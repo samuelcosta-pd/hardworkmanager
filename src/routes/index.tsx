@@ -14,13 +14,13 @@ import { GameOver } from '@/components/screens/GameOver';
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: [
-      { title: 'Projeto SIGAA: Modernização e Performance - Simulador PMBOK 7' },
+      { title: 'Hard Work Manager' },
       {
         name: 'description',
         content:
           'Jogo sério de gerenciamento de projetos de software colaborativo para o ensino do domínio Trabalho do Projeto do PMBOK 7, focado na modernização do SIGAA da UFC.',
       },
-      { property: 'og:title', content: 'Projeto SIGAA: Modernização e Performance' },
+      { property: 'og:title', content: 'Hard Work Manager' },
       {
         property: 'og:description',
         content: 'Simulador educacional colaborativo do domínio Trabalho do Projeto.',

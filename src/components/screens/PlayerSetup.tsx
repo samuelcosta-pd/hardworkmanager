@@ -52,9 +52,9 @@ export function PlayerSetup() {
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-3xl bg-card shadow-[var(--shadow-soft)]">
           <Sparkles className="h-7 w-7 text-primary" />
         </div>
-        <h1 className="text-3xl font-bold tracking-tight">Projeto SIGAA</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Hard Work Manager</h1>
         <p className="mt-2 text-muted-foreground">
-          Modernização e Performance - Simulador Colaborativo PMBOK 7
+          Simulador do domínio Trabalho do Projeto do PMBOK 7ª Edição
         </p>
       </div>
 
