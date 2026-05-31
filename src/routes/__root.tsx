@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "HardWorkManager" },
+      { name: "description", content: "Simulação do Trabalho do Projeto - PMBOK 7" },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "HardWorkManager" },
+      { property: "og:description", content: "Simulação do Trabalho do Projeto - PMBOK 7" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "HardWorkManager" },
+      { name: "twitter:description", content: "Simulação do Trabalho do Projeto - PMBOK 7" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ce8123b8-9d4c-4f5d-9daa-ba724d0bba41/id-preview-034d357e--354863cb-5afb-4a43-9295-473d5e6023d0.lovable.app-1780246390912.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ce8123b8-9d4c-4f5d-9daa-ba724d0bba41/id-preview-034d357e--354863cb-5afb-4a43-9295-473d5e6023d0.lovable.app-1780246390912.png" },
     ],
     links: [
       {
