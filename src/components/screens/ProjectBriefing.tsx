@@ -10,9 +10,9 @@ export function ProjectBriefing() {
     <div className="mx-auto min-h-screen max-w-4xl px-6 py-12">
       <div className="mb-8 animate-float-in">
         <p className="text-xs uppercase tracking-[0.2em] text-primary">Briefing do Projeto</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight">XIX WTISC</h1>
-        <p className="mt-1 text-muted-foreground">
-          Workshop de Tecnologia da Informação do Sertão Central — PET SI / UFC Quixadá
+        <h1 className="mt-2 text-3xl font-bold tracking-tight">Projeto SIGAA: Modernização e Performance</h1>
+        <p className="mt-2 text-muted-foreground leading-relaxed">
+          Vocês são o comitê gestor responsável por reconstruir o SIGAA. O sistema legado sofre com quedas nos períodos críticos, UX defasada e alto acoplamento. O desafio de vocês é entregar a nova versão equilibrando o Orçamento do projeto, a Qualidade do software e a Moral da equipe de desenvolvimento frente a imprevistos e stakeholders exigentes.
         </p>
       </div>
 
@@ -22,9 +22,9 @@ export function ProjectBriefing() {
             <Target className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold">Tema</h2>
-            <p className="mt-1 text-muted-foreground">
-              Cibersegurança na era da Inteligência Artificial
+            <h2 className="text-lg font-semibold">Módulos Críticos</h2>
+            <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
+              Matrículas online, emissão de históricos, integração com bolsas e redesenho completo de fluxos para alunos e docentes.
             </p>
           </div>
         </div>
@@ -33,18 +33,18 @@ export function ProjectBriefing() {
       <div className="mb-6 grid gap-4 md:grid-cols-3">
         <SoftCard className="animate-float-in">
           <Calendar className="mb-3 h-5 w-5 text-primary" />
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">Datas</p>
-          <p className="mt-1 font-semibold">20 e 21 de maio</p>
+          <p className="text-xs uppercase tracking-wider text-muted-foreground">Prazo Limite</p>
+          <p className="mt-1 font-semibold">Período de Matrículas</p>
         </SoftCard>
         <SoftCard className="animate-float-in">
           <MapPin className="mb-3 h-5 w-5 text-primary" />
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">Local</p>
-          <p className="mt-1 font-semibold">Auditório UFC Quixadá</p>
+          <p className="text-xs uppercase tracking-wider text-muted-foreground">Infraestrutura</p>
+          <p className="mt-1 font-semibold">Nuvem da UFC</p>
         </SoftCard>
         <SoftCard className="animate-float-in">
           <GraduationCap className="mb-3 h-5 w-5 text-primary" />
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">Formato</p>
-          <p className="mt-1 font-semibold">Palestras, minicursos e coffee breaks</p>
+          <p className="text-xs uppercase tracking-wider text-muted-foreground">Público-Alvo</p>
+          <p className="mt-1 font-semibold">Alunos e Professores</p>
         </SoftCard>
       </div>
 
@@ -54,12 +54,9 @@ export function ProjectBriefing() {
             <ShieldCheck className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold">Expectativa da Tutora</h2>
-            <p className="mt-1 leading-relaxed text-muted-foreground">
-              <strong className="text-foreground">Profa. Dra. Rainara</strong> espera um evento
-              que mantenha o prestígio acadêmico do PET SI, sem estouros de orçamento e com a
-              equipe de bolsistas saudável até o último coffee break. Sob forte pressão de
-              orçamento, qualidade e moral, vocês têm autonomia para decidir.
+            <h2 className="text-lg font-semibold">Expectativas dos Stakeholders</h2>
+            <p className="mt-1 leading-relaxed text-sm text-muted-foreground">
+              A <strong className="text-foreground">Reitoria e a PROGRAD</strong> exigem alta estabilidade nas matrículas e uma UX que reduza os chamados de suporte técnico. Sob forte pressão de orçamento, qualidade e moral, vocês têm autonomia para decidir como atingir esses objetivos.
             </p>
           </div>
         </div>

@@ -10,14 +10,14 @@ interface Draft {
   role: PlayerRole;
 }
 
-const DEFAULT_ROLES: PlayerRole[] = ['pm', 'commsManager', 'opsManager'];
+const DEFAULT_ROLES: PlayerRole[] = ['pm', 'techLead', 'uxLead'];
 
 export function PlayerSetup() {
   const setupPlayers = useGameStore((s) => s.setupPlayers);
   const [drafts, setDrafts] = useState<Draft[]>([
     { name: '', role: 'pm' },
-    { name: '', role: 'commsManager' },
-    { name: '', role: 'opsManager' },
+    { name: '', role: 'techLead' },
+    { name: '', role: 'uxLead' },
   ]);
 
   const canAdd = drafts.length < 4;
@@ -25,7 +25,7 @@ export function PlayerSetup() {
 
   const addPlayer = () => {
     if (!canAdd) return;
-    setDrafts([...drafts, { name: '', role: 'opsManager' }]);
+    setDrafts([...drafts, { name: '', role: 'uxLead' }]);
   };
 
   const removeLast = () => {
@@ -41,8 +41,8 @@ export function PlayerSetup() {
 
   const handleStart = () => {
     if (!allValid) return;
-    // Force 4th player to opsManager
-    const final = drafts.map((d, i) => (i === 3 ? { ...d, role: 'opsManager' as PlayerRole } : d));
+    // Force 4th player to uxLead
+    const final = drafts.map((d, i) => (i === 3 ? { ...d, role: 'uxLead' as PlayerRole } : d));
     setupPlayers(final);
   };
 
@@ -52,9 +52,9 @@ export function PlayerSetup() {
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-3xl bg-card shadow-[var(--shadow-soft)]">
           <Sparkles className="h-7 w-7 text-primary" />
         </div>
-        <h1 className="text-3xl font-bold tracking-tight">HardWorkManager</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Projeto SIGAA</h1>
         <p className="mt-2 text-muted-foreground">
-          Simulador colaborativo do domínio Trabalho do Projeto — PMBOK 7
+          Modernização e Performance — Simulador Colaborativo PMBOK 7
         </p>
       </div>
 
@@ -85,7 +85,7 @@ export function PlayerSetup() {
                 />
                 {isFourth ? (
                   <div className="rounded-2xl bg-card px-4 py-3 text-sm text-muted-foreground shadow-[var(--shadow-soft)]">
-                    {ROLE_LABELS.opsManager} (obrigatório)
+                    {ROLE_LABELS.uxLead} (obrigatório)
                   </div>
                 ) : (
                   <select

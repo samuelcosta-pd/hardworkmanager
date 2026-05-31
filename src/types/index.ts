@@ -13,7 +13,7 @@ export type GamePhase =
   | 'gameover'
   | 'completed';
 
-export type PlayerRole = 'pm' | 'commsManager' | 'opsManager';
+export type PlayerRole = 'pm' | 'techLead' | 'uxLead';
 export type AlternativeKey = 'a' | 'b' | 'c';
 export type MetricLevel = 'stable' | 'warning' | 'critical';
 export type CommunicationType = 'email' | 'slack' | 'ticket';
@@ -79,6 +79,6 @@ export interface Decision {
 
 export const ROLE_LABELS: Record<PlayerRole, string> = {
   pm: 'Gerente de Projetos',
-  commsManager: 'Gerente de Comunicação',
-  opsManager: 'Gerente de Operações',
+  techLead: 'Líder Técnico',
+  uxLead: 'Líder de Design/UX',
 };

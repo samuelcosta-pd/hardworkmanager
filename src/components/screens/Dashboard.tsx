@@ -15,7 +15,7 @@ export function Dashboard() {
       <header className="mb-8 flex flex-wrap items-center justify-between gap-4 animate-float-in">
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-primary">Painel Executivo</p>
-          <h1 className="mt-1 text-3xl font-bold tracking-tight">XIX WTISC — Sala de Comando</h1>
+          <h1 className="mt-1 text-3xl font-bold tracking-tight">Projeto SIGAA — Sala de Comando</h1>
         </div>
         <div className="flex -space-x-2">
           {players.map((p) => (

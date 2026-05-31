@@ -49,7 +49,6 @@ export function DebateStructured() {
   const speaker = speakers[idx];
   const [secondsLeft, setSecondsLeft] = useState(speaker?.durationSeconds ?? 30);
   const [running, setRunning] = useState(true);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     setSecondsLeft(speakers[idx]?.durationSeconds ?? 30);
@@ -58,13 +57,14 @@ export function DebateStructured() {
 
   useEffect(() => {
     if (!running) return;
-    intervalRef.current = setInterval(() => {
-      setSecondsLeft((s) => (s > 0 ? s - 1 : 0));
+    if (secondsLeft <= 0) return;
+
+    const timer = setInterval(() => {
+      setSecondsLeft((s) => s - 1);
     }, 1000);
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [running, idx]);
+
+    return () => clearInterval(timer);
+  }, [running, secondsLeft]);
 
   const next = () => {
     if (idx < speakers.length - 1) setIdx(idx + 1);

@@ -29,8 +29,8 @@
   --color-critical: var(--critical);
   --color-critical-foreground: var(--critical-foreground);
   --color-pm: var(--pm);
-  --color-comms: var(--comms);
-  --color-ops: var(--ops);
+  --color-tech: var(--tech);
+  --color-ux: var(--ux);
   --shadow-soft: var(--shadow-soft);
   --shadow-soft-lg: var(--shadow-soft-lg);
   --shadow-success: var(--shadow-success);
@@ -61,8 +61,8 @@
   --critical-foreground: oklch(0.38 0.13 25);
 
   --pm: oklch(0.7 0.13 285);
-  --comms: oklch(0.75 0.12 210);
-  --ops: oklch(0.78 0.13 35);
+  --tech: oklch(0.75 0.12 210);
+  --ux: oklch(0.78 0.13 35);
 
   --shadow-soft:
     0 10px 30px -12px rgba(100, 116, 139, 0.18),

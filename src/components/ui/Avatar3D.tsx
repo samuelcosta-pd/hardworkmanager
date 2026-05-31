@@ -10,8 +10,8 @@ interface Props {
 
 const ROLE_BG: Record<PlayerRole | 'sender', string> = {
   pm: 'bg-[var(--pm)]',
-  commsManager: 'bg-[var(--comms)]',
-  opsManager: 'bg-[var(--ops)]',
+  techLead: 'bg-[var(--tech)]',
+  uxLead: 'bg-[var(--ux)]',
   sender: 'bg-accent',
 };
 

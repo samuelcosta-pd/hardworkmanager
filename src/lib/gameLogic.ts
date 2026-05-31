@@ -21,9 +21,9 @@ export function metricLevel(value: number): MetricLevel {
 }
 
 export function isGameOver(m: Metrics): { over: boolean; reason?: string } {
-  if (m.budget <= 0) return { over: true, reason: 'O orçamento se esgotou. Sem caixa, o evento não pode mais avançar.' };
-  if (m.quality < 40) return { over: true, reason: 'A qualidade percebida despencou. A tutora interrompeu a produção do WTISC.' };
-  if (m.morale < 40) return { over: true, reason: 'A moral dos bolsistas foi destruída. A equipe entregou os cargos coletivamente.' };
+  if (m.budget <= 0) return { over: true, reason: 'O orçamento se esgotou. Sem caixa, o projeto de modernização do SIGAA não pode mais avançar.' };
+  if (m.quality < 40) return { over: true, reason: 'A qualidade do software despencou. A reitoria e a PROGRAD interromperam a modernização do SIGAA devido a falhas operacionais críticas.' };
+  if (m.morale < 40) return { over: true, reason: 'A moral da equipe de desenvolvimento foi destruída. Os desenvolvedores pediram demissão coletiva diante da pressão e dívida técnica acumulada.' };
   return { over: false };
 }
 

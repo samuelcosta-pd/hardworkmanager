@@ -15,7 +15,7 @@ export function EmailView({ event }: Props) {
   return (
     <SoftCard className="animate-float-in">
       <div className="mb-4 flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground">
-        <Mail className="h-4 w-4" /> Caixa de entrada — Coordenação WTISC
+        <Mail className="h-4 w-4" /> Caixa de entrada — Projeto SIGAA
       </div>
       <div className="rounded-2xl bg-muted/60 p-5">
         <div className="flex items-start gap-4">
@@ -39,7 +39,7 @@ export function SlackView({ event }: Props) {
   return (
     <SoftCard className="animate-float-in">
       <div className="mb-4 flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground">
-        <MessageSquare className="h-4 w-4" /> #coordenacao-wtisc
+        <MessageSquare className="h-4 w-4" /> #sigaa-modernizacao
       </div>
       <div className="flex items-start gap-4">
         <Avatar3D initials={event.senderInitials} size="lg" />
@@ -63,7 +63,7 @@ export function TicketView({ event }: Props) {
     <SoftCard className="animate-float-in">
       <div className="mb-4 flex items-center justify-between text-xs uppercase tracking-wider text-muted-foreground">
         <span className="flex items-center gap-2">
-          <Ticket className="h-4 w-4" /> Kanban — WTISC
+          <Ticket className="h-4 w-4" /> Kanban — SIGAA
         </span>
         <span className="rounded-full bg-warning/30 px-3 py-1 text-warning-foreground">A fazer</span>
       </div>

@@ -31,12 +31,12 @@ export function GameOver({ outcome }: Props) {
           {isFail ? 'Game Over' : 'Sucesso'}
         </p>
         <h1 className="mt-1 text-3xl font-bold tracking-tight">
-          {isFail ? 'O WTISC não chegou ao fim' : 'O XIX WTISC entrou para a história'}
+          {isFail ? 'O Projeto SIGAA não chegou ao fim' : 'O Projeto SIGAA foi concluído com sucesso'}
         </h1>
         <p className="mt-3 text-muted-foreground">
           {isFail
             ? gameOverReason ?? 'A pressão foi maior que a capacidade da equipe.'
-            : 'A equipe equilibrou orçamento, qualidade e moral até o último coffee break. A Profa. Dra. Rainara está orgulhosa.'}
+            : 'A equipe equilibrou orçamento, qualidade e moral até a entrega final. A Reitoria e a PROGRAD estão orgulhosas.'}
         </p>
 
         <div className="mt-6 grid gap-3 sm:grid-cols-3">
