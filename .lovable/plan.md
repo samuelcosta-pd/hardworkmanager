@@ -1,5 +1,5 @@
 
-## HardWorkManager — Plano de Implementação (v2)
+## HardWorkManager - Plano de Implementação (v2)
 
 Simulador educacional web (single-device, pass-the-laptop) para ensinar o domínio **Trabalho do Projeto** do PMBOK 7, usando o contexto do XIX WTISC.
 
@@ -67,7 +67,7 @@ condição crítica atingida → gameover
   - `morale < 40`
 - Votação secreta: cada jogador passa o dispositivo, escolhe A/B/C, tela limpa antes do próximo
 - Revelação mostra divergência (quem votou em quê)
-- **Debate Estruturado** — cronômetro central, tempos ajustados para dinâmica ágil:
+- **Debate Estruturado** - cronômetro central, tempos ajustados para dinâmica ágil:
   - 1º falante (minoria): **30s**
   - 2º falante (maioria): **30s**
   - PM fala por último para arbitrar: **20s**
@@ -87,7 +87,7 @@ Tokens em `src/styles.css`:
 Componentes usam exclusivamente tokens semânticos.
 
 ### Comunicação visual dos dilemas
-- **Email**: layout caixa de entrada — assunto, remetente com avatar+cargo, corpo formal
+- **Email**: layout caixa de entrada - assunto, remetente com avatar+cargo, corpo formal
 - **Slack**: avatar 3D pastel + balão macio com cauda + nome+cargo+timestamp
 - **Ticket**: card estilo Kanban com tag de domínio PMBOK colorida
 
@@ -101,4 +101,4 @@ Transições Tailwind (`transition-all duration-500 ease-out`) nas barras de mé
 - Reset para nova partida
 
 ### Nota técnica
-`src/routes/index.tsx` é o único ponto de entrada e renderiza a tela atual baseada em `useGameStore(s => s.phase)`. Sem loaders nem server functions — tudo client-side e em memória.
+`src/routes/index.tsx` é o único ponto de entrada e renderiza a tela atual baseada em `useGameStore(s => s.phase)`. Sem loaders nem server functions - tudo client-side e em memória.

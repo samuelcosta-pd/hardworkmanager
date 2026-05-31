@@ -32,8 +32,8 @@ function buildOrder(players: Player[], minorityIds: string[]): DebateSpeaker[] {
 
 export function DebateStructured() {
   const { players, votes, beginRound2 } = useGameStore();
-  const round1 = votes.filter((v) => v.round === 1);
-  const tally = tallyVotes(round1);
+  const round1 = useMemo(() => votes.filter((v) => v.round === 1), [votes]);
+  const tally = useMemo(() => tallyVotes(round1), [round1]);
 
   const speakers = useMemo(() => {
     const minorityKey = tally.tied

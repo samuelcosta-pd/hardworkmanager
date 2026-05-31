@@ -54,7 +54,7 @@ export function PlayerSetup() {
         </div>
         <h1 className="text-3xl font-bold tracking-tight">Projeto SIGAA</h1>
         <p className="mt-2 text-muted-foreground">
-          Modernização e Performance — Simulador Colaborativo PMBOK 7
+          Modernização e Performance - Simulador Colaborativo PMBOK 7
         </p>
       </div>
 

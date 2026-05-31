@@ -14,7 +14,7 @@ import { GameOver } from '@/components/screens/GameOver';
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: [
-      { title: 'Projeto SIGAA: Modernização e Performance — Simulador PMBOK 7' },
+      { title: 'Projeto SIGAA: Modernização e Performance - Simulador PMBOK 7' },
       {
         name: 'description',
         content:
