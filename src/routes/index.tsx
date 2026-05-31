@@ -1,29 +1,65 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router';
+import { useGameStore } from '@/store/gameStore';
+import { PlayerSetup } from '@/components/screens/PlayerSetup';
+import { RoleExplanation } from '@/components/screens/RoleExplanation';
+import { ProjectBriefing } from '@/components/screens/ProjectBriefing';
+import { Dashboard } from '@/components/screens/Dashboard';
+import { EventDisplay } from '@/components/screens/EventDisplay';
+import { VotingRound } from '@/components/screens/VotingRound';
+import { VoteReveal } from '@/components/screens/VoteReveal';
+import { DebateStructured } from '@/components/screens/DebateStructured';
+import { ConsequenceFeedback } from '@/components/screens/ConsequenceFeedback';
+import { GameOver } from '@/components/screens/GameOver';
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute('/')({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: 'HardWorkManager — Simulador PMBOK 7 do XIX WTISC' },
+      {
+        name: 'description',
+        content:
+          'Jogo sério multiplayer colaborativo para o ensino do domínio Trabalho do Projeto do PMBOK 7, ambientado no XIX WTISC da UFC Quixadá.',
+      },
+      { property: 'og:title', content: 'HardWorkManager — Simulador PMBOK 7' },
+      {
+        property: 'og:description',
+        content: 'Simulador educacional colaborativo do domínio Trabalho do Projeto.',
+      },
     ],
   }),
-  component: Index,
+  component: Game,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+function Game() {
+  const phase = useGameStore((s) => s.phase);
+
+  switch (phase) {
+    case 'onboarding':
+      return <PlayerSetup />;
+    case 'role_explanation':
+      return <RoleExplanation />;
+    case 'briefing':
+      return <ProjectBriefing />;
+    case 'dashboard':
+      return <Dashboard />;
+    case 'event_display':
+      return <EventDisplay />;
+    case 'voting_round_1':
+      return <VotingRound round={1} />;
+    case 'vote_reveal':
+      return <VoteReveal />;
+    case 'debate_structured':
+      return <DebateStructured />;
+    case 'voting_round_2':
+      return <VotingRound round={2} />;
+    case 'decision_resolved':
+    case 'feedback_narrative':
+      return <ConsequenceFeedback />;
+    case 'gameover':
+      return <GameOver outcome="gameover" />;
+    case 'completed':
+      return <GameOver outcome="completed" />;
+    default:
+      return <PlayerSetup />;
+  }
 }
