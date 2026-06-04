@@ -45,10 +45,11 @@ interface GameState {
   resolveDecision: () => void;
   nextEvent: () => void;
   reset: () => void;
+  quitGame: () => void;
 }
 
 const initialState = {
-  phase: 'onboarding' as GamePhase,
+  phase: 'intro' as GamePhase,
   players: [] as Player[],
   metrics: INITIAL_METRICS,
   events: GAME_EVENTS,
@@ -153,7 +154,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     set({
       metrics: newMetrics,
       decisions: [...decisions, decision],
-      phase: gameOver.over ? 'feedback_narrative' : 'feedback_narrative',
+      phase: 'feedback_narrative',
       gameOverReason: gameOver.over ? gameOver.reason : undefined,
     });
   },
@@ -161,12 +162,12 @@ export const useGameStore = create<GameState>((set, get) => ({
   nextEvent: () => {
     const { currentEventIndex, events, gameOverReason } = get();
     if (gameOverReason) {
-      set({ phase: 'gameover' });
+      set({ phase: 'debriefing' });
       return;
     }
     const next = currentEventIndex + 1;
     if (next >= events.length) {
-      set({ phase: 'completed' });
+      set({ phase: 'debriefing' });
     } else {
       set({
         currentEventIndex: next,
@@ -178,4 +179,5 @@ export const useGameStore = create<GameState>((set, get) => ({
   },
 
   reset: () => set({ ...initialState }),
+  quitGame: () => set({ ...initialState, phase: 'intro' }),
 }));

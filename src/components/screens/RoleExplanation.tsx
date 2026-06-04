@@ -10,19 +10,19 @@ const ROLE_INFO: Record<PlayerRole, { icon: React.ReactNode; mindset: string; de
     icon: <Briefcase className="h-5 w-5" />,
     mindset: 'Mindset de Dono',
     description:
-      'Você assume a responsabilidade final pelo sucesso do novo SIGAA. Tenha iniciativa proativa para remover impedimentos, blindar a equipe de escopo desnecessário e gerenciar stakeholders.',
+      'Você assume a responsabilidade final pelo sucesso da modernização. Tenha iniciativa proativa para remover impedimentos, blindar a equipe de escopo desnecessário e gerenciar stakeholders.',
   },
   techLead: {
     icon: <Terminal className="h-5 w-5" />,
     mindset: 'Guardião da Performance',
     description:
-      'O código legado é um campo minado. Sua missão é garantir a qualidade da arquitetura, evitar dívida técnica insustentável e manter os servidores estáveis durante as matrículas.',
+      'O código legado é um campo minado. Sua missão é garantir a qualidade da arquitetura, evitar dívida técnica insustentável e manter os servidores estáveis.',
   },
   uxLead: {
     icon: <Palette className="h-5 w-5" />,
     mindset: 'Defensor do Usuário',
     description:
-      'O SIGAA atual tem uma interface hostil. Você luta por fluxos intuitivos, design acessível e pela melhoria contínua da experiência de alunos e professores.',
+      'O sistema atual tem uma interface hostil. Você luta por fluxos intuitivos, design acessível e pela melhoria contínua da experiência de alunos e professores.',
   },
 };
 
@@ -35,7 +35,7 @@ export function RoleExplanation() {
       <div className="mb-10 text-center animate-float-in">
         <h1 className="text-3xl font-bold tracking-tight">Os Três Papéis</h1>
         <p className="mt-2 text-muted-foreground">
-          A mentalidade exigida de cada um para conduzir a modernização do SIGAA
+          A mentalidade exigida de cada um para conduzir a modernização tecnológica
         </p>
       </div>
 

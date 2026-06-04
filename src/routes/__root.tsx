@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { ExitButton } from "@/components/ui/ExitButton";
 
 function NotFoundComponent() {
   return (
@@ -77,18 +78,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Projeto SIGAA: Modernização e Performance" },
-      { name: "description", content: "Projeto SIGAA: Modernização e Performance - Simulador Colaborativo PMBOK 7" },
+      { title: "Hard Work Manager: Modernização" },
+      { name: "description", content: "Simulador Colaborativo de Gerenciamento de Projetos - PMBOK 7" },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Projeto SIGAA: Modernização e Performance" },
-      { property: "og:description", content: "Projeto SIGAA: Modernização e Performance - Simulador Colaborativo PMBOK 7" },
+      { property: "og:title", content: "Hard Work Manager" },
+      { property: "og:description", content: "Simulador Colaborativo de Gerenciamento de Projetos - PMBOK 7" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Projeto SIGAA: Modernização e Performance" },
-      { name: "twitter:description", content: "Projeto SIGAA: Modernização e Performance - Simulador Colaborativo PMBOK 7" },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ce8123b8-9d4c-4f5d-9daa-ba724d0bba41/id-preview-034d357e--354863cb-5afb-4a43-9295-473d5e6023d0.lovable.app-1780246390912.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ce8123b8-9d4c-4f5d-9daa-ba724d0bba41/id-preview-034d357e--354863cb-5afb-4a43-9295-473d5e6023d0.lovable.app-1780246390912.png" },
+      { name: "twitter:title", content: "Hard Work Manager" },
+      { name: "twitter:description", content: "Simulador Colaborativo de Gerenciamento de Projetos - PMBOK 7" },
     ],
     links: [
       {
@@ -122,7 +121,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <ExitButton />
       <Outlet />
     </QueryClientProvider>
   );

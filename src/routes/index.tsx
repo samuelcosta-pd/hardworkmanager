@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useGameStore } from '@/store/gameStore';
+import { Onboarding } from '@/components/screens/Onboarding';
 import { PlayerSetup } from '@/components/screens/PlayerSetup';
 import { RoleExplanation } from '@/components/screens/RoleExplanation';
 import { ProjectBriefing } from '@/components/screens/ProjectBriefing';
@@ -9,7 +10,7 @@ import { VotingRound } from '@/components/screens/VotingRound';
 import { VoteReveal } from '@/components/screens/VoteReveal';
 import { DebateStructured } from '@/components/screens/DebateStructured';
 import { ConsequenceFeedback } from '@/components/screens/ConsequenceFeedback';
-import { GameOver } from '@/components/screens/GameOver';
+import { DebriefingFinal } from '@/components/screens/DebriefingFinal';
 
 export const Route = createFileRoute('/')({
   head: () => ({
@@ -18,7 +19,7 @@ export const Route = createFileRoute('/')({
       {
         name: 'description',
         content:
-          'Jogo sério de gerenciamento de projetos de software colaborativo para o ensino do domínio Trabalho do Projeto do PMBOK 7, focado na modernização do SIGAA da UFC.',
+          'Jogo sério de gerenciamento de projetos de software colaborativo para o ensino do domínio Trabalho do Projeto do PMBOK 7.',
       },
       { property: 'og:title', content: 'Hard Work Manager' },
       {
@@ -34,7 +35,9 @@ function Game() {
   const phase = useGameStore((s) => s.phase);
 
   switch (phase) {
-    case 'onboarding':
+    case 'intro':
+      return <Onboarding />;
+    case 'setup':
       return <PlayerSetup />;
     case 'role_explanation':
       return <RoleExplanation />;
@@ -55,11 +58,9 @@ function Game() {
     case 'decision_resolved':
     case 'feedback_narrative':
       return <ConsequenceFeedback />;
-    case 'gameover':
-      return <GameOver outcome="gameover" />;
-    case 'completed':
-      return <GameOver outcome="completed" />;
+    case 'debriefing':
+      return <DebriefingFinal />;
     default:
-      return <PlayerSetup />;
+      return <Onboarding />;
   }
 }

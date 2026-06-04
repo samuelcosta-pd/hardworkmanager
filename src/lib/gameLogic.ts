@@ -1,6 +1,6 @@
 import type { AlternativeKey, MetricLevel, Metrics, Vote } from '@/types';
 
-export const INITIAL_METRICS: Metrics = { budget: 100, quality: 100, morale: 100 };
+export const INITIAL_METRICS: Metrics = { eficiencia: 100, qualidade: 100, saudeEquipe: 100 };
 
 export function clamp(n: number): number {
   return Math.max(0, Math.min(100, n));
@@ -8,9 +8,9 @@ export function clamp(n: number): number {
 
 export function applyImpacts(current: Metrics, impacts: Partial<Metrics>): Metrics {
   return {
-    budget: clamp(current.budget + (impacts.budget ?? 0)),
-    quality: clamp(current.quality + (impacts.quality ?? 0)),
-    morale: clamp(current.morale + (impacts.morale ?? 0)),
+    eficiencia: clamp(current.eficiencia + (impacts.eficiencia ?? 0)),
+    qualidade: clamp(current.qualidade + (impacts.qualidade ?? 0)),
+    saudeEquipe: clamp(current.saudeEquipe + (impacts.saudeEquipe ?? 0)),
   };
 }
 
@@ -21,9 +21,9 @@ export function metricLevel(value: number): MetricLevel {
 }
 
 export function isGameOver(m: Metrics): { over: boolean; reason?: string } {
-  if (m.budget <= 0) return { over: true, reason: 'O orçamento se esgotou. Sem caixa, o projeto de modernização do SIGAA não pode mais avançar.' };
-  if (m.quality < 40) return { over: true, reason: 'A qualidade do software despencou. A reitoria e a PROGRAD interromperam a modernização do SIGAA devido a falhas operacionais críticas.' };
-  if (m.morale < 40) return { over: true, reason: 'A moral da equipe de desenvolvimento foi destruída. Os desenvolvedores pediram demissão coletiva diante da pressão e dívida técnica acumulada.' };
+  if (m.eficiencia <= 0) return { over: true, reason: 'A eficiência operacional colapsou. Prazos foram estourados e os recursos esgotados, inviabilizando a continuidade do projeto.' };
+  if (m.qualidade < 40) return { over: true, reason: 'A qualidade técnica despencou a níveis inaceitáveis. O sistema apresentou falhas críticas operacionais e o projeto foi cancelado pela diretoria.' };
+  if (m.saudeEquipe < 40) return { over: true, reason: 'A saúde da equipe foi destruída. Um ambiente tóxico e alta pressão causaram demissões em massa e burnout, paralisando o trabalho do projeto.' };
   return { over: false };
 }
 

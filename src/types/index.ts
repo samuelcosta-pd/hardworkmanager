@@ -1,5 +1,6 @@
 export type GamePhase =
-  | 'onboarding'
+  | 'intro'
+  | 'setup'
   | 'role_explanation'
   | 'briefing'
   | 'dashboard'
@@ -11,6 +12,7 @@ export type GamePhase =
   | 'decision_resolved'
   | 'feedback_narrative'
   | 'gameover'
+  | 'debriefing'
   | 'completed';
 
 export type PlayerRole = 'pm' | 'techLead' | 'uxLead';
@@ -26,9 +28,9 @@ export interface Player {
 }
 
 export interface Metrics {
-  budget: number;
-  quality: number;
-  morale: number;
+  eficiencia: number;
+  qualidade: number;
+  saudeEquipe: number;
 }
 
 export interface Alternative {
@@ -36,6 +38,11 @@ export interface Alternative {
   text: string;
   impacts: Partial<Metrics>;
   feedbackNarrative: string;
+  pmbokConcept: string;
+  learnings: string;
+  goodBad: string;
+  risksEvaded: string;
+  otherConsequences: string;
 }
 
 export interface GameEvent {
