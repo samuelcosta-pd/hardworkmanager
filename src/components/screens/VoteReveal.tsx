@@ -69,7 +69,7 @@ export function VoteReveal() {
                           key={p.id}
                           className="flex items-center gap-2 rounded-full bg-muted px-3 py-1 text-xs"
                         >
-                          <Avatar3D initials={p.name.slice(0, 2)} role={p.role} size="sm" />
+                          <Avatar3D initials={p.name.slice(0, 2)} role={p.role} imageUrl={p.avatarImage} size="sm" />
                           <span className="font-medium">{p.name}</span>
                           <span className="text-muted-foreground">· {ROLE_LABELS[p.role]}</span>
                         </div>

@@ -19,7 +19,7 @@ export function EmailView({ event }: Props) {
       </div>
       <div className="rounded-2xl bg-muted/60 p-5">
         <div className="flex items-start gap-4">
-          <Avatar3D initials={event.senderInitials} size="lg" />
+          <Avatar3D initials={event.senderInitials} imageUrl={event.avatarImage} size="lg" />
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <p className="font-semibold">{event.senderName}</p>
@@ -42,7 +42,7 @@ export function SlackView({ event }: Props) {
         <MessageSquare className="h-4 w-4" /> #sigaa-modernizacao
       </div>
       <div className="flex items-start gap-4">
-        <Avatar3D initials={event.senderInitials} size="lg" />
+        <Avatar3D initials={event.senderInitials} imageUrl={event.avatarImage} size="lg" />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-baseline gap-2">
             <p className="font-semibold">{event.senderName}</p>
@@ -73,7 +73,7 @@ export function TicketView({ event }: Props) {
         </div>
         <h2 className="text-lg font-bold">{event.title}</h2>
         <div className="mt-2 flex items-center gap-3">
-          <Avatar3D initials={event.senderInitials} size="sm" />
+          <Avatar3D initials={event.senderInitials} imageUrl={event.avatarImage} size="sm" />
           <div>
             <p className="text-sm font-medium">{event.senderName}</p>
             <p className="text-xs text-muted-foreground">{event.senderRole}</p>

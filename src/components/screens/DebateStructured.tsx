@@ -17,6 +17,7 @@ function buildOrder(players: Player[], minorityIds: string[]): DebateSpeaker[] {
     playerId: p.id,
     playerName: p.name,
     playerRole: p.role,
+    avatarImage: p.avatarImage,
     durationSeconds: 30,
     order: (i + 1) as 1 | 2 | 3,
   }));
@@ -24,6 +25,7 @@ function buildOrder(players: Player[], minorityIds: string[]): DebateSpeaker[] {
     playerId: pm.id,
     playerName: pm.name,
     playerRole: pm.role,
+    avatarImage: pm.avatarImage,
     durationSeconds: 20,
     order: (list.length + 1) as 1 | 2 | 3 | 4,
   });
@@ -88,7 +90,7 @@ export function DebateStructured() {
 
       <SoftCard className="mb-6 animate-pop-in">
         <div className="flex flex-col items-center text-center">
-          <Avatar3D initials={speaker.playerName.slice(0, 2)} role={speaker.playerRole} size="lg" />
+          <Avatar3D initials={speaker.playerName.slice(0, 2)} role={speaker.playerRole} imageUrl={(speaker as any).avatarImage} size="lg" />
           <p className="mt-3 text-xs uppercase tracking-wider text-muted-foreground">
             Falante {speaker.order} de {speakers.length}
           </p>
@@ -146,7 +148,7 @@ export function DebateStructured() {
               }`}
             >
               <span className="w-5 text-xs">{s.order}.</span>
-              <Avatar3D initials={s.playerName.slice(0, 2)} role={s.playerRole} size="sm" />
+              <Avatar3D initials={s.playerName.slice(0, 2)} role={s.playerRole} imageUrl={(s as any).avatarImage} size="sm" />
               <span className="flex-1">{s.playerName}</span>
               <span className="text-xs">{s.durationSeconds}s</span>
             </div>

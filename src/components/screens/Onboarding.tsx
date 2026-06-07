@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { BookOpen, Users, AlertTriangle, ArrowRight, ArrowLeft, SkipForward } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { MENTOR } from '@/data/avatars';
 
 export function Onboarding() {
   const [step, setStep] = useState(1);
@@ -29,7 +30,7 @@ export function Onboarding() {
         {/* Mediator Introduction Header */}
         <div className="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-slate-100">
           <Avatar className="h-16 w-16 border-2 border-primary/20">
-            <AvatarImage src="https://api.dicebear.com/7.x/notionists/svg?seed=Helena&backgroundColor=e2e8f0" alt="Helena" />
+            <AvatarImage src={MENTOR.imagePath} alt={MENTOR.name} />
             <AvatarFallback>HE</AvatarFallback>
           </Avatar>
           <div>

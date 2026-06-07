@@ -1,13 +1,14 @@
-import { Gauge, Heart, Sparkle, TrendingDown, TrendingUp, BookOpen, AlertTriangle, Lightbulb, ShieldCheck } from 'lucide-react';
+import { Gauge, Heart, Sparkle, TrendingDown, TrendingUp, BookOpen, AlertTriangle, Lightbulb, ShieldCheck, Clock } from 'lucide-react';
 import { SoftCard } from '@/components/ui/SoftCard';
 import { SoftButton } from '@/components/ui/SoftButton';
 import { MetricBar } from '@/components/ui/MetricBar';
 import { useGameStore } from '@/store/gameStore';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { MENTOR } from '@/data/avatars';
 import type { Metrics } from '@/types';
 
 export function ConsequenceFeedback() {
-  const { decisions, metrics, nextEvent, gameOverReason, events, currentEventIndex } = useGameStore();
+  const { decisions, metrics, nextEvent, gameOverReason, events, currentEventIndex, delayedImpactsTriggeredThisRound } = useGameStore();
   const decision = decisions[decisions.length - 1];
   if (!decision) return null;
 
@@ -37,14 +38,37 @@ export function ConsequenceFeedback() {
         <h1 className="mt-1 text-2xl font-bold tracking-tight">{decision.eventTitle}</h1>
       </div>
 
-      {/* Helena Mediator - Narrative */}
+      {delayedImpactsTriggeredThisRound.length > 0 && (
+        <div className="mb-6 space-y-3 animate-pop-in">
+          {delayedImpactsTriggeredThisRound.map((impact, i) => (
+            <div key={i} className="flex items-start gap-3 bg-red-50 p-4 rounded-xl border border-red-200">
+              <Clock className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
+              <div>
+                <p className="text-sm font-semibold text-red-800">Consequência de: {impact.sourceEventTitle}</p>
+                <p className="text-sm text-red-700">{impact.narrative}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {alt.delayedImpacts && alt.delayedImpacts.length > 0 && (
+        <div className="mb-6 flex items-start gap-3 bg-amber-50 p-4 rounded-xl border border-amber-200 animate-pop-in">
+          <Clock className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
+          <div>
+            <p className="text-sm font-semibold text-amber-800">Aviso</p>
+            <p className="text-sm text-amber-700">Esta decisão gerou um impacto sistêmico que retornará no futuro.</p>
+          </div>
+        </div>
+      )}
+
       <div className="flex items-start gap-4 bg-white p-5 rounded-xl shadow-sm border border-slate-100 mb-6 animate-float-in">
         <Avatar className="h-14 w-14 border-2 border-primary/20 shrink-0">
-          <AvatarImage src="https://api.dicebear.com/7.x/notionists/svg?seed=Helena&backgroundColor=e2e8f0" alt="Helena" />
+          <AvatarImage src={MENTOR.imagePath} alt={MENTOR.name} />
           <AvatarFallback>HE</AvatarFallback>
         </Avatar>
         <div>
-          <p className="text-sm font-semibold text-slate-800 mb-1">Helena — Análise da Decisão</p>
+          <p className="text-sm font-semibold text-slate-800 mb-1">{MENTOR.name} — Análise da Decisão</p>
           <p className="text-sm leading-relaxed text-slate-600">{alt.goodBad}</p>
         </div>
       </div>
@@ -91,14 +115,18 @@ export function ConsequenceFeedback() {
             <ShieldCheck className="h-4 w-4 text-green-600" />
             <p className="text-xs font-semibold uppercase tracking-wider text-green-700">Riscos Evitados / Criados</p>
           </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">{alt.risksEvaded}</p>
+          <ul className="text-sm text-muted-foreground leading-relaxed list-disc list-inside space-y-1">
+            {alt.risksEvaded.map((r, i) => <li key={i}>{r}</li>)}
+          </ul>
         </SoftCard>
         <SoftCard className="animate-float-in">
           <div className="flex items-center gap-2 mb-2">
             <AlertTriangle className="h-4 w-4 text-amber-600" />
             <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">E se outra opção fosse escolhida?</p>
           </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">{alt.otherConsequences}</p>
+          <ul className="text-sm text-muted-foreground leading-relaxed list-disc list-inside space-y-1">
+            {alt.otherConsequences.map((c, i) => <li key={i}>{c}</li>)}
+          </ul>
         </SoftCard>
       </div>
 
@@ -113,11 +141,13 @@ export function ConsequenceFeedback() {
           <p className="text-sm font-medium text-blue-900">{alt.pmbokConcept}</p>
         </div>
         <div className="bg-slate-50 rounded-xl p-4">
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-2">
             <Lightbulb className="h-4 w-4 text-amber-500" />
             <p className="text-xs font-semibold uppercase tracking-wider text-slate-600">Aprendizado Prático</p>
           </div>
-          <p className="text-sm text-slate-700 leading-relaxed">{alt.learnings}</p>
+          <ul className="text-sm text-slate-700 leading-relaxed list-disc list-inside space-y-1">
+            {alt.learnings.map((l, i) => <li key={i}>{l}</li>)}
+          </ul>
         </div>
       </SoftCard>
 

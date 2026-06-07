@@ -71,7 +71,7 @@ export function VotingRound({ round }: Props) {
   return (
     <div className="mx-auto min-h-screen max-w-3xl px-6 py-10">
       <div className="mb-6 flex items-center gap-3 animate-float-in">
-        <Avatar3D initials={player.name.slice(0, 2)} role={player.role} />
+        <Avatar3D initials={player.name.slice(0, 2)} role={player.role} imageUrl={player.avatarImage} />
         <div>
           <p className="text-xs uppercase tracking-wider text-muted-foreground">
             Voto secreto · Rodada {round}

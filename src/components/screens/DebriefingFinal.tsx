@@ -3,8 +3,9 @@ import { SoftCard } from '@/components/ui/SoftCard';
 import { SoftButton } from '@/components/ui/SoftButton';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { BookOpen, TrendingUp, Award, RotateCcw } from 'lucide-react';
-import { GAME_EVENTS } from '@/data/events';
+import { ALL_DYNAMIC_EVENTS as GAME_EVENTS } from '@/data/dynamicEvents';
 import { metricLevel } from '@/lib/gameLogic';
+import { MENTOR } from '@/data/avatars';
 
 export function DebriefingFinal() {
   const { decisions, metrics, gameOverReason, quitGame } = useGameStore();
@@ -15,7 +16,7 @@ export function DebriefingFinal() {
     return {
       eventTitle: d.eventTitle,
       pmbokConcept: alt?.pmbokConcept ?? '',
-      learnings: alt?.learnings ?? '',
+      learnings: alt?.learnings?.join('. ') ?? '',
     };
   });
 
@@ -42,11 +43,11 @@ export function DebriefingFinal() {
       {/* Helena's closing */}
       <div className="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-slate-100 mb-8 animate-float-in">
         <Avatar className="h-16 w-16 border-2 border-primary/20">
-          <AvatarImage src="https://api.dicebear.com/7.x/notionists/svg?seed=Helena&backgroundColor=e2e8f0" alt="Helena" />
+          <AvatarImage src={MENTOR.imagePath} alt={MENTOR.name} />
           <AvatarFallback>HE</AvatarFallback>
         </Avatar>
         <div>
-          <h2 className="text-xl font-bold text-slate-800">Debriefing Final — Helena</h2>
+          <h2 className="text-xl font-bold text-slate-800">Debriefing Final — {MENTOR.name}</h2>
           <p className="text-slate-600">
             {isSuccess
               ? '"Parabéns, equipe! Vocês concluíram o projeto. Vamos revisar juntos o que aprendemos para consolidar o conhecimento."'
@@ -77,7 +78,7 @@ export function DebriefingFinal() {
             <p className="text-xs text-muted-foreground">Decisões Unânimes</p>
           </div>
           <div className="bg-muted rounded-2xl p-4">
-            <p className="text-2xl font-bold">{GAME_EVENTS.length}</p>
+            <p className="text-2xl font-bold">{decisions.length}</p>
             <p className="text-xs text-muted-foreground">Eventos Enfrentados</p>
           </div>
         </div>

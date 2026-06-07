@@ -3,6 +3,7 @@ import { SoftCard } from '@/components/ui/SoftCard';
 import { SoftButton } from '@/components/ui/SoftButton';
 import { useGameStore } from '@/store/gameStore';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { MENTOR } from '@/data/avatars';
 
 export function ProjectBriefing() {
   const beginEvent = useGameStore((s) => s.beginEvent);
@@ -12,7 +13,7 @@ export function ProjectBriefing() {
       <div className="mb-8 animate-float-in">
         <div className="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-slate-100 mb-6">
           <Avatar className="h-16 w-16 border-2 border-primary/20">
-            <AvatarImage src="https://api.dicebear.com/7.x/notionists/svg?seed=Helena&backgroundColor=e2e8f0" alt="Helena" />
+            <AvatarImage src={MENTOR.imagePath} alt={MENTOR.name} />
             <AvatarFallback>HE</AvatarFallback>
           </Avatar>
           <div>

@@ -48,7 +48,7 @@ export function RoleExplanation() {
               className="flex flex-col items-center text-center animate-float-in"
               style={{ animationDelay: `${i * 80}ms` }}
             >
-              <Avatar3D initials={p.name.slice(0, 2)} role={p.role} size="lg" />
+              <Avatar3D initials={p.name.slice(0, 2)} role={p.role} imageUrl={p.avatarImage} size="lg" />
               <h3 className="mt-4 text-base font-semibold">{p.name}</h3>
               <p className="text-xs uppercase tracking-wider text-muted-foreground">
                 {ROLE_LABELS[p.role]}

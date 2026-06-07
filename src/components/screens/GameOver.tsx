@@ -40,10 +40,10 @@ export function GameOver({ outcome }: Props) {
         </p>
 
         <div className="mt-6 grid gap-3 sm:grid-cols-3">
-          {(['budget', 'quality', 'morale'] as const).map((k) => (
+          {(['eficiencia', 'qualidade', 'saudeEquipe'] as const).map((k) => (
             <div key={k} className="rounded-2xl bg-muted p-4">
               <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                {k === 'budget' ? 'Orçamento' : k === 'quality' ? 'Qualidade' : 'Moral'}
+                {k === 'eficiencia' ? 'Eficiência' : k === 'qualidade' ? 'Qualidade' : 'Saúde da Equipe'}
               </p>
               <p className="mt-1 text-2xl font-bold tabular-nums">{metrics[k]}</p>
             </div>
@@ -73,6 +73,7 @@ export function GameOver({ outcome }: Props) {
                     <Avatar3D
                       initials={d.dissentingPlayer.name.slice(0, 2)}
                       role={d.dissentingPlayer.role}
+                      imageUrl={d.dissentingPlayer.avatarImage}
                       size="sm"
                     />
                     Voto divergente:{' '}
@@ -85,13 +86,13 @@ export function GameOver({ outcome }: Props) {
                 )}
                 <div className="mt-3 flex flex-wrap gap-2 text-xs">
                   <span className="rounded-full bg-muted px-3 py-1">
-                    Orçamento: <b>{d.metricsAfter.budget}</b>
+                    Eficiência: <b>{d.metricsAfter.eficiencia}</b>
                   </span>
                   <span className="rounded-full bg-muted px-3 py-1">
-                    Qualidade: <b>{d.metricsAfter.quality}</b>
+                    Qualidade: <b>{d.metricsAfter.qualidade}</b>
                   </span>
                   <span className="rounded-full bg-muted px-3 py-1">
-                    Moral: <b>{d.metricsAfter.morale}</b>
+                    Saúde da Equipe: <b>{d.metricsAfter.saudeEquipe}</b>
                   </span>
                 </div>
               </div>

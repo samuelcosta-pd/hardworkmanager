@@ -11,6 +11,7 @@ import { VoteReveal } from '@/components/screens/VoteReveal';
 import { DebateStructured } from '@/components/screens/DebateStructured';
 import { ConsequenceFeedback } from '@/components/screens/ConsequenceFeedback';
 import { DebriefingFinal } from '@/components/screens/DebriefingFinal';
+import { SprintReview } from '@/components/screens/SprintReview';
 
 export const Route = createFileRoute('/')({
   head: () => ({
@@ -58,6 +59,8 @@ function Game() {
     case 'decision_resolved':
     case 'feedback_narrative':
       return <ConsequenceFeedback />;
+    case 'sprint_review':
+      return <SprintReview />;
     case 'debriefing':
       return <DebriefingFinal />;
     default:

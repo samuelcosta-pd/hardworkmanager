@@ -1,4 +1,5 @@
-import type { AlternativeKey, MetricLevel, Metrics, Vote } from '@/types';
+import type { AlternativeKey, MetricLevel, Metrics, Vote, GameEvent, DelayedImpact } from '@/types';
+import { EventCategory, EventDifficulty, GameDifficulty } from '@/types';
 
 export const INITIAL_METRICS: Metrics = { eficiencia: 100, qualidade: 100, saudeEquipe: 100 };
 
@@ -49,3 +50,70 @@ export function tallyVotes(votes: Vote[]): VoteTally {
     topAlternatives,
   };
 }
+
+export function evaluateCondition(currentMetrics: Metrics, condition?: DelayedImpact['condition']): boolean {
+  if (!condition) return true; // Se não tem condição, sempre dispara
+  const value = currentMetrics[condition.metric];
+  switch (condition.operator) {
+    case '<': return value < condition.value;
+    case '>': return value > condition.value;
+    case '<=': return value <= condition.value;
+    case '>=': return value >= condition.value;
+    case '===': return value === condition.value;
+    default: return false;
+  }
+}
+
+export function drawNextEvent(
+  allEvents: GameEvent[],
+  playedEventsIds: string[],
+  currentSprint: number,
+  gameDifficulty: GameDifficulty = GameDifficulty.MEDIUM
+): GameEvent | undefined {
+  const available = allEvents.filter(e => !playedEventsIds.includes(e.id));
+  if (available.length === 0) return undefined;
+
+  const SPRINT_CATEGORIES: Record<number, EventCategory[]> = {
+    1: [EventCategory.PEOPLE, EventCategory.EXECUTION],
+    2: [EventCategory.INFRASTRUCTURE, EventCategory.KNOWLEDGE],
+    3: [EventCategory.EXECUTION, EventCategory.EXTERNAL_PRESSURE],
+    4: Object.values(EventCategory),
+  };
+
+  const currentCategories = SPRINT_CATEGORIES[currentSprint] || SPRINT_CATEGORIES[4];
+
+  const DIFFICULTY_WEIGHTS = {
+    [GameDifficulty.EASY]: { [EventDifficulty.EASY]: 80, [EventDifficulty.MEDIUM]: 20, [EventDifficulty.HARD]: 0 },
+    [GameDifficulty.MEDIUM]: { [EventDifficulty.EASY]: 25, [EventDifficulty.MEDIUM]: 50, [EventDifficulty.HARD]: 25 },
+    [GameDifficulty.HARD]: { [EventDifficulty.EASY]: 0, [EventDifficulty.MEDIUM]: 20, [EventDifficulty.HARD]: 80 },
+  };
+
+  const weights = DIFFICULTY_WEIGHTS[gameDifficulty];
+
+  // Calcular pesos ajustados
+  let weightedEvents = available.map(event => {
+    let weight = event.probabilityWeight * weights[event.difficulty];
+    if (currentCategories.includes(event.category)) weight *= 3;
+    return { event, weight };
+  });
+
+  // Se o peso total for 0 (ex: acabou os eventos fáceis no modo fácil), 
+  // ativamos o fallback e permitimos eventos com peso igual
+  let totalWeight = weightedEvents.reduce((sum, item) => sum + item.weight, 0);
+  if (totalWeight === 0) {
+    weightedEvents = available.map(event => ({ event, weight: 1 }));
+    totalWeight = available.length;
+  }
+
+  let random = Math.random() * totalWeight;
+
+  for (const item of weightedEvents) {
+    random -= item.weight;
+    if (random <= 0) {
+      return item.event;
+    }
+  }
+
+  return weightedEvents[0].event;
+}
+
