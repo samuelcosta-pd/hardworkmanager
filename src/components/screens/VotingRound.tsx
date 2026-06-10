@@ -83,6 +83,7 @@ export function VotingRound({ round }: Props) {
       <SoftCard className="mb-4 animate-float-in" variant="inset">
         <p className="text-sm font-medium text-foreground">{event.title}</p>
         <p className="mt-1 text-xs text-muted-foreground">{event.domainTag}</p>
+        <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{event.description}</p>
       </SoftCard>
 
       <div className="space-y-3">

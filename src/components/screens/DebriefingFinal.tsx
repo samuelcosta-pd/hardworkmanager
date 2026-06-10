@@ -47,7 +47,7 @@ export function DebriefingFinal() {
           <AvatarFallback>HE</AvatarFallback>
         </Avatar>
         <div>
-          <h2 className="text-xl font-bold text-slate-800">Debriefing Final — {MENTOR.name}</h2>
+          <h2 className="text-xl font-bold text-slate-800">Debriefing Final : {MENTOR.name}</h2>
           <p className="text-slate-600">
             {isSuccess
               ? '"Parabéns, equipe! Vocês concluíram o projeto. Vamos revisar juntos o que aprendemos para consolidar o conhecimento."'
@@ -152,7 +152,7 @@ export function DebriefingFinal() {
           Os cenários que vocês enfrentaram refletem dilemas reais do dia a dia de projetos de software. A habilidade de equilibrar eficiência operacional,
           qualidade técnica e saúde da equipe é central no Domínio de Desempenho <strong>Trabalho do Projeto</strong> (PMBOK 7). Em projetos reais, busquem
           sempre negociar prazos com dados concretos, proteger o fluxo de trabalho do time contra interrupções não planejadas, e investir na melhoria contínua
-          dos processos — exatamente como vocês praticaram aqui.
+          dos processos, exatamente como vocês praticaram aqui.
         </p>
       </SoftCard>
 

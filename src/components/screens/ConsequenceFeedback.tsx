@@ -68,7 +68,7 @@ export function ConsequenceFeedback() {
           <AvatarFallback>HE</AvatarFallback>
         </Avatar>
         <div>
-          <p className="text-sm font-semibold text-slate-800 mb-1">{MENTOR.name} — Análise da Decisão</p>
+          <p className="text-sm font-semibold text-slate-800 mb-1">{MENTOR.name} : Análise da Decisão</p>
           <p className="text-sm leading-relaxed text-slate-600">{alt.goodBad}</p>
         </div>
       </div>

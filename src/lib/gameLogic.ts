@@ -22,7 +22,7 @@ export function metricLevel(value: number): MetricLevel {
 }
 
 export function isGameOver(m: Metrics): { over: boolean; reason?: string } {
-  if (m.eficiencia <= 0) return { over: true, reason: 'A eficiência operacional colapsou. Prazos foram estourados e os recursos esgotados, inviabilizando a continuidade do projeto.' };
+  if (m.eficiencia < 40) return { over: true, reason: 'A eficiência operacional colapsou. Prazos foram estourados e os recursos esgotados, inviabilizando a continuidade do projeto.' };
   if (m.qualidade < 40) return { over: true, reason: 'A qualidade técnica despencou a níveis inaceitáveis. O sistema apresentou falhas críticas operacionais e o projeto foi cancelado pela diretoria.' };
   if (m.saudeEquipe < 40) return { over: true, reason: 'A saúde da equipe foi destruída. Um ambiente tóxico e alta pressão causaram demissões em massa e burnout, paralisando o trabalho do projeto.' };
   return { over: false };

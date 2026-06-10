@@ -309,8 +309,8 @@ export const useGameStore = create<GameState>()(
 
         const next = currentEventIndex + 1;
         
-        // 12 events total (4 sprints of 3 events)
-        if (next >= 12) {
+        // 2 events total (fase de testes)
+        if (next >= 2) {
           set({ phase: 'debriefing' });
         } else if (next > 0 && next % 3 === 0) {
           // Acabou a sprint

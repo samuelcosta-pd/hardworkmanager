@@ -84,7 +84,9 @@ export function DebateStructured() {
         <p className="text-xs uppercase tracking-[0.2em] text-primary">Debate estruturado</p>
         <h1 className="mt-1 text-2xl font-bold tracking-tight">Cada voz tem seu tempo</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Minoria fala primeiro · Maioria responde · PM arbitra por último
+          {speakers.length >= 3 
+            ? `${speakers[0].playerName} fala primeiro · ${speakers[1].playerName} responde · ${speakers[speakers.length - 1].playerName} fala por último.` 
+            : `${speakers[0]?.playerName} fala primeiro · ${speakers[1]?.playerName} responde.`}
         </p>
       </div>
 

@@ -107,7 +107,7 @@ export function ProjectBriefing() {
             <div>
               <h2 className="text-md font-semibold">Critérios de Falha</h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                Qualquer uma das três métricas principais chegar a 0 (zero) ou nível crítico irreversível durante os eventos.
+                Qualquer uma das três métricas principais chegar abaixo de 40 pontos (nível crítico) durante os eventos.
               </p>
             </div>
           </div>

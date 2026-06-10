@@ -35,7 +35,7 @@ export function SprintReview() {
           <AvatarFallback>HE</AvatarFallback>
         </Avatar>
         <div>
-          <h2 className="text-xl font-bold text-slate-800">Review da Sprint — {MENTOR.name}</h2>
+          <h2 className="text-xl font-bold text-slate-800">Review da Sprint : {MENTOR.name}</h2>
           <p className="text-slate-600">
             "Mais um ciclo fechado. Confiram como ficaram nossas métricas principais após as últimas decisões. Lembrem-se que atalhos tomados hoje podem retornar como dívida no futuro."
           </p>

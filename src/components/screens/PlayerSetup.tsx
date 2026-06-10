@@ -130,9 +130,6 @@ export function PlayerSetup() {
                         alt={d.avatarName} 
                         className="h-8 w-8 rounded-full object-cover bg-slate-100" 
                       />
-                      <span className="text-xs font-semibold text-slate-700 hidden lg:inline-block max-w-[80px] truncate" title={d.avatarName}>
-                        {d.avatarName}
-                      </span>
                     </div>
                   ) : (
                     <div className="flex items-center gap-2 bg-white rounded-full pr-3 p-1 shadow-[var(--shadow-soft)] border border-slate-100">
