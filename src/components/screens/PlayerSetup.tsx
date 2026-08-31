@@ -18,6 +18,7 @@ const DEFAULT_ROLES: PlayerRole[] = ['pm', 'techLead', 'uxLead'];
 
 export function PlayerSetup() {
   const setupPlayers = useGameStore((s) => s.setupPlayers);
+  const goTo = useGameStore((s) => s.goTo);
   
   const [drafts, setDrafts] = useState<Draft[]>([
     { name: '', role: 'pm' },
