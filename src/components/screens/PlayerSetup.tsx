@@ -3,7 +3,7 @@ import { Plus, Sparkles, Trash2, Users, X, Pencil } from 'lucide-react';
 import { SoftCard } from '@/components/ui/SoftCard';
 import { SoftButton } from '@/components/ui/SoftButton';
 import { useGameStore } from '@/store/gameStore';
-import { ROLE_LABELS, type PlayerRole, GameDifficulty } from '@/types';
+import { ROLE_LABELS, type PlayerRole } from '@/types';
 import { AVAILABLE_AVATARES } from '@/data/avatars';
 
 interface Draft {
@@ -18,8 +18,6 @@ const DEFAULT_ROLES: PlayerRole[] = ['pm', 'techLead', 'uxLead'];
 
 export function PlayerSetup() {
   const setupPlayers = useGameStore((s) => s.setupPlayers);
-  const setGameDifficulty = useGameStore((s) => s.setGameDifficulty);
-  const gameDifficulty = useGameStore((s) => s.gameDifficulty);
   
   const [drafts, setDrafts] = useState<Draft[]>([
     { name: '', role: 'pm' },
@@ -168,45 +166,13 @@ export function PlayerSetup() {
           )}
         </div>
 
-        <div className="mt-8 border-t pt-6">
-          <h2 className="text-lg font-semibold mb-4 text-slate-800">Dificuldade da Partida</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {[
-              { id: GameDifficulty.EASY, label: 'Fácil', desc: 'Mais eventos operacionais simples e menor quantidade de riscos complexos.' },
-              { id: GameDifficulty.MEDIUM, label: 'Médio', desc: 'Equilíbrio entre problemas operacionais, técnicos e organizacionais.' },
-              { id: GameDifficulty.HARD, label: 'Difícil', desc: 'Maior presença de crises, conflitos, riscos institucionais e consequências indiretas.' }
-            ].map(diff => (
-              <label 
-                key={diff.id} 
-                className={`cursor-pointer rounded-xl border p-4 text-sm flex flex-col gap-1 transition-all ${
-                  gameDifficulty === diff.id 
-                    ? 'border-primary bg-primary/5 ring-2 ring-primary/20' 
-                    : 'border-slate-200 bg-white hover:border-slate-300'
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  <input 
-                    type="radio" 
-                    name="gameDifficulty" 
-                    value={diff.id} 
-                    checked={gameDifficulty === diff.id}
-                    onChange={() => setGameDifficulty(diff.id as GameDifficulty)}
-                    className="accent-primary w-4 h-4"
-                  />
-                  <span className="font-bold text-slate-800">{diff.label}</span>
-                </div>
-                <span className="text-muted-foreground text-xs leading-relaxed mt-1">{diff.desc}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
         <div className="mt-8 flex justify-end">
           <SoftButton size="lg" onClick={handleStart} disabled={!allValid}>
             Avançar para os papéis
           </SoftButton>
         </div>
       </SoftCard>
+
       {avatarModalOpenFor !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in">
           <div className="w-full max-w-3xl rounded-3xl bg-white p-6 shadow-2xl animate-in zoom-in-95">

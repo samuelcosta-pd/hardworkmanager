@@ -1,5 +1,9 @@
 import type { AlternativeKey, MetricLevel, Metrics, Vote, GameEvent, DelayedImpact } from '@/types';
-import { EventCategory, EventDifficulty, GameDifficulty } from '@/types';
+import { tailoringEvents } from '@/data/events/tailoringEvents';
+import { leadershipEvents } from '@/data/events/leadershipEvents';
+import { systemsThinkingEvents } from '@/data/events/systemsThinkingEvents';
+import { changeManagementEvents } from '@/data/events/changeManagementEvents';
+import { qualityEvents } from '@/data/events/qualityEvents';
 
 export const INITIAL_METRICS: Metrics = { capacidadeEntrega: 100, qualidadeProduto: 100, saudeEquipe: 100, conhecimentoOrganizacional: 50 };
 
@@ -8,9 +12,9 @@ export function clamp(n: number): number {
 }
 
 export function applyImpacts(current: Metrics, impacts: Partial<Metrics>): Metrics {
-  // Penalty mechanics: if organizational knowledge is critically low (< 20)
-  // and the current impact tries to decrease delivery capacity, we double the penalty
-  // to simulate that lack of knowledge makes bugs/problems twice as slow to fix.
+  // Mecânica de penalidade: se o conhecimento organizacional estiver criticamente baixo (< 20)
+  // e o impacto atual reduzir a capacidade de entrega, dobramos a perda de capacidade
+  // para simular que a falta de documentação/silos dobra o tempo de resolução de problemas.
   let capacidadeImpact = impacts.capacidadeEntrega ?? 0;
   if (current.conhecimentoOrganizacional < 20 && capacidadeImpact < 0) {
     capacidadeImpact *= 2;
@@ -34,7 +38,6 @@ export function isGameOver(m: Metrics): { over: boolean; reason?: string } {
   if (m.capacidadeEntrega < 40) return { over: true, reason: 'A capacidade de entrega (Velocity) colapsou. Gargalos crônicos e lentidão inviabilizaram a continuidade do projeto.' };
   if (m.qualidadeProduto < 40) return { over: true, reason: 'A qualidade do produto despencou a níveis inaceitáveis. O alto volume de sucata (scrap) e retrabalho forçou o cancelamento pelo cliente.' };
   if (m.saudeEquipe < 40) return { over: true, reason: 'A saúde da equipe foi destruída. Um ambiente tóxico e alta pressão causaram demissões em massa e burnout, paralisando o trabalho do projeto.' };
-  // Conhecimento Organizacional dropping < 40 does not cause immediate game over, but causes severe penalties on velocity as defined in applyImpacts.
   return { over: false };
 }
 
@@ -62,7 +65,7 @@ export function tallyVotes(votes: Vote[]): VoteTally {
 }
 
 export function evaluateCondition(currentMetrics: Metrics, condition?: DelayedImpact['condition']): boolean {
-  if (!condition) return true; // Se não tem condição, sempre dispara
+  if (!condition) return true;
   const value = currentMetrics[condition.metric];
   switch (condition.operator) {
     case '<': return value < condition.value;
@@ -74,56 +77,41 @@ export function evaluateCondition(currentMetrics: Metrics, condition?: DelayedIm
   }
 }
 
-export function drawNextEvent(
-  allEvents: GameEvent[],
-  playedEventsIds: string[],
-  currentSprint: number,
-  gameDifficulty: GameDifficulty = GameDifficulty.MEDIUM
-): GameEvent | undefined {
-  const available = allEvents.filter(e => !playedEventsIds.includes(e.id));
-  if (available.length === 0) return undefined;
-
-  const SPRINT_CATEGORIES: Record<number, EventCategory[]> = {
-    1: [EventCategory.PEOPLE, EventCategory.EXECUTION],
-    2: [EventCategory.INFRASTRUCTURE, EventCategory.KNOWLEDGE],
-    3: [EventCategory.EXECUTION, EventCategory.EXTERNAL_PRESSURE],
-    4: Object.values(EventCategory),
+/**
+ * Gera o baralho equilibrado de 10 dilemas para uma partida completa:
+ * - Exatamente 2 dilemas sorteados aleatoriamente de cada um dos 5 princípios do PMBOK 7.
+ * - Distribuídos em 2 rodadas de 5 princípios para garantir variedade pedagógica contínua.
+ * Total: 10 dilemas por partida.
+ */
+export function generateMatchDeck(): GameEvent[] {
+  const sampleRandom = (arr: GameEvent[], count: number = 2): GameEvent[] => {
+    const shuffled = [...arr].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, count);
   };
 
-  const currentCategories = SPRINT_CATEGORIES[currentSprint] || SPRINT_CATEGORIES[4];
+  const poolTailoring = sampleRandom(tailoringEvents, 2);
+  const poolLeadership = sampleRandom(leadershipEvents, 2);
+  const poolSystems = sampleRandom(systemsThinkingEvents, 2);
+  const poolChange = sampleRandom(changeManagementEvents, 2);
+  const poolQuality = sampleRandom(qualityEvents, 2);
 
-  const DIFFICULTY_WEIGHTS = {
-    [GameDifficulty.EASY]: { [EventDifficulty.EASY]: 80, [EventDifficulty.MEDIUM]: 20, [EventDifficulty.HARD]: 0 },
-    [GameDifficulty.MEDIUM]: { [EventDifficulty.EASY]: 25, [EventDifficulty.MEDIUM]: 50, [EventDifficulty.HARD]: 25 },
-    [GameDifficulty.HARD]: { [EventDifficulty.EASY]: 0, [EventDifficulty.MEDIUM]: 20, [EventDifficulty.HARD]: 80 },
-  };
+  // Primeira metade da partida: 1 de cada princípio (ordem aleatória)
+  const round1 = [
+    poolTailoring[0],
+    poolLeadership[0],
+    poolSystems[0],
+    poolChange[0],
+    poolQuality[0],
+  ].sort(() => Math.random() - 0.5);
 
-  const weights = DIFFICULTY_WEIGHTS[gameDifficulty];
+  // Segunda metade da partida: o segundo de cada princípio (ordem aleatória)
+  const round2 = [
+    poolTailoring[1],
+    poolLeadership[1],
+    poolSystems[1],
+    poolChange[1],
+    poolQuality[1],
+  ].sort(() => Math.random() - 0.5);
 
-  // Calcular pesos ajustados
-  let weightedEvents = available.map(event => {
-    let weight = event.probabilityWeight * weights[event.difficulty];
-    if (currentCategories.includes(event.category)) weight *= 3;
-    return { event, weight };
-  });
-
-  // Se o peso total for 0 (ex: acabou os eventos fáceis no modo fácil), 
-  // ativamos o fallback e permitimos eventos com peso igual
-  let totalWeight = weightedEvents.reduce((sum, item) => sum + item.weight, 0);
-  if (totalWeight === 0) {
-    weightedEvents = available.map(event => ({ event, weight: 1 }));
-    totalWeight = available.length;
-  }
-
-  let random = Math.random() * totalWeight;
-
-  for (const item of weightedEvents) {
-    random -= item.weight;
-    if (random <= 0) {
-      return item.event;
-    }
-  }
-
-  return weightedEvents[0].event;
+  return [...round1, ...round2];
 }
-

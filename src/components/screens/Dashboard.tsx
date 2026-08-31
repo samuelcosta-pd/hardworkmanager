@@ -4,10 +4,10 @@ import { SoftButton } from '@/components/ui/SoftButton';
 import { Avatar3D } from '@/components/ui/Avatar3D';
 import { MetricBar } from '@/components/ui/MetricBar';
 import { useGameStore } from '@/store/gameStore';
-import { ROLE_LABELS, GameDifficulty } from '@/types';
+import { ROLE_LABELS } from '@/types';
 
 export function Dashboard() {
-  const { players, metrics, events, currentEventIndex, decisions, beginEvent, currentSprint, appliedDelayedImpactsHistory, gameDifficulty } = useGameStore();
+  const { players, metrics, events, currentEventIndex, decisions, beginEvent, currentSprint, appliedDelayedImpactsHistory } = useGameStore();
   const currentEvent = events[currentEventIndex];
 
   return (
@@ -24,15 +24,6 @@ export function Dashboard() {
         </div>
       </header>
 
-      <div className="mb-8 flex items-center justify-between animate-pop-in">
-        <div className="rounded-full bg-muted px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Dificuldade:{' '}
-          <span className="text-foreground">
-            {gameDifficulty === GameDifficulty.EASY ? 'Fácil' : gameDifficulty === GameDifficulty.HARD ? 'Difícil' : 'Média'}
-          </span>
-        </div>
-      </div>
-
       <section className="mb-8 grid gap-4 md:grid-cols-3">
         <MetricBar label="Capacidade de Entrega (Velocity)" value={metrics.capacidadeEntrega} icon={<Gauge className="h-5 w-5 text-primary" />} />
         <MetricBar label="Qualidade do Produto" value={metrics.qualidadeProduto} icon={<Sparkle className="h-5 w-5 text-primary" />} />
@@ -42,13 +33,13 @@ export function Dashboard() {
       <div className="grid gap-6 md:grid-cols-3">
         <SoftCard className="md:col-span-2 animate-float-in">
           <p className="text-xs uppercase tracking-wider text-muted-foreground">Próximo dilema</p>
-          <h2 className="mt-2 text-2xl font-bold">{currentEvent.title}</h2>
+          <h2 className="mt-2 text-2xl font-bold">{currentEvent?.title || 'Carregando...'}</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Domínio: <span className="font-medium text-foreground">{currentEvent.domainTag}</span>
+            Princípio PMBOK: <span className="font-medium text-foreground">{currentEvent?.domainTag}</span>
           </p>
           <p className="mt-1 text-sm text-muted-foreground">
             Responsável principal:{' '}
-            <span className="font-medium text-foreground">{ROLE_LABELS[currentEvent.responsibleRole]}</span>
+            <span className="font-medium text-foreground">{currentEvent ? ROLE_LABELS[currentEvent.responsibleRole] : ''}</span>
           </p>
           <div className="mt-6 flex justify-end">
             <SoftButton size="lg" onClick={beginEvent}>
@@ -58,12 +49,12 @@ export function Dashboard() {
         </SoftCard>
 
         <SoftCard className="animate-float-in">
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">Progresso</p>
+          <p className="text-xs uppercase tracking-wider text-muted-foreground">Progresso da Partida</p>
           <p className="mt-2 text-3xl font-bold">
             {decisions.length}
-            <span className="text-base font-normal text-muted-foreground"> / {events.length}</span>
+            <span className="text-base font-normal text-muted-foreground"> / 10</span>
           </p>
-          <p className="mt-1 text-sm text-muted-foreground">decisões registradas</p>
+          <p className="mt-1 text-sm text-muted-foreground">dilemas concluídos (2 por princípio)</p>
           <div className="mt-5 space-y-2 max-h-[300px] overflow-y-auto pr-2">
             {events.map((ev, i) => (
               <div
@@ -87,7 +78,7 @@ export function Dashboard() {
           <p className="text-xs uppercase tracking-wider text-muted-foreground">Ciclo de Entrega</p>
           <h2 className="mt-2 text-2xl font-bold">Sprint {currentSprint} / 4</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            {12 - currentEventIndex} eventos restantes na partida.
+            {Math.max(0, 10 - currentEventIndex)} dilema(s) restantes na partida.
           </p>
         </SoftCard>
 

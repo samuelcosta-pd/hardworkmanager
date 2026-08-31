@@ -1,14 +1,13 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { ALL_DYNAMIC_EVENTS } from '@/data/dynamicEvents';
 import { AVAILABLE_AVATARES } from '@/data/avatars';
 import {
   INITIAL_METRICS,
   applyImpacts,
   isGameOver,
   tallyVotes,
-  drawNextEvent,
   evaluateCondition,
+  generateMatchDeck,
 } from '@/lib/gameLogic';
 import type {
   AlternativeKey,
@@ -20,7 +19,6 @@ import type {
   PlayerRole,
   Vote,
   DelayedImpact,
-  GameDifficulty,
 } from '@/types';
 
 interface PlayerDraft {
@@ -48,6 +46,7 @@ interface GameState {
   phase: GamePhase;
   players: Player[];
   metrics: Metrics;
+  matchDeck: GameEvent[];
   events: GameEvent[];
   currentEventIndex: number;
   votes: Vote[];
@@ -55,15 +54,13 @@ interface GameState {
   currentVoterIndex: number;
   gameOverReason?: string;
   
-  // New properties for dynamic events
+  // Propriedades de fluxo e impactos diferidos
   currentSprint: number;
-  gameDifficulty: GameDifficulty;
   playedEventsIds: string[];
   pendingDelayedImpacts: PendingDelayedImpact[];
   appliedDelayedImpactsHistory: AppliedImpactHistory[];
-  delayedImpactsTriggeredThisRound: AppliedImpactHistory[]; // To show in UI
+  delayedImpactsTriggeredThisRound: AppliedImpactHistory[];
 
-  setGameDifficulty: (diff: GameDifficulty) => void;
   setupPlayers: (drafts: PlayerDraft[]) => void;
   goTo: (phase: GamePhase) => void;
   startGame: () => void;
@@ -84,6 +81,7 @@ const initialState = {
   phase: 'intro' as GamePhase,
   players: [] as Player[],
   metrics: INITIAL_METRICS,
+  matchDeck: [] as GameEvent[],
   events: [] as GameEvent[],
   currentEventIndex: 0,
   votes: [] as Vote[],
@@ -91,7 +89,6 @@ const initialState = {
   currentVoterIndex: 0,
   gameOverReason: undefined as string | undefined,
   currentSprint: 1,
-  gameDifficulty: 'medium' as GameDifficulty,
   playedEventsIds: [] as string[],
   pendingDelayedImpacts: [] as PendingDelayedImpact[],
   appliedDelayedImpactsHistory: [] as AppliedImpactHistory[],
@@ -139,8 +136,6 @@ export const useGameStore = create<GameState>()(
     (set, get) => ({
       ...initialState,
 
-      setGameDifficulty: (diff) => set({ gameDifficulty: diff }),
-
       setupPlayers: (drafts) => {
         const players: Player[] = drafts.map((d, i) => ({
           id: `p${i + 1}`,
@@ -157,16 +152,14 @@ export const useGameStore = create<GameState>()(
       goTo: (phase) => set({ phase }),
 
       startGame: () => {
-        // Draw the first event dynamically
-        let firstEvent = drawNextEvent(ALL_DYNAMIC_EVENTS, [], 1, get().gameDifficulty);
-        if (!firstEvent) {
-          console.error("No events available!");
-          return;
-        }
-        firstEvent = injectNPC(firstEvent, get().players);
+        const rawDeck = generateMatchDeck();
+        const players = get().players;
+        const matchDeck = rawDeck.map(e => injectNPC(e, players));
+        const firstEvent = matchDeck[0];
         
         set({ 
           phase: 'briefing',
+          matchDeck,
           events: [firstEvent],
           playedEventsIds: [firstEvent.id],
           currentSprint: 1,
@@ -178,7 +171,7 @@ export const useGameStore = create<GameState>()(
         phase: 'event_display', 
         votes: [], 
         currentVoterIndex: 0,
-        delayedImpactsTriggeredThisRound: [], // Reset this round's notifications
+        delayedImpactsTriggeredThisRound: [],
       }),
 
       castVote: (alt) => {
@@ -199,37 +192,73 @@ export const useGameStore = create<GameState>()(
 
       startDebate: () => set({ phase: 'debate_structured' }),
 
-      beginRound2: () => set({ phase: 'voting_round_2', currentVoterIndex: 0 }),
+      beginRound2: () => set({ 
+        phase: 'voting_round_2', 
+        currentVoterIndex: 0 
+      }),
 
-      finalizeRound2: () => {
-        get().resolveDecision();
-      },
+      finalizeRound2: () => set({ phase: 'decision_resolved' }),
 
       resolveDecision: () => {
-        const { events, currentEventIndex, votes, players, metrics, decisions, pendingDelayedImpacts, appliedDelayedImpactsHistory } = get();
+        const { 
+          events, 
+          currentEventIndex, 
+          votes, 
+          metrics, 
+          decisions, 
+          players, 
+          pendingDelayedImpacts, 
+          appliedDelayedImpactsHistory 
+        } = get();
+        
         const event = events[currentEventIndex];
-        const round = votes.some((v) => v.round === 2) ? 2 : 1;
-        const roundVotes = votes.filter((v) => v.round === round);
-        const tally = tallyVotes(roundVotes);
-
-        let chosen: AlternativeKey;
+        const round2Votes = votes.filter((v) => v.round === 2);
+        const tally = tallyVotes(round2Votes.length > 0 ? round2Votes : votes.filter((v) => v.round === 1));
+        
+        let chosenKey: AlternativeKey = tally.winner;
         if (tally.tied) {
-          const pm = players.find((p) => p.role === 'pm')!;
-          const pmVote = roundVotes.find((v) => v.playerId === pm.id);
-          chosen = pmVote ? pmVote.alternative : tally.topAlternatives[0];
-        } else {
-          chosen = tally.winner;
+          const pm = players.find((p) => p.role === 'pm');
+          const pmVote = round2Votes.find((v) => v.playerId === pm?.id);
+          if (pmVote && tally.topAlternatives.includes(pmVote.alternative)) {
+            chosenKey = pmVote.alternative;
+          }
         }
 
-        const alt = event.alternatives.find((a) => a.key === chosen)!;
-        let newMetrics = applyImpacts(metrics, alt.impacts);
-        
-        // Register new delayed impacts
-        let newPendingImpacts = [...pendingDelayedImpacts];
-        if (alt.delayedImpacts) {
-          alt.delayedImpacts.forEach(di => {
-            newPendingImpacts.push({
-              id: Math.random().toString(36).substr(2, 9),
+        const chosenAlt = event.alternatives.find((a) => a.key === chosenKey) || event.alternatives[0];
+
+        // 1. Processar Delayed Impacts que já estavam pendentes
+        let currentMetrics = { ...metrics };
+        const newlyAppliedHistory: AppliedImpactHistory[] = [];
+        const remainingDelayedImpacts: PendingDelayedImpact[] = [];
+
+        for (const item of pendingDelayedImpacts) {
+          const decremented = item.remainingEvents - 1;
+          if (decremented <= 0) {
+            // Checar se a condição de ativação é satisfeita
+            if (evaluateCondition(currentMetrics, item.impact.condition)) {
+              currentMetrics = applyImpacts(currentMetrics, item.impact.impacts);
+              newlyAppliedHistory.push({
+                narrative: item.impact.narrative,
+                metricsDelta: item.impact.impacts,
+                sourceEventTitle: item.sourceEventTitle,
+              });
+            }
+          } else {
+            remainingDelayedImpacts.push({
+              ...item,
+              remainingEvents: decremented,
+            });
+          }
+        }
+
+        // 2. Aplicar impactos imediatos da alternativa escolhida
+        const nextMetrics = applyImpacts(currentMetrics, chosenAlt.impacts);
+
+        // 3. Registrar novos Delayed Impacts gerados pela escolha atual
+        if (chosenAlt.delayedImpacts && chosenAlt.delayedImpacts.length > 0) {
+          chosenAlt.delayedImpacts.forEach((di, idx) => {
+            remainingDelayedImpacts.push({
+              id: `${event.id}_di_${idx}_${Date.now()}`,
               remainingEvents: di.triggerAfterEvents,
               impact: di,
               sourceEventTitle: event.title,
@@ -237,66 +266,31 @@ export const useGameStore = create<GameState>()(
           });
         }
 
-        // Process existing delayed impacts (decrement and trigger)
-        const newlyTriggered: AppliedImpactHistory[] = [];
-        newPendingImpacts = newPendingImpacts.map(p => ({
-          ...p,
-          remainingEvents: p.remainingEvents - 1
-        }));
-
-        const toTrigger = newPendingImpacts.filter(p => p.remainingEvents <= 0);
-        newPendingImpacts = newPendingImpacts.filter(p => p.remainingEvents > 0);
-
-        toTrigger.forEach(p => {
-          if (evaluateCondition(newMetrics, p.impact.condition)) {
-            newMetrics = applyImpacts(newMetrics, p.impact.impacts);
-            newlyTriggered.push({
-              narrative: p.impact.narrative,
-              metricsDelta: p.impact.impacts,
-              sourceEventTitle: p.sourceEventTitle,
-            });
-          }
-        });
-
-        const newAppliedHistory = [...appliedDelayedImpactsHistory, ...newlyTriggered];
-
-        const round1Tally = tallyVotes(votes.filter((v) => v.round === 1));
-        const wasUnanimous = round1Tally.unanimous;
-        let dissentingPlayer: Player | undefined;
-        let dissentingAlternative: AlternativeKey | undefined;
-        if (!wasUnanimous) {
-          const counts = round1Tally.counts;
-          const minorityKey = (Object.entries(counts) as [AlternativeKey, number][])
-            .filter(([, n]) => n > 0)
-            .sort((a, b) => a[1] - b[1])[0][0];
-          const dissentVote = votes.find((v) => v.round === 1 && v.alternative === minorityKey);
-          if (dissentVote) {
-            dissentingPlayer = players.find((p) => p.id === dissentVote.playerId);
-            dissentingAlternative = minorityKey;
-          }
-        }
+        const dissentingVote = round2Votes.find((v) => v.alternative !== chosenKey);
+        const dissentingPlayer = dissentingVote ? players.find((p) => p.id === dissentingVote.playerId) : undefined;
 
         const decision: Decision = {
           eventId: event.id,
           eventTitle: event.title,
-          chosenAlternative: chosen,
-          chosenText: alt.text,
-          wasUnanimous,
+          chosenAlternative: chosenKey,
+          chosenText: chosenAlt.text,
+          wasUnanimous: tally.unanimous,
           dissentingPlayer,
-          dissentingAlternative,
-          feedbackNarrative: alt.feedbackNarrative,
-          metricsAfter: newMetrics,
+          dissentingAlternative: dissentingVote?.alternative,
+          feedbackNarrative: chosenAlt.feedbackNarrative,
+          metricsAfter: nextMetrics,
         };
 
-        const gameOver = isGameOver(newMetrics);
+        const over = isGameOver(nextMetrics);
+
         set({
-          metrics: newMetrics,
+          metrics: nextMetrics,
           decisions: [...decisions, decision],
-          pendingDelayedImpacts: newPendingImpacts,
-          appliedDelayedImpactsHistory: newAppliedHistory,
-          delayedImpactsTriggeredThisRound: newlyTriggered,
+          gameOverReason: over.over ? over.reason : undefined,
+          pendingDelayedImpacts: remainingDelayedImpacts,
+          appliedDelayedImpactsHistory: [...appliedDelayedImpactsHistory, ...newlyAppliedHistory],
+          delayedImpactsTriggeredThisRound: newlyAppliedHistory,
           phase: 'feedback_narrative',
-          gameOverReason: gameOver.over ? gameOver.reason : undefined,
         });
       },
 
@@ -309,11 +303,11 @@ export const useGameStore = create<GameState>()(
 
         const next = currentEventIndex + 1;
         
-        // 2 events total (fase de testes)
-        if (next >= 2) {
+        // Partida completa com 10 dilemas (2 de cada um dos 5 princípios)
+        if (next >= 10) {
           set({ phase: 'debriefing' });
-        } else if (next > 0 && next % 3 === 0) {
-          // Acabou a sprint
+        } else if (next === 3 || next === 6 || next === 9) {
+          // Revisão de Sprint ao final dos blocos de sprint
           set({ phase: 'sprint_review' });
         } else {
           get().startNextSprint();
@@ -321,18 +315,16 @@ export const useGameStore = create<GameState>()(
       },
 
       startNextSprint: () => {
-        const { currentEventIndex, events, playedEventsIds } = get();
-        // Se vier de sprint_review, currentEventIndex é do último evento da sprint.
-        // Precisamos avançar +1.
+        const { currentEventIndex, matchDeck, events, playedEventsIds } = get();
         const next = currentEventIndex + 1;
-        const newSprint = Math.floor(next / 3) + 1;
+        const newSprint = Math.min(4, Math.floor(next / 3) + 1);
         
-        let newEvent = drawNextEvent(ALL_DYNAMIC_EVENTS, playedEventsIds, newSprint, get().gameDifficulty);
-        if (!newEvent) {
+        if (next >= matchDeck.length) {
           set({ phase: 'debriefing' });
           return;
         }
-        newEvent = injectNPC(newEvent, get().players);
+
+        const newEvent = matchDeck[next];
 
         set({
           currentEventIndex: next,

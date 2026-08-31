@@ -30,12 +30,6 @@ export enum EventDifficulty {
   HARD = 'hard',
 }
 
-export enum GameDifficulty {
-  EASY = 'easy',
-  MEDIUM = 'medium',
-  HARD = 'hard',
-}
-
 export type PlayerRole = 'pm' | 'techLead' | 'uxLead';
 export type AlternativeKey = 'a' | 'b' | 'c';
 export type MetricLevel = 'stable' | 'warning' | 'critical';

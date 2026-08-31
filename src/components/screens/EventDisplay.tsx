@@ -14,7 +14,7 @@ export function EventDisplay() {
         <p className="text-xs uppercase tracking-[0.2em] text-primary">Novo dilema</p>
         <h1 className="mt-1 text-2xl font-bold tracking-tight">{event.title}</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Domínio PMBOK: {event.domainTag} · Liderança: {ROLE_LABELS[event.responsibleRole]}
+          Princípio PMBOK: <span className="font-medium text-foreground">{event.domainTag}</span> · Liderança: {ROLE_LABELS[event.responsibleRole]}
         </p>
       </div>
 
