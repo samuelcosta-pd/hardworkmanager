@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { Pause, Play, SkipForward, Timer } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { Pause, Play, SkipForward, Timer, MessageSquare, Check, ArrowRight } from 'lucide-react';
 import { SoftCard } from '@/components/ui/SoftCard';
 import { SoftButton } from '@/components/ui/SoftButton';
 import { Avatar3D } from '@/components/ui/Avatar3D';
@@ -80,79 +80,97 @@ export function DebateStructured() {
 
   return (
     <div className="mx-auto min-h-screen max-w-3xl px-6 py-10">
-      <div className="mb-6 animate-float-in">
-        <p className="text-xs uppercase tracking-[0.2em] text-primary">Debate estruturado</p>
-        <h1 className="mt-1 text-2xl font-bold tracking-tight">Cada voz tem seu tempo</h1>
+      <div className="mb-6 text-center animate-float-in">
+        <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+          <MessageSquare className="h-5 w-5" />
+        </div>
+        <p className="text-xs uppercase tracking-[0.2em] text-primary font-bold">Debate Estruturado</p>
+        <h1 className="mt-1 text-2xl font-bold tracking-tight">Defendam seus pontos de vista</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          {speakers.length >= 3 
-            ? `${speakers[0].playerName} fala primeiro · ${speakers[1].playerName} responde · ${speakers[speakers.length - 1].playerName} fala por último.` 
-            : `${speakers[0]?.playerName} fala primeiro · ${speakers[1]?.playerName} responde.`}
+          Voz minoritária fala primeiro para evitar o efeito manada (Groupthink).
         </p>
       </div>
 
-      <SoftCard className="mb-6 animate-pop-in">
-        <div className="flex flex-col items-center text-center">
-          <Avatar3D initials={speaker.playerName.slice(0, 2)} role={speaker.playerRole} imageUrl={(speaker as any).avatarImage} size="lg" />
-          <p className="mt-3 text-xs uppercase tracking-wider text-muted-foreground">
-            Falante {speaker.order} de {speakers.length}
-          </p>
-          <p className="text-2xl font-bold">{speaker.playerName}</p>
-          <p className="text-sm text-muted-foreground">{ROLE_LABELS[speaker.playerRole]}</p>
-
-          <div className="mt-6 flex items-center gap-2 text-muted-foreground">
-            <Timer className="h-4 w-4" />
-            <span className="text-xs uppercase tracking-wider">Tempo</span>
+      {/* Card do Orador Atual */}
+      <SoftCard className="mb-6 animate-pop-in text-center p-8">
+        <div className="flex flex-col items-center">
+          <div className="relative">
+            <Avatar3D initials={speaker.playerName.slice(0, 2)} role={speaker.playerRole} imageUrl={(speaker as any).avatarImage} size="lg" />
+            <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+              {speaker.order}
+            </span>
           </div>
-          <p className="mt-2 font-mono text-7xl font-bold tabular-nums text-primary">
-            {mm}:{ss}
-          </p>
-          <div className="mt-4 h-2 w-full max-w-xs overflow-hidden rounded-full bg-muted">
-            <div
-              className={`h-full rounded-full transition-all duration-1000 ease-linear ${
-                secondsLeft === 0 ? 'bg-critical' : 'bg-primary'
-              }`}
-              style={{ width: `${progress}%` }}
-            />
+          
+          <p className="mt-3 text-2xl font-bold text-foreground">{speaker.playerName}</p>
+          <span className="mt-1 inline-block rounded-full bg-primary/10 px-3 py-0.5 text-xs font-semibold text-primary">
+            {ROLE_LABELS[speaker.playerRole]}
+          </span>
+
+          {/* Cronômetro */}
+          <div className="mt-6 flex flex-col items-center">
+            <div className="flex items-center gap-1.5 text-muted-foreground text-xs font-semibold uppercase tracking-wider">
+              <Timer className="h-4 w-4" />
+              <span>Tempo de Fala</span>
+            </div>
+            
+            <p className="mt-1 font-mono text-6xl font-extrabold tabular-nums text-foreground">
+              {mm}:{ss}
+            </p>
+
+            <div className="mt-4 h-2.5 w-full max-w-xs overflow-hidden rounded-full bg-muted shadow-inner">
+              <div
+                className={`h-full rounded-full transition-all duration-1000 ease-linear ${
+                  secondsLeft <= 5 ? 'bg-rose-500' : 'bg-primary'
+                }`}
+                style={{ width: `${progress}%` }}
+              />
+            </div>
           </div>
 
-          <div className="mt-6 flex gap-2">
-            <SoftButton variant="ghost" onClick={() => setRunning((r) => !r)}>
-              {running ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+          {/* Controles de Tempo */}
+          <div className="mt-6 flex flex-wrap justify-center gap-2">
+            <SoftButton variant="ghost" size="sm" onClick={() => setRunning((r) => !r)}>
+              {running ? <Pause className="h-4 w-4 mr-1.5" /> : <Play className="h-4 w-4 mr-1.5" />}
               {running ? 'Pausar' : 'Retomar'}
             </SoftButton>
+            
             {!isLast ? (
-              <SoftButton onClick={next}>
-                <SkipForward className="h-4 w-4" /> Próximo falante
+              <SoftButton size="sm" onClick={next}>
+                <SkipForward className="h-4 w-4 mr-1.5" /> Próximo Colega
               </SoftButton>
             ) : (
-              <SoftButton variant="success" onClick={beginRound2}>
-                Encerrar debate · Rodada 2
+              <SoftButton variant="success" size="sm" onClick={beginRound2}>
+                Encerrar Debate · Votação Final <ArrowRight className="h-4 w-4 ml-1.5" />
               </SoftButton>
             )}
           </div>
         </div>
       </SoftCard>
 
-      <SoftCard variant="inset">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Ordem completa
+      {/* Ordem dos Falantes */}
+      <SoftCard variant="inset" className="p-4">
+        <p className="mb-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+          Fila de Fala
         </p>
-        <div className="space-y-2">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           {speakers.map((s, i) => (
             <div
               key={s.playerId + i}
-              className={`flex items-center gap-3 rounded-2xl px-3 py-2 text-sm transition-all ${
+              className={`flex items-center gap-2.5 rounded-2xl p-2.5 text-xs transition-all ${
                 i === idx
-                  ? 'bg-card font-semibold shadow-[var(--shadow-soft)]'
+                  ? 'bg-card font-bold text-foreground shadow-sm ring-2 ring-primary/40'
                   : i < idx
-                    ? 'text-muted-foreground line-through'
-                    : 'text-muted-foreground'
+                    ? 'bg-muted/40 text-muted-foreground opacity-60'
+                    : 'bg-muted/60 text-muted-foreground'
               }`}
             >
-              <span className="w-5 text-xs">{s.order}.</span>
-              <Avatar3D initials={s.playerName.slice(0, 2)} role={s.playerRole} imageUrl={(s as any).avatarImage} size="sm" />
-              <span className="flex-1">{s.playerName}</span>
-              <span className="text-xs">{s.durationSeconds}s</span>
+              <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
+                i < idx ? 'bg-emerald-100 text-emerald-700' : i === idx ? 'bg-primary text-primary-foreground' : 'bg-slate-200 text-slate-600'
+              }`}>
+                {i < idx ? <Check className="h-3.5 w-3.5" /> : s.order}
+              </div>
+              <span className="truncate flex-1">{s.playerName}</span>
+              <span className="text-xs text-muted-foreground">{s.durationSeconds}s</span>
             </div>
           ))}
         </div>

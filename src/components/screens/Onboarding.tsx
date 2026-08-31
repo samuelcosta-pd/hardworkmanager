@@ -86,9 +86,9 @@ export function Onboarding() {
                   <li><strong>Jogadores:</strong> A equipe é formada por 3 líderes (GP, Tech Lead, UX Lead).</li>
                   <li><strong>Eventos:</strong> Vocês enfrentarão uma série de cenários de crise e decisões táticas.</li>
                   <li><strong>Debate e Votação:</strong> Diante de um problema, vocês debatem e votam na melhor solução. Empates são decididos pelo Gerente de Projetos.</li>
-                  <li><strong>Métricas:</strong> Vocês devem equilibrar Eficiência Operacional, Qualidade Técnica e Saúde da Equipe.</li>
-                  <li><strong>Duração:</strong> A simulação dura cerca de 15-20 minutos.</li>
-                  <li><strong>Fim de Jogo:</strong> O projeto falha se qualquer métrica chegar a zero, ou é concluído após todos os eventos.</li>
+                  <li><strong>Métricas:</strong> Vocês devem equilibrar Capacidade de Entrega, Qualidade do Produto, Saúde da Equipe e Conhecimento Organizacional.</li>
+                  <li><strong>Duração:</strong> A simulação percorre 10 dilemas operacionais (2 de cada princípio do PMBOK 7).</li>
+                  <li><strong>Condição de Fim de Jogo:</strong> O projeto falha se qualquer métrica principal cair abaixo de 40 pontos (zona crítica), ou é concluído com sucesso ao término dos 10 dilemas.</li>
                 </ul>
               </div>
             )}

@@ -146,7 +146,20 @@ export const useGameStore = create<GameState>()(
           avatarImage: d.avatarImage || '',
           isReady: false,
         }));
-        set({ players, phase: 'role_explanation' });
+
+        const rawDeck = generateMatchDeck();
+        const matchDeck = rawDeck.map((e) => injectNPC(e, players));
+        const firstEvent = matchDeck[0];
+
+        set({
+          players,
+          phase: 'dashboard',
+          matchDeck,
+          events: [firstEvent],
+          playedEventsIds: [firstEvent.id],
+          currentSprint: 1,
+          currentEventIndex: 0,
+        });
       },
 
       goTo: (phase) => set({ phase }),
@@ -197,7 +210,9 @@ export const useGameStore = create<GameState>()(
         currentVoterIndex: 0 
       }),
 
-      finalizeRound2: () => set({ phase: 'decision_resolved' }),
+      finalizeRound2: () => {
+        get().resolveDecision();
+      },
 
       resolveDecision: () => {
         const { 
@@ -295,7 +310,7 @@ export const useGameStore = create<GameState>()(
       },
 
       nextEvent: () => {
-        const { currentEventIndex, gameOverReason } = get();
+        const { currentEventIndex, gameOverReason, matchDeck } = get();
         if (gameOverReason) {
           set({ phase: 'debriefing' });
           return;
@@ -303,11 +318,11 @@ export const useGameStore = create<GameState>()(
 
         const next = currentEventIndex + 1;
         
-        // Partida completa com 10 dilemas (2 de cada um dos 5 princípios)
-        if (next >= 10) {
-          set({ phase: 'debriefing' });
-        } else if (next === 3 || next === 6 || next === 9) {
-          // Revisão de Sprint ao final dos blocos de sprint
+        // Ao finalizar os dilemas do deck (ex: 3 dilemas no modo demo de 1 sprint), abre a Sprint Review
+        if (next >= matchDeck.length) {
+          set({ phase: 'sprint_review' });
+        } else if (next % 3 === 0) {
+          // Revisão de Sprint a cada 3 dilemas
           set({ phase: 'sprint_review' });
         } else {
           get().startNextSprint();

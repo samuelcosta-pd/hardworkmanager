@@ -26,7 +26,7 @@ export const tailoringEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Negociar o Tailoring do Processo: Substituir os relatórios manuais em PDF por acesso direto aos dashboards do Jira em tempo real.',
+        text: 'Substituir os relatórios manuais em PDF por acesso direto aos dashboards do Jira em tempo real.',
         impacts: { capacidadeEntrega: 20, qualidadeProduto: 0, saudeEquipe: 15, conhecimentoOrganizacional: 10 },
         feedbackNarrative: 'A diretoria resistiu no início, mas adorou a transparência em tempo real com radiadores de informação. A equipe recuperou quase 10 horas semanais de desenvolvimento focado.',
         pmbokConcept: 'Eliminação de Desperdícios (Muda) e Radiadores de Informação',
@@ -89,7 +89,7 @@ export const tailoringEvents: GameEvent[] = [
       },
       {
         key: 'b',
-        text: 'Realizar o Tailoring do Processo: Propor e automatizar a extração das métricas a partir dos commits do Git e cards do Jira.',
+        text: 'Propor e automatizar a extração das métricas a partir dos commits do Git e cards do Jira.',
         impacts: { capacidadeEntrega: -10, qualidadeProduto: 15, saudeEquipe: 15, conhecimentoOrganizacional: 10 },
         feedbackNarrative: 'Exigiu esforço inicial de 3 dias para configurar o script de telemetria, mas a diretoria obteve dados 100% confiáveis sem tomar um minuto sequer da equipe.',
         pmbokConcept: 'Adaptação de Processos (Tailoring) e Automação',
@@ -137,7 +137,7 @@ export const tailoringEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Criar um rito de Fast-Track: Aprovar a correção emergencial com o Tech Lead e PM, documentando a mudança no changelog para auditoria posterior.',
+        text: 'Aprovar a correção emergencial com o Tech Lead e PM, documentando a mudança no changelog para auditoria posterior.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 15, saudeEquipe: 10, conhecimentoOrganizacional: 5 },
         feedbackNarrative: 'A interface foi corrigida em 2 horas. As matrículas fluíram sem suporte e o CCB aprovou o rito de exceção retroativamente pela transparência documental.',
         pmbokConcept: 'Tailoring de Governança e Fluxo de Valor',
@@ -189,7 +189,7 @@ export const tailoringEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Fazer o Tailoring dos Ritos: Consolidar em uma única daily de 15 minutos em pé (timeboxed) e migrar os demais alinhamentos para canais assíncronos no Slack.',
+        text: 'Consolidar em uma única daily de 15 minutos em pé (timeboxed) e migrar os demais alinhamentos para canais assíncronos no Slack.',
         impacts: { capacidadeEntrega: 20, qualidadeProduto: 10, saudeEquipe: 15, conhecimentoOrganizacional: 5 },
         feedbackNarrative: 'A mudança devolveu 2h30 diárias de programação para cada desenvolvedor. O ritmo de commits aumentou e o estresse diminuiu visivelmente.',
         pmbokConcept: 'Comunicação Eficiente e Eliminação de Desperdício de Tempo',
@@ -241,7 +241,7 @@ export const tailoringEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Adaptar o Processo: Fatiar o documento em User Stories incrementais com critérios de aceitação claros (BDD/Gherkin) validados semanalmente com o setor.',
+        text: 'Fatiar o documento em User Stories incrementais com critérios de aceitação claros (BDD/Gherkin) validados semanalmente com o setor.',
         impacts: { capacidadeEntrega: 15, qualidadeProduto: 15, saudeEquipe: 10, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'A conversão em histórias permitiu entregas quinzenais de valor. O setor pedagógico adorou poder testar partes funcionais desde a primeira sprint.',
         pmbokConcept: 'Decomposição Progressiva e Foco no Valor Incremental',
@@ -293,7 +293,7 @@ export const tailoringEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Tailoring de Validação: Propor testes de usabilidade gravados com 5 alunos e 5 professores reais, apresentando os relatórios objetivos de usabilidade à comissão.',
+        text: 'Propor testes de usabilidade gravados com 5 alunos e 5 professores reais, apresentando os relatórios objetivos de usabilidade à comissão.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 20, saudeEquipe: 15, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'Os dados concretos dos testes com alunos deixaram a comissão maravilhada. O processo de aprovação passou de 10 dias para 24 horas com base em dados de uso.',
         pmbokConcept: 'Decisões Baseadas em Evidências e Foco no Usuário',
@@ -345,7 +345,7 @@ export const tailoringEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Tailoring de Engenharia: Investir 1 sprint para implementar pipeline de CI/CD automatizado com rollback automático e testes de fumaça.',
+        text: 'Investir 1 sprint para implementar pipeline de CI/CD automatizado com rollback automático e testes de fumaça.',
         impacts: { capacidadeEntrega: -15, qualidadeProduto: 25, saudeEquipe: 20, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'O esforço inicial foi pago em 2 semanas. Os deploys agora ocorrem em 4 minutos durante o horário comercial sem quedas e sem madrugadas perdidas.',
         pmbokConcept: 'Automação de Processos e Excelência Técnica',
@@ -449,7 +449,7 @@ export const tailoringEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Tailoring para Fluxo Kanban: Quebrar histórias em itens pequenos e padronizados, medindo o Lead Time e Throughput real em vez de pontuar horas.',
+        text: 'Quebrar histórias em itens pequenos e padronizados, medindo o Lead Time e Throughput real em vez de pontuar horas.',
         impacts: { capacidadeEntrega: 20, qualidadeProduto: 10, saudeEquipe: 15, conhecimentoOrganizacional: 10 },
         feedbackNarrative: 'A reunião de planejamento passou de 8 horas para 45 minutos. O time focou em puxar trabalho pronto e a cadência de entregas aumentou 30%.',
         pmbokConcept: 'Métricas de Fluxo Contínuo vs Estimativas Tradicionais',
@@ -501,7 +501,7 @@ export const tailoringEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Apresentar Trilha Digital de Auditoria: Convidar os auditores para uma demonstração do Git e Jira, fornecendo relatórios criptografados e logs de aprovação de Pull Requests.',
+        text: 'Convidar os auditores para uma demonstração do Git e Jira, fornecendo relatórios criptografados e logs de aprovação de Pull Requests.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 15, saudeEquipe: 15, conhecimentoOrganizacional: 20 },
         feedbackNarrative: 'Os auditores ficaram impressionados com a rastreabilidade digital moderna. A auditoria foi aprovada com louvor e o modelo virou padrão para a universidade inteira.',
         pmbokConcept: 'Compliance Adaptativo e Evidências Digitais',

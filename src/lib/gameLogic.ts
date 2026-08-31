@@ -78,40 +78,51 @@ export function evaluateCondition(currentMetrics: Metrics, condition?: DelayedIm
 }
 
 /**
- * Gera o baralho equilibrado de 10 dilemas para uma partida completa:
- * - Exatamente 2 dilemas sorteados aleatoriamente de cada um dos 5 princípios do PMBOK 7.
- * - Distribuídos em 2 rodadas de 5 princípios para garantir variedade pedagógica contínua.
- * Total: 10 dilemas por partida.
+ * MODO DEMONSTRAÇÃO TEMPORÁRIO (1 SPRINT = 3 DILEMAS):
+ * Para agilizar a apresentação ao professor, a partida executa exatamente 1 Sprint (3 dilemas de princípios diferentes).
+ * O código da partida completa com 10 dilemas (2 de cada princípio) está mantido e comentado logo abaixo.
  */
 export function generateMatchDeck(): GameEvent[] {
-  const sampleRandom = (arr: GameEvent[], count: number = 2): GameEvent[] => {
+  const sampleRandom = (arr: GameEvent[], count: number = 1): GameEvent[] => {
     const shuffled = [...arr].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, count);
   };
 
-  const poolTailoring = sampleRandom(tailoringEvents, 2);
-  const poolLeadership = sampleRandom(leadershipEvents, 2);
-  const poolSystems = sampleRandom(systemsThinkingEvents, 2);
-  const poolChange = sampleRandom(changeManagementEvents, 2);
-  const poolQuality = sampleRandom(qualityEvents, 2);
+  // Sorteia 1 dilema de 3 princípios distintos para compor a Sprint 1
+  const poolTailoring = sampleRandom(tailoringEvents, 1);
+  const poolLeadership = sampleRandom(leadershipEvents, 1);
+  const poolQuality = sampleRandom(qualityEvents, 1);
 
-  // Primeira metade da partida: 1 de cada princípio (ordem aleatória)
-  const round1 = [
-    poolTailoring[0],
-    poolLeadership[0],
-    poolSystems[0],
-    poolChange[0],
-    poolQuality[0],
-  ].sort(() => Math.random() - 0.5);
+  // Baralho de 1 Sprint (3 dilemas)
+  return [poolLeadership[0], poolTailoring[0], poolQuality[0]];
 
-  // Segunda metade da partida: o segundo de cada princípio (ordem aleatória)
-  const round2 = [
-    poolTailoring[1],
-    poolLeadership[1],
-    poolSystems[1],
-    poolChange[1],
-    poolQuality[1],
-  ].sort(() => Math.random() - 0.5);
-
-  return [...round1, ...round2];
+  /* =========================================================================
+   * [CÓDIGO ORIGINAL - PARTIDA COMPLETA COM 10 DILEMAS / 4 SPRINTS]
+   * (Descomente este bloco para restaurar a partida de 10 dilemas)
+   * =========================================================================
+   *
+   * const poolTailoring = sampleRandom(tailoringEvents, 2);
+   * const poolLeadership = sampleRandom(leadershipEvents, 2);
+   * const poolSystems = sampleRandom(systemsThinkingEvents, 2);
+   * const poolChange = sampleRandom(changeManagementEvents, 2);
+   * const poolQuality = sampleRandom(qualityEvents, 2);
+   *
+   * const round1 = [
+   *   poolTailoring[0],
+   *   poolLeadership[0],
+   *   poolSystems[0],
+   *   poolChange[0],
+   *   poolQuality[0],
+   * ].sort(() => Math.random() - 0.5);
+   *
+   * const round2 = [
+   *   poolTailoring[1],
+   *   poolLeadership[1],
+   *   poolSystems[1],
+   *   poolChange[1],
+   *   poolQuality[1],
+   * ].sort(() => Math.random() - 0.5);
+   *
+   * return [...round1, ...round2];
+   * ========================================================================= */
 }

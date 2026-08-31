@@ -119,37 +119,36 @@ export function PlayerSetup() {
                   </select>
                 )}
                 
-                {/* Avatar & Action */}
-                <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto mt-2 sm:mt-0 pt-3 sm:pt-0 border-t sm:border-none border-slate-200">
+                {/* Unified Avatar Selector Button */}
+                <button
+                  type="button"
+                  onClick={() => setAvatarModalOpenFor(i)}
+                  className={`flex items-center gap-2.5 rounded-2xl px-4 py-2.5 text-sm font-medium transition-all duration-200 shrink-0 ${
+                    d.avatarImage
+                      ? 'bg-card text-foreground shadow-[var(--shadow-soft)] hover:-translate-y-0.5 border border-primary/30 hover:border-primary'
+                      : 'bg-card text-muted-foreground shadow-[var(--shadow-soft)] hover:-translate-y-0.5 hover:text-foreground border border-dashed border-slate-300 hover:border-primary/50'
+                  }`}
+                >
                   {d.avatarImage ? (
-                    <div className="flex items-center gap-2 bg-white rounded-full pr-3 p-1 shadow-[var(--shadow-soft)] border border-slate-100">
-                      <img 
-                        src={d.avatarImage} 
-                        alt={d.avatarName} 
-                        className="h-8 w-8 rounded-full object-cover bg-slate-100" 
+                    <>
+                      <img
+                        src={d.avatarImage}
+                        alt={d.avatarName}
+                        className="h-6 w-6 rounded-full object-cover bg-slate-100 ring-1 ring-primary/30"
                       />
-                    </div>
+                      <span className="font-semibold">{d.avatarName}</span>
+                      <Pencil className="h-3.5 w-3.5 text-muted-foreground ml-1 opacity-70" />
+                    </>
                   ) : (
-                    <div className="flex items-center gap-2 bg-white rounded-full pr-3 p-1 shadow-[var(--shadow-soft)] border border-slate-100">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-400">
-                        <Users className="h-4 w-4" />
+                    <>
+                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-slate-400">
+                        <Users className="h-3.5 w-3.5" />
                       </div>
-                      <span className="text-xs text-muted-foreground hidden lg:inline-block">Nenhum</span>
-                    </div>
+                      <span>Nenhum Avatar</span>
+                      <Plus className="h-3.5 w-3.5 text-primary ml-1" />
+                    </>
                   )}
-                  <SoftButton 
-                    size="sm" 
-                    variant="ghost" 
-                    onClick={() => setAvatarModalOpenFor(i)}
-                    className="px-3 h-10 ml-auto sm:ml-0"
-                  >
-                    {d.avatarId ? (
-                      <><Pencil className="h-4 w-4 mr-1.5" /> Alterar</>
-                    ) : (
-                      <><Plus className="h-4 w-4 mr-1.5" /> Escolher</>
-                    )}
-                  </SoftButton>
-                </div>
+                </button>
               </div>
             );
           })}
@@ -166,9 +165,13 @@ export function PlayerSetup() {
           )}
         </div>
 
-        <div className="mt-8 flex justify-end">
+        <div className="mt-8 flex items-center justify-between">
+          <SoftButton variant="ghost" size="md" onClick={() => goTo('intro')}>
+            ← Voltar ao Guia
+          </SoftButton>
+
           <SoftButton size="lg" onClick={handleStart} disabled={!allValid}>
-            Avançar para os papéis
+            Iniciar Partida
           </SoftButton>
         </div>
       </SoftCard>

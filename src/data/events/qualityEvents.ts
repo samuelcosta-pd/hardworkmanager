@@ -26,7 +26,7 @@ export const qualityEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Atitude de Dono e Foco em Qualidade: Pausar a esteira de novas features por 1 sprint e refatorar os módulos críticos antes de realizar a integração.',
+        text: 'Pausar a esteira de novas features por 1 sprint e refatorar os módulos críticos antes de realizar a integração.',
         impacts: { capacidadeEntrega: -15, qualidadeProduto: 25, saudeEquipe: 15, conhecimentoOrganizacional: 20 },
         feedbackNarrative: 'A refatoração limpou a base de código e aumentou a cobertura de testes. A integração ocorreu sem nenhuma queda e os desenvolvedores agradeceram a decisão madura.',
         pmbokConcept: 'Qualidade no Processo e Pagamento Proativo de Dívida Técnica',
@@ -85,7 +85,7 @@ export const qualityEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Prática Lean de Swarming: Parar o desenvolvimento de novas tarefas e alocar todos os desenvolvedores para ajudarem o time de QA a testar e automatizar a esteira parada.',
+        text: 'Parar o desenvolvimento de novas tarefas e alocar todos os desenvolvedores para ajudarem o time de QA a testar e automatizar a esteira parada.',
         impacts: { capacidadeEntrega: -10, qualidadeProduto: 25, saudeEquipe: 15, conhecimentoOrganizacional: 20 },
         feedbackNarrative: 'O gargalo foi desfeito em 3 dias. Os desenvolvedores aprenderam a escrever testes automatizados melhores e o fluxo voltou a correr livremente.',
         pmbokConcept: 'Teoria das Restrições e Swarming (Lean)',
@@ -137,7 +137,7 @@ export const qualityEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Processo Rigoroso de Hotfix: Ativar bloqueio otimista de transação (Pessimistic/Optimistic Lock), criar testes automatizados de estresse reproduzindo a concorrência e homologar em Staging antes de subir.',
+        text: 'Ativar bloqueio otimista de transação (Pessimistic/Optimistic Lock), criar testes automatizados de estresse reproduzindo a concorrência e homologar em Staging antes de subir.',
         impacts: { capacidadeEntrega: -5, qualidadeProduto: 25, saudeEquipe: 15, conhecimentoOrganizacional: 20 },
         feedbackNarrative: 'A correção com travas transacionais resolveu a falha na raiz. Os testes de concorrência garantiram que nenhuma vaga fantasma fosse criada novamente.',
         pmbokConcept: 'Garantia de Qualidade em Gestão de Incidentes Críticos',
@@ -189,7 +189,7 @@ export const qualityEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Instituir Quality Gates Contínuos: Travar merges de código que não atinjam cobertura mínima de 80% de testes e 0 vulnerabilidades críticas, dedicando 20% de cada sprint para pagar o débito.',
+        text: 'Travar merges de código que não atinjam cobertura mínima de 80% de testes e 0 vulnerabilidades críticas, dedicando 20% de cada sprint para pagar o débito.',
         impacts: { capacidadeEntrega: 5, qualidadeProduto: 25, saudeEquipe: 15, conhecimentoOrganizacional: 25 },
         feedbackNarrative: 'A qualidade do repositório virou para o verde em 4 semanas. O número de bugs reportados por usuários caiu 60% e a manutenção ficou simples.',
         pmbokConcept: 'Quality Gates e Prevenção Contínua de Defeitos',
@@ -248,7 +248,7 @@ export const qualityEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Qualidade no Processo de Requisitos (Specification by Example): Conduzir reunião de 1 hora com o comitê de graduação, desenhar 5 cenários com tabelas de exemplos reais e criar testes automatizados de aceitação antes de codificar.',
+        text: 'Conduzir reunião de 1 hora com o comitê de graduação, desenhar 5 cenários com tabelas de exemplos reais e criar testes automatizados de aceitação antes de codificar.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 25, saudeEquipe: 15, conhecimentoOrganizacional: 25 },
         feedbackNarrative: 'Os exemplos reais eliminaram todas as dúvidas. O cálculo foi codificado de primeira e validado com precisão matemática em 100% dos históricos.',
         pmbokConcept: 'Prevenção de Defeitos e Especificação por Exemplo',
@@ -300,7 +300,7 @@ export const qualityEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Qualidade Estrutural e Testes de Regressão: Refatorar o gerador de PDF desacoplando o modelo de dados do layout visual e implementar testes visuais de regressão automatizados no CI/CD.',
+        text: 'Refatorar o gerador de PDF desacoplando o modelo de dados do layout visual e implementar testes visuais de regressão automatizados no CI/CD.',
         impacts: { capacidadeEntrega: 15, qualidadeProduto: 25, saudeEquipe: 20, conhecimentoOrganizacional: 20 },
         feedbackNarrative: 'A refatoração com testes automáticos eliminou o retrabalho em 100%. O módulo nunca mais quebrou e a equipe economizou 4 dias de trabalho por mês.',
         pmbokConcept: 'Custo da Não-Conformidade e Testes de Regressão',
@@ -352,7 +352,7 @@ export const qualityEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Honrar a Definition of Done: Manter o rigor de qualidade, não dar a tarefa como pronta sem testes completos e mover o item não testado de forma transparente para a sprint seguinte.',
+        text: 'Manter o rigor de qualidade, não dar a tarefa como pronta sem testes completos e mover o item não testado de forma transparente para a sprint seguinte.',
         impacts: { capacidadeEntrega: 5, qualidadeProduto: 20, saudeEquipe: 15, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'A transparência fortaleceu a cultura de engenharia. Na sprint seguinte os testes foram concluídos e a funcionalidade foi lançada com zero bugs.',
         pmbokConcept: 'Critérios Rígidos de Conclusão (Definition of Done) e Integridade',
@@ -411,7 +411,7 @@ export const qualityEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Qualidade Inclusiva: Adequar a biblioteca de componentes ao padrão WCAG 2.1 AA, incluindo testes automáticos com a ferramenta axe-core e validação com estudantes com deficiência.',
+        text: 'Adequar a biblioteca de componentes ao padrão WCAG 2.1 AA, incluindo testes automáticos com a ferramenta axe-core e validação com estudantes com deficiência.',
         impacts: { capacidadeEntrega: 5, qualidadeProduto: 25, saudeEquipe: 20, conhecimentoOrganizacional: 25 },
         feedbackNarrative: 'O portal se tornou referência nacional de acessibilidade universitária. Estudantes com deficiência conseguiram se matricular de forma 100% autônoma pela primeira vez na história.',
         pmbokConcept: 'Qualidade Inclusiva e Cumprimento de Requisitos Legais e Sociais',
@@ -463,7 +463,7 @@ export const qualityEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Garantia de Qualidade Proativa: Realizar simulações de carga com k6 para 50.000 usuários simultâneos, identificando gargalos de conexão e ajustando o pool de threads e cache.',
+        text: 'Realizar simulações de carga com k6 para 50.000 usuários simultâneos, identificando gargalos de conexão e ajustando o pool de threads e cache.',
         impacts: { capacidadeEntrega: 5, qualidadeProduto: 25, saudeEquipe: 20, conhecimentoOrganizacional: 20 },
         feedbackNarrative: 'O teste de carga revelou um gargalo crítico de conexões que teria derrubado o sistema em 2 minutos. Com o ajuste prévio, o dia da matrícula foi o mais calmo da história da UFC.',
         pmbokConcept: 'Validação de Desempenho e Engenharia de Resiliência',
@@ -522,7 +522,7 @@ export const qualityEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Qualidade e Segurança Imediata: Parar a esteira imediatamente para aplicar consultas parametrizadas (Prepared Statements / ORM seguro) e realizar varredura completa em todos os endpoints com ferramentas SAST/DAST.',
+        text: 'Parar a esteira imediatamente para aplicar consultas parametrizadas (Prepared Statements / ORM seguro) e realizar varredura completa em todos os endpoints com ferramentas SAST/DAST.',
         impacts: { capacidadeEntrega: 0, qualidadeProduto: 30, saudeEquipe: 15, conhecimentoOrganizacional: 25 },
         feedbackNarrative: 'A correção foi rápida e cirúrgica. A varredura de segurança blindou o sistema contra as 10 principais ameaças da OWASP e o laudo de segurança foi aprovado com nota máxima.',
         pmbokConcept: 'Segurança como Pilar Inegociável da Qualidade de Software',

@@ -26,7 +26,7 @@ export const changeManagementEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Governança de Mudanças e Negociação: Apresentar a análise de impacto, demonstrar que o chatbot no momento comprometeria o fluxo de matrícula e incluí-lo formalmente no roadmap da Fase 2.',
+        text: 'Apresentar a análise de impacto, demonstrar que o chatbot no momento comprometeria o fluxo de matrícula e incluí-lo formalmente no roadmap da Fase 2.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 20, saudeEquipe: 20, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'A postura profissional e transparente impressionou o Reitor. Ele compreendeu os riscos operacionais, elogiou a responsabilidade da equipe e aprovou o cronograma da Fase 2.',
         pmbokConcept: 'Gestão de Mudanças Integrada e Controle de Linha de Base',
@@ -78,7 +78,7 @@ export const changeManagementEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Gestão da Mudança e Facilitação: Oferecer oficinas práticas de 30 minutos com os docentes, acolher feedbacks de ergonomia e criar um guia passo a passo em vídeo.',
+        text: 'Oferecer oficinas práticas de 30 minutos com os docentes, acolher feedbacks de ergonomia e criar um guia passo a passo em vídeo.',
         impacts: { capacidadeEntrega: 5, qualidadeProduto: 20, saudeEquipe: 15, conhecimentoOrganizacional: 25 },
         feedbackNarrative: 'Nas oficinas, os professores perceberam que o novo diário lança notas em 2 cliques em vez de 15. A resistência se transformou em apoio entusiasta.',
         pmbokConcept: 'Gestão da Mudança Organizacional e Empatia com Stakeholders',
@@ -130,7 +130,7 @@ export const changeManagementEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Repriorização Ágil do Backlog: Realizar reunião extraordinária do comitê, mover o Diploma Digital para o topo da sprint atual e adiar funcionalidades não críticas de baixa prioridade.',
+        text: 'Realizar reunião extraordinária do comitê, mover o Diploma Digital para o topo da sprint atual e adiar funcionalidades não críticas de baixa prioridade.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 20, saudeEquipe: 15, conhecimentoOrganizacional: 25 },
         feedbackNarrative: 'A equipe adaptou o foco com agilidade. O módulo de diploma digital foi homologado com 10 dias de antecedência e a UFC foi a primeira universidade do estado a cumprir a portaria.',
         pmbokConcept: 'Adaptabilidade a Mudanças Regulatórias e Repriorização de Backlog',
@@ -189,7 +189,7 @@ export const changeManagementEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Governança e Proteção de Dados: Implementar mascaramento automático de dados (Data Masking) nas APIs e registrar termos de consentimento no fluxo de primeiro login.',
+        text: 'Implementar mascaramento automático de dados (Data Masking) nas APIs e registrar termos de consentimento no fluxo de primeiro login.',
         impacts: { capacidadeEntrega: 5, qualidadeProduto: 25, saudeEquipe: 15, conhecimentoOrganizacional: 25 },
         feedbackNarrative: 'Os dados foram protegidos na camada de API. O DPO emitiu parecer favorável de 100% de conformidade com a LGPD e o sistema ganhou maturidade em governança.',
         pmbokConcept: 'Privacidade por Padrão (Privacy by Design) e Conformidade',
@@ -241,7 +241,7 @@ export const changeManagementEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Negociação Baseada em Trade-offs: Apresentar a capacidade finita do time e negociar: para incluir o formulário agora, qual das funcionalidades atuais a pró-reitoria aceita adiar para a próxima sprint?',
+        text: 'Apresentar a capacidade finita do time e negociar: para incluir o formulário agora, qual das funcionalidades atuais a pró-reitoria aceita adiar para a próxima sprint?',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 15, saudeEquipe: 20, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'Ao visualizar as opções na balança, a pró-reitoria percebeu que a matrícula era mais urgente e aceitou agendar o formulário de avaliação para o mês seguinte.',
         pmbokConcept: 'Triângulo de Ferro e Negociação de Escopo Baseada em Capacidade',
@@ -293,7 +293,7 @@ export const changeManagementEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Transparência Radical: Apresentar apenas o que já está 100% funcionando e testado em ambiente de staging, demonstrando o roadmap real das próximas entregas.',
+        text: 'Apresentar apenas o que já está 100% funcionando e testado em ambiente de staging, demonstrando o roadmap real das próximas entregas.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 15, saudeEquipe: 20, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'O Conselho Universitário aplaudiu a seriedade e a honestidade técnica. O projeto ganhou credibilidade sólida por não vender ilusões.',
         pmbokConcept: 'Transparência e Entrega Baseada em Incrementos Reais',
@@ -345,7 +345,7 @@ export const changeManagementEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Arquitetura Resiliente (Adapter Pattern): Implementar um Adapter Pattern que isola a camada de integração governamental, atualizando o conector em 48 horas com testes de contrato.',
+        text: 'Implementar um Adapter Pattern que isola a camada de integração governamental, atualizando o conector em 48 horas com testes de contrato.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 25, saudeEquipe: 15, conhecimentoOrganizacional: 25 },
         feedbackNarrative: 'Graças ao isolamento arquitetural (Clean Architecture), apenas o conector precisou ser atualizado. Nenhuma outra tela do sistema foi impactada e as bolsas foram pagas em dia.',
         pmbokConcept: 'Isolamento de Dependências Externas e Arquitetura Adaptativa',
@@ -404,7 +404,7 @@ export const changeManagementEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Abraçar o Feedback e Iterar: Conduzir um design sprint rápido de 3 dias para incluir grade visual com detecção automática de conflito de horários.',
+        text: 'Conduzir um design sprint rápido de 3 dias para incluir grade visual com detecção automática de conflito de horários.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 25, saudeEquipe: 15, conhecimentoOrganizacional: 20 },
         feedbackNarrative: 'A nova grade visual foi aclamada em um segundo teste com 98% de aprovação. O piloto cumpriu seu papel perfeito de evitar o desastre antes da escala geral.',
         pmbokConcept: 'Ciclos Rápidos de Feedback e Validação Contínua (Build-Measure-Learn)',
@@ -456,7 +456,7 @@ export const changeManagementEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Planejamento de Integração por Fases: Explicar a separação de escopo, documentar os endpoints de API necessários e agendar a integração do RU para o próximo ciclo de releases.',
+        text: 'Explicar a separação de escopo, documentar os endpoints de API necessários e agendar a integração do RU para o próximo ciclo de releases.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 15, saudeEquipe: 15, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'A pró-reitoria compreendeu a importância de garantir a estabilidade das matrículas primeiro. A integração do RU foi planejada com calma e funcionou perfeitamente.',
         pmbokConcept: 'Gerenciamento de Escopo e Arquitetura de Integração em Fases',
@@ -508,7 +508,7 @@ export const changeManagementEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Adaptação Eficiente via Design Tokens: Atualizar as variáveis de cores e fontes centralizadas no Design System / Tailwind CSS, propagando a nova marca instantaneamente em todo o sistema.',
+        text: 'Atualizar as variáveis de cores e fontes centralizadas no Design System / Tailwind CSS, propagando a nova marca instantaneamente em todo o sistema.',
         impacts: { capacidadeEntrega: 15, qualidadeProduto: 20, saudeEquipe: 15, conhecimentoOrganizacional: 20 },
         feedbackNarrative: 'Por termos usado uma arquitetura limpa com Design Tokens, a mudança de marca de 80 telas foi concluída em apenas 20 minutos. A Reitoria ficou maravilhada.',
         pmbokConcept: 'Excelência Arquitetural e Baixo Custo de Mudança',

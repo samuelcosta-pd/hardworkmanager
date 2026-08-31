@@ -44,7 +44,7 @@ export const systemsThinkingEvents: GameEvent[] = [
       },
       {
         key: 'b',
-        text: 'Pensamento Sistêmico e Qualidade: Adiar o lançamento da funcionalidade automática em 5 dias, utilizar escalonamento manual temporário seguro e corrigir a causa-raiz do código.',
+        text: 'Adiar o lançamento da funcionalidade automática em 5 dias, utilizar escalonamento manual temporário seguro e corrigir a causa-raiz do código.',
         impacts: { capacidadeEntrega: -15, qualidadeProduto: 20, saudeEquipe: 10, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'Houve atrito político inicial pelo pequeno adiamento, mas o algoritmo foi corrigido de forma limpa. O período de matrículas processou 50 mil requisições sem nenhuma queda.',
         pmbokConcept: 'Balanceamento de Restrições Concorrentes e Sustentabilidade',
@@ -85,7 +85,7 @@ export const systemsThinkingEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Pensamento Sistêmico de Nuvem: Conduzir migração em nuvem híbrida com arquitetura elástica (autoscaling), pagando sob demanda nos períodos de pico.',
+        text: 'Conduzir migração em nuvem híbrida com arquitetura elástica (autoscaling), pagando sob demanda nos períodos de pico.',
         impacts: { capacidadeEntrega: 15, qualidadeProduto: 20, saudeEquipe: 15, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'A escalabilidade automática suportou os picos de matrícula sem quedas e sem custos fixos gigantescos durante as férias acadêmicas. O time aprendeu tecnologias modernas de nuvem.',
         pmbokConcept: 'Interação de Sistemas e Gestão Flexível de Recursos',
@@ -137,7 +137,7 @@ export const systemsThinkingEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Pensamento Sistêmico: Pausar a esteira de novas telas por 5 dias para decodificar, documentar e reescrever o cálculo com testes unitários abrangentes.',
+        text: 'Pausar a esteira de novas telas por 5 dias para decodificar, documentar e reescrever o cálculo com testes unitários abrangentes.',
         impacts: { capacidadeEntrega: -15, qualidadeProduto: 25, saudeEquipe: 10, conhecimentoOrganizacional: 35 },
         feedbackNarrative: 'Foi um sacrifício de velocidade temporário, mas o conhecimento tácito virou explícito. Meses depois, quando o MEC mudou as regras, a alteração foi feita em 30 minutos.',
         pmbokConcept: 'Conversão de Conhecimento Tácito em Explícito e Resiliência',
@@ -196,7 +196,7 @@ export const systemsThinkingEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Pensamento Sistêmico de Arquitetura: Implementar camada de cache em memória (Redis) e replicar o banco em modo somente-leitura (Read-Replica) para relatórios.',
+        text: 'Implementar camada de cache em memória (Redis) e replicar o banco em modo somente-leitura (Read-Replica) para relatórios.',
         impacts: { capacidadeEntrega: -10, qualidadeProduto: 25, saudeEquipe: 15, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'A separação de leitura e escrita reduziu a carga no banco principal em 80%. O sistema de folhas voltou a rodar liso e as consultas dos alunos ficaram instantâneas.',
         pmbokConcept: 'Isolamento de Cargas e Resiliência Sistêmica',
@@ -248,7 +248,7 @@ export const systemsThinkingEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Visão Sistêmica de Longo Prazo: Migrar para PostgreSQL, economizando R$ 400.000 anuais e investindo na capacitação da equipe interna.',
+        text: 'Migrar para PostgreSQL, economizando R$ 400.000 anuais e investindo na capacitação da equipe interna.',
         impacts: { capacidadeEntrega: -15, qualidadeProduto: 20, saudeEquipe: 15, conhecimentoOrganizacional: 25 },
         feedbackNarrative: 'A migração exigiu testes intensos, mas foi impecável. A universidade se livrou do aprisionamento tecnológico (Vendor Lock-in) e a verba poupada garantiu bolsas por 2 anos.',
         pmbokConcept: 'Independência Tecnológica e Otimização de Custos de Ciclo de Vida',
@@ -300,7 +300,7 @@ export const systemsThinkingEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Manter Staging Estruturado: Otimizar o ambiente de testes usando containers leves (Docker) e dados mockados, provando que testar em produção gerará custos muito maiores.',
+        text: 'Otimizar o ambiente de testes usando containers leves (Docker) e dados mockados, provando que testar em produção gerará custos muito maiores.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 20, saudeEquipe: 15, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'Com containers locais e dados simulados, o custo de staging caiu 70%. O time manteve a segurança de testar antes de subir e nenhum bug vazou para produção.',
         pmbokConcept: 'Mitigação de Riscos de Ambiente e Eficiência de Recursos',
@@ -352,7 +352,7 @@ export const systemsThinkingEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Pensamento Sistêmico de Dados: Implementar política de arquivamento frio comprimido (Cold Storage/Glacier) de baixo custo para dados históricos e backups incrementais.',
+        text: 'Implementar política de arquivamento frio comprimido (Cold Storage/Glacier) de baixo custo para dados históricos e backups incrementais.',
         impacts: { capacidadeEntrega: 5, qualidadeProduto: 20, saudeEquipe: 15, conhecimentoOrganizacional: 20 },
         feedbackNarrative: 'A compressão e o tiering automático reduziram o custo em 85% e mantiveram a conformidade legal de guarda de históricos escolares por 50 anos.',
         pmbokConcept: 'Gestão do Ciclo de Vida dos Dados e Continuidade de Negócios',
@@ -411,7 +411,7 @@ export const systemsThinkingEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Pensamento Sistêmico de Aquisição: Definir critérios rigorosos de aceitação técnica (Definition of Done com cobertura de testes > 80% e documentação de OpenAPI) antes de autorizar o contrato.',
+        text: 'Definir critérios rigorosos de aceitação técnica (Definition of Done com cobertura de testes > 80% e documentação de OpenAPI) antes de autorizar o contrato.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 15, saudeEquipe: 10, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'O contrato com critérios técnicos estritos impediu entregas de "código espaguete". A fábrica entregou o módulo testado e a integração ocorreu suavemente.',
         pmbokConcept: 'Gestão Integrada de Aquisições e Critérios de Aceitação',
@@ -463,7 +463,7 @@ export const systemsThinkingEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Decisão Sistêmica (Monólito Modular): Adotar arquitetura de "Monólito Modular" bem desacoplado, deixando a migração para microsserviços para quando a equipe crescer.',
+        text: 'Adotar arquitetura de "Monólito Modular" bem desacoplado, deixando a migração para microsserviços para quando a equipe crescer.',
         impacts: { capacidadeEntrega: 20, qualidadeProduto: 20, saudeEquipe: 15, conhecimentoOrganizacional: 20 },
         feedbackNarrative: 'A arquitetura modular permitiu velocidade de desenvolvimento alta, deploys simples e zero dores de cabeça com tracing distribuído. O foco ficou nas regras de negócio.',
         pmbokConcept: 'Adequação Arquitetural à Capacidade da Equipe',
@@ -515,7 +515,7 @@ export const systemsThinkingEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Abordagem Sistêmica Gradual: Implementar 2FA obrigatório para professores e administradores com acesso a dados sensíveis, e disponibilizar 2FA opcional e simplificado (e-mail/SMS) com campanha educativa para alunos.',
+        text: 'Implementar 2FA obrigatório para professores e administradores com acesso a dados sensíveis, e disponibilizar 2FA opcional e simplificado (e-mail/SMS) com campanha educativa para alunos.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 20, saudeEquipe: 15, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'Os dados mais críticos foram blindados de imediato e os estudantes adotaram a segurança gradualmente sem sobrecarregar a central de suporte.',
         pmbokConcept: 'Segurança Baseada em Risco e Gestão de Impacto no Usuário',

@@ -11,13 +11,15 @@ export function SprintReview() {
     currentSprint, 
     metrics, 
     decisions, 
+    matchDeck,
     pendingDelayedImpacts, 
     appliedDelayedImpactsHistory,
-    startNextSprint 
+    startNextSprint,
+    goTo
   } = useGameStore();
 
-  // A sprint sempre tem 3 eventos. Pegamos as últimas 3 decisões.
   const sprintDecisions = decisions.slice(-3);
+  const isMatchComplete = decisions.length >= matchDeck.length;
 
   return (
     <div className="mx-auto min-h-screen max-w-4xl px-6 py-12">
@@ -101,9 +103,15 @@ export function SprintReview() {
       </div>
 
       <div className="flex justify-center mt-8 animate-float-in">
-        <SoftButton size="lg" onClick={startNextSprint}>
-          Iniciar Sprint {currentSprint + 1}
-        </SoftButton>
+        {isMatchComplete ? (
+          <SoftButton size="lg" onClick={() => goTo('debriefing')}>
+            Avançar para o Debriefing Final
+          </SoftButton>
+        ) : (
+          <SoftButton size="lg" onClick={startNextSprint}>
+            Iniciar Sprint {currentSprint + 1}
+          </SoftButton>
+        )}
       </div>
     </div>
   );

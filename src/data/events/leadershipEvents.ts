@@ -26,7 +26,7 @@ export const leadershipEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Atuar como Escudo (Liderança Servidora): Negociar a alocação emergencial de estagiários de suporte N1 e criar um FAQ automático, blindando os desenvolvedores.',
+        text: 'Negociar a alocação emergencial de estagiários de suporte N1 e criar um FAQ automático, blindando os desenvolvedores.',
         impacts: { capacidadeEntrega: -15, qualidadeProduto: 15, saudeEquipe: 20, conhecimentoOrganizacional: 10 },
         feedbackNarrative: 'Consumimos um pouco de esforço gerencial para estruturar o suporte, mas mantivemos o time 100% focado no código central. A moral da equipe subiu expressivamente.',
         pmbokConcept: 'Liderança Servidora e Proteção da Capacidade de Produção',
@@ -78,7 +78,7 @@ export const leadershipEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Liderança Corajosa: Negociar com dados de capacidade e fatiar o escopo do lançamento, recusando horas extras predatórias e mantendo ritmo sustentável.',
+        text: 'Negociar com dados de capacidade e fatiar o escopo do lançamento, recusando horas extras predatórias e mantendo ritmo sustentável.',
         impacts: { capacidadeEntrega: 0, qualidadeProduto: 15, saudeEquipe: 25, conhecimentoOrganizacional: 10 },
         feedbackNarrative: 'A liderança usou dados do burndown para provar que horas extras gerariam defeitos e retrabalho. A diretoria aceitou fatiar o escopo e o time trabalhou motivado.',
         pmbokConcept: 'Ritmo Sustentável e Proteção da Saúde da Equipe',
@@ -130,7 +130,7 @@ export const leadershipEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Liderar Gestão de Conhecimento: Instituir 10 dias de Pair Programming intensivo e documentação gravada com os desenvolvedores pleno.',
+        text: 'Instituir 10 dias de Pair Programming intensivo e documentação gravada com os desenvolvedores pleno.',
         impacts: { capacidadeEntrega: -10, qualidadeProduto: 15, saudeEquipe: 15, conhecimentoOrganizacional: 30 },
         feedbackNarrative: 'A transferência de conhecimento foi um sucesso. Os desenvolvedores pleno assumiram o módulo com confiança e a saída do sênior não parou o projeto.',
         pmbokConcept: 'Disseminação de Conhecimento e Continuidade Operacional',
@@ -182,7 +182,7 @@ export const leadershipEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Liderar Mediação e Alinhamento: Conduzir um workshop conjunto com testes de usabilidade com alunos cegos e de baixa visão, estabelecendo um Design System unificado.',
+        text: 'Conduzir um workshop conjunto com testes de usabilidade com alunos cegos e de baixa visão, estabelecendo um Design System unificado.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 20, saudeEquipe: 20, conhecimentoOrganizacional: 20 },
         feedbackNarrative: 'Ver os alunos reais com dificuldades comoveu os desenvolvedores. Engenharia e Design uniram forças para construir um dos sistemas mais acessíveis do país.',
         pmbokConcept: 'Criação de Propósito Compartilhado e Resolução Construtiva de Conflitos',
@@ -234,7 +234,7 @@ export const leadershipEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Postura de Liderança Firme: Chamar o diretor para uma reunião individual, alinhar que as cobranças devem ser feitas via PM e criar um canal executivo de transparência.',
+        text: 'Chamar o diretor para uma reunião individual, alinhar que as cobranças devem ser feitas via PM e criar um canal executivo de transparência.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 10, saudeEquipe: 25, conhecimentoOrganizacional: 5 },
         feedbackNarrative: 'A liderança blindou os júniores com firmeza e elegância. O diretor passou a receber boletins semanais objetivos e os desenvolvedores voltaram a trabalhar em paz.',
         pmbokConcept: 'Comunicação Estruturada e Proteção Psicológica',
@@ -286,7 +286,7 @@ export const leadershipEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Liderar Post-Mortem Sem Culpa (Blameless): Proteger o desenvolvedor, assumir a falha como sistêmica e implementar travas automatizadas no CI/CD para impedir que o erro se repita.',
+        text: 'Proteger o desenvolvedor, assumir a falha como sistêmica e implementar travas automatizadas no CI/CD para impedir que o erro se repita.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 20, saudeEquipe: 20, conhecimentoOrganizacional: 25 },
         feedbackNarrative: 'A diretoria aceitou o relatório técnico que focou no processo e não na pessoa. As travas criadas impediram 5 novos incidentes parecidos nos meses seguintes.',
         pmbokConcept: 'Cultura de Aprendizado Contínuo e Segurança Sistêmica',
@@ -338,7 +338,7 @@ export const leadershipEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Postura de Liderança Servidora: Organizar uma sessão solene de encerramento com demonstração técnica aberta onde os próprios desenvolvedores e designers apresentam seu trabalho à comunidade.',
+        text: 'Organizar uma sessão solene de encerramento com demonstração técnica aberta onde os próprios desenvolvedores e designers apresentam seu trabalho à comunidade.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 10, saudeEquipe: 25, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'Os aplausos dos professores e alunos emocionaram a equipe. O reconhecimento público autêntico restaurou o orgulho e o senso de dono dos desenvolvedores.',
         pmbokConcept: 'Reconhecimento e Empoderamento da Equipe',
@@ -390,7 +390,7 @@ export const leadershipEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Liderar Mudança Cultural: Estabelecer Code Review obrigatório com 2 aprovadores e pareamento rotativo, alinhando que qualidade de software é um esporte coletivo.',
+        text: 'Estabelecer Code Review obrigatório com 2 aprovadores e pareamento rotativo, alinhando que qualidade de software é um esporte coletivo.',
         impacts: { capacidadeEntrega: 5, qualidadeProduto: 20, saudeEquipe: 15, conhecimentoOrganizacional: 25 },
         feedbackNarrative: 'O desenvolvedor resistiu no início, mas com a ajuda do time, o conhecimento se espalhou. O sistema deixou de ser refém de uma única pessoa.',
         pmbokConcept: 'Propriedade Coletiva de Código e Mentoria Mútua',
@@ -442,7 +442,7 @@ export const leadershipEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Liderar para a Excelência: Aprovar o dia de capacitação, ajustando a meta da sprint e tratando o aprendizado como investimento de alto retorno.',
+        text: 'Aprovar o dia de capacitação, ajustando a meta da sprint e tratando o aprendizado como investimento de alto retorno.',
         impacts: { capacidadeEntrega: -5, qualidadeProduto: 25, saudeEquipe: 20, conhecimentoOrganizacional: 25 },
         feedbackNarrative: 'Com o treinamento, a equipe passou a codificar telas 40% mais rápido e sem bugs de acessibilidade nas sprints seguintes. O investimento se pagou com folga.',
         pmbokConcept: 'Desenvolvimento de Competências e Melhoria Contínua',
@@ -494,7 +494,7 @@ export const leadershipEvents: GameEvent[] = [
     alternatives: [
       {
         key: 'a',
-        text: 'Liderança Protetora: Notificar formalmente os setores que os bolsistas têm plano de trabalho estrito em engenharia de software e mentorar os estudantes a reportarem desvios.',
+        text: 'Notificar formalmente os setores que os bolsistas têm plano de trabalho estrito em engenharia de software e mentorar os estudantes a reportarem desvios.',
         impacts: { capacidadeEntrega: 10, qualidadeProduto: 10, saudeEquipe: 20, conhecimentoOrganizacional: 15 },
         feedbackNarrative: 'Os bolsistas se sentiram respeitados e valorizados. Seu rendimento no desenvolvimento do sistema acadêmico dobrou e eles aprenderam boas práticas de engenharia.',
         pmbokConcept: 'Mentoria Ética e Proteção do Escopo de Pessoal',
