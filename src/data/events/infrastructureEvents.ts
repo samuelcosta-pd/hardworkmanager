@@ -20,7 +20,7 @@ export const infrastructureEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Aumentar a capacidade do servidor imediatamente (Scale Up), assumindo custos imprevistos.',
-        impacts: { eficiencia: -15, qualidade: 10, saudeEquipe: 5 },
+        impacts: { capacidadeEntrega: -15, qualidadeProduto: 10, saudeEquipe: 5 },
         feedbackNarrative: 'O servidor aguentou o tranco, mas o orçamento de infraestrutura foi gravemente impactado. A equipe não sofreu com a queda, mas a diretoria não gostou da surpresa.',
         pmbokConcept: 'Gerenciamento de Recursos Físicos',
         learnings: ['Escalonamento vertical resolve o problema imediato, mas onera o projeto se não planejado.'],
@@ -31,11 +31,11 @@ export const infrastructureEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Otimizar as queries problemáticas durante a madrugada, sem aumentar o servidor.',
-        impacts: { eficiencia: 5, qualidade: 5, saudeEquipe: -20 },
+        impacts: { capacidadeEntrega: 5, qualidadeProduto: 5, saudeEquipe: -20 },
         delayedImpacts: [
           {
             triggerAfterEvents: 2,
-            impacts: { qualidade: -10, saudeEquipe: -5 },
+            impacts: { qualidadeProduto: -10, saudeEquipe: -5 },
             narrative: 'A otimização feita de madrugada gerou um bug sutil no relatório de matrículas.',
           }
         ],
@@ -49,7 +49,7 @@ export const infrastructureEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Limitar o acesso simultâneo (fila virtual) até que a poeira baixe.',
-        impacts: { eficiencia: -20, qualidade: -10, saudeEquipe: 0 },
+        impacts: { capacidadeEntrega: -20, qualidadeProduto: -10, saudeEquipe: 0 },
         feedbackNarrative: 'A fila virtual evitou a queda, mas gerou centenas de reclamações de estudantes nas redes sociais, arranhando a reputação do projeto.',
         pmbokConcept: 'Gestão de Stakeholders e Comunicação',
         learnings: ['Limitar acesso protege o recurso, mas degrada severamente a experiência do usuário.'],
@@ -78,7 +78,7 @@ export const infrastructureEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Renovar a licença imediatamente com aprovação emergencial.',
-        impacts: { eficiencia: -10, qualidade: 0, saudeEquipe: 5 },
+        impacts: { capacidadeEntrega: -10, qualidadeProduto: 0, saudeEquipe: 5 },
         feedbackNarrative: 'A aprovação emergencial custou um dia de burocracia, mas destravou a equipe. Tudo voltou ao normal.',
         pmbokConcept: 'Aquisições e Contratos',
         learnings: ['Depender de ferramentas pagas exige renovações proativas para não parar a esteira.'],
@@ -89,11 +89,11 @@ export const infrastructureEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Substituir por uma biblioteca open-source equivalente para não pagar licença.',
-        impacts: { eficiencia: -20, qualidade: -10, saudeEquipe: -15 },
+        impacts: { capacidadeEntrega: -20, qualidadeProduto: -10, saudeEquipe: -15 },
         delayedImpacts: [
           {
             triggerAfterEvents: 3,
-            impacts: { qualidade: 15, eficiencia: 10 },
+            impacts: { qualidadeProduto: 15, capacidadeEntrega: 10 },
             narrative: 'A equipe dominou a nova biblioteca open-source e agora tem muito mais flexibilidade nas telas.',
           }
         ],
@@ -107,7 +107,7 @@ export const infrastructureEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Usar uma versão antiga da biblioteca que não exige licença paga (downgrade).',
-        impacts: { eficiencia: 0, qualidade: -25, saudeEquipe: -5 },
+        impacts: { capacidadeEntrega: 0, qualidadeProduto: -25, saudeEquipe: -5 },
         feedbackNarrative: 'O downgrade quebrou dezenas de componentes visuais que dependiam de features novas. O sistema parece que voltou no tempo.',
         pmbokConcept: 'Gestão da Qualidade Técnica',
         learnings: ['Regredir versões de dependências destrói o valor já construído e gera inconsistências.'],
@@ -136,7 +136,7 @@ export const infrastructureEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Pausar os testes e realocar QA para revisar documentação até o ambiente voltar.',
-        impacts: { eficiencia: -15, qualidade: 5, saudeEquipe: -5 },
+        impacts: { capacidadeEntrega: -15, qualidadeProduto: 5, saudeEquipe: -5 },
         feedbackNarrative: 'A equipe de QA ficou ociosa e as entregas atrasaram 2 dias. Pelo menos a documentação ficou atualizada.',
         pmbokConcept: 'Otimização de Recursos Ociosos',
         learnings: ['Ambientes de teste são críticos; quando caem, o fluxo de valor é interrompido.'],
@@ -147,7 +147,7 @@ export const infrastructureEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Configurar testes locais nas máquinas dos QAs provisoriamente.',
-        impacts: { eficiencia: 5, qualidade: -5, saudeEquipe: -10 },
+        impacts: { capacidadeEntrega: 5, qualidadeProduto: -5, saudeEquipe: -10 },
         feedbackNarrative: 'Deu trabalho configurar tudo nas máquinas locais, atrasou os devs que precisaram ajudar, mas as validações continuaram.',
         pmbokConcept: 'Resiliência e Adaptação Operacional',
         learnings: ['Soluções de contorno (workarounds) exigem esforço da equipe, mas mantêm o fluxo andando.'],
@@ -158,7 +158,7 @@ export const infrastructureEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Enviar o código diretamente para produção confiando apenas nos testes automatizados unitários.',
-        impacts: { eficiencia: 15, qualidade: -25, saudeEquipe: -15 },
+        impacts: { capacidadeEntrega: 15, qualidadeProduto: -25, saudeEquipe: -15 },
         feedbackNarrative: 'Um bug crítico passou direto para a produção e a funcionalidade de matrícula quebrou para 30% dos alunos.',
         pmbokConcept: 'Gestão de Riscos e Qualidade',
         learnings: ['Pular etapas de qualidade para ganhar eficiência quase sempre resulta em desastre em produção.'],
@@ -187,7 +187,7 @@ export const infrastructureEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Construir um middleware (camada intermediária) de cache e retry para estabilizar a comunicação.',
-        impacts: { eficiencia: -20, qualidade: 15, saudeEquipe: -5 },
+        impacts: { capacidadeEntrega: -20, qualidadeProduto: 15, saudeEquipe: -5 },
         feedbackNarrative: 'O middleware demorou uma semana para ser feito. A sprint atual foi comprometida, mas a integração ficou robusta e estável.',
         pmbokConcept: 'Gestão de Interfaces e Complexidade',
         learnings: ['Sistemas legados exigem camadas de adaptação robustas para não contaminar a nova arquitetura.'],
@@ -198,7 +198,7 @@ export const infrastructureEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Aumentar o tempo limite (timeout) para 30 segundos, forçando os usuários a esperarem.',
-        impacts: { eficiencia: 5, qualidade: -15, saudeEquipe: -5 },
+        impacts: { capacidadeEntrega: 5, qualidadeProduto: -15, saudeEquipe: -5 },
         feedbackNarrative: 'Os alunos agora reclamam que a tela congela por 30 segundos, mas os erros diminuíram. A UX está péssima.',
         pmbokConcept: 'Aceitação de Risco',
         learnings: ['Camuflar um erro de integração aumentando timeouts apenas repassa a dor para o usuário.'],
@@ -209,7 +209,7 @@ export const infrastructureEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Manter a implementação atual e apenas adicionar mensagens de erro mais amigáveis no frontend.',
-        impacts: { eficiencia: -5, qualidade: -10, saudeEquipe: 5 },
+        impacts: { capacidadeEntrega: -5, qualidadeProduto: -10, saudeEquipe: 5 },
         feedbackNarrative: 'O aluno vê "Tente novamente mais tarde". Embora a mensagem seja amigável, o serviço continua instável e inconfiável.',
         pmbokConcept: 'Engajamento de Usuários Finais',
         learnings: ['Problemas de infraestrutura não são resolvidos apenas com UX bonita.'],
@@ -238,7 +238,7 @@ export const infrastructureEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Contratar mais espaço em disco na nuvem e configurar a retenção automática a longo prazo.',
-        impacts: { eficiencia: -10, qualidade: 15, saudeEquipe: 0 },
+        impacts: { capacidadeEntrega: -10, qualidadeProduto: 15, saudeEquipe: 0 },
         feedbackNarrative: 'Custo financeiro extra, mas a segurança dos dados voltou ao normal e a política de retenção evitou que o problema volte a ocorrer.',
         pmbokConcept: 'Garantia de Continuidade de Negócios (Recursos Físicos)',
         learnings: ['Backups são essenciais; escalonamento de armazenamento deve ser automatizado.'],
@@ -249,11 +249,11 @@ export const infrastructureEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Pedir à equipe para apagar backups antigos de 2 anos atrás manualmente para liberar espaço.',
-        impacts: { eficiencia: 0, qualidade: -10, saudeEquipe: -5 },
+        impacts: { capacidadeEntrega: 0, qualidadeProduto: -10, saudeEquipe: -5 },
         delayedImpacts: [
           {
             triggerAfterEvents: 4,
-            impacts: { qualidade: -15, saudeEquipe: -10 },
+            impacts: { qualidadeProduto: -15, saudeEquipe: -10 },
             narrative: 'A auditoria constatou que backups obrigatórios por lei foram deletados. A universidade foi multada.',
           }
         ],
@@ -267,11 +267,11 @@ export const infrastructureEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Ignorar o alerta por enquanto e lidar com isso na próxima sprint, pois a prioridade é entregar features.',
-        impacts: { eficiencia: 10, qualidade: -20, saudeEquipe: -5 },
+        impacts: { capacidadeEntrega: 10, qualidadeProduto: -20, saudeEquipe: -5 },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
-            impacts: { qualidade: -30, saudeEquipe: -30, eficiencia: -20 },
+            impacts: { qualidadeProduto: -30, saudeEquipe: -30, capacidadeEntrega: -20 },
             narrative: 'Um desenvolvedor dropou uma tabela errada no banco de produção. Sem os backups recentes, perdemos matrículas do dia.',
           }
         ],

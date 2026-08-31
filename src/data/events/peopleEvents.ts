@@ -20,7 +20,7 @@ export const peopleEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Pausar a integração e focar os júniors em tarefas mais simples até ele voltar.',
-        impacts: { eficiencia: -20, qualidade: 0, saudeEquipe: 10 },
+        impacts: { capacidadeEntrega: -20, qualidadeProduto: 0, saudeEquipe: 10 },
         feedbackNarrative: 'A sprint atrasou muito, mas os júniors entregaram várias features menores sem estresse. O sênior descansou e voltou melhor.',
         pmbokConcept: 'Gestão de Capacidade da Equipe',
         learnings: ['Aceitar a perda de capacidade é preferível a forçar tarefas complexas em pessoas não preparadas.'],
@@ -31,11 +31,11 @@ export const peopleEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Exigir que os Desenvolvedores Plenos e Júniors absorvam e finalizem a integração sozinhos no prazo.',
-        impacts: { eficiencia: 0, qualidade: -15, saudeEquipe: -20 },
+        impacts: { capacidadeEntrega: 0, qualidadeProduto: -15, saudeEquipe: -20 },
         delayedImpacts: [
           {
             triggerAfterEvents: 2,
-            impacts: { saudeEquipe: -15, qualidade: -10 },
+            impacts: { saudeEquipe: -15, qualidadeProduto: -10 },
             narrative: 'Um dos Desenvolvedores Plenos pediu demissão devido à pressão extrema sofrida durante a integração.',
           }
         ],
@@ -49,7 +49,7 @@ export const peopleEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Contratar um freelancer emergencial (outsourcing) para cobrir a vaga durante as duas semanas.',
-        impacts: { eficiencia: -10, qualidade: -10, saudeEquipe: 0 },
+        impacts: { capacidadeEntrega: -10, qualidadeProduto: -10, saudeEquipe: 0 },
         feedbackNarrative: 'O freela passou 1 semana apenas entendendo o código. A entrega não saiu a tempo e custou parte significativa do orçamento.',
         pmbokConcept: 'Curva de Aprendizado e Integração',
         learnings: ['Adicionar pessoas a um projeto atrasado costuma atrasá-lo ainda mais devido ao onboarding.'],
@@ -78,7 +78,7 @@ export const peopleEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Acordar com o Tech Lead para refatorar metade agora e a outra metade na próxima sprint.',
-        impacts: { eficiencia: -10, qualidade: 10, saudeEquipe: 10 },
+        impacts: { capacidadeEntrega: -10, qualidadeProduto: 10, saudeEquipe: 10 },
         feedbackNarrative: 'O acordo aliviou a tensão. Os devs corrigiram os fluxos mais críticos e a UX melhorou. O diálogo prevaleceu.',
         pmbokConcept: 'Gestão de Conflitos e Negociação',
         learnings: ['Negociação mútua resolve problemas de escopo sem destruir a motivação de nenhuma das partes.'],
@@ -89,7 +89,7 @@ export const peopleEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Forçar a equipe de frontend a refatorar tudo imediatamente, parando novas features.',
-        impacts: { eficiencia: -20, qualidade: 15, saudeEquipe: -15 },
+        impacts: { capacidadeEntrega: -20, qualidadeProduto: 15, saudeEquipe: -15 },
         feedbackNarrative: 'A UX ficou perfeita, mas os desenvolvedores ficaram revoltados por terem seu trabalho descartado repentinamente. A produtividade caiu.',
         pmbokConcept: 'Priorização e Empatia no Trabalho',
         learnings: ['Mudanças abruptas de direção (pivot) destroem o fluxo (flow) do desenvolvimento.'],
@@ -100,11 +100,11 @@ export const peopleEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Ignorar o UX e manter como está, afirmando que "já está funcionando e atende os requisitos mínimos".',
-        impacts: { eficiencia: 10, qualidade: -20, saudeEquipe: -10 },
+        impacts: { capacidadeEntrega: 10, qualidadeProduto: -20, saudeEquipe: -10 },
         delayedImpacts: [
           {
             triggerAfterEvents: 2,
-            impacts: { qualidade: -10 },
+            impacts: { qualidadeProduto: -10 },
             narrative: 'A taxa de abandono do cadastro pelos alunos disparou, confirmando a preocupação inicial do time de UX.',
           }
         ],
@@ -136,7 +136,7 @@ export const peopleEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Agendar uma reunião de alinhamento imediata, criar um Design System conjunto e definir regras claras.',
-        impacts: { eficiencia: -15, qualidade: 15, saudeEquipe: 15 },
+        impacts: { capacidadeEntrega: -15, qualidadeProduto: 15, saudeEquipe: 15 },
         feedbackNarrative: 'A reunião demorou e consumiu tempo da sprint, mas a criação do Design System pôs fim à guerra. A comunicação flui agora.',
         pmbokConcept: 'Construção de Equipes e Ambiente Colaborativo',
         learnings: ['Investir tempo em artefatos compartilhados reduz atritos diários crônicos.'],
@@ -147,7 +147,7 @@ export const peopleEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Tomar partido de um dos lados (Devs ou UX) para finalizar a discussão e voltar ao trabalho.',
-        impacts: { eficiencia: 5, qualidade: -10, saudeEquipe: -20 },
+        impacts: { capacidadeEntrega: 5, qualidadeProduto: -10, saudeEquipe: -20 },
         feedbackNarrative: 'O lado que perdeu a discussão se sentiu desrespeitado e adotou uma postura de "fazer apenas o mínimo necessário". A colaboração morreu.',
         pmbokConcept: 'Imparcialidade e Mediação',
         learnings: ['Decisões autocráticas (Forçar/Impor) resolvem a discussão rápida, mas destroem a confiança na gestão.'],
@@ -158,7 +158,7 @@ export const peopleEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Não intervir e deixar que eles se resolvam como adultos.',
-        impacts: { eficiencia: -10, qualidade: -15, saudeEquipe: -15 },
+        impacts: { capacidadeEntrega: -10, qualidadeProduto: -15, saudeEquipe: -15 },
         feedbackNarrative: 'Eles não se resolveram. O clima de guerra fria continuou, ninguém se ajudou e a produtividade de ambas as áreas caiu.',
         pmbokConcept: 'Afastamento Ineficaz (Withdraw/Avoid)',
         learnings: ['Líderes precisam intervir quando o conflito se torna destrutivo e afeta o trabalho do projeto.'],
@@ -187,7 +187,7 @@ export const peopleEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Cortar escopo imediatamente, retirando histórias da Sprint e protegendo a equipe.',
-        impacts: { eficiencia: -15, qualidade: 10, saudeEquipe: 20 },
+        impacts: { capacidadeEntrega: -15, qualidadeProduto: 10, saudeEquipe: 20 },
         feedbackNarrative: 'A decisão de cortar escopo exigiu coragem, mas o time voltou a dormir. O trabalho entregue ficou bem testado e a confiança no PM aumentou.',
         pmbokConcept: 'Proteção da Equipe (Servant Leadership)',
         learnings: ['Adaptar o escopo para a realidade é o papel fundamental do gestor de projetos focado no time.'],
@@ -198,11 +198,11 @@ export const peopleEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Comprar pizzas, incentivar o esforço extra e prometer folga na próxima sprint.',
-        impacts: { eficiencia: 15, qualidade: -10, saudeEquipe: -15 },
+        impacts: { capacidadeEntrega: 15, qualidadeProduto: -10, saudeEquipe: -15 },
         delayedImpacts: [
           {
             triggerAfterEvents: 2,
-            impacts: { saudeEquipe: -20, eficiencia: -15 },
+            impacts: { saudeEquipe: -20, capacidadeEntrega: -15 },
             narrative: 'A "folga" prometida não ocorreu devido a novos requisitos. A quebra de promessa desanimou fatalmente a equipe.',
           }
         ],
@@ -216,7 +216,7 @@ export const peopleEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Não fazer nada e manter a cobrança baseada nas metas iniciais prometidas.',
-        impacts: { eficiencia: -5, qualidade: -25, saudeEquipe: -25 },
+        impacts: { capacidadeEntrega: -5, qualidadeProduto: -25, saudeEquipe: -25 },
         feedbackNarrative: 'O ritmo quebrou as pessoas. Histórias ficaram pela metade, o que foi entregue estava quebrado e um dos devs adoeceu. Desastre total.',
         pmbokConcept: 'Fracasso na Gestão do Trabalho do Projeto',
         learnings: ['Ignorar a realidade física da capacidade da equipe leva ao colapso total da produção.'],
@@ -245,7 +245,7 @@ export const peopleEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Alocar 2 dias dessa sprint para que Júlia faça Pair Programming com o Pleno no módulo de pagamentos.',
-        impacts: { eficiencia: -15, qualidade: 10, saudeEquipe: 15 },
+        impacts: { capacidadeEntrega: -15, qualidadeProduto: 10, saudeEquipe: 15 },
         feedbackNarrative: 'As entregas da Júlia e do Pleno reduziram na sprint, mas o conhecimento foi disseminado. O Pleno sente-se valorizado e a equipe mais segura.',
         pmbokConcept: 'Transferência de Conhecimento Tácito',
         learnings: ['O conhecimento compartilhado (Pair Programming) é o backup mais seguro de uma equipe ágil.'],
@@ -256,7 +256,7 @@ export const peopleEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Pedir à Júlia para passar o final de semana escrevendo a documentação detalhada (horas extras pagas).',
-        impacts: { eficiencia: 5, qualidade: 5, saudeEquipe: -15 },
+        impacts: { capacidadeEntrega: 5, qualidadeProduto: 5, saudeEquipe: -15 },
         feedbackNarrative: 'A Júlia escreveu um PDF de 50 páginas. Ninguém leu, mas a documentação "existe". Ela começou suas férias exausta e desanimada.',
         pmbokConcept: 'Limitações do Conhecimento Explícito',
         learnings: ['Documentações longas escritas com pressa e sem aplicação prática não transferem conhecimento real (tácito).'],
@@ -267,11 +267,11 @@ export const peopleEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Torcer para não dar problemas e focar apenas no desenvolvimento das novas features.',
-        impacts: { eficiencia: 15, qualidade: -5, saudeEquipe: 0 },
+        impacts: { capacidadeEntrega: 15, qualidadeProduto: -5, saudeEquipe: 0 },
         delayedImpacts: [
           {
             triggerAfterEvents: 2,
-            impacts: { qualidade: -20, eficiencia: -25, saudeEquipe: -15 },
+            impacts: { qualidadeProduto: -20, capacidadeEntrega: -25, saudeEquipe: -15 },
             narrative: 'Um erro grave ocorreu no pagamento. A Júlia estava inacessível. O Pleno quebrou o sistema inteiro tentando arrumar às pressas.',
           }
         ],

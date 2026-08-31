@@ -20,8 +20,8 @@ export function DebriefingFinal() {
     };
   });
 
-  const efLevel = metricLevel(metrics.eficiencia);
-  const quaLevel = metricLevel(metrics.qualidade);
+  const efLevel = metricLevel(metrics.capacidadeEntrega);
+  const quaLevel = metricLevel(metrics.qualidadeProduto);
   const seLevel = metricLevel(metrics.saudeEquipe);
 
   const isSuccess = !gameOverReason;
@@ -29,10 +29,10 @@ export function DebriefingFinal() {
   const reflectionText = (() => {
     const good: string[] = [];
     const bad: string[] = [];
-    if (efLevel === 'stable') good.push('Eficiência Operacional');
-    else if (efLevel === 'critical') bad.push('Eficiência Operacional');
-    if (quaLevel === 'stable') good.push('Qualidade Técnica');
-    else if (quaLevel === 'critical') bad.push('Qualidade Técnica');
+    if (efLevel === 'stable') good.push('Capacidade de Entrega (Velocity)');
+    else if (efLevel === 'critical') bad.push('Capacidade de Entrega (Velocity)');
+    if (quaLevel === 'stable') good.push('Qualidade do Produto');
+    else if (quaLevel === 'critical') bad.push('Qualidade do Produto');
     if (seLevel === 'stable') good.push('Saúde da Equipe');
     else if (seLevel === 'critical') bad.push('Saúde da Equipe');
     return { good, bad };
@@ -92,8 +92,8 @@ export function DebriefingFinal() {
         </div>
         <div className="grid gap-3 sm:grid-cols-3">
           {[
-            { label: 'Eficiência', value: metrics.eficiencia, level: efLevel },
-            { label: 'Qualidade', value: metrics.qualidade, level: quaLevel },
+            { label: 'Capacidade de Entrega', value: metrics.capacidadeEntrega, level: efLevel },
+            { label: 'Qualidade do Produto', value: metrics.qualidadeProduto, level: quaLevel },
             { label: 'Saúde da Equipe', value: metrics.saudeEquipe, level: seLevel },
           ].map((m) => (
             <div

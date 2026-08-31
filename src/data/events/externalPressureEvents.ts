@@ -20,7 +20,7 @@ export const externalPressureEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Aceitar a demonstração, mas preparar uma apresentação em slide e um roteiro seguro pelo protótipo, gerenciando expectativas.',
-        impacts: { eficiencia: -10, qualidade: 0, saudeEquipe: 5 },
+        impacts: { capacidadeEntrega: -10, qualidadeProduto: 0, saudeEquipe: 5 },
         feedbackNarrative: 'Gastou-se um dia inteiro preparando os slides e o roteiro seguro. A demonstração correu bem, sem sustos, e a equipe de desenvolvimento continuou sossegada trabalhando no fundo.',
         pmbokConcept: 'Engajamento Eficaz dos Stakeholders',
         learnings: ['Demonstrar produtos incompletos exige criar "caminhos felizes" bem narrados, mitigando riscos de percepção negativa sem atrapalhar a base.'],
@@ -31,7 +31,7 @@ export const externalPressureEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Acionar todos os desenvolvedores e pedir que madruguem fazendo as telas parecerem de verdade ("mock de dados apressado").',
-        impacts: { eficiencia: 15, qualidade: -15, saudeEquipe: -20 },
+        impacts: { capacidadeEntrega: 15, qualidadeProduto: -15, saudeEquipe: -20 },
         feedbackNarrative: 'As telas pareciam reais, os conselheiros ficaram deslumbrados, mas os dados de mock inseridos de madrugada corromperam o banco e não serviam pra nada de útil.',
         pmbokConcept: 'Geração de Fake Value (Desperdício)',
         learnings: ['Trabalhar apenas na "fachada" sob pressão cria um desperdício enorme de energia técnica que joga a saúde da equipe no lixo.'],
@@ -42,11 +42,11 @@ export const externalPressureEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Negar a apresentação violentamente, dizendo que "Trabalhamos com Scrum e o MVP não tá pronto, só apresentamos no final da Sprint".',
-        impacts: { eficiencia: 0, qualidade: 0, saudeEquipe: -15 },
+        impacts: { capacidadeEntrega: 0, qualidadeProduto: 0, saudeEquipe: -15 },
         delayedImpacts: [
           {
             triggerAfterEvents: 2,
-            impacts: { eficiencia: -15, saudeEquipe: -15 },
+            impacts: { capacidadeEntrega: -15, saudeEquipe: -15 },
             narrative: 'A Reitoria cortou verbas do projeto alegando falta de "boa vontade" e "burocracia".',
           }
         ],
@@ -78,7 +78,7 @@ export const externalPressureEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Convidar um grupo de professores, mapear o fluxo doloroso, e criar um ticket urgente de UX com pequenas vitórias.',
-        impacts: { eficiencia: -15, qualidade: 20, saudeEquipe: 10 },
+        impacts: { capacidadeEntrega: -15, qualidadeProduto: 20, saudeEquipe: 10 },
         feedbackNarrative: 'A reunião ouviu as dores deles. A equipe adicionou um botão "Repetir falta" que reduziu o tempo. A resistência dos docentes caiu vertiginosamente e eles apoiaram o novo software.',
         pmbokConcept: 'Avaliação de Aceitação do Usuário (Design Inclusivo)',
         learnings: ['Integrar queixas ativamente ao ciclo de desenvolvimento transforma opositores críticos em promotores ferrenhos do produto.'],
@@ -89,7 +89,7 @@ export const externalPressureEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Acelerar a entrega do módulo "Padrão" atual e pedir à Reitoria que force uma Portaria tornando o uso obrigatório.',
-        impacts: { eficiencia: 15, qualidade: -10, saudeEquipe: -15 },
+        impacts: { capacidadeEntrega: 15, qualidadeProduto: -10, saudeEquipe: -15 },
         feedbackNarrative: 'Foi imposto à força. A equipe produziu no prazo, mas a enxurrada de e-mails, ódio diário e pedidos de suporte no chat acabou com o ânimo do time inteiro.',
         pmbokConcept: 'Mudança Impositiva e Resistência Organizacional',
         learnings: ['Impor usabilidade ruim por força bruta de gestão (Portaria) garante que o sistema seja odiado permanentemente, destruindo os canais de suporte.'],
@@ -100,7 +100,7 @@ export const externalPressureEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Dizer aos professores que eles precisam de um "treinamento de familiarização" para aprenderem a clicar onde precisam.',
-        impacts: { eficiencia: -5, qualidade: -15, saudeEquipe: -5 },
+        impacts: { capacidadeEntrega: -5, qualidadeProduto: -15, saudeEquipe: -5 },
         feedbackNarrative: 'O treinamento foi marcado. Os professores se sentiram chamados de "ignorantes", abandonaram os treinamentos e criaram ferramentas de excel paralelas, ignorando nosso sistema.',
         pmbokConcept: 'Arrogância Técnica na Experiência',
         learnings: ['Quando o usuário foge do sistema e cria planilhas Excel, a falha é do projeto (má UX), não da inteligência do usuário.'],
@@ -129,7 +129,7 @@ export const externalPressureEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Interromper features não críticas imediatamente e montar uma força-tarefa multidisciplinar focada na portaria.',
-        impacts: { eficiencia: -25, qualidade: 15, saudeEquipe: 5 },
+        impacts: { capacidadeEntrega: -25, qualidadeProduto: 15, saudeEquipe: 5 },
         feedbackNarrative: 'O time foi honesto com os outros stakeholders e parou tudo. Entregamos o exportador complexo dentro do prazo, salvando a universidade de sanções. A equipe sentiu-se heróica.',
         pmbokConcept: 'Adaptação a Mudanças e Compliance',
         learnings: ['Alterações regulatórias não são sugestões, são paralisantes. Aceitá-las no escopo e remover coisas ativas com transparência é o único caminho.'],
@@ -140,7 +140,7 @@ export const externalPressureEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Tentar encaixar a adaptação da portaria do MEC "nas horas livres", espremida junto com o desenvolvimento normal.',
-        impacts: { eficiencia: 0, qualidade: -15, saudeEquipe: -20 },
+        impacts: { capacidadeEntrega: 0, qualidadeProduto: -15, saudeEquipe: -20 },
         feedbackNarrative: 'Tentar fazer tudo gerou burnout e exaustão. A adaptação do MEC ficou mal feita, o Ministério ameaçou multar, e as features normais saíram bugadas.',
         pmbokConcept: 'Ilusão de Multitarefa e Falso Compromisso',
         learnings: ['Tentar alocar tarefas colossais no espaço vazio de "horas extras" apenas destrói qualidade em todas as frentes.'],
@@ -151,11 +151,11 @@ export const externalPressureEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Pedir que o setor administrativo continue copiando e colando os dados antigos na mão para a planilha do MEC por mais um ano.',
-        impacts: { eficiencia: 15, qualidade: -5, saudeEquipe: 5 },
+        impacts: { capacidadeEntrega: 15, qualidadeProduto: -5, saudeEquipe: 5 },
         delayedImpacts: [
           {
             triggerAfterEvents: 4,
-            impacts: { saudeEquipe: -15, qualidade: -20 },
+            impacts: { saudeEquipe: -15, qualidadeProduto: -20 },
             narrative: 'A reitoria descobriu que 2.000 alunos ficaram de fora por erro manual. O escândalo caiu na nossa área de tecnologia por não dar suporte.',
           }
         ],
@@ -187,7 +187,7 @@ export const externalPressureEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Designar os especialistas de back-end para focar e pagar essas falhas de segurança durante a semana, revisando todos os endpoints.',
-        impacts: { eficiencia: -20, qualidade: 25, saudeEquipe: 0 },
+        impacts: { capacidadeEntrega: -20, qualidadeProduto: 25, saudeEquipe: 0 },
         feedbackNarrative: 'A eficiência da semana foi morta. O código de autenticação foi saneado. A equipe está aliviada e os relatórios de auditoria foram limpados com nota máxima de excelência.',
         pmbokConcept: 'Pagamento de Dívida de Segurança Preditiva',
         learnings: ['Relatórios de auditoria são oportunidades de investimento de longo prazo. Corrigir proativamente blinda a reputação do software.'],
@@ -198,11 +198,11 @@ export const externalPressureEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Corrigir apenas 2 vulnerabilidades críticas que são mais fáceis (Cherry-picking), maquiando os testes locais para passar o resto no sufoco.',
-        impacts: { eficiencia: 5, qualidade: -15, saudeEquipe: -5 },
+        impacts: { capacidadeEntrega: 5, qualidadeProduto: -15, saudeEquipe: -5 },
         delayedImpacts: [
           {
             triggerAfterEvents: 2,
-            impacts: { qualidade: -20, saudeEquipe: -20, eficiencia: -20 },
+            impacts: { qualidadeProduto: -20, saudeEquipe: -20, capacidadeEntrega: -20 },
             narrative: 'Hackers russos exploraram uma das brechas que mascaramos. Criptografaram dados (Ransomware). O pânico é absoluto.',
           }
         ],
@@ -216,7 +216,7 @@ export const externalPressureEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Implementar a correção solicitada e, além disso, adotar uma ferramenta adicional caríssima de análise estática sem aprovação de orçamento clara.',
-        impacts: { eficiencia: -15, qualidade: 10, saudeEquipe: -10 },
+        impacts: { capacidadeEntrega: -15, qualidadeProduto: 10, saudeEquipe: -10 },
         feedbackNarrative: 'A nova ferramenta melhorou o radar de segurança para sempre, mas estourou parte do orçamento e exigiu que o tech lead ficasse virando noites tentando instalar sozinho.',
         pmbokConcept: 'Compras Reativas Não Estruturadas',
         learnings: ['Aquisições sem planejamento por puro medo (Fear, Uncertainty, Doubt - FUD) geram despesas soltas, sem integração com a esteira do time.'],
@@ -245,7 +245,7 @@ export const externalPressureEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Defender o time ativamente: negociar de forma dura, proteger a Sprint atual, mas adicionar a ideia no Backlog para análise futura.',
-        impacts: { eficiencia: -5, qualidade: 15, saudeEquipe: 20 },
+        impacts: { capacidadeEntrega: -5, qualidadeProduto: 15, saudeEquipe: 20 },
         feedbackNarrative: 'O Vice-Reitor ameaçou com o ego ferido, mas recuou ao entender o planejamento (Roadmap). A equipe se sentiu super protegida (psicologicamente) e o fluxo permaneceu íntegro.',
         pmbokConcept: 'Proteção de Escopo e Equipe contra o HiPPO',
         learnings: ['Negociar firmemente, dizendo "Não agora" a ideias aleatórias de líderes superiores (HiPPO), é a função primária que blinda o desempenho da engenharia.'],
@@ -256,7 +256,7 @@ export const externalPressureEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Dobrar e ceder. Abandonar o cronograma principal e tentar implementar uma IA falsa ("mágica de string") para o Vice-Reitor.',
-        impacts: { eficiencia: -15, qualidade: -25, saudeEquipe: -20 },
+        impacts: { capacidadeEntrega: -15, qualidadeProduto: -25, saudeEquipe: -20 },
         feedbackNarrative: 'Foi um final de semana infernal. O "Chatbot" criado respondia coisas aleatórias. O Vice Reitor apresentou, passou vergonha e colocou a culpa total na "incompetência da equipe".',
         pmbokConcept: 'Falha Total na Gestão de Expectativas (Escopo)',
         learnings: ['Aceitar pressão de cima sem blindagem técnica resulta no ciclo da morte: entregas horríveis e queimação política de toda a equipe que aceitou.'],
@@ -267,11 +267,11 @@ export const externalPressureEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Contratar uma API de Chatbot pronta rapidamente, que consome o orçamento da manutenção dos servidores, para acalmar o líder.',
-        impacts: { eficiencia: 15, qualidade: -10, saudeEquipe: -5 },
+        impacts: { capacidadeEntrega: 15, qualidadeProduto: -10, saudeEquipe: -5 },
         delayedImpacts: [
           {
             triggerAfterEvents: 3,
-            impacts: { qualidade: -10, saudeEquipe: -15 },
+            impacts: { qualidadeProduto: -10, saudeEquipe: -15 },
             narrative: 'A conta de dólares da API do chatbot explodiu. Não houve dinheiro para a renovação anual do banco de dados, e a base colapsou.',
           }
         ],

@@ -40,10 +40,10 @@ export function GameOver({ outcome }: Props) {
         </p>
 
         <div className="mt-6 grid gap-3 sm:grid-cols-3">
-          {(['eficiencia', 'qualidade', 'saudeEquipe'] as const).map((k) => (
+          {(['capacidadeEntrega', 'qualidadeProduto', 'saudeEquipe'] as const).map((k) => (
             <div key={k} className="rounded-2xl bg-muted p-4">
               <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                {k === 'eficiencia' ? 'Eficiência' : k === 'qualidade' ? 'Qualidade' : 'Saúde da Equipe'}
+                {k === 'capacidadeEntrega' ? 'Capacidade de Entrega' : k === 'qualidadeProduto' ? 'Qualidade do Produto' : 'Saúde da Equipe'}
               </p>
               <p className="mt-1 text-2xl font-bold tabular-nums">{metrics[k]}</p>
             </div>
@@ -86,10 +86,10 @@ export function GameOver({ outcome }: Props) {
                 )}
                 <div className="mt-3 flex flex-wrap gap-2 text-xs">
                   <span className="rounded-full bg-muted px-3 py-1">
-                    Eficiência: <b>{d.metricsAfter.eficiencia}</b>
+                    Capacidade de Entrega: <b>{d.metricsAfter.capacidadeEntrega}</b>
                   </span>
                   <span className="rounded-full bg-muted px-3 py-1">
-                    Qualidade: <b>{d.metricsAfter.qualidade}</b>
+                    Qualidade: <b>{d.metricsAfter.qualidadeProduto}</b>
                   </span>
                   <span className="rounded-full bg-muted px-3 py-1">
                     Saúde da Equipe: <b>{d.metricsAfter.saudeEquipe}</b>

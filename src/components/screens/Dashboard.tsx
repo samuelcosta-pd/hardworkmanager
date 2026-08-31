@@ -34,8 +34,8 @@ export function Dashboard() {
       </div>
 
       <section className="mb-8 grid gap-4 md:grid-cols-3">
-        <MetricBar label="Eficiência" value={metrics.eficiencia} icon={<Gauge className="h-5 w-5 text-primary" />} />
-        <MetricBar label="Qualidade" value={metrics.qualidade} icon={<Sparkle className="h-5 w-5 text-primary" />} />
+        <MetricBar label="Capacidade de Entrega (Velocity)" value={metrics.capacidadeEntrega} icon={<Gauge className="h-5 w-5 text-primary" />} />
+        <MetricBar label="Qualidade do Produto" value={metrics.qualidadeProduto} icon={<Sparkle className="h-5 w-5 text-primary" />} />
         <MetricBar label="Saúde da Equipe" value={metrics.saudeEquipe} icon={<Heart className="h-5 w-5 text-primary" />} />
       </section>
 

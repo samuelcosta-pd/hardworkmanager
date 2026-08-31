@@ -87,13 +87,13 @@ export function ConsequenceFeedback() {
       <div className="mb-6 grid gap-3 sm:grid-cols-3">
         <SoftCard className="text-center" variant="muted">
           <Gauge className="mx-auto h-5 w-5 text-primary" />
-          <p className="mt-2 text-xs uppercase tracking-wider text-muted-foreground">Eficiência</p>
-          <div className="mt-1 flex items-center justify-center">{renderDelta('eficiencia')}</div>
+          <p className="mt-2 text-xs uppercase tracking-wider text-muted-foreground">Capacidade de Entrega</p>
+          <div className="mt-1 flex items-center justify-center">{renderDelta('capacidadeEntrega')}</div>
         </SoftCard>
         <SoftCard className="text-center" variant="muted">
           <Sparkle className="mx-auto h-5 w-5 text-primary" />
-          <p className="mt-2 text-xs uppercase tracking-wider text-muted-foreground">Qualidade</p>
-          <div className="mt-1 flex items-center justify-center">{renderDelta('qualidade')}</div>
+          <p className="mt-2 text-xs uppercase tracking-wider text-muted-foreground">Qualidade do Produto</p>
+          <div className="mt-1 flex items-center justify-center">{renderDelta('qualidadeProduto')}</div>
         </SoftCard>
         <SoftCard className="text-center" variant="muted">
           <Heart className="mx-auto h-5 w-5 text-primary" />
@@ -103,8 +103,8 @@ export function ConsequenceFeedback() {
       </div>
 
       <div className="grid gap-3 sm:grid-cols-3 mb-6">
-        <MetricBar label="Eficiência" value={metrics.eficiencia} icon={<Gauge className="h-5 w-5 text-primary" />} />
-        <MetricBar label="Qualidade" value={metrics.qualidade} icon={<Sparkle className="h-5 w-5 text-primary" />} />
+        <MetricBar label="Capacidade de Entrega (Velocity)" value={metrics.capacidadeEntrega} icon={<Gauge className="h-5 w-5 text-primary" />} />
+        <MetricBar label="Qualidade do Produto" value={metrics.qualidadeProduto} icon={<Sparkle className="h-5 w-5 text-primary" />} />
         <MetricBar label="Saúde da Equipe" value={metrics.saudeEquipe} icon={<Heart className="h-5 w-5 text-primary" />} />
       </div>
 

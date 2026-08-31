@@ -20,7 +20,7 @@ export const executionEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Pausar o desenvolvimento da tela, chamar os stakeholders e reescrever os critérios de aceite.',
-        impacts: { eficiencia: -15, qualidade: 15, saudeEquipe: 5 },
+        impacts: { capacidadeEntrega: -15, qualidadeProduto: 15, saudeEquipe: 5 },
         feedbackNarrative: 'A pausa atrasou a entrega em 2 dias, mas quando o desenvolvimento retomou, foi feito da forma certa e sem retrabalho. O time não se estressou.',
         pmbokConcept: 'Gerenciamento de Escopo e Critérios de Aceite',
         learnings: ['Ambiguidades resolvem-se conversando com quem pediu, e não codando no escuro.'],
@@ -31,11 +31,11 @@ export const executionEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Fazer apenas um filtro básico (por ano) assumindo que será o suficiente, para não perder tempo.',
-        impacts: { eficiencia: 10, qualidade: -10, saudeEquipe: -5 },
+        impacts: { capacidadeEntrega: 10, qualidadeProduto: -10, saudeEquipe: -5 },
         delayedImpacts: [
           {
             triggerAfterEvents: 2,
-            impacts: { eficiencia: -15, qualidade: -5 },
+            impacts: { capacidadeEntrega: -15, qualidadeProduto: -5 },
             narrative: 'A reitoria reclamou que o filtro não tem status. Uma nova sprint foi engolida pelo retrabalho da tela.',
           }
         ],
@@ -49,7 +49,7 @@ export const executionEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Colocar todos os filtros possíveis imagináveis na tela para cobrir qualquer possibilidade.',
-        impacts: { eficiencia: -25, qualidade: -10, saudeEquipe: -15 },
+        impacts: { capacidadeEntrega: -25, qualidadeProduto: -10, saudeEquipe: -15 },
         feedbackNarrative: 'A tela ficou complexa, demorou o dobro do tempo planejado, a equipe exauriu-se trabalhando num canivete suíço inútil. A UX ficou horrível.',
         pmbokConcept: 'Gold Plating (Folheamento a Ouro)',
         learnings: ['Fazer a mais (over-engineering) para cobrir incertezas desperdiça recursos preciosos e corrompe a usabilidade (UX).'],
@@ -78,11 +78,11 @@ export const executionEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Aprovar o PR mesmo errado para bater a meta da Sprint, e criar um ticket de dívida técnica para depois.',
-        impacts: { eficiencia: 15, qualidade: -20, saudeEquipe: 0 },
+        impacts: { capacidadeEntrega: 15, qualidadeProduto: -20, saudeEquipe: 0 },
         delayedImpacts: [
           {
             triggerAfterEvents: 3,
-            impacts: { qualidade: -10, saudeEquipe: -10 },
+            impacts: { qualidadeProduto: -10, saudeEquipe: -10 },
             narrative: 'O ticket de dívida nunca foi pago. O código ruim gerou bugs de integração, exigindo finais de semana da equipe para consertar.',
           }
         ],
@@ -96,7 +96,7 @@ export const executionEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Rejeitar o PR. O dev terá que refazer, assumindo a falha e o atraso na Sprint da equipe.',
-        impacts: { eficiencia: -20, qualidade: 15, saudeEquipe: -10 },
+        impacts: { capacidadeEntrega: -20, qualidadeProduto: 15, saudeEquipe: -10 },
         feedbackNarrative: 'A meta da sprint não foi batida. A equipe ficou um pouco chateada, mas a arquitetura manteve-se impecável, preservando o valor do produto.',
         pmbokConcept: 'Garantia de Qualidade e Padrões (Quality Assurance)',
         learnings: ['Qualidade é não negociável, mesmo que as métricas de tempo (velocity) tenham que sofrer o impacto imediatamente.'],
@@ -107,7 +107,7 @@ export const executionEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'O próprio Tech Lead reescrever o código de madrugada para não atrasar a Sprint nem expor o dev.',
-        impacts: { eficiencia: 5, qualidade: 10, saudeEquipe: -20 },
+        impacts: { capacidadeEntrega: 5, qualidadeProduto: 10, saudeEquipe: -20 },
         feedbackNarrative: 'O código foi salvo, mas o Tech Lead exauriu-se. E pior, o desenvolvedor não aprendeu como deveria ser feito e repetirá o erro.',
         pmbokConcept: 'Microgerenciamento e Esgotamento do Líder',
         learnings: ['Líderes que tomam para si o trabalho braçal em vez de guiar a equipe geram dependência técnica tóxica e esgotamento rápido.'],
@@ -136,7 +136,7 @@ export const executionEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Parar todo o time, sair do ar imediatamente (Downtime) e trabalhar numa correção permanente urgente.',
-        impacts: { eficiencia: -25, qualidade: 10, saudeEquipe: -15 },
+        impacts: { capacidadeEntrega: -25, qualidadeProduto: 10, saudeEquipe: -15 },
         feedbackNarrative: 'O sistema ficou fora do ar por horas. Foi um dia caótico, com gritaria. A correção permanente subiu e a falha de segurança acabou, mas todos estão esgotados.',
         pmbokConcept: 'Gestão de Crise (Incident Response)',
         learnings: ['Incidentes de segurança exigem paralisação máxima, e a resposta rápida protege a organização, mesmo destruindo a eficiência momentânea.'],
@@ -147,11 +147,11 @@ export const executionEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Fazer um "Hotfix" rápido (uma gambiarra) desativando temporariamente o módulo de boletos apenas.',
-        impacts: { eficiencia: -5, qualidade: -10, saudeEquipe: -5 },
+        impacts: { capacidadeEntrega: -5, qualidadeProduto: -10, saudeEquipe: -5 },
         delayedImpacts: [
           {
             triggerAfterEvents: 2,
-            impacts: { saudeEquipe: -10, qualidade: 10 },
+            impacts: { saudeEquipe: -10, qualidadeProduto: 10 },
             narrative: 'A equipe conseguiu corrigir o módulo de boletos com calma depois de alguns dias.',
           }
         ],
@@ -165,7 +165,7 @@ export const executionEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Pedir que apenas 1 dev sênior corrija escondido sem tirar o sistema do ar para não chamar atenção.',
-        impacts: { eficiencia: 0, qualidade: -20, saudeEquipe: -10 },
+        impacts: { capacidadeEntrega: 0, qualidadeProduto: -20, saudeEquipe: -10 },
         feedbackNarrative: 'O desenvolvedor errou o fix na pressa e derrubou o sistema inteiro na hora do almoço. A diretoria descobriu o vazamento pelos alunos nas redes sociais.',
         pmbokConcept: 'Encobrimento e Agravamento de Riscos',
         learnings: ['Tentar esconder falhas graves (shadow fix) inviabiliza testes emergenciais e gera risco de reputação catastrófico quando dá errado.'],
@@ -194,7 +194,7 @@ export const executionEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Negociar com o PM para reservar 1 sprint inteira dedicada apenas a refatorar o Módulo de Notas.',
-        impacts: { eficiencia: -20, qualidade: 25, saudeEquipe: 10 },
+        impacts: { capacidadeEntrega: -20, qualidadeProduto: 25, saudeEquipe: 10 },
         feedbackNarrative: 'A diretoria brigou com a falta de entregas, mas a equipe limpou o módulo. Depois da refatoração, as features estão saindo o dobro mais rápido.',
         pmbokConcept: 'Melhoria Contínua e Refatoração',
         learnings: ['Pagamento agressivo de débito técnico dói na eficiência de curto prazo, mas destrava e acelera fortemente a operação nos próximos meses.'],
@@ -205,7 +205,7 @@ export const executionEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Adotar a "Regra do Escoteiro": cada desenvolvedor limpa um pouco do código apenas quando for mexer nele para não paralisar tudo.',
-        impacts: { eficiencia: -5, qualidade: 10, saudeEquipe: 0 },
+        impacts: { capacidadeEntrega: -5, qualidadeProduto: 10, saudeEquipe: 0 },
         feedbackNarrative: 'Não resolveu a bagunça geral de uma vez, mas a qualidade começou a melhorar aos poucos sem travar as entregas institucionais.',
         pmbokConcept: 'Pagamento Incremental de Dívida (Refatoração Oportunista)',
         learnings: ['A Regra do Escoteiro (deixar mais limpo que achou) permite pagar dívida de forma orgânica sem estresse nos stakeholders institucionais.'],
@@ -216,11 +216,11 @@ export const executionEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Ignorar o aviso. Débito técnico é problema para a equipe de manutenção depois que entregarmos o sistema final.',
-        impacts: { eficiencia: 15, qualidade: -30, saudeEquipe: -10 },
+        impacts: { capacidadeEntrega: 15, qualidadeProduto: -30, saudeEquipe: -10 },
         delayedImpacts: [
           {
             triggerAfterEvents: 4,
-            impacts: { saudeEquipe: -20, qualidade: -20, eficiencia: -25 },
+            impacts: { saudeEquipe: -20, qualidadeProduto: -20, capacidadeEntrega: -25 },
             narrative: 'A dívida quebrou a integração. Faltando semanas pro final, está impossível consertar algo sem quebrar 5 telas diferentes.',
           }
         ],
@@ -252,7 +252,7 @@ export const executionEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Comunicar imediatamente a Reitoria sobre o atraso real, cancelar a review e reagendar os prazos para entregar o que for possível.',
-        impacts: { eficiencia: -10, qualidade: 10, saudeEquipe: 5 },
+        impacts: { capacidadeEntrega: -10, qualidadeProduto: 10, saudeEquipe: 5 },
         feedbackNarrative: 'A transparência machucou, a Reitoria ficou frustrada, mas compreendeu. A equipe não se esgotou e o que foi feito ficou com boa qualidade.',
         pmbokConcept: 'Transparência no Monitoramento (Trabalho do Projeto)',
         learnings: ['Tratar dados reais e assumir o fracasso parcial de uma meta de tempo previne perda de confiança a longo prazo dos stakeholders.'],
@@ -263,7 +263,7 @@ export const executionEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Aumentar a pressão brutalmente: convocar trabalho até as 2 da manhã para "bater a meta a qualquer custo".',
-        impacts: { eficiencia: 15, qualidade: -20, saudeEquipe: -25 },
+        impacts: { capacidadeEntrega: 15, qualidadeProduto: -20, saudeEquipe: -25 },
         feedbackNarrative: 'As metas foram preenchidas no sistema as 03h00 da manhã. O código subiu sujo. A equipe te odeia, e a qualidade caiu num abismo.',
         pmbokConcept: 'Comportamento Destrutivo na Gestão de Prazo',
         learnings: ['Espremer a equipe para bater métricas de quadro destrói a moral e preenche o produto de falhas lógicas e estruturais ocultas.'],
@@ -274,11 +274,11 @@ export const executionEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Apenas entregar o que está pronto e tentar jogar o restante, incompleto e com bugs ocultos, para passar na avaliação superficial.',
-        impacts: { eficiencia: -5, qualidade: -15, saudeEquipe: -10 },
+        impacts: { capacidadeEntrega: -5, qualidadeProduto: -15, saudeEquipe: -10 },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
-            impacts: { qualidade: -20 },
+            impacts: { qualidadeProduto: -20 },
             narrative: 'A avaliação superficial falhou. Os usuários perceberam o engano. A vergonha para o time de desenvolvimento foi gigantesca.',
           }
         ],

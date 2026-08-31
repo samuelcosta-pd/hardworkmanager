@@ -61,9 +61,10 @@ export interface Player {
 }
 
 export interface Metrics {
-  eficiencia: number;
-  qualidade: number;
+  capacidadeEntrega: number;
+  qualidadeProduto: number;
   saudeEquipe: number;
+  conhecimentoOrganizacional: number;
 }
 
 export interface DelayedImpact {

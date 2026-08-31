@@ -20,7 +20,7 @@ export const knowledgeEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Parar o tech lead para reescrever o README e garantir que o novo desenvolvedor faça o onboarding sem problemas.',
-        impacts: { eficiencia: -15, qualidade: 15, saudeEquipe: 10 },
+        impacts: { capacidadeEntrega: -15, qualidadeProduto: 15, saudeEquipe: 10 },
         feedbackNarrative: 'O tech lead gastou um dia inteiro nisso, mas o júnior começou a produzir. A nova documentação será útil para futuras contratações.',
         pmbokConcept: 'Gestão da Informação e Conhecimento Explícito',
         learnings: ['Documentação atualizada reduz drasticamente o tempo de onboarding de novos membros.'],
@@ -31,11 +31,11 @@ export const knowledgeEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Designar um "padrinho" (buddy) para ajudar o novo desenvolvedor oralmente, mas sem atualizar os documentos.',
-        impacts: { eficiencia: -5, qualidade: 0, saudeEquipe: 10 },
+        impacts: { capacidadeEntrega: -5, qualidadeProduto: 0, saudeEquipe: 10 },
         delayedImpacts: [
           {
             triggerAfterEvents: 5,
-            impacts: { eficiencia: -10 },
+            impacts: { capacidadeEntrega: -10 },
             narrative: 'Um segundo estagiário foi contratado e o mesmo problema ocorreu, exigindo tempo do "padrinho" novamente.',
           }
         ],
@@ -49,7 +49,7 @@ export const knowledgeEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Dizer ao júnior que ele deve "descobrir lendo o código", já que somos ágeis e código é a melhor documentação.',
-        impacts: { eficiencia: 5, qualidade: -10, saudeEquipe: -20 },
+        impacts: { capacidadeEntrega: 5, qualidadeProduto: -10, saudeEquipe: -20 },
         feedbackNarrative: 'O júnior sentiu-se isolado. Após duas semanas, ele configurou as coisas de maneira incorreta, introduzindo bugs silenciosos no sistema.',
         pmbokConcept: 'Falha na Integração de Membros',
         learnings: ['"Software funcionando acima de documentação" não significa "Nenhuma documentação", especialmente para integrações base.'],
@@ -78,11 +78,11 @@ export const knowledgeEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Adotar o framework imediatamente no módulo principal, aproveitando a empolgação do time.',
-        impacts: { eficiencia: -10, qualidade: -10, saudeEquipe: 15 },
+        impacts: { capacidadeEntrega: -10, qualidadeProduto: -10, saudeEquipe: 15 },
         delayedImpacts: [
           {
             triggerAfterEvents: 2,
-            impacts: { qualidade: -20, eficiencia: -20, saudeEquipe: -10 },
+            impacts: { qualidadeProduto: -20, capacidadeEntrega: -20, saudeEquipe: -10 },
             narrative: 'O framework novo possuía bugs não documentados e quebrou os relatórios. O time precisou reescrever tudo com a tecnologia antiga.',
           }
         ],
@@ -96,7 +96,7 @@ export const knowledgeEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Criar uma Prova de Conceito (PoC) controlada: permitir que testem o framework em uma funcionalidade isolada e pequena.',
-        impacts: { eficiencia: -10, qualidade: 10, saudeEquipe: 10 },
+        impacts: { capacidadeEntrega: -10, qualidadeProduto: 10, saudeEquipe: 10 },
         feedbackNarrative: 'A PoC foi divertida. O time percebeu que o framework era rápido, mas não suportava integrações antigas. Eles decidiram, com sabedoria, não adotá-lo no core.',
         pmbokConcept: 'Experimentação Segura e Gestão de Riscos',
         learnings: ['Experimentos controlados permitem o aprendizado técnico sem comprometer o fluxo de valor do projeto principal.'],
@@ -107,7 +107,7 @@ export const knowledgeEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Vetar a ideia brutalmente. O escopo é fechado e tecnologia não se muda no meio do caminho.',
-        impacts: { eficiencia: 10, qualidade: 0, saudeEquipe: -15 },
+        impacts: { capacidadeEntrega: 10, qualidadeProduto: 0, saudeEquipe: -15 },
         feedbackNarrative: 'A equipe acatou, e o módulo continuou seguro, mas os desenvolvedores ficaram frustrados e sentiram que não há espaço para inovar na universidade.',
         pmbokConcept: 'Cultura de Equipe Autocrática',
         learnings: ['Matar propostas de inovação de forma truculenta sufoca a criatividade e o engajamento intelectual.'],
@@ -136,7 +136,7 @@ export const knowledgeEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Agendar uma sessão de "Análise de Causa Raiz" profunda, paralisando metade da equipe até acharem o problema real.',
-        impacts: { eficiencia: -25, qualidade: 25, saudeEquipe: 5 },
+        impacts: { capacidadeEntrega: -25, qualidadeProduto: 25, saudeEquipe: 5 },
         feedbackNarrative: 'A equipe passou dois dias inteiros destrinchando o sistema, encontrou um bug oculto no cache do servidor e finalmente o corrigiu para sempre.',
         pmbokConcept: 'Resolução de Problemas Complexos',
         learnings: ['Tratar os sintomas de problemas repetitivos custa mais tempo a longo prazo do que parar e remover a causa raiz.'],
@@ -147,7 +147,7 @@ export const knowledgeEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Pedir ao DevPleno para colocar mais "Try/Catches" para evitar o travamento, mantendo o fluxo rápido.',
-        impacts: { eficiencia: 0, qualidade: -10, saudeEquipe: -5 },
+        impacts: { capacidadeEntrega: 0, qualidadeProduto: -10, saudeEquipe: -5 },
         feedbackNarrative: 'A tela não trava mais, mas as notas são salvas em branco de forma silenciosa. A causa raiz não foi removida, e a qualidade dos dados despencou.',
         pmbokConcept: 'Dívida Técnica Camuflada',
         learnings: ['Silenciar alertas de erro (exceptions) mascara problemas, criando dados corrompidos invisíveis que são muito mais difíceis de corrigir.'],
@@ -158,11 +158,11 @@ export const knowledgeEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Reiniciar o servidor. Afinal, as outras vezes que reiniciou, voltou a funcionar.',
-        impacts: { eficiencia: 15, qualidade: -20, saudeEquipe: -15 },
+        impacts: { capacidadeEntrega: 15, qualidadeProduto: -20, saudeEquipe: -15 },
         delayedImpacts: [
           {
             triggerAfterEvents: 2,
-            impacts: { qualidade: -20, saudeEquipe: -20 },
+            impacts: { qualidadeProduto: -20, saudeEquipe: -20 },
             narrative: 'O problema não era a memória do servidor, e sim contenção de banco. O servidor caiu e corrompeu registros.',
           }
         ],
@@ -194,7 +194,7 @@ export const knowledgeEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Aceitar o treinamento para todos os envolvidos de Frontend e UX e ajustar o prazo com a Reitoria.',
-        impacts: { eficiencia: -20, qualidade: 20, saudeEquipe: 15 },
+        impacts: { capacidadeEntrega: -20, qualidadeProduto: 20, saudeEquipe: 15 },
         feedbackNarrative: 'A entrega atrasou e gerou atritos institucionais, mas o produto final agora é 100% acessível e o time voltou muito mais motivado e capacitado.',
         pmbokConcept: 'Desenvolvimento e Capacitação da Equipe',
         learnings: ['Aprender continuamente valoriza o produto e motiva pessoas, mas custa eficiência no curto prazo.'],
@@ -205,7 +205,7 @@ export const knowledgeEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Enviar apenas uma pessoa (Líder UX) para aprender e depois replicar o conhecimento para a equipe (Workshop Interno).',
-        impacts: { eficiencia: -5, qualidade: 10, saudeEquipe: 5 },
+        impacts: { capacidadeEntrega: -5, qualidadeProduto: 10, saudeEquipe: 5 },
         feedbackNarrative: 'O UX Lead adorou. O prazo foi salvo, e ele dará uma apresentação semana que vem. O conhecimento está chegando, embora de forma mais lenta.',
         pmbokConcept: 'Gestão de Conhecimento "Train the Trainer"',
         learnings: ['A abordagem de "Treinar o Treinador" equilibra ganhos de capacidade com proteção da capacidade produtiva.'],
@@ -216,11 +216,11 @@ export const knowledgeEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Recusar gentilmente o treinamento para focar 100% na entrega. Não temos tempo para parar.',
-        impacts: { eficiencia: 15, qualidade: -10, saudeEquipe: -15 },
+        impacts: { capacidadeEntrega: 15, qualidadeProduto: -10, saudeEquipe: -15 },
         delayedImpacts: [
           {
             triggerAfterEvents: 3,
-            impacts: { qualidade: -15 },
+            impacts: { qualidadeProduto: -15 },
             narrative: 'O Ministério Público cobrou acessibilidade na ferramenta nova. Precisaremos gastar semanas adaptando o que já estava pronto.',
           }
         ],
@@ -252,7 +252,7 @@ export const knowledgeEvents: GameEvent[] = [
       {
         key: 'a',
         text: 'Paralisar todas as entregas dele e colocá-lo para gravar vídeos e documentar tudo ao lado da equipe.',
-        impacts: { eficiencia: -20, qualidade: 5, saudeEquipe: 5 },
+        impacts: { capacidadeEntrega: -20, qualidadeProduto: 5, saudeEquipe: 5 },
         feedbackNarrative: 'A saída foi dolorosa, a velocidade despencou, mas ele deixou horas de vídeos explicando os gargalos e o time não ficou completamente no escuro.',
         pmbokConcept: 'Mitigação Imediata do Bus Factor e Turnover',
         learnings: ['A transição de saída de membros-chave exige paralisação imediata das suas tarefas para extrair conhecimento tácito para explícito.'],
@@ -263,11 +263,11 @@ export const knowledgeEvents: GameEvent[] = [
       {
         key: 'b',
         text: 'Forçá-lo a finalizar as entregas críticas que estavam sob sua responsabilidade antes de ir embora.',
-        impacts: { eficiencia: 15, qualidade: -15, saudeEquipe: -10 },
+        impacts: { capacidadeEntrega: 15, qualidadeProduto: -15, saudeEquipe: -10 },
         delayedImpacts: [
           {
             triggerAfterEvents: 4,
-            impacts: { qualidade: -25, eficiencia: -25, saudeEquipe: -15 },
+            impacts: { qualidadeProduto: -25, capacidadeEntrega: -25, saudeEquipe: -15 },
             narrative: 'A integração que ele fechou no último dia quebrou. Ninguém sabia consertar. Dias inteiros foram perdidos em investigação às cegas.',
           }
         ],
@@ -281,7 +281,7 @@ export const knowledgeEvents: GameEvent[] = [
       {
         key: 'c',
         text: 'Oferecer um aumento absurdo e dobrar seu salário para ele não sair.',
-        impacts: { eficiencia: 0, qualidade: 0, saudeEquipe: -20 },
+        impacts: { capacidadeEntrega: 0, qualidadeProduto: 0, saudeEquipe: -20 },
         feedbackNarrative: 'Ele aceitou o dinheiro e ficou. Mas agora o restante da equipe descobriu sobre o aumento desesperado e todos estão desmotivados e sentindo-se desvalorizados.',
         pmbokConcept: 'Inequidade Organizacional e Reação Emocional',
         learnings: ['Aumentos fora da política salarial geram ressentimento agudo, minando a confiança de todos que continuaram fiéis e não receberam nada.'],

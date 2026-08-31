@@ -1,17 +1,26 @@
 import type { AlternativeKey, MetricLevel, Metrics, Vote, GameEvent, DelayedImpact } from '@/types';
 import { EventCategory, EventDifficulty, GameDifficulty } from '@/types';
 
-export const INITIAL_METRICS: Metrics = { eficiencia: 100, qualidade: 100, saudeEquipe: 100 };
+export const INITIAL_METRICS: Metrics = { capacidadeEntrega: 100, qualidadeProduto: 100, saudeEquipe: 100, conhecimentoOrganizacional: 50 };
 
 export function clamp(n: number): number {
   return Math.max(0, Math.min(100, n));
 }
 
 export function applyImpacts(current: Metrics, impacts: Partial<Metrics>): Metrics {
+  // Penalty mechanics: if organizational knowledge is critically low (< 20)
+  // and the current impact tries to decrease delivery capacity, we double the penalty
+  // to simulate that lack of knowledge makes bugs/problems twice as slow to fix.
+  let capacidadeImpact = impacts.capacidadeEntrega ?? 0;
+  if (current.conhecimentoOrganizacional < 20 && capacidadeImpact < 0) {
+    capacidadeImpact *= 2;
+  }
+
   return {
-    eficiencia: clamp(current.eficiencia + (impacts.eficiencia ?? 0)),
-    qualidade: clamp(current.qualidade + (impacts.qualidade ?? 0)),
+    capacidadeEntrega: clamp(current.capacidadeEntrega + capacidadeImpact),
+    qualidadeProduto: clamp(current.qualidadeProduto + (impacts.qualidadeProduto ?? 0)),
     saudeEquipe: clamp(current.saudeEquipe + (impacts.saudeEquipe ?? 0)),
+    conhecimentoOrganizacional: clamp(current.conhecimentoOrganizacional + (impacts.conhecimentoOrganizacional ?? 0)),
   };
 }
 
@@ -22,9 +31,10 @@ export function metricLevel(value: number): MetricLevel {
 }
 
 export function isGameOver(m: Metrics): { over: boolean; reason?: string } {
-  if (m.eficiencia < 40) return { over: true, reason: 'A eficiência operacional colapsou. Prazos foram estourados e os recursos esgotados, inviabilizando a continuidade do projeto.' };
-  if (m.qualidade < 40) return { over: true, reason: 'A qualidade técnica despencou a níveis inaceitáveis. O sistema apresentou falhas críticas operacionais e o projeto foi cancelado pela diretoria.' };
+  if (m.capacidadeEntrega < 40) return { over: true, reason: 'A capacidade de entrega (Velocity) colapsou. Gargalos crônicos e lentidão inviabilizaram a continuidade do projeto.' };
+  if (m.qualidadeProduto < 40) return { over: true, reason: 'A qualidade do produto despencou a níveis inaceitáveis. O alto volume de sucata (scrap) e retrabalho forçou o cancelamento pelo cliente.' };
   if (m.saudeEquipe < 40) return { over: true, reason: 'A saúde da equipe foi destruída. Um ambiente tóxico e alta pressão causaram demissões em massa e burnout, paralisando o trabalho do projeto.' };
+  // Conhecimento Organizacional dropping < 40 does not cause immediate game over, but causes severe penalties on velocity as defined in applyImpacts.
   return { over: false };
 }
 

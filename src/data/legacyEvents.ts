@@ -22,7 +22,7 @@ export const GAME_EVENTS: GameEvent[] = [
       {
         key: 'a',
         text: 'Entregar a integração rápido conforme exigido, assumindo conscientemente a dívida técnica e torcendo para o sistema aguentar.',
-        impacts: { eficiencia: 0, qualidade: -20, saudeEquipe: -10 },
+        impacts: { capacidadeEntrega: 0, qualidadeProduto: -20, saudeEquipe: -10 },
         feedbackNarrative:
           'A integração foi entregue no prazo, mas semanas depois surgiram bugs severos. Estudantes não conseguiram gerar boletos e a equipe precisou virar noites em modo de correção emergencial, esgotando o time e prejudicando a confiança.',
         pmbokConcept: 'Adequação de Processos (Trabalho do Projeto)',
@@ -34,7 +34,7 @@ export const GAME_EVENTS: GameEvent[] = [
       {
         key: 'b',
         text: 'Atitude de Dono: Parar a esteira de features e negociar a refatoração completa dos módulos críticos antes de fazer a integração.',
-        impacts: { eficiencia: -15, qualidade: 20, saudeEquipe: 10 },
+        impacts: { capacidadeEntrega: -15, qualidadeProduto: 20, saudeEquipe: 10 },
         feedbackNarrative:
           'A refatoração consumiu parte da eficiência operacional e causou atrito inicial, mas a integração ocorreu sem quedas. O código ficou mais limpo, a performance melhorou e os devs agradeceram a decisão técnica madura.',
         pmbokConcept: 'Gerenciar Processos e Melhoria Contínua',
@@ -46,7 +46,7 @@ export const GAME_EVENTS: GameEvent[] = [
       {
         key: 'c',
         text: 'Entregar uma versão parcial cobrindo apenas 60% dos casos de uso para ganhar tempo e refatorar o restante em paralelo.',
-        impacts: { eficiencia: -10, qualidade: -5, saudeEquipe: -15 },
+        impacts: { capacidadeEntrega: -10, qualidadeProduto: -5, saudeEquipe: -15 },
         feedbackNarrative:
           'Estratégia confusa. A versão parcial gerou dezenas de chamados no suporte. A refatoração paralela causou conflitos de merge diários, estressando os desenvolvedores e prejudicando a qualidade do que estava sendo feito.',
         pmbokConcept: 'Eficácia na Gestão de Escopo Técnico',
@@ -77,7 +77,7 @@ export const GAME_EVENTS: GameEvent[] = [
       {
         key: 'a',
         text: 'Mindset estratégico: Solicitar uma reunião com a Reitoria, explicando o impacto na esteira atual e apresentando um roadmap estruturado para inserir o chatbot apenas em versões futuras.',
-        impacts: { eficiencia: 0, qualidade: 15, saudeEquipe: 15 },
+        impacts: { capacidadeEntrega: 0, qualidadeProduto: 15, saudeEquipe: 15 },
         feedbackNarrative:
           'A reunião revelou profissionalismo. A Reitoria entendeu os riscos operacionais e aprovou o roadmap futuro. A equipe de desenvolvimento pôde manter o foco, e a arquitetura central do sistema não foi comprometida.',
         pmbokConcept: 'Comunicação e Engajamento de Stakeholders',
@@ -89,7 +89,7 @@ export const GAME_EVENTS: GameEvent[] = [
       {
         key: 'b',
         text: 'Acatar a ordem imediatamente e realocar a equipe de UX e os devs para fazer um protótipo de chatbot às pressas, interrompendo as entregas planejadas.',
-        impacts: { eficiencia: -20, qualidade: -15, saudeEquipe: -15 },
+        impacts: { capacidadeEntrega: -20, qualidadeProduto: -15, saudeEquipe: -15 },
         feedbackNarrative:
           'O chatbot consumiu tempo e eficiência. O código gerado foi descartável e a tela principal de login continuou com problemas. A equipe ficou altamente frustrada com a quebra de processos e mudança brusca de foco.',
         pmbokConcept: 'Desempenho Eficiente e Efetivo',
@@ -101,7 +101,7 @@ export const GAME_EVENTS: GameEvent[] = [
       {
         key: 'c',
         text: 'Terceirizar a criação do chatbot usando parte crítica do orçamento (recursos) de infraestrutura, sem envolver a equipe interna de devs para não atrapalhar a esteira.',
-        impacts: { eficiencia: -30, qualidade: 5, saudeEquipe: -5 },
+        impacts: { capacidadeEntrega: -30, qualidadeProduto: 5, saudeEquipe: -5 },
         feedbackNarrative:
           'A terceirizada entregou um bot genérico em tempo recorde. No entanto, o orçamento ficou comprometido e a integração com o sistema foi frágil, prejudicando a eficiência geral dos recursos.',
         pmbokConcept: 'Gestão de Aquisições e Recursos Físicos',
