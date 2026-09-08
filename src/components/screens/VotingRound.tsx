@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { EyeOff, Lock, ArrowLeft } from 'lucide-react';
+import { EyeOff, Lock, ArrowLeft, HelpCircle } from 'lucide-react';
 import { SoftCard } from '@/components/ui/SoftCard';
 import { SoftButton } from '@/components/ui/SoftButton';
 import { Avatar3D } from '@/components/ui/Avatar3D';
 import { useGameStore } from '@/store/gameStore';
 import { ROLE_LABELS, type AlternativeKey } from '@/types';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { detectTechTerms } from '@/data/glossary';
 
 interface Props {
   round: 1 | 2;
@@ -61,6 +63,7 @@ export function VotingRound({ round }: Props) {
 
   // 3. Tela de passagem de dispositivo (Handoff)
   if (handoff) {
+    if (!player) return null;
     return (
       <div className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-6">
         <SoftCard className="w-full text-center animate-pop-in p-8">
@@ -118,12 +121,12 @@ export function VotingRound({ round }: Props) {
       </div>
 
       <div className="mb-5 flex items-center gap-3 animate-float-in">
-        <Avatar3D initials={player.name.slice(0, 2)} role={player.role} imageUrl={player.avatarImage} size="md" />
+        <Avatar3D initials={player!.name.slice(0, 2)} role={player!.role} imageUrl={player!.avatarImage} size="md" />
         <div>
           <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
             Voto Secreto de:
           </p>
-          <p className="font-bold text-foreground text-lg">{player.name} · <span className="font-normal text-muted-foreground">{ROLE_LABELS[player.role]}</span></p>
+          <p className="font-bold text-foreground text-lg">{player!.name} · <span className="font-normal text-muted-foreground">{ROLE_LABELS[player!.role]}</span></p>
         </div>
       </div>
 
@@ -137,29 +140,63 @@ export function VotingRound({ round }: Props) {
       </SoftCard>
 
       {/* Cards de Alternativas com Formatação Uniforme */}
-      <div className="space-y-3.5">
-        {event.alternatives.map((alt, i) => (
-          <button
-            key={alt.key}
-            type="button"
-            onClick={() => handleVote(alt.key)}
-            className="group block w-full rounded-3xl bg-card p-5 text-left shadow-[var(--shadow-soft)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-soft-lg)] border-2 border-transparent hover:border-primary/40 animate-float-in"
-            style={{ animationDelay: `${i * 60}ms` }}
-          >
-            <div className="flex items-start gap-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary text-primary-foreground font-extrabold text-lg uppercase shadow-sm group-hover:scale-105 transition-transform">
-                {alt.key}
-              </div>
-              
-              <div className="min-w-0 flex-1 pt-0.5">
-                <p className="font-semibold text-foreground text-base leading-relaxed group-hover:text-primary transition-colors">
-                  {alt.text}
-                </p>
-              </div>
-            </div>
-          </button>
-        ))}
-      </div>
+      <TooltipProvider delayDuration={200}>
+        <div className="space-y-3.5">
+          {event.alternatives.map((alt, i) => {
+            const techTerms = detectTechTerms(alt.text);
+            return (
+              <button
+                key={alt.key}
+                type="button"
+                onClick={() => handleVote(alt.key)}
+                className="group block w-full rounded-3xl bg-card p-5 text-left shadow-[var(--shadow-soft)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-soft-lg)] border-2 border-transparent hover:border-primary/40 animate-float-in"
+                style={{ animationDelay: `${i * 60}ms` }}
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary text-primary-foreground font-extrabold text-lg uppercase shadow-sm group-hover:scale-105 transition-transform">
+                    {alt.key}
+                  </div>
+                  
+                  <div className="min-w-0 flex-1 pt-0.5">
+                    <p className="font-semibold text-foreground text-base leading-relaxed group-hover:text-primary transition-colors">
+                      {alt.text}
+                    </p>
+                  </div>
+
+                  {/* Ícone de ajuda com termos técnicos */}
+                  {techTerms.length > 0 && (
+                    <Tooltip>
+                      <TooltipTrigger
+                        type="button"
+                        onClick={(e) => e.stopPropagation()}
+                        className="shrink-0 mt-0.5 text-muted-foreground/50 hover:text-primary transition-colors"
+                        aria-label="Ver termos técnicos"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </TooltipTrigger>
+                      <TooltipContent
+                        side="top"
+                        align="end"
+                        className="max-w-xs rounded-2xl bg-slate-900 p-3 text-left shadow-xl"
+                      >
+                        <p className="text-xs font-bold uppercase tracking-wider text-primary mb-2">Termos Técnicos</p>
+                        <div className="space-y-2">
+                          {techTerms.map(({ term, definition }) => (
+                            <div key={term}>
+                              <p className="text-xs font-semibold text-white capitalize">{term}</p>
+                              <p className="text-xs text-slate-300 leading-relaxed">{definition}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </TooltipContent>
+                    </Tooltip>
+                  )}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </TooltipProvider>
     </div>
   );
 }

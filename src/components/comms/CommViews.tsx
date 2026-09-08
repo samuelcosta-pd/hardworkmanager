@@ -55,15 +55,15 @@ export function EmailView({ event }: Props) {
                 <button
                   type="button"
                   onClick={() => setShowDetails(!showDetails)}
-                  className="flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline transition-all"
+                  className="flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline transition-all"
                 >
-                  <FileText className="h-3.5 w-3.5" />
+                  <FileText className="h-4 w-4" />
                   {showDetails ? 'Recolher detalhes técnicos' : 'Ver contexto completo do e-mail'}
-                  {showDetails ? <ChevronUp className="h-3.5 w-3.5 ml-0.5" /> : <ChevronDown className="h-3.5 w-3.5 ml-0.5" />}
+                  {showDetails ? <ChevronUp className="h-4 w-4 ml-0.5" /> : <ChevronDown className="h-4 w-4 ml-0.5" />}
                 </button>
                 
                 {showDetails && (
-                  <div className="mt-2 rounded-xl bg-card/60 p-3 text-xs leading-relaxed text-muted-foreground animate-in fade-in">
+                  <div className="mt-2 rounded-xl bg-card/60 p-3 text-sm leading-relaxed text-muted-foreground animate-in fade-in">
                     {remainingText}
                   </div>
                 )}
@@ -115,15 +115,15 @@ export function SlackView({ event }: Props) {
               <button
                 type="button"
                 onClick={() => setShowDetails(!showDetails)}
-                className="flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline transition-all"
+                className="flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline transition-all"
               >
-                <FileText className="h-3.5 w-3.5" />
+                <FileText className="h-4 w-4" />
                 {showDetails ? 'Recolher detalhes' : 'Ver contexto completo da mensagem'}
-                {showDetails ? <ChevronUp className="h-3.5 w-3.5 ml-0.5" /> : <ChevronDown className="h-3.5 w-3.5 ml-0.5" />}
+                {showDetails ? <ChevronUp className="h-4 w-4 ml-0.5" /> : <ChevronDown className="h-4 w-4 ml-0.5" />}
               </button>
               
               {showDetails && (
-                <div className="mt-2 rounded-xl bg-muted/60 p-3 text-xs leading-relaxed text-muted-foreground animate-in fade-in">
+                <div className="mt-2 rounded-xl bg-muted/60 p-3 text-sm leading-relaxed text-muted-foreground animate-in fade-in">
                   {remainingText}
                 </div>
               )}
@@ -180,15 +180,15 @@ export function TicketView({ event }: Props) {
             <button
               type="button"
               onClick={() => setShowDetails(!showDetails)}
-              className="flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline transition-all"
+              className="flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline transition-all"
             >
-              <FileText className="h-3.5 w-3.5" />
+              <FileText className="h-4 w-4" />
               {showDetails ? 'Ocultar logs técnicos' : 'Ver logs e descrição detalhada do ticket'}
-              {showDetails ? <ChevronUp className="h-3.5 w-3.5 ml-0.5" /> : <ChevronDown className="h-3.5 w-3.5 ml-0.5" />}
+              {showDetails ? <ChevronUp className="h-4 w-4 ml-0.5" /> : <ChevronDown className="h-4 w-4 ml-0.5" />}
             </button>
             
             {showDetails && (
-              <div className="mt-2 rounded-xl bg-card/60 p-3 text-xs leading-relaxed text-muted-foreground animate-in fade-in font-mono">
+              <div className="mt-2 rounded-xl bg-card/60 p-3 text-sm leading-relaxed text-muted-foreground animate-in fade-in font-mono">
                 {remainingText}
               </div>
             )}

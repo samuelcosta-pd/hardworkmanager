@@ -174,7 +174,7 @@ export function ConsequenceFeedback() {
             {/* Lições Práticas */}
             <div className="rounded-2xl bg-muted/60 p-4">
               <p className="text-xs font-bold uppercase tracking-wider text-primary mb-1.5">Aprendizados Práticos</p>
-              <ul className="text-xs text-slate-700 leading-relaxed list-disc list-inside space-y-1">
+              <ul className="text-sm text-slate-700 leading-relaxed list-disc list-inside space-y-1.5">
                 {alt.learnings.map((l, i) => <li key={i}>{l}</li>)}
               </ul>
             </div>
@@ -186,7 +186,7 @@ export function ConsequenceFeedback() {
                   <ShieldCheck className="h-4 w-4 text-emerald-600" />
                   <span>Riscos Evitados</span>
                 </div>
-                <ul className="text-xs text-emerald-900 leading-relaxed list-disc list-inside space-y-1">
+                <ul className="text-sm text-emerald-900 leading-relaxed list-disc list-inside space-y-1.5">
                   {alt.risksEvaded.map((r, i) => <li key={i}>{r}</li>)}
                 </ul>
               </div>
@@ -199,7 +199,7 @@ export function ConsequenceFeedback() {
                   <AlertTriangle className="h-4 w-4 text-amber-600" />
                   <span>Cenários e Trade-offs Alternativos</span>
                 </div>
-                <ul className="text-xs text-amber-900 leading-relaxed list-disc list-inside space-y-1">
+                <ul className="text-sm text-amber-900 leading-relaxed list-disc list-inside space-y-1.5">
                   {alt.otherConsequences.map((c, i) => <li key={i}>{c}</li>)}
                 </ul>
               </div>

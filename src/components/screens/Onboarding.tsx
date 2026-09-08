@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useGameStore } from '@/store/gameStore';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { BookOpen, Users, AlertTriangle, ArrowRight, ArrowLeft, SkipForward } from 'lucide-react';
+import { BookOpen, Users, AlertTriangle, ArrowRight, ArrowLeft, SkipForward, Lightbulb } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { MENTOR } from '@/data/avatars';
 
@@ -26,7 +26,7 @@ export function Onboarding() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-3xl space-y-6">
-        
+
         {/* Mediator Introduction Header */}
         <div className="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-slate-100">
           <Avatar className="h-16 w-16 border-2 border-primary/20">
@@ -44,7 +44,7 @@ export function Onboarding() {
         <Card className="border-t-4 border-t-primary shadow-lg relative overflow-hidden">
           {/* Progress bar */}
           <div className="absolute top-0 left-0 h-1 bg-primary transition-all duration-300" style={{ width: `${(step / 3) * 100}%` }} />
-          
+
           <CardHeader className="text-center pb-2 pt-8">
             <CardTitle className="text-3xl font-bold text-slate-800">
               {step === 1 && "Bem-vindo ao Hard Work Manager"}
@@ -52,7 +52,7 @@ export function Onboarding() {
               {step === 3 && "Regras e Expectativas"}
             </CardTitle>
           </CardHeader>
-          
+
           <CardContent className="min-h-[300px] flex items-center justify-center p-6">
             {step === 1 && (
               <div className="space-y-6 text-slate-700 w-full">
@@ -95,12 +95,12 @@ export function Onboarding() {
 
             {step === 3 && (
               <div className="space-y-6 text-slate-700 w-full">
-                <div className="p-4 bg-amber-50 rounded-lg border border-amber-200">
-                  <h3 className="font-bold text-amber-800 mb-2 flex items-center gap-2">
-                    <AlertTriangle className="w-5 h-5" />
-                    Trade-offs são Inevitáveis
-                  </h3>
-                  <p className="text-amber-700">
+                <div className="p-4 bg-amber-50 rounded-xl border border-amber-200">
+                  <p className="text-xs font-bold uppercase tracking-wider text-amber-600 mb-1.5 flex items-center gap-1.5">
+                    <Lightbulb className="w-4 h-4" />
+                    Dica da Mentora Helena
+                  </p>
+                  <p className="text-amber-700 text-sm leading-relaxed">
                     Nem toda decisão possui uma saída perfeita. Às vezes, para garantir a qualidade, vocês precisarão sacrificar a eficiência. O objetivo é maximizar o valor e a sustentabilidade do projeto.
                   </p>
                 </div>
@@ -121,13 +121,13 @@ export function Onboarding() {
               </div>
             )}
           </CardContent>
-          
+
           <CardFooter className="flex justify-between border-t bg-slate-50 p-4">
             <Button variant="ghost" onClick={skip} className="text-slate-500 hover:text-slate-700">
               <SkipForward className="w-4 h-4 mr-2" />
               Pular introdução
             </Button>
-            
+
             <div className="flex gap-2">
               <Button variant="outline" onClick={prevStep} disabled={step === 1}>
                 <ArrowLeft className="w-4 h-4 mr-2" />
