@@ -1,21 +1,31 @@
-import { useState } from 'react';
-import { EyeOff, Lock, ArrowLeft, HelpCircle } from 'lucide-react';
-import { SoftCard } from '@/components/ui/SoftCard';
-import { SoftButton } from '@/components/ui/SoftButton';
-import { Avatar3D } from '@/components/ui/Avatar3D';
-import { useGameStore } from '@/store/gameStore';
-import { ROLE_LABELS, type AlternativeKey } from '@/types';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { detectTechTerms } from '@/data/glossary';
+import { useState } from "react";
+import { EyeOff, Lock, ArrowLeft, HelpCircle, AlertTriangle } from "lucide-react";
+import { SoftCard } from "@/components/ui/SoftCard";
+import { SoftButton } from "@/components/ui/SoftButton";
+import { Avatar3D } from "@/components/ui/Avatar3D";
+import { useGameStore } from "@/store/gameStore";
+import { ROLE_LABELS, type AlternativeKey } from "@/types";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { detectTechTerms } from "@/data/glossary";
 
 interface Props {
   round: 1 | 2;
 }
 
 export function VotingRound({ round }: Props) {
-  const { players, events, matchDeck, currentEventIndex, currentVoterIndex, castVote, finalizeRound1, finalizeRound2, goTo } =
-    useGameStore();
-  
+  const {
+    players,
+    events,
+    matchDeck,
+    currentEventIndex,
+    currentVoterIndex,
+    pendingDelayedImpacts,
+    castVote,
+    finalizeRound1,
+    finalizeRound2,
+    goTo,
+  } = useGameStore();
+
   const event = events && events.length > 0 ? events[currentEventIndex] || events[0] : null;
   const [handoff, setHandoff] = useState(true);
 
@@ -31,12 +41,12 @@ export function VotingRound({ round }: Props) {
           <h2 className="mt-4 text-2xl font-bold text-foreground">Todos os votos registrados!</h2>
           <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
             {round === 1
-              ? 'Reúna toda a equipe ao redor da tela para ver se houve consenso ou se será necessário um debate estruturado.'
-              : 'Votação final concluída. Hora de aplicar a decisão colegiada e conferir o impacto no projeto.'}
+              ? "Reúna toda a equipe ao redor da tela para ver se houve consenso ou se será necessário um debate estruturado."
+              : "Votação final concluída. Hora de aplicar a decisão colegiada e conferir o impacto no projeto."}
           </p>
           <div className="mt-6">
             <SoftButton size="lg" onClick={round === 1 ? finalizeRound1 : finalizeRound2}>
-              {round === 1 ? 'Revelar votos da equipe' : 'Aplicar decisão final'}
+              {round === 1 ? "Revelar votos da equipe" : "Aplicar decisão final"}
             </SoftButton>
           </div>
         </SoftCard>
@@ -50,9 +60,11 @@ export function VotingRound({ round }: Props) {
       <div className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center px-6 py-20 text-center">
         <SoftCard className="w-full p-8 text-center animate-pop-in">
           <h2 className="text-xl font-bold text-foreground">Sessão de votação aguardando dados</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Configure os integrantes da equipe para iniciar o jogo.</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Configure os integrantes da equipe para iniciar o jogo.
+          </p>
           <div className="mt-6 flex justify-center">
-            <SoftButton size="lg" onClick={() => goTo('setup')}>
+            <SoftButton size="lg" onClick={() => goTo("setup")}>
               Ir para Configuração
             </SoftButton>
           </div>
@@ -61,36 +73,47 @@ export function VotingRound({ round }: Props) {
     );
   }
 
-  // 3. Tela de passagem de dispositivo (Handoff)
+  const imminentEco = pendingDelayedImpacts?.find((p) => p.remainingEvents === 1);
+
+  const handleVote = (key: AlternativeKey) => {
+    castVote(key);
+    setHandoff(true);
+  };
+
+  // 3. Tela de Bloqueio (Handoff Intermediário para Voto Secreto)
   if (handoff) {
     if (!player) return null;
     return (
-      <div className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-6">
-        <SoftCard className="w-full text-center animate-pop-in p-8">
-          <div className="mx-auto mb-3 flex justify-center">
-            {player.avatarImage ? (
-              <img src={player.avatarImage} alt={player.name} className="h-20 w-20 rounded-full object-cover shadow-md ring-4 ring-primary/20 bg-slate-100" />
-            ) : (
-              <EyeOff className="h-12 w-12 text-primary" />
-            )}
+      <div className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center px-6 text-center">
+        <SoftCard className="w-full animate-pop-in p-8">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl bg-primary/10">
+            <EyeOff className="h-8 w-8 text-primary" />
           </div>
-          <p className="text-xs uppercase tracking-wider text-muted-foreground font-bold">
-            Passe o dispositivo para
+          <p className="mt-4 text-xs font-bold uppercase tracking-[0.2em] text-primary">
+            Votação Secreta · Rodada {round}
           </p>
-          <h2 className="mt-1 text-3xl font-bold text-foreground">{player.name}</h2>
-          <span className="mt-2 inline-block rounded-full bg-primary/10 px-3.5 py-1 text-sm font-semibold text-primary">
-            {ROLE_LABELS[player.role]}
-          </span>
-          <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
-            🔒 Os demais colegas devem desviar o olhar para garantir o sigilo do voto nesta rodada.
+          <h2 className="mt-2 text-2xl font-bold text-foreground">Passe o dispositivo para:</h2>
+
+          <div className="my-6 flex flex-col items-center gap-2 rounded-2xl bg-muted/60 p-4">
+            <Avatar3D
+              initials={player.name.slice(0, 2)}
+              role={player.role}
+              imageUrl={player.avatarImage}
+              size="lg"
+            />
+            <p className="text-xl font-bold text-foreground">{player.name}</p>
+            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
+              {ROLE_LABELS[player.role]}
+            </span>
+          </div>
+
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            Mantenha seu voto confidencial. Apenas você deve visualizar as opções a seguir.
           </p>
-          
-          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <SoftButton variant="ghost" size="md" onClick={() => goTo('event_display')}>
-              <ArrowLeft className="h-4 w-4 mr-1.5" /> Reexaminar Dilema
-            </SoftButton>
-            <SoftButton size="lg" onClick={() => setHandoff(false)}>
-              Estou sozinho com a tela
+
+          <div className="mt-6">
+            <SoftButton size="lg" className="w-full" onClick={() => setHandoff(false)}>
+              Sou {player.name}, estou pronto
             </SoftButton>
           </div>
         </SoftCard>
@@ -98,19 +121,15 @@ export function VotingRound({ round }: Props) {
     );
   }
 
-  const handleVote = (alt: AlternativeKey) => {
-    castVote(alt);
-    setHandoff(true);
-  };
-
+  // 4. Tela Ativa de Votação
   return (
-    <div className="mx-auto min-h-screen max-w-3xl px-6 py-10">
-      {/* Cabeçalho de Navegação e Identificação */}
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-3 animate-float-in">
+    <div className="mx-auto min-h-screen max-w-2xl px-6 py-8">
+      {/* Cabeçalho de Navegação e Contexto do Jogador */}
+      <div className="mb-6 flex items-center justify-between">
         <button
           type="button"
           onClick={() => setHandoff(true)}
-          className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
+          className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors cursor-pointer"
         >
           <ArrowLeft className="h-4 w-4" /> Voltar
         </button>
@@ -121,23 +140,53 @@ export function VotingRound({ round }: Props) {
       </div>
 
       <div className="mb-5 flex items-center gap-3 animate-float-in">
-        <Avatar3D initials={player!.name.slice(0, 2)} role={player!.role} imageUrl={player!.avatarImage} size="md" />
+        <Avatar3D
+          initials={player!.name.slice(0, 2)}
+          role={player!.role}
+          imageUrl={player!.avatarImage}
+          size="md"
+        />
         <div>
           <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
             Voto Secreto de:
           </p>
-          <p className="font-bold text-foreground text-lg">{player!.name} · <span className="font-normal text-muted-foreground">{ROLE_LABELS[player!.role]}</span></p>
+          <p className="font-bold text-foreground text-lg">
+            {player!.name} ·{" "}
+            <span className="font-normal text-muted-foreground">{ROLE_LABELS[player!.role]}</span>
+          </p>
         </div>
       </div>
 
       {/* Resumo do Dilema */}
-      <SoftCard className="mb-5 animate-float-in" variant="inset">
+      <SoftCard className="mb-4 animate-float-in" variant="inset">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-primary">Dilema {currentEventIndex + 1} de {matchDeck?.length || 3}</span>
+          <span className="text-xs font-bold uppercase tracking-wider text-primary">
+            Dilema {currentEventIndex + 1} de {matchDeck?.length || 10}
+          </span>
           <span className="text-xs font-semibold text-muted-foreground">{event.domainTag}</span>
         </div>
         <h2 className="mt-1 text-base font-bold text-foreground">{event.title}</h2>
       </SoftCard>
+
+      {/* Alerta de Radar se houver Eco Iminente na Votação */}
+      {pendingDelayedImpacts && pendingDelayedImpacts.length > 0 && (
+        <div
+          className={`mb-4 flex items-center gap-2 p-2.5 rounded-xl border text-xs animate-pop-in ${
+            imminentEco
+              ? "bg-rose-50 border-rose-300 text-rose-950 ring-1 ring-rose-200"
+              : "bg-amber-50 border-amber-200 text-amber-900"
+          }`}
+        >
+          <AlertTriangle
+            className={`w-3.5 h-3.5 shrink-0 ${imminentEco ? "text-rose-600" : "text-amber-600"}`}
+          />
+          <span className="font-semibold">
+            {imminentEco
+              ? `Atenção: O eco de "${imminentEco.sourceEventTitle}" detonará no término deste dilema!`
+              : `Radar: Há ${pendingDelayedImpacts.length} débito(s) sistêmico(s) ativo(s) no radar.`}
+          </span>
+        </div>
+      )}
 
       {/* Cards de Alternativas com Formatação Uniforme */}
       <TooltipProvider delayDuration={200}>
@@ -156,7 +205,7 @@ export function VotingRound({ round }: Props) {
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary text-primary-foreground font-extrabold text-lg uppercase shadow-sm group-hover:scale-105 transition-transform">
                     {alt.key}
                   </div>
-                  
+
                   <div className="min-w-0 flex-1 pt-0.5">
                     <p className="font-semibold text-foreground text-base leading-relaxed group-hover:text-primary transition-colors">
                       {alt.text}
@@ -179,7 +228,9 @@ export function VotingRound({ round }: Props) {
                         align="end"
                         className="max-w-xs rounded-2xl bg-slate-900 p-3 text-left shadow-xl"
                       >
-                        <p className="text-xs font-bold uppercase tracking-wider text-primary mb-2">Termos Técnicos</p>
+                        <p className="text-xs font-bold uppercase tracking-wider text-primary mb-2">
+                          Termos Técnicos
+                        </p>
                         <div className="space-y-2">
                           {techTerms.map(({ term, definition }) => (
                             <div key={term}>

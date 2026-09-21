@@ -1,25 +1,53 @@
-import { useState } from 'react';
-import { Gauge, Heart, Sparkle, Clock, ShieldCheck, AlertTriangle, Lightbulb, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
-import { SoftCard } from '@/components/ui/SoftCard';
-import { SoftButton } from '@/components/ui/SoftButton';
-import { MetricBar } from '@/components/ui/MetricBar';
-import { useGameStore } from '@/store/gameStore';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { MENTOR } from '@/data/avatars';
-import type { Metrics } from '@/types';
+import { useState } from "react";
+import {
+  Gauge,
+  Heart,
+  Sparkle,
+  Clock,
+  ShieldCheck,
+  AlertTriangle,
+  Lightbulb,
+  ChevronDown,
+  ChevronUp,
+  ArrowRight,
+  TrendingDown,
+} from "lucide-react";
+import { SoftCard } from "@/components/ui/SoftCard";
+import { SoftButton } from "@/components/ui/SoftButton";
+import { MetricBar } from "@/components/ui/MetricBar";
+import { useGameStore } from "@/store/gameStore";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { MENTOR } from "@/data/avatars";
+import type { Metrics } from "@/types";
 
-function SvgTrendUp({ className = 'w-4 h-4' }: { className?: string }) {
+function SvgTrendUp({ className = "w-4 h-4" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
       <polyline points="17 6 23 6 23 12" />
     </svg>
   );
 }
 
-function SvgTrendDown({ className = 'w-4 h-4' }: { className?: string }) {
+function SvgTrendDown({ className = "w-4 h-4" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polyline points="23 18 13.5 8.5 8.5 13.5 1 6" />
       <polyline points="17 18 23 18 23 12" />
     </svg>
@@ -27,21 +55,34 @@ function SvgTrendDown({ className = 'w-4 h-4' }: { className?: string }) {
 }
 
 export function ConsequenceFeedback() {
-  const { decisions, metrics, nextEvent, gameOverReason, events, currentEventIndex, delayedImpactsTriggeredThisRound, goTo } = useGameStore();
+  const {
+    decisions,
+    metrics,
+    nextEvent,
+    gameOverReason,
+    events,
+    matchDeck,
+    currentEventIndex,
+    delayedImpactsTriggeredThisRound,
+    goTo,
+  } = useGameStore();
   const [showPedagogicalDetails, setShowPedagogicalDetails] = useState(false);
 
   const decision = decisions && decisions.length > 0 ? decisions[decisions.length - 1] : null;
   const event = events && events.length > 0 ? events[currentEventIndex] || events[0] : null;
-  const alt = (event && decision) ? event.alternatives.find((a) => a.key === decision.chosenAlternative) : null;
+  const alt =
+    event && decision ? event.alternatives.find((a) => a.key === decision.chosenAlternative) : null;
 
   if (!decision || !event || !alt) {
     return (
       <div className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center px-6 py-20 text-center">
         <SoftCard className="w-full p-8 text-center animate-pop-in">
           <h2 className="text-xl font-bold text-foreground">Nenhuma decisão recente para exibir</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Retorne ao painel para prosseguir na simulação.</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Retorne ao painel para prosseguir na simulação.
+          </p>
           <div className="mt-6 flex justify-center">
-            <SoftButton size="lg" onClick={() => goTo('dashboard')}>
+            <SoftButton size="lg" onClick={() => goTo("dashboard")}>
               Ir ao Painel
             </SoftButton>
           </div>
@@ -50,8 +91,17 @@ export function ConsequenceFeedback() {
     );
   }
 
-  const isLast = currentEventIndex === (events?.length || 1) - 1;
-  const ctaLabel = gameOverReason ? 'Ver desfecho do projeto' : isLast ? 'Ver debriefing final' : 'Avançar no projeto';
+  const totalDilemmas = matchDeck?.length || 10;
+  const isLast = currentEventIndex >= totalDilemmas - 1;
+  const isSprintEnd = (currentEventIndex + 1) % 3 === 0;
+
+  const ctaLabel = gameOverReason
+    ? "Ver desfecho do projeto"
+    : isLast
+      ? "Ver Debriefing Final"
+      : isSprintEnd
+        ? "Avançar para Sprint Review"
+        : "Avançar para o Próximo Dilema";
 
   const renderDeltaChip = (key: keyof Metrics, label: string) => {
     const v = alt.impacts[key] ?? 0;
@@ -59,12 +109,20 @@ export function ConsequenceFeedback() {
     const isPositive = v > 0;
 
     return (
-      <div className={`flex items-center justify-between p-3 rounded-2xl border ${
-        isPositive ? 'bg-emerald-50/70 border-emerald-200 text-emerald-800' : 'bg-rose-50/70 border-rose-200 text-rose-800'
-      }`}>
+      <div
+        className={`flex items-center justify-between p-3 rounded-2xl border ${
+          isPositive
+            ? "bg-emerald-50/70 border-emerald-200 text-emerald-800"
+            : "bg-rose-50/70 border-rose-200 text-rose-800"
+        }`}
+      >
         <span className="text-xs font-semibold">{label}</span>
         <span className="flex items-center gap-1 text-sm font-bold">
-          {isPositive ? <SvgTrendUp className="w-4 h-4 text-emerald-600" /> : <SvgTrendDown className="w-4 h-4 text-rose-600" />}
+          {isPositive ? (
+            <SvgTrendUp className="w-4 h-4 text-emerald-600" />
+          ) : (
+            <SvgTrendDown className="w-4 h-4 text-rose-600" />
+          )}
           {isPositive ? `+${v}` : v}
         </span>
       </div>
@@ -75,31 +133,90 @@ export function ConsequenceFeedback() {
     <div className="mx-auto min-h-screen max-w-3xl px-6 py-10">
       {/* Cabeçalho */}
       <div className="mb-6 animate-float-in">
-        <p className="text-xs uppercase tracking-[0.2em] text-primary font-bold">Desfecho da Decisão</p>
-        <h1 className="mt-1 text-2xl font-bold tracking-tight text-foreground">{decision.eventTitle}</h1>
+        <p className="text-xs uppercase tracking-[0.2em] text-primary font-bold">
+          Desfecho da Decisão
+        </p>
+        <h1 className="mt-1 text-2xl font-bold tracking-tight text-foreground">
+          {decision.eventTitle}
+        </h1>
       </div>
 
-      {/* Alertas de Ecos e Impactos Diferidos */}
+      {/* Alerta Destacado: Ecos e Impactos Diferidos que Detonaram Nesta Rodada */}
       {delayedImpactsTriggeredThisRound && delayedImpactsTriggeredThisRound.length > 0 && (
-        <div className="mb-5 space-y-2 animate-pop-in">
+        <div className="mb-6 space-y-3 animate-pop-in">
           {delayedImpactsTriggeredThisRound.map((impact, i) => (
-            <div key={i} className="flex items-start gap-3 bg-rose-50 p-4 rounded-2xl border border-rose-200 text-rose-900 shadow-sm">
-              <Clock className="w-5 h-5 text-rose-500 mt-0.5 shrink-0" />
-              <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-rose-700">Eco do Passado: {impact.sourceEventTitle}</p>
-                <p className="text-sm mt-0.5 leading-relaxed">{impact.narrative}</p>
+            <div
+              key={i}
+              className="bg-rose-50 p-5 rounded-2xl border-2 border-rose-400 text-rose-950 shadow-md ring-2 ring-rose-100"
+            >
+              <div className="flex items-start gap-3.5">
+                <div className="p-2.5 rounded-xl bg-rose-200 text-rose-800 shrink-0">
+                  <AlertTriangle className="w-6 h-6 text-rose-700" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <span className="text-xs font-black uppercase tracking-wider bg-rose-200 text-rose-900 px-2.5 py-0.5 rounded-full border border-rose-300">
+                      💥 Consequência Detonou Nesta Rodada
+                    </span>
+                    <span className="text-xs font-bold text-rose-700">
+                      Eco de: {impact.sourceEventTitle}
+                    </span>
+                  </div>
+                  <p className="text-sm font-semibold mt-2 text-rose-900 leading-relaxed">
+                    {impact.narrative}
+                  </p>
+                  {impact.metricsDelta && (
+                    <div className="mt-3 flex flex-wrap items-center gap-2 pt-2.5 border-t border-rose-200">
+                      <span className="text-xs font-bold text-rose-800">
+                        Penalidade aplicada no time:
+                      </span>
+                      {Object.entries(impact.metricsDelta).map(([k, v]) => {
+                        if (!v) return null;
+                        const label =
+                          k === "capacidadeEntrega"
+                            ? "Velocidade"
+                            : k === "qualidadeProduto"
+                              ? "Qualidade"
+                              : k === "saudeEquipe"
+                                ? "Saúde"
+                                : "Conhecimento";
+                        return (
+                          <span
+                            key={k}
+                            className="text-xs font-extrabold bg-white border border-rose-300 px-2.5 py-1 rounded-lg text-rose-800 shadow-2xs"
+                          >
+                            {label}: {v > 0 ? `+${v}` : v}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           ))}
         </div>
       )}
 
+      {/* Alerta de Novo Risco Registrado no Radar */}
       {alt.delayedImpacts && alt.delayedImpacts.length > 0 && (
-        <div className="mb-5 flex items-start gap-3 bg-amber-50 p-4 rounded-2xl border border-amber-200 text-amber-900 shadow-sm animate-pop-in">
-          <Clock className="w-5 h-5 text-amber-600 mt-0.5 shrink-0" />
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-amber-700">Risco Sistêmico Registrado</p>
-            <p className="text-sm mt-0.5">Esta escolha gerou um débito futuro que poderá retornar nas próximas sprints.</p>
+        <div className="mb-6 flex items-start gap-3.5 bg-amber-50 p-4 sm:p-5 rounded-2xl border-2 border-amber-300 text-amber-950 shadow-sm animate-pop-in">
+          <Clock className="w-6 h-6 text-amber-600 mt-0.5 shrink-0" />
+          <div className="flex-1">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
+              <span className="text-xs font-black uppercase tracking-wider bg-amber-200 text-amber-900 px-2.5 py-0.5 rounded-full border border-amber-300">
+                ⚠️ Risco Sistêmico Registrado no Radar
+              </span>
+              <span className="text-xs font-extrabold bg-white px-2 py-0.5 rounded border border-amber-200 text-amber-800">
+                Detonará em {alt.delayedImpacts[0].triggerAfterEvents}{" "}
+                {alt.delayedImpacts[0].triggerAfterEvents === 1 ? "dilema" : "dilemas"}
+              </span>
+            </div>
+            <p className="text-sm mt-2 text-amber-900 leading-relaxed font-medium">
+              Esta escolha postergou um problema técnico ou de processos. Um eco foi engatilhado no{" "}
+              <strong>Radar de Ameaças</strong> e retornará com consequências nas métricas caso a
+              equipe não se atente.
+            </p>
           </div>
         </div>
       )}
@@ -114,20 +231,26 @@ export function ConsequenceFeedback() {
           <div className="min-w-0 flex-1">
             <div className="flex items-center justify-between gap-2">
               <p className="text-sm font-bold text-foreground">{MENTOR.name} · Mentoria Ágil</p>
-              <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
-                alt.goodBad === 'good' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
-              }`}>
-                {alt.goodBad === 'good' ? 'Decisão Recomendada' : 'Decisão Arriscada'}
+              <span
+                className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
+                  alt.goodBad === "good"
+                    ? "bg-emerald-100 text-emerald-800"
+                    : "bg-rose-100 text-rose-800"
+                }`}
+              >
+                {alt.goodBad === "good" ? "Decisão Recomendada" : "Decisão Arriscada"}
               </span>
             </div>
-            
+
             <p className="mt-2 text-sm text-slate-700 leading-relaxed font-medium">
               "{decision.feedbackNarrative}"
             </p>
 
             {/* Conceito PMBOK 7 em Destaque */}
             <div className="mt-4 rounded-2xl bg-primary/5 p-3.5 border border-primary/20">
-              <p className="text-xs font-bold uppercase tracking-wider text-primary">Princípio PMBOK 7 em Prática</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-primary">
+                Princípio PMBOK 7 em Prática
+              </p>
               <p className="text-sm font-semibold text-foreground mt-0.5">{alt.pmbokConcept}</p>
             </div>
           </div>
@@ -136,22 +259,71 @@ export function ConsequenceFeedback() {
 
       {/* INSIGHT CARD 2: Impacto nas Métricas */}
       <SoftCard className="mb-5 animate-pop-in p-6">
-        <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-4">
+        <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">
           Impacto Direto nas Barras de Desempenho
         </p>
 
-        {/* Chips de Variação Imediata */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-5">
-          {renderDeltaChip('capacidadeEntrega', 'Velocidade')}
-          {renderDeltaChip('qualidadeProduto', 'Qualidade')}
-          {renderDeltaChip('saudeEquipe', 'Saúde do Time')}
+        {/* Chips de Variação Imediata da Decisão */}
+        <div className="mb-4">
+          <p className="text-xs font-semibold text-slate-600 mb-2">Variação da Decisão Tomada:</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            {renderDeltaChip("capacidadeEntrega", "Velocidade")}
+            {renderDeltaChip("qualidadeProduto", "Qualidade")}
+            {renderDeltaChip("saudeEquipe", "Saúde do Time")}
+          </div>
         </div>
+
+        {/* Penalidade de Ecos Ativados Nesta Rodada */}
+        {delayedImpactsTriggeredThisRound && delayedImpactsTriggeredThisRound.length > 0 && (
+          <div className="mb-4 bg-rose-50/70 p-3 rounded-xl border border-rose-200">
+            <p className="text-xs font-bold uppercase tracking-wider text-rose-800 mb-2 flex items-center gap-1.5">
+              <TrendingDown className="w-3.5 h-3.5" /> Penalidade Cumulativa do Eco:
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              {delayedImpactsTriggeredThisRound.map((imp, idx) => {
+                if (!imp.metricsDelta) return null;
+                return Object.entries(imp.metricsDelta).map(([k, v]) => {
+                  if (!v) return null;
+                  const label =
+                    k === "capacidadeEntrega"
+                      ? "Velocidade"
+                      : k === "qualidadeProduto"
+                        ? "Qualidade"
+                        : k === "saudeEquipe"
+                          ? "Saúde"
+                          : "Conhecimento";
+                  return (
+                    <div
+                      key={`${idx}_${k}`}
+                      className="flex items-center justify-between p-2.5 rounded-xl border bg-white border-rose-200 text-rose-900"
+                    >
+                      <span className="text-xs font-semibold">{label}</span>
+                      <span className="text-xs font-bold text-rose-700">{v > 0 ? `+${v}` : v}</span>
+                    </div>
+                  );
+                });
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Barras de Métricas com Níveis Atualizados */}
         <div className="space-y-4 pt-4 border-t border-slate-100">
-          <MetricBar label="Capacidade de Entrega (Velocity)" value={metrics.capacidadeEntrega} icon={<Gauge className="h-5 w-5 text-primary" />} />
-          <MetricBar label="Qualidade do Produto" value={metrics.qualidadeProduto} icon={<Sparkle className="h-5 w-5 text-primary" />} />
-          <MetricBar label="Saúde da Equipe" value={metrics.saudeEquipe} icon={<Heart className="h-5 w-5 text-primary" />} />
+          <MetricBar
+            label="Capacidade de Entrega (Velocity)"
+            value={metrics.capacidadeEntrega}
+            icon={<Gauge className="h-5 w-5 text-primary" />}
+          />
+          <MetricBar
+            label="Qualidade do Produto"
+            value={metrics.qualidadeProduto}
+            icon={<Sparkle className="h-5 w-5 text-primary" />}
+          />
+          <MetricBar
+            label="Saúde da Equipe"
+            value={metrics.saudeEquipe}
+            icon={<Heart className="h-5 w-5 text-primary" />}
+          />
         </div>
       </SoftCard>
 
@@ -166,16 +338,24 @@ export function ConsequenceFeedback() {
             <Lightbulb className="h-5 w-5 text-amber-500" />
             <span>Lições Aprendidas e Riscos do Cenário</span>
           </div>
-          {showPedagogicalDetails ? <ChevronUp className="h-5 w-5 text-muted-foreground" /> : <ChevronDown className="h-5 w-5 text-muted-foreground" />}
+          {showPedagogicalDetails ? (
+            <ChevronUp className="h-5 w-5 text-muted-foreground" />
+          ) : (
+            <ChevronDown className="h-5 w-5 text-muted-foreground" />
+          )}
         </button>
 
         {showPedagogicalDetails && (
           <div className="mt-4 space-y-4 pt-4 border-t border-slate-100 animate-in fade-in">
             {/* Lições Práticas */}
             <div className="rounded-2xl bg-muted/60 p-4">
-              <p className="text-xs font-bold uppercase tracking-wider text-primary mb-1.5">Aprendizados Práticos</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-primary mb-1.5">
+                Aprendizados Práticos
+              </p>
               <ul className="text-sm text-slate-700 leading-relaxed list-disc list-inside space-y-1.5">
-                {alt.learnings.map((l, i) => <li key={i}>{l}</li>)}
+                {alt.learnings.map((l, i) => (
+                  <li key={i}>{l}</li>
+                ))}
               </ul>
             </div>
 
@@ -187,7 +367,9 @@ export function ConsequenceFeedback() {
                   <span>Riscos Evitados</span>
                 </div>
                 <ul className="text-sm text-emerald-900 leading-relaxed list-disc list-inside space-y-1.5">
-                  {alt.risksEvaded.map((r, i) => <li key={i}>{r}</li>)}
+                  {alt.risksEvaded.map((r, i) => (
+                    <li key={i}>{r}</li>
+                  ))}
                 </ul>
               </div>
             )}
@@ -200,7 +382,9 @@ export function ConsequenceFeedback() {
                   <span>Cenários e Trade-offs Alternativos</span>
                 </div>
                 <ul className="text-sm text-amber-900 leading-relaxed list-disc list-inside space-y-1.5">
-                  {alt.otherConsequences.map((c, i) => <li key={i}>{c}</li>)}
+                  {alt.otherConsequences.map((c, i) => (
+                    <li key={i}>{c}</li>
+                  ))}
                 </ul>
               </div>
             )}
