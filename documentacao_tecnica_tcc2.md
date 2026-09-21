@@ -865,7 +865,7 @@ O projeto está em **estágio totalmente funcional**, com interface de alta fide
 | `DebateStructured.tsx` | `src/components/screens/` | Cronômetro e gerenciamento da ordem de fala no debate. |
 | `ConsequenceFeedback.tsx` | `src/components/screens/` | Feedback visual, conceitos PMBOK 7 e aprendizados práticos. |
 | `SprintReview.tsx` | `src/components/screens/` | Revisão de sprint a cada 3 eventos e radar de impactos diferidos. |
-| `DebriefingFinal.tsx` | `src/components/screens/` | Fechamento pedagógico, resumo estatístico e reflexão final. |
+| `DebriefingFinal.tsx` | `src/components/screens/` | Fechamento pedagógico estruturado em 3 telas progressivas (1: Resumo & Reflexão, 2: Conceitos PMBOK 7, 3: Aplicação Profissional). |
 
 ### Principais Interfaces e Tipos
 
