@@ -34,6 +34,8 @@ export type PlayerRole = 'pm' | 'techLead' | 'uxLead';
 export type AlternativeKey = 'a' | 'b' | 'c';
 export type MetricLevel = 'stable' | 'warning' | 'critical';
 export type CommunicationType = 'email' | 'slack' | 'ticket';
+export type ResourceType = 'humano' | 'fisico_virtual';
+export type ResourceProcess = 'planejar' | 'estimar' | 'adquirir' | 'liderar' | 'monitorar';
 
 export interface Avatar {
   id: string;
@@ -102,6 +104,8 @@ export interface GameEvent {
   responsibleRole: PlayerRole;
   description: string;
   alternatives: Alternative[];
+  resourceType?: ResourceType;
+  resourceProcess?: ResourceProcess;
 }
 
 export interface Vote {
