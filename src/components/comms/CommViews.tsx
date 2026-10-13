@@ -40,11 +40,11 @@ export function EmailView({ event }: Props) {
             </div>
             <p className="text-xs text-muted-foreground">{event.senderRole}</p>
             
-            <h2 className="mt-2 text-base font-bold text-foreground">{subject}</h2>
+            <h2 className="mt-2 text-lg sm:text-xl font-bold text-foreground">{subject}</h2>
             
             {/* Balão de Fala Conciso */}
             <div className="mt-3 rounded-2xl bg-card p-4 shadow-[var(--shadow-soft)] border-l-4 border-primary">
-              <p className="text-sm font-medium leading-relaxed text-foreground">
+              <p className="text-base sm:text-lg font-medium leading-relaxed text-foreground">
                 "{mainSentence}"
               </p>
             </div>
@@ -55,7 +55,7 @@ export function EmailView({ event }: Props) {
                 <button
                   type="button"
                   onClick={() => setShowDetails(!showDetails)}
-                  className="flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline transition-all"
+                  className="flex items-center gap-1.5 text-sm sm:text-base font-semibold text-primary hover:underline transition-all"
                 >
                   <FileText className="h-4 w-4" />
                   {showDetails ? 'Recolher detalhes técnicos' : 'Ver contexto completo do e-mail'}
@@ -63,7 +63,7 @@ export function EmailView({ event }: Props) {
                 </button>
                 
                 {showDetails && (
-                  <div className="mt-2 rounded-xl bg-card/60 p-3 text-sm leading-relaxed text-muted-foreground animate-in fade-in">
+                  <div className="mt-2 rounded-xl bg-card/60 p-4 text-base leading-relaxed text-muted-foreground animate-in fade-in">
                     {remainingText}
                   </div>
                 )}
@@ -97,14 +97,14 @@ export function SlackView({ event }: Props) {
         <Avatar3D initials={event.senderInitials} imageUrl={event.avatarImage} size="lg" />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-baseline gap-2">
-            <p className="font-bold text-foreground">{event.senderName}</p>
-            <span className="text-xs text-muted-foreground">· {event.senderRole}</span>
-            <span className="text-xs text-muted-foreground">· agora</span>
+            <p className="font-bold text-foreground text-base sm:text-lg">{event.senderName}</p>
+            <span className="text-xs sm:text-sm text-muted-foreground">· {event.senderRole}</span>
+            <span className="text-xs sm:text-sm text-muted-foreground">· agora</span>
           </div>
 
           {/* Balão de Mensagem Direta */}
           <div className="relative mt-2 inline-block rounded-3xl rounded-tl-md bg-card px-5 py-4 shadow-[var(--shadow-soft)] border border-slate-100 max-w-full">
-            <p className="text-sm font-medium leading-relaxed text-foreground">
+            <p className="text-base sm:text-lg font-medium leading-relaxed text-foreground">
               {mainSentence}
             </p>
           </div>
@@ -115,7 +115,7 @@ export function SlackView({ event }: Props) {
               <button
                 type="button"
                 onClick={() => setShowDetails(!showDetails)}
-                className="flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline transition-all"
+                className="flex items-center gap-1.5 text-sm sm:text-base font-semibold text-primary hover:underline transition-all"
               >
                 <FileText className="h-4 w-4" />
                 {showDetails ? 'Recolher detalhes' : 'Ver contexto completo da mensagem'}
@@ -123,7 +123,7 @@ export function SlackView({ event }: Props) {
               </button>
               
               {showDetails && (
-                <div className="mt-2 rounded-xl bg-muted/60 p-3 text-sm leading-relaxed text-muted-foreground animate-in fade-in">
+                <div className="mt-2 rounded-xl bg-muted/60 p-4 text-base leading-relaxed text-muted-foreground animate-in fade-in">
                   {remainingText}
                 </div>
               )}
@@ -153,23 +153,23 @@ export function TicketView({ event }: Props) {
       </div>
 
       <div className="rounded-3xl bg-muted/60 p-5 shadow-sm">
-        <div className="mb-3 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+        <div className="mb-3 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs sm:text-sm font-semibold text-primary">
           {event.domainTag}
         </div>
         
-        <h2 className="text-lg font-bold text-foreground">{event.title}</h2>
+        <h2 className="text-xl sm:text-2xl font-bold text-foreground">{event.title}</h2>
         
         <div className="mt-3 flex items-center gap-3">
           <Avatar3D initials={event.senderInitials} imageUrl={event.avatarImage} size="sm" />
           <div>
-            <p className="text-sm font-semibold text-foreground">{event.senderName}</p>
-            <p className="text-xs text-muted-foreground">{event.senderRole}</p>
+            <p className="text-base font-bold text-foreground">{event.senderName}</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">{event.senderRole}</p>
           </div>
         </div>
 
         {/* Resumo Direto do Ticket */}
         <div className="mt-4 rounded-2xl bg-card p-4 shadow-[var(--shadow-soft)] border-l-4 border-amber-500">
-          <p className="text-sm font-medium leading-relaxed text-foreground">
+          <p className="text-base sm:text-lg font-medium leading-relaxed text-foreground">
             {mainSentence}
           </p>
         </div>
@@ -180,7 +180,7 @@ export function TicketView({ event }: Props) {
             <button
               type="button"
               onClick={() => setShowDetails(!showDetails)}
-              className="flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline transition-all"
+              className="flex items-center gap-1.5 text-sm sm:text-base font-semibold text-primary hover:underline transition-all"
             >
               <FileText className="h-4 w-4" />
               {showDetails ? 'Ocultar logs técnicos' : 'Ver logs e descrição detalhada do ticket'}
@@ -188,7 +188,7 @@ export function TicketView({ event }: Props) {
             </button>
             
             {showDetails && (
-              <div className="mt-2 rounded-xl bg-card/60 p-3 text-sm leading-relaxed text-muted-foreground animate-in fade-in font-mono">
+              <div className="mt-2 rounded-xl bg-card/60 p-4 text-base leading-relaxed text-muted-foreground animate-in fade-in font-mono">
                 {remainingText}
               </div>
             )}

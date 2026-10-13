@@ -74,13 +74,13 @@ export function ProjectBriefing() {
         </SoftCard>
         <SoftCard className="animate-float-in">
           <Calendar className="mb-3 h-5 w-5 text-primary" />
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">Sprints</p>
-          <p className="mt-1 font-semibold text-sm">6 Sprints (15 dias)</p>
+          <p className="text-xs uppercase tracking-wider text-muted-foreground">Ciclos de Trabalho</p>
+          <p className="mt-1 font-semibold text-sm">6 Ciclos (15 dias)</p>
         </SoftCard>
         <SoftCard className="animate-float-in">
           <Users className="mb-3 h-5 w-5 text-primary" />
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">Stakeholders</p>
-          <p className="mt-1 font-semibold text-sm">Reitoria e Pró-Reitoria</p>
+          <p className="text-xs uppercase tracking-wider text-muted-foreground">Partes Interessadas</p>
+          <p className="mt-1 font-semibold text-sm">Reitoria e Pró-Reitorias</p>
         </SoftCard>
         <SoftCard className="animate-float-in">
           <GraduationCap className="mb-3 h-5 w-5 text-primary" />

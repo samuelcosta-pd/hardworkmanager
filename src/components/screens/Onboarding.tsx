@@ -34,9 +34,9 @@ export function Onboarding() {
             <AvatarFallback>HE</AvatarFallback>
           </Avatar>
           <div>
-            <h2 className="text-xl font-bold text-slate-800">Olá! Eu sou a Helena.</h2>
-            <p className="text-slate-600">
-              Sou Consultora Ágil e serei a mediadora da sua equipe. Vou guiar vocês pelos desafios do Domínio Trabalho do Projeto (PMBOK 7).
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-800">Olá! Eu sou a Helena.</h2>
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed mt-1">
+              Sou Consultora de Projetos e serei a mediadora da sua equipe. Vou guiar vocês pelos desafios do Domínio de Recursos do PMBOK 8, equilibrando pessoas, ferramentas e infraestrutura.
             </p>
           </div>
         </div>
@@ -46,7 +46,7 @@ export function Onboarding() {
           <div className="absolute top-0 left-0 h-1 bg-primary transition-all duration-300" style={{ width: `${(step / 3) * 100}%` }} />
 
           <CardHeader className="text-center pb-2 pt-8">
-            <CardTitle className="text-3xl font-bold text-slate-800">
+            <CardTitle className="text-3xl sm:text-4xl font-extrabold text-slate-800">
               {step === 1 && "Bem-vindo ao Hard Work Manager"}
               {step === 2 && "Como funciona a dinâmica"}
               {step === 3 && "Regras e Expectativas"}
@@ -59,35 +59,35 @@ export function Onboarding() {
                 <div className="flex items-start gap-4">
                   <BookOpen className="w-8 h-8 text-blue-500 shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-lg font-bold">O que é este jogo?</h3>
-                    <p>Uma simulação colaborativa baseada no PMBOK 7. Vocês assumirão a liderança da modernização de um Sistema de Gerenciamento Acadêmico.</p>
+                    <h3 className="text-lg sm:text-xl font-bold">O que é este jogo?</h3>
+                    <p className="text-base sm:text-lg leading-relaxed text-slate-600">Uma simulação colaborativa baseada no PMBOK 8. Vocês assumirão a liderança da modernização de um Sistema de Gerenciamento Acadêmico.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <Users className="w-8 h-8 text-green-500 shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-lg font-bold">Aprendizado Colaborativo</h3>
-                    <p>O foco é o Domínio de Desempenho <strong>Trabalho do Projeto</strong>. Vocês aprenderão a gerenciar processos, recursos e a manter o time engajado.</p>
+                    <h3 className="text-lg sm:text-xl font-bold">Aprendizado Colaborativo</h3>
+                    <p className="text-base sm:text-lg leading-relaxed text-slate-600">O foco é o Domínio de Desempenho <strong>Recursos</strong>. Vocês aprenderão a planejar, liderar e monitorar recursos humanos, ambientes e ferramentas.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <AlertTriangle className="w-8 h-8 text-amber-500 shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-lg font-bold">Ações têm Consequências</h3>
-                    <p>Cada decisão afeta a Eficiência, a Qualidade e a Saúde da Equipe. Decisões ruins podem levar ao fracasso do projeto.</p>
+                    <h3 className="text-lg sm:text-xl font-bold">Ações têm Consequências</h3>
+                    <p className="text-base sm:text-lg leading-relaxed text-slate-600">Cada decisão afeta a Eficiência, a Qualidade e a Saúde da Equipe. Decisões ruins podem levar ao fracasso do projeto.</p>
                   </div>
                 </div>
               </div>
             )}
 
             {step === 2 && (
-              <div className="space-y-4 text-slate-700 w-full text-lg">
-                <ul className="space-y-3 list-disc list-inside marker:text-primary">
-                  <li><strong>Jogadores:</strong> A equipe é formada por 3 líderes (GP, Tech Lead, UX Lead).</li>
+              <div className="space-y-4 text-slate-700 w-full text-base sm:text-lg leading-relaxed">
+                <ul className="space-y-3.5 list-disc list-inside marker:text-primary">
+                  <li><strong>Jogadores:</strong> A equipe é formada por 3 líderes (Gerente de Projetos, Líder Técnico e Líder de Design e Telas).</li>
                   <li><strong>Eventos:</strong> Vocês enfrentarão uma série de cenários de crise e decisões táticas.</li>
                   <li><strong>Debate e Votação:</strong> Diante de um problema, vocês debatem e votam na melhor solução. Empates são decididos pelo Gerente de Projetos.</li>
                   <li><strong>Métricas:</strong> Vocês devem equilibrar Capacidade de Entrega, Qualidade do Produto, Saúde da Equipe e Conhecimento Organizacional.</li>
-                  <li><strong>Duração:</strong> A simulação percorre 10 dilemas operacionais (2 de cada princípio do PMBOK 7).</li>
+                  <li><strong>Duração:</strong> A simulação percorre 10 dilemas operacionais cobrindo os processos de Recursos do PMBOK 8.</li>
                   <li><strong>Condição de Fim de Jogo:</strong> O projeto falha se qualquer métrica principal cair abaixo de 40 pontos (zona crítica), ou é concluído com sucesso ao término dos 10 dilemas.</li>
                 </ul>
               </div>
@@ -95,27 +95,27 @@ export function Onboarding() {
 
             {step === 3 && (
               <div className="space-y-6 text-slate-700 w-full">
-                <div className="p-4 bg-amber-50 rounded-xl border border-amber-200">
-                  <p className="text-xs font-bold uppercase tracking-wider text-amber-600 mb-1.5 flex items-center gap-1.5">
-                    <Lightbulb className="w-4 h-4" />
+                <div className="p-5 bg-amber-50 rounded-2xl border border-amber-200">
+                  <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-amber-700 mb-1.5 flex items-center gap-1.5">
+                    <Lightbulb className="w-5 h-5" />
                     Dica da Mentora Helena
                   </p>
-                  <p className="text-amber-700 text-sm leading-relaxed">
+                  <p className="text-amber-900 text-base sm:text-lg leading-relaxed font-medium">
                     Nem toda decisão possui uma saída perfeita. Às vezes, para garantir a qualidade, vocês precisarão sacrificar a eficiência. O objetivo é maximizar o valor e a sustentabilidade do projeto.
                   </p>
                 </div>
                 <div className="grid grid-cols-3 gap-4">
-                  <div className="bg-slate-100 p-3 rounded-lg text-center">
-                    <h4 className="font-bold text-slate-800">GP</h4>
-                    <p className="text-sm text-slate-600">Foca nos Recursos e Eficiência</p>
+                  <div className="bg-slate-100 p-4 rounded-xl text-center">
+                    <h4 className="font-bold text-slate-800 text-base sm:text-lg">GP</h4>
+                    <p className="text-sm sm:text-base text-slate-600 mt-1">Foca nos Recursos e Eficiência</p>
                   </div>
-                  <div className="bg-slate-100 p-3 rounded-lg text-center">
-                    <h4 className="font-bold text-slate-800">Tech Lead</h4>
-                    <p className="text-sm text-slate-600">Foca na Qualidade e Débito Técnico</p>
+                  <div className="bg-slate-100 p-4 rounded-xl text-center">
+                    <h4 className="font-bold text-slate-800 text-base sm:text-lg">Tech Lead</h4>
+                    <p className="text-sm sm:text-base text-slate-600 mt-1">Foca na Qualidade e Débito Técnico</p>
                   </div>
-                  <div className="bg-slate-100 p-3 rounded-lg text-center">
-                    <h4 className="font-bold text-slate-800">UX Lead</h4>
-                    <p className="text-sm text-slate-600">Foca no Usuário e Engajamento</p>
+                  <div className="bg-slate-100 p-4 rounded-xl text-center">
+                    <h4 className="font-bold text-slate-800 text-base sm:text-lg">UX Lead</h4>
+                    <p className="text-sm sm:text-base text-slate-600 mt-1">Foca no Usuário e Engajamento</p>
                   </div>
                 </div>
               </div>

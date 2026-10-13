@@ -1,810 +1,1048 @@
 import { GameEvent, EventCategory, EventDifficulty } from "@/types";
 
 /**
- * Princípio 1: Faça a adaptação de acordo com o contexto (Tailoring)
- * Fundamentação: Seção 2.5.1 (Processos do projeto) - Métodos Lean e eliminação de desperdícios operacionais.
- * Objetivo Pedagógico: Combate ao Desperdício Burocrático.
+ * Domínio de Recursos (PMBOK 8) - Tailoring, Operações de Equipe e Eficiência de Recursos
  * Total: 10 Dilemas
  */
 export const tailoringEvents: GameEvent[] = [
   {
-    id: "tailoring_1_lean_desperdicio_adm",
-    title: "Excesso de Burocracia Administrativa (Lean)",
+    "id": "tailoring_1_lean_desperdicio_adm",
+    "title": "Excesso de Burocracia Administrativa (Lean)",
     category: EventCategory.EXECUTION,
     difficulty: EventDifficulty.EASY,
-    probabilityWeight: 2,
-    tags: ["burocracia", "lean", "processos", "tailoring"],
-    learningObjective:
-      "Identificar e mitigar processos burocráticos que causam desperdícios operacionais (Muda).",
-    communicationType: "email",
-    senderRole: "PMO Universitário",
-    description:
-      "Assunto: Relatórios Diários em PDF. A diretoria exige relatórios de status em PDF com 20 páginas todos os dias de cada desenvolvedor. O time está gastando quase 2 horas diárias preenchendo tabelas duplicadas, reduzindo a eficiência global da equipe.",
-    domainTag: "Faça a adaptação de acordo com o contexto (Tailoring)",
-    senderName: "PMO Universitário",
-    senderInitials: "PM",
-    avatarImage: "/Personagens/Lívia.png",
-    responsibleRole: "pm",
-    alternatives: [
-      {
-        key: "a",
-        text: "Substituir os relatórios manuais em PDF por acesso direto aos dashboards do Jira em tempo real.",
-        impacts: {
-          capacidadeEntrega: 20,
-          qualidadeProduto: 0,
-          saudeEquipe: 15,
-          conhecimentoOrganizacional: 10,
-        },
-        feedbackNarrative:
-          "A diretoria resistiu no início, mas adorou a transparência em tempo real com radiadores de informação. A equipe recuperou quase 10 horas semanais de desenvolvimento focado.",
-        pmbokConcept: "Eliminação de Desperdícios (Muda) e Radiadores de Informação",
-        learnings: [
-          "Desperdícios de atividades que não agregam valor ao produto devem ser eliminados usando transparência e radiadores de informação.",
-        ],
-        goodBad: "good",
-        risksEvaded: ["Burnout burocrático e queda de produtividade"],
-        otherConsequences: ["Maior alinhamento com a diretoria por meio de métricas transparentes"],
-      },
-      {
-        key: "b",
-        text: "Cumprir a exigência criando um turno administrativo onde todos param de codificar às 16h para redigir relatórios.",
-        impacts: {
-          capacidadeEntrega: -25,
-          qualidadeProduto: 0,
-          saudeEquipe: -15,
-          conhecimentoOrganizacional: 0,
-        },
-        feedbackNarrative:
-          'A moral despencou. "Somos engenheiros ou digitadores de relatório?", questionou a equipe. A esteira de entregas foi paralisada pela burocracia.',
-        pmbokConcept: "Ineficiência e Rigidez de Processos",
-        learnings: [
-          "Submissão passiva a processos burocráticos suga a capacidade produtiva e desengaja a equipe de desenvolvimento técnica.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Conflito imediato com o PMO"],
-        otherConsequences: ["Perda drástica de ritmo produtivo e entregas atrasadas"],
-      },
-      {
-        key: "c",
-        text: "Contratar um estagiário apenas para entrevistar os desenvolvedores o dia todo e preencher as planilhas para a diretoria.",
-        impacts: {
-          capacidadeEntrega: -10,
-          qualidadeProduto: -5,
-          saudeEquipe: -5,
-          conhecimentoOrganizacional: -5,
-        },
-        feedbackNarrative:
-          "O estagiário passou o dia interrompendo os desenvolvedores no meio do raciocínio lógico. Os relatórios gerados ficaram cheios de inconsistências técnicas.",
-        pmbokConcept: "Aumento da Complexidade de Coordenação",
-        learnings: [
-          "Adicionar intermediários sem simplificar a causa-raiz apenas adiciona ruído de comunicação e desperdício de recursos.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Trabalho manual direto dos seniores"],
-        otherConsequences: ["Gastos desnecessários e interrupções frequentes"],
-      },
+    "probabilityWeight": 2,
+    "tags": [
+      "burocracia",
+      "lean",
+      "processos",
+      "recursos_humanos"
     ],
-  },
-  {
-    id: "tailoring_2_trabalho_pmo",
-    title: 'O "Trabalho Sem Valor Agregado" do PMO',
-    category: EventCategory.EXECUTION,
-    difficulty: EventDifficulty.MEDIUM,
-    probabilityWeight: 2,
-    tags: ["processos", "desperdicio", "tailoring", "timesheet"],
-    learningObjective:
-      "Adaptar processos de controle gerencial sem gerar sobrecarga administrativa desnecessária.",
-    communicationType: "email",
-    senderRole: "Diretor de TI",
-    description:
-      'Assunto: Diretriz de Timesheets. O novo Diretor de TI envia uma portaria obrigando desenvolvedores e designers a preencherem planilhas manuais diárias com 15 categorias de horas, com a justificativa de "aumentar o controle financeiro".',
-    domainTag: "Faça a adaptação de acordo com o contexto (Tailoring)",
-    senderName: "Diretor de TI",
-    senderInitials: "DT",
-    avatarImage: "/Personagens/Geraldo.png",
-    responsibleRole: "techLead",
-    alternatives: [
+    "learningObjective": "Identificar e mitigar processos burocráticos que causam desperdício de tempo e esforço da equipe.",
+    "communicationType": "email",
+    "senderRole": "PMO Universitário",
+    "description": "Assunto: Relatórios Diários em PDF. A diretoria exige relatórios de status em PDF com 20 páginas todos os dias de cada desenvolvedor. O time está gastando quase 2 horas diárias preenchendo tabelas duplicadas, reduzindo a eficiência e o tempo útil dos recursos humanos.",
+    "domainTag": "Recursos › Monitorar e Controlar Recursos",
+    "resourceType": "humano",
+    "resourceProcess": "monitorar",
+    "senderName": "PMO Universitário",
+    "senderInitials": "PM",
+    "avatarImage": "/Personagens/Lívia.png",
+    "responsibleRole": "pm",
+    "alternatives": [
       {
-        key: "a",
-        text: "Impor a regra à equipe estritamente como foi pedido, cobrando o preenchimento diário sob pena de advertência.",
-        impacts: {
-          capacidadeEntrega: -15,
-          qualidadeProduto: 0,
-          saudeEquipe: -20,
-          conhecimentoOrganizacional: 0,
+        "key": "a",
+        "text": "Substituir os relatórios manuais por dashboards integrados com radiadores de informação e métricas em tempo real.",
+        "impacts": {
+          "capacidadeEntrega": 20,
+          "qualidadeProduto": 0,
+          "saudeEquipe": 15,
+          "conhecimentoOrganizacional": 10
         },
-        delayedImpacts: [
-          {
-            triggerAfterEvents: 1,
-            impacts: { capacidadeEntrega: -15, saudeEquipe: -15 },
-            narrative:
-              "A burocracia excessiva de preenchimento manual de planilhas provocou lentidão nos deploys e um protesto formal dos desenvolvedores, paralisando o ritmo de entregas.",
-          },
+        "feedbackNarrative": "A diretoria adorou a transparência em tempo real. A equipe recuperou quase 10 horas semanais de desenvolvimento focado sem desperdício burocrático.",
+        "pmbokConcept": "Retrabalho e desperdício como indicadores de eficiência",
+        "learnings": [
+          "Desperdícios de tempo da equipe que não agregam valor ao produto devem ser eliminados com radiadores de informação e transparência."
         ],
-        feedbackNarrative:
-          "Criou-se um clima de microgerenciamento sufocante. O tempo gasto preenchendo códigos tomou horas produtivas e desmotivou os melhores desenvolvedores.",
-        pmbokConcept: "Desperdício e Falta de Tailoring",
-        learnings: [
-          "Processos devem servir ao projeto, não o contrário. Burocracia extrema desengaja times de alta performance.",
+        "goodBad": "good",
+        "risksEvaded": [
+          "Burnout burocrático e queda de produtividade"
         ],
-        goodBad: "bad",
-        risksEvaded: ["Atrito hierárquico com o Diretor de TI"],
-        otherConsequences: ["Microgerenciamento e evasão de talentos"],
+        "otherConsequences": [
+          "Maior alinhamento com a diretoria por meio de métricas transparentes"
+        ]
       },
       {
-        key: "b",
-        text: "Propor e automatizar a extração das métricas a partir dos commits do Git e cards do Jira.",
-        impacts: {
-          capacidadeEntrega: -10,
-          qualidadeProduto: 15,
-          saudeEquipe: 15,
-          conhecimentoOrganizacional: 10,
+        "key": "b",
+        "text": "Cumprir a exigência criando um turno administrativo onde todos param de programar às 16h para redigir relatórios.",
+        "impacts": {
+          "capacidadeEntrega": -25,
+          "qualidadeProduto": 0,
+          "saudeEquipe": -15,
+          "conhecimentoOrganizacional": 0
         },
-        feedbackNarrative:
-          "Exigiu esforço inicial de 3 dias para configurar o script de telemetria, mas a diretoria obteve dados 100% confiáveis sem tomar um minuto sequer da equipe.",
-        pmbokConcept: "Adaptação de Processos (Tailoring) e Automação",
-        learnings: [
-          "O PMBOK 7 orienta a adaptação (tailoring) contínua dos processos. Automatizar governança maximiza o fluxo de entrega de valor.",
-        ],
-        goodBad: "good",
-        risksEvaded: ["Queda crônica de produtividade"],
-        otherConsequences: ["Esforço inicial não planejado consumido na automação"],
-      },
-      {
-        key: "c",
-        text: "Ignorar o e-mail do Diretor de TI e instruir a equipe a preencher a planilha no final do mês com estimativas fictícias.",
-        impacts: {
-          capacidadeEntrega: 5,
-          qualidadeProduto: 0,
-          saudeEquipe: -10,
-          conhecimentoOrganizacional: -15,
-        },
-        delayedImpacts: [
+        "delayedImpacts": [
           {
-            triggerAfterEvents: 2,
-            impacts: {
-              capacidadeEntrega: 0,
-              qualidadeProduto: 0,
-              saudeEquipe: -15,
-              conhecimentoOrganizacional: -15,
+            "triggerAfterEvents": 2,
+            "impacts": {
+              "capacidadeEntrega": -15,
+              "qualidadeProduto": -5,
+              "saudeEquipe": -10,
+              "conhecimentoOrganizacional": 0
             },
-            narrative:
-              "A auditoria interna identificou incoerências nas planilhas fictícias. O comitê gestor tomou uma advertência formal da Reitoria.",
-          },
+            "narrative": "A rotina de relatórios manuais drenou a energia da equipe e atrasou entregas prioritárias da release."
+          }
         ],
-        feedbackNarrative:
-          "Gerou uma cultura de maquiagem de dados. Quando a auditoria descobriu os dados falsos, a credibilidade do projeto foi destruída.",
-        pmbokConcept: "Integridade dos Dados e Governança Ética",
-        learnings: [
-          "Burlar processos em vez de negociar adaptações legítimas destrói a confiança institucional e corrompe a governança.",
+        "feedbackNarrative": "A moral despencou. A esteira de entregas foi paralisada pela sobrecarga burocrática imposta sobre as horas de trabalho do time.",
+        "pmbokConcept": "Utilização e inatividade de recursos",
+        "learnings": [
+          "Submissão passiva a processos burocráticos suga a capacidade produtiva e desengaja a equipe de desenvolvimento técnica."
         ],
-        goodBad: "bad",
-        risksEvaded: ["Perda de tempo imediata com planilhas"],
-        otherConsequences: ["Quebra ética e advertência administrativa"],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Conflito imediato com o PMO"
+        ],
+        "otherConsequences": [
+          "Perda drástica de ritmo produtivo e entregas atrasadas"
+        ]
       },
-    ],
+      {
+        "key": "c",
+        "text": "Alocar um analista administrativo exclusivamente para entrevistar a equipe o dia todo e consolidar planilhas para a gestão.",
+        "impacts": {
+          "capacidadeEntrega": -10,
+          "qualidadeProduto": -5,
+          "saudeEquipe": -5,
+          "conhecimentoOrganizacional": -5
+        },
+        "feedbackNarrative": "O analista passou o dia interrompendo os desenvolvedores no meio das tarefas. Os relatórios gerados ficaram inconsistentes.",
+        "pmbokConcept": "Papéis, responsabilidades e lacunas de conhecimento",
+        "learnings": [
+          "Adicionar intermediários sem simplificar a causa-raiz apenas adiciona ruído de comunicação e desperdício de esforço humano."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Trabalho manual direto dos seniores"
+        ],
+        "otherConsequences": [
+          "Gastos desnecessários e interrupções frequentes da equipe"
+        ]
+      }
+    ]
   },
   {
-    id: "tailoring_3_mudancas_agil_vs_ccb",
-    title: "Burocracia na Gestão de Mudanças",
+    "id": "tailoring_2_trabalho_pmo",
+    "title": "Controle Administrativo Excessivo de Horas",
     category: EventCategory.EXECUTION,
     difficulty: EventDifficulty.MEDIUM,
-    probabilityWeight: 2,
-    tags: ["mudancas", "ccb", "tailoring", "agil"],
-    learningObjective:
-      "Equilibrar a governança de mudanças formal com a adaptabilidade ágil necessária no dia a dia.",
-    communicationType: "slack",
-    senderRole: "Líder de UX",
-    description:
-      "Detectamos uma falha no fluxo de matrícula onde 40% dos alunos não encontram o botão de confirmação. A correção é simples no CSS, mas o regulamento da universidade exige abrir chamado formal no Comitê de Controle de Mudanças (CCB) que só se reúne a cada 15 dias.",
-    domainTag: "Faça a adaptação de acordo com o contexto (Tailoring)",
-    senderName: "Marina Design",
-    senderInitials: "MD",
-    avatarImage: "/Personagens/Leonara.png",
-    responsibleRole: "uxLead",
-    alternatives: [
-      {
-        key: "a",
-        text: "Aprovar a correção emergencial com o Tech Lead e PM, documentando a mudança no changelog para auditoria posterior.",
-        impacts: {
-          capacidadeEntrega: 10,
-          qualidadeProduto: 15,
-          saudeEquipe: 10,
-          conhecimentoOrganizacional: 5,
-        },
-        feedbackNarrative:
-          "A interface foi corrigida em 2 horas. As matrículas fluíram sem suporte e o CCB aprovou o rito de exceção retroativamente pela transparência documental.",
-        pmbokConcept: "Tailoring de Governança e Fluxo de Valor",
-        learnings: [
-          "Processos de mudança devem ter trilhas diferenciadas para ajustes emergenciais e de baixo risco, garantindo foco no valor ao usuário.",
-        ],
-        goodBad: "good",
-        risksEvaded: ["Milhares de alunos travados e enxurrada de suporte"],
-        otherConsequences: ["Estabelecimento de novo precedente de agilidade na universidade"],
-      },
-      {
-        key: "b",
-        text: "Submeter o formulário ao CCB e aguardar os 15 dias para não contrariar a burocracia da Diretoria de TI.",
-        impacts: {
-          capacidadeEntrega: -25,
-          qualidadeProduto: -10,
-          saudeEquipe: -10,
-          conhecimentoOrganizacional: 0,
-        },
-        feedbackNarrative:
-          "Esperamos obedientemente. Durante 15 dias, mais de 2.000 alunos ligaram desesperados para a central de atendimento e o projeto foi duramente criticado.",
-        pmbokConcept: "Rigidez Administrativa e Perda de Foco no Valor",
-        learnings: [
-          "Foco cego em compliance procedural rígido prejudica a entrega de valor ao cliente final.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Conflito político com o CCB"],
-        otherConsequences: ["Crise de imagem e sobrecarga do suporte"],
-      },
-      {
-        key: "c",
-        text: "Subir a mudança na surdina no servidor de produção, sem documentar nem avisar o CCB para resolver logo o problema.",
-        impacts: {
-          capacidadeEntrega: 10,
-          qualidadeProduto: -20,
-          saudeEquipe: 0,
-          conhecimentoOrganizacional: -20,
-        },
-        feedbackNarrative:
-          "A alteração sem versionamento sobrescreveu uma variável de sessão crítica, quebrando o módulo financeiro. Fomos autuados por Shadow IT.",
-        pmbokConcept: "Shadow IT e Violação de Integridade de Configuração",
-        learnings: [
-          "Mudanças sem rastreabilidade quebram a integridade da baseline de configuração do sistema.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Espera burocrática"],
-        otherConsequences: ["Corrupção de dados e perda grave de credibilidade"],
-      },
+    "probabilityWeight": 2,
+    "tags": [
+      "processos",
+      "desperdicio",
+      "recursos_humanos",
+      "produtividade"
     ],
+    "learningObjective": "Adaptar processos de controle gerencial sem gerar sobrecarga administrativa desnecessária sobre a equipe.",
+    "communicationType": "email",
+    "senderRole": "Diretor de TI",
+    "description": "Assunto: Diretriz de Apontamento de Horas. O novo Diretor de TI envia portaria obrigando o time técnico a preencher planilhas com 15 categorias de horas manuais para \"aumentar o controle financeiro\", gerando atrito e desperdício de tempo produtivo.",
+    "domainTag": "Recursos › Monitorar e Controlar Recursos",
+    "resourceType": "humano",
+    "resourceProcess": "monitorar",
+    "senderName": "Prof. Cláudio TI",
+    "senderInitials": "PC",
+    "avatarImage": "/Personagens/Professor.png",
+    "responsibleRole": "pm",
+    "alternatives": [
+      {
+        "key": "a",
+        "text": "Automatizar o acompanhamento do esforço através dos registros de tarefas concluídas no sistema de gestão, eliminando planilhas manuais da rotina da equipe.",
+        "impacts": {
+          "capacidadeEntrega": 15,
+          "qualidadeProduto": 10,
+          "saudeEquipe": 15,
+          "conhecimentoOrganizacional": 10
+        },
+        "feedbackNarrative": "A diretoria obteve métricas precisas sem exigir trabalho braçal repetitivo dos desenvolvedores. A equipe manteve o foco na construção das funcionalidades.",
+        "pmbokConcept": "Retrabalho e desperdício como indicadores de eficiência",
+        "learnings": [
+          "A adaptação contínua de processos deve focar em reduzir desperdícios e proteger a capacidade produtiva das pessoas."
+        ],
+        "goodBad": "good",
+        "risksEvaded": [
+          "Revolta da equipe e falsificação de dados em planilhas"
+        ],
+        "otherConsequences": [
+          "Visibilidade confiável sobre o esforço real gasto"
+        ]
+      },
+      {
+        "key": "b",
+        "text": "Acatar integralmente a portaria e penalizar membros da equipe que esquecerem de registrar frações diárias de 15 minutos.",
+        "impacts": {
+          "capacidadeEntrega": -20,
+          "qualidadeProduto": -10,
+          "saudeEquipe": -20,
+          "conhecimentoOrganizacional": 0
+        },
+        "delayedImpacts": [
+          {
+            "triggerAfterEvents": 2,
+            "impacts": {
+              "capacidadeEntrega": -10,
+              "qualidadeProduto": -10,
+              "saudeEquipe": -15,
+              "conhecimentoOrganizacional": 0
+            },
+            "narrative": "O clima de desconfiança generalizou-se e dois desenvolvedores seniores começaram a procurar vagas externas."
+          }
+        ],
+        "feedbackNarrative": "Os desenvolvedores passaram a inventar categorias de horas só para cumprir a burocracia. O clima virou de desconfiança e vigilância contínua.",
+        "pmbokConcept": "Bem-estar e prevenção de burnout",
+        "learnings": [
+          "Impor microgerenciamento de horas eleva o estresse da equipe sem gerar ganhos reais de produtividade."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Confronto com a nova diretoria"
+        ],
+        "otherConsequences": [
+          "Queda profunda de moral e perda de produtividade"
+        ]
+      },
+      {
+        "key": "c",
+        "text": "Ignorar solenemente o comunicado da diretoria e instruir a equipe a não responder aos e-mails de cobrança da chefia.",
+        "impacts": {
+          "capacidadeEntrega": 0,
+          "qualidadeProduto": 0,
+          "saudeEquipe": -15,
+          "conhecimentoOrganizacional": -20
+        },
+        "feedbackNarrative": "A diretoria congelou a liberação de bolsas para novos integrantes por considerar o time insubordinado e desalinhado com a universidade.",
+        "pmbokConcept": "Coordenação entre Recursos, Cronograma, Finanças e Risco",
+        "learnings": [
+          "Ignorar governança institucional gera retaliações orçamentárias que impactam diretamente a alocação de recursos da equipe."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Burocracia no curto prazo"
+        ],
+        "otherConsequences": [
+          "Bloqueio orçamentário de novas bolsas de desenvolvimento"
+        ]
+      }
+    ]
   },
   {
-    id: "tailoring_4_reunioes_excessivas",
-    title: "Reuniões Excessivas e Bloqueio de Foco",
+    "id": "tailoring_3_estimativa_bottomup_vs_analogia",
+    "title": "Estimativa Bottom-Up vs. por Analogia na Migração",
+    category: EventCategory.EXECUTION,
+    difficulty: EventDifficulty.MEDIUM,
+    "probabilityWeight": 2,
+    "tags": [
+      "estimativa",
+      "bottom_up",
+      "analogia",
+      "recursos_humanos"
+    ],
+    "learningObjective": "Selecionar técnicas adequadas de estimativa de esforço e recursos técnicos para migração crítica.",
+    "communicationType": "slack",
+    "senderRole": "Líder Técnico",
+    "description": "Canal #planejamento-sigaa - A diretoria exige uma estimativa de esforço em 2 horas para migrar o módulo legado de notas, sugerindo usar dados por analogia do vestibular. A equipe técnica defende uma estimativa bottom-up para decompor as dependências e evitar surpresas.",
+    "domainTag": "Recursos › Estimar Recursos",
+    "resourceType": "humano",
+    "resourceProcess": "estimar",
+    "senderName": "Carlos Silva",
+    "senderInitials": "CS",
+    "avatarImage": "/Personagens/Roberto.png",
+    "responsibleRole": "techLead",
+    "alternatives": [
+      {
+        "key": "a",
+        "text": "Negociar um spike técnico de 1 dia para estimativa bottom-up detalhada, identificando esforço real e dependências.",
+        "impacts": {
+          "capacidadeEntrega": -10,
+          "qualidadeProduto": 20,
+          "saudeEquipe": 15,
+          "conhecimentoOrganizacional": 25
+        },
+        "feedbackNarrative": "O spike revelou dezenas de procedimentos legados ocultos. A estimativa resultante foi realista e evitou que a equipe fosse pega de surpresa.",
+        "pmbokConcept": "Estimativa bottom-up de recursos",
+        "learnings": [
+          "Estimativas bottom-up decompõem atividades complexas, assegurando dimensionamento correto de capacidade e menos surpresas operacionais."
+        ],
+        "goodBad": "good",
+        "risksEvaded": [
+          "Subdimensionamento de esforço e sobrecarga oculta"
+        ],
+        "otherConsequences": [
+          "Alinhamento técnico sólido e base confiável para o cronograma"
+        ]
+      },
+      {
+        "key": "b",
+        "text": "Entregar a estimativa superficial por analogia em 30 minutos para agradar a diretoria sem investigar o código.",
+        "impacts": {
+          "capacidadeEntrega": 15,
+          "qualidadeProduto": -20,
+          "saudeEquipe": -20,
+          "conhecimentoOrganizacional": -15
+        },
+        "delayedImpacts": [
+          {
+            "triggerAfterEvents": 2,
+            "impacts": {
+              "capacidadeEntrega": -20,
+              "qualidadeProduto": -15,
+              "saudeEquipe": -15,
+              "conhecimentoOrganizacional": 0
+            },
+            "narrative": "A migração subestimada estourou em dezenas de tabelas não mapeadas, exigindo horas extras forçadas de todo o time."
+          }
+        ],
+        "feedbackNarrative": "A diretoria adorou a rapidez inicial, mas no meio da execução descobriu-se que o módulo de notas era quatro vezes mais complexo que o vestibular.",
+        "pmbokConcept": "Estimativa análoga e paramétrica",
+        "learnings": [
+          "Aplicar analogia superficial a componentes arquiteturais distintos gera distorções graves de estimativa e esgotamento da equipe."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Pressão imediata da diretoria por respostas rápidas"
+        ],
+        "otherConsequences": [
+          "Retrabalho severo e estouro inevitável de prazos"
+        ]
+      },
+      {
+        "key": "c",
+        "text": "Travar todo o desenvolvimento por três semanas para montar uma planilha exaustiva de cada linha de código legado.",
+        "impacts": {
+          "capacidadeEntrega": -30,
+          "qualidadeProduto": 10,
+          "saudeEquipe": -10,
+          "conhecimentoOrganizacional": 5
+        },
+        "feedbackNarrative": "O time gastou semanas refinando linhas teóricas enquanto as entregas urgentes pararam completamente. A diretoria questionou a paralisia do projeto.",
+        "pmbokConcept": "Análise de alternativas na estimativa",
+        "learnings": [
+          "Paralisar a esteira inteira por preciosismo de estimativa consome recursos preciosos sem antecipar entregas concretas."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Incertezas microscópicas no planejamento"
+        ],
+        "otherConsequences": [
+          "Paralisia por análise e desperdício de capacidade de entrega"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tailoring_4_reunioes_excessivas",
+    "title": "Excesso de Reuniões e Sobrecarga de Comunicação",
     category: EventCategory.PEOPLE,
     difficulty: EventDifficulty.EASY,
-    probabilityWeight: 2,
-    tags: ["reunioes", "foco", "lean", "tailoring"],
-    learningObjective:
-      "Otimizar ritos de equipe para proteger o tempo de foco e trabalho profundo (Deep Work).",
-    communicationType: "slack",
-    senderRole: "Líder Técnico",
-    description:
-      "A equipe está participando de 4 reuniões diárias (alinhamento, daily com clientes, checkpoint com suporte e retrospectiva informal), totalizando 3 horas diárias. Os desenvolvedores relatam que não conseguem mais entrar em estado de concentração profunda.",
-    domainTag: "Faça a adaptação de acordo com o contexto (Tailoring)",
-    senderName: "Roberto Arquiteto",
-    senderInitials: "RA",
-    avatarImage: "/Personagens/Roberto.png",
-    responsibleRole: "pm",
-    alternatives: [
-      {
-        key: "a",
-        text: "Consolidar em uma única daily de 15 minutos em pé (timeboxed) e migrar os demais alinhamentos para canais assíncronos no Slack.",
-        impacts: {
-          capacidadeEntrega: 20,
-          qualidadeProduto: 10,
-          saudeEquipe: 15,
-          conhecimentoOrganizacional: 5,
-        },
-        feedbackNarrative:
-          "A mudança devolveu 2h30 diárias de programação para cada desenvolvedor. O ritmo de commits aumentou e o estresse diminuiu visivelmente.",
-        pmbokConcept: "Comunicação Eficiente e Eliminação de Desperdício de Tempo",
-        learnings: [
-          "Ritos ágeis devem ser enxutos e respeitar o timebox. Comunicação assíncrona protege o trabalho focado.",
-        ],
-        goodBad: "good",
-        risksEvaded: ["Atrasos crônicos por fragmentação do tempo"],
-        otherConsequences: ["Maior clareza e síntese na comunicação da equipe"],
-      },
-      {
-        key: "b",
-        text: 'Manter todas as reuniões presenciais para garantir que "ninguém fique com dúvidas".',
-        impacts: {
-          capacidadeEntrega: -20,
-          qualidadeProduto: -5,
-          saudeEquipe: -20,
-          conhecimentoOrganizacional: 0,
-        },
-        feedbackNarrative:
-          "A exaustão tomou conta. Para compensar o tempo perdido em reuniões, o time começou a codificar às pressas à noite, gerando erros primários de lógica.",
-        pmbokConcept: "Fadiga por Reuniões (Zoom/Meeting Fatigue)",
-        learnings: [
-          "Excesso de reuniões síncronas fragmenta a atenção e destrói a produtividade técnica.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Risco de desalinhamento verbal"],
-        otherConsequences: ["Fadiga mental e queda de rendimento"],
-      },
-      {
-        key: "c",
-        text: "Cancelar todas as reuniões do projeto e proibir qualquer comunicação síncrona.",
-        impacts: {
-          capacidadeEntrega: 10,
-          qualidadeProduto: -15,
-          saudeEquipe: -10,
-          conhecimentoOrganizacional: -20,
-        },
-        feedbackNarrative:
-          "O time ganhou tempo, mas cada desenvolvedor construiu telas com regras divergentes por falta de alinhamento básico, exigindo retrabalho de integração.",
-        pmbokConcept: "Extremismo de Processo e Isolamento",
-        learnings: [
-          "Eliminar ritos necessários sem canais alternativos causa silos e desalinhamento arquitetural.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Tempo gasto em reuniões"],
-        otherConsequences: ["Retrabalho por desalinhamento e retrabalho de integração"],
-      },
+    "probabilityWeight": 2,
+    "tags": [
+      "reunioes",
+      "comunicacao",
+      "recursos_humanos",
+      "foco"
     ],
+    "learningObjective": "Otimizar canais de comunicação e acordos de trabalho para proteger o tempo de foco da equipe.",
+    "communicationType": "slack",
+    "senderRole": "Líder Técnico",
+    "description": "Canal #geral - Desenvolvedores relatam que têm mais de 4 horas de reuniões diárias síncronas entre alinhamentos e comitês. Ninguém consegue focar em desenvolver código, e a capacidade de entrega da equipe está desabando por fragmentação da atenção.",
+    "domainTag": "Recursos › Liderar a Equipe",
+    "resourceType": "humano",
+    "resourceProcess": "liderar",
+    "senderName": "Carlos Silva",
+    "senderInitials": "CS",
+    "avatarImage": "/Personagens/Roberto.png",
+    "responsibleRole": "techLead",
+    "alternatives": [
+      {
+        "key": "a",
+        "text": "Adotar comunicação assíncrona, fixar bloco livre de reuniões e restringir rituais síncronos a 15 minutos diários.",
+        "impacts": {
+          "capacidadeEntrega": 20,
+          "qualidadeProduto": 10,
+          "saudeEquipe": 20,
+          "conhecimentoOrganizacional": 10
+        },
+        "feedbackNarrative": "Com blocos de foco contínuo e rituais objetivos, a produtividade dobrou e a sensação de exaustão mental diminuiu radicalmente.",
+        "pmbokConcept": "Team charter e operações da equipe",
+        "learnings": [
+          "Acordos de equipe e canais assíncronos protegem o tempo de dedicação profunda e previnem o esgotamento por excesso de reuniões."
+        ],
+        "goodBad": "good",
+        "risksEvaded": [
+          "Fadiga de reuniões e perda de prazos técnicos"
+        ],
+        "otherConsequences": [
+          "Fluxo de desenvolvimento contínuo e maior satisfação"
+        ]
+      },
+      {
+        "key": "b",
+        "text": "Manter todas as reuniões e solicitar que o time compense as horas de desenvolvimento à noite em regime extraordinário.",
+        "impacts": {
+          "capacidadeEntrega": -15,
+          "qualidadeProduto": -10,
+          "saudeEquipe": -25,
+          "conhecimentoOrganizacional": 0
+        },
+        "delayedImpacts": [
+          {
+            "triggerAfterEvents": 2,
+            "impacts": {
+              "capacidadeEntrega": -15,
+              "qualidadeProduto": -10,
+              "saudeEquipe": -15,
+              "conhecimentoOrganizacional": 0
+            },
+            "narrative": "A sobrecarga crônica de reuniões somada a noites extras provocou estafa e licenças médicas."
+          }
+        ],
+        "feedbackNarrative": "Os desenvolvedores ficaram esgotados. A taxa de erros no código disparou e duas pessoas ameaçaram abandonar o projeto.",
+        "pmbokConcept": "Bem-estar e prevenção de burnout",
+        "learnings": [
+          "Compensar ineficiências de gestão com horas extras noturnas destrói o bem-estar e a sustentabilidade da equipe."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Confronto com gestores que adoram reuniões"
+        ],
+        "otherConsequences": [
+          "Burnout acelerado e aumento exponencial de defeitos"
+        ]
+      },
+      {
+        "key": "c",
+        "text": "Cancelar sumariamente todas as reuniões e alinhamentos técnicos, deixando cada desenvolvedor trabalhar isolado.",
+        "impacts": {
+          "capacidadeEntrega": 10,
+          "qualidadeProduto": -20,
+          "saudeEquipe": -10,
+          "conhecimentoOrganizacional": -25
+        },
+        "feedbackNarrative": "Sem alinhamentos, cada pessoa seguiu em uma direção oposta. Surgiram componentes duplicados e incompatíveis no repositório.",
+        "pmbokConcept": "Visão e objetivos compartilhados",
+        "learnings": [
+          "Eliminar alinhamentos por completo destrói o entendimento compartilhado e fragmenta os objetivos da equipe."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Tempo gasto em conversas de alinhamento"
+        ],
+        "otherConsequences": [
+          "Perda de visão compartilhada e integrações quebradas"
+        ]
+      }
+    ]
   },
   {
-    id: "tailoring_5_especificacao_excessiva",
-    title: "Especificações Extensas vs Histórias Ágeis",
-    category: EventCategory.KNOWLEDGE,
-    difficulty: EventDifficulty.MEDIUM,
-    probabilityWeight: 2,
-    tags: ["especificacao", "documentacao", "tailoring", "agil"],
-    learningObjective: "Adequar o nível de documentação técnica ao contexto de entrega contínua.",
-    communicationType: "email",
-    senderRole: "Analista de Negócios",
-    description:
-      "Assunto: Especificação do Módulo de Bolsas. O setor pedagógico enviou um documento de requisitos em formato DOCX com 180 páginas, exigindo que a equipe de engenharia leia e assine todas as páginas antes de iniciar qualquer linha de código.",
-    domainTag: "Faça a adaptação de acordo com o contexto (Tailoring)",
-    senderName: "Rainara Negócios",
-    senderInitials: "RN",
-    avatarImage: "/Personagens/Rainara.png",
-    responsibleRole: "techLead",
-    alternatives: [
-      {
-        key: "a",
-        text: "Fatiar o documento em User Stories incrementais com critérios de aceitação claros (BDD/Gherkin) validados semanalmente com o setor.",
-        impacts: {
-          capacidadeEntrega: 15,
-          qualidadeProduto: 15,
-          saudeEquipe: 10,
-          conhecimentoOrganizacional: 15,
-        },
-        feedbackNarrative:
-          "A conversão em histórias permitiu entregas quinzenais de valor. O setor pedagógico adorou poder testar partes funcionais desde a primeira sprint.",
-        pmbokConcept: "Decomposição Progressiva e Foco no Valor Incremental",
-        learnings: [
-          "Documentos gigantescos congelam o escopo e criam ilusão de certeza. Histórias de usuário incrementais viabilizam feedback rápido.",
-        ],
-        goodBad: "good",
-        risksEvaded: ["Trabalho travado por semanas em leitura de documentos estáticos"],
-        otherConsequences: ["Parceria mais próxima com o cliente pedagógico"],
-      },
-      {
-        key: "b",
-        text: "Parar todo o time de desenvolvimento por 3 semanas para ler, validar e assinar o documento de 180 páginas.",
-        impacts: {
-          capacidadeEntrega: -30,
-          qualidadeProduto: -5,
-          saudeEquipe: -15,
-          conhecimentoOrganizacional: 5,
-        },
-        feedbackNarrative:
-          "Após 3 semanas de leitura exaustiva, quando o código começou a ser feito, o setor mudou as regras das bolsas, tornando 60% do documento inútil.",
-        pmbokConcept: "Desperdício de Inventário de Requisitos (Lean Muda)",
-        learnings: [
-          "Gerar grandes estoques de documentação antes da implementação gera desperdício quando as necessidades de negócio mudam.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Conflito com o setor de bolsas"],
-        otherConsequences: ["Atraso generalizado e retrabalho de documentação"],
-      },
-      {
-        key: "c",
-        text: "Ignorar o documento completamente e programar o módulo de bolsas baseado apenas no que o desenvolvedor acha que é o correto.",
-        impacts: {
-          capacidadeEntrega: 10,
-          qualidadeProduto: -25,
-          saudeEquipe: -10,
-          conhecimentoOrganizacional: -15,
-        },
-        feedbackNarrative:
-          "O módulo foi programado rápido, mas calculou os valores de bolsas de forma errônea, violando regras federais e gerando escândalo na pró-reitoria.",
-        pmbokConcept: "Negligência de Regras de Negócio e Falta de Alinhamento",
-        learnings: [
-          "Agilidade não significa ausência de requisitos; significa obter requisitos de forma iterativa e estruturada.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Tempo de leitura"],
-        otherConsequences: ["Violação legal e cálculo indevido de bolsas"],
-      },
-    ],
-  },
-  {
-    id: "tailoring_6_homologacao_design",
-    title: "Cadeia Lenta de Homologação de Telas",
+    "id": "tailoring_5_team_charter_silos",
+    "title": "Equipe em Silos: Team Charter e Acordos de Convivência",
     category: EventCategory.PEOPLE,
     difficulty: EventDifficulty.MEDIUM,
-    probabilityWeight: 2,
-    tags: ["ux", "aprovacao", "tailoring", "design"],
-    learningObjective:
-      "Desburocratizar a validação de design focando na experiência real do usuário.",
-    communicationType: "slack",
-    senderRole: "Líder de UX",
-    description:
-      "A Pró-Reitoria de Planejamento instituiu uma comissão de 6 chefes de departamento que exigem assinar um parecer impresso para cada tela nova criada no Figma antes que os desenvolvedores possam codificar.",
-    domainTag: "Faça a adaptação de acordo com o contexto (Tailoring)",
-    senderName: "Leonara UX",
-    senderInitials: "LU",
-    avatarImage: "/Personagens/Leonara.png",
-    responsibleRole: "uxLead",
-    alternatives: [
-      {
-        key: "a",
-        text: "Propor testes de usabilidade gravados com 5 alunos e 5 professores reais, apresentando os relatórios objetivos de usabilidade à comissão.",
-        impacts: {
-          capacidadeEntrega: 10,
-          qualidadeProduto: 20,
-          saudeEquipe: 15,
-          conhecimentoOrganizacional: 15,
-        },
-        feedbackNarrative:
-          "Os dados concretos dos testes com alunos deixaram a comissão maravilhada. O processo de aprovação passou de 10 dias para 24 horas com base em dados de uso.",
-        pmbokConcept: "Decisões Baseadas em Evidências e Foco no Usuário",
-        learnings: [
-          "Substituir opiniões subjetivas de comissões por dados reais de testes de usabilidade acelera o fluxo e melhora o produto.",
-        ],
-        goodBad: "good",
-        risksEvaded: ["Bloqueio de desenvolvimento aguardando assinaturas"],
-        otherConsequences: ["Cultura de design orientada a dados na instituição"],
-      },
-      {
-        key: "b",
-        text: "Aceitar a burocracia e enviar pastas de pareceres impressos para colher assinaturas sala por sala.",
-        impacts: {
-          capacidadeEntrega: -20,
-          qualidadeProduto: -10,
-          saudeEquipe: -15,
-          conhecimentoOrganizacional: 0,
-        },
-        feedbackNarrative:
-          "Cada chefe pediu uma cor e um botão diferente, criando uma interface esquizofrênica e atrasando o projeto em semanas.",
-        pmbokConcept: "Design por Comitê e Perda de Coerência",
-        learnings: [
-          "Tentar agradar múltiplos stakeholders sem critérios técnicos de UX destrói a usabilidade do sistema.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Desagradar a comissão de planejamento"],
-        otherConsequences: ["Interface confusa e lentidão burocrática"],
-      },
-      {
-        key: "c",
-        text: "Remover toda a equipe de design e deixar os desenvolvedores criarem as telas diretamente em HTML sem validação.",
-        impacts: {
-          capacidadeEntrega: 15,
-          qualidadeProduto: -30,
-          saudeEquipe: -5,
-          conhecimentoOrganizacional: -10,
-        },
-        feedbackNarrative:
-          "O sistema ficou funcionalmente rápido, mas com uma interface hostil e inacessível, gerando milhares de reclamações de estudantes no primeiro dia.",
-        pmbokConcept: "Descarte de Qualidade Visual e Acessibilidade",
-        learnings: [
-          "Cortar etapas de design para ganhar velocidade gera produtos de baixíssima adoção e alto custo de suporte.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Espera pela comissão"],
-        otherConsequences: ["Rejeição massiva da comunidade acadêmica"],
-      },
+    "probabilityWeight": 2,
+    "tags": [
+      "silos",
+      "team_charter",
+      "colaboracao",
+      "ux_dev"
     ],
+    "learningObjective": "Construir propriedade compartilhada e acordos de trabalho entre equipes de design e engenharia.",
+    "communicationType": "slack",
+    "senderRole": "Líder de UX",
+    "description": "Canal #design-dev - Os responsáveis pela lógica interna do sistema e a equipe de design de telas estão trabalhando isolados em áreas separadas. Modelos de tela são desenhados sem avaliar a viabilidade prática e o sistema final fica diferente do planejado, gerando disputas e retrabalho constante.",
+    "domainTag": "Recursos › Liderar a Equipe",
+    "resourceType": "humano",
+    "resourceProcess": "liderar",
+    "senderName": "Marina (Design de Telas)",
+    "senderInitials": "MD",
+    "avatarImage": "/Personagens/Beatriz.png",
+    "responsibleRole": "uxLead",
+    "alternatives": [
+      {
+        "key": "a",
+        "text": "Facilitar workshop conjunto para criar um Team Charter com acordos de trabalho e definição de pronto compartilhada.",
+        "impacts": {
+          "capacidadeEntrega": 10,
+          "qualidadeProduto": 20,
+          "saudeEquipe": 20,
+          "conhecimentoOrganizacional": 20
+        },
+        "feedbackNarrative": "O Team Charter definiu cerimônias de pareamento semanal e critérios claros de transição. As equipes passaram a colaborar como um único time.",
+        "pmbokConcept": "Team charter e operações da equipe",
+        "learnings": [
+          "Acordos de trabalho explícitos (Team Charter) alinham expectativas, dissolvem silos e estabelecem colaboração efetiva entre papéis multidisciplinares."
+        ],
+        "goodBad": "good",
+        "risksEvaded": [
+          "Atritos interpessoais crônicos e retrabalho de telas"
+        ],
+        "otherConsequences": [
+          "Cultura de respeito mútuo e integração fluida entre design e código"
+        ]
+      },
+      {
+        "key": "b",
+        "text": "Estabelecer que o time de UX só passa especificações via chamados formais sem reuniões diretas com desenvolvedores.",
+        "impacts": {
+          "capacidadeEntrega": -15,
+          "qualidadeProduto": -15,
+          "saudeEquipe": -20,
+          "conhecimentoOrganizacional": -10
+        },
+        "delayedImpacts": [
+          {
+            "triggerAfterEvents": 2,
+            "impacts": {
+              "capacidadeEntrega": -15,
+              "qualidadeProduto": -10,
+              "saudeEquipe": -15,
+              "conhecimentoOrganizacional": 0
+            },
+            "narrative": "A formalização burocrática aumentou a distância entre UX e dev, duplicando o número de tickets de ajuste."
+          }
+        ],
+        "feedbackNarrative": "A burocratização formal aprofundou a divisão entre as equipes. Tickets passaram a ser respondidos com frieza e lentidão.",
+        "pmbokConcept": "Resolução de problemas e conflitos",
+        "learnings": [
+          "Isolar áreas em canais de chamados formais cristaliza silos e impede a resolução colaborativa de problemas da equipe."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Discussões acaloradas no canal aberto"
+        ],
+        "otherConsequences": [
+          "Aprofundamento de barreiras culturais e hostilidade velada"
+        ]
+      },
+      {
+        "key": "c",
+        "text": "Instruir os desenvolvedores a ignorarem o protótipo de UX e codificarem a interface conforme conveniência do banco.",
+        "impacts": {
+          "capacidadeEntrega": 10,
+          "qualidadeProduto": -25,
+          "saudeEquipe": -20,
+          "conhecimentoOrganizacional": -15
+        },
+        "feedbackNarrative": "A interface ficou confusa para os usuários finais e os designers se sentiram desrespeitados e desmotivados no projeto.",
+        "pmbokConcept": "Propriedade compartilhada do projeto",
+        "learnings": [
+          "Desconsiderar contribuições especializadas destrói a propriedade compartilhada e afeta a integridade do produto final."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Esforço de alinhar código com o protótipo visual"
+        ],
+        "otherConsequences": [
+          "Desengajamento profundo da equipe de design e experiência do usuário deficiente"
+        ]
+      }
+    ]
   },
   {
-    id: "tailoring_7_deploy_manual",
-    title: "Deploy Manual em 14 Etapas Noturnas",
+    "id": "tailoring_6_homologacao_design",
+    "title": "Ociosidade Forçada por Homologação Centralizada de UX",
+    category: EventCategory.EXECUTION,
+    difficulty: EventDifficulty.MEDIUM,
+    "probabilityWeight": 2,
+    "tags": [
+      "fluxo",
+      "gargalo",
+      "ux",
+      "ociosidade"
+    ],
+    "learningObjective": "Mitigar gargalos e inatividade de desenvolvedores capacitando a equipe com padrões e delegação.",
+    "communicationType": "slack",
+    "senderRole": "Líder de UX",
+    "description": "Canal #design - Toda entrega de tela precisa da validação formal individual da coordenadora de design. Três profissionais de interface estão com tarefas prontas paradas e sem novas atribuições, gerando ociosidade involuntária da equipe.",
+    "domainTag": "Recursos › Monitorar e Controlar Recursos",
+    "resourceType": "humano",
+    "resourceProcess": "monitorar",
+    "senderName": "Marina (Design de Telas)",
+    "senderInitials": "MD",
+    "avatarImage": "/Personagens/Beatriz.png",
+    "responsibleRole": "uxLead",
+    "alternatives": [
+      {
+        "key": "a",
+        "text": "Capacitar a equipe em um padrão visual comum com critérios claros de autoavaliação, liberando a coordenadora para os casos mais complexos.",
+        "impacts": {
+          "capacidadeEntrega": 20,
+          "qualidadeProduto": 15,
+          "saudeEquipe": 15,
+          "conhecimentoOrganizacional": 20
+        },
+        "feedbackNarrative": "A fila de aprovação zerou. Os desenvolvedores aprenderam os princípios do Design System e a coordenadora focou em melhorias estruturais.",
+        "pmbokConcept": "Empoderamento, delegação e autonomia",
+        "learnings": [
+          "Delegar validações rotineiras por meio de diretrizes claras elimina tempo ocioso e desenvolve as competências técnicas da equipe."
+        ],
+        "goodBad": "good",
+        "risksEvaded": [
+          "Bloqueios no fluxo de trabalho e atraso nas entregas"
+        ],
+        "otherConsequences": [
+          "Agilidade no fluxo de homologação e maturidade compartilhada"
+        ]
+      },
+      {
+        "key": "b",
+        "text": "Manter a fila centralizada de aprovação e mandar os profissionais adiantarem tarefas aleatórias sem desenho definido.",
+        "impacts": {
+          "capacidadeEntrega": -20,
+          "qualidadeProduto": -15,
+          "saudeEquipe": -15,
+          "conhecimentoOrganizacional": -10
+        },
+        "delayedImpacts": [
+          {
+            "triggerAfterEvents": 2,
+            "impacts": {
+              "capacidadeEntrega": -15,
+              "qualidadeProduto": -10,
+              "saudeEquipe": -10,
+              "conhecimentoOrganizacional": 0
+            },
+            "narrative": "O código adiantado sem aprovação gerou telas fora de padrão que precisaram ser reconstruídas do zero."
+          }
+        ],
+        "feedbackNarrative": "Os desenvolvedores criaram componentes improvisados que violavam a acessibilidade. A fila de revisão duplicou de tamanho.",
+        "pmbokConcept": "Utilização e inatividade de recursos",
+        "learnings": [
+          "Ocupar pessoas com trabalho sem direção para disfarçar ociosidade gera retrabalho massivo e desperdício de esforço."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Aparência imediata de time parado"
+        ],
+        "otherConsequences": [
+          "Retrabalho severo e despadronização de interface"
+        ]
+      },
+      {
+        "key": "c",
+        "text": "Eliminar qualquer validação de design e publicar telas diretamente em produção sem critérios de consistência.",
+        "impacts": {
+          "capacidadeEntrega": 10,
+          "qualidadeProduto": -30,
+          "saudeEquipe": -10,
+          "conhecimentoOrganizacional": -20
+        },
+        "feedbackNarrative": "Telas com botões sobrepostos e fontes ilegíveis foram para o ar, gerando avalanche de reclamações de estudantes e professores.",
+        "pmbokConcept": "Retrabalho e desperdício como indicadores de eficiência",
+        "learnings": [
+          "Eliminar controles de qualidade sem maturidade processual resulta em refugo de código e retrabalho desastroso."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Esforço de revisão"
+        ],
+        "otherConsequences": [
+          "Reclamações públicas e retrabalho emergencial"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tailoring_7_deploy_manual",
+    "title": "Atualização Manual Noturna vs Automação de Publicação",
     category: EventCategory.INFRASTRUCTURE,
     difficulty: EventDifficulty.HARD,
-    probabilityWeight: 2,
-    tags: ["devops", "deploy", "tailoring", "automacao"],
-    learningObjective:
-      "Substituir procedimentos operacionais manuais suscetíveis a erro humano por pipelines automatizados.",
-    communicationType: "ticket",
-    senderRole: "Líder Técnico",
-    description:
-      "Ticket #1105 - Operação de Release. O processo atual de publicação em produção exige que 2 engenheiros fiquem acordados na madrugada executando manualmente 14 comandos SQL e cópias de arquivos FTP. Falhas humanas já ocorreram em 3 das últimas 4 publicações.",
-    domainTag: "Faça a adaptação de acordo com o contexto (Tailoring)",
-    senderName: "Kendrick DevOps",
-    senderInitials: "KD",
-    avatarImage: "/Personagens/Kendrick.png",
-    responsibleRole: "techLead",
-    alternatives: [
-      {
-        key: "a",
-        text: "Investir 1 sprint para implementar pipeline de CI/CD automatizado com rollback automático e testes de fumaça.",
-        impacts: {
-          capacidadeEntrega: -15,
-          qualidadeProduto: 25,
-          saudeEquipe: 20,
-          conhecimentoOrganizacional: 15,
-        },
-        feedbackNarrative:
-          "O esforço inicial foi pago em 2 semanas. Os deploys agora ocorrem em 4 minutos durante o horário comercial sem quedas e sem madrugadas perdidas.",
-        pmbokConcept: "Automação de Processos e Excelência Técnica",
-        learnings: [
-          "Processos operacionais repetitivos devem ser automatizados para eliminar falhas humanas e proteger a saúde da equipe.",
-        ],
-        goodBad: "good",
-        risksEvaded: ["Erros manuais graves em produção e exaustão noturna"],
-        otherConsequences: ["Confiabilidade extrema nas entregas contínuas"],
-      },
-      {
-        key: "b",
-        text: "Criar um checklist impresso em papel de 30 páginas e exigir que os engenheiros assinem com caneta cada comando executado às 3h da manhã.",
-        impacts: {
-          capacidadeEntrega: -15,
-          qualidadeProduto: -15,
-          saudeEquipe: -20,
-          conhecimentoOrganizacional: 0,
-        },
-        feedbackNarrative:
-          "O cansaço da madrugada continuou causando erros. O checklist burocrático apenas serviu para culpar individualmente os desenvolvedores exaustos.",
-        pmbokConcept: "Ilusão de Controle Burocrático",
-        learnings: [
-          "Checklists burocráticos manuais não resolvem problemas estruturais de engenharia de software.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Custo imediato de criação de pipelines"],
-        otherConsequences: ["Erros recorrentes e desmotivação crônica"],
-      },
-      {
-        key: "c",
-        text: "Espaçar os deploys para ocorrerem apenas 1 vez a cada 6 meses para diminuir a frequência do sofrimento.",
-        impacts: {
-          capacidadeEntrega: -25,
-          qualidadeProduto: -20,
-          saudeEquipe: -10,
-          conhecimentoOrganizacional: -10,
-        },
-        feedbackNarrative:
-          'Acumular 6 meses de alterações em um único deploy gerou um "Big Bang" catastrófico. O sistema ficou fora do ar por 3 dias para estabilização.',
-        pmbokConcept: "Entregas em Lotes Grandes (Large Batch Size)",
-        learnings: [
-          "Aumentar o tamanho do lote de entrega aumenta exponencialmente o risco e a complexidade da integração.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Frequência de deploys noturnos"],
-        otherConsequences: ["Queda catastrófica do sistema em produção"],
-      },
+    "probabilityWeight": 2,
+    "tags": [
+      "ci_cd",
+      "automacao",
+      "recursos_virtuais",
+      "burnout"
     ],
+    "learningObjective": "Adquirir e implementar recursos virtuais automatizados para liberar a equipe de tarefas exaustivas.",
+    "communicationType": "ticket",
+    "senderRole": "Líder Técnico",
+    "description": "Ticket #1042 - As atualizações do novo SIGAA são feitas manualmente às 23h de sexta-feira, exigindo três profissionais acordados de madrugada. Erros manuais de digitação travam o sistema todo fim de semana e geram exaustão crônica da equipe.",
+    "domainTag": "Recursos › Monitorar e Controlar Recursos",
+    "resourceType": "fisico_virtual",
+    "resourceProcess": "monitorar",
+    "senderName": "Kendrick (Infraestrutura)",
+    "senderInitials": "KD",
+    "avatarImage": "/Personagens/Kendrick.png",
+    "responsibleRole": "techLead",
+    "alternatives": [
+      {
+        "key": "a",
+        "text": "Implantar uma ferramenta automatizada de publicação com testes e retorno automático à versão anterior em caso de erro, eliminando o trabalho manual noturno.",
+        "impacts": {
+          "capacidadeEntrega": 20,
+          "qualidadeProduto": 20,
+          "saudeEquipe": 20,
+          "conhecimentoOrganizacional": 15
+        },
+        "feedbackNarrative": "As atualizações passaram a durar 4 minutos em horário normal de trabalho com zero intervenção manual desgastante. A equipe dorme tranquila nos fins de semana.",
+        "pmbokConcept": "Melhoria contínua",
+        "learnings": [
+          "Substituir intervenções manuais exaustivas por ferramentas virtuais automatizadas eleva a confiabilidade e preserva a saúde da equipe."
+        ],
+        "goodBad": "good",
+        "risksEvaded": [
+          "Erros humanos noturnos e esgotamento da equipe de infraestrutura"
+        ],
+        "otherConsequences": [
+          "Processo de entrega previsível e fim do trabalho extraordinário aos fins de semana"
+        ]
+      },
+      {
+        "key": "b",
+        "text": "Manter as atualizações manuais noturnas e instituir escala rotativa obrigatória para que ninguém reclame sozinho das madrugadas.",
+        "impacts": {
+          "capacidadeEntrega": -15,
+          "qualidadeProduto": -10,
+          "saudeEquipe": -25,
+          "conhecimentoOrganizacional": 0
+        },
+        "delayedImpacts": [
+          {
+            "triggerAfterEvents": 2,
+            "impacts": {
+              "capacidadeEntrega": -10,
+              "qualidadeProduto": -15,
+              "saudeEquipe": -15,
+              "conhecimentoOrganizacional": 0
+            },
+            "narrative": "Um erro de digitação na atualização manual de sexta corrompeu o cadastro de turmas e manteve três pessoas trabalhando no domingo."
+          }
+        ],
+        "feedbackNarrative": "A rotação apenas distribuiu a insatisfação igualmente entre todos. Erros manuais continuaram derrubando os servidores.",
+        "pmbokConcept": "Bem-estar e prevenção de burnout",
+        "learnings": [
+          "Rotacionar tarefas degradantes e propensas a falhas não soluciona a causa-raiz e espalha a desmotivação pelo time."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Custo inicial de configurar ferramenta de automação"
+        ],
+        "otherConsequences": [
+          "Permanência de falhas críticas e descontentamento generalizado"
+        ]
+      },
+      {
+        "key": "c",
+        "text": "Fazer as atualizações manuais diretamente no meio do expediente comercial na segunda-feira sem servidor de testes prévio.",
+        "impacts": {
+          "capacidadeEntrega": -20,
+          "qualidadeProduto": -25,
+          "saudeEquipe": -15,
+          "conhecimentoOrganizacional": -10
+        },
+        "feedbackNarrative": "O servidor reiniciou durante o horário de pico e derrubou o sistema de matrículas. A Reitoria exigiu explicações imediatas.",
+        "pmbokConcept": "Retrabalho e desperdício como indicadores de eficiência",
+        "learnings": [
+          "Ignorar processos seguros de atualização do sistema gera indisponibilidade crítica e retrabalho de suporte em larga escala."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Trabalho noturno na sexta-feira"
+        ],
+        "otherConsequences": [
+          "Indisponibilidade pública e crise institucional com usuários"
+        ]
+      }
+    ]
   },
   {
-    id: "tailoring_8_duplicacao_cadastros",
-    title: "Duplicação de Formulários Administrativos",
-    category: EventCategory.EXECUTION,
-    difficulty: EventDifficulty.EASY,
-    probabilityWeight: 2,
-    tags: ["desperdicio", "sistemas", "tailoring", "integracao"],
-    learningObjective:
-      "Identificar atividades redundantes e integrar fluxos para poupar capacidade operacional.",
-    communicationType: "slack",
-    senderRole: "Desenvolvedor Pleno",
-    description:
-      "Para cada nova disciplina criada no novo SIGAA, a equipe é obrigada a abrir o sistema contábil legado da universidade e redigitar manualmente os mesmos 25 campos, gastando 4 horas por semana em trabalho duplicado.",
-    domainTag: "Faça a adaptação de acordo com o contexto (Tailoring)",
-    senderName: "Kenedy Backend",
-    senderInitials: "KB",
-    avatarImage: "/Personagens/Kenedy.png",
-    responsibleRole: "techLead",
-    alternatives: [
-      {
-        key: "a",
-        text: "Desenvolver um script webhook simples de sincronização em segundo plano entre o novo SGA e o banco legado.",
-        impacts: {
-          capacidadeEntrega: 15,
-          qualidadeProduto: 10,
-          saudeEquipe: 10,
-          conhecimentoOrganizacional: 10,
-        },
-        feedbackNarrative:
-          "O script eliminou 100% da digitação manual. Os dados agora sincronizam em tempo real e os desenvolvedores ganharam meio dia útil por semana.",
-        pmbokConcept: "Eliminação de Tarefas Manuais Redundantes (Lean)",
-        learnings: [
-          "Integrar sistemas para eliminar redigitação de dados é um dos maiores ganhos de eficiência em modernização de legado.",
-        ],
-        goodBad: "good",
-        risksEvaded: ["Erros de digitação e inconsistência entre bases de dados"],
-        otherConsequences: ["Maior integridade de dados na instituição"],
-      },
-      {
-        key: "b",
-        text: "Determinar que os desenvolvedores continuem redigitando manualmente tudo para não mexer no código legado.",
-        impacts: {
-          capacidadeEntrega: -15,
-          qualidadeProduto: -5,
-          saudeEquipe: -15,
-          conhecimentoOrganizacional: 0,
-        },
-        feedbackNarrative:
-          "Erros de digitação geraram disciplinas com códigos trocados, impedindo centenas de alunos de se formarem no semestre.",
-        pmbokConcept: "Conformismo com Ineficiência Operacional",
-        learnings: [
-          "Aceitar processos manuais falhos por medo de tocar no legado cobra um preço altíssimo em qualidade e suporte.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Esforço de desenvolvimento do webhook"],
-        otherConsequences: ["Inconsistência de dados acadêmicos"],
-      },
-      {
-        key: "c",
-        text: "Parar de cadastrar as disciplinas no sistema contábil e ignorar a exigência da pró-reitoria financeira.",
-        impacts: {
-          capacidadeEntrega: 5,
-          qualidadeProduto: 0,
-          saudeEquipe: -10,
-          conhecimentoOrganizacional: -20,
-        },
-        feedbackNarrative:
-          "A ausência dos dados contábeis travou o repasse de bolsas dos professores das disciplinas, gerando protestos no campus.",
-        pmbokConcept: "Ruptura Inconsequente de Processo",
-        learnings: [
-          "Ignorar processos financeiros sem fornecer alternativa técnica gera impactos regulatórios severos.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Trabalho de digitação"],
-        otherConsequences: ["Paralisação de bolsas e atrito institucional"],
-      },
-    ],
-  },
-  {
-    id: "tailoring_9_estimativas_excessivas",
-    title: "Estimativas Minuciosas vs Fluxo Contínuo",
-    category: EventCategory.KNOWLEDGE,
+    "id": "tailoring_8_equipe_virtual_colaboracao",
+    "title": "Equipe Virtual Distribuída e Baixa Colaboração",
+    category: EventCategory.PEOPLE,
     difficulty: EventDifficulty.MEDIUM,
-    probabilityWeight: 2,
-    tags: ["estimativas", "planejamento", "tailoring", "agil"],
-    learningObjective:
-      "Adaptar o planejamento para focar na entrega contínua em vez de previsões excessivamente detalhadas.",
-    communicationType: "email",
-    senderRole: "Gerente de Projetos",
-    description:
-      "Assunto: Cerimônias de Planejamento. O time está gastando toda segunda-feira (8 horas) debatendo se cada tarefa de ajuste tem 3, 5 ou 8 Story Points, gerando discussões exaustivas sobre estimativas que quase nunca se concretizam.",
-    domainTag: "Faça a adaptação de acordo com o contexto (Tailoring)",
-    senderName: "Lívia Gestora",
-    senderInitials: "LG",
-    avatarImage: "/Personagens/Lívia.png",
-    responsibleRole: "pm",
-    alternatives: [
-      {
-        key: "a",
-        text: "Quebrar histórias em itens pequenos e padronizados, medindo o Lead Time e Throughput real em vez de pontuar horas.",
-        impacts: {
-          capacidadeEntrega: 20,
-          qualidadeProduto: 10,
-          saudeEquipe: 15,
-          conhecimentoOrganizacional: 10,
-        },
-        feedbackNarrative:
-          "A reunião de planejamento passou de 8 horas para 45 minutos. O time focou em puxar trabalho pronto e a cadência de entregas aumentou 30%.",
-        pmbokConcept: "Métricas de Fluxo Contínuo vs Estimativas Tradicionais",
-        learnings: [
-          "Em ambientes de alta incerteza, dados históricos de vazão (throughput) são mais precisos e econômicos do que estimativas subjetivas longas.",
-        ],
-        goodBad: "good",
-        risksEvaded: ["Exaustão em debates infrutíferos sobre pontuação"],
-        otherConsequences: ["Previsibilidade baseada em dados reais de entrega"],
-      },
-      {
-        key: "b",
-        text: "Aumentar o rigor e exigir que as tarefas sejam estimadas até o nível de minutos com planilhas de controle diário.",
-        impacts: {
-          capacidadeEntrega: -25,
-          qualidadeProduto: -5,
-          saudeEquipe: -20,
-          conhecimentoOrganizacional: 0,
-        },
-        feedbackNarrative:
-          "O time passou a gastar mais tempo estimando e justificando desvios do que desenvolvendo o software. A velocidade real despencou.",
-        pmbokConcept: "Paralisia por Análise e Microestimativa",
-        learnings: [
-          "Microestimativas não aumentam a precisão em engenharia de software; apenas aumentam o custo de coordenação.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Risco de não saber o tempo teórico"],
-        otherConsequences: ["Frustração da equipe e lentidão generalizada"],
-      },
-      {
-        key: "c",
-        text: "Não planejar nada e deixar cada desenvolvedor escolher livremente o que quiser fazer a cada dia.",
-        impacts: {
-          capacidadeEntrega: 5,
-          qualidadeProduto: -20,
-          saudeEquipe: 5,
-          conhecimentoOrganizacional: -25,
-        },
-        feedbackNarrative:
-          "Cada um trabalhou no que achava divertido. O módulo de login ficou perfeito, mas ninguém fez o banco de dados das matrículas.",
-        pmbokConcept: "Falta de Priorização Estratégica",
-        learnings: [
-          "Agilidade requer priorização rigorosa de valor no topo do backlog, mesmo com processos enxutos.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Tempo de reunião de planejamento"],
-        otherConsequences: ["Desalinhamento completo das prioridades institucionais"],
-      },
+    "probabilityWeight": 2,
+    "tags": [
+      "equipes_virtuais",
+      "colaboracao",
+      "engajamento",
+      "comunicacao"
     ],
+    "learningObjective": "Fortalecer a colaboração e o sentimento de pertencimento em equipes distribuídas e remotas.",
+    "communicationType": "slack",
+    "senderRole": "Líder de UX",
+    "description": "Canal #geral - Metade dos desenvolvedores e especialistas trabalha remotamente em cidades do interior do Ceará. A comunicação síncrona ruiu, tarefas ficam paradas por falta de resposta no chat e a sensação de isolamento está derrubando a moral do time.",
+    "domainTag": "Recursos › Liderar a Equipe",
+    "resourceType": "humano",
+    "resourceProcess": "liderar",
+    "senderName": "Marina (Design de Telas)",
+    "senderInitials": "MD",
+    "avatarImage": "/Personagens/Beatriz.png",
+    "responsibleRole": "uxLead",
+    "alternatives": [
+      {
+        "key": "a",
+        "text": "Estruturar rituais assíncronos transparentes, coworking virtual semanal e canal aberto de suporte entre pares.",
+        "impacts": {
+          "capacidadeEntrega": 15,
+          "qualidadeProduto": 15,
+          "saudeEquipe": 20,
+          "conhecimentoOrganizacional": 20
+        },
+        "feedbackNarrative": "O espaço de colaboração virtual recriou o senso de comunidade. Desenvolvedores do interior passaram a colaborar ativamente e destravar dúvidas com rapidez.",
+        "pmbokConcept": "Equipes virtuais",
+        "learnings": [
+          "Equipes virtuais requerem acordos claros de colaboração assíncrona e espaços intencionais de convivência para manter o engajamento e a produtividade."
+        ],
+        "goodBad": "good",
+        "risksEvaded": [
+          "Desengajamento e evasão de talentos remotos"
+        ],
+        "otherConsequences": [
+          "Coesão da equipe e fortalecimento do sentimento de pertencimento coletivo"
+        ]
+      },
+      {
+        "key": "b",
+        "text": "Exigir presença física diária obrigatória no campus de Fortaleza sob ameaça de cancelamento imediato de bolsas.",
+        "impacts": {
+          "capacidadeEntrega": -20,
+          "qualidadeProduto": -10,
+          "saudeEquipe": -30,
+          "conhecimentoOrganizacional": -15
+        },
+        "delayedImpacts": [
+          {
+            "triggerAfterEvents": 2,
+            "impacts": {
+              "capacidadeEntrega": -15,
+              "qualidadeProduto": -10,
+              "saudeEquipe": -15,
+              "conhecimentoOrganizacional": 0
+            },
+            "narrative": "Dois desenvolvedores seniores do interior pediram desligamento definitivo por incapacidade de custear transporte diário até a capital."
+          }
+        ],
+        "feedbackNarrative": "A medida gerou revolta. Vários desenvolvedores que moravam a mais de 100 km do campus não tinham como arcar com deslocamento diário.",
+        "pmbokConcept": "Bem-estar e prevenção de burnout",
+        "learnings": [
+          "Impor presencialismo inflexível a equipes remotas destrói a retenção de talentos e ignora limitações reais das pessoas."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Desafio de gerenciar tarefas remotas"
+        ],
+        "otherConsequences": [
+          "Evasão de desenvolvedores experientes e perda de conhecimento técnico"
+        ]
+      },
+      {
+        "key": "c",
+        "text": "Instalar aplicativo de monitoramento de cliques e webcam ativa para vigiar a jornada remota dos desenvolvedores.",
+        "impacts": {
+          "capacidadeEntrega": -10,
+          "qualidadeProduto": -15,
+          "saudeEquipe": -30,
+          "conhecimentoOrganizacional": -20
+        },
+        "feedbackNarrative": "A equipe sentiu-se vigiada e humilhada. A confiança foi pulverizada e as pessoas passaram a simular atividade para bater metas de cliques.",
+        "pmbokConcept": "Ambiente seguro e transparência sobre vieses",
+        "learnings": [
+          "Vigilância invasiva destrói a segurança psicológica e estimula comportamentos artificiais em vez de resultados autênticos."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Suposta ociosidade não comprovada"
+        ],
+        "otherConsequences": [
+          "Clima tóxico de desconfiança e queda drástica no engajamento"
+        ]
+      }
+    ]
   },
   {
-    id: "tailoring_10_auditoria_adaptativa",
-    title: "Auditoria de Processos vs Agilidade",
+    "id": "tailoring_9_estimativas_excessivas",
+    "title": "Estimativa Excessiva vs Entrega de Valor",
+    category: EventCategory.EXECUTION,
+    difficulty: EventDifficulty.MEDIUM,
+    "probabilityWeight": 2,
+    "tags": [
+      "estimativa",
+      "lean",
+      "planejamento",
+      "recursos_humanos"
+    ],
+    "learningObjective": "Equilibrar a precisão das técnicas de estimativa com a capacidade real de execução da equipe.",
+    "communicationType": "email",
+    "senderRole": "Líder Técnico",
+    "description": "Mensagem do Líder Técnico: O time está gastando três dias inteiros de cada período de trabalho preenchendo planilhas de estimativas minuciosas de minutos antes de iniciar qualquer atividade prática, gerando ociosidade e atraso nas entregas reais.",
+    "domainTag": "Recursos › Estimar Recursos",
+    "resourceType": "humano",
+    "resourceProcess": "estimar",
+    "senderName": "Carlos Silva",
+    "senderInitials": "CS",
+    "avatarImage": "/Personagens/Roberto.png",
+    "responsibleRole": "techLead",
+    "alternatives": [
+      {
+        "key": "a",
+        "text": "Adotar estimativa relativa com Planning Poker e focar o esforço técnico em prototipação rápida de valor.",
+        "impacts": {
+          "capacidadeEntrega": 20,
+          "qualidadeProduto": 10,
+          "saudeEquipe": 15,
+          "conhecimentoOrganizacional": 10
+        },
+        "feedbackNarrative": "A estimativa simplificada reduziu o tempo de planejamento para 2 horas por período. O time começou a produzir mais cedo com estimativas precisas o suficiente.",
+        "pmbokConcept": "Análise de alternativas na estimativa",
+        "learnings": [
+          "Técnicas de estimativa relativa proporcionam precisão adequada sem desperdiçar dias preciosos de desenvolvimento técnico."
+        ],
+        "goodBad": "good",
+        "risksEvaded": [
+          "Paralisia por análise e desperdício de tempo da equipe"
+        ],
+        "otherConsequences": [
+          "Maior agilidade de planejamento e foco em entregas funcionais"
+        ]
+      },
+      {
+        "key": "b",
+        "text": "Aumentar a exigência para estimativas em segundos com aprovação formal de cada subtarefa antes do desenvolvimento.",
+        "impacts": {
+          "capacidadeEntrega": -25,
+          "qualidadeProduto": -5,
+          "saudeEquipe": -20,
+          "conhecimentoOrganizacional": 0
+        },
+        "delayedImpacts": [
+          {
+            "triggerAfterEvents": 2,
+            "impacts": {
+              "capacidadeEntrega": -15,
+              "qualidadeProduto": -5,
+              "saudeEquipe": -10,
+              "conhecimentoOrganizacional": 0
+            },
+            "narrative": "A burocracia de estimativas excessivas paralisou dois períodos consecutivos de trabalho e a liderança perdeu o controle das entregas."
+          }
+        ],
+        "feedbackNarrative": "O tempo gasto discutindo minutos foi maior do que o tempo necessário para implementar as funcionalidades. Os desenvolvedores ficaram frustrados.",
+        "pmbokConcept": "Estimativa bottom-up de recursos",
+        "learnings": [
+          "Levar a decomposição a níveis microscópicos além do necessário transforma estimativas em burocracia paralisante."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Pequenas variações de escopo"
+        ],
+        "otherConsequences": [
+          "Queda acentuada na capacidade de entrega e desmotivação"
+        ]
+      },
+      {
+        "key": "c",
+        "text": "Abolir qualquer tipo de estimativa e deixar cada desenvolvedor escolher tarefas sem acompanhamento de capacidade.",
+        "impacts": {
+          "capacidadeEntrega": -10,
+          "qualidadeProduto": -15,
+          "saudeEquipe": -10,
+          "conhecimentoOrganizacional": -20
+        },
+        "feedbackNarrative": "Sem qualquer parâmetro de esforço, o projeto ficou sem previsão de entrega e funcionalidades críticas foram deixadas para o final.",
+        "pmbokConcept": "Antecipação de escassez ou excedente",
+        "learnings": [
+          "Abandonar completamente estimativas impede a gestão de antecipar escassez de recursos e dimensionar cronogramas com segurança."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Discussões sobre prazos na equipe"
+        ],
+        "otherConsequences": [
+          "Incapacidade de prever datas de entrega e desorientação de escopo"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tailoring_10_auditoria_adaptativa",
+    "title": "Auditoria de Recursos Públicos vs Agilidade da Equipe",
     category: EventCategory.EXECUTION,
     difficulty: EventDifficulty.HARD,
-    probabilityWeight: 2,
-    tags: ["auditoria", "compliance", "tailoring", "governanca"],
-    learningObjective:
-      "Atender aos requisitos de auditoria pública adaptando evidências digitais transparentes.",
-    communicationType: "email",
-    senderRole: "Auditoria Interna da UFC",
-    description:
-      "Assunto: Notificação de Auditoria. A Auditoria Interna exige cópia impressa e rubricada de todas as atas de reunião e aprovações de código dos últimos 3 meses, ameaçando paralisar o orçamento do projeto caso não receba os papéis em 48 horas.",
-    domainTag: "Faça a adaptação de acordo com o contexto (Tailoring)",
-    senderName: "Geraldo Auditor",
-    senderInitials: "GA",
-    avatarImage: "/Personagens/Geraldo.png",
-    responsibleRole: "pm",
-    alternatives: [
-      {
-        key: "a",
-        text: "Convidar os auditores para uma demonstração do Git e Jira, fornecendo relatórios criptografados e logs de aprovação de Pull Requests.",
-        impacts: {
-          capacidadeEntrega: 10,
-          qualidadeProduto: 15,
-          saudeEquipe: 15,
-          conhecimentoOrganizacional: 20,
-        },
-        feedbackNarrative:
-          "Os auditores ficaram impressionados com a rastreabilidade digital moderna. A auditoria foi aprovada com louvor e o modelo virou padrão para a universidade inteira.",
-        pmbokConcept: "Compliance Adaptativo e Evidências Digitais",
-        learnings: [
-          "Auditorias públicas buscam rastreabilidade e integridade; apresentar trilhas digitais automatizadas atende ao compliance sem burocracia física.",
-        ],
-        goodBad: "good",
-        risksEvaded: ["Paralisação financeira e desperdício de semanas imprimindo papéis"],
-        otherConsequences: ["Modernização da governança institucional"],
-      },
-      {
-        key: "b",
-        text: "Parar todo o time de tecnologia por 4 dias para redigir atas retroativas e imprimir 5.000 folhas para rubricar.",
-        impacts: {
-          capacidadeEntrega: -30,
-          qualidadeProduto: -10,
-          saudeEquipe: -20,
-          conhecimentoOrganizacional: -5,
-        },
-        feedbackNarrative:
-          "Milhares de folhas foram impressas às pressas. A sprint foi perdida e os desenvolvedores ficaram extremamente desmotivados com a tarefa cartorial.",
-        pmbokConcept: "Desperdício Burocrático Passivo",
-        learnings: [
-          "Ceder a exigências ultrapassadas sem apresentar alternativas modernas drena os recursos do projeto.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Atrito imediato com auditores"],
-        otherConsequences: ["Atraso em entregas críticas e desmotivação"],
-      },
-      {
-        key: "c",
-        text: 'Burlar a notificação e responder aos auditores com ironia, dizendo que "métodos ágeis não prestam contas à burocracia".',
-        impacts: {
-          capacidadeEntrega: -10,
-          qualidadeProduto: 0,
-          saudeEquipe: -25,
-          conhecimentoOrganizacional: -30,
-        },
-        feedbackNarrative:
-          "A Auditoria Interna abriu processo administrativo e congelou as contas do projeto. O reitor precisou intervir e o comitê foi advertido.",
-        pmbokConcept: "Arrogância Metodológica e Quebra de Governança",
-        learnings: [
-          "Metodologias ágeis não isentam projetos públicos de prestar contas e cumprir deveres de transparência governamental.",
-        ],
-        goodBad: "bad",
-        risksEvaded: ["Trabalho de prestar contas"],
-        otherConsequences: ["Processo administrativo e bloqueio de verbas"],
-      },
+    "probabilityWeight": 2,
+    "tags": [
+      "auditoria",
+      "compliance",
+      "recursos",
+      "governanca"
     ],
-  },
+    "learningObjective": "Atender aos requisitos de auditoria pública adaptando evidências digitais transparentes de uso de recursos.",
+    "communicationType": "email",
+    "senderRole": "Auditoria Interna da UFC",
+    "description": "Assunto: Notificação de Auditoria de TI. A Auditoria Interna exige relatórios impressos de uso de servidores e alocação horária dos desenvolvedores dos últimos 3 meses, ameaçando congelar o orçamento caso não receba os relatórios em 48 horas.",
+    "domainTag": "Recursos › Planejar o Gerenciamento dos Recursos",
+    "resourceType": "humano",
+    "resourceProcess": "planejar",
+    "senderName": "Geraldo (Auditoria)",
+    "senderInitials": "GA",
+    "avatarImage": "/Personagens/Geraldo.png",
+    "responsibleRole": "pm",
+    "alternatives": [
+      {
+        "key": "a",
+        "text": "Apresentar dashboards digitais de alocação de recursos e relatórios automáticos de auditoria gerados pelas ferramentas.",
+        "impacts": {
+          "capacidadeEntrega": 10,
+          "qualidadeProduto": 15,
+          "saudeEquipe": 15,
+          "conhecimentoOrganizacional": 20
+        },
+        "feedbackNarrative": "Os auditores ficaram impressionados com a rastreabilidade digital moderna. A auditoria aprovou o processo e o modelo virou referência institucional.",
+        "pmbokConcept": "Abordagem de recursos adaptada ao projeto (tailoring)",
+        "learnings": [
+          "Auditorias buscam integridade e transparência; adaptar a comprovação por meio de trilhas digitais atende aos órgãos de controle sem desperdiçar tempo humano."
+        ],
+        "goodBad": "good",
+        "risksEvaded": [
+          "Bloqueio de verbas e perda de semanas imprimindo formulários físicos"
+        ],
+        "otherConsequences": [
+          "Modernização da governança institucional e maior respeito ao projeto"
+        ]
+      },
+      {
+        "key": "b",
+        "text": "Parar todo o time de tecnologia por 4 dias para redigir planilhas retroativas e imprimir milhares de folhas.",
+        "impacts": {
+          "capacidadeEntrega": -30,
+          "qualidadeProduto": -10,
+          "saudeEquipe": -20,
+          "conhecimentoOrganizacional": -5
+        },
+        "delayedImpacts": [
+          {
+            "triggerAfterEvents": 2,
+            "impacts": {
+              "capacidadeEntrega": -15,
+              "qualidadeProduto": -10,
+              "saudeEquipe": -10,
+              "conhecimentoOrganizacional": 0
+            },
+            "narrative": "A perda de 4 dias de trabalho paralisou o cronograma e gerou estresse generalizado na equipe."
+          }
+        ],
+        "feedbackNarrative": "Milhares de folhas foram impressas às pressas. O período de entregas foi completamente perdido e os profissionais ficaram desmotivados com a tarefa burocrática.",
+        "pmbokConcept": "Retrabalho e desperdício como indicadores de eficiência",
+        "learnings": [
+          "Ceder a práticas retrógradas sem negociar soluções digitais consome a capacidade da equipe em tarefas sem valor agregado."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Atrito imediato com auditores"
+        ],
+        "otherConsequences": [
+          "Atrasos graves no cronograma e desmotivação geral"
+        ]
+      },
+      {
+        "key": "c",
+        "text": "Ignorar a auditoria e responder com ironia afirmando que gestão moderna de recursos não deve explicações a órgãos de controle.",
+        "impacts": {
+          "capacidadeEntrega": -10,
+          "qualidadeProduto": 0,
+          "saudeEquipe": -25,
+          "conhecimentoOrganizacional": -30
+        },
+        "feedbackNarrative": "A Auditoria Interna abriu processo administrativo e congelou as contas do projeto. O reitor precisou intervir e o comitê foi advertido formalmente.",
+        "pmbokConcept": "Coordenação entre Recursos, Cronograma, Finanças e Risco",
+        "learnings": [
+          "A gestão de recursos em órgãos públicos exige coordenação e transparência com finanças e governança; ignorá-las compromete todo o projeto."
+        ],
+        "goodBad": "bad",
+        "risksEvaded": [
+          "Trabalho imediato de prestar contas"
+        ],
+        "otherConsequences": [
+          "Processo administrativo e bloqueio total de recursos financeiros"
+        ]
+      }
+    ]
+  }
 ];

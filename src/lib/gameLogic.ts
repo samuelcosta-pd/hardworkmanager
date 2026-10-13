@@ -58,7 +58,7 @@ export function isGameOver(m: Metrics): { over: boolean; reason?: string } {
     return {
       over: true,
       reason:
-        "A saúde da equipe foi destruída. Um ambiente tóxico e alta pressão causaram demissões em massa e burnout, paralisando o trabalho do projeto.",
+        "A saúde da equipe foi destruída. Um ambiente tóxico e alta pressão causaram demissões em massa e burnout crônico, inviabilizando os recursos humanos da equipe.",
     };
   return { over: false };
 }
@@ -112,7 +112,7 @@ export function evaluateCondition(
 
 /**
  * GERAÇÃO DO BARALHO DA PARTIDA (10 DILEMAS / 4 SPRINTS):
- * Sorteia 2 dilemas de cada um dos 5 princípios do PMBOK 7 (Domínio Trabalho do Projeto),
+ * Sorteia 2 dilemas de cada um dos 5 conjuntos de eventos do Domínio de Recursos (PMBOK 8),
  * totalizando 10 dilemas balanceados ao longo das 4 Sprints da simulação.
  */
 export function generateMatchDeck(): GameEvent[] {

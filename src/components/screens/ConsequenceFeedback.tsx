@@ -100,7 +100,7 @@ export function ConsequenceFeedback() {
     : isLast
       ? "Ver Debriefing Final"
       : isSprintEnd
-        ? "Avançar para Sprint Review"
+        ? "Avançar para Revisão do Ciclo"
         : "Avançar para o Próximo Dilema";
 
   const renderDeltaChip = (key: keyof Metrics, label: string) => {
@@ -133,10 +133,10 @@ export function ConsequenceFeedback() {
     <div className="mx-auto min-h-screen max-w-3xl px-6 py-10">
       {/* Cabeçalho */}
       <div className="mb-6 animate-float-in">
-        <p className="text-xs uppercase tracking-[0.2em] text-primary font-bold">
+        <p className="text-xs sm:text-sm uppercase tracking-[0.2em] text-primary font-bold">
           Desfecho da Decisão
         </p>
-        <h1 className="mt-1 text-2xl font-bold tracking-tight text-foreground">
+        <h1 className="mt-1 text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
           {decision.eventTitle}
         </h1>
       </div>
@@ -155,19 +155,19 @@ export function ConsequenceFeedback() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between gap-2 flex-wrap">
-                    <span className="text-xs font-black uppercase tracking-wider bg-rose-200 text-rose-900 px-2.5 py-0.5 rounded-full border border-rose-300">
+                    <span className="text-xs sm:text-sm font-black uppercase tracking-wider bg-rose-200 text-rose-900 px-2.5 py-0.5 rounded-full border border-rose-300">
                       💥 Consequência Detonou Nesta Rodada
                     </span>
-                    <span className="text-xs font-bold text-rose-700">
+                    <span className="text-xs sm:text-sm font-bold text-rose-700">
                       Eco de: {impact.sourceEventTitle}
                     </span>
                   </div>
-                  <p className="text-sm font-semibold mt-2 text-rose-900 leading-relaxed">
+                  <p className="text-base sm:text-lg font-semibold mt-2.5 text-rose-900 leading-relaxed">
                     {impact.narrative}
                   </p>
                   {impact.metricsDelta && (
                     <div className="mt-3 flex flex-wrap items-center gap-2 pt-2.5 border-t border-rose-200">
-                      <span className="text-xs font-bold text-rose-800">
+                      <span className="text-xs sm:text-sm font-bold text-rose-800">
                         Penalidade aplicada no time:
                       </span>
                       {Object.entries(impact.metricsDelta).map(([k, v]) => {
@@ -183,7 +183,7 @@ export function ConsequenceFeedback() {
                         return (
                           <span
                             key={k}
-                            className="text-xs font-extrabold bg-white border border-rose-300 px-2.5 py-1 rounded-lg text-rose-800 shadow-2xs"
+                            className="text-xs sm:text-sm font-extrabold bg-white border border-rose-300 px-2.5 py-1 rounded-lg text-rose-800 shadow-2xs"
                           >
                             {label}: {v > 0 ? `+${v}` : v}
                           </span>
@@ -204,15 +204,15 @@ export function ConsequenceFeedback() {
           <Clock className="w-6 h-6 text-amber-600 mt-0.5 shrink-0" />
           <div className="flex-1">
             <div className="flex items-center justify-between gap-2 flex-wrap">
-              <span className="text-xs font-black uppercase tracking-wider bg-amber-200 text-amber-900 px-2.5 py-0.5 rounded-full border border-amber-300">
+              <span className="text-xs sm:text-sm font-black uppercase tracking-wider bg-amber-200 text-amber-900 px-2.5 py-0.5 rounded-full border border-amber-300">
                 ⚠️ Risco Sistêmico Registrado no Radar
               </span>
-              <span className="text-xs font-extrabold bg-white px-2 py-0.5 rounded border border-amber-200 text-amber-800">
+              <span className="text-xs sm:text-sm font-extrabold bg-white px-2.5 py-0.5 rounded border border-amber-200 text-amber-800">
                 Detonará em {alt.delayedImpacts[0].triggerAfterEvents}{" "}
                 {alt.delayedImpacts[0].triggerAfterEvents === 1 ? "dilema" : "dilemas"}
               </span>
             </div>
-            <p className="text-sm mt-2 text-amber-900 leading-relaxed font-medium">
+            <p className="text-base sm:text-lg mt-2 text-amber-900 leading-relaxed font-medium">
               Esta escolha postergou um problema técnico ou de processos. Um eco foi engatilhado no{" "}
               <strong>Radar de Ameaças</strong> e retornará com consequências nas métricas caso a
               equipe não se atente.
@@ -221,18 +221,18 @@ export function ConsequenceFeedback() {
         </div>
       )}
 
-      {/* INSIGHT CARD 1: Análise da Mentora Helena & Conceito PMBOK 7 */}
+      {/* INSIGHT CARD 1: Análise da Mentora Helena & Conceito PMBOK 8 */}
       <SoftCard className="mb-5 animate-float-in p-6">
         <div className="flex items-start gap-4">
-          <Avatar className="h-14 w-14 border-2 border-primary/20 shrink-0 shadow-sm">
+          <Avatar className="h-16 w-16 border-2 border-primary/20 shrink-0 shadow-sm">
             <AvatarImage src={MENTOR.imagePath} alt={MENTOR.name} />
             <AvatarFallback>HE</AvatarFallback>
           </Avatar>
           <div className="min-w-0 flex-1">
             <div className="flex items-center justify-between gap-2">
-              <p className="text-sm font-bold text-foreground">{MENTOR.name} · Mentoria Ágil</p>
+              <p className="text-base font-bold text-foreground">{MENTOR.name} · Mentoria Ágil</p>
               <span
-                className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
+                className={`text-xs sm:text-sm font-bold px-2.5 py-0.5 rounded-full ${
                   alt.goodBad === "good"
                     ? "bg-emerald-100 text-emerald-800"
                     : "bg-rose-100 text-rose-800"
@@ -242,16 +242,16 @@ export function ConsequenceFeedback() {
               </span>
             </div>
 
-            <p className="mt-2 text-sm text-slate-700 leading-relaxed font-medium">
+            <p className="mt-2.5 text-base sm:text-lg text-slate-700 leading-relaxed font-medium">
               "{decision.feedbackNarrative}"
             </p>
 
-            {/* Conceito PMBOK 7 em Destaque */}
-            <div className="mt-4 rounded-2xl bg-primary/5 p-3.5 border border-primary/20">
-              <p className="text-xs font-bold uppercase tracking-wider text-primary">
-                Princípio PMBOK 7 em Prática
+            {/* Conceito PMBOK 8 em Destaque */}
+            <div className="mt-4 rounded-2xl bg-primary/5 p-4 border border-primary/20">
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-primary">
+                Conceito de Recursos (PMBOK 8)
               </p>
-              <p className="text-sm font-semibold text-foreground mt-0.5">{alt.pmbokConcept}</p>
+              <p className="text-base sm:text-lg font-bold text-foreground mt-0.5">{alt.pmbokConcept}</p>
             </div>
           </div>
         </div>

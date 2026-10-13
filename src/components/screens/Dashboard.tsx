@@ -151,7 +151,7 @@ export function Dashboard() {
         <SoftCard className="md:col-span-2 animate-float-in p-6">
           <div className="flex items-center justify-between gap-2">
             <span className="text-xs font-bold uppercase tracking-wider text-primary">
-              Dilema {currentEventIndex + 1} de {matchDeck.length} · Sprint {currentSprint}
+              Dilema {currentEventIndex + 1} de {matchDeck.length} · Ciclo {currentSprint}
             </span>
             <span className="rounded-full bg-primary/10 px-3 py-0.5 text-xs font-semibold text-primary">
               {currentEvent.domainTag}
@@ -187,7 +187,7 @@ export function Dashboard() {
             </span>
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
-            dilemas concluídos (Sprint {currentSprint})
+            dilemas concluídos (Ciclo {currentSprint})
           </p>
 
           <div className="mt-4 space-y-1.5 max-h-[260px] overflow-y-auto pr-1">
@@ -224,7 +224,7 @@ export function Dashboard() {
           <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             Ciclo de Entrega
           </p>
-          <h2 className="mt-2 text-2xl font-bold text-foreground">Sprint {currentSprint}</h2>
+          <h2 className="mt-2 text-2xl font-bold text-foreground">Ciclo {currentSprint}</h2>
           <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
             {Math.max(0, matchDeck.length - decisions.length)} dilema(s) restantes no projeto.
           </p>

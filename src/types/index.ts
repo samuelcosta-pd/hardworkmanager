@@ -138,5 +138,5 @@ export interface Decision {
 export const ROLE_LABELS: Record<PlayerRole, string> = {
   pm: 'Gerente de Projetos',
   techLead: 'Líder Técnico',
-  uxLead: 'Líder de Design/UX',
+  uxLead: 'Líder de Design e Telas',
 };

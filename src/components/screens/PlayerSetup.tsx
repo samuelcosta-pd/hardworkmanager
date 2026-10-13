@@ -73,7 +73,7 @@ export function PlayerSetup() {
         </div>
         <h1 className="text-3xl font-bold tracking-tight">Hard Work Manager</h1>
         <p className="mt-2 text-muted-foreground">
-          Simulador do domínio Trabalho do Projeto do PMBOK 7ª Edição
+          Simulador do Domínio de Recursos do PMBOK 8ª Edição
         </p>
       </div>
 

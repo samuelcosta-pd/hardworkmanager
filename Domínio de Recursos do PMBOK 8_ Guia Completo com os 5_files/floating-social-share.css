@@ -1,0 +1,552 @@
+/* ================================================
+   Floating Social Share Buttons - Frontend Styles
+   ================================================ */
+
+.fss-container {
+    position: fixed;
+    z-index: 99999;
+    display: flex;
+    transition: all 0.3s ease;
+}
+
+/* Orientação Vertical */
+.fss-container.fss-vertical .fss-buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fss-button-spacing, 10px);
+}
+
+/* Orientação Horizontal */
+.fss-container.fss-horizontal .fss-buttons-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: var(--fss-button-spacing, 10px);
+}
+
+/* Botões Individuais */
+.fss-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--fss-button-size, 50px);
+    height: var(--fss-button-size, 50px);
+    border-radius: var(--fss-border-radius, 50%);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+}
+
+.fss-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.fss-button:active {
+    transform: translateY(-1px);
+}
+
+/* Com Labels */
+.fss-button.fss-has-label {
+    width: auto;
+    padding: 0 20px;
+    min-width: var(--fss-button-size, 50px);
+}
+
+.fss-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.fss-label {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Cores das Redes Sociais */
+.fss-facebook {
+    background: linear-gradient(135deg, #1877f2 0%, #0d65d9 100%);
+}
+
+.fss-facebook:hover {
+    background: linear-gradient(135deg, #166fe5 0%, #0a5ac7 100%);
+}
+
+.fss-linkedin {
+    background: linear-gradient(135deg, #0077b5 0%, #005885 100%);
+}
+
+.fss-linkedin:hover {
+    background: linear-gradient(135deg, #006ba1 0%, #004d74 100%);
+}
+
+.fss-whatsapp {
+    background: linear-gradient(135deg, #25D366 0%, #1EBE57 100%);
+}
+
+.fss-whatsapp:hover {
+    background: linear-gradient(135deg, #1EBE57 0%, #17A446 100%);
+}
+
+.fss-telegram {
+    background: linear-gradient(135deg, #0088cc 0%, #006ba1 100%);
+}
+
+.fss-telegram:hover {
+    background: linear-gradient(135deg, #006ba1 0%, #005885 100%);
+}
+
+/* Contador de Compartilhamentos */
+.fss-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff3b30;
+    color: #fff;
+    border-radius: 10px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1;
+    min-width: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(255, 59, 48, 0.4);
+}
+
+/* Animações de Entrada */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.fss-animation-slide .fss-button {
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+.fss-animation-fade .fss-button {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.fss-animation-bounce .fss-button {
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+/* Atrasos para animação em cascata */
+.fss-animation-slide .fss-button:nth-child(1),
+.fss-animation-fade .fss-button:nth-child(1),
+.fss-animation-bounce .fss-button:nth-child(1) {
+    animation-delay: 0.1s;
+    opacity: 0;
+}
+
+.fss-animation-slide .fss-button:nth-child(2),
+.fss-animation-fade .fss-button:nth-child(2),
+.fss-animation-bounce .fss-button:nth-child(2) {
+    animation-delay: 0.2s;
+    opacity: 0;
+}
+
+.fss-animation-slide .fss-button:nth-child(3),
+.fss-animation-fade .fss-button:nth-child(3),
+.fss-animation-bounce .fss-button:nth-child(3) {
+    animation-delay: 0.3s;
+    opacity: 0;
+}
+
+/* Tooltip */
+.fss-button::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.fss-vertical .fss-button::before {
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.fss-horizontal .fss-button::before {
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.fss-button:hover::before {
+    opacity: 1;
+}
+
+/* Responsividade */
+@media screen and (max-width: 767px) {
+    .fss-hide-mobile {
+        display: none !important;
+    }
+    
+    .fss-container {
+        --fss-button-size: 45px;
+    }
+    
+    /* FAB Mobile: Garante que botões estão ocultos inicialmente */
+    .fss-container.fss-mobile-fab-enabled:not(.fss-fab-expanded) .fss-button {
+        visibility: hidden;
+        opacity: 0;
+    }
+    
+    /* FAB Mobile: Mostra botões quando expandido */
+    .fss-container.fss-mobile-fab-enabled.fss-fab-expanded .fss-button {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .fss-hide-tablet {
+        display: none !important;
+    }
+    
+    /* Em tablet, sempre mostra os botões normalmente */
+    .fss-container .fss-button {
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .fss-hide-desktop {
+        display: none !important;
+    }
+    
+    /* Em desktop, sempre mostra os botões normalmente */
+    .fss-container .fss-button {
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Loading State */
+.fss-button.fss-loading {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.fss-button.fss-loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Success Feedback */
+.fss-button.fss-success {
+    animation: successPulse 0.5s ease;
+}
+
+@keyframes successPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Efeito de Ripple ao clicar */
+.fss-button {
+    overflow: hidden;
+}
+
+.fss-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(0);
+    animation: ripple 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Acessibilidade */
+.fss-button:focus {
+    outline: 3px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+.fss-button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Print - Ocultar botões na impressão */
+@media print {
+    .fss-container {
+        display: none !important;
+    }
+}
+
+/* ================================================
+   Mobile FAB (Floating Action Button)
+   ================================================ */
+
+.fss-fab-trigger {
+    /* MESMO ESTILO dos botões de redes sociais */
+    display: none; /* Oculto por padrão */
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Circular como os botões */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    /* MESMO box-shadow dos botões de redes sociais */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    z-index: 1001;
+    
+    /* Gradiente roxo/azul (estilo dos botões sociais) */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Hover IGUAL aos botões de redes sociais */
+.fss-fab-trigger:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.fss-fab-trigger:active {
+    transform: translateY(-1px);
+}
+
+/* Estado expandido - inverte gradiente */
+.fss-container.fss-fab-expanded .fss-fab-trigger {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* Ícone do FAB - simples como os botões */
+.fss-fab-icon {
+    position: relative;
+    pointer-events: none;
+    transition: transform 0.3s ease;
+}
+
+/* Rotaciona ícone quando expandido */
+.fss-container.fss-fab-expanded .fss-fab-icon {
+    transform: rotate(180deg);
+}
+
+
+
+/* Mobile APENAS - FAB habilitado */
+@media screen and (max-width: 767px) {
+    /* Mostra o FAB trigger APENAS em mobile quando habilitado */
+    .fss-container.fss-mobile-fab-enabled .fss-fab-trigger {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    .fss-container.fss-mobile-fab-enabled {
+        position: fixed !important;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* CRÍTICO: Oculta TODOS os botões individuais por padrão */
+    .fss-container.fss-mobile-fab-enabled .fss-button {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        transform: scale(0.8) translateY(20px);
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    
+    /* CRÍTICO: Oculta o wrapper dos botões por padrão */
+    .fss-container.fss-mobile-fab-enabled .fss-buttons-wrapper {
+        position: absolute;
+        display: flex !important;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: scale(0);
+        transform-origin: center;
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        z-index: 1001;
+    }
+    
+    /* Mostra o wrapper quando expandido */
+    .fss-container.fss-mobile-fab-enabled.fss-fab-expanded .fss-buttons-wrapper {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+        transform: scale(1);
+    }
+    
+    /* Mostra os botões individuais quando expandido */
+    .fss-container.fss-mobile-fab-enabled.fss-fab-expanded .fss-button {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: all !important;
+        transform: scale(1) translateY(0) !important;
+    }
+    
+    /* Posicionamento vertical */
+    .fss-container.fss-mobile-fab-enabled.fss-vertical .fss-buttons-wrapper {
+        flex-direction: column;
+        bottom: 70px;
+        left: 50%;
+        transform: translateX(-50%) scale(0);
+    }
+    
+    .fss-container.fss-mobile-fab-enabled.fss-vertical.fss-fab-expanded .fss-buttons-wrapper {
+        transform: translateX(-50%) scale(1);
+    }
+    
+    /* Posicionamento horizontal */
+    .fss-container.fss-mobile-fab-enabled.fss-horizontal .fss-buttons-wrapper {
+        flex-direction: row;
+        bottom: 70px;
+        left: 50%;
+        transform: translateX(-50%) scale(0);
+        flex-wrap: wrap;
+        max-width: 90vw;
+        justify-content: center;
+    }
+    
+    .fss-container.fss-mobile-fab-enabled.fss-horizontal.fss-fab-expanded .fss-buttons-wrapper {
+        transform: translateX(-50%) scale(1);
+    }
+    
+    /* Overlay escuro quando expandido */
+    .fss-container.fss-mobile-fab-enabled.fss-fab-expanded::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    /* Garante que cada botão individual está oculto */
+    .fss-container.fss-mobile-fab-enabled:not(.fss-fab-expanded) .fss-button {
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+    
+    /* Mostra botões individuais quando expandido */
+    .fss-container.fss-mobile-fab-enabled.fss-fab-expanded .fss-button {
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Tablet e Desktop - SEM FAB, funcionamento normal */
+@media screen and (min-width: 768px) {
+    /* CRÍTICO: Esconde completamente o FAB trigger em tablet/desktop */
+    .fss-fab-trigger {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    
+    /* Garante que botões funcionem normalmente sem FAB */
+    .fss-container .fss-buttons-wrapper {
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: all !important;
+        transform: none !important;
+        display: flex !important;
+    }
+    
+    /* Todos os botões visíveis normalmente */
+    .fss-container .fss-button {
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    /* Remove todas as classes e estilos de FAB */
+    .fss-container.fss-mobile-fab-enabled {
+        position: fixed !important;
+    }
+    
+    .fss-container.fss-mobile-fab-enabled.fss-fab-expanded::before {
+        display: none !important;
+    }
+}

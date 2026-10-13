@@ -7,12 +7,12 @@ import type { GameEvent } from '@/types';
 
 /**
  * Catálogo Completo dos 50 Dilemas do Hard Work Manager
- * 10 Dilemas por Princípio do PMBOK 7 (Domínio Trabalho do Projeto):
- * 1. Faça a adaptação de acordo com o contexto (Tailoring) - 10 dilemas
- * 2. Demonstre comportamentos de liderança - 10 dilemas
- * 3. Reconheça, avalie e reaja às interações do sistema (Pensamento Sistêmico) - 10 dilemas
- * 4. Aceite a mudança para alcançar o futuro estado previsto - 10 dilemas
- * 5. Inclua qualidade nos processos e nas entregas - 10 dilemas
+ * 5 Conjuntos de Eventos do Domínio de Recursos (PMBOK 8):
+ * 1. tailoringEvents - 10 dilemas (estimativas, fluxo e eliminação de desperdício)
+ * 2. leadershipEvents - 10 dilemas (liderança de equipe, clima e bem-estar)
+ * 3. systemsThinkingEvents - 10 dilemas (infraestrutura, nuvem, licenças e recursos virtuais)
+ * 4. changeManagementEvents - 10 dilemas (aquisição, gestão matricial e negociação de recursos)
+ * 5. qualityEvents - 10 dilemas (teoria das restrições, retrabalho e eficiência de ferramentas)
  */
 export const ALL_DYNAMIC_EVENTS: GameEvent[] = [
   ...tailoringEvents,

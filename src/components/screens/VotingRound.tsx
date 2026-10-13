@@ -160,25 +160,25 @@ export function VotingRound({ round }: Props) {
       {/* Resumo do Dilema */}
       <SoftCard className="mb-4 animate-float-in" variant="inset">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-primary">
+          <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-primary">
             Dilema {currentEventIndex + 1} de {matchDeck?.length || 10}
           </span>
-          <span className="text-xs font-semibold text-muted-foreground">{event.domainTag}</span>
+          <span className="text-xs sm:text-sm font-semibold text-muted-foreground">{event.domainTag}</span>
         </div>
-        <h2 className="mt-1 text-base font-bold text-foreground">{event.title}</h2>
+        <h2 className="mt-1.5 text-lg sm:text-xl font-bold text-foreground">{event.title}</h2>
       </SoftCard>
 
       {/* Alerta de Radar se houver Eco Iminente na Votação */}
       {pendingDelayedImpacts && pendingDelayedImpacts.length > 0 && (
         <div
-          className={`mb-4 flex items-center gap-2 p-2.5 rounded-xl border text-xs animate-pop-in ${
+          className={`mb-4 flex items-center gap-2 p-3 rounded-xl border text-xs sm:text-sm animate-pop-in ${
             imminentEco
               ? "bg-rose-50 border-rose-300 text-rose-950 ring-1 ring-rose-200"
               : "bg-amber-50 border-amber-200 text-amber-900"
           }`}
         >
           <AlertTriangle
-            className={`w-3.5 h-3.5 shrink-0 ${imminentEco ? "text-rose-600" : "text-amber-600"}`}
+            className={`w-4 h-4 shrink-0 ${imminentEco ? "text-rose-600" : "text-amber-600"}`}
           />
           <span className="font-semibold">
             {imminentEco
@@ -190,7 +190,7 @@ export function VotingRound({ round }: Props) {
 
       {/* Cards de Alternativas com Formatação Uniforme */}
       <TooltipProvider delayDuration={200}>
-        <div className="space-y-3.5">
+        <div className="space-y-4">
           {event.alternatives.map((alt, i) => {
             const techTerms = detectTechTerms(alt.text);
             return (
@@ -198,16 +198,16 @@ export function VotingRound({ round }: Props) {
                 key={alt.key}
                 type="button"
                 onClick={() => handleVote(alt.key)}
-                className="group block w-full rounded-3xl bg-card p-5 text-left shadow-[var(--shadow-soft)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-soft-lg)] border-2 border-transparent hover:border-primary/40 animate-float-in"
+                className="group block w-full rounded-3xl bg-card p-5 sm:p-6 text-left shadow-[var(--shadow-soft)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-soft-lg)] border-2 border-transparent hover:border-primary/40 animate-float-in"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
                 <div className="flex items-start gap-4">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary text-primary-foreground font-extrabold text-lg uppercase shadow-sm group-hover:scale-105 transition-transform">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary text-primary-foreground font-black text-xl uppercase shadow-sm group-hover:scale-105 transition-transform">
                     {alt.key}
                   </div>
 
                   <div className="min-w-0 flex-1 pt-0.5">
-                    <p className="font-semibold text-foreground text-base leading-relaxed group-hover:text-primary transition-colors">
+                    <p className="font-semibold text-foreground text-base sm:text-lg leading-relaxed group-hover:text-primary transition-colors">
                       {alt.text}
                     </p>
                   </div>

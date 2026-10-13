@@ -1,60 +1,40 @@
 /**
- * Glossário de termos técnicos utilizados nas alternativas dos dilemas.
- * Cada entrada contém o termo (em minúsculas para matching case-insensitive)
- * e sua definição pedagógica curta.
+ * Glossário pedagógico voltado ao Domínio de Recursos do PMBOK 8.
+ * Apresenta definições claras e acessíveis para estudantes de graduação,
+ * sem depender de termos ou jargões prévios de programação.
  */
 export const TECH_GLOSSARY: Record<string, string> = {
-  // Ágil / Scrum
-  'sprint': 'Ciclo curto de desenvolvimento (geralmente 1–4 semanas) onde o time entrega incrementos funcionais do produto.',
-  'scrum': 'Framework ágil baseado em sprints, papéis definidos (PO, SM, Dev Team) e cerimônias como Daily e Retrospectiva.',
-  'kanban': 'Método visual de gestão de fluxo de trabalho usando colunas (A Fazer, Em Progresso, Concluído) para limitar o trabalho em andamento.',
-  'backlog': 'Lista priorizada de funcionalidades, melhorias e correções que o time deve desenvolver ao longo do projeto.',
-  'daily': 'Reunião diária curta (até 15 min) onde o time sincroniza progresso, planos e impedimentos.',
-  'retrospectiva': 'Cerimônia ao final de cada sprint para inspecionar o processo e criar melhorias concretas.',
-  'velocity': 'Quantidade média de trabalho que um time consegue concluir por sprint, usada para planejar futuras entregas.',
-  'pair programming': 'Prática onde dois desenvolvedores trabalham juntos no mesmo código: um escreve, o outro revisa em tempo real.',
-
-  // Débito técnico e qualidade
-  'débito técnico': 'Custo futuro de retrabalho gerado por atalhos técnicos feitos hoje. Quanto maior o débito, mais lento o time fica.',
-  'débito': 'Custo futuro de retrabalho gerado por atalhos técnicos feitos hoje. Quanto maior o débito, mais lento o time fica.',
-  'refactoring': 'Processo de reestruturar código existente sem alterar seu comportamento externo, melhorando legibilidade e manutenção.',
-  'refatoração': 'Processo de reestruturar código existente sem alterar seu comportamento externo, melhorando legibilidade e manutenção.',
-  'code review': 'Revisão sistemática do código por outro desenvolvedor antes de integrá-lo, reduzindo bugs e melhorando a qualidade.',
-  'ci/cd': 'Integração Contínua (CI) e Entrega Contínua (CD): automação de testes e deploys para acelerar ciclos de entrega com qualidade.',
-  'pipeline': 'Sequência automatizada de etapas (build, teste, deploy) que garante que o software seja entregue de forma confiável.',
-  'tdd': 'Test-Driven Development: escrever testes automatizados antes do código de produção, guiando o design do sistema.',
-  'bug': 'Defeito no código que causa comportamento inesperado ou incorreto no sistema.',
-  'feature flag': 'Mecanismo para ativar/desativar funcionalidades em produção sem fazer novo deploy, reduzindo riscos de lançamento.',
-
-  // PMBOK / Gestão
-  'pmbok': 'Guia de Boas Práticas de Gerenciamento de Projetos do PMI. A 7ª edição foca em princípios e domínios de desempenho.',
-  'stakeholder': 'Qualquer pessoa ou grupo com interesse ou influência sobre o projeto (clientes, patrocinadores, usuários, equipe).',
-  'trade-off': 'Situação em que melhorar um aspecto necessariamente piora outro (ex: qualidade vs. velocidade de entrega).',
-  'trade-offs': 'Situações em que melhorar um aspecto necessariamente piora outro (ex: qualidade vs. velocidade de entrega).',
-  'risco': 'Evento incerto que, se ocorrer, pode impactar positiva ou negativamente os objetivos do projeto.',
-  'escopo': 'Conjunto de todo o trabalho necessário para entregar o produto ou serviço com as características acordadas.',
-  'kpi': 'Key Performance Indicator: métrica usada para avaliar o desempenho em relação a um objetivo estratégico.',
-  'roadmap': 'Plano visual de alto nível que mostra a direção estratégica e as principais entregas do produto ao longo do tempo.',
-  'mvp': 'Minimum Viable Product: versão com o mínimo de funcionalidades para validar hipóteses com usuários reais.',
-
-  // Infraestrutura e ops
-  'jira': 'Ferramenta de rastreamento de projetos e bugs amplamente usada em times ágeis para gerenciar backlogs e sprints.',
-  'downtime': 'Período em que o sistema está indisponível, causando impacto direto nos usuários e nos negócios.',
-  'deploy': 'Processo de disponibilizar uma nova versão do software para o ambiente de produção (ou teste).',
-  'hotfix': 'Correção urgente aplicada diretamente em produção para resolver um bug crítico sem esperar o próximo ciclo de release.',
-  'rollback': 'Reversão para uma versão anterior do sistema após detectar problemas em um novo deploy.',
-  'monitoramento': 'Coleta contínua de métricas do sistema (erros, latência, uso de recursos) para detectar e corrigir problemas rapidamente.',
-
-  // Lean
-  'muda': 'Termo japonês para desperdício. Em Lean, identifica atividades que consomem recursos sem agregar valor ao cliente.',
-  'lean': 'Filosofia de gestão que busca maximizar valor ao cliente eliminando desperdícios nos processos.',
-  'timesheet': 'Registro de horas trabalhadas por cada membro da equipe, usado para controle de custos e produtividade.',
-
-  // Pessoas e cultura
-  'burnout': 'Estado de esgotamento físico e mental causado por sobrecarga de trabalho prolongada, reduzindo produtividade e bem-estar.',
-  'onboarding': 'Processo de integração de um novo membro à equipe, incluindo ambientação, treinamento e acesso aos sistemas.',
-  'feedback': 'Retorno sobre desempenho ou resultados, essencial para aprendizado contínuo e melhoria de processos.',
-  'mentoria': 'Relação de desenvolvimento profissional onde um profissional mais experiente orienta outro menos experiente.',
+  // PMBOK 8 - Processos e Conceitos de Recursos
+  'team charter': 'Documento formal e colaborativo que define as regras de convivência, valores, canais de comunicação e acordos operacionais da equipe.',
+  'liderança servidora': 'Abordagem de liderança em que o gestor atua para apoiar a equipe, remover impedimentos e fornecer as condições para o alto desempenho.',
+  'segurança psicológica': 'Clima de confiança mútua onde os membros sentem liberdade para expressar dúvidas, propor ideias e admitir erros sem medo de punição.',
+  'ambiente seguro': 'Ambiente de trabalho transparente e protegido contra perseguições, onde falhas são tratadas como oportunidades de aprendizado do sistema.',
+  'transparência sobre vieses': 'Reconhecimento aberto de preferências e limitações da equipe para tomar decisões mais justas e equilibradas.',
+  'blameless post-mortem': 'Reunião de análise após um incidente focada em descobrir falhas nos processos e no sistema, sem apontar culpados individuais.',
+  'matriz de responsabilidades': 'Quadro visual (como a matriz RAM ou RACI) que define com clareza quem faz, quem aprova e quem apoia cada entrega do projeto.',
+  'ram': 'Matriz de Atribuição de Responsabilidades: ferramenta que esclarece os papéis de cada membro em relação às tarefas do projeto.',
+  'estimativa bottom-up': 'Técnica de estimativa em que cada tarefa detalhada é calculada individualmente e somada para formar o total com máxima precisão.',
+  'estimativa análoga': 'Técnica de estimativa rápida baseada na comparação com projetos ou atividades semelhantes executados no passado.',
+  'estimativa paramétrica': 'Técnica de estimativa que utiliza dados históricos e relações estatísticas ou matemáticas para calcular prazos e recursos.',
+  'teoria das restrições': 'Filosofia de gestão focada em identificar o gargalo (o ponto mais lento do processo) e otimizá-lo para aumentar a capacidade total.',
+  'gargalo': 'Etapa ou recurso com menor capacidade no fluxo de trabalho que limita a velocidade de entrega de toda a equipe.',
+  'desperdício': 'Qualquer atividade que consome tempo e recursos sem agregar valor real ao resultado final do projeto (conceito Lean / Muda).',
+  'muda': 'Termo da filosofia Lean que designa desperdícios no processo produtivo que devem ser sistematicamente eliminados.',
+  'retrabalho': 'Esforço gasto para refazer tarefas que apresentaram defeitos devido à falta de planejamento, testes ou comunicação.',
+  'burnout': 'Estado de esgotamento físico e mental gerado por sobrecarga de trabalho e pressão contínua, reduzindo o bem-estar e a produtividade.',
+  'ociosidade': 'Período em que profissionais ou equipamentos ficam parados sem produzir, geralmente aguardando aprovações ou desbloqueios.',
+  'propriedade compartilhada': 'Sentimento coletivo de responsabilidade em que todos os membros cuidam do projeto como um todo, superando silos individuais.',
+  'recursos físicos e virtuais': 'Todos os recursos materiais ou tecnológicos necessários ao projeto: servidores, computadores, licenças de software e laboratórios.',
+  'retrospectiva': 'Reunião periódica da equipe para inspecionar o processo de trabalho recente e pactuar melhorias contínuas para as próximas etapas.',
+  'tailoring': 'Adaptação consciente e intencional dos processos e ferramentas de gerenciamento para atender à realidade específica do projeto.',
+  'gestão de conflitos': 'Mediação construtiva de divergências na equipe, transformando opiniões diferentes em soluções inovadoras.',
+  'partes interessadas': 'Pessoas, grupos ou instituições que podem afetar ou ser afetados pelas decisões e entregas do projeto (stakeholders).',
+  'capacidade de entrega': 'Volume de trabalho útil que a equipe consegue concluir em um determinado período sem comprometer a sustentabilidade.',
+  'qualidade do produto': 'Grau em que as entregas atendem aos requisitos combinados, normas de acessibilidade e expectativas dos usuários.',
+  'saúde da equipe': 'Nível de motivação, energia, confiança e bem-estar físico e emocional dos profissionais envolvidos no projeto.',
+  'conhecimento organizacional': 'Patrimônio de saberes, documentações e competências acumuladas e compartilhadas pela equipe ao longo do projeto.',
+  'silos': 'Isolamento entre profissionais ou departamentos que não se comunicam, prejudicando o fluxo de trabalho e gerando retrabalho.',
+  'horas extras': 'Extensão da jornada de trabalho além do horário normal; seu uso crônico causa exaustão, erros e desmotivação.',
 };
 
 /**

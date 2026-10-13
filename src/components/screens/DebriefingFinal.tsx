@@ -60,7 +60,7 @@ export function DebriefingFinal() {
         <div className="flex items-center justify-between max-w-xl mx-auto mb-2">
           {[
             { stepNumber: 1, label: "Resumo & Reflexão" },
-            { stepNumber: 2, label: "Conceitos PMBOK 7" },
+            { stepNumber: 2, label: "Conceitos PMBOK 8" },
             { stepNumber: 3, label: "Aplicação Profissional" },
           ].map((item, index) => {
             const isActive = step === item.stepNumber;
@@ -108,14 +108,14 @@ export function DebriefingFinal() {
       {step === 1 && (
         <div className="animate-float-in">
           {/* Helena's closing */}
-          <div className="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-slate-100 mb-8 animate-float-in">
-            <Avatar className="h-16 w-16 border-2 border-primary/20">
+          <div className="flex items-center gap-4 bg-white p-5 rounded-2xl shadow-sm border border-slate-100 mb-8 animate-float-in">
+            <Avatar className="h-16 w-16 border-2 border-primary/20 shrink-0">
               <AvatarImage src={MENTOR.imagePath} alt={MENTOR.name} />
               <AvatarFallback>HE</AvatarFallback>
             </Avatar>
             <div>
               <h2 className="text-xl font-bold text-slate-800">Debriefing Final : {MENTOR.name}</h2>
-              <p className="text-slate-600">
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed mt-1">
                 {isSuccess
                   ? '"Parabéns, equipe! Vocês concluíram o projeto. Vamos revisar juntos o que aprendemos para consolidar o conhecimento."'
                   : `"Infelizmente o projeto não pôde ser concluído. Motivo: ${gameOverReason}. Mas o mais importante agora é refletir sobre as decisões tomadas."`}
@@ -124,7 +124,7 @@ export function DebriefingFinal() {
           </div>
 
           <div className="mb-8 text-center animate-float-in">
-            <h1 className="text-3xl font-bold tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
               {isSuccess ? "🎉 Projeto Concluído" : "⚠️ Projeto Encerrado"}
             </h1>
           </div>
@@ -212,14 +212,14 @@ export function DebriefingFinal() {
           {/* Botão de Navegação para Tela 2 */}
           <div className="flex justify-end animate-float-in mt-8">
             <SoftButton size="lg" onClick={() => handleSetStep(2)}>
-              Avançar para Conceitos PMBOK 7
+              Avançar para Conceitos PMBOK 8
               <ArrowRight className="h-4 w-4 ml-2" />
             </SoftButton>
           </div>
         </div>
       )}
 
-      {/* TELA 2: Somente os Conceitos PMBOK 7 Aprendidos */}
+      {/* TELA 2: Somente os Conceitos PMBOK 8 Aprendidos */}
       {step === 2 && (
         <div className="animate-float-in">
           {/* Helena's closing - Contexto PMBOK */}
@@ -231,33 +231,33 @@ export function DebriefingFinal() {
             <div>
               <h2 className="text-xl font-bold text-slate-800">Debriefing Final : {MENTOR.name}</h2>
               <p className="text-slate-600">
-                "Cada desafio enfrentado pelo time esteve diretamente conectado a princípios e
-                práticas essenciais do PMBOK 7. Vejam a síntese dos conceitos trabalhados:"
+                "Cada desafio enfrentado pelo time esteve diretamente conectado aos processos e
+                práticas essenciais do Domínio de Recursos (PMBOK 8). Vejam a síntese dos conceitos trabalhados:"
               </p>
             </div>
           </div>
 
           <div className="mb-8 text-center animate-float-in">
-            <h1 className="text-3xl font-bold tracking-tight">📘 Conceitos PMBOK 7 Aprendidos</h1>
+            <h1 className="text-3xl font-bold tracking-tight">📘 Conceitos de Recursos (PMBOK 8) Aprendidos</h1>
           </div>
 
           {/* Conceitos PMBOK Aprendidos */}
           <SoftCard className="mb-8 animate-float-in">
             <div className="flex items-center gap-3 mb-4">
-              <BookOpen className="h-5 w-5 text-primary" />
-              <h2 className="text-lg font-semibold">Conceitos PMBOK Aprendidos</h2>
+              <BookOpen className="h-6 w-6 text-primary" />
+              <h2 className="text-xl font-bold">Conceitos de Recursos Aprendidos</h2>
             </div>
             {allLearnings.length === 0 ? (
-              <p className="text-sm text-slate-500 italic p-4 text-center">
+              <p className="text-base text-slate-500 italic p-4 text-center">
                 Nenhum conceito registrado nesta rodada.
               </p>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {allLearnings.map((l, i) => (
-                  <div key={i} className="bg-muted rounded-xl p-4">
-                    <p className="text-sm font-semibold text-foreground">{l.eventTitle}</p>
-                    <p className="text-xs text-primary mt-1 font-medium">📘 {l.pmbokConcept}</p>
-                    <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
+                  <div key={i} className="bg-muted rounded-xl p-4 sm:p-5">
+                    <p className="text-base sm:text-lg font-bold text-foreground">{l.eventTitle}</p>
+                    <p className="text-sm sm:text-base text-primary mt-1 font-bold">📘 {l.pmbokConcept}</p>
+                    <p className="text-base text-muted-foreground mt-1.5 leading-relaxed">
                       {l.learnings}
                     </p>
                   </div>
@@ -268,7 +268,7 @@ export function DebriefingFinal() {
 
           {/* Botões de Navegação */}
           <div className="flex items-center justify-between animate-float-in mt-8 gap-4">
-            <SoftButton variant="outline" size="lg" onClick={() => handleSetStep(1)}>
+            <SoftButton variant="ghost" size="lg" onClick={() => handleSetStep(1)}>
               <ArrowLeft className="h-4 w-4 mr-2" />
               Voltar para Resumo
             </SoftButton>
@@ -284,14 +284,14 @@ export function DebriefingFinal() {
       {step === 3 && (
         <div className="animate-float-in">
           {/* Helena's closing - Contexto Aplicação Profissional */}
-          <div className="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-slate-100 mb-8 animate-float-in">
-            <Avatar className="h-16 w-16 border-2 border-primary/20">
+          <div className="flex items-center gap-4 bg-white p-5 rounded-2xl shadow-sm border border-slate-100 mb-8 animate-float-in">
+            <Avatar className="h-16 w-16 border-2 border-primary/20 shrink-0">
               <AvatarImage src={MENTOR.imagePath} alt={MENTOR.name} />
               <AvatarFallback>HE</AvatarFallback>
             </Avatar>
             <div>
               <h2 className="text-xl font-bold text-slate-800">Debriefing Final : {MENTOR.name}</h2>
-              <p className="text-slate-600">
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed mt-1">
                 "Para consolidar nossa jornada, vejam como as lições deste projeto se traduzem na
                 prática profissional e no dia a dia da liderança ágil."
               </p>
@@ -303,24 +303,24 @@ export function DebriefingFinal() {
           </div>
 
           {/* Aplicação Profissional */}
-          <SoftCard className="mb-8 animate-float-in border-t-4 border-t-primary">
+          <SoftCard className="mb-8 animate-float-in border-t-4 border-t-primary p-6">
             <div className="flex items-center gap-3 mb-3">
-              <Briefcase className="h-5 w-5 text-primary" />
-              <h2 className="text-lg font-semibold">Aplicação Profissional</h2>
+              <Briefcase className="h-6 w-6 text-primary" />
+              <h2 className="text-xl font-bold">Aplicação Profissional</h2>
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
               Os cenários que vocês enfrentaram refletem dilemas reais do dia a dia de projetos de
               software. A habilidade de equilibrar eficiência operacional, qualidade técnica e saúde
-              da equipe é central no Domínio de Desempenho <strong>Trabalho do Projeto</strong>{" "}
-              (PMBOK 7). Em projetos reais, busquem sempre negociar prazos com dados concretos,
-              proteger o fluxo de trabalho do time contra interrupções não planejadas, e investir na
-              melhoria contínua dos processos, exatamente como vocês praticaram aqui.
+              da equipe é central no Domínio de Desempenho <strong>Recursos</strong>{" "}
+              (PMBOK 8). Em projetos reais, busquem sempre garantir os recursos certos no momento e
+              lugar certos, negociar prazos com base na capacidade real, proteger o time contra
+              sobrecarga e investir na eficiência dos ambientes e ferramentas, exatamente como vocês praticaram aqui.
             </p>
           </SoftCard>
 
           {/* Botões de Ação Final */}
           <div className="flex items-center justify-between animate-float-in mt-8 gap-4">
-            <SoftButton variant="outline" size="lg" onClick={() => handleSetStep(2)}>
+            <SoftButton variant="ghost" size="lg" onClick={() => handleSetStep(2)}>
               <ArrowLeft className="h-4 w-4 mr-2" />
               Voltar para Conceitos PMBOK
             </SoftButton>

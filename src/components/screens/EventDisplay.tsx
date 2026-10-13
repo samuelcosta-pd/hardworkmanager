@@ -70,13 +70,13 @@ export function EventDisplay() {
       )}
 
       <div className="mb-6 animate-float-in">
-        <h1 className="text-2xl font-bold tracking-tight text-foreground">{event.title}</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">{event.title}</h1>
+        <p className="mt-1.5 text-base sm:text-lg text-muted-foreground">
           Liderança responsável:{" "}
-          <span className="font-semibold text-foreground">
+          <span className="font-bold text-foreground">
             {ROLE_LABELS[event.responsibleRole]}
           </span>{" "}
-          · <span className="text-xs">{event.domainTag}</span>
+          · <span className="text-sm font-medium">{event.domainTag}</span>
         </p>
       </div>
 
@@ -88,13 +88,13 @@ export function EventDisplay() {
       {/* Dica da Mentora para o 1º Dilema (Modo Aprenda Jogando) */}
       {currentEventIndex === 0 ? (
         <SoftCard className="mt-6 animate-float-in border-l-4 border-l-primary" variant="inset">
-          <div className="flex items-start gap-3">
-            <Users className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+          <div className="flex items-start gap-3.5">
+            <Users className="h-6 w-6 text-primary shrink-0 mt-0.5" />
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-primary">
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-primary">
                 Dica da Mentora Helena
               </p>
-              <p className="mt-1 text-sm leading-relaxed text-slate-700">
+              <p className="mt-1.5 text-base sm:text-lg leading-relaxed text-slate-700">
                 Discutam a situação em equipe. Em seguida, cliquem abaixo e passem o dispositivo de
                 mão em mão para cada um registrar seu voto secreto.
               </p>
@@ -103,7 +103,7 @@ export function EventDisplay() {
         </SoftCard>
       ) : (
         <SoftCard className="mt-6 animate-float-in text-center" variant="inset">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-base text-muted-foreground">
             Discutam brevemente as opções. Cada jogador passará o dispositivo para registrar seu
             voto secreto.
           </p>

@@ -20,14 +20,14 @@ export const AVAILABLE_AVATARES: Avatar[] = [
     id: 'kendrick',
     name: 'Kendrick',
     imagePath: '/Personagens/Kendrick.png',
-    description: 'Focado em processos operacionais e integração contínua (DevOps).',
+    description: 'Focado em processos operacionais, infraestrutura de servidores e automação.',
     preferredRoles: ['techLead'],
   },
   {
     id: 'kenedy',
     name: 'Kenedy',
     imagePath: '/Personagens/Kenedy.png',
-    description: 'Analista de sistemas com forte perfil de backend e gerenciamento de banco de dados.',
+    description: 'Analista de sistemas focado na lógica interna e no gerenciamento de banco de dados.',
     preferredRoles: ['techLead'],
   },
   {
@@ -41,14 +41,14 @@ export const AVAILABLE_AVATARES: Avatar[] = [
     id: 'livia',
     name: 'Lívia',
     imagePath: '/Personagens/Lívia.png',
-    description: 'Gestora com visão estratégica, focada no alinhamento de stakeholders e prazos.',
+    description: 'Gestora com visão estratégica, focada no alinhamento de partes interessadas e prazos.',
     preferredRoles: ['pm'],
   },
   {
     id: 'paulyne',
     name: 'Paulyne',
     imagePath: '/Personagens/Paulyne.png',
-    description: 'Especialista em métricas de qualidade e testes automatizados.',
+    description: 'Especialista em testes de qualidade e validação de requisitos do sistema.',
     preferredRoles: ['uxLead', 'techLead'],
   },
   {
@@ -62,7 +62,7 @@ export const AVAILABLE_AVATARES: Avatar[] = [
     id: 'roberto',
     name: 'Roberto',
     imagePath: '/Personagens/Roberto.png',
-    description: 'Especialista em arquitetura de software e sistemas legados complexos.',
+    description: 'Especialista em arquitetura estrutural e modernização de sistemas legados complexos.',
     preferredRoles: ['techLead'],
   },
 ];

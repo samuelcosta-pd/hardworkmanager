@@ -20,12 +20,12 @@ export const Route = createFileRoute('/')({
       {
         name: 'description',
         content:
-          'Jogo sério de gerenciamento de projetos de software colaborativo para o ensino do domínio Trabalho do Projeto do PMBOK 7.',
+          'Jogo sério colaborativo para o ensino do Domínio de Recursos do PMBOK 8 (gestão de equipes e infraestrutura).',
       },
       { property: 'og:title', content: 'Hard Work Manager' },
       {
         property: 'og:description',
-        content: 'Simulador educacional colaborativo do domínio Trabalho do Projeto.',
+        content: 'Simulador educacional colaborativo do Domínio de Recursos do PMBOK 8.',
       },
     ],
   }),

@@ -28,7 +28,7 @@ export function SprintReview() {
           <CheckCircle2 className="h-8 w-8 text-indigo-600" />
         </div>
         <p className="text-xs uppercase tracking-[0.2em] text-primary">Encerramento de Ciclo</p>
-        <h1 className="mt-1 text-3xl font-bold tracking-tight">Sprint {currentSprint} Concluída</h1>
+        <h1 className="mt-1 text-3xl font-bold tracking-tight">Ciclo de Entregas {currentSprint} Concluído</h1>
       </div>
 
       <div className="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-slate-100 mb-8 animate-float-in">
@@ -37,7 +37,7 @@ export function SprintReview() {
           <AvatarFallback>HE</AvatarFallback>
         </Avatar>
         <div>
-          <h2 className="text-xl font-bold text-slate-800">Review da Sprint : {MENTOR.name}</h2>
+          <h2 className="text-xl font-bold text-slate-800">Revisão do Ciclo : {MENTOR.name}</h2>
           <p className="text-slate-600">
             "Mais um ciclo fechado. Confiram como ficaram nossas métricas principais após as últimas decisões. Lembrem-se que atalhos tomados hoje podem retornar como dívida no futuro."
           </p>
@@ -52,7 +52,7 @@ export function SprintReview() {
 
       <div className="grid gap-6 md:grid-cols-2 mb-8">
         <SoftCard className="animate-float-in">
-          <h2 className="text-lg font-bold mb-4">Decisões desta Sprint</h2>
+          <h2 className="text-lg font-bold mb-4">Decisões deste Ciclo</h2>
           <div className="space-y-3">
             {sprintDecisions.map((d, i) => (
               <div key={i} className="bg-slate-50 p-3 rounded-lg border border-slate-100 text-sm">
@@ -109,7 +109,7 @@ export function SprintReview() {
           </SoftButton>
         ) : (
           <SoftButton size="lg" onClick={startNextSprint}>
-            Iniciar Sprint {currentSprint + 1}
+            Iniciar Ciclo {currentSprint + 1}
           </SoftButton>
         )}
       </div>
