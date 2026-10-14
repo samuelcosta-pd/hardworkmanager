@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Gauge,
   Heart,
@@ -8,6 +9,7 @@ import {
   ArrowRight,
   Clock,
   ShieldAlert,
+  ArrowLeft,
 } from "lucide-react";
 import { SoftCard } from "@/components/ui/SoftCard";
 import { SoftButton } from "@/components/ui/SoftButton";
@@ -17,6 +19,7 @@ import { useGameStore } from "@/store/gameStore";
 import { ROLE_LABELS } from "@/types";
 
 export function Dashboard() {
+  const [page, setPage] = useState<0 | 1>(0);
   const {
     players,
     metrics,
@@ -54,8 +57,8 @@ export function Dashboard() {
   }
 
   return (
-    <div className="mx-auto min-h-screen max-w-5xl px-6 py-10">
-      <header className="mb-8 flex flex-wrap items-center justify-between gap-4 animate-float-in">
+    <div className="mx-auto min-h-screen max-w-5xl px-6 py-6">
+      <header className="mb-5 flex flex-wrap items-center justify-between gap-4 animate-float-in">
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-primary font-bold">
             Painel Executivo
@@ -78,8 +81,8 @@ export function Dashboard() {
       </header>
 
       {/* Alerta de Consequência Imediata (Eco Detonado na Rodada) */}
-      {delayedImpactsTriggeredThisRound && delayedImpactsTriggeredThisRound.length > 0 && (
-        <div className="mb-8 rounded-2xl bg-rose-50 border-2 border-rose-400 p-5 shadow-sm animate-pop-in">
+      {page === 0 && delayedImpactsTriggeredThisRound && delayedImpactsTriggeredThisRound.length > 0 && (
+        <div className="mb-5 rounded-2xl bg-rose-50 border-2 border-rose-400 p-5 shadow-sm animate-pop-in">
           <div className="flex items-start gap-3.5">
             <div className="p-2.5 rounded-xl bg-rose-200 text-rose-800 shrink-0">
               <AlertTriangle className="w-6 h-6 text-rose-700" />
@@ -128,7 +131,8 @@ export function Dashboard() {
       )}
 
       {/* 3 Métricas Principais */}
-      <section className="mb-8 grid gap-4 md:grid-cols-3">
+      {page === 0 && (<>
+      <section className="mb-5 grid gap-4 md:grid-cols-3">
         <MetricBar
           label="Capacidade de Entrega"
           value={metrics.capacidadeEntrega}
@@ -217,9 +221,16 @@ export function Dashboard() {
           </div>
         </SoftCard>
       </div>
+      <div className="mt-5 flex justify-end">
+        <SoftButton variant="ghost" onClick={() => setPage(1)}>
+          Ver radar de impactos <ArrowRight className="ml-1.5 h-4 w-4" />
+        </SoftButton>
+      </div>
+      </>)}
 
       {/* Ciclo de Entrega e Radar de Impactos Diferidos */}
-      <div className="grid gap-6 md:grid-cols-2 mt-6">
+      {page === 1 && (<>
+      <div className="grid gap-6 md:grid-cols-2">
         <SoftCard className="animate-float-in border-t-4 border-t-indigo-500 p-6">
           <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             Ciclo de Entrega
@@ -231,7 +242,7 @@ export function Dashboard() {
         </SoftCard>
 
         {/* Radar Completo de Impactos Diferidos (Ecos) */}
-        <SoftCard className="animate-float-in border-t-4 border-t-amber-500 max-h-80 overflow-y-auto p-6">
+        <SoftCard className="animate-float-in border-t-4 border-t-amber-500 p-6">
           <div className="flex items-center justify-between gap-2 mb-4">
             <div className="flex items-center gap-2">
               <ShieldAlert className="h-5 w-5 text-amber-500" />
@@ -346,6 +357,12 @@ export function Dashboard() {
           </div>
         </SoftCard>
       </div>
+      <div className="mt-5 flex justify-start">
+        <SoftButton variant="ghost" onClick={() => setPage(0)}>
+          <ArrowLeft className="mr-1.5 h-4 w-4" /> Voltar ao painel
+        </SoftButton>
+      </div>
+      </>)}
     </div>
   );
 }

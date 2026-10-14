@@ -8,6 +8,7 @@ import {
   tallyVotes,
   evaluateCondition,
   generateMatchDeck,
+  MATCH_DILEMMA_COUNT,
 } from '@/lib/gameLogic';
 import type {
   AlternativeKey,
@@ -364,6 +365,14 @@ export const useGameStore = create<GameState>()(
     }),
     {
       name: 'hardwork-manager-storage',
+      // Descarta partida salva com tamanho de baralho diferente de MATCH_DILEMMA_COUNT
+      merge: (persisted, current) => {
+        const saved = persisted as Partial<GameState> | undefined;
+        if (saved?.matchDeck && saved.matchDeck.length > 0 && saved.matchDeck.length !== MATCH_DILEMMA_COUNT) {
+          return current;
+        }
+        return { ...current, ...(saved ?? {}) };
+      },
     }
   )
 );

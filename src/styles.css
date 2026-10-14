@@ -1,5 +1,4 @@
-@import "tailwindcss" source(none);
-@source "../src";
+@import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -83,16 +82,16 @@
     border-color: var(--color-border);
   }
   html {
-    font-size: 18px;
+    font-size: 15px;
   }
   @media (min-width: 768px) {
     html {
-      font-size: 18.5px;
+      font-size: 15.5px;
     }
   }
   @media (min-width: 1280px) {
     html {
-      font-size: 19.5px;
+      font-size: 16px;
     }
   }
   html, body {

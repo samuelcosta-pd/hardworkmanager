@@ -115,6 +115,13 @@ export function evaluateCondition(
  * Sorteia 2 dilemas de cada um dos 5 conjuntos de eventos do Domínio de Recursos (PMBOK 8),
  * totalizando 10 dilemas balanceados ao longo das 4 Sprints da simulação.
  */
+/**
+ * QUANTIDADE DE DILEMAS DA PARTIDA.
+ * Apresentação: 6 (1 de cada domínio + 1 extra). Jogo completo: 10.
+ * Para voltar ao jogo completo, basta alterar este valor para 10.
+ */
+export const MATCH_DILEMMA_COUNT = 6;
+
 export function generateMatchDeck(): GameEvent[] {
   const sampleRandom = (arr: GameEvent[], count: number = 1): GameEvent[] => {
     const shuffled = [...arr].sort(() => Math.random() - 0.5);
@@ -143,5 +150,5 @@ export function generateMatchDeck(): GameEvent[] {
     poolQuality[1],
   ].sort(() => Math.random() - 0.5);
 
-  return [...round1, ...round2];
+  return [...round1, ...round2].slice(0, MATCH_DILEMMA_COUNT);
 }
