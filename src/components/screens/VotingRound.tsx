@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { EyeOff, Lock, ArrowLeft, HelpCircle, AlertTriangle } from "lucide-react";
+import { EyeOff, Lock, ArrowLeft, HelpCircle, AlertTriangle, UserX, Clock } from "lucide-react";
 import { SoftCard } from "@/components/ui/SoftCard";
 import { SoftButton } from "@/components/ui/SoftButton";
 import { Avatar3D } from "@/components/ui/Avatar3D";
+import { CountdownTimer } from "@/components/ui/CountdownTimer";
+import { useCountdown } from "@/hooks/useCountdown";
 import { useGameStore } from "@/store/gameStore";
-import { ROLE_LABELS, type AlternativeKey } from "@/types";
+import { ROLE_LABELS, type AlternativeKey, type VoteChoice } from "@/types";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { detectTechTerms } from "@/data/glossary";
 
@@ -20,6 +22,7 @@ export function VotingRound({ round }: Props) {
     currentEventIndex,
     currentVoterIndex,
     pendingDelayedImpacts,
+    timerSettings,
     castVote,
     finalizeRound1,
     finalizeRound2,
@@ -31,6 +34,21 @@ export function VotingRound({ round }: Props) {
 
   const allVoted = currentVoterIndex >= (players?.length || 0) && (players?.length || 0) > 0;
   const player = players && players[currentVoterIndex] ? players[currentVoterIndex] : null;
+
+  const handleVote = (choice: VoteChoice) => {
+    castVote(choice);
+    setHandoff(true);
+  };
+
+  // Cronômetro individual de voto: só roda quando handoff === false
+  const countdown = useCountdown({
+    durationSeconds: timerSettings.votingSeconds,
+    enabled: !handoff && !allVoted && timerSettings.enabled && timerSettings.votingSeconds > 0,
+    onExpire: () => {
+      // Quando o tempo de voto expira, o voto é computado como abstenção
+      handleVote('abstain');
+    },
+  });
 
   // 1. Quando todos já votaram nesta rodada
   if (allVoted) {
@@ -75,11 +93,6 @@ export function VotingRound({ round }: Props) {
 
   const imminentEco = pendingDelayedImpacts?.find((p) => p.remainingEvents === 1);
 
-  const handleVote = (key: AlternativeKey) => {
-    castVote(key);
-    setHandoff(true);
-  };
-
   // 3. Tela de Bloqueio (Handoff Intermediário para Voto Secreto)
   if (handoff) {
     if (!player) return null;
@@ -108,7 +121,7 @@ export function VotingRound({ round }: Props) {
           </div>
 
           <p className="text-xs text-muted-foreground leading-relaxed">
-            Mantenha seu voto confidencial. Apenas você deve visualizar as opções a seguir.
+            Mantenha seu voto confidencial. O tempo para decisão individual começará assim que você clicar abaixo.
           </p>
 
           <div className="mt-6">
@@ -124,8 +137,8 @@ export function VotingRound({ round }: Props) {
   // 4. Tela Ativa de Votação
   return (
     <div className="mx-auto min-h-screen max-w-2xl px-6 py-8">
-      {/* Cabeçalho de Navegação e Contexto do Jogador */}
-      <div className="mb-6 flex items-center justify-between">
+      {/* Cabeçalho de Navegação, Cronômetro de Voto e Contexto do Jogador */}
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <button
           type="button"
           onClick={() => setHandoff(true)}
@@ -134,9 +147,25 @@ export function VotingRound({ round }: Props) {
           <ArrowLeft className="h-4 w-4" /> Voltar
         </button>
 
-        <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
-          Jogador {currentVoterIndex + 1} de {players.length} · Rodada {round}
-        </span>
+        <div className="flex items-center gap-2.5">
+          {timerSettings.enabled && timerSettings.votingSeconds > 0 && (
+            <CountdownTimer
+              formatted={countdown.formatted}
+              progressPercent={countdown.progressPercent}
+              isUrgent={countdown.isUrgent}
+              isExpired={countdown.isExpired}
+              isRunning={countdown.isRunning}
+              label="Tempo de Voto"
+              onToggle={countdown.toggle}
+              showControls
+              size="sm"
+            />
+          )}
+
+          <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
+            Jogador {currentVoterIndex + 1} de {players.length} · Rodada {round}
+          </span>
+        </div>
       </div>
 
       <div className="mb-5 flex items-center gap-3 animate-float-in">
@@ -229,7 +258,7 @@ export function VotingRound({ round }: Props) {
                         className="max-w-xs rounded-2xl bg-slate-900 p-3 text-left shadow-xl"
                       >
                         <p className="text-xs font-bold uppercase tracking-wider text-primary mb-2">
-                          Termos Técnicos
+                          Termos Técnicos (PMBOK 8)
                         </p>
                         <div className="space-y-2">
                           {techTerms.map(({ term, definition }) => (
@@ -248,6 +277,18 @@ export function VotingRound({ round }: Props) {
           })}
         </div>
       </TooltipProvider>
+
+      {/* Botão de Abstenção Voluntária */}
+      <div className="mt-6 flex justify-center">
+        <button
+          type="button"
+          onClick={() => handleVote('abstain')}
+          className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-rose-600 transition-colors py-2 px-4 rounded-xl hover:bg-rose-50 border border-transparent hover:border-rose-200"
+        >
+          <UserX className="h-3.5 w-3.5" />
+          Não me sinto apto a escolher · Registrar Abstenção
+        </button>
+      </div>
     </div>
   );
 }

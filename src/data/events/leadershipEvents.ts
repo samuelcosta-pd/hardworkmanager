@@ -2,946 +2,1007 @@ import { GameEvent, EventCategory, EventDifficulty } from "@/types";
 
 /**
  * Domínio de Recursos (PMBOK 8): Liderar a Equipe
- * Foco Pedagógico: Liderança de equipe, clima seguro, desenvolvimento de competências e sustentabilidade.
- * Total: 10 Dilemas
+ * Foco Pedagógico: Clima seguro, inteligência emocional, Tuckman, prevenção de burnout,
+ * liderança servidora vs. centralizada, resolução construtiva de conflitos e avaliação de desempenho.
+ * Total: 10 Dilemas reequilibrados segundo o modelo PMBOK 8.
  */
 export const leadershipEvents: GameEvent[] = [
   {
-    "id": "leadership_1_escudo_suporte",
-    "title": "O Escudo de Desvios (Capacidade da Equipe em Risco)",
+    id: "leadership_1_escudo_suporte",
+    title: "O Escudo de Desvios (Capacidade da Equipe em Risco)",
     category: EventCategory.PEOPLE,
     difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "capacidade",
-      "suporte",
-      "aquisicao_recursos",
-      "blindagem"
-    ],
-    "learningObjective": "Proteger a capacidade da equipe de desenvolvimento ao obter recursos alternativos para o suporte operacional.",
-    "communicationType": "email",
-    "senderRole": "Pró-Reitoria de Graduação",
-    "description": "Assunto: Chamados de Matrícula. A Pró-Reitoria de Graduação exige que a equipe do novo SIGAA pare o desenvolvimento imediatamente para atender chamados telefônicos de alunos com dúvidas de login e redefinição de senhas.",
-    "domainTag": "Recursos › Adquirir Recursos",
-    "resourceType": "humano",
-    "resourceProcess": "adquirir",
-    "senderName": "Pró-Reitor Adjunto",
-    "senderInitials": "PR",
-    "avatarImage": "/Personagens/Geraldo.png",
-    "responsibleRole": "pm",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["capacidade", "suporte", "aquisicao_recursos", "blindagem"],
+    learningObjective: "Proteger a capacidade da equipe ao negociar recursos alternativos para suporte operacional sem fragmentar o desenvolvimento.",
+    communicationType: "email",
+    senderRole: "Pró-Reitoria de Graduação",
+    description: "Assunto: Chamados Críticos de Matrícula. A PROGRAD solicita que a equipe do SIGAA interrompa os sprints para atender chamados telefônicos de alunos com dúvidas de login e senhas durante o pico acadêmico.",
+    domainTag: "Recursos › Liderar a Equipe",
+    resourceType: "humano",
+    resourceProcess: "liderar",
+    senderName: "Pró-Reitor Adjunto",
+    senderInitials: "PR",
+    avatarImage: "/Personagens/Geraldo.png",
+    responsibleRole: "pm",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Negociar a alocação emergencial de uma equipe de suporte operacional e criar um FAQ automático, blindando os desenvolvedores.",
-        "impacts": {
-          "capacidadeEntrega": -15,
-          "qualidadeProduto": 15,
-          "saudeEquipe": 20,
-          "conhecimentoOrganizacional": 10
+        key: "a",
+        text: "Negociar a alocação de recursos alternativos da central de atendimento e blindar a equipe de engenharia.",
+        impacts: {
+          capacidadeEntrega: 0,
+          qualidadeProduto: 10,
+          saudeEquipe: 15,
+          conhecimentoOrganizacional: 10
         },
-        "feedbackNarrative": "Consumimos um pouco de esforço gerencial para estruturar o suporte, mas mantivemos o time 100% focado no código central. A moral da equipe subiu expressivamente.",
-        "pmbokConcept": "Recursos alternativos com riscos reconhecidos",
-        "learnings": [
-          "Quando falta capacidade, obter recursos alternativos com riscos reconhecidos protege quem constrói o sistema e preserva o cronograma."
+        feedbackNarrative: "A negociação exigiu esforço gerencial imediato, mas preservou o foco cognitivo dos desenvolvedores e manteve a moral elevada.",
+        pmbokConcept: "Recursos alternativos com riscos reconhecidos",
+        learnings: [
+          "O PMBOK 8 recomenda buscar recursos alternativos para demandas operacionais emergenciais, protegendo a equipe central de desvios.",
+          "Essa decisão atende ao resultado esperado de manter a equipe focada na entrega de valor sem comprometer o cronograma básico."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Burnout dos engenheiros e atraso no módulo crítico de matrículas"
+        goodBad: "good",
+        risksEvaded: [
+          "Fragmentação cognitiva e burnout dos engenheiros de software"
         ],
-        "otherConsequences": [
-          "Estruturação de suporte sustentável para a universidade"
+        otherConsequences: [
+          "Consolidação de processo formal de suporte técnico na universidade"
         ]
       },
       {
-        "key": "b",
-        "text": "Determinar que os desenvolvedores atendam os telefones ao mesmo tempo em que programam o novo sistema.",
-        "impacts": {
-          "capacidadeEntrega": -20,
-          "qualidadeProduto": -20,
-          "saudeEquipe": -25,
-          "conhecimentoOrganizacional": 0
+        key: "b",
+        text: "Autorizar atendimento telefônico direto pelos desenvolvedores durante as pausas de compilação de código.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -10,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: 0
         },
-        "delayedImpacts": [
+        delayedImpacts: [
           {
-            "triggerAfterEvents": 1,
-            "impacts": {
-              "capacidadeEntrega": -15,
-              "qualidadeProduto": -15
+            triggerAfterEvents: 1,
+            impacts: {
+              capacidadeEntrega: -10,
+              qualidadeProduto: -10
             },
-            "narrative": "As falhas operacionais inseridas pelos membros sobrecarregados com telefonemas de suporte na rodada anterior começaram a estourar no sistema oficial. O time precisou parar entregas para conter os problemas."
+            narrative: "A alternância contínua de contexto gerou defeitos críticos de autenticação que exigiram reestruturação técnica emergencial e não planejada."
           }
         ],
-        "feedbackNarrative": "A troca de contexto contínua destruiu a concentração do time. Falhas graves foram inseridas no sistema e dois profissionais experientes pediram demissão.",
-        "pmbokConcept": "Bem-estar e prevenção de burnout",
-        "learnings": [
-          "Interromper desenvolvedores com demandas operacionais fragmenta o foco e gera erros críticos de programação."
+        feedbackNarrative: "A resposta imediata aos alunos pareceu rápida, mas a perda de foco técnico introduziu defeitos severos no módulo de matrícula.",
+        pmbokConcept: "Bem-estar e prevenção de burnout",
+        learnings: [
+          "O PMBOK 8 enfatiza que a sobrecarga e a troca de contexto frequente degradam o bem-estar e elevam drasticamente a taxa de retrabalho.",
+          "Essa escolha gera alívio cosmético de curto prazo, mas viola o objetivo de manter a sustentabilidade da capacidade produtiva."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Atrito inicial com a pró-reitoria"
+        goodBad: "bad",
+        risksEvaded: [
+          "Atrito burocrático inicial com a pró-reitoria"
         ],
-        "otherConsequences": [
-          "Exaustão da equipe e quebra de prazos"
+        otherConsequences: [
+          "Queda de produtividade e desgaste emocional entre os engenheiros"
         ]
       },
       {
-        "key": "c",
-        "text": "O Gerente de Projetos tenta atender sozinho todos os telefonemas nas madrugadas para poupar a equipe.",
-        "impacts": {
-          "capacidadeEntrega": -10,
-          "qualidadeProduto": 0,
-          "saudeEquipe": 10,
-          "conhecimentoOrganizacional": -15
+        key: "c",
+        text: "Centralizar todos os atendimentos telefônicos no próprio Gerente de Projetos para poupar a equipe técnica.",
+        impacts: {
+          capacidadeEntrega: -10,
+          qualidadeProduto: 5,
+          saudeEquipe: 5,
+          conhecimentoOrganizacional: -10
         },
-        "feedbackNarrative": "O time ficou grato, mas o Gerente entrou em colapso por exaustão e o projeto ficou sem liderança estratégica na semana mais crítica.",
-        "pmbokConcept": "Liderança distribuída e centralizada",
-        "learnings": [
-          "Liderança heroica que centraliza esforço em vez de estruturar processos gera gargalos institucionais."
+        feedbackNarrative: "A liderança heroica protegeu o time temporariamente, mas gerou gargalo decisório e paralisou o alinhamento com os patrocinadores.",
+        pmbokConcept: "Liderança distribuída e centralizada",
+        learnings: [
+          "O PMBOK 8 adverte contra a centralização heroica de tarefas operacionais no líder, o que compromete suas atribuições estratégicas.",
+          "Essa medida deixa o projeto sem governança gerencial durante a fase crítica de implantação dos serviços acadêmicos."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Interrupção direta dos desenvolvedores"
+        goodBad: "bad",
+        risksEvaded: [
+          "Interrupções diretas aos desenvolvedores"
         ],
-        "otherConsequences": [
-          "Desgaste pessoal insustentável do líder"
+        otherConsequences: [
+          "Sobrecarga do gerente e perda de visibilidade das entregas"
         ]
       }
     ]
   },
   {
-    "id": "leadership_2_sobrecarga_burnout",
-    "title": "Pressão por Horas Extras e Risco de Burnout",
+    id: "leadership_2_sobrecarga_burnout",
+    title: "Sinais de Fadiga (Monitoramento do Clima e Bem-Estar)",
     category: EventCategory.PEOPLE,
     difficulty: EventDifficulty.HARD,
-    "probabilityWeight": 2,
-    "tags": [
-      "burnout",
-      "sobrecarga",
-      "lideranca",
-      "sustentabilidade"
-    ],
-    "learningObjective": "Garantir ritmo sustentável de trabalho protegendo a saúde e retenção do time.",
-    "communicationType": "slack",
-    "senderRole": "Diretoria de TI",
-    "description": "A Diretoria de TI exige que toda a equipe trabalhe 12 horas por dia, incluindo sábados e domingos no próximo mês, para compensar um atraso causado por lentidão de compras de servidores pela universidade.",
-    "domainTag": "Recursos › Liderar a Equipe",
-    "resourceType": "humano",
-    "resourceProcess": "liderar",
-    "senderName": "Diretor de TI",
-    "senderInitials": "DT",
-    "avatarImage": "/Personagens/Roberto.png",
-    "responsibleRole": "pm",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["burnout", "saude", "sustentabilidade", "ritmo_sustentavel"],
+    learningObjective: "Identificar sinais precoces de desengajamento silencioso e intervir mediante gestão de ritmo de trabalho sustentável.",
+    communicationType: "slack",
+    senderRole: "Líder Técnico",
+    description: "Canal #lideranca: 'Dois desenvolvedores seniores estão em silêncio nas reuniões, enviando tarefas de madrugada e aparentando exaustão antes do lançamento do portal docente.'",
+    domainTag: "Recursos › Liderar a Equipe",
+    resourceType: "humano",
+    resourceProcess: "liderar",
+    senderName: "Mariana Costa",
+    senderInitials: "MC",
+    avatarImage: "/Personagens/Mariana.png",
+    responsibleRole: "techLead",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Negociar com dados de capacidade e fatiar o escopo do lançamento, recusando horas extras predatórias e mantendo ritmo sustentável.",
-        "impacts": {
-          "capacidadeEntrega": 0,
-          "qualidadeProduto": 15,
-          "saudeEquipe": 25,
-          "conhecimentoOrganizacional": 10
+        key: "a",
+        text: "Replanejar a cadência do ciclo de trabalho, redistribuir tarefas críticas e pactuar pausas de recuperação com a equipe.",
+        impacts: {
+          capacidadeEntrega: -5,
+          qualidadeProduto: 10,
+          saudeEquipe: 15,
+          conhecimentoOrganizacional: 10
         },
-        "feedbackNarrative": "A liderança usou dados do burndown para provar que horas extras gerariam defeitos e retrabalho. A diretoria aceitou fatiar o escopo e o time trabalhou motivado.",
-        "pmbokConcept": "Sustentabilidade na gestão de recursos",
-        "learnings": [
-          "Manter ritmo sustentável de trabalho protege a qualidade a longo prazo e evita rotatividade voluntária (turnover)."
+        feedbackNarrative: "A desaceleração pontual recuperou a clareza mental do time e evitou pedidos de demissão em momento decisivo.",
+        pmbokConcept: "Bem-estar e prevenção de burnout",
+        learnings: [
+          "O PMBOK 8 destaca a prevenção de burnout e a manutenção de ritmo sustentável como responsabilidade central na liderança de pessoas.",
+          "O ajuste proativo preserva o capital intelectual e assegura estabilidade operacional nas etapas subsequentes da modernização."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Demissões em massa por burnout e código de má qualidade"
+        goodBad: "good",
+        risksEvaded: [
+          "Evasão de talentos seniores e colapso operacional da arquitetura"
         ],
-        "otherConsequences": [
-          "Atrito político momentâneo com a diretoria"
+        otherConsequences: [
+          "Fortalecimento da confiança psicológica entre liderança e liderados"
         ]
       },
       {
-        "key": "b",
-        "text": "Acatar a ordem da diretoria e exigir que todos trabalhem nos finais de semana sob ameaça de corte de bolsas.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": -25,
-          "saudeEquipe": -35,
-          "conhecimentoOrganizacional": -10
+        key: "b",
+        text: "Oferecer bonificação financeira informal por horas extras para motivar o encerramento rápido do módulo.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -10,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -5
         },
-        "feedbackNarrative": "Nas primeiras duas semanas o volume de tarefas concluídas subiu, mas logo o cansaço cobrou o preço: falhas críticas chegaram ao sistema oficial e o clima ficou insuportável.",
-        "pmbokConcept": "Utilização e inatividade de recursos",
-        "learnings": [
-          "Horas extras crônicas geram mais defeitos do que entregas reais de valor."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Confronto com a diretoria de TI"
-        ],
-        "otherConsequences": [
-          "Colapso da saúde mental da equipe"
-        ]
-      },
-      {
-        "key": "c",
-        "text": "Prometer à diretoria que o time fará as horas extras, mas orientar os desenvolvedores a fingirem que estão logados sem trabalhar.",
-        "impacts": {
-          "capacidadeEntrega": -15,
-          "qualidadeProduto": -15,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -20
-        },
-        "feedbackNarrative": "A mentira foi descoberta quando a entrega atrasou do mesmo jeito. A credibilidade de toda a liderança foi aniquilada.",
-        "pmbokConcept": "Ambiente seguro e transparência sobre vieses",
-        "learnings": [
-          "Liderança sem coragem e sem transparência destrói a confiança da equipe e dos patrocinadores."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Conflito no curto prazo"
-        ],
-        "otherConsequences": [
-          "Demissão da liderança por quebra de confiança"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "leadership_3_saida_arquiteto_senior",
-    "title": "Demissão Repentina do Arquiteto Sênior",
-    category: EventCategory.PEOPLE,
-    difficulty: EventDifficulty.HARD,
-    "probabilityWeight": 2,
-    "tags": [
-      "turnover",
-      "conhecimento",
-      "lideranca",
-      "gestao_crise"
-    ],
-    "learningObjective": "Conduzir a transição de membros-chave sem desestabilizar a equipe.",
-    "communicationType": "slack",
-    "senderRole": "Líder Técnico",
-    "description": "O principal arquiteto do sistema de matrículas recebeu uma proposta irrecusável do exterior e sairá em 10 dias. Todo o conhecimento de autenticação segura e concorrência está concentrado na cabeça dele.",
-    "domainTag": "Recursos › Liderar a Equipe",
-    "resourceType": "humano",
-    "resourceProcess": "liderar",
-    "senderName": "Carlos Silva",
-    "senderInitials": "CS",
-    "avatarImage": "/Personagens/Kendrick.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
-      {
-        "key": "a",
-        "text": "Instituir 10 dias de trabalho em duplas e gravação de orientações com os demais profissionais da equipe.",
-        "impacts": {
-          "capacidadeEntrega": -10,
-          "qualidadeProduto": 15,
-          "saudeEquipe": 15,
-          "conhecimentoOrganizacional": 30
-        },
-        "feedbackNarrative": "A transferência de conhecimento foi um sucesso. Os desenvolvedores pleno assumiram o módulo com confiança e a saída do sênior não parou o projeto.",
-        "pmbokConcept": "Treinamento, mentoria e coaching",
-        "learnings": [
-          "Líderes transformam crises de perda de talentos em oportunidades de crescimento para os demais membros da equipe."
-        ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Silo de conhecimento perdido e paralisação do módulo"
-        ],
-        "otherConsequences": [
-          "Empoderamento dos desenvolvedores mais jovens"
-        ]
-      },
-      {
-        "key": "b",
-        "text": "Exigir que o arquiteto programe sozinho o máximo de código possível nas madrugadas antes de ir embora.",
-        "impacts": {
-          "capacidadeEntrega": 15,
-          "qualidadeProduto": -20,
-          "saudeEquipe": -10,
-          "conhecimentoOrganizacional": -30
-        },
-        "feedbackNarrative": "Ele entregou muito código sem testes e sem documentação. No dia seguinte à sua saída, o sistema caiu e ninguém soube como reiniciar os serviços.",
-        "pmbokConcept": "Papéis, responsabilidades e lacunas de conhecimento",
-        "learnings": [
-          "Código sem compartilhamento de contexto se torna dívida técnica inoperável quando o autor vai embora."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Perda de tempo ensinando outros"
-        ],
-        "otherConsequences": [
-          "Caos na manutenção pós-saída do profissional"
-        ]
-      },
-      {
-        "key": "c",
-        "text": "Tentar reter o profissional criando atritos contratuais e ameaçando reter seus certificados.",
-        "impacts": {
-          "capacidadeEntrega": -10,
-          "qualidadeProduto": -10,
-          "saudeEquipe": -30,
-          "conhecimentoOrganizacional": -20
-        },
-        "feedbackNarrative": "A atitude antiética gerou revolta generalizada. Toda a equipe se solidarizou com o colega e o clima de trabalho ficou tóxico.",
-        "pmbokConcept": "Negociação e influência para obter recursos",
-        "learnings": [
-          "Relações profissionais devem ser pautadas por respeito e ética; coerção destrói a cultura organizacional."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Saída imediata"
-        ],
-        "otherConsequences": [
-          "Processos trabalhistas e greve informal da equipe"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "leadership_4_conflito_dev_ux",
-    "title": "Guerra de Egos: Desenvolvedores vs Designers",
-    category: EventCategory.PEOPLE,
-    difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "conflito",
-      "mediacao",
-      "lideranca",
-      "colaboracao"
-    ],
-    "learningObjective": "Mediar conflitos interdisciplinares alinhando a equipe ao propósito comum.",
-    "communicationType": "slack",
-    "senderRole": "Líder de UX",
-    "description": "A equipe de programação está ignorando os modelos de acessibilidade criados pelo time de design, alegando que \"desenho de telas é secundário e o que importa é o processamento interno rodar rápido\". O time de design ameaça parar de desenhar as telas.",
-    "domainTag": "Recursos › Liderar a Equipe",
-    "resourceType": "humano",
-    "resourceProcess": "liderar",
-    "senderName": "Marina (Design de Telas)",
-    "senderInitials": "MD",
-    "avatarImage": "/Personagens/Leonara.png",
-    "responsibleRole": "pm",
-    "alternatives": [
-      {
-        "key": "a",
-        "text": "Conduzir um workshop conjunto com testes de usabilidade com alunos cegos e de baixa visão, estabelecendo um Design System unificado.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": 20,
-          "saudeEquipe": 20,
-          "conhecimentoOrganizacional": 20
-        },
-        "feedbackNarrative": "Ver os alunos reais com dificuldades comoveu os desenvolvedores. Engenharia e Design uniram forças para construir um dos sistemas mais acessíveis do país.",
-        "pmbokConcept": "Visão e objetivos compartilhados",
-        "learnings": [
-          "Conflitos entre áreas são superados conectando a equipe ao impacto real do produto na vida dos usuários."
-        ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Ruptura interna e retrabalho de interface"
-        ],
-        "otherConsequences": [
-          "Fortalecimento da empatia e colaboração interfuncional"
-        ]
-      },
-      {
-        "key": "b",
-        "text": "Dar razão total aos desenvolvedores e cortar o time de UX para acabar com as discussões.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": -25,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": -15
-        },
-        "delayedImpacts": [
+        delayedImpacts: [
           {
-            "triggerAfterEvents": 2,
-            "impacts": {
-              "qualidadeProduto": -20,
-              "saudeEquipe": -10
+            triggerAfterEvents: 1,
+            impacts: {
+              capacidadeEntrega: -15,
+              saudeEquipe: -10
             },
-            "narrative": "A notificação formal do Ministério Público e as reclamações massivas de estudantes sobre a inacessibilidade da interface forçaram um congelamento nas homologações."
+            narrative: "O cansaço acumulado culminou em licença médica simultânea dos dois engenheiros centrais do portal."
           }
         ],
-        "feedbackNarrative": "A interface virou uma réplica do sistema de 1995. O Ministério Público notificou a UFC por falta de acessibilidade para pessoas com deficiência.",
-        "pmbokConcept": "Resolução de problemas e conflitos",
-        "learnings": [
-          "Descartar disciplinas vitais como design e acessibilidade cria vulnerabilidades legais e funcionais severas."
+        feedbackNarrative: "O incentivo financeiro mascarou o esgotamento por poucos dias, acelerando o colapso físico dos profissionais.",
+        pmbokConcept: "Desengajamento silencioso (quiet quitting)",
+        learnings: [
+          "O PMBOK 8 alerta que recompensas monetárias não substituem a recuperação fisiológica e intensificam o desengajamento silencioso.",
+          "A medida viola o princípio de sustentabilidade humana, convertendo sobrecarga pontual em afastamento médico imprevisto."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Discussões em reuniões"
+        goodBad: "bad",
+        risksEvaded: [
+          "Negociação de prazo com o comitê acadêmico"
         ],
-        "otherConsequences": [
-          "Ação civil pública e rejeição dos usuários"
+        otherConsequences: [
+          "Perda de engajamento intrínseco e deterioração do clima interno"
         ]
       },
       {
-        "key": "c",
-        "text": "Obrigar os desenvolvedores a implementarem 100% das ideias do UX sem direito a contestar viabilidade técnica.",
-        "impacts": {
-          "capacidadeEntrega": -20,
-          "qualidadeProduto": 0,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": 0
+        key: "c",
+        text: "Instituir cobrança diária minuciosa de entregas para impedir que o desânimo contagie os demais membros.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -5,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -10
         },
-        "feedbackNarrative": "Animações pesadas travaram os servidores da universidade. Os desenvolvedores ficaram ressentidos por terem seus avisos técnicos ignorados.",
-        "pmbokConcept": "Team charter e operações da equipe",
-        "learnings": [
-          "Design excelente precisa respeitar as restrições físicas de arquitetura e infraestrutura."
+        feedbackNarrative: "A fiscalização coercitiva agravou o estresse e fez os profissionais reduzirem qualquer iniciativa voluntária de inovação.",
+        pmbokConcept: "Ambiente seguro e transparência sobre vieses",
+        learnings: [
+          "O PMBOK 8 demonstra que a liderança por coação destrói a segurança psicológica e bloqueia a transparência sobre impedimentos reais.",
+          "Essa postura compromete a coesão do grupo e desestimula a comunicação de riscos pelos membros da equipe."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Reclamação do time de design"
+        goodBad: "bad",
+        risksEvaded: [
+          "Sensação aparente de perda de controle hierárquico"
         ],
-        "otherConsequences": [
-          "Queda de performance e ressentimento técnico"
+        otherConsequences: [
+          "Instauração de clima de vigilância e desconfiança mútua"
         ]
       }
     ]
   },
   {
-    "id": "leadership_5_microgerenciamento_diretoria",
-    "title": "Diretor no Grupo dos Desenvolvedores",
+    id: "leadership_3_saida_arquiteto_senior",
+    title: "A Transição do Arquiteto (Gestão de Lacunas de Conhecimento)",
+    category: EventCategory.PEOPLE,
+    difficulty: EventDifficulty.HARD,
+    probabilityWeight: 2,
+    tags: ["conhecimento", "mentoria", "transicao", "papeis_responsabilidades"],
+    learningObjective: "Aplicar práticas de mentoria cruzada e documentação pareada para mitigar lacunas de conhecimento decorrentes de rotatividade.",
+    communicationType: "email",
+    senderRole: "Tech Lead",
+    description: "Assunto: Aviso Prévio. O arquiteto de dados principal aceitou proposta da iniciativa privada e deixará a equipe da universidade em três semanas, em pleno redesenho do banco acadêmico.",
+    domainTag: "Recursos › Liderar a Equipe",
+    resourceType: "humano",
+    resourceProcess: "liderar",
+    senderName: "Mariana Costa",
+    senderInitials: "MC",
+    avatarImage: "/Personagens/Mariana.png",
+    responsibleRole: "techLead",
+    alternatives: [
+      {
+        key: "a",
+        text: "Pactuar dedicação exclusiva do arquiteto a trabalho conjunto em duplas e mentoria intensiva com dois desenvolvedores plenos.",
+        impacts: {
+          capacidadeEntrega: -5,
+          qualidadeProduto: 10,
+          saudeEquipe: 5,
+          conhecimentoOrganizacional: 15
+        },
+        feedbackNarrative: "A codificação direta desacelerou temporariamente, mas o conhecimento crítico foi assimilado pelos profissionais remanescentes.",
+        pmbokConcept: "Treinamento, mentoria e coaching",
+        learnings: [
+          "O PMBOK 8 estabelece a mentoria e o coaching estruturados como técnicas prioritárias para reter competências institucionais.",
+          "A decisão assegura que a capacidade técnica seja sustentada pela equipe após a saída do profissional especializado."
+        ],
+        goodBad: "good",
+        risksEvaded: [
+          "Dependência exclusiva de indivíduo e paralisia futura do repositório corporativo de dados"
+        ],
+        otherConsequences: [
+          "Elevação da autonomia técnica dos desenvolvedores plenos"
+        ]
+      },
+      {
+        key: "b",
+        text: "Exigir que o profissional desenvolva o máximo de código possível até o último dia, postergando documentação.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -5,
+          saudeEquipe: -5,
+          conhecimentoOrganizacional: -15
+        },
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              capacidadeEntrega: -15,
+              qualidadeProduto: -10
+            },
+            narrative: "Nenhum membro compreendeu as regras de migração deixadas pelo arquiteto, gerando travamento geral no repositório de dados institucional."
+          }
+        ],
+        feedbackNarrative: "Houve avanço imediato de linhas de código, mas ninguém domina as premissas arquiteturais adotadas.",
+        pmbokConcept: "Papéis, responsabilidades e lacunas de conhecimento",
+        learnings: [
+          "O PMBOK 8 adverte que priorizar volume de tarefas em detrimento da transferência de saber cria silos intransponíveis.",
+          "A estratégia expõe o projeto a severa vulnerabilidade operacional ao perder o entendimento sobre a arquitetura implantada."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Redução pontual na velocidade de entrega dos sprints"
+        ],
+        otherConsequences: [
+          "Dívida arquitetural profunda e retrabalho de decodificação"
+        ]
+      },
+      {
+        key: "c",
+        text: "Contratar consultoria especializada de mercado para assumir diretamente a arquitetura a partir da saída.",
+        impacts: {
+          capacidadeEntrega: -10,
+          qualidadeProduto: -5,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -10
+        },
+        feedbackNarrative: "A consultoria demorou semanas para obter acessos de segurança da universidade e não transferiu conhecimento ao time público.",
+        pmbokConcept: "Recursos internos e externos",
+        learnings: [
+          "O PMBOK 8 salienta que a contratação externa sem alinhamento interno retarda a assimilação dos processos e desmotiva o time.",
+          "Essa conduta descumpre a diretriz de valorizar e amadurecer as competências orgânicas da equipe do projeto."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Esforço inicial de mentoria interna"
+        ],
+        otherConsequences: [
+          "Custo orçamentário elevado e alienação técnica dos funcionários públicos efetivos"
+        ]
+      }
+    ]
+  },
+  {
+    id: "leadership_4_conflito_dev_ux",
+    title: "A Tensão entre Telas e Prazos (Resolução Construtiva de Conflitos)",
+    category: EventCategory.PEOPLE,
+    difficulty: EventDifficulty.MEDIUM,
+    probabilityWeight: 2,
+    tags: ["conflitos", "ux", "desenvolvimento", "colaboracao", "tuckman"],
+    learningObjective: "Aplicar a técnica dos Seis Chapéus do Pensamento e mediação focada em problemas para solucionar atritos entre a equipe de telas e a de regras do sistema.",
+    communicationType: "slack",
+    senderRole: "Líder de Design e Telas",
+    description: "Canal #geral: 'Os desenvolvedores dizem que nossos fluxos de acessibilidade são luxo dispensável; já o time de telas afirma que as regras de negócio ignoram os padrões de usabilidade do MEC.'",
+    domainTag: "Recursos › Liderar a Equipe",
+    resourceType: "humano",
+    resourceProcess: "liderar",
+    senderName: "Carla Silveira",
+    senderInitials: "CS",
+    avatarImage: "/Personagens/Carla.png",
+    responsibleRole: "uxLead",
+    alternatives: [
+      {
+        key: "a",
+        text: "Conduzir dinâmica com os Seis Chapéus do Pensamento para unificar critérios de usabilidade e restrições técnicas.",
+        impacts: {
+          capacidadeEntrega: 0,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 10
+        },
+        feedbackNarrative: "A técnica estruturada removeu acusações pessoais, permitindo equilibrar a conformidade de acessibilidade com os limites técnicos do sistema.",
+        pmbokConcept: "Seis Chapéus do Pensamento",
+        learnings: [
+          "O PMBOK 8 recomenda ferramentas deliberadas de pensamento coletivo como os Seis Chapéus para superar impasses interdisciplinares.",
+          "O resultado fortalece a propriedade compartilhada e harmoniza usabilidade e viabilidade computacional."
+        ],
+        goodBad: "good",
+        risksEvaded: [
+          "Polarização destrutiva e sabotagem cruzada entre disciplinas"
+        ],
+        otherConsequences: [
+          "Elaboração de biblioteca compartilhada de componentes acessíveis"
+        ]
+      },
+      {
+        key: "b",
+        text: "Impor decisão gerencial imediata priorizando regras centrais e relegando testes de acessibilidade para fase posterior.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -5
+        },
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              qualidadeProduto: -15,
+              saudeEquipe: -10
+            },
+            narrative: "Notificação do Ministério Público por falta de acessibilidade para deficientes visuais paralisou a homologação do sistema."
+          }
+        ],
+        feedbackNarrative: "O ganho aparente no cronograma resultou em produto excludente e desmotivação profunda na equipe de experiência do usuário.",
+        pmbokConcept: "Resolução de problemas e conflitos",
+        learnings: [
+          "O PMBOK 8 alerta que suprimir pontos de vista por coerção não resolve a causa raiz e gera passivos legais e éticos.",
+          "A medida viola os critérios de aceitação essenciais de usabilidade e destrói o alinhamento da equipe com os usuários finais."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Discussões e reuniões adicionais de consenso na semana"
+        ],
+        otherConsequences: [
+          "Risco de sanções institucionais e perda de credibilidade do SIGAA"
+        ]
+      },
+      {
+        key: "c",
+        text: "Delegar a resolução do impasse a um alinhamento direto autônomo entre as lideranças técnicas e de design.",
+        impacts: {
+          capacidadeEntrega: -5,
+          qualidadeProduto: -10,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -5
+        },
+        feedbackNarrative: "A abstenção gerencial transformou a divergência em disputa política, gerando animosidade e retrabalho de código.",
+        pmbokConcept: "Ambiente seguro e transparência sobre vieses",
+        learnings: [
+          "O PMBOK 8 orienta o líder a atuar como facilitador ativo de um ambiente seguro quando atritos entre áreas ameaçam as entregas.",
+          "A negligência em mediar conflitos de papéis perpetua insegurança e compromete a qualidade do produto universitário."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Desconforto gerencial imediato de assumir a mediação"
+        ],
+        otherConsequences: [
+          "Fragmentação das equipes em silos corporativos hostis"
+        ]
+      }
+    ]
+  },
+  {
+    id: "leadership_5_microgerenciamento_diretoria",
+    title: "O Cerco de Relatórios (Autonomia e Empoderamento da Equipe)",
+    category: EventCategory.PEOPLE,
+    difficulty: EventDifficulty.HARD,
+    probabilityWeight: 2,
+    tags: ["empoderamento", "autonomia", "lideranca_servidora", "governanca"],
+    learningObjective: "Defender a autonomia operacional da equipe estabelecendo acordos claros de trabalho no Team Charter e radiadores visuais de progresso.",
+    communicationType: "email",
+    senderRole: "Superintendência de TI",
+    description: "Assunto: Planilhas Horárias Diárias. A diretoria exige que cada membro preencha formulários a cada duas horas detalhando o progresso individual de linhas de código e chamados resolvidos.",
+    domainTag: "Recursos › Liderar a Equipe",
+    resourceType: "humano",
+    resourceProcess: "liderar",
+    senderName: "Prof. Alberto Silva",
+    senderInitials: "AS",
+    avatarImage: "/Personagens/Alberto.png",
+    responsibleRole: "pm",
+    alternatives: [
+      {
+        key: "a",
+        text: "Apresentar o Team Charter e fornecer radiadores de informação transparentes no painel de gestão à vista.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: 10,
+          saudeEquipe: 15,
+          conhecimentoOrganizacional: 10
+        },
+        feedbackNarrative: "A governança foi atendida com visibilidade objetiva de métricas, protegendo a autonomia criativa e o foco do time.",
+        pmbokConcept: "Team charter e operações da equipe",
+        learnings: [
+          "O PMBOK 8 recomenda o uso do Team Charter e radiadores visuais de informação para conciliar governança e autonomia operacional.",
+          "Essa abordagem assegura transparência sem impor burocracia desnecessária que sufoca o engajamento dos especialistas."
+        ],
+        goodBad: "good",
+        risksEvaded: [
+          "Microgerenciamento sufocante e queda no moral produtivo da equipe"
+        ],
+        otherConsequences: [
+          "Instituição de indicadores de fluxo ágil reconhecidos pela diretoria"
+        ]
+      },
+      {
+        key: "b",
+        text: "Instituir o preenchimento diário dos formulários como protocolo obrigatório de acompanhamento de jornada.",
+        impacts: {
+          capacidadeEntrega: -15,
+          qualidadeProduto: -5,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: 5
+        },
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              capacidadeEntrega: -10,
+              saudeEquipe: -10
+            },
+            narrative: "Os desenvolvedores passaram a inflar dados nas planilhas e reduziram drasticamente a velocidade de entrega técnica."
+          }
+        ],
+        feedbackNarrative: "O time gastou horas diárias alimentando relatórios fúteis, instaurando uma cultura burocrática de conformismo.",
+        pmbokConcept: "Empoderamento, delegação e autonomia",
+        learnings: [
+          "O PMBOK 8 preconiza o empoderamento e a delegação como motores da alta performance em ambientes de desenvolvimento cognitivo.",
+          "O controle coercitivo de micro-tarefas drena energia produtiva e induz o comportamento de cumprimento meramente protocolar."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Atrito diplomático com a superintendência da universidade"
+        ],
+        otherConsequences: [
+          "Criação de métricas de vaidade sem correlação com software funcional"
+        ]
+      },
+      {
+        key: "c",
+        text: "Assumir o envio de estimativas consolidadas pelo GP com base nas métricas históricas para dispensar os desenvolvedores.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -10,
+          saudeEquipe: -5,
+          conhecimentoOrganizacional: -15
+        },
+        feedbackNarrative: "A manipulação de dados foi descoberta em auditoria acadêmica, minando a credibilidade do gerenciamento do projeto.",
+        pmbokConcept: "Integridade e transparência do gerente de projetos",
+        learnings: [
+          "O PMBOK 8 estabelece a integridade e transparência como premissas inegociáveis na conduta profissional do líder de projetos.",
+          "A falsificação de indicadores fere a ética e desmorona os laços de confiança indispensáveis à sustentabilidade do projeto."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Sobrecarga imediata de preenchimento formal de formulários"
+        ],
+        otherConsequences: [
+          "Abertura de apuração disciplinar e desconfiança da reitoria"
+        ]
+      }
+    ]
+  },
+  {
+    id: "leadership_6_post_mortem_sem_culpa",
+    title: "A Falha no Lançamento Piloto (Cultura de Aprendizagem e Segurança)",
+    category: EventCategory.PEOPLE,
+    difficulty: EventDifficulty.MEDIUM,
+    probabilityWeight: 2,
+    tags: ["retrospectivas", "ambiente_seguro", "aprendizado", "qualidade"],
+    learningObjective: "Conduzir retrospectivas focadas em causas sistêmicas e melhoria contínua, rejeitando a caça individual a culpados.",
+    communicationType: "slack",
+    senderRole: "Líder Técnico",
+    description: "Canal #incidentes: 'O primeiro teste de matrícula com 500 alunos derrubou o cluster de banco devido a um índice ausente em script enviado por um desenvolvedor júnior.'",
+    domainTag: "Recursos › Liderar a Equipe",
+    resourceType: "humano",
+    resourceProcess: "liderar",
+    senderName: "Mariana Costa",
+    senderInitials: "MC",
+    avatarImage: "/Personagens/Mariana.png",
+    responsibleRole: "techLead",
+    alternatives: [
+      {
+        key: "a",
+        text: "Conduzir retrospectiva sem culpados para aprimorar os testes automatizados e o checklist de homologação.",
+        impacts: {
+          capacidadeEntrega: 0,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 15
+        },
+        feedbackNarrative: "O incidente transformou-se em evolução dos rotinas automatizadas de verificação e aumentou a união e a segurança psicológica da equipe.",
+        pmbokConcept: "Retrospectivas",
+        learnings: [
+          "O PMBOK 8 ressalta as retrospectivas como ferramenta de aprimoramento contínuo voltada a processos, não a punições individuais.",
+          "O aprendizado com incidentes previne a repetição de falhas sistêmicas e eleva a maturidade técnica coletiva do grupo."
+        ],
+        goodBad: "good",
+        risksEvaded: [
+          "Cultura do medo, omissão de incidentes futuros e evasão de novatos"
+        ],
+        otherConsequences: [
+          "Blindagem dos ambientes de liberação operacional contra falhas humanas"
+        ]
+      },
+      {
+        key: "b",
+        text: "Atribuir a correção do script ao desenvolvedor que enviou a alteração com acompanhamento sênior individual.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -5,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -10
+        },
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              capacidadeEntrega: -10,
+              qualidadeProduto: -10
+            },
+            narrative: "Com medo de retaliação, desenvolvedores passaram a ocultar defeitos e atrasar entregas para evitar revisões públicas."
+          }
+        ],
+        feedbackNarrative: "A exposição punitiva gerou ambiente tóxico; membros passaram a esconder falhas com receio de humilhação.",
+        pmbokConcept: "Ambiente seguro e transparência sobre vieses",
+        learnings: [
+          "O PMBOK 8 frisa que a punição pública destrói a segurança psicológica e incentiva a dissimulação de riscos críticos.",
+          "Essa postura fragiliza a qualidade ao criar incentivos perversos para a ocultação de vulnerabilidades no sistema."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Sensação de condescendência perante a diretoria"
+        ],
+        otherConsequences: [
+          "Bloqueio da cooperação espontânea e evasão de profissionais juniores"
+        ]
+      },
+      {
+        key: "c",
+        text: "Retirar o desenvolvedor júnior do projeto e solicitar outro profissional com experiência prévia ao setor de TI.",
+        impacts: {
+          capacidadeEntrega: -15,
+          qualidadeProduto: 0,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -5
+        },
+        feedbackNarrative: "A substituição não resolveu as deficiências na esteira automatizada de verificação e liberação, transmitindo insegurança a toda a equipe.",
+        pmbokConcept: "Maturidade dos membros da equipe",
+        learnings: [
+          "O PMBOK 8 indica que falhas operacionais decorrem comumente de processos frágeis de verificação e não de incompetência individual.",
+          "Descartar membros sem diagnosticar causas do sistema desperdiça investimentos prévios de capacitação institucional."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Necessidade de treinamento específico imediato"
+        ],
+        otherConsequences: [
+          "Perda de continuidade e aumento do tempo de adaptação de pessoal"
+        ]
+      }
+    ]
+  },
+  {
+    id: "leadership_7_reconhecimento_time",
+    title: "O Sucesso Silencioso (Reconhecimento e Motivação Sustentável)",
     category: EventCategory.PEOPLE,
     difficulty: EventDifficulty.EASY,
-    "probabilityWeight": 2,
-    "tags": [
-      "comunicacao",
-      "lideranca",
-      "blindagem",
-      "gestao_stakeholder"
-    ],
-    "learningObjective": "Estabelecer canais claros de comunicação protegendo a equipe de cobranças indevidas.",
-    "communicationType": "slack",
-    "senderRole": "Desenvolvedor Júnior",
-    "description": "O Diretor de Administração entrou no canal informal dos desenvolvedores júnior no chat e começou a cobrar prazos de forma ríspida diretamente aos novos profissionais, gerando pânico na equipe.",
-    "domainTag": "Recursos › Liderar a Equipe",
-    "resourceType": "humano",
-    "resourceProcess": "liderar",
-    "senderName": "Paulyne (Qualidade)",
-    "senderInitials": "PQ",
-    "avatarImage": "/Personagens/Paulyne.png",
-    "responsibleRole": "pm",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["reconhecimento", "recompensas", "motivacao", "lideranca_servidora"],
+    learningObjective: "Aplicar práticas de reconhecimento autêntico alinhadas a entregas de valor sem gerar competitividade predatória interna.",
+    communicationType: "email",
+    senderRole: "Gerente de Projetos",
+    description: "Assunto: Homologação do Módulo de Pós-Graduação. O módulo mais complexo foi entregue sem erros graves após esforço conjunto exemplar entre engenharia, design e analistas da STI.",
+    domainTag: "Recursos › Liderar a Equipe",
+    resourceType: "humano",
+    resourceProcess: "liderar",
+    senderName: "Você (Gerente de Projetos)",
+    senderInitials: "GP",
+    avatarImage: "/Personagens/Narrador.png",
+    responsibleRole: "pm",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Chamar o diretor para uma reunião individual, alinhar que as cobranças devem ser feitas via PM e criar um canal executivo de transparência.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": 10,
-          "saudeEquipe": 25,
-          "conhecimentoOrganizacional": 5
+        key: "a",
+        text: "Promover celebração formal destacando contribuições de cada disciplina e emitir menções honrosas no comitê.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: 10,
+          saudeEquipe: 15,
+          conhecimentoOrganizacional: 10
         },
-        "feedbackNarrative": "A liderança blindou os júniores com firmeza e elegância. O diretor passou a receber boletins semanais objetivos e os desenvolvedores voltaram a trabalhar em paz.",
-        "pmbokConcept": "Empoderamento, delegação e autonomia",
-        "learnings": [
-          "Líderes de projeto estabelecem a governança de comunicação, impedindo o assédio e o desvio de hierarquia sobre membros vulneráveis."
+        feedbackNarrative: "O reconhecimento coletivo e transparente fortaleceu o sentimento de pertencimento e renovou a disposição do time.",
+        pmbokConcept: "Reconhecimento e recompensas",
+        learnings: [
+          "O PMBOK 8 ressalta que o reconhecimento público genuíno ancora o engajamento e reforça comportamentos colaborativos de valor.",
+          "A valorização multidisciplinar assegura sinergia sustentável para as fases vindouras de implantação do sistema acadêmico."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Pânico, insegurança psicológica e demissão de júniores"
+        goodBad: "good",
+        risksEvaded: [
+          "Sensação de invisibilidade do esforço técnico perante a cúpula da universidade"
         ],
-        "otherConsequences": [
-          "Canal formalizado de prestação de contas com o diretor"
+        otherConsequences: [
+          "Consolidação de reputação positiva do projeto perante os órgãos colegiados"
         ]
       },
       {
-        "key": "b",
-        "text": "Não fazer nada para não criar atrito com o diretor e dizer aos desenvolvedores mais jovens que \"faz parte da vida corporativa\".",
-        "impacts": {
-          "capacidadeEntrega": -15,
-          "qualidadeProduto": -15,
-          "saudeEquipe": -30,
-          "conhecimentoOrganizacional": -10
+        key: "b",
+        text: "Instituir o prêmio de 'Desenvolvedor do Mês' com destaque individual exclusivo para quem concluiu mais tarefas.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -10,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -5
         },
-        "feedbackNarrative": "Dois desenvolvedores talentosos pediram demissão por ansiedade. A equipe perdeu a confiança no gerente por omissão.",
-        "pmbokConcept": "Ambiente seguro e transparência sobre vieses",
-        "learnings": [
-          "A omissão do líder diante de abusos externos destrói a segurança psicológica e o engajamento da equipe."
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              qualidadeProduto: -10,
+              saudeEquipe: -10
+            },
+            narrative: "A disputa individual incentivou entregas fragmentadas sem revisão, gerando atritos internos e quebra de testes."
+          }
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Conversa difícil com o diretor"
+        feedbackNarrative: "A premiação individual estimulou competitividade tóxica; profissionais de UX e testes sentiram-se desvalorizados.",
+        pmbokConcept: "Propriedade compartilhada do projeto",
+        learnings: [
+          "O PMBOK 8 alerta contra recompensas que estimulam individualismo em detrimento da propriedade compartilhada das entregas.",
+          "Métricas individuais rasas provocam manipulação de indicadores e enfraquecem o espírito de cooperação essencial ao projeto."
         ],
-        "otherConsequences": [
-          "Perda de talentos e clima de medo"
+        goodBad: "bad",
+        risksEvaded: [
+          "Custo de organização de evento coletivo de validação"
+        ],
+        otherConsequences: [
+          "Rivalidade interna e isolamento entre as diferentes áreas técnicas"
         ]
       },
       {
-        "key": "c",
-        "text": "Discutir agressivamente com o diretor publicamente no canal geral do Slack na frente de todos.",
-        "impacts": {
-          "capacidadeEntrega": -10,
-          "qualidadeProduto": 0,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -10
+        key: "c",
+        text: "Agradecer por e-mail e priorizar a abertura imediata do próximo ciclo de entregas para adiantar o cronograma acadêmico.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: 0,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -5
         },
-        "feedbackNarrative": "O escândalo público virou caso de ouvidoria. O projeto foi paralisado para averiguação de conduta disciplinar.",
-        "pmbokConcept": "Liderança servidora",
-        "learnings": [
-          "Conflitos com stakeholders devem ser resolvidos em privado com profissionalismo e dados, nunca em arenas públicas."
+        feedbackNarrative: "A falta de fechamento simbólico causou desânimo generalizado e a sensação de que o esforço nunca é notado.",
+        pmbokConcept: "Atividades de gestão e de liderança",
+        learnings: [
+          "O PMBOK 8 distingue gestão mecânica de liderança inspiradora, apontando a celebração de marcos como dever da liderança.",
+          "Omitir a etapa de reconhecimento drena a energia da equipe e acelera o desengajamento nas etapas de maior complexidade."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Passividade"
+        goodBad: "bad",
+        risksEvaded: [
+          "Pausa pontual nas atividades do cronograma"
         ],
-        "otherConsequences": [
-          "Processo administrativo disciplinar"
+        otherConsequences: [
+          "Desgaste emocional e perda de comprometimento espontâneo"
         ]
       }
     ]
   },
   {
-    "id": "leadership_6_post_mortem_sem_culpa",
-    "title": "Incidente em Produção: A \"Caça às Bruxas\"",
-    category: EventCategory.EXECUTION,
-    difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "cultura",
-      "qualidade",
-      "lideranca",
-      "post_mortem"
-    ],
-    "learningObjective": "Promover cultura de aprendizado contínuo através de Blameless Post-Mortem.",
-    "communicationType": "ticket",
-    "senderRole": "Desenvolvedor Pleno",
-    "description": "Ticket #1190 - Queda do Portal. Uma configuração errada subida por um desenvolvedor novato derrubou o portal de matrículas por 20 minutos. A Diretoria de TI exige o nome do responsável para aplicar punição administrativa.",
-    "domainTag": "Recursos › Liderar a Equipe",
-    "resourceType": "humano",
-    "resourceProcess": "liderar",
-    "senderName": "Kendrick (Infraestrutura)",
-    "senderInitials": "KD",
-    "avatarImage": "/Personagens/Kendrick.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
-      {
-        "key": "a",
-        "text": "Proteger o profissional, assumir a falha como sistêmica e implementar verificações automáticas no sistema para impedir que o erro se repita.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": 20,
-          "saudeEquipe": 20,
-          "conhecimentoOrganizacional": 25
-        },
-        "feedbackNarrative": "A diretoria aceitou o relatório técnico que focou no processo e não na pessoa. As travas criadas impediram 5 novos incidentes parecidos nos meses seguintes.",
-        "pmbokConcept": "Retrospectivas",
-        "learnings": [
-          "Erros humanos são sintomas de falhas nos processos e ferramentas; culpar indivíduos esconde os problemas em vez de corrigi-los."
-        ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Cultura de medo onde a equipe esconde erros operacionais"
-        ],
-        "otherConsequences": [
-          "Fortalecimento das travas de qualidade e testes automatizados"
-        ]
-      },
-      {
-        "key": "b",
-        "text": "Entregar o nome do desenvolvedor novato para a diretoria punir e afastar o profissional.",
-        "impacts": {
-          "capacidadeEntrega": -10,
-          "qualidadeProduto": -20,
-          "saudeEquipe": -30,
-          "conhecimentoOrganizacional": -15
-        },
-        "feedbackNarrative": "O novato foi suspenso. Com medo de punição, toda a equipe começou a esconder erros e empurrar tarefas arriscadas uns para os outros.",
-        "pmbokConcept": "Ambiente seguro e transparência sobre vieses",
-        "learnings": [
-          "Ambientes punitivos incentivam a ocultação de falhas, tornando o sistema muito mais frágil a longo prazo."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Desagradar a diretoria que queria um culpado"
-        ],
-        "otherConsequences": [
-          "Ocultação crônica de falhas e desconfiança geral"
-        ]
-      },
-      {
-        "key": "c",
-        "text": "Mentir dizendo que a culpa foi de uma invasão de hackers externos para não admitir o erro da equipe.",
-        "impacts": {
-          "capacidadeEntrega": -20,
-          "qualidadeProduto": -10,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -20
-        },
-        "feedbackNarrative": "A Polícia Federal foi acionada para investigar o suposto ataque cibernético e descobriu o erro banal de configuração. A vergonha foi nacional.",
-        "pmbokConcept": "Resolução de problemas e conflitos",
-        "learnings": [
-          "A transparência profissional é pilar inegociável da gestão ética de projetos."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Admissão de erro imediato"
-        ],
-        "otherConsequences": [
-          "Escândalo institucional e investigação policial"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "leadership_7_reconhecimento_time",
-    "title": "Apropriação de Créditos da Entrega",
+    id: "leadership_8_isolamento_silos",
+    title: "A Barreira dos Silos (Colocação e Comunicação Integrada)",
     category: EventCategory.PEOPLE,
-    difficulty: EventDifficulty.EASY,
-    "probabilityWeight": 2,
-    "tags": [
-      "reconhecimento",
-      "moral",
-      "lideranca",
-      "motivacao"
-    ],
-    "learningObjective": "Garantir visibilidade e valorização aos esforços dos membros da equipe.",
-    "communicationType": "email",
-    "senderRole": "Gabinete da Reitoria",
-    "description": "Assunto: Lançamento do Portal. A Reitoria publicou matéria no jornal institucional comemorando o sucesso da primeira fase do SGA, mas atribuiu todos os louros exclusivamente aos diretores, omitindo o time técnico.",
-    "domainTag": "Recursos › Liderar a Equipe",
-    "resourceType": "humano",
-    "resourceProcess": "liderar",
-    "senderName": "Reitoria da UFC",
-    "senderInitials": "RE",
-    "avatarImage": "/Personagens/Rainara.png",
-    "responsibleRole": "pm",
-    "alternatives": [
-      {
-        "key": "a",
-        "text": "Organizar uma sessão solene de encerramento com demonstração técnica aberta onde os próprios desenvolvedores e designers apresentam seu trabalho à comunidade.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": 10,
-          "saudeEquipe": 25,
-          "conhecimentoOrganizacional": 15
-        },
-        "feedbackNarrative": "Os aplausos dos professores e alunos emocionaram a equipe. O reconhecimento público autêntico restaurou o orgulho e o senso de dono dos desenvolvedores.",
-        "pmbokConcept": "Reconhecimento e recompensas",
-        "learnings": [
-          "Líderes garantem que o valor produzido pela equipe seja reconhecido, construindo senso de pertencimento e motivação intrínseca."
-        ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Ressentimento e desengajamento da equipe técnica"
-        ],
-        "otherConsequences": [
-          "Visibilidade positiva para os talentos da universidade"
-        ]
-      },
-      {
-        "key": "b",
-        "text": "Dizer aos desenvolvedores que \"é assim mesmo no serviço público\" e que não devem esperar elogios.",
-        "impacts": {
-          "capacidadeEntrega": -15,
-          "qualidadeProduto": -5,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": 0
-        },
-        "feedbackNarrative": "A apatia se instalou. A equipe passou a fazer apenas o mínimo estrito do horário, sem qualquer entusiasmo ou iniciativa própria.",
-        "pmbokConcept": "Propriedade compartilhada do projeto",
-        "learnings": [
-          "Desconsiderar a necessidade humana de reconhecimento gera conformismo e mediocridade na entrega."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Esforço de organizar eventos"
-        ],
-        "otherConsequences": [
-          "Apatia crônica e perda de proatividade"
-        ]
-      },
-      {
-        "key": "c",
-        "text": "Ameaçar parar o sistema caso o Reitor não publique uma retratação no jornal no dia seguinte.",
-        "impacts": {
-          "capacidadeEntrega": -25,
-          "qualidadeProduto": -10,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -10
-        },
-        "feedbackNarrative": "A chantagem foi vista como insubordinação grave. A liderança do projeto foi afastada temporariamente.",
-        "pmbokConcept": "Visão e objetivos compartilhados",
-        "learnings": [
-          "Reconhecimento se constrói com pontes e visibilidade profissional, não com chantagem política."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Passividade"
-        ],
-        "otherConsequences": [
-          "Afastamento da liderança e crise de governança"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "leadership_8_isolamento_silos",
-    "title": "Silos de Conhecimento e o \"Dev Estrela\"",
-    category: EventCategory.KNOWLEDGE,
     difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "silos",
-      "colaboracao",
-      "lideranca",
-      "cultura"
-    ],
-    "learningObjective": "Desmontar silos técnicos e incentivar a propriedade coletiva do código.",
-    "communicationType": "slack",
-    "senderRole": "Líder Técnico",
-    "description": "Um dos desenvolvedores mais experientes se recusa a comentar o código, não deixa ninguém revisar seus Pull Requests e diz que \"se os outros não entendem, o problema é deles\".",
-    "domainTag": "Recursos › Liderar a Equipe",
-    "resourceType": "humano",
-    "resourceProcess": "liderar",
-    "senderName": "Roberto (Arquitetura)",
-    "senderInitials": "RA",
-    "avatarImage": "/Personagens/Roberto.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["colocacao", "equipes_virtuais", "comunicacao", "tuckman"],
+    learningObjective: "Utilizar estratégias de colocação física ou salas virtuais compartilhadas para romper barreiras entre regras de dados, interfaces e experiência do usuário.",
+    communicationType: "slack",
+    senderRole: "Líder Técnico",
+    description: "Canal #engenharia: 'A equipe de gestão de dados trabalha no prédio central, o time de telas opera em outro campus e os estagiários ficam remotos, gerando interfaces desconectadas das regras do sistema.'",
+    domainTag: "Recursos › Liderar a Equipe",
+    resourceType: "humano",
+    resourceProcess: "liderar",
+    senderName: "Mariana Costa",
+    senderInitials: "MC",
+    avatarImage: "/Personagens/Mariana.png",
+    responsibleRole: "techLead",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Estabelecer revisão conjunta obrigatória de tarefas por duas pessoas e trabalho em duplas rotativo, alinhando que a qualidade do trabalho é uma responsabilidade coletiva.",
-        "impacts": {
-          "capacidadeEntrega": 5,
-          "qualidadeProduto": 20,
-          "saudeEquipe": 15,
-          "conhecimentoOrganizacional": 25
+        key: "a",
+        text: "Instituir dois dias semanais de colocação física conjunta no laboratório central e war room virtual permanente.",
+        impacts: {
+          capacidadeEntrega: 0,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 15
         },
-        "feedbackNarrative": "O desenvolvedor resistiu no início, mas com a ajuda do time, o conhecimento se espalhou. O sistema deixou de ser refém de uma única pessoa.",
-        "pmbokConcept": "Propriedade compartilhada do projeto",
-        "learnings": [
-          "Nenhum talento individual compensa o risco de silos de conhecimento e arrogância técnica em projetos colaborativos."
+        feedbackNarrative: "A proximidade física periódica combinada a canais virtuais fluidos alinhou a arquitetura e acelerou integrações complexas.",
+        pmbokConcept: "Colocação",
+        learnings: [
+          "O PMBOK 8 recomenda a colocação física ou virtual deliberada para potencializar a comunicação oscilante e a coesão da equipe.",
+          "A integração regular reduz o ciclo de feedback de interfaces e previne incompatibilidades entre dados e experiência do usuário."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Dependência crítica de um único indivíduo (Bus Factor 1)"
+        goodBad: "good",
+        risksEvaded: [
+          "Retrabalho massivo de integração na fase de homologação geral"
         ],
-        "otherConsequences": [
-          "Elevação do nível técnico médio de toda a equipe"
+        otherConsequences: [
+          "Criação de identidade compartilhada de time entre diferentes campi"
         ]
       },
       {
-        "key": "b",
-        "text": "Deixar o desenvolvedor fazer tudo do jeito dele porque ele é \"rápido demais para ser atrapalhado pelos outros\".",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": -20,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": -30
+        key: "b",
+        text: "Padronizar toda a comunicação entre campi exclusivamente via sistema formal de chamados e tickets.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -15,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -10
         },
-        "feedbackNarrative": "O sistema virou uma caixa-preta que ninguém entendia. Quando ele tirou férias, ninguém conseguiu corrigir uma falha simples de acesso que durou 4 dias.",
-        "pmbokConcept": "Papéis, responsabilidades e lacunas de conhecimento",
-        "learnings": [
-          "Permitir heróis individuais sem governança técnica cria bombas-relógio de manutenção futura."
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              capacidadeEntrega: -15,
+              qualidadeProduto: -10
+            },
+            narrative: "Chamados burocráticos demoravam dias para resposta, paralisando a montagem das telas integradas ao banco."
+          }
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Conflito com o desenvolvedor experiente"
+        feedbackNarrative: "A comunicação assíncrona excessivamente formal gerou lentidão, ruído interpretativo e rancor entre as equipes.",
+        pmbokConcept: "Equipes virtuais",
+        learnings: [
+          "O PMBOK 8 alerta que equipes virtuais demandam acordos ativos de colaboração, sob pena de fragmentação em feudos ineficientes.",
+          "Burocratizar as interações rompe a agilidade necessária para ajustar requisitos de software em tempo oportuno."
         ],
-        "otherConsequences": [
-          "Paralisação do projeto durante a ausência do profissional"
+        goodBad: "bad",
+        risksEvaded: [
+          "Custos de deslocamento e adaptação física no laboratório"
+        ],
+        otherConsequences: [
+          "Perda de flexibilidade e multiplicação de mal-entendidos técnicos"
         ]
       },
       {
-        "key": "c",
-        "text": "Demitir o desenvolvedor sumariamente no mesmo dia sem planejar a absorção das tarefas.",
-        "impacts": {
-          "capacidadeEntrega": -30,
-          "qualidadeProduto": -15,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -25
+        key: "c",
+        text: "Determinar o retorno ao trabalho presencial diário no laboratório do campus para facilitar o contato direto.",
+        impacts: {
+          capacidadeEntrega: -15,
+          qualidadeProduto: 5,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: 0
         },
-        "feedbackNarrative": "A demissão sem transição deixou o módulo de notas inacabado e sem ninguém capaz de assumir de imediato.",
-        "pmbokConcept": "Utilização e inatividade de recursos",
-        "learnings": [
-          "Decisões de pessoal drásticas exigem planejamento de contingência e mitigação de impacto no projeto."
+        feedbackNarrative: "O laboratório não possuía mesas suficientes para todos; a medida unilateral gerou revolta e queda de rendimento.",
+        pmbokConcept: "Inteligência emocional",
+        learnings: [
+          "O PMBOK 8 preconiza o exercício da inteligência emocional ao impor mudanças drásticas nas condições de trabalho da equipe.",
+          "Medidas arbitrárias sem o devido suporte de infraestrutura física desestruturam a confiança e elevam o absenteísmo."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Mau comportamento do desenvolvedor"
+        goodBad: "bad",
+        risksEvaded: [
+          "Necessidade de gestão híbrida de canais virtuais"
         ],
-        "otherConsequences": [
-          "Vazio técnico e atraso severo nas entregas"
+        otherConsequences: [
+          "Resistência passiva e atritos sindicais com os funcionários da instituição"
         ]
       }
     ]
   },
   {
-    "id": "leadership_9_capacitacao_vs_pressao",
-    "title": "Capacitação Técnica vs Velocidade Imediata",
-    category: EventCategory.KNOWLEDGE,
-    difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "capacitacao",
-      "lideranca",
-      "longo_prazo",
-      "tecnologia"
-    ],
-    "learningObjective": "Investir no desenvolvimento contínuo da equipe para sustentar entregas futuras.",
-    "communicationType": "email",
-    "senderRole": "Líder de UX",
-    "description": "Assunto: Treinamento em Padrões Visuais. A equipe de telas e design pediu 1 dia de capacitação em componentes padronizados e acessíveis, mas há entregas agendadas para o fim do ciclo de trabalho.",
-    "domainTag": "Recursos › Liderar a Equipe",
-    "resourceType": "humano",
-    "resourceProcess": "liderar",
-    "senderName": "Leonara (Design de Telas)",
-    "senderInitials": "LU",
-    "avatarImage": "/Personagens/Leonara.png",
-    "responsibleRole": "pm",
-    "alternatives": [
-      {
-        "key": "a",
-        "text": "Aprovar o dia de capacitação, ajustando a meta do ciclo e tratando o aprendizado como investimento de alto retorno.",
-        "impacts": {
-          "capacidadeEntrega": -5,
-          "qualidadeProduto": 25,
-          "saudeEquipe": 20,
-          "conhecimentoOrganizacional": 25
-        },
-        "feedbackNarrative": "Com o treinamento, a equipe passou a produzir telas 40% mais rápido e sem falhas de acessibilidade nos ciclos seguintes. O investimento se pagou com folga.",
-        "pmbokConcept": "Treinamento, mentoria e coaching",
-        "learnings": [
-          "Capacitar a equipe aumenta a velocidade e a qualidade das entregas futuras, combatendo a obsolescência técnica."
-        ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Erros primários por falta de domínio das ferramentas"
-        ],
-        "otherConsequences": [
-          "Aumento sustentável da produtividade nos próximos ciclos de trabalho"
-        ]
-      },
-      {
-        "key": "b",
-        "text": "Proibir qualquer treinamento durante o projeto, dizendo que \"quem quiser aprender deve estudar nas madrugadas em casa\".",
-        "impacts": {
-          "capacidadeEntrega": 5,
-          "qualidadeProduto": -20,
-          "saudeEquipe": -25,
-          "conhecimentoOrganizacional": -15
-        },
-        "feedbackNarrative": "O time continuou usando código obsoleto e cometendo erros básicos. A sensação de desvalorização profissional desengajou a equipe.",
-        "pmbokConcept": "Uso planejado vs. real de recursos",
-        "learnings": [
-          "Negar capacitação em projetos de inovação gera código antiquado e equipes desmotivadas."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Pausa no ciclo de trabalho atual"
-        ],
-        "otherConsequences": [
-          "Código repleto de más práticas e evasão de desenvolvedores"
-        ]
-      },
-      {
-        "key": "c",
-        "text": "Parar o projeto inteiro por 2 meses para que todos façam pós-graduação antes de continuar o sistema.",
-        "impacts": {
-          "capacidadeEntrega": -40,
-          "qualidadeProduto": 10,
-          "saudeEquipe": 0,
-          "conhecimentoOrganizacional": 30
-        },
-        "feedbackNarrative": "A reitoria cancelou o orçamento do projeto devido à paralisação injustificável do cronograma institucional.",
-        "pmbokConcept": "Escassez e excedente de recursos",
-        "learnings": [
-          "O aprendizado em projetos deve ser contínuo e em doses equilibradas com as entregas de valor."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Falta de conhecimento acadêmico"
-        ],
-        "otherConsequences": [
-          "Cancelamento do contrato do projeto"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "leadership_10_protecao_estagiarios",
-    "title": "Desvio de Função dos Profissionais de Tecnologia",
+    id: "leadership_9_capacitacao_vs_pressao",
+    title: "A Curva de Aprendizado (Capacitação vs. Prazo de Entrega)",
     category: EventCategory.PEOPLE,
-    difficulty: EventDifficulty.EASY,
-    "probabilityWeight": 2,
-    "tags": [
-      "profissionais_ti",
-      "etica",
-      "lideranca",
-      "mentoria"
-    ],
-    "learningObjective": "Proteger a alocação dos profissionais de tecnologia contra desvios de função para garantir o foco no projeto.",
-    "communicationType": "slack",
-    "senderRole": "Desenvolvedora Júnior",
-    "description": "Vários setores da administração da universidade descobriram que o projeto conta com desenvolvedores talentosos e começaram a enviar tarefas paralelas de conserto de impressoras e suporte administrativo genérico para a equipe técnica.",
-    "domainTag": "Recursos › Liderar a Equipe",
-    "resourceType": "humano",
-    "resourceProcess": "liderar",
-    "senderName": "Paulyne QA",
-    "senderInitials": "PQ",
-    "avatarImage": "/Personagens/Paulyne.png",
-    "responsibleRole": "pm",
-    "alternatives": [
+    difficulty: EventDifficulty.HARD,
+    probabilityWeight: 2,
+    tags: ["capacitacao", "treinamento", "competencias", "qualidade"],
+    learningObjective: "Investir em treinamento e nivelamento técnico inicial para garantir velocidade sustentável e conformidade arquitetural.",
+    communicationType: "email",
+    senderRole: "Líder Técnico",
+    description: "Assunto: Adoção de Nova Ferramenta Tecnológica. Três desenvolvedores nunca operaram a nova tecnologia adotada pela STI e estão cometendo erros estruturais graves de estado e concorrência.",
+    domainTag: "Recursos › Liderar a Equipe",
+    resourceType: "humano",
+    resourceProcess: "liderar",
+    senderName: "Mariana Costa",
+    senderInitials: "MC",
+    avatarImage: "/Personagens/Mariana.png",
+    responsibleRole: "techLead",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Notificar formalmente os setores que os desenvolvedores têm plano de trabalho estrito no projeto e orientar a equipe a reportar desvios.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": 10,
-          "saudeEquipe": 20,
-          "conhecimentoOrganizacional": 15
+        key: "a",
+        text: "Reservar dois dias do ciclo de trabalho para workshop técnico imersivo e pareamento estruturado com os desenvolvedores plenos.",
+        impacts: {
+          capacidadeEntrega: -5,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 15
         },
-        "feedbackNarrative": "Os desenvolvedores se sentiram respeitados e valorizados. Seu rendimento no desenvolvimento do sistema acadêmico dobrou e o foco nas metas prioritárias foi mantido.",
-        "pmbokConcept": "Papéis, responsabilidades e lacunas de conhecimento",
-        "learnings": [
-          "Líderes de projeto têm responsabilidade com a alocação de sua equipe; proteger os profissionais de tecnologia garante a entrega das metas e o alto desempenho."
+        feedbackNarrative: "O treinamento concentrado eliminou as falhas recorrentes de concorrência e nivelou o domínio tecnológico da equipe.",
+        pmbokConcept: "Treinamento, mentoria e coaching",
+        learnings: [
+          "O PMBOK 8 estabelece que o investimento em treinamento e mentoria é essencial para suprir lacunas de conhecimento e elevar a qualidade.",
+          "Essa intervenção assegura padronização técnica e reduz significativamente o retrabalho ao longo de todo o ciclo de vida."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Desvio de finalidade e desmotivação dos estudantes"
+        goodBad: "good",
+        risksEvaded: [
+          "Acúmulo de débito arquitetural e falhas de concorrência em produção"
         ],
-        "otherConsequences": [
-          "Formação de excelentes novos profissionais para o mercado"
+        otherConsequences: [
+          "Autonomia sustentável dos novos desenvolvedores no projeto"
         ]
       },
       {
-        "key": "b",
-        "text": "Permitir que os desenvolvedores façam tudo o que os outros setores pedirem para \"fazer política de boa vizinhança\" no campus.",
-        "impacts": {
-          "capacidadeEntrega": -20,
-          "qualidadeProduto": -15,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": -10
+        key: "b",
+        text: "Recomendar que a equipe realize cursos online assíncronos em paralelo à execução das tarefas do ciclo de trabalho.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -15,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -5
         },
-        "feedbackNarrative": "Os estudantes passaram os dias carregando caixas e formatando PCs antigos. O código do SIGAA ficou abandonado e os prazos estouraram.",
-        "pmbokConcept": "Bem-estar e prevenção de burnout",
-        "learnings": [
-          "Permitir desvio de função de recursos do projeto drena a capacidade produtiva e fere o propósito do projeto."
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              capacidadeEntrega: -10,
+              qualidadeProduto: -15
+            },
+            narrative: "Código instável gerado sem fundamentação quebrou a sincronização em tempo real de matrículas."
+          }
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Atrito com outros departamentos"
+        feedbackNarrative: "A equipe produziu código inseguro e defeituoso sob estresse severo, resultando em retrabalho substancial.",
+        pmbokConcept: "Bem-estar e prevenção de burnout",
+        learnings: [
+          "O PMBOK 8 adverte que transferir a capacitação crítica para as horas de descanso dos membros degrada o bem-estar e amplifica falhas.",
+          "A negligência com a formação técnica adequada compromete a integridade do produto e inviabiliza metas de qualidade."
         ],
-        "otherConsequences": [
-          "Abandono do projeto pelos profissionais de tecnologia"
+        goodBad: "bad",
+        risksEvaded: [
+          "Atraso pontual na entrega de entregas programadas da iteração corrente"
+        ],
+        otherConsequences: [
+          "Desgaste físico dos desenvolvedores e vulnerabilidade no sistema"
         ]
       },
       {
-        "key": "c",
-        "text": "Proibir os desenvolvedores de conversarem com qualquer pessoa fora da sala do projeto sob ameaça de desligamento.",
-        "impacts": {
-          "capacidadeEntrega": 0,
-          "qualidadeProduto": -5,
-          "saudeEquipe": -25,
-          "conhecimentoOrganizacional": -15
+        key: "c",
+        text: "Reverter a arquitetura para o conjunto tradicional de ferramentas já dominada pela equipe da universidade.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: 5,
+          conhecimentoOrganizacional: -15
         },
-        "feedbackNarrative": "O ambiente virou um regime carcerário. O clima ficou opressivo e a universidade abriu uma sindicância interna.",
-        "pmbokConcept": "Liderança servidora",
-        "learnings": [
-          "Governança e limites profissionais se estabelecem com diálogo institucional, nunca com autoritarismo paranoico."
+        feedbackNarrative: "O sistema foi entregue na data, mas tornou-se obsoleto no ato do lançamento, sem suporte a microsserviços modernos.",
+        pmbokConcept: "Visão e objetivos compartilhados",
+        learnings: [
+          "O PMBOK 8 salienta que as decisões de recursos devem sustentar a visão estratégica de longo prazo do produto entregue.",
+          "Regredir a padrões defasados sacrifica a longevidade do investimento público em troca de conforto gerencial efêmero."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Desvio de função"
+        goodBad: "bad",
+        risksEvaded: [
+          "Necessidade de aprendizado e adaptação a novas linguagens"
         ],
-        "otherConsequences": [
-          "Sindicância e denúncia na comissão de ética"
+        otherConsequences: [
+          "Dificuldade extrema de manutenção e incompatibilidade tecnológica futura"
+        ]
+      }
+    ]
+  },
+  {
+    id: "leadership_10_protecao_estagiarios",
+    title: "O Papel dos Bolsistas (Desenvolvimento de Competências e Ética)",
+    category: EventCategory.PEOPLE,
+    difficulty: EventDifficulty.MEDIUM,
+    probabilityWeight: 2,
+    tags: ["estagiarios", "etica", "mentoria", "responsabilidades"],
+    learningObjective: "Estruturar a alocação de estagiários com foco pedagógico e supervisão sênior, evitando a delegação desregulada de responsabilidades centrais.",
+    communicationType: "slack",
+    senderRole: "Líder Técnico",
+    description: "Canal #gestao: 'Com a proximidade do prazo final, o departamento sugeriu delegar a entrega de todo o módulo de segurança de dados aos bolsistas da graduação, que ficariam sem supervisão direta.'",
+    domainTag: "Recursos › Liderar a Equipe",
+    resourceType: "humano",
+    resourceProcess: "liderar",
+    senderName: "Mariana Costa",
+    senderInitials: "MC",
+    avatarImage: "/Personagens/Mariana.png",
+    responsibleRole: "techLead",
+    alternatives: [
+      {
+        key: "a",
+        text: "Alocar os bolsistas em tarefas formativas pareadas com desenvolvedores plenos e manter a segurança com especialistas.",
+        impacts: {
+          capacidadeEntrega: 0,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 15
+        },
+        feedbackNarrative: "Os estudantes aprenderam práticas sólidas com acompanhamento e os módulos críticos de segurança mantiveram conformidade ética.",
+        pmbokConcept: "Papéis, responsabilidades e lacunas de conhecimento",
+        learnings: [
+          "O PMBOK 8 orienta que os papéis e níveis de responsabilidade devem ser compatíveis com as competências reais de cada recurso.",
+          "A supervisão pedagógica cumpre a missão acadêmica de formação sem colocar em risco a governança do sistema universitário."
+        ],
+        goodBad: "good",
+        risksEvaded: [
+          "Vazamento de dados institucionais e violação de normativas da LGPD"
+        ],
+        otherConsequences: [
+          "Formação de talentos qualificados aptos a assumir vagas futuras"
+        ]
+      },
+      {
+        key: "b",
+        text: "Delegar a implementação do módulo de segurança aos bolsistas sob mentoria remota para acelerar a entrega.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -10
+        },
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              qualidadeProduto: -15,
+              capacidadeEntrega: -10
+            },
+            narrative: "Brechas graves de autenticação criadas por falta de vivência técnica forçaram o bloqueio emergencial do sistema."
+          }
+        ],
+        feedbackNarrative: "A sobrecarga irresponsável gerou ansiedade nos estudantes e abriu brechas gravíssimas de segurança na base de dados.",
+        pmbokConcept: "Maturidade dos membros da equipe",
+        learnings: [
+          "O PMBOK 8 adverte que atribuir tarefas de alta criticidade a membros em estágio inicial de maturidade técnica desrespeita os limites da equipe.",
+          "Essa escolha gera passivos de segurança irreparáveis e desvirtua o papel formador da universidade pública."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Necessidade de remanejar o cronograma dos módulos de infraestrutura"
+        ],
+        otherConsequences: [
+          "Exposição a sanções regulatórias da ANPD e danos à reputação institucional"
+        ]
+      },
+      {
+        key: "c",
+        text: "Restringir a atuação dos bolsistas à confecção de manuais de usuário e apoio à documentação funcional.",
+        impacts: {
+          capacidadeEntrega: -5,
+          qualidadeProduto: 0,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -10
+        },
+        feedbackNarrative: "Os estudantes desmotivaram-se com as tarefas servis e procuraram projetos de iniciação científica concorrentes.",
+        pmbokConcept: "Treinamento, mentoria e coaching",
+        learnings: [
+          "O PMBOK 8 preconiza o desenvolvimento progressivo de capacidades práticas através de mentoria orientada a desafios reais.",
+          "Subutilizar o potencial dos colaboradores prejudica a retenção e empobrece a formação de competências no ecossistema do projeto."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Esforço inicial de acompanhamento e revisão de código júnior"
+        ],
+        otherConsequences: [
+          "Desperdício de recursos de bolsas e frustração acadêmica dos discentes"
         ]
       }
     ]

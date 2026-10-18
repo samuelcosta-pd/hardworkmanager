@@ -4,7 +4,7 @@
 
 ## 1. Resumo Executivo
 
-O Hard Work Manager é um *serious game* colaborativo (React 19, TypeScript, Zustand) desenvolvido para TCC na UFC, atualmente fundamentado no domínio "Trabalho do Projeto" do PMBOK 7. Com o lançamento do PMBOK 8 e a extinção desse domínio, propõe-se adaptar o jogo para o domínio de **Recursos**, preservando integralmente suas mecânicas centrais (4 métricas, hotseat de 3 papéis, votação/debate, impactos diferidos e baralho de 10 dilemas em 4 sprints). O estudo revelou que 20 dos 50 dilemas possuem alta aderência direta a Recursos (sobretudo gestão de equipe e infraestrutura), 12 podem ser reescritos e 18 devem ser substituídos por tratarem de escopo, auditoria e requisitos alheios ao domínio. A transição prevê a introdução dos tipos `resourceType` e `resourceProcess`, reformulação dos textos da mentora Helena, do Debriefing e das causas de Game Over, garantindo rigor pedagógico sem descontinuar a persistência do `localStorage`.
+O Hard Work Manager é um *serious game* colaborativo (React 19, TypeScript, Zustand) desenvolvido como trabalho de conclusão de curso, atualmente fundamentado no domínio "Trabalho do Projeto" do PMBOK 7. Com o lançamento do PMBOK 8 e a extinção desse domínio, propõe-se adaptar o jogo para o domínio de **Recursos**, preservando integralmente suas mecânicas centrais (4 métricas, hotseat de 3 papéis, votação/debate, impactos diferidos e baralho de 10 dilemas em 4 sprints). O estudo revelou que 20 dos 50 dilemas possuem alta aderência direta a Recursos (sobretudo gestão de equipe e infraestrutura), 12 podem ser reescritos e 18 devem ser substituídos por tratarem de escopo, auditoria e requisitos alheios ao domínio. A transição prevê a introdução dos tipos `resourceType` e `resourceProcess`, reformulação dos textos da mentora Helena, do Debriefing e das causas de Game Over, garantindo rigor pedagógico sem descontinuar a persistência do `localStorage`.
 
 ---
 
@@ -17,7 +17,7 @@ Conforme o Guia PMBOK 8 (Seção 2.6) e a fonte secundária (*Escritório de Pro
 
 O domínio estrutura os recursos em duas categorias fundamentais:
 
-| Tipo de Recurso (`resourceType`) | Definição Oficial (PMBOK 8, Seção 2.6.1) | Exemplos Reais no Contexto SIGAA / UFC |
+| Tipo de Recurso (`resourceType`) | Definição Oficial (PMBOK 8, Seção 2.6.1) | Exemplos Reais no Contexto de um SIGAA Universitário |
 | :--- | :--- | :--- |
 | **Humano** (`humano`) | Indivíduos com papéis e responsabilidades atribuídas que trabalham coletivamente para atingir o objetivo compartilhado do projeto. Requer liderança, motivação, desenvolvimento de competências e inteligência emocional. | Desenvolvedores de lógica interna e telas, analistas de testes, designers, Gerente de Projetos, especialistas em banco de dados e arquitetura. |
 | **Físico / Virtual** (`fisico_virtual`) | Qualquer recurso que não seja uma pessoa: equipamentos, materiais, instalações, infraestrutura, software, ambientes de teste, licenças, serviços, dados ou informações. | Servidores de aplicação, instâncias em nuvem, bancos de dados legados, ambiente de homologação (*staging*), licenças de software (ex.: Oracle), pipelines de CI/CD, ferramentas de monitoramento. |
@@ -344,7 +344,7 @@ Cada dilema foi auditado com base no teste de fronteira do domínio Recursos:
 | 37 | `change_7_mudanca_api_governo` | change | Mudança de API do Governo | - | - | **SUBSTITUIR** | Trata de integração externa e dependência tecnológica. |
 | 38 | `change_8_feedback_piloto_estudantes` | change | Piloto com estudantes | - | - | **SUBSTITUIR** | Trata de validação de produto e experiência do usuário (UX pura). |
 | 39 | `change_9_integracao_restaurante_universitario` | change | Catracas do RU | - | - | **SUBSTITUIR** | Trata de expansão de escopo funcional de integração. |
-| 40 | `change_10_novo_manual_marca_ufc` | change | Novo manual de marca UFC | monitorar | humano | **REESCREVER** | Focar no retrabalho massivo consumindo o tempo escasso do designer UX. |
+| 40 | `change_10_novo_manual_marca_institucional` | change | Novo manual de marca institucional | monitorar | humano | **REESCREVER** | Focar no retrabalho massivo consumindo o tempo escasso do designer UX. |
 | 41 | `quality_1_code_chaos_legado` | quality | Dívida técnica no módulo | monitorar | humano | **REESCREVER** | Focar no retrabalho crônico que drena a capacidade produtiva da equipe. |
 | 42 | `quality_2_lean_gargalo_qa_swarming` | quality | Gargalo de QA e Swarming | monitorar | humano | **MANTER** | Teoria das Restrições e reatribuição colaborativa de recursos humanos (R3/R5). |
 | 43 | `quality_3_bug_critico_inscricao_dupla` | quality | Bug crítico em produção | - | - | **SUBSTITUIR** | Trata de gestão de defeitos e suporte a operações em tempo real. |

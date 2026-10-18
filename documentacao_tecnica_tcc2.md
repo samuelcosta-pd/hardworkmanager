@@ -1,26 +1,23 @@
 # Documentação Técnica e Funcional: Hard Work Manager
-*Simulador Educacional de Gerenciamento de Projetos com base no PMBOK 7 e no Domínio de Desempenho "Trabalho do Projeto"*
+*Simulador Educacional de Gerenciamento de Projetos com base no PMBOK 8 e no Domínio de Desempenho de Recursos*
 
 ---
 
 ## 1. Visão Geral do Projeto
 
 ### Propósito do Sistema
-O **Hard Work Manager** é um jogo sério (*serious game*) desenvolvido como um simulador web colaborativo em turnos locais (*hotseat*). O seu propósito principal é capacitar estudantes e profissionais no gerenciamento de projetos de software, simulando os dilemas, tensões e *trade-offs* táticos durante a modernização do Sistema de Gestão Acadêmica de uma instituição pública de ensino superior (baseada no contexto da Universidade Federal do Ceará - UFC).
+O **Hard Work Manager** é um jogo sério (*serious game*) desenvolvido como um simulador web colaborativo em turnos locais (*hotseat*). O seu propósito principal é capacitar estudantes e profissionais no gerenciamento de projetos de software, simulando os dilemas, tensões e *trade-offs* táticos durante a modernização do Sistema de Gestão Acadêmica de uma instituição pública de ensino superior no contexto de uma universidade pública federal.
 
 ### Problema que Resolve
-O ensino de gerenciamento de projetos, especialmente sob as diretrizes do **PMBOK 7ª Edição**, costuma ser focado em teorias abstratas e memorização de processos. Alunos frequentemente têm dificuldade em compreender na prática os impactos sistêmicos de decisões críticas sobre a saúde global do projeto. O sistema resolve essa deficiência pedagógica ao materializar em tempo real as relações de causa e efeito entre decisões de escopo, qualidade técnica do código, bem-estar da equipe, fluxo de trabalho (*Lean/Swarming*) e capacidade de entrega contínua.
+O ensino de gerenciamento de projetos costuma ser focado em teorias abstratas e memorização de processos descontextualizados. Alunos frequentemente têm dificuldade em compreender na prática os impactos sistêmicos de decisões críticas sobre a saúde global do projeto e a dinâmica de equipes multidisciplinares. O sistema resolve essa deficiência pedagógica ao materializar em tempo real as relações de causa e efeito entre decisões de alocação de pessoas, infraestrutura técnica (nuvem, servidores e licenças), bem-estar e clima seguro, fluxo de trabalho (*Lean/Swarming*) e capacidade de entrega contínua.
 
-### Relação com a Gestão de Projetos e PMBOK 7
-Diferente das edições anteriores do PMBOK (baseadas estritamente em áreas de conhecimento e processos sequenciais), o PMBOK 7 estrutura o gerenciamento em **Princípios de Entrega de Projetos** e **Domínios de Desempenho**. O jogo transpõe esses princípios subjetivos para mecânicas interativas determinísticas, exigindo que o comitê gestor (formado pelos jogadores) negocie expectativas, gerencie conflitos, blinde a equipe contra desvios de escopo e tome decisões sob limites temporais estruturados.
-
-### Domínio de Desempenho Representado
-O núcleo do simulador é o domínio **Trabalho do Projeto** (*Project Work Performance Domain*). Este domínio engloba:
-1. Estabelecimento e melhoria contínua de processos eficientes (*Lean*, Teoria das Restrições e eliminação de desperdícios);
-2. Gerenciamento equilibrado de recursos humanos, técnicos e operacionais;
-3. Manutenção da motivação e combate à sobrecarga da equipe;
-4. Comunicação assertiva e engajamento contínuo de stakeholders institucionais;
-5. Gestão ativa da dívida técnica e aprendizado organizacional contínuo.
+### Relação com o PMBOK 8 e o Domínio de Recursos
+O simulador fundamenta-se estritamente na **8ª Edição do PMBOK** (especificamente na Seção 2.6 - *Domínio de Desempenho de Recursos*). O jogo aborda tanto **Recursos Humanos** (motivação, inteligência emocional, Tuckman, liderança servidora, prevenção de burnout e desengajamento silencioso) quanto **Recursos Físicos e Virtuais** (servidores, ambientes em nuvem, storages, bancos de dados e licenças de software), articulando os 5 processos canônicos do domínio:
+1. **Planejar o Gerenciamento dos Recursos**: RAM, SWOT, Team Charter, gestão verde de RH e visão baseada em recursos;
+2. **Estimar os Recursos**: EAR (Estrutura Analítica dos Recursos), estimativa bottom-up, paramétrica, análoga e calendários de recursos;
+3. **Adquirir Recursos**: negociação em ambiente matricial, pré-designação, recursos alternativos com riscos reconhecidos e análise de decisão multicritério;
+4. **Liderar a Equipe**: colocação, escada de Tuckman, Seis Chapéus do Pensamento, liderança servidora vs. centralizada e avaliação de desempenho;
+5. **Monitorar e Controlar Recursos**: uso planejado vs. real, Teoria das Restrições (TOC), retrabalho como indicador de ineficiência, mapeamento do fluxo de valor e liberação planejada de ativos.
 
 ### Público-Alvo e Objetivos de Aprendizagem
 * **Público-Alvo**: Estudantes de graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação e profissionais em capacitação de gestão ágil e tradicional.
@@ -311,17 +308,26 @@ O sistema implementa 7 mecânicas integradas para simular o ambiente corporativo
 * **Arquivos**: `src/types/index.ts` (`DelayedImpact`), `src/store/gameStore.ts`, `src/lib/gameLogic.ts` (`evaluateCondition`).
 * **Funcionamento**: Certas alternativas de decisão geram consequências atrasadas que não impactam o projeto de imediato, mas criam "dívidas" que explodem após $N$ rodadas (`triggerAfterEvents`). A store gerencia a fila de `pendingDelayedImpacts`, decrementando os contadores a cada turno. Quando o contador zera, o sistema avalia condições booleanas opcionais (ex.: `qualidadeProduto < 50`) e aplica penalidades narrativas e numéricas retroativas, exibidas no "Radar de Impactos Diferidos" da Sprint Review e no painel de consequências.
 
-### 6. Mecânica de Geração de Partida Equilibrada (10 Dilemas / 2 por Princípio)
-* **Arquivos**: `src/lib/gameLogic.ts` (`generateMatchDeck`) e `src/store/gameStore.ts`.
-* **Funcionamento**: A cada nova partida, o simulador gera um baralho de **exatamente 10 dilemas**, garantindo a cobertura pedagógica completa e equilibrada dos 5 princípios do PMBOK 7:
-  - **Sorteio sem Repetição**: O algoritmo sorteia aleatoriamente **exatamente 2 dilemas** do acervo de cada um dos 5 princípios (2 do Princípio 1, 2 do Princípio 2, 2 do Princípio 3, 2 do Princípio 4 e 2 do Princípio 5).
-  - **Distribuição em Duas Rodadas**: A primeira metade da partida apresenta 1 dilema de cada princípio em ordem pseudoaleatória; a segunda metade apresenta o segundo dilema de cada princípio. Isso evita dilemas consecutivos do mesmo princípio e mantém a experiência pedagógica diversificada.
-  - **Estrutura de 4 Sprints**: Os 10 dilemas são organizados em Sprints de trabalho (Sprint 1: dilemas 1 a 3; Sprint 2: dilemas 4 a 6; Sprint 3: dilemas 7 a 9; Sprint 4: dilema 10), intercalados por reuniões de *Sprint Review* com a Mentora Helena.
-  - **Níveis de Dificuldade Descontinuados**: A seleção de dificuldade foi removida para assegurar que todas as equipes de estudantes experimentem uma jornada equilibrada e comparável para fins de pesquisa e avaliação pedagógica no TCC 2.
+### 6. Mecânica de Geração de Partida Equilibrada e Embaralhamento de Alternativas
+* **Arquivos**: `src/lib/gameLogic.ts` (`generateMatchDeck`, `shuffleEventAlternatives`) e `src/store/gameStore.ts`.
+* **Funcionamento**: A cada nova partida, o simulador sorteia os dilemas da partida e **embaralha pseudoaleatoriamente a ordem das alternativas (a, b, c)** de cada dilema. Isso elimina o vício de previsibilidade posicional (onde a opção correta ficava historicamente concentrada na letra 'a') sem alterar a chave canônica original preservada na rastreabilidade dos dados.
+* **Modelo de Equilíbrio das Alternativas**:
+  - **Alternativa Recomendada (`good`)**: Apresenta trade-offs reais. Exige pequenos investimentos iniciais ou custos de adaptação, mas gera ganhos consolidados em saúde, qualidade e conhecimento institucional (soma líquida moderada de +10 a +25).
+  - **Alternativa Frágil Tentadora (`bad tentadora`)**: Oferece ganhos imediatos ilusórios de velocidade (+5 a +10), cobrando a conta através de **impactos diferidos (`delayedImpacts`)** acumulados nas rodadas seguintes (-10 a -15).
+  - **Alternativa Fraca (`bad franca`)**: Queda imediata moderada (-10 a -15), sem ultrapassar -15 em qualquer métrica isolada, evitando mortes súbitas não pedagógicas.
+  - **Validação Monte Carlo**: O catálogo é calibrado com simulação de 10.000 partidas (`simular-partidas.ts`), garantindo 0.00% de Game Over para decisões consistentes, ~37% para escolhas aleatórias e 99.9% para decisões negligentes recorrentes (com colapso ocorrendo a partir do 4º dilema).
 
 ### 7. Injeção Dinâmica de NPCs e Avatares
 * **Arquivos**: `src/store/gameStore.ts` (função `injectNPC`), `src/data/avatars.ts`.
 * **Funcionamento**: Personagens remetentes de eventos internos (como desenvolvedores pleno, líderes técnicos adjuntos e designers) são sorteados dinamicamente dentre os avatares do catálogo que **não foram escolhidos pelos jogadores humanos**, garantindo variedade visual e imersão em cada partida.
+
+### 8. Mecânica de Limitação de Tempo Oficial e Regra de Abstenção
+* **Arquivos**: `src/hooks/useCountdown.ts`, `src/components/ui/CountdownTimer.tsx`, `src/components/screens/EventDisplay.tsx` e `src/components/screens/VotingRound.tsx`.
+* **Regra Rígida de Negócio (`timerSettings`)**: O tempo não é customizável pelo usuário, atuando como regra estrita do sistema para assegurar a comparabilidade das sessões de jogo e a pressão controlada na tomada de decisões:
+  - **Leitura e Discussão Coletiva**: **2 minutos (120 segundos)** cronometrados durante o `EventDisplay`.
+  - **Voto Individual em Hotseat**: **45 segundos** por participante durante o `VotingRound`.
+* **Auto-Avanço na Leitura**: Ao esgotar os 2 minutos em `EventDisplay`, um alerta visual informa que o tempo de discussão encerrou e o jogo avança automaticamente para a votação após 5 segundos.
+* **Regra de Abstenção Individual**: No `VotingRound`, o cronômetro inicia estritamente após o jogador confirmar que assumiu o dispositivo. Caso os 45 segundos expirem sem seleção, o sistema registra automaticamente uma **Abstenção (`abstain`)**. O participante também dispõe de botão explícito para abstenção voluntária. Votos em abstenção não pontuam em nenhuma alternativa na apuração.
 
 ---
 
@@ -349,17 +355,16 @@ O jogo transpõe os princípios e práticas do PMBOK 7ª Edição e da gestão �
   - Na **Sprint Review**, consolida o desempenho das últimas 3 decisões e alerta sobre ameaças pendentes.
   - No **Debriefing Final**, conduz a retrospectiva de encerramento com métricas e aplicação profissional.
 
-### Papéis do Jogador
-Os papéis definidos no tipo `PlayerRole` estabelecem as lentes através das quais os jogadores analisam os problemas:
-1. **Gerente de Projetos (PM - Project Manager)**:
-   - *Mindset*: "Mindset de Dono".
-   - *Responsabilidade*: Alinhamento com stakeholders, proteção dos recursos, gestão de riscos institucionais e resolução de empates via Voto de Minerva.
-2. **Líder Técnico (Tech Lead)**:
-   - *Mindset*: "Guardião da Performance e Arquitetura".
-   - *Responsabilidade*: Estabilidade dos servidores, qualidade do código, testes e combate à dívida técnica.
-3. **Líder de Design/UX (UX Lead)**:
-   - *Mindset*: "Defensor do Usuário".
-   - *Responsabilidade*: Usabilidade, acessibilidade, satisfação de docentes/alunos e redução de fricção na interface.
+### Papéis do Jogador (Fundamentação PMBOK 8)
+Os papéis definidos no tipo `PlayerRole` e centralizados em `src/data/roles.ts` estabelecem as fronteiras de autoridade, os processos exercidos e as lentes decisórias de cada participante:
+
+| Dimensão | Gerente de Projetos (GP) | Líder Técnico (Tech Lead) | Líder de Design e Telas (UX Lead) |
+| :--- | :--- | :--- | :--- |
+| **Responde por** | Formação, clima e operação da equipe; governança e sucesso global do projeto. | Viabilidade computacional, integridade técnica e gestão de recursos físicos e virtuais. | Experiência discente/docente, usabilidade, acessibilidade digital e conformidade com o MEC. |
+| **Processos PMBOK 8 mais exercidos** | **Planejar**, **Adquirir** (negociação matricial com chefias e reitoria) e **Liderar a Equipe**. | **Estimar** (esforço bottom-up) e **Monitorar e Controlar** (servidores, nuvem, bancos, licenças e gargalos TOC). | **Estimar** (esforço de telas/pesquisa) e **Liderar** (testes com usuários e facilitação). |
+| **Fronteira de Autoridade** | Negocia alocação de pessoas, mantém ambiente seguro e exerce o Voto de Minerva em empates. | Autoridade sobre arquitetura, padrões técnicos, linguagens e qualidade da esteira CI/CD. | Autoridade sobre requisitos de interface, design tokens e acessibilidade (WCAG). |
+| **O que NÃO decide** | Não impõe escolhas arquiteturais nem define ferramentas técnicas de programação. | Não contrata/remaneja pessoas sem o GP nem negocia orçamentos com a Reitoria. | Não define priorização de infraestrutura de banco de dados nem barramentos internos. |
+| **Pergunta-Chave** | *"Temos as pessoas e recursos certos, no tempo certo, com a equipe motivada e segura?"* | *"Os recursos físicos e virtuais estão sendo usados com eficiência, sem desperdício nem retrabalho?"* | *"Esta solução é compreensível, inclusiva e realmente serve a quem estuda e leciona na universidade?"* |
 
 ### Catálogo de Avatares da Equipe
 O sistema conta com 8 avatares selecionáveis (`src/data/avatars.ts`), com imagens ilustrativas em `public/Personagens/`:
@@ -834,7 +839,7 @@ A tabela abaixo sintetiza a cobertura pedagógica alcançada pelo simulador:
 ## 26. Resumo Executivo
 
 ### O que o sistema faz
-O **Hard Work Manager** é um simulador sério e colaborativo que coloca estudantes de Engenharia de Software no papel do comitê de liderança responsável pela modernização do Sistema de Gestão Acadêmica da UFC, capacitando-os no Domínio de Desempenho **Trabalho do Projeto** do PMBOK 7.
+O **Hard Work Manager** é um simulador sério e colaborativo que coloca estudantes de Engenharia de Software no papel do comitê de liderança responsável pela modernização do Sistema de Gestão Acadêmica de uma universidade pública federal, capacitando-os no Domínio de Desempenho **Recursos** do PMBOK 8.
 
 ### Como funciona
 Em grupos de 3 a 4 participantes assumindo papéis de Gerente de Projetos, Líder Técnico e Líder de UX, a equipe gerencia dilemas operacionais e crises institucionais. O jogo utiliza rodadas de voto secreto em dispositivo compartilhado (*hotseat*), debates cronometrados com regras de equidade de fala e apuração com Voto de Minerva. As decisões impactam 4 métricas interdependentes, disparam impactos diferidos no tempo e culminam em um debriefing pedagógico conduzido pela Mentora Helena.

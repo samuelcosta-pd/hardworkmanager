@@ -19,8 +19,18 @@ import type {
   Player,
   PlayerRole,
   Vote,
+  VoteChoice,
+  TimerPreset,
+  TimerSettings,
   DelayedImpact,
 } from '@/types';
+
+export const TIMER_PRESETS: Record<TimerPreset, { readingSeconds: number; votingSeconds: number; enabled: boolean }> = {
+  short: { readingSeconds: 120, votingSeconds: 45, enabled: true },
+  standard: { readingSeconds: 120, votingSeconds: 45, enabled: true },
+  long: { readingSeconds: 120, votingSeconds: 45, enabled: true },
+  none: { readingSeconds: 120, votingSeconds: 45, enabled: true },
+};
 
 interface PlayerDraft {
   name: string;
@@ -54,6 +64,7 @@ interface GameState {
   decisions: Decision[];
   currentVoterIndex: number;
   gameOverReason?: string;
+  timerSettings: TimerSettings;
   
   // Propriedades de fluxo e impactos diferidos
   currentSprint: number;
@@ -62,11 +73,13 @@ interface GameState {
   appliedDelayedImpactsHistory: AppliedImpactHistory[];
   delayedImpactsTriggeredThisRound: AppliedImpactHistory[];
 
-  setupPlayers: (drafts: PlayerDraft[]) => void;
+  setupPlayers: (drafts: PlayerDraft[], preset?: TimerPreset) => void;
+  setTimerSettings: (settings: TimerSettings) => void;
+  setTimerPreset: (preset: TimerPreset) => void;
   goTo: (phase: GamePhase) => void;
   startGame: () => void;
   beginEvent: () => void;
-  castVote: (alt: AlternativeKey) => void;
+  castVote: (alt: VoteChoice) => void;
   finalizeRound1: () => void;
   startDebate: () => void;
   beginRound2: () => void;
@@ -89,12 +102,19 @@ const initialState = {
   decisions: [] as Decision[],
   currentVoterIndex: 0,
   gameOverReason: undefined as string | undefined,
+  timerSettings: {
+    preset: 'standard' as TimerPreset,
+    readingSeconds: 120,
+    votingSeconds: 45,
+    enabled: true,
+  },
   currentSprint: 1,
   playedEventsIds: [] as string[],
   pendingDelayedImpacts: [] as PendingDelayedImpact[],
   appliedDelayedImpactsHistory: [] as AppliedImpactHistory[],
   delayedImpactsTriggeredThisRound: [] as AppliedImpactHistory[],
 };
+
 
 function injectNPC(event: GameEvent, players: Player[]): GameEvent {
   const npcRoles = [
@@ -137,7 +157,7 @@ export const useGameStore = create<GameState>()(
     (set, get) => ({
       ...initialState,
 
-      setupPlayers: (drafts) => {
+      setupPlayers: (drafts, preset) => {
         const players: Player[] = drafts.map((d, i) => ({
           id: `p${i + 1}`,
           name: d.name.trim(),
@@ -152,9 +172,14 @@ export const useGameStore = create<GameState>()(
         const matchDeck = rawDeck.map((e) => injectNPC(e, players));
         const firstEvent = matchDeck[0];
 
+        const timerSettings = preset
+          ? { preset, ...TIMER_PRESETS[preset] }
+          : get().timerSettings;
+
         set({
           players,
-          phase: 'dashboard',
+          timerSettings,
+          phase: 'role_explanation',
           matchDeck,
           events: [firstEvent],
           playedEventsIds: [firstEvent.id],
@@ -163,22 +188,36 @@ export const useGameStore = create<GameState>()(
         });
       },
 
+      setTimerSettings: (timerSettings) => set({ timerSettings }),
+
+      setTimerPreset: (preset) =>
+        set({
+          timerSettings: {
+            preset,
+            ...TIMER_PRESETS[preset],
+          },
+        }),
+
       goTo: (phase) => set({ phase }),
 
       startGame: () => {
-        const rawDeck = generateMatchDeck();
-        const players = get().players;
-        const matchDeck = rawDeck.map(e => injectNPC(e, players));
-        const firstEvent = matchDeck[0];
-        
-        set({ 
-          phase: 'briefing',
-          matchDeck,
-          events: [firstEvent],
-          playedEventsIds: [firstEvent.id],
-          currentSprint: 1,
-          currentEventIndex: 0,
-        });
+        const { matchDeck, players } = get();
+        // Se ainda não gerou o deck, inicializa
+        if (!matchDeck || matchDeck.length === 0) {
+          const rawDeck = generateMatchDeck();
+          const deck = rawDeck.map((e) => injectNPC(e, players));
+          const firstEvent = deck[0];
+          set({
+            phase: 'briefing',
+            matchDeck: deck,
+            events: [firstEvent],
+            playedEventsIds: [firstEvent.id],
+            currentSprint: 1,
+            currentEventIndex: 0,
+          });
+        } else {
+          set({ phase: 'briefing' });
+        }
       },
 
       beginEvent: () => set({ 
@@ -231,11 +270,11 @@ export const useGameStore = create<GameState>()(
         const round2Votes = votes.filter((v) => v.round === 2);
         const tally = tallyVotes(round2Votes.length > 0 ? round2Votes : votes.filter((v) => v.round === 1));
         
-        let chosenKey: AlternativeKey = tally.winner;
+        let chosenKey: AlternativeKey = tally.winner || event.alternatives[0].key;
         if (tally.tied) {
           const pm = players.find((p) => p.role === 'pm');
           const pmVote = round2Votes.find((v) => v.playerId === pm?.id);
-          if (pmVote && tally.topAlternatives.includes(pmVote.alternative)) {
+          if (pmVote && pmVote.alternative !== 'abstain' && tally.topAlternatives.includes(pmVote.alternative)) {
             chosenKey = pmVote.alternative;
           }
         }
@@ -245,6 +284,7 @@ export const useGameStore = create<GameState>()(
         // 1. Processar Delayed Impacts que já estavam pendentes
         let currentMetrics = { ...metrics };
         const newlyAppliedHistory: AppliedImpactHistory[] = [];
+
         const remainingDelayedImpacts: PendingDelayedImpact[] = [];
 
         for (const item of pendingDelayedImpacts) {

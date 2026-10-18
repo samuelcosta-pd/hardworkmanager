@@ -1,973 +1,1018 @@
-import { GameEvent, EventCategory, EventDifficulty } from '@/types';
+import { GameEvent, EventCategory, EventDifficulty } from "@/types";
 
 /**
- * Domínio de Recursos (PMBOK 8): Infraestrutura e Recursos Virtuais
- * Foco Pedagógico: Infraestrutura em nuvem, bancos de dados, licenças de software e ambientes de testes.
- * Total: 10 Dilemas
+ * Domínio de Recursos (PMBOK 8): Recursos Físicos e Virtuais
+ * Foco Pedagógico: Infraestrutura em nuvem, ambientes de staging, bancos de dados,
+ * licenças de software, uso planejado vs. real, teoria das restrições e sustentabilidade técnica.
+ * Total: 10 Dilemas reequilibrados segundo o modelo PMBOK 8.
  */
 export const systemsThinkingEvents: GameEvent[] = [
   {
-    "id": "systems_1_gambiarra_matriculas",
-    "title": "Gargalo Crítico de Banco no Período de Matrículas",
+    id: "systems_1_gambiarra_matriculas",
+    title: "Otimização do Banco Acadêmico (Monitoramento de Recursos Virtuais)",
     category: EventCategory.EXECUTION,
     difficulty: EventDifficulty.HARD,
-    "probabilityWeight": 2,
-    "tags": [
-      "recursos_virtuais",
-      "banco_dados",
-      "gargalo",
-      "capacidade"
-    ],
-    "learningObjective": "Reconhecer como atalhos em recursos virtuais e consultas sobrecarregam a capacidade da equipe.",
-    "communicationType": "ticket",
-    "senderRole": "Líder Técnico",
-    "description": "Ticket #1088 - Faltam 10 dias para a abertura das matrículas. O novo algoritmo de ranqueamento está sobrecarregando o banco de dados. Um programador sugere uma consulta direta improvisada no banco que alivia o servidor no momento, mas consumirá o triplo de esforço futuro.",
-    "domainTag": "Recursos › Monitorar e Controlar Recursos",
-    "resourceType": "fisico_virtual",
-    "resourceProcess": "monitorar",
-    "senderName": "Carlos Silva",
-    "senderInitials": "CS",
-    "avatarImage": "/Personagens/Roberto.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["recursos_virtuais", "banco_dados", "gargalo", "capacidade"],
+    learningObjective: "Identificar gargalos em recursos virtuais mediante a Teoria das Restrições e aplicar otimização estrutural em vez de atalhos frágeis.",
+    communicationType: "ticket",
+    senderRole: "Líder Técnico",
+    description: "Ticket #1088 - Faltam dez dias para o início das matrículas da instituição. O algoritmo de alocação de turmas satura a capacidade de processamento do repositório de dados, ameaçando paralisar as instâncias operacionais da instituição.",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "fisico_virtual",
+    resourceProcess: "monitorar",
+    senderName: "Carlos Silva",
+    senderInitials: "CS",
+    avatarImage: "/Personagens/Roberto.png",
+    responsibleRole: "techLead",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Aprovar o atalho no banco temporariamente para cumprir o prazo imediato.",
-        "impacts": {
-          "capacidadeEntrega": 15,
-          "qualidadeProduto": -25,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -10
+        key: "a",
+        text: "Otimizar índices relacionais e reestruturar consultas críticas sob a ótica da Teoria das Restrições.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: 15,
+          saudeEquipe: 5,
+          conhecimentoOrganizacional: 15
         },
-        "delayedImpacts": [
+        feedbackNarrative: "A intervenção focada no gargalo central reduziu o consumo de CPU em 60%, estabilizando o banco para o pico de acessos.",
+        pmbokConcept: "Teoria das restrições e gargalos",
+        learnings: [
+          "O PMBOK 8 preconiza a Teoria das Restrições para atuar no elo mais fraco dos recursos físicos e virtuais do sistema.",
+          "Essa decisão assegura a disponibilidade sustentável dos recursos computacionais acadêmicos sem mascarar ineficiências na modelagem."
+        ],
+        goodBad: "good",
+        risksEvaded: [
+          "Colapso catastrófico das instâncias de banco no primeiro dia de matrículas"
+        ],
+        otherConsequences: [
+          "Padronização de diretrizes para consultas de alta performance na STI"
+        ]
+      },
+      {
+        key: "b",
+        text: "Suspender temporariamente as travas de integridade e checagens no banco para acelerar a gravação no pico.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -5
+        },
+        delayedImpacts: [
           {
-            "triggerAfterEvents": 2,
-            "impacts": {
-              "capacidadeEntrega": -20,
-              "qualidadeProduto": -15,
-              "saudeEquipe": -20,
-              "conhecimentoOrganizacional": 0
+            triggerAfterEvents: 1,
+            impacts: {
+              qualidadeProduto: -15,
+              capacidadeEntrega: -15
             },
-            "narrative": "A consulta improvisada travou o banco de dados no segundo dia de matrículas. A equipe precisou varar a noite corrigindo registros corrompidos e reprocessando filas."
+            narrative: "A falta de integridade corrompeu o histórico de pré-requisitos, exigindo cancelamento manual de centenas de matrículas."
           }
         ],
-        "feedbackNarrative": "Entregamos na data e a Reitoria comemorou inicialmente. Porém, a sobrecarga gerada nas instâncias de banco explodiu semanas depois em produção.",
-        "pmbokConcept": "Retrabalho e desperdício como indicadores de eficiência",
-        "learnings": [
-          "Comprometer a integridade de recursos virtuais para cumprir prazos imediatos multiplica o retrabalho futuro."
+        feedbackNarrative: "A gravação ficou rápida por dois dias, mas registros inconsistentes corromperam a base e geraram retrabalho massivo.",
+        pmbokConcept: "Retrabalho e desperdício como indicadores de eficiência",
+        learnings: [
+          "O PMBOK 8 adverte que atalhos em recursos virtuais geram desperdício exponencial na forma de retrabalho de correção.",
+          "Suprimir mecanismos de proteção dos dados fere a confiabilidade do produto e compromete a sustentabilidade da operação."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Atraso imediato nas matrículas"
+        goodBad: "bad",
+        risksEvaded: [
+          "Atraso imediato no cronograma de homologação"
         ],
-        "otherConsequences": [
-          "Colapso sistêmico diferido e retrabalho exaustivo"
+        otherConsequences: [
+          "Inconsistência de matrículas de estudantes e passivo de auditoria"
         ]
       },
       {
-        "key": "b",
-        "text": "Adiar o lançamento da funcionalidade em 5 dias, utilizar contingência segura e otimizar os índices do banco de dados.",
-        "impacts": {
-          "capacidadeEntrega": -15,
-          "qualidadeProduto": 20,
-          "saudeEquipe": 10,
-          "conhecimentoOrganizacional": 15
+        key: "c",
+        text: "Aumentar horizontalmente o cluster de instâncias de banco em nuvem para absorver a carga por hardware.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -5,
+          saudeEquipe: 0,
+          conhecimentoOrganizacional: -15
         },
-        "feedbackNarrative": "Houve atrito político inicial pelo pequeno adiamento, mas o banco foi indexado corretamente. O período de matrículas processou 50 mil requisições sem nenhuma queda.",
-        "pmbokConcept": "Uso planejado vs. real de recursos",
-        "learnings": [
-          "Garantir a operação estável de recursos virtuais protege a produtividade contínua e a saúde do time."
+        feedbackNarrative: "O custo de hospedagem estourou o orçamento mensal da pró-reitoria e as consultas continuaram lentas por bloqueio de locks.",
+        pmbokConcept: "Análise de custo-benefício e de tendências",
+        learnings: [
+          "O PMBOK 8 recomenda a análise de custo-benefício para evitar o superdimensionamento dispendioso de recursos virtuais.",
+          "Aumentar hardware para compensar código defeituoso drena recursos financeiros sem solucionar a causa raiz do problema."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Queda catastrófica de servidores e corrupção de matrículas"
+        goodBad: "bad",
+        risksEvaded: [
+          "Esforço imediato de otimização técnica preventiva das rotinas de consulta"
         ],
-        "otherConsequences": [
-          "Desgaste político momentâneo com a gestão"
-        ]
-      },
-      {
-        "key": "c",
-        "text": "Contratar consultoria externa emergencial para reescrever as queries na madrugada gastando verba crítica de infraestrutura.",
-        "impacts": {
-          "capacidadeEntrega": -25,
-          "qualidadeProduto": 5,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -15
-        },
-        "feedbackNarrative": "A consultoria cobrou uma fortuna do orçamento. As queries funcionaram, mas a equipe interna não entendeu a lógica proprietária deixada por eles.",
-        "pmbokConcept": "Aquisição de recursos físicos ou virtuais",
-        "learnings": [
-          "Aquisições reativas de emergência frequentemente geram dependências externas e drenam recursos financeiros."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Atraso no prazo"
-        ],
-        "otherConsequences": [
-          "Dreno financeiro e perda de domínio do código"
+        otherConsequences: [
+          "Glosa orçamentária pela administração superior da universidade"
         ]
       }
     ]
   },
   {
-    "id": "systems_2_aquisicoes_nuvem",
-    "title": "Migração para Nuvem vs Servidores Físicos",
-    category: EventCategory.INFRASTRUCTURE,
-    difficulty: EventDifficulty.HARD,
-    "probabilityWeight": 2,
-    "tags": [
-      "nuvem",
-      "infraestrutura",
-      "recursos_virtuais",
-      "capacidade"
-    ],
-    "learningObjective": "Avaliar os impactos operacionais e a elasticidade de recursos físicos versus virtuais em nuvem.",
-    "communicationType": "email",
-    "senderRole": "Líder Técnico",
-    "description": "Assunto: Crise de Infraestrutura. O centro de processamento de dados físico da UFC está com servidores superaquecendo e sem capacidade de expansão para o novo portal. Temos que decidir se migramos para servidores em nuvem com capacidade elástica sob demanda ou compramos novos equipamentos físicos via licitação demorada.",
-    "domainTag": "Recursos › Adquirir Recursos",
-    "resourceType": "fisico_virtual",
-    "resourceProcess": "adquirir",
-    "senderName": "Kendrick (Infraestrutura)",
-    "senderInitials": "KD",
-    "avatarImage": "/Personagens/Kendrick.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
-      {
-        "key": "a",
-        "text": "Conduzir migração para servidores em nuvem com capacidade elástica sob demanda, pagando pelo uso nos períodos de pico.",
-        "impacts": {
-          "capacidadeEntrega": 15,
-          "qualidadeProduto": 20,
-          "saudeEquipe": 15,
-          "conhecimentoOrganizacional": 15
-        },
-        "feedbackNarrative": "A escalabilidade automática suportou os picos de matrícula sem quedas e sem custos fixos gigantescos durante as férias acadêmicas. O time aprendeu tecnologias modernas de nuvem.",
-        "pmbokConcept": "Aquisição de recursos físicos ou virtuais",
-        "learnings": [
-          "Adquirir recursos virtuais elásticos sob demanda viabiliza flexibilidade operacional e evita compras físicas obsoletas."
-        ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Queda física de servidores e demora de licitação"
-        ],
-        "otherConsequences": [
-          "Necessidade de monitoramento contínuo de custos em nuvem"
-        ]
-      },
-      {
-        "key": "b",
-        "text": "Insistir na compra de servidores físicos locais via processo licitatório tradicional de 8 meses.",
-        "impacts": {
-          "capacidadeEntrega": -30,
-          "qualidadeProduto": -15,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": 0
-        },
-        "feedbackNarrative": "A licitação travou em recursos jurídicos. O sistema foi lançado nos servidores antigos superaquecidos e queimou três placas de rede durante as matrículas.",
-        "pmbokConcept": "Impacto da indisponibilidade de recursos nos demais planos",
-        "learnings": [
-          "A indisponibilidade de infraestrutura no momento adequado compromete diretamente os prazos e a qualidade da entrega."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Custo de nuvem em dólar"
-        ],
-        "otherConsequences": [
-          "Queima de hardware e indisponibilidade total"
-        ]
-      },
-      {
-        "key": "c",
-        "text": "Desligar a metade dos módulos do sistema acadêmico para que o servidor velho aguente rodar.",
-        "impacts": {
-          "capacidadeEntrega": -20,
-          "qualidadeProduto": -25,
-          "saudeEquipe": -10,
-          "conhecimentoOrganizacional": -10
-        },
-        "feedbackNarrative": "Os módulos de bolsas e notas foram desativados. Alunos perderam prazos de formatura e professores não conseguiram lançar frequências.",
-        "pmbokConcept": "Escassez e excedente de recursos",
-        "learnings": [
-          "Desativar serviços essenciais para compensar carência de infraestrutura destrói o valor do projeto para os usuários."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Investimento financeiro"
-        ],
-        "otherConsequences": [
-          "Paralisação de serviços acadêmicos essenciais"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "systems_3_conhecimento_legado",
-    "title": "Conhecimento Tácito Preso no Código Legado",
-    category: EventCategory.KNOWLEDGE,
+    id: "systems_2_aquisicoes_nuvem",
+    title: "O Dimensionamento da Nuvem (Uso Planejado vs. Real de Recursos)",
+    category: EventCategory.EXECUTION,
     difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "legado",
-      "conhecimento",
-      "capacidade",
-      "pessoal"
-    ],
-    "learningObjective": "Compreender o impacto da retenção e compartilhamento de conhecimento na produtividade da equipe.",
-    "communicationType": "slack",
-    "senderRole": "Líder Técnico",
-    "description": "O cálculo das regras de desligamento acadêmico de estudantes está em instruções antigas e complexas de 2.000 linhas sem documentação. O único funcionário que as entendia se aposentou. Reformar esse módulo exigirá 1 semana sem entregar novas telas.",
-    "domainTag": "Recursos › Liderar a Equipe",
-    "resourceType": "humano",
-    "resourceProcess": "liderar",
-    "senderName": "Roberto (Arquitetura)",
-    "senderInitials": "RA",
-    "avatarImage": "/Personagens/Roberto.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["nuvem", "custo_beneficio", "recursos_virtuais", "aquisicao"],
+    learningObjective: "Monitorar o desvio entre consumo planejado e real de recursos computacionais e aplicar contratação elástica sob demanda.",
+    communicationType: "email",
+    senderRole: "Superintendência de TI",
+    description: "Assunto: Fatura da Nuvem Governamental. O consumo de recursos computacionais virtuais durante os testes de carga ultrapassou a previsão inicial em 80%, consumindo a dotação de infraestrutura do trimestre.",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "fisico_virtual",
+    resourceProcess: "monitorar",
+    senderName: "Prof. Alberto Silva",
+    senderInitials: "AS",
+    avatarImage: "/Personagens/Alberto.png",
+    responsibleRole: "techLead",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Pausar novas telas por 5 dias para decodificar, documentar e reescrever o cálculo com testes unitários abrangentes.",
-        "impacts": {
-          "capacidadeEntrega": -15,
-          "qualidadeProduto": 25,
-          "saudeEquipe": 10,
-          "conhecimentoOrganizacional": 35
+        key: "a",
+        text: "Implantar desligamento automático de instâncias ociosas e auto-scaling baseado em análise de tendências.",
+        impacts: {
+          capacidadeEntrega: 0,
+          qualidadeProduto: 10,
+          saudeEquipe: 5,
+          conhecimentoOrganizacional: 15
         },
-        "feedbackNarrative": "Foi um sacrifício temporário, mas o conhecimento tácito virou explícito. Quando as regras mudaram, a alteração foi feita em 30 minutos por qualquer desenvolvedor.",
-        "pmbokConcept": "Propriedade compartilhada do projeto",
-        "learnings": [
-          "Disseminar conhecimento tácito entre os membros da equipe elimina dependências críticas e protege a continuidade das entregas."
+        feedbackNarrative: "O escalonamento automatizado reduziu a ociosidade dos ambientes computacionais em 45%, reequilibrando as despesas contratuais da universidade.",
+        pmbokConcept: "Uso planejado vs. real de recursos",
+        learnings: [
+          "O PMBOK 8 orienta o acompanhamento contínuo da variação entre uso planejado e real de recursos virtuais para evitar desperdícios.",
+          "A automação da infraestrutura elástica atende às metas de sustentabilidade financeira sem prejudicar os ambientes de teste."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Cálculos errôneos de jubilamento e processos judiciais"
+        goodBad: "good",
+        risksEvaded: [
+          "Esgotamento prematuro da verba orçamentária de computação da instituição"
         ],
-        "otherConsequences": [
-          "Pequena desaceleração temporária nas entregas"
+        otherConsequences: [
+          "Criação de cultura de gestão financeira de recursos virtuais na equipe pública"
         ]
       },
       {
-        "key": "b",
-        "text": "Não mexer no script de jeito nenhum e continuar implementando novas telas por cima sem entender a base.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": -15,
-          "saudeEquipe": -10,
-          "conhecimentoOrganizacional": -25
+        key: "b",
+        text: "Desligar imediatamente os ambientes computacionais de homologação e concentrar todos os testes na máquina de produção.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -15,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -10
         },
-        "delayedImpacts": [
+        delayedImpacts: [
           {
-            "triggerAfterEvents": 3,
-            "impacts": {
-              "capacidadeEntrega": -25,
-              "qualidadeProduto": -20,
-              "saudeEquipe": -20,
-              "conhecimentoOrganizacional": -10
+            triggerAfterEvents: 1,
+            impacts: {
+              qualidadeProduto: -15,
+              capacidadeEntrega: -10
             },
-            "narrative": "O script arcaico gerou uma falha silenciosa que jubilou 450 estudantes incorretamente. O time parou por duas semanas para fazer correções manuais."
+            narrative: "Testes automatizados concorrentes no ambiente de produção sobrescreveram notas oficiais do semestre anterior."
           }
         ],
-        "feedbackNarrative": "Ganhamos prazo imediato, mas deixamos uma mina terrestre armada na base de dados.",
-        "pmbokConcept": "Papéis, responsabilidades e lacunas de conhecimento",
-        "learnings": [
-          "Ignorar lacunas de conhecimento na equipe cria gargalos operacionais graves quando falhas silenciosas eclodem."
+        feedbackNarrative: "A economia na fatura foi ilusória; a mistura de testes em produção causou incidentes gravíssimos e pânico na universidade.",
+        pmbokConcept: "Aquisição de recursos físicos ou virtuais",
+        learnings: [
+          "O PMBOK 8 salienta que a supressão de recursos virtuais essenciais como ambientes de homologação compromete a integridade do produto.",
+          "Essa ação viola preceitos básicos de isolamento de infraestrutura e expõe os dados corporativos a risco inaceitável."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Atraso nas entregas atuais"
+        goodBad: "bad",
+        risksEvaded: [
+          "Necessidade de renegociação orçamentária com a pró-reitoria"
         ],
-        "otherConsequences": [
-          "Jubilamento indevido de centenas de estudantes e ações judiciais"
+        otherConsequences: [
+          "Vulnerabilidade operacional severa e risco de sanções jurídicas"
         ]
       },
       {
-        "key": "c",
-        "text": "Apagar o script antigo e criar um cálculo simplificado qualquer sem validar com a comissão acadêmica.",
-        "impacts": {
-          "capacidadeEntrega": 5,
-          "qualidadeProduto": -30,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -20
+        key: "c",
+        text: "Manter todas as instâncias ativas em capacidade máxima contínua para assegurar tolerância a falhas.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: 5,
+          saudeEquipe: -5,
+          conhecimentoOrganizacional: -15
         },
-        "feedbackNarrative": "A simplificação arbitrária feriu o regimento geral da universidade, gerando invalidade jurídica em todos os históricos escolares.",
-        "pmbokConcept": "Uso planejado vs. real de recursos",
-        "learnings": [
-          "A gestão de recursos exige calibrar o esforço técnico com os padrões de conformidade institucionais."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Tempo de análise"
-        ],
-        "otherConsequences": [
-          "Anulação de históricos escolares pela Reitoria"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "systems_4_integracao_banco_dados",
-    "title": "Sobrecarga no Banco de Dados Central",
-    category: EventCategory.INFRASTRUCTURE,
-    difficulty: EventDifficulty.HARD,
-    "probabilityWeight": 2,
-    "tags": [
-      "database",
-      "performance",
-      "infraestrutura",
-      "recursos_virtuais"
-    ],
-    "learningObjective": "Monitorar o consumo de recursos virtuais compartilhados e mitigar restrições de infraestrutura.",
-    "communicationType": "ticket",
-    "senderRole": "Líder Técnico",
-    "description": "Ticket #1142 - Lock de Banco de Dados. As novas telas de consulta de histórico estão disparando consultas pesadas sem cache, travando o banco de dados central e derrubando outros serviços compartilhados da universidade.",
-    "domainTag": "Recursos › Monitorar e Controlar Recursos",
-    "resourceType": "fisico_virtual",
-    "resourceProcess": "monitorar",
-    "senderName": "Kenedy (Programador)",
-    "senderInitials": "KB",
-    "avatarImage": "/Personagens/Kenedy.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
-      {
-        "key": "a",
-        "text": "Implementar camada de cache em memória (Redis) e replicar o banco em modo somente-leitura (Read-Replica) para relatórios.",
-        "impacts": {
-          "capacidadeEntrega": -10,
-          "qualidadeProduto": 25,
-          "saudeEquipe": 15,
-          "conhecimentoOrganizacional": 15
-        },
-        "feedbackNarrative": "A separação de leitura e escrita reduziu a carga no banco principal em 80%. Os sistemas voltaram a rodar liso e as consultas dos alunos ficaram instantâneas.",
-        "pmbokConcept": "Teoria das restrições e gargalos",
-        "learnings": [
-          "Identificar e aliviar o gargalo em recursos virtuais compartilhados preserva o desempenho global de toda a organização."
-        ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Queda do sistema de pagamentos e travamento institucional"
-        ],
-        "otherConsequences": [
-          "Custo de configuração de réplicas e cache"
-        ]
-      },
-      {
-        "key": "b",
-        "text": "Aumentar a memória do servidor antigo temporariamente e torcer para o banco aguentar a pressão.",
-        "impacts": {
-          "capacidadeEntrega": -15,
-          "qualidadeProduto": -15,
-          "saudeEquipe": -10,
-          "conhecimentoOrganizacional": 0
-        },
-        "feedbackNarrative": "O aumento de memória adiou o problema por 3 dias, mas na segunda-feira as consultas consumiram toda a RAM nova e o banco travou novamente.",
-        "pmbokConcept": "Utilização e inatividade de recursos",
-        "learnings": [
-          "Alocar mais capacidade bruta sem otimizar a utilização do recurso virtual é um paliativo caro que não resolve o gargalo."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Esforço de modernização estrutural"
-        ],
-        "otherConsequences": [
-          "Novo travamento e prejuízo financeiro"
-        ]
-      },
-      {
-        "key": "c",
-        "text": "Limitar o acesso dos alunos ao histórico para apenas 5 minutos por dia por turma.",
-        "impacts": {
-          "capacidadeEntrega": 0,
-          "qualidadeProduto": -30,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": -10
-        },
-        "feedbackNarrative": "A restrição absurda revoltou o corpo discente, gerando protestos na reitoria e manchetes negativas na imprensa local.",
-        "pmbokConcept": "Escassez e excedente de recursos",
-        "learnings": [
-          "Racionar o uso de serviços finais para esconder limitações de infraestrutura degrada severamente a percepção de valor."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Trabalho técnico de banco"
-        ],
-        "otherConsequences": [
-          "Crise pública de relações institucionais"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "systems_5_licenca_banco_proprietario",
-    "title": "Licenciamento de Software: Banco Proprietário vs Gratuito Aberto",
-    category: EventCategory.INFRASTRUCTURE,
-    difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "licencas",
-      "custo",
-      "recursos_virtuais",
-      "aquisicoes"
-    ],
-    "learningObjective": "Equilibrar custos de licenças comerciais com o esforço de migração para ferramentas de código aberto.",
-    "communicationType": "email",
-    "senderRole": "Diretor de TI",
-    "description": "Assunto: Renovação de Licença. A licença anual do banco de dados comercial antigo custará R$ 400.000 para renovar. A alternativa é investir 2 semanas para migrar o sistema para um banco de dados gratuito de código aberto e usar a economia na equipe e em equipamentos do projeto.",
-    "domainTag": "Recursos › Monitorar e Controlar Recursos",
-    "resourceType": "fisico_virtual",
-    "resourceProcess": "monitorar",
-    "senderName": "Geraldo (Auditoria)",
-    "senderInitials": "GA",
-    "avatarImage": "/Personagens/Geraldo.png",
-    "responsibleRole": "pm",
-    "alternatives": [
-      {
-        "key": "a",
-        "text": "Migrar para o banco de dados gratuito de código aberto, economizando R$ 400.000 anuais e investindo na capacitação da equipe interna.",
-        "impacts": {
-          "capacidadeEntrega": -15,
-          "qualidadeProduto": 20,
-          "saudeEquipe": 15,
-          "conhecimentoOrganizacional": 25
-        },
-        "feedbackNarrative": "A migração exigiu testes intensos, mas foi impecável. A universidade se livrou de licenças caras e a verba poupada garantiu bolsas e infraestrutura por 2 anos.",
-        "pmbokConcept": "Análise de custo-benefício e de tendências",
-        "learnings": [
-          "Monitorar despesas e substituir recursos virtuais onerosos por soluções sustentáveis libera orçamento para a equipe."
-        ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Gasto recorrente de centenas de milhares de reais"
-        ],
-        "otherConsequences": [
-          "Esforço temporário de migração de queries"
-        ]
-      },
-      {
-        "key": "b",
-        "text": "Pagar a renovação milionária de R$ 400.000 e cortar o orçamento de bolsas e contratações de suporte.",
-        "impacts": {
-          "capacidadeEntrega": -20,
-          "qualidadeProduto": 0,
-          "saudeEquipe": -25,
-          "conhecimentoOrganizacional": -10
-        },
-        "feedbackNarrative": "As bolsas de desenvolvimento foram canceladas para pagar a licença. Três desenvolvedores saíram do projeto por falta de remuneração.",
-        "pmbokConcept": "Escassez e excedente de recursos",
-        "learnings": [
-          "Sacrificar recursos humanos para sustentar licenças virtuais superdimensionadas fragiliza a capacidade do projeto."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Trabalho de migração de banco"
-        ],
-        "otherConsequences": [
-          "Evasão de talentos e descontinuidade"
-        ]
-      },
-      {
-        "key": "c",
-        "text": "Continuar usando o banco proprietário sem licença de forma irregular na esperança de não ser auditado.",
-        "impacts": {
-          "capacidadeEntrega": 0,
-          "qualidadeProduto": -10,
-          "saudeEquipe": -30,
-          "conhecimentoOrganizacional": -30
-        },
-        "feedbackNarrative": "A fornecedora auditou a universidade e aplicou multa pesada. O comitê gestor respondeu a processo administrativo por irregularidade.",
-        "pmbokConcept": "Liberação de recursos conforme o plano",
-        "learnings": [
-          "Manter recursos sem autorização contratual formal gera passivos regulatórios gravíssimos."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Custo de licença"
-        ],
-        "otherConsequences": [
-          "Multa milionária e processo judicial"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "systems_6_ambiente_staging_testes",
-    "title": "Servidor Exclusivo de Testes vs Redução de Gastos",
-    category: EventCategory.INFRASTRUCTURE,
-    difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "servidor_testes",
-      "qualidade",
-      "infraestrutura",
-      "recursos_virtuais"
-    ],
-    "learningObjective": "Garantir ambientes de teste adequados para evitar contaminação e retrabalho em produção.",
-    "communicationType": "slack",
-    "senderRole": "Líder Técnico",
-    "description": "Para economizar recursos de servidores, a diretoria propôs desativar o servidor exclusivo de testes da equipe e fazer com que todos testem as alterações direto no sistema oficial em horários de menor movimento.",
-    "domainTag": "Recursos › Adquirir Recursos",
-    "resourceType": "fisico_virtual",
-    "resourceProcess": "adquirir",
-    "senderName": "Kendrick (Infraestrutura)",
-    "senderInitials": "KD",
-    "avatarImage": "/Personagens/Kendrick.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
-      {
-        "key": "a",
-        "text": "Otimizar o servidor de testes usando ambientes virtuais leves e dados simulados, provando que testar direto no sistema oficial gerará custos muito maiores.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": 20,
-          "saudeEquipe": 15,
-          "conhecimentoOrganizacional": 15
-        },
-        "feedbackNarrative": "Com ambientes virtuais e dados simulados, o custo dos servidores de teste caiu 70%. O time manteve a segurança de testar antes e nenhuma falha chegou aos usuários finais.",
-        "pmbokConcept": "Aquisição de recursos físicos ou virtuais",
-        "learnings": [
-          "Disponibilizar ambientes de teste virtuais eficientes previne retrabalho massivo e protege os serviços em produção."
-        ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Testes em produção que corrompem dados reais de alunos"
-        ],
-        "otherConsequences": [
-          "Modernização dos ambientes de testes com dados simulados"
-        ]
-      },
-      {
-        "key": "b",
-        "text": "Aceitar o fim do servidor de testes e começar a testar funcionalidades direto na base de dados do sistema oficial.",
-        "impacts": {
-          "capacidadeEntrega": -10,
-          "qualidadeProduto": -30,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": -15
-        },
-        "feedbackNarrative": "No primeiro teste direto em produção, um comando de limpeza de teste apagou o cadastro de 3.000 alunos reais. O pânico foi generalizado.",
-        "pmbokConcept": "Impacto da indisponibilidade de recursos nos demais planos",
-        "learnings": [
-          "A indisponibilidade de um ambiente de testes adequado força práticas de risco que destroem a confiabilidade do produto."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Custo de servidor de testes"
-        ],
-        "otherConsequences": [
-          "Perda irreparável de dados de estudantes"
-        ]
-      },
-      {
-        "key": "c",
-        "text": "Fazer testes apenas na máquina pessoal de um único desenvolvedor sem documentar os passos.",
-        "impacts": {
-          "capacidadeEntrega": -15,
-          "qualidadeProduto": -20,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -20
-        },
-        "feedbackNarrative": "O clássico problema de compatibilidade: o sistema funcionou no computador pessoal, mas travou completamente nos servidores oficiais da universidade.",
-        "pmbokConcept": "Recursos alternativos com riscos reconhecidos",
-        "learnings": [
-          "Recursos improvisados de teste que não espelham a infraestrutura de produção geram inconsistências graves de implantação."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Configuração de servidores"
-        ],
-        "otherConsequences": [
-          "Falhas recorrentes na publicação de novas versões"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "systems_7_backup_politica_retencao",
-    "title": "Capacidade de Armazenamento e Backups",
-    category: EventCategory.INFRASTRUCTURE,
-    difficulty: EventDifficulty.HARD,
-    "probabilityWeight": 2,
-    "tags": [
-      "backup",
-      "storage",
-      "recursos_virtuais",
-      "continuidade"
-    ],
-    "learningObjective": "Gerenciar a capacidade de armazenamento e políticas de ciclo de vida de recursos de dados.",
-    "communicationType": "ticket",
-    "senderRole": "Líder Técnico",
-    "description": "Ticket #1160 - Storage Cheio. O storage de backups atingiu 98% de ocupação. Para não comprar mais espaço agora, um desenvolvedor sugeriu apagar os backups históricos dos últimos 5 anos e manter apenas o backup do dia anterior.",
-    "domainTag": "Recursos › Monitorar e Controlar Recursos",
-    "resourceType": "fisico_virtual",
-    "resourceProcess": "monitorar",
-    "senderName": "Kenedy (Programador)",
-    "senderInitials": "KB",
-    "avatarImage": "/Personagens/Kenedy.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
-      {
-        "key": "a",
-        "text": "Implementar política de arquivamento frio comprimido (Cold Storage) de baixo custo para dados históricos e backups incrementais.",
-        "impacts": {
-          "capacidadeEntrega": 5,
-          "qualidadeProduto": 20,
-          "saudeEquipe": 15,
-          "conhecimentoOrganizacional": 20
-        },
-        "feedbackNarrative": "A compressão e o tiering automático reduziram o custo em 85% e mantiveram a conformidade legal de guarda de históricos escolares por 50 anos.",
-        "pmbokConcept": "Uso planejado vs. real de recursos",
-        "learnings": [
-          "Monitorar e escalonar o uso de armazenamento em camadas garante conformidade e otimiza despesas de infraestrutura."
-        ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Perda irrecuperável de registros acadêmicos e penalidades legais"
-        ],
-        "otherConsequences": [
-          "Conformidade total com as normas do MEC e Arquivo Nacional"
-        ]
-      },
-      {
-        "key": "b",
-        "text": "Apagar todos os backups antigos e torcer para o banco de dados nunca corromper tabelas históricas.",
-        "impacts": {
-          "capacidadeEntrega": 5,
-          "qualidadeProduto": -25,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": -30
-        },
-        "delayedImpacts": [
+        delayedImpacts: [
           {
-            "triggerAfterEvents": 2,
-            "impacts": {
-              "capacidadeEntrega": -30,
-              "qualidadeProduto": -30,
-              "saudeEquipe": -25,
-              "conhecimentoOrganizacional": -30
+            triggerAfterEvents: 1,
+            impacts: {
+              capacidadeEntrega: -15,
+              saudeEquipe: -10
             },
-            "narrative": "Um ransomware criptografou o banco de dados. Como não havia backups históricos, o histórico de notas de 10 anos da universidade foi perdido para sempre."
+            narrative: "A universidade teve as instâncias bloqueadas por inadimplência contratual, parando todo o desenvolvimento."
           }
         ],
-        "feedbackNarrative": "Ganhamos espaço no disco no curto prazo, mas deixamos a universidade desprotegida contra desastres.",
-        "pmbokConcept": "Retrabalho e desperdício como indicadores de eficiência",
-        "learnings": [
-          "Descartar recursos de contingência para mascarar falta de espaço gera perdas catastróficas e retrabalho irreversível."
+        feedbackNarrative: "O provedor emitiu notificação de bloqueio judicial por estouro de dotação, paralisando os testes por uma semana.",
+        pmbokConcept: "Utilização e inatividade de recursos",
+        learnings: [
+          "O PMBOK 8 destaca o controle de inatividade como fator crucial para a gestão eficiente e sustentável de recursos de TI.",
+          "A negligência com o consumo de infraestrutura compromete a continuidade do projeto perante os órgãos de controle."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Custo de storage no mês atual"
+        goodBad: "bad",
+        risksEvaded: [
+          "Trabalho de configuração e monitoramento de scripts de desligamento"
         ],
-        "otherConsequences": [
-          "Perda definitiva de dados históricos"
-        ]
-      },
-      {
-        "key": "c",
-        "text": "Desativar a criação de novos backups diários para parar de ocupar espaço no disco.",
-        "impacts": {
-          "capacidadeEntrega": 0,
-          "qualidadeProduto": -35,
-          "saudeEquipe": -25,
-          "conhecimentoOrganizacional": -30
-        },
-        "feedbackNarrative": "Três dias depois uma queda de energia corrompeu as tabelas e o trabalho de semanas foi perdido.",
-        "pmbokConcept": "Liberação de recursos conforme o plano",
-        "learnings": [
-          "Desativar rotinas essenciais de salvaguarda de recursos operacionais viola as diretrizes básicas de engenharia."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Alerta de disco cheio"
-        ],
-        "otherConsequences": [
-          "Perda de dias de trabalho e retrabalho massivo"
+        otherConsequences: [
+          "Interrupção de serviços e processos administrativos contra a gestão"
         ]
       }
     ]
   },
   {
-    "id": "systems_8_terceirizacao_vs_interno",
-    "title": "Terceirização de Módulo Crítico vs Time Interno",
+    id: "systems_3_conhecimento_legado",
+    title: "O Enigma do Legado (Estrutura Analítica dos Recursos e Memória Técnica)",
     category: EventCategory.EXECUTION,
     difficulty: EventDifficulty.HARD,
-    "probabilityWeight": 2,
-    "tags": [
-      "terceirizacao",
-      "aquisicoes",
-      "equipe_externa",
-      "gestao_matricial"
-    ],
-    "learningObjective": "Gerenciar a aquisição de recursos externos e fiscalizar critérios de qualidade na integração.",
-    "communicationType": "email",
-    "senderRole": "Pró-Reitor de Planejamento",
-    "description": "Assunto: Aceleração do Módulo Financeiro. A pró-reitoria propõe contratar uma fábrica de software externa para construir o módulo de boletos em 30 dias por R$ 80.000, mas a equipe interna terá que fiscalizar a entrega e integrar os serviços.",
-    "domainTag": "Recursos › Adquirir Recursos",
-    "resourceType": "humano",
-    "resourceProcess": "adquirir",
-    "senderName": "Lívia (Gerência)",
-    "senderInitials": "LG",
-    "avatarImage": "/Personagens/Lívia.png",
-    "responsibleRole": "pm",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["legado", "documentacao", "ear", "migracao"],
+    learningObjective: "Mapear dependências tecnológicas usando a Estrutura Analítica dos Recursos (EAR) para viabilizar migração segura de dados.",
+    communicationType: "slack",
+    senderRole: "Líder Técnico",
+    description: "Canal #dados: 'Ninguém sabe como funciona a rotina legada de emissão de diplomas de 2004 em COBOL/C; o único analista que conhecia as regras se aposentou sem deixar documentação.'",
+    domainTag: "Recursos › Estimar os Recursos",
+    resourceType: "fisico_virtual",
+    resourceProcess: "estimar",
+    senderName: "Mariana Costa",
+    senderInitials: "MC",
+    avatarImage: "/Personagens/Mariana.png",
+    responsibleRole: "techLead",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Definir critérios rigorosos de aceitação da entrega (testes completos comprovados e documentação padronizada) antes de autorizar o contrato.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": 15,
-          "saudeEquipe": 10,
-          "conhecimentoOrganizacional": 15
+        key: "a",
+        text: "Mapear as dependências na Estrutura Analítica dos Recursos e contratar o aposentado por parecer pontual.",
+        impacts: {
+          capacidadeEntrega: -5,
+          qualidadeProduto: 15,
+          saudeEquipe: 5,
+          conhecimentoOrganizacional: 15
         },
-        "feedbackNarrative": "O contrato com critérios técnicos estritos impediu entregas defeituosas. A fábrica entregou o módulo testado e a integração ocorreu suavemente.",
-        "pmbokConcept": "Negociação e influência para obter recursos",
-        "learnings": [
-          "Contratar recursos humanos externos requer negociação formal de padrões técnicos de qualidade para garantir alinhamento com a equipe interna."
+        feedbackNarrative: "O parecer estruturado com a EAR documentou as rotinas obscuras e permitiu recriar as validações no novo SIGAA.",
+        pmbokConcept: "Estrutura analítica dos recursos (EAR)",
+        learnings: [
+          "O PMBOK 8 recomenda a EAR para catalogar de forma hierárquica recursos humanos e acervos de conhecimento indispensáveis.",
+          "Essa medida garante a continuidade institucional do patrimônio de dados sem paralisar a esteira de desenvolvimento."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Recebimento de código de baixa qualidade e retrabalho interno"
+        goodBad: "good",
+        risksEvaded: [
+          "Bloqueio legal da emissão de diplomas de formandos da graduação"
         ],
-        "otherConsequences": [
-          "Consumo de verba financeira com entrega efetiva de valor"
+        otherConsequences: [
+          "Elaboração de repositório documentado de regras de negócio legadas"
         ]
       },
       {
-        "key": "b",
-        "text": "Contratar a fábrica sem nenhuma especificação técnica e aceitar qualquer código que eles entregarem no final dos 30 dias.",
-        "impacts": {
-          "capacidadeEntrega": -20,
-          "qualidadeProduto": -25,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": -20
+        key: "b",
+        text: "Deduzir as regras de negócio a partir do esquema de tabelas do banco legado e reprogramar o módulo em linguagem moderna.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -10
         },
-        "feedbackNarrative": "A fábrica entregou um código ilegível e sem documentação. O módulo não conversava com nosso banco e os desenvolvedores internos gastaram 2 meses consertando os erros.",
-        "pmbokConcept": "Recursos alternativos com riscos reconhecidos",
-        "learnings": [
-          "Adquirir recursos de desenvolvimento sem critérios formais transfere sobrecarga crônica de retrabalho para o time interno."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Esforço de fiscalização inicial"
-        ],
-        "otherConsequences": [
-          "Prejuízo financeiro e meses de retrabalho"
-        ]
-      },
-      {
-        "key": "c",
-        "text": "Recusar a verba de R$ 80.000 e sobrecarregar os desenvolvedores internos para fazerem o módulo nas madrugadas.",
-        "impacts": {
-          "capacidadeEntrega": -10,
-          "qualidadeProduto": -15,
-          "saudeEquipe": -30,
-          "conhecimentoOrganizacional": 5
-        },
-        "feedbackNarrative": "A equipe interna entrou em colapso de estresse tentando abraçar o mundo e o projeto atrasou.",
-        "pmbokConcept": "Gerente de recursos e ambiente matricial",
-        "learnings": [
-          "Recusar apoio de recursos adicionais quando a equipe está no limite de capacidade gera esgotamento e atrasos evitáveis."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Contratação de terceiros"
-        ],
-        "otherConsequences": [
-          "Burnout e atraso no cronograma"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "systems_9_licencas_subutilizadas",
-    "title": "Licenças de Software Proprietário Subutilizadas",
-    category: EventCategory.INFRASTRUCTURE,
-    difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "licencas",
-      "recursos_virtuais",
-      "monitoramento",
-      "custos"
-    ],
-    "learningObjective": "Monitorar a taxa de utilização de licenças de software e realocar recursos ociosos onde há demanda.",
-    "communicationType": "slack",
-    "senderRole": "Líder Técnico Adjunto",
-    "description": "Uma auditoria técnica apontou que 40% das licenças contratadas de banco de dados corporativo estão ociosas, enquanto a equipe de telas e design sofre com a falta de licenças de ferramentas profissionais de criação visual.",
-    "domainTag": "Recursos › Monitorar e Controlar Recursos",
-    "resourceType": "fisico_virtual",
-    "resourceProcess": "monitorar",
-    "senderName": "Carlos Silva",
-    "senderInitials": "CS",
-    "avatarImage": "/Personagens/Roberto.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
-      {
-        "key": "a",
-        "text": "Realocar as licenças ociosas, cancelar os excedentes contratuais e adquirir as ferramentas de prototipação necessárias para o time.",
-        "impacts": {
-          "capacidadeEntrega": 15,
-          "qualidadeProduto": 20,
-          "saudeEquipe": 15,
-          "conhecimentoOrganizacional": 15
-        },
-        "feedbackNarrative": "A realocação foi elogiada pela pró-reitoria. O cancelamento do excedente economizou recursos e a equipe de design aumentou expressivamente a velocidade de entrega.",
-        "pmbokConcept": "Análise de custo-benefício e de tendências",
-        "learnings": [
-          "Monitorar periodicamente o uso real versus planejado de licenças permite reequilibrar recursos virtuais e eliminar desperdícios financeiros."
-        ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Desperdício financeiro contínuo e bloqueio da equipe de design"
-        ],
-        "otherConsequences": [
-          "Equilíbrio de ferramentas entre todas as disciplinas"
-        ]
-      },
-      {
-        "key": "b",
-        "text": "Manter todas as licenças ociosas ativas pagando a anuidade completa para evitar o trabalho administrativo de renegociação.",
-        "impacts": {
-          "capacidadeEntrega": -15,
-          "qualidadeProduto": -10,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -10
-        },
-        "feedbackNarrative": "A despesa com licenças continuou sangrando o orçamento do projeto, enquanto a equipe de UX seguiu improvisando ferramentas gratuitas instáveis.",
-        "pmbokConcept": "Uso planejado vs. real de recursos",
-        "learnings": [
-          "A passividade diante da subutilização de recursos virtuais drena recursos orçamentários vitais para outras áreas do projeto."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Trabalho burocrático de renegociação contratual"
-        ],
-        "otherConsequences": [
-          "Frustração do time de design e despesas desnecessárias"
-        ]
-      },
-      {
-        "key": "c",
-        "text": "Cancelar unilateralmente 100% das licenças de banco de dados sem verificar quem de fato ainda depende delas.",
-        "impacts": {
-          "capacidadeEntrega": -25,
-          "qualidadeProduto": -20,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": -15
-        },
-        "feedbackNarrative": "O corte precipitado derrubou o acesso de profissionais experientes a bancos de dados essenciais, paralisando atualizações críticas da semana.",
-        "pmbokConcept": "Liberação de recursos conforme o plano",
-        "learnings": [
-          "A liberação ou desativação de recursos deve seguir critérios planejados para não desestabilizar quem depende das ferramentas."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Pagamento imediato de licenças"
-        ],
-        "otherConsequences": [
-          "Paralisação do desenvolvimento e retrabalho de reativação"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "systems_10_staging_indisponivel",
-    "title": "Servidor de Testes Indisponível no Dia da Avaliação",
-    category: EventCategory.INFRASTRUCTURE,
-    difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "servidor_testes",
-      "ambiente_teste",
-      "recursos_virtuais",
-      "usabilidade"
-    ],
-    "learningObjective": "Obter ambientes de teste alternativos para assegurar a continuidade das validações com usuários.",
-    "communicationType": "slack",
-    "senderRole": "Líder de UX",
-    "description": "O servidor de testes da universidade caiu devido a manutenção não programada justamente no dia marcado para a sessão de testes de usabilidade do novo fluxo de matrícula com 30 estudantes voluntários.",
-    "domainTag": "Recursos › Adquirir Recursos",
-    "resourceType": "fisico_virtual",
-    "resourceProcess": "adquirir",
-    "senderName": "Marina (Design de Telas)",
-    "senderInitials": "MD",
-    "avatarImage": "/Personagens/Leonara.png",
-    "responsibleRole": "uxLead",
-    "alternatives": [
-      {
-        "key": "a",
-        "text": "Contratar rapidamente um servidor temporário em nuvem com dados simulados e executar a sessão de testes conforme agendado.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": 20,
-          "saudeEquipe": 15,
-          "conhecimentoOrganizacional": 15
-        },
-        "feedbackNarrative": "A rápida obtenção do ambiente virtual em nuvem salvou o dia de testes. Identificamos 12 pontos de atrito antes do lançamento oficial.",
-        "pmbokConcept": "Aquisição de recursos físicos ou virtuais",
-        "learnings": [
-          "Obter recursos virtuais alternativos sob demanda evita o cancelamento de validações críticas e protege o cronograma de entrega."
-        ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Perda da janela de testes com alunos e retrabalho futuro"
-        ],
-        "otherConsequences": [
-          "Custo marginal de poucas horas de instância de nuvem"
-        ]
-      },
-      {
-        "key": "b",
-        "text": "Cancelar a sessão com os alunos voluntários e liberar as telas diretamente para o sistema oficial sem nenhum teste com usuários.",
-        "impacts": {
-          "capacidadeEntrega": 5,
-          "qualidadeProduto": -25,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": -15
-        },
-        "delayedImpacts": [
+        delayedImpacts: [
           {
-            "triggerAfterEvents": 2,
-            "impacts": {
-              "capacidadeEntrega": -20,
-              "qualidadeProduto": -20
+            triggerAfterEvents: 1,
+            impacts: {
+              qualidadeProduto: -15,
+              capacidadeEntrega: -10
             },
-            "narrative": "A ausência de validação de usabilidade provocou milhares de chamados de dúvidas e desistências no primeiro dia de matrículas."
+            narrative: "Diplomas emitidos com a nova rotina foram rejeitados pelo MEC por ausência de selos digitais criptográficos previstos em lei."
           }
         ],
-        "feedbackNarrative": "A dispensa dos estudantes gerou frustração e o lançamento às cegas resultou em uma avalanche de críticas nas redes sociais da universidade.",
-        "pmbokConcept": "Impacto da indisponibilidade de recursos nos demais planos",
-        "learnings": [
-          "A indisponibilidade não gerenciada de recursos de teste transfere o custo do erro diretamente para a experiência dos usuários finais."
+        feedbackNarrative: "A entrega foi rápida, mas dezenas de exceções legais foram esquecidas, gerando anulação de certidões acadêmicas.",
+        pmbokConcept: "Opinião especializada na estimativa",
+        learnings: [
+          "O PMBOK 8 adverte que prescindir de opinião especializada qualificada em domínios críticos conduz a estimativas e códigos falhos.",
+          "Trabalhar com suposições desinformadas gera passivos regulatórios severos para a instituição de ensino superior."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Esforço de ativar servidor alternativo"
+        goodBad: "bad",
+        risksEvaded: [
+          "Despesa pontual com consultoria de transição de conhecimento"
         ],
-        "otherConsequences": [
-          "Rejeição pública do sistema e retrabalho massivo de telas"
+        otherConsequences: [
+          "Paralisação de colações de grau e danos institucionais à universidade"
         ]
       },
       {
-        "key": "c",
-        "text": "Convidar os 30 estudantes para testarem diretamente no banco de dados de produção durante o expediente acadêmico.",
-        "impacts": {
-          "capacidadeEntrega": -20,
-          "qualidadeProduto": -35,
-          "saudeEquipe": -25,
-          "conhecimentoOrganizacional": -20
+        key: "c",
+        text: "Isolar o ativo físico computacional legado de 2004 em rede interna dedicada e manter sua operação paralela para diplomas.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -10,
+          saudeEquipe: -5,
+          conhecimentoOrganizacional: -15
         },
-        "feedbackNarrative": "Os testes em produção geraram dados fictícios misturados com cadastros reais, forçando o cancelamento de matrículas do semestre.",
-        "pmbokConcept": "Recursos alternativos com riscos reconhecidos",
-        "learnings": [
-          "Improvisar recursos operacionais sem avaliar riscos críticos viola a segurança e corrompe dados essenciais do projeto."
+        feedbackNarrative: "A máquina antiga sofreu queima física de disco por obsolescência, corrompendo backups e travando a reitoria.",
+        pmbokConcept: "Sustentabilidade na gestão de recursos",
+        learnings: [
+          "O PMBOK 8 orienta a aposentadoria planejada e sustentável de recursos em fim de ciclo de vida para mitigar riscos catastróficos.",
+          "Manter ativos obsoletos sem plano de transição converte dívida técnica em vulnerabilidade de continuidade do negócio."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Cancelamento da sessão com alunos"
+        goodBad: "bad",
+        risksEvaded: [
+          "Esforço técnico de análise do legado nesta fase do projeto"
         ],
-        "otherConsequences": [
-          "Corrupção de base de dados e sindicância administrativa"
+        otherConsequences: [
+          "Risco iminente de perda irreversível de registros históricos discentes"
+        ]
+      }
+    ]
+  },
+  {
+    id: "systems_4_integracao_banco_dados",
+    title: "A Ilusão de Dados Simulados (Uso Planejado e Ambientes de Integração)",
+    category: EventCategory.EXECUTION,
+    difficulty: EventDifficulty.MEDIUM,
+    probabilityWeight: 2,
+    tags: ["integracao", "testes", "qualidade", "gargalos"],
+    learningObjective: "Garantir a integridade do fluxo de entrega através de testes em ambientes integrados reais, evitando o adiamento crônico de validações.",
+    communicationType: "slack",
+    senderRole: "Líder Técnico",
+    description: "Canal #arquitetura: 'Para manter a meta de histórias entregues no ciclo de trabalho, os membros da equipe usaram dados simulados isolados e não testaram a integração com o barramento real da STI.'",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "fisico_virtual",
+    resourceProcess: "monitorar",
+    senderName: "Mariana Costa",
+    senderInitials: "MC",
+    avatarImage: "/Personagens/Mariana.png",
+    responsibleRole: "techLead",
+    alternatives: [
+      {
+        key: "a",
+        text: "Conectar testes contínuos ao barramento de integração real e reajustar a velocidade dos próximos sprints.",
+        impacts: {
+          capacidadeEntrega: -5,
+          qualidadeProduto: 15,
+          saudeEquipe: 5,
+          conhecimentoOrganizacional: 15
+        },
+        feedbackNarrative: "A integração revelou vinte conflitos de esquema imediatamente, permitindo corrigi-los antes que virassem bloqueio geral.",
+        pmbokConcept: "Mapeamento do fluxo de valor",
+        learnings: [
+          "O PMBOK 8 preconiza o mapeamento do fluxo de valor para identificar onde desperdícios e estoques invisíveis de defeitos se acumulam.",
+          "Validar integrações com recursos reais elimina ilusões de velocidade e assegura software genuinamente pronto."
+        ],
+        goodBad: "good",
+        risksEvaded: [
+          "Descobrir centenas de erros de integração na véspera do lançamento público"
+        ],
+        otherConsequences: [
+          "Ambiente de integração contínua robusto para todas as equipes da STI"
+        ]
+      },
+      {
+        key: "b",
+        text: "Manter os dados de teste simulados até a entrega final e reservar uma semana de correções antes do go-live.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -10
+        },
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              qualidadeProduto: -15,
+              capacidadeEntrega: -15
+            },
+            narrative: "A integração tardia colapsou os serviços; o lançamento precisou ser adiado em dois meses."
+          }
+        ],
+        feedbackNarrative: "As métricas de produtividade do ciclo pareceram ótimas, mas o sistema travou completamente ao ser integrado aos dados reais.",
+        pmbokConcept: "Retrabalho e desperdício como indicadores de eficiência",
+        learnings: [
+          "O PMBOK 8 adverte que acumular débitos de integração transfere o custo da validação para o momento de maior vulnerabilidade.",
+          "Essa prática camufla o atraso real e viola o compromisso de entregas verificáveis e funcionais."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Queda aparente nos gráficos de desempenho da iteração corrente"
+        ],
+        otherConsequences: [
+          "Atraso no cronograma oficial e desgaste com o conselho universitário"
+        ]
+      },
+      {
+        key: "c",
+        text: "Excluir o barramento da arquitetura e forçar acesso direto de cada componente ao repositório principal de dados corporativos.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -15,
+          saudeEquipe: -5,
+          conhecimentoOrganizacional: -15
+        },
+        feedbackNarrative: "O acoplamento rígido derrubou o isolamento de segurança e expôs dados sensíveis de folha e notas a acessos indevidos.",
+        pmbokConcept: "Teoria das restrições e gargalos",
+        learnings: [
+          "O PMBOK 8 ensina que romper padrões arquiteturais para aliviar prazos gera gargalos e vulnerabilidades sistêmicas crônicas.",
+          "O desrespeito à arquitetura de recursos virtuais destrói a modularidade e inviabiliza a manutenção futura."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Configuração de contratos de interface com o barramento"
+        ],
+        otherConsequences: [
+          "Quebra de conformidade com padrões de governança digital do governo federal"
+        ]
+      }
+    ]
+  },
+  {
+    id: "systems_5_licenca_banco_proprietario",
+    title: "O Dilema do Software Livre (Análise de Custo-Benefício e Sustentabilidade)",
+    category: EventCategory.EXECUTION,
+    difficulty: EventDifficulty.MEDIUM,
+    probabilityWeight: 2,
+    tags: ["licenciamento", "custos", "open_source", "sustentabilidade"],
+    learningObjective: "Avaliar o impacto de longo prazo na sustentabilidade de recursos entre plataformas proprietárias e tecnologias abertas.",
+    communicationType: "email",
+    senderRole: "Superintendência de TI",
+    description: "Assunto: Renovação de Licenças Proprietárias. A renovação anual do ativo de software comercial consumirá 70% do orçamento total; a equipe propõe migração para recurso de tecnologia aberta.",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "fisico_virtual",
+    resourceProcess: "monitorar",
+    senderName: "Prof. Alberto Silva",
+    senderInitials: "AS",
+    avatarImage: "/Personagens/Alberto.png",
+    responsibleRole: "techLead",
+    alternatives: [
+      {
+        key: "a",
+        text: "Planejar migração gradativa para plataforma de dados aberta investindo a economia em capacitação e suporte especializado.",
+        impacts: {
+          capacidadeEntrega: -5,
+          qualidadeProduto: 15,
+          saudeEquipe: 5,
+          conhecimentoOrganizacional: 15
+        },
+        feedbackNarrative: "A migração libertou a universidade de amarras contratuais e capacitou os desenvolvedores em tecnologias modernas abertas.",
+        pmbokConcept: "Análise de custo-benefício e de tendências",
+        learnings: [
+          "O PMBOK 8 recomenda a análise de custo-benefício e de tendências para sustentar decisões de ciclo de vida de ativos computacionais.",
+          "A adoção de padrões abertos assegura sustentabilidade financeira de longo prazo e independência tecnológica do serviço público."
+        ],
+        goodBad: "good",
+        risksEvaded: [
+          "Dependência crônica de fornecedor (vendor lock-in) e sequestro orçamentário"
+        ],
+        otherConsequences: [
+          "Autonomia tecnológica e reinvestimento de verbas em bolsas discentes"
+        ]
+      },
+      {
+        key: "b",
+        text: "Renovar o contrato da plataforma proprietária com aditivo orçamentário para manter a estabilidade do ecossistema.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -5,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -10
+        },
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              capacidadeEntrega: -15,
+              saudeEquipe: -10
+            },
+            narrative: "A reitoria precisou contingenciar bolsas de desenvolvimento para cobrir a fatura da licença de software."
+          }
+        ],
+        feedbackNarrative: "O conforto imediato sacrificou as bolsas de estágio e renovação de computadores físicos dos laboratórios da universidade.",
+        pmbokConcept: "Sustentabilidade na gestão de recursos",
+        learnings: [
+          "O PMBOK 8 posiciona a sustentabilidade como pilar transversal na gestão responsável de recursos escassos em projetos públicos.",
+          "Manter custos fixos desproporcionais restringe a capacidade da organização de atender demandas prioritárias da comunidade acadêmica."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Trabalho técnico de conversão de dados e rotinas de banco"
+        ],
+        otherConsequences: [
+          "Déficit orçamentário na pró-reitoria e cortes em programas de assistência estudantil"
+        ]
+      },
+      {
+        key: "c",
+        text: "Migrar para uma edição comunitária não suportada com chaves de teste acadêmicas para dispensar a taxa anual.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -15,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -15
+        },
+        feedbackNarrative: "A irregularidade foi flagrada pelo Tribunal de Contas, acarretando multas pesadas e responsabilização dos gestores.",
+        pmbokConcept: "Integridade e transparência do gerente de projetos",
+        learnings: [
+          "O PMBOK 8 estabelece a estrita integridade legal e transparência em todas as ações de aquisição e uso de recursos corporativos.",
+          "Infringir normas legais acarreta severas consequências institucionais, civis e criminais para a liderança do projeto."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Desembolso financeiro inicial para aquisição de licenças legais"
+        ],
+        otherConsequences: [
+          "Processo de improbidade administrativa e paralisação forçada dos sistemas"
+        ]
+      }
+    ]
+  },
+  {
+    id: "systems_6_ambiente_staging_testes",
+    title: "O Choque de Ambientes (Calendário e Alocação de Recursos Virtuais)",
+    category: EventCategory.EXECUTION,
+    difficulty: EventDifficulty.MEDIUM,
+    probabilityWeight: 2,
+    tags: ["staging", "calendario_recursos", "ambientes", "testes"],
+    learningObjective: "Gerenciar a concorrência por recursos virtuais compartilhados por meio de calendários de recursos e agendamento planejado.",
+    communicationType: "slack",
+    senderRole: "Líder de Design e Telas",
+    description: "Canal #testes: 'A equipe de experiência do usuário necessita do ambiente de homologação para testes de acessibilidade, mas a equipe de processamento central executou testes de estresse que derrubaram o ambiente computacional compartilhado.'",
+    domainTag: "Recursos › Estimar os Recursos",
+    resourceType: "fisico_virtual",
+    resourceProcess: "estimar",
+    senderName: "Carla Silveira",
+    senderInitials: "CS",
+    avatarImage: "/Personagens/Carla.png",
+    responsibleRole: "uxLead",
+    alternatives: [
+      {
+        key: "a",
+        text: "Estabelecer calendário formal de uso dos ambientes com janelas exclusivas para usabilidade e testes de estresse.",
+        impacts: {
+          capacidadeEntrega: 0,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 15
+        },
+        feedbackNarrative: "A coordenação por calendário eliminou a sobreposição destrutiva e assegurou dados confiáveis para as duas disciplinas.",
+        pmbokConcept: "Calendários de recursos",
+        learnings: [
+          "O PMBOK 8 prescreve calendários de recursos para organizar o uso compartilhado de ativos físicos e virtuais sem disputas desordenadas.",
+          "O planejamento temporal protege a integridade dos testes de usabilidade e preserva a estabilidade das medições de carga."
+        ],
+        goodBad: "good",
+        risksEvaded: [
+          "Cancelamento de sessões com discentes cegos e retrabalho de testes de carga"
+        ],
+        otherConsequences: [
+          "Previsibilidade operacional para todos os times de desenvolvimento da STI"
+        ]
+      },
+      {
+        key: "b",
+        text: "Dar prioridade irrestrita às rotinas centrais de banco e cancelar os testes com usuários para não atrasar a medição de performance.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -5
+        },
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              qualidadeProduto: -15,
+              capacidadeEntrega: -10
+            },
+            narrative: "Telas confusas e inacessíveis causaram avalanche de reclamações e rejeição pública pelos centros acadêmicos."
+          }
+        ],
+        feedbackNarrative: "O processamento atingiu ótima velocidade, mas a interface lançada mostrou-se incompreensível para alunos e professores.",
+        pmbokConcept: "Escassez e excedente de recursos",
+        learnings: [
+          "O PMBOK 8 adverte que privilegiar uma disciplina em detrimento de outra gera desequilíbrio e compromete o valor total do produto.",
+          "Suprimir validações com usuários gera produtos computacionalmente rápidos, mas funcionalmente ineficazes para a comunidade."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Negociação de horários e ajustes na agenda de testes de estresse"
+        ],
+        otherConsequences: [
+          "Rejeição da nova interface por alunos e docentes da universidade"
+        ]
+      },
+      {
+        key: "c",
+        text: "Adotar política de fila dinâmica sob demanda onde as tarefas executam simultaneamente no mesmo ambiente.",
+        impacts: {
+          capacidadeEntrega: -15,
+          qualidadeProduto: -10,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -5
+        },
+        feedbackNarrative: "A disputa não regulada corrompeu os dados de homologação e instaurou discórdia aberta entre as lideranças de desenvolvimento.",
+        pmbokConcept: "Ambiente seguro e transparência sobre vieses",
+        learnings: [
+          "O PMBOK 8 frisa que a omissão na alocação de recursos compartilhados gera conflitos destrutivos e corrupção de artefatos.",
+          "A governança ativa da liderança é indispensável para criar cooperação ordenada e manter o ambiente seguro de trabalho."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Esforço inicial de alinhamento e gestão do cronograma de infraestrutura"
+        ],
+        otherConsequences: [
+          "Deterioração das relações entre designers e engenheiros de software"
+        ]
+      }
+    ]
+  },
+  {
+    id: "systems_7_backup_politica_retencao",
+    title: "O Ponto de Restauração (Segurança e Coordenação com Riscos)",
+    category: EventCategory.EXECUTION,
+    difficulty: EventDifficulty.HARD,
+    probabilityWeight: 2,
+    tags: ["backup", "riscos", "infraestrutura", "seguranca"],
+    learningObjective: "Harmonizar a alocação de recursos de armazenamento com o plano de gerenciamento dos riscos e continuidade de negócios.",
+    communicationType: "ticket",
+    senderRole: "Líder Técnico",
+    description: "Ticket #1102 - O espaço de armazenamento em nuvem está no limite; a equipe desativou os cópias diárias de segurança do repositório para economizar capacidade e evitar aquisição emergencial de ativos físicos de armazenamento.",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "fisico_virtual",
+    resourceProcess: "monitorar",
+    senderName: "Carlos Silva",
+    senderInitials: "CS",
+    avatarImage: "/Personagens/Roberto.png",
+    responsibleRole: "techLead",
+    alternatives: [
+      {
+        key: "a",
+        text: "Alocar armazenamento frio arquival e automatizar a política de retenção de snapshots integrada ao plano de riscos.",
+        impacts: {
+          capacidadeEntrega: -5,
+          qualidadeProduto: 15,
+          saudeEquipe: 5,
+          conhecimentoOrganizacional: 15
+        },
+        feedbackNarrative: "O uso de armazenamento econômico de longo prazo garantiu pontos de restauração sem onerar o orçamento da instituição.",
+        pmbokConcept: "Coordenação entre Recursos, Cronograma, Finanças e Risco",
+        learnings: [
+          "O PMBOK 8 destaca a coordenação estreita entre recursos, finanças e gerenciamento de riscos para salvaguardar os ativos críticos.",
+          "Garantir redundância através de mídias adequadas preserva a integridade institucional sem inflacionar custos operacionais."
+        ],
+        goodBad: "good",
+        risksEvaded: [
+          "Perda irrecuperável de notas e histórico escolar discente por falha de storage"
+        ],
+        otherConsequences: [
+          "Alinhamento dos processos da STI com a política de segurança da informação"
+        ]
+      },
+      {
+        key: "b",
+        text: "Suspender a replicação cruzada de snapshots e apoiar a resiliência no SLA de alta disponibilidade do provedor de nuvem.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -10
+        },
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              qualidadeProduto: -15,
+              capacidadeEntrega: -15
+            },
+            narrative: "Uma falha de hardware na nuvem corrompeu tabelas e a equipe levou quatro dias para reconstruir dados manualmente."
+          }
+        ],
+        feedbackNarrative: "A economia foi negligente; uma falha de disco subsequente exigiu reconstituição penosa e manual de semanas de trabalho.",
+        pmbokConcept: "Impacto da indisponibilidade de recursos nos demais planos",
+        learnings: [
+          "O PMBOK 8 adverte que ignorar salvaguardas de recursos acarreta paralisia catastrófica em caso de contingência real.",
+          "Essa omissão compromete o plano de continuidade operacional e gera custos desmedidos de reparação emergencial."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Contratação imediata de volume adicional de armazenamento de dados"
+        ],
+        otherConsequences: [
+          "Vulnerabilidade institucional extrema a incidentes e ataques virtuais"
+        ]
+      },
+      {
+        key: "c",
+        text: "Excluir os volumes históricos de homologação e testes antigos para liberar espaço imediato em disco.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -10,
+          saudeEquipe: -5,
+          conhecimentoOrganizacional: -15
+        },
+        feedbackNarrative: "A destruição precipitada de dados históricos eliminou o acervo de testes de regressão, gerando insegurança técnica.",
+        pmbokConcept: "Liberação de recursos conforme o plano",
+        learnings: [
+          "O PMBOK 8 preconiza que a liberação ou descarte de ativos deve obedecer a planejamento criterioso e retenção de memória.",
+          "Destruir ativos de conhecimento sem validação empobrece a base técnica e reduz a eficácia de manutenções futuras."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Configuração de rotinas de arquivamento em camadas de baixo custo"
+        ],
+        otherConsequences: [
+          "Perda definitiva de cenários históricos de teste de regressão"
+        ]
+      }
+    ]
+  },
+  {
+    id: "systems_8_terceirizacao_vs_interno",
+    title: "O Dilema do Outsourcing (Análise de Decisão Multicritério)",
+    category: EventCategory.EXECUTION,
+    difficulty: EventDifficulty.HARD,
+    probabilityWeight: 2,
+    tags: ["aquisicao", "multicriterio", "terceirizacao", "estrategia"],
+    learningObjective: "Aplicar análise de decisão multicritério para deliberar entre desenvolvimento interno ou contratação externa de pacotes técnicos.",
+    communicationType: "email",
+    senderRole: "Gerente de Projetos",
+    description: "Assunto: Módulo de Reconhecimento Facial para Acesso a Restaurantes Universitários. A reitoria propõe contratar fábrica de software externa por valor milionário em vez de capacitar o time próprio.",
+    domainTag: "Recursos › Adquirir Recursos",
+    resourceType: "humano",
+    resourceProcess: "adquirir",
+    senderName: "Você (Gerente de Projetos)",
+    senderInitials: "GP",
+    avatarImage: "/Personagens/Narrador.png",
+    responsibleRole: "pm",
+    alternatives: [
+      {
+        key: "a",
+        text: "Conduzir Análise de Decisão Multicritério avaliando custo total de posse, segurança e autonomia técnica interna.",
+        impacts: {
+          capacidadeEntrega: -5,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 15
+        },
+        feedbackNarrative: "A análise formal demonstrou que desenvolver internamente com bibliotecas abertas custava 80% menos e retinha o domínio na universidade.",
+        pmbokConcept: "Análise de decisão multicritério",
+        learnings: [
+          "O PMBOK 8 recomenda a análise de decisão multicritério para selecionar fontes de recursos ponderando fatores técnicos e estratégicos.",
+          "A ponderação objetiva assegura o melhor uso do erário e estimula o fortalecimento das capacidades tecnológicas da organização."
+        ],
+        goodBad: "good",
+        risksEvaded: [
+          "Contratação de solução externa incompatível e de altíssimo custo de manutenção"
+        ],
+        otherConsequences: [
+          "Domínio institucional de tecnologias biométricas por funcionários públicos efetivos"
+        ]
+      },
+      {
+        key: "b",
+        text: "Contratar o pacote de reconhecimento facial com o fornecedor líder de mercado para agilizar o lançamento.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -10,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -15
+        },
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              qualidadeProduto: -15,
+              capacidadeEntrega: -15
+            },
+            narrative: "A empresa entregou código ofuscado e proprietário que não dialogava com a base de dados discente da instituição."
+          }
+        ],
+        feedbackNarrative: "A terceirização custou caro e entregou solução fechada que a equipe interna não consegue adaptar aos novos campi.",
+        pmbokConcept: "Recursos internos e externos",
+        learnings: [
+          "O PMBOK 8 adverte contra a terceirização precipitada que aliena o conhecimento central e cria dependência operacional crônica.",
+          "Essa decisão contraria o desenvolvimento sustentável das competências da instituição e expõe dados sensíveis a terceiros."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Esforço inicial de capacitação da equipe em visão computacional"
+        ],
+        otherConsequences: [
+          "Drenagem orçamentária prolongada e perda de domínio sobre o código-fonte"
+        ]
+      },
+      {
+        key: "c",
+        text: "Declinar formalmente a solicitação de reconhecimento facial justificando que biometria não integra o escopo original.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -15,
+          saudeEquipe: -5,
+          conhecimentoOrganizacional: -10
+        },
+        feedbackNarrative: "A recusa sumária gerou crise com a Pró-Reitoria de Assuntos Estudantis e manteve fraudes crônicas nas filas do RU.",
+        pmbokConcept: "Negociação e influência para obter recursos",
+        learnings: [
+          "O PMBOK 8 orienta o gerente a negociar e propor saídas colaborativas com os stakeholders em vez de impor vetos unilaterais.",
+          "Ignorar as necessidades essenciais das partes interessadas enfraquece o valor público entregue pelo projeto."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Trabalho de elaboração de estudos técnicos e termos de referência"
+        ],
+        otherConsequences: [
+          "Desgaste político severo e persistência de ineficiência operacional nos campi"
+        ]
+      }
+    ]
+  },
+  {
+    id: "systems_9_licencas_subutilizadas",
+    title: "Licenças Ociosas (Utilização, Inatividade e Liberação de Recursos)",
+    category: EventCategory.EXECUTION,
+    difficulty: EventDifficulty.EASY,
+    probabilityWeight: 2,
+    tags: ["licencas", "inatividade", "custos", "liberacao"],
+    learningObjective: "Auditar a taxa de utilização de recursos virtuais e licenças para liberar ativos ociosos e reverter sobras para áreas deficitárias.",
+    communicationType: "slack",
+    senderRole: "Líder de Design e Telas",
+    description: "Canal #design: 'Descobrimos que a universidade paga 40 licenças de uma suíte cara de modelagem 3D contratada no passado; apenas duas estão em uso ativo pelos designers neste ano.'",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "fisico_virtual",
+    resourceProcess: "monitorar",
+    senderName: "Carla Silveira",
+    senderInitials: "CS",
+    avatarImage: "/Personagens/Carla.png",
+    responsibleRole: "uxLead",
+    alternatives: [
+      {
+        key: "a",
+        text: "Cancelar as licenças inativas conforme o plano e reverter a economia para monitores ergonômicos e testes com usuários.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: 15,
+          saudeEquipe: 15,
+          conhecimentoOrganizacional: 10
+        },
+        feedbackNarrative: "O cancelamento das ferramentas ociosas liberou verba para comprar equipamentos modernos que melhoraram a saúde do time.",
+        pmbokConcept: "Liberação de recursos conforme o plano",
+        learnings: [
+          "O PMBOK 8 recomenda a liberação tempestiva de recursos ociosos para evitar desperdícios e realocar valor onde há necessidade real.",
+          "O remanejamento responsável de investimentos virtuais para infraestrutura física melhora o ambiente e o rendimento da equipe."
+        ],
+        goodBad: "good",
+        risksEvaded: [
+          "Glosa de despesas ineficientes em auditoria interna da universidade"
+        ],
+        otherConsequences: [
+          "Aquisição de periféricos ergonômicos e elevação do conforto do laboratório"
+        ]
+      },
+      {
+        key: "b",
+        text: "Preservar a dotação de 40 licenças contratadas para absorver futuras turmas e expansões de cursos de design.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -10,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -10
+        },
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              capacidadeEntrega: -10,
+              qualidadeProduto: -10
+            },
+            narrative: "Auditoria do Tribunal de Contas apontou dano ao erário por pagamento continuado de licenças sem uso comprovado."
+          }
+        ],
+        feedbackNarrative: "A inércia gerencial desperdiçou verba pública preciosa que fez falta direta para a compra de computadores de trabalho.",
+        pmbokConcept: "Utilização e inatividade de recursos",
+        learnings: [
+          "O PMBOK 8 aponta a tolerância com inatividade crônica de recursos como falha grave de governança e monitoramento.",
+          "Desperdiçar recursos contratuais por comodismo administrativo viola o dever de sustentabilidade na gestão pública."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Processo burocrático de repactuação de contrato com fornecedor de TI"
+        ],
+        otherConsequences: [
+          "Apontamento de auditoria e contingenciamento de compras prioritárias"
+        ]
+      },
+      {
+        key: "c",
+        text: "Instituir o uso obrigatório da suíte 3D nas equipes de desenvolvimento de interfaces para padronizar as ferramentas de interface.",
+        impacts: {
+          capacidadeEntrega: -15,
+          qualidadeProduto: -5,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: 5
+        },
+        feedbackNarrative: "Obrigar o uso de software inadequado gerou atrito, perda de tempo de codificação e insatisfação nos desenvolvedores.",
+        pmbokConcept: "Mapeamento do fluxo de valor",
+        learnings: [
+          "O PMBOK 8 adverte que impor etapas desnecessárias no fluxo de trabalho introduz atrito e desperdício cognitivo.",
+          "A adequação da ferramenta ao papel é indispensável para preservar o foco e a eficiência operacional dos colaboradores."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Justificativa formal do baixo índice de adesão da ferramenta adquirida"
+        ],
+        otherConsequences: [
+          "Queda de produtividade e desmotivação técnica entre os programadores"
+        ]
+      }
+    ]
+  },
+  {
+    id: "systems_10_staging_indisponivel",
+    title: "A Pane do Ambiente de Testes (Plano de Contingência e Recursos Virtuais)",
+    category: EventCategory.EXECUTION,
+    difficulty: EventDifficulty.HARD,
+    probabilityWeight: 2,
+    tags: ["staging", "contingencia", "recursos_virtuais", "governanca"],
+    learningObjective: "Acionar recursos alternativos com riscos reconhecidos quando falhas de infraestrutura virtual impedirem a esteira contínua.",
+    communicationType: "slack",
+    senderRole: "Líder Técnico",
+    description: "Canal #infra: 'A máquina física que hospeda o ambiente de testes de integração queimou a fonte no datacenter da universidade; a reposição da peça levará cinco dias úteis.'",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "fisico_virtual",
+    resourceProcess: "monitorar",
+    senderName: "Mariana Costa",
+    senderInitials: "MC",
+    avatarImage: "/Personagens/Mariana.png",
+    responsibleRole: "techLead",
+    alternatives: [
+      {
+        key: "a",
+        text: "Provisionar cluster temporário na nuvem pública governamental e migrar a esteira de testes com riscos registrados.",
+        impacts: {
+          capacidadeEntrega: 0,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 15
+        },
+        feedbackNarrative: "A resposta rápida através de infraestrutura como código restabeleceu os testes em poucas horas sem paralisar o ciclo de entregas.",
+        pmbokConcept: "Recursos alternativos com riscos reconhecidos",
+        learnings: [
+          "O PMBOK 8 recomenda a ativação planejada de recursos alternativos com riscos reconhecidos em situações de indisponibilidade.",
+          "A adoção de infraestrutura virtual redundante protege a continuidade do projeto e minimiza tempos de inatividade."
+        ],
+        goodBad: "good",
+        risksEvaded: [
+          "Paralisia de cinco dias da equipe inteira de engenharia e atraso da versão"
+        ],
+        otherConsequences: [
+          "Modernização dos scripts de automação de ambientes em contêineres"
+        ]
+      },
+      {
+        key: "b",
+        text: "Adiantar documentação e planejamento técnico enquanto aguarda a substituição da fonte pelo setor de patrimônio.",
+        impacts: {
+          capacidadeEntrega: -15,
+          qualidadeProduto: -5,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -10
+        },
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              capacidadeEntrega: -15,
+              saudeEquipe: -10
+            },
+            narrative: "A paralisação forçada acumulou tarefas e gerou regime exaustivo de horas extras na semana seguinte."
+          }
+        ],
+        feedbackNarrative: "A inércia diante da quebra de hardware consumiu uma semana útil de trabalho e comprimiu perigosamente o calendário final.",
+        pmbokConcept: "Impacto da indisponibilidade de recursos nos demais planos",
+        learnings: [
+          "O PMBOK 8 alerta que a inação perante indisponibilidade de recursos virtuais reverbera de forma destrutiva nos demais planos.",
+          "A liderança proativa deve dispor de alternativas de contingência para assegurar a produtividade contínua dos recursos humanos."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Custo de consumo temporário de nuvem governamental"
+        ],
+        otherConsequences: [
+          "Atraso crítico na entrega e descontentamento entre os desenvolvedores"
+        ]
+      },
+      {
+        key: "c",
+        text: "Liberar atualizações pontuais diretamente em produção sob supervisão sênior até o restabelecimento do laboratório.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -15
+        },
+        feedbackNarrative: "Um erro não testado subiu para a produção e travou o sistema de emissão de notas em plena época de fechamento semestral.",
+        pmbokConcept: "Ambiente seguro e transparência sobre vieses",
+        learnings: [
+          "O PMBOK 8 salienta que violar salvaguardas de isolamento técnico sob pressão expõe a instituição a colapso de serviços vitais.",
+          "Apressar entregas sem validação em ambiente controlado destrói a segurança operacional e a reputação do projeto."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Sensação momentânea de interrupção do ritmo de codificação"
+        ],
+        otherConsequences: [
+          "Indisponibilidade pública do sistema universitário e indignação geral da comunidade"
         ]
       }
     ]

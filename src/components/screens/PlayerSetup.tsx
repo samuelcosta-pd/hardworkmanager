@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Plus, Sparkles, Trash2, Users, X, Pencil } from 'lucide-react';
+import { Plus, Sparkles, Trash2, Users, X, Pencil, Clock } from 'lucide-react';
 import { SoftCard } from '@/components/ui/SoftCard';
 import { SoftButton } from '@/components/ui/SoftButton';
-import { useGameStore } from '@/store/gameStore';
-import { ROLE_LABELS, type PlayerRole } from '@/types';
+import { useGameStore, TIMER_PRESETS } from '@/store/gameStore';
+import { ROLE_LABELS, type PlayerRole, type TimerPreset } from '@/types';
 import { AVAILABLE_AVATARES } from '@/data/avatars';
+import { ROLES_DETAILS } from '@/data/roles';
 
 interface Draft {
   name: string;
@@ -60,10 +61,10 @@ export function PlayerSetup() {
 
   const handleStart = () => {
     if (!allValid) return;
-    // Force 4th player to uxLead
     const final = drafts.map((d, i) => (i === 3 ? { ...d, role: 'uxLead' as PlayerRole } : d));
     setupPlayers(final);
   };
+
 
   return (
     <div className="mx-auto flex min-h-screen max-w-3xl flex-col justify-center px-6 py-10">
@@ -90,66 +91,73 @@ export function PlayerSetup() {
             return (
               <div
                 key={i}
-                className="flex flex-col gap-3 rounded-2xl bg-muted p-4 sm:flex-row sm:items-center"
+                className="rounded-2xl bg-muted p-4 space-y-2"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-card text-sm font-bold text-primary shadow-[var(--shadow-soft)]">
-                  {i + 1}
-                </div>
-                <input
-                  type="text"
-                  placeholder={`Nome do jogador ${i + 1}`}
-                  value={d.name}
-                  onChange={(e) => updateDraft(i, { name: e.target.value })}
-                  className="flex-1 rounded-2xl bg-card px-4 py-3 text-sm outline-none ring-0 shadow-[var(--shadow-inset-soft)] focus:shadow-[var(--shadow-soft)] min-w-[140px]"
-                />
-                {isFourth ? (
-                  <div className="rounded-2xl bg-card px-4 py-3 text-sm text-muted-foreground shadow-[var(--shadow-soft)] shrink-0">
-                    {ROLE_LABELS.uxLead} (obrigatório)
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-card text-sm font-bold text-primary shadow-[var(--shadow-soft)]">
+                    {i + 1}
                   </div>
-                ) : (
-                  <select
-                    value={d.role}
-                    onChange={(e) => updateDraft(i, { role: e.target.value as PlayerRole })}
-                    className="rounded-2xl bg-card px-4 py-3 text-sm outline-none shadow-[var(--shadow-soft)] shrink-0"
-                  >
-                    {DEFAULT_ROLES.map((r) => (
-                      <option key={r} value={r}>
-                        {ROLE_LABELS[r]}
-                      </option>
-                    ))}
-                  </select>
-                )}
-                
-                {/* Unified Avatar Selector Button */}
-                <button
-                  type="button"
-                  onClick={() => setAvatarModalOpenFor(i)}
-                  className={`flex items-center gap-2.5 rounded-2xl px-4 py-2.5 text-sm font-medium transition-all duration-200 shrink-0 ${
-                    d.avatarImage
-                      ? 'bg-card text-foreground shadow-[var(--shadow-soft)] hover:-translate-y-0.5 border border-primary/30 hover:border-primary'
-                      : 'bg-card text-muted-foreground shadow-[var(--shadow-soft)] hover:-translate-y-0.5 hover:text-foreground border border-dashed border-slate-300 hover:border-primary/50'
-                  }`}
-                >
-                  {d.avatarImage ? (
-                    <>
-                      <img
-                        src={d.avatarImage}
-                        alt={d.avatarName}
-                        className="h-6 w-6 rounded-full object-cover bg-slate-100 ring-1 ring-primary/30"
-                      />
-                      <span className="font-semibold">{d.avatarName}</span>
-                      <Pencil className="h-3.5 w-3.5 text-muted-foreground ml-1 opacity-70" />
-                    </>
+                  <input
+                    type="text"
+                    placeholder={`Nome do jogador ${i + 1}`}
+                    value={d.name}
+                    onChange={(e) => updateDraft(i, { name: e.target.value })}
+                    className="flex-1 rounded-2xl bg-card px-4 py-3 text-sm outline-none ring-0 shadow-[var(--shadow-inset-soft)] focus:shadow-[var(--shadow-soft)] min-w-[140px]"
+                  />
+                  {isFourth ? (
+                    <div className="rounded-2xl bg-card px-4 py-3 text-sm text-muted-foreground shadow-[var(--shadow-soft)] shrink-0">
+                      {ROLE_LABELS.uxLead} (obrigatório)
+                    </div>
                   ) : (
-                    <>
-                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-slate-400">
-                        <Users className="h-3.5 w-3.5" />
-                      </div>
-                      <span>Nenhum Avatar</span>
-                      <Plus className="h-3.5 w-3.5 text-primary ml-1" />
-                    </>
+                    <select
+                      value={d.role}
+                      onChange={(e) => updateDraft(i, { role: e.target.value as PlayerRole })}
+                      className="rounded-2xl bg-card px-4 py-3 text-sm outline-none shadow-[var(--shadow-soft)] shrink-0"
+                    >
+                      {DEFAULT_ROLES.map((r) => (
+                        <option key={r} value={r}>
+                          {ROLE_LABELS[r]}
+                        </option>
+                      ))}
+                    </select>
                   )}
-                </button>
+                  
+                  {/* Unified Avatar Selector Button */}
+                  <button
+                    type="button"
+                    onClick={() => setAvatarModalOpenFor(i)}
+                    className={`flex items-center gap-2.5 rounded-2xl px-4 py-2.5 text-sm font-medium transition-all duration-200 shrink-0 ${
+                      d.avatarImage
+                        ? 'bg-card text-foreground shadow-[var(--shadow-soft)] hover:-translate-y-0.5 border border-primary/30 hover:border-primary'
+                        : 'bg-card text-muted-foreground shadow-[var(--shadow-soft)] hover:-translate-y-0.5 hover:text-foreground border border-dashed border-slate-300 hover:border-primary/50'
+                    }`}
+                  >
+                    {d.avatarImage ? (
+                      <>
+                        <img
+                          src={d.avatarImage}
+                          alt={d.avatarName}
+                          className="h-6 w-6 rounded-full object-cover bg-slate-100 ring-1 ring-primary/30"
+                        />
+                        <span className="font-semibold">{d.avatarName}</span>
+                        <Pencil className="h-3.5 w-3.5 text-muted-foreground ml-1 opacity-70" />
+                      </>
+                    ) : (
+                      <>
+                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-slate-400">
+                          <Users className="h-3.5 w-3.5" />
+                        </div>
+                        <span>Nenhum Avatar</span>
+                        <Plus className="h-3.5 w-3.5 text-primary ml-1" />
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {/* Linha explicativa rápida do papel sob o PMBOK 8 */}
+                <div className="text-[11px] text-muted-foreground pl-1">
+                  {ROLES_DETAILS[isFourth ? 'uxLead' : d.role].badge} · {ROLES_DETAILS[isFourth ? 'uxLead' : d.role].mindset}
+                </div>
               </div>
             );
           })}
@@ -164,6 +172,17 @@ export function PlayerSetup() {
               <Trash2 className="h-4 w-4" /> Remover último
             </SoftButton>
           )}
+        </div>
+
+        {/* Regra de Negócio: Limitação de Tempo (PMBOK 8) */}
+        <div className="mt-8 pt-6 border-t border-slate-200/80">
+          <div className="rounded-2xl bg-muted/70 p-4 border border-slate-200/70 flex items-start gap-3">
+            <Clock className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+            <div className="text-xs text-slate-600 leading-relaxed">
+              <span className="font-bold text-foreground block mb-0.5">Regra Oficial de Tempo da Simulação</span>
+              Para exercitar a tomada de decisão sob pressão controlada e a comunicação assertiva, a simulação opera com <strong>2 minutos para discussão e leitura coletiva</strong> do dilema e <strong>45 segundos para cada voto individual</strong>.
+            </div>
+          </div>
         </div>
 
         <div className="mt-8 flex items-center justify-between">

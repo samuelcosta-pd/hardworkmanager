@@ -1,4 +1,4 @@
-import { Calendar, GraduationCap, MapPin, ShieldCheck, Target, User, Users, CheckCircle, XCircle, Clock } from 'lucide-react';
+import { Calendar, GraduationCap, MapPin, ShieldCheck, Target, User, Users, CheckCircle, XCircle, Clock, ArrowRight } from 'lucide-react';
 import { SoftCard } from '@/components/ui/SoftCard';
 import { SoftButton } from '@/components/ui/SoftButton';
 import { useGameStore } from '@/store/gameStore';
@@ -116,25 +116,26 @@ export function ProjectBriefing() {
 
       <SoftCard className="mb-8 animate-float-in" variant="inset">
         <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Métricas Iniciais
+          Métricas Iniciais do Projeto
         </p>
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-4">
           {[
-            { label: 'Eficiência', text: 'Estável' },
-            { label: 'Qualidade', text: 'Estável' },
-            { label: 'Saúde da Equipe', text: 'Estável' },
+            { label: 'Capacidade de Entrega', value: '100 pts (Estável)' },
+            { label: 'Qualidade do Produto', value: '100 pts (Estável)' },
+            { label: 'Saúde da Equipe', value: '100 pts (Estável)' },
+            { label: 'Conhecimento Organizacional', value: '50 pts (Base)' },
           ].map((s) => (
-            <div key={s.label} className="rounded-2xl bg-card p-3 shadow-[var(--shadow-success)]">
+            <div key={s.label} className="rounded-2xl bg-card p-3 shadow-sm border border-slate-100">
               <p className="text-xs text-muted-foreground">{s.label}</p>
-              <p className="font-semibold text-success-foreground">{s.text}</p>
+              <p className="font-bold text-foreground text-sm mt-0.5">{s.value}</p>
             </div>
           ))}
         </div>
       </SoftCard>
 
       <div className="flex justify-end">
-        <SoftButton size="lg" onClick={beginEvent}>
-          Abrir caixa de entrada e Começar
+        <SoftButton size="lg" onClick={() => useGameStore.getState().goTo('dashboard')}>
+          Acessar Sala de Comando e Iniciar <ArrowRight className="ml-2 h-4 w-4" />
         </SoftButton>
       </div>
     </div>

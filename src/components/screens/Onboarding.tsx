@@ -83,12 +83,12 @@ export function Onboarding() {
             {step === 2 && (
               <div className="space-y-4 text-slate-700 w-full text-base sm:text-lg leading-relaxed">
                 <ul className="space-y-3.5 list-disc list-inside marker:text-primary">
-                  <li><strong>Jogadores:</strong> A equipe é formada por 3 líderes (Gerente de Projetos, Líder Técnico e Líder de Design e Telas).</li>
-                  <li><strong>Eventos:</strong> Vocês enfrentarão uma série de cenários de crise e decisões táticas.</li>
-                  <li><strong>Debate e Votação:</strong> Diante de um problema, vocês debatem e votam na melhor solução. Empates são decididos pelo Gerente de Projetos.</li>
-                  <li><strong>Métricas:</strong> Vocês devem equilibrar Capacidade de Entrega, Qualidade do Produto, Saúde da Equipe e Conhecimento Organizacional.</li>
-                  <li><strong>Duração:</strong> A simulação percorre 10 dilemas operacionais cobrindo os processos de Recursos do PMBOK 8.</li>
-                  <li><strong>Condição de Fim de Jogo:</strong> O projeto falha se qualquer métrica principal cair abaixo de 40 pontos (zona crítica), ou é concluído com sucesso ao término dos 10 dilemas.</li>
+                  <li><strong>Lideranças:</strong> A equipe é formada por 3 papéis decisores: Gerente de Projetos, Líder Técnico e Líder de Design e Telas.</li>
+                  <li><strong>Dilemas:</strong> Vocês enfrentarão uma sequência de cenários de crise e decisões táticas sobre recursos humanos, virtuais e físicos.</li>
+                  <li><strong>Debate e Votação:</strong> Diante de cada problema, votem secretamente. Em caso de divergência, um debate estruturado com tempo regulado precede a votação final (empates são decididos pelo Voto de Minerva do GP).</li>
+                  <li><strong>Métricas:</strong> Equilibre Capacidade de Entrega, Qualidade do Produto, Saúde da Equipe e Conhecimento Organizacional.</li>
+                  <li><strong>Duração:</strong> A simulação percorre os dilemas sorteados equilibrando os 5 processos de Recursos do PMBOK 8.</li>
+                  <li><strong>Fim de Jogo:</strong> O projeto colapsa se qualquer métrica principal cair abaixo de 40 pontos (zona crítica). O sucesso é alcançado ao concluir os dilemas mantendo o equilíbrio sustentável.</li>
                 </ul>
               </div>
             )}
@@ -101,21 +101,21 @@ export function Onboarding() {
                     Dica da Mentora Helena
                   </p>
                   <p className="text-amber-900 text-base sm:text-lg leading-relaxed font-medium">
-                    Nem toda decisão possui uma saída perfeita. Às vezes, para garantir a qualidade, vocês precisarão sacrificar a eficiência. O objetivo é maximizar o valor e a sustentabilidade do projeto.
+                    Nem toda decisão possui uma saída perfeita. Às vezes, para garantir a sustentabilidade da equipe ou a robustez da infraestrutura, será necessário aceitar custos no curto prazo. O objetivo é a sustentabilidade a longo prazo.
                   </p>
                 </div>
                 <div className="grid grid-cols-3 gap-4">
-                  <div className="bg-slate-100 p-4 rounded-xl text-center">
-                    <h4 className="font-bold text-slate-800 text-base sm:text-lg">GP</h4>
-                    <p className="text-sm sm:text-base text-slate-600 mt-1">Foca nos Recursos e Eficiência</p>
+                  <div className="bg-slate-100 p-4 rounded-xl text-center border border-slate-200">
+                    <h4 className="font-bold text-blue-800 text-base sm:text-lg">GP</h4>
+                    <p className="text-xs sm:text-sm text-slate-600 mt-1">Recursos Humanos, Clima e Voto de Minerva</p>
                   </div>
-                  <div className="bg-slate-100 p-4 rounded-xl text-center">
-                    <h4 className="font-bold text-slate-800 text-base sm:text-lg">Tech Lead</h4>
-                    <p className="text-sm sm:text-base text-slate-600 mt-1">Foca na Qualidade e Débito Técnico</p>
+                  <div className="bg-slate-100 p-4 rounded-xl text-center border border-slate-200">
+                    <h4 className="font-bold text-emerald-800 text-base sm:text-lg">Tech Lead</h4>
+                    <p className="text-xs sm:text-sm text-slate-600 mt-1">Recursos Físicos/Virtuais, Servidores e Retrabalho</p>
                   </div>
-                  <div className="bg-slate-100 p-4 rounded-xl text-center">
-                    <h4 className="font-bold text-slate-800 text-base sm:text-lg">UX Lead</h4>
-                    <p className="text-sm sm:text-base text-slate-600 mt-1">Foca no Usuário e Engajamento</p>
+                  <div className="bg-slate-100 p-4 rounded-xl text-center border border-slate-200">
+                    <h4 className="font-bold text-purple-800 text-base sm:text-lg">UX Lead</h4>
+                    <p className="text-xs sm:text-sm text-slate-600 mt-1">Experiência, Acessibilidade e Inclusão</p>
                   </div>
                 </div>
               </div>

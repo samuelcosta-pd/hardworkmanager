@@ -21,9 +21,16 @@ export function VoteReveal() {
   const tally = tallyVotes(round1);
 
   const votersByAlt: Record<AlternativeKey, typeof players> = { a: [], b: [], c: [] };
+  const abstainedPlayers: typeof players = [];
+
   round1.forEach((v) => {
     const p = players.find((pp) => pp.id === v.playerId);
-    if (p) votersByAlt[v.alternative].push(p);
+    if (!p) return;
+    if (v.alternative === 'abstain') {
+      abstainedPlayers.push(p);
+    } else {
+      votersByAlt[v.alternative].push(p);
+    }
   });
 
   return (
@@ -109,6 +116,27 @@ export function VoteReveal() {
           );
         })}
       </div>
+
+      {/* Jogadores que se abstiveram */}
+      {abstainedPlayers.length > 0 && (
+        <div className="mt-4 p-3.5 rounded-2xl bg-slate-100/80 border border-slate-200 text-xs flex items-center justify-between gap-3 animate-float-in">
+          <span className="font-semibold text-slate-700">
+            Abstenções registradas nesta rodada:
+          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            {abstainedPlayers.map((p) => (
+              <div
+                key={p.id}
+                className="flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-slate-600 shadow-sm border border-slate-200"
+              >
+                <Avatar3D initials={p.name.slice(0, 2)} role={p.role} imageUrl={p.avatarImage} size="xs" />
+                <span className="font-semibold text-slate-700">{p.name}</span>
+                <span className="text-[10px] text-muted-foreground">({ROLE_LABELS[p.role].split(' ')[0]})</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Ação de Avanço */}
       <div className="mt-8 flex justify-end">

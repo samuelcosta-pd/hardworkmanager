@@ -18,7 +18,7 @@ import { MENTOR } from "@/data/avatars";
 
 export function DebriefingFinal() {
   const [step, setStep] = useState<1 | 2 | 3>(1);
-  const { decisions, metrics, gameOverReason, quitGame } = useGameStore();
+  const { decisions, metrics, gameOverReason, matchDeck, events, quitGame } = useGameStore();
 
   const handleSetStep = (newStep: 1 | 2 | 3) => {
     setStep(newStep);
@@ -26,7 +26,10 @@ export function DebriefingFinal() {
   };
 
   const allLearnings = decisions.map((d) => {
-    const event = GAME_EVENTS.find((e) => e.id === d.eventId);
+    const event =
+      matchDeck?.find((e) => e.id === d.eventId) ||
+      events?.find((e) => e.id === d.eventId) ||
+      GAME_EVENTS.find((e) => e.id === d.eventId);
     const alt = event?.alternatives.find((a) => a.key === d.chosenAlternative);
     return {
       eventTitle: d.eventTitle,
@@ -34,6 +37,7 @@ export function DebriefingFinal() {
       learnings: alt?.learnings?.join(". ") ?? "",
     };
   });
+
 
   const efLevel = metricLevel(metrics.capacidadeEntrega);
   const quaLevel = metricLevel(metrics.qualidadeProduto);

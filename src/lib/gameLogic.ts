@@ -65,6 +65,7 @@ export function isGameOver(m: Metrics): { over: boolean; reason?: string } {
 
 export interface VoteTally {
   counts: Record<AlternativeKey, number>;
+  abstentions: number;
   winner: AlternativeKey;
   unanimous: boolean;
   tied: boolean;
@@ -73,17 +74,32 @@ export interface VoteTally {
 
 export function tallyVotes(votes: Vote[]): VoteTally {
   const counts: Record<AlternativeKey, number> = { a: 0, b: 0, c: 0 };
-  votes.forEach((v) => (counts[v.alternative] += 1));
+  let abstentions = 0;
+
+  votes.forEach((v) => {
+    if (v.alternative === 'abstain') {
+      abstentions += 1;
+    } else {
+      counts[v.alternative] += 1;
+    }
+  });
+
+  const validVotesCount = votes.length - abstentions;
   const entries = (Object.entries(counts) as [AlternativeKey, number][]).sort(
     (a, b) => b[1] - a[1],
   );
   const max = entries[0][1];
   const topAlternatives = entries.filter(([, n]) => n === max).map(([k]) => k);
+
+  const tied = max === 0 || topAlternatives.length > 1;
+  const unanimous = validVotesCount > 0 && topAlternatives.length === 1 && max === validVotesCount;
+
   return {
     counts,
+    abstentions,
     winner: topAlternatives[0],
-    unanimous: topAlternatives.length === 1 && max === votes.length,
-    tied: topAlternatives.length > 1,
+    unanimous,
+    tied,
     topAlternatives,
   };
 }
@@ -111,14 +127,28 @@ export function evaluateCondition(
 }
 
 /**
- * GERAÇÃO DO BARALHO DA PARTIDA (10 DILEMAS / 4 SPRINTS):
- * Sorteia 2 dilemas de cada um dos 5 conjuntos de eventos do Domínio de Recursos (PMBOK 8),
- * totalizando 10 dilemas balanceados ao longo das 4 Sprints da simulação.
+ * Embaralha a ordem das alternativas do dilema preservando o conteúdo
+ * e reatribuindo as chaves 'a', 'b', 'c', para que a alternativa 'good'
+ * não seja sempre a primeira ('a').
  */
+export function shuffleEventAlternatives(event: GameEvent): GameEvent {
+  const keys: AlternativeKey[] = ['a', 'b', 'c'];
+  const shuffledAlts = [...event.alternatives]
+    .sort(() => Math.random() - 0.5)
+    .map((alt, idx) => ({
+      ...alt,
+      key: keys[idx],
+    }));
+
+  return {
+    ...event,
+    alternatives: shuffledAlts,
+  };
+}
+
 /**
- * QUANTIDADE DE DILEMAS DA PARTIDA.
- * Apresentação: 6 (1 de cada domínio + 1 extra). Jogo completo: 10.
- * Para voltar ao jogo completo, basta alterar este valor para 10.
+ * GERAÇÃO DO BARALHO DA PARTIDA:
+ * Sorteia dilemas balanceados e embaralha as alternativas de cada dilema.
  */
 export const MATCH_DILEMMA_COUNT = 6;
 
@@ -150,5 +180,7 @@ export function generateMatchDeck(): GameEvent[] {
     poolQuality[1],
   ].sort(() => Math.random() - 0.5);
 
-  return [...round1, ...round2].slice(0, MATCH_DILEMMA_COUNT);
+  const selectedDeck = [...round1, ...round2].slice(0, MATCH_DILEMMA_COUNT);
+  return selectedDeck.map(shuffleEventAlternatives);
 }
+

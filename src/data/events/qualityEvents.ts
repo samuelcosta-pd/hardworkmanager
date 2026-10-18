@@ -1,1046 +1,1008 @@
 import { GameEvent, EventCategory, EventDifficulty } from "@/types";
 
 /**
- * Domínio de Recursos (PMBOK 8) - Monitoramento de Recursos, Teoria das Restrições e Eficiência
- * Total: 10 Dilemas
+ * Domínio de Recursos (PMBOK 8): Monitoramento de Recursos, Teoria das Restrições e Eficiência
+ * Foco Pedagógico: Teoria das restrições (TOC), retrabalho como desperdício de capacidade,
+ * mapeamento do fluxo de valor, gráficos de controle, dívida técnica e eficiência produtiva.
+ * Total: 10 Dilemas reequilibrados segundo o modelo PMBOK 8.
  */
 export const qualityEvents: GameEvent[] = [
   {
-    "id": "quality_1_code_chaos_legado",
-    "title": "A Dívida Técnica Acumulada no Módulo Central",
+    id: "quality_1_code_chaos_legado",
+    title: "O Dreno do Código Espaguete (Retrabalho como Indicador de Ineficiência)",
     category: EventCategory.EXECUTION,
     difficulty: EventDifficulty.HARD,
-    "probabilityWeight": 2,
-    "tags": [
-      "debito_tecnico",
-      "retrabalho",
-      "recursos_humanos",
-      "capacidade"
-    ],
-    "learningObjective": "Reconhecer que dívida técnica crônica atua como dreno contínuo sobre a capacidade produtiva da equipe.",
-    "communicationType": "ticket",
-    "senderRole": "Líder Técnico",
-    "description": "Ticket #1042 - Prioridade Crítica. Os módulos centrais de matrícula e identificação estão desorganizados e misturados. A diretoria exige uma nova integração urgente. A equipe alerta que conectar sem organizar a estrutura causará retrabalho crônico e consumirá o dobro de horas futuras.",
-    "domainTag": "Recursos › Monitorar e Controlar Recursos",
-    "resourceType": "humano",
-    "resourceProcess": "monitorar",
-    "senderName": "Carlos Silva",
-    "senderInitials": "CS",
-    "avatarImage": "/Personagens/Roberto.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["debito_tecnico", "retrabalho", "recursos_humanos", "capacidade"],
+    learningObjective: "Tratar a dívida técnica como fator redutor da capacidade útil da equipe aplicando saneamento preventivo e manutenção contínua de ativos.",
+    communicationType: "ticket",
+    senderRole: "Líder Técnico",
+    description: "Ticket #1042 - Prioridade Crítica. O módulo de cálculo de IRA e créditos está tão emaranhado que pequenas correções exigem o triplo de horas de depuração e geram novos defeitos em cascata.",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "humano",
+    resourceProcess: "monitorar",
+    senderName: "Carlos Silva",
+    senderInitials: "CS",
+    avatarImage: "/Personagens/Roberto.png",
+    responsibleRole: "techLead",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Pausar novas entregas por um ciclo de trabalho e reorganizar a estrutura interna dos módulos críticos para estancar o desperdício contínuo de esforço.",
-        "impacts": {
-          "capacidadeEntrega": -15,
-          "qualidadeProduto": 25,
-          "saudeEquipe": 15,
-          "conhecimentoOrganizacional": 20
+        key: "a",
+        text: "Dedicar esforço planejado no ciclo de trabalho para reorganizar preventivamente o núcleo de cálculo e estancar o desperdício contínuo de esforço.",
+        impacts: {
+          capacidadeEntrega: -5,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 15
         },
-        "feedbackNarrative": "A reorganização estrutural saneou o sistema. A nova integração ocorreu de forma limpa e o tempo de trabalho dos próximos ciclos caiu pela metade.",
-        "pmbokConcept": "Retrabalho e desperdício como indicadores de eficiência",
-        "learnings": [
-          "Dedicar esforço para sanear bases de código reduz o retrabalho futuro e restaura a capacidade produtiva das pessoas."
+        feedbackNarrative: "O saneamento arquitetural preventivo eliminou retrabalhos; o tempo necessário para implementar novas regras caiu pela metade.",
+        pmbokConcept: "Retrabalho e desperdício como indicadores de eficiência",
+        learnings: [
+          "O PMBOK 8 estabelece que o retrabalho excessivo sinaliza ineficiência no uso dos recursos que deve ser estancada na causa raiz.",
+          "Sanear o débito técnico recupera a capacidade produtiva útil e preserva a saúde mental da equipe nos ciclos futuros."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Quedas frequentes em produção e consumo excessivo de horas"
+        goodBad: "good",
+        risksEvaded: [
+          "Paralisia progressiva das entregas por acúmulo de complexidade incontrolável"
         ],
-        "otherConsequences": [
-          "Capacidade sustentável recuperada para os ciclos seguintes"
+        otherConsequences: [
+          "Aceleração sustentável no desenvolvimento dos próximos módulos acadêmicos"
         ]
       },
       {
-        "key": "b",
-        "text": "Entregar a integração apressada sem reorganizar a estrutura interna, assumindo o risco de retrabalho para bater a data imediata.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": -25,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": -15
+        key: "b",
+        text: "Empilhar novas regras condicionais sobre o código confuso para entregar as demandas do ciclo de trabalho na data prevista.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -10
         },
-        "delayedImpacts": [
+        delayedImpacts: [
           {
-            "triggerAfterEvents": 2,
-            "impacts": {
-              "capacidadeEntrega": -25,
-              "qualidadeProduto": -20,
-              "saudeEquipe": -25,
-              "conhecimentoOrganizacional": 0
+            triggerAfterEvents: 1,
+            impacts: {
+              capacidadeEntrega: -15,
+              qualidadeProduto: -15
             },
-            "narrative": "A integração sem organização estrutural gerou falhas graves no sistema oficial, forçando a equipe a passar semanas apenas corrigindo defeitos."
+            narrative: "A complexidade desordenada quebrou o cálculo de notas de formandos durante a validação da colação de grau."
           }
         ],
-        "feedbackNarrative": "A entrega rápida foi elogiada na primeira semana, mas gerou uma enxurrada de chamados que paralisou a equipe nas semanas seguintes.",
-        "pmbokConcept": "Utilização e inatividade de recursos",
-        "learnings": [
-          "Ignorar a degradação técnica converte a capacidade produtiva do time em esforço improdutivo de combate a incêndios."
+        feedbackNarrative: "A entrega imediata foi comemorada, mas a fragilidade gerou enxurrada de chamados que paralisou as semanas seguintes.",
+        pmbokConcept: "Utilização e inatividade de recursos",
+        learnings: [
+          "O PMBOK 8 adverte que ignorar a degradação técnica converte capacidade nobre em esforço estéril de correção emergencial.",
+          "Adiar saneamento técnico gera juros destrutivos sobre o tempo e a paciência dos profissionais envolvidos."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Atrito inicial com a diretoria por prazo"
+        goodBad: "bad",
+        risksEvaded: [
+          "Atrito pontual com a comissão acadêmica por adiamento de entrega"
         ],
-        "otherConsequences": [
-          "Colapso em produção e esgotamento da equipe"
+        otherConsequences: [
+          "Multiplicação de chamados de suporte e estresse severo entre programadores"
         ]
       },
       {
-        "key": "c",
-        "text": "Entregar apenas 50% das funcionalidades para cumprir o prazo e reorganizar o restante em paralelo sem isolamento.",
-        "impacts": {
-          "capacidadeEntrega": -10,
-          "qualidadeProduto": -15,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -10
+        key: "c",
+        text: "Determinar que apenas os estagiários trabalhem no saneamento da arquitetura enquanto os seniores continuam criando novas telas.",
+        impacts: {
+          capacidadeEntrega: -10,
+          qualidadeProduto: -10,
+          saudeEquipe: -5,
+          conhecimentoOrganizacional: -10
         },
-        "feedbackNarrative": "A divisão caótica de esforço gerou conflitos constantes no repositório e sobrecarregou os desenvolvedores seniores.",
-        "pmbokConcept": "Melhoria contínua",
-        "learnings": [
-          "Tentativas desorganizadas de reorganização paralela sem método estruturado elevam o retrabalho em vez de eliminá-lo."
+        feedbackNarrative: "Sem domínio arquitetural, os novatos introduziram divergências de arredondamento em cálculos contábeis do SIGAA.",
+        pmbokConcept: "Papéis, responsabilidades e lacunas de conhecimento",
+        learnings: [
+          "O PMBOK 8 adverte contra a atribuição de desafios arquiteturais complexos a perfis em fase inicial de formação técnica.",
+          "O saneamento de regras essenciais do sistema demanda experiência consolidada para não gerar passivos ocultos."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Parada total da esteira"
+        goodBad: "bad",
+        risksEvaded: [
+          "Dedicação de tempo dos desenvolvedores mais experientes"
         ],
-        "otherConsequences": [
-          "Conflitos no código e desperdício de esforço"
+        otherConsequences: [
+          "Inconsistência de dados acadêmicos e necessidade de auditoria contábil"
         ]
       }
     ]
   },
   {
-    "id": "quality_2_lean_gargalo_qa_swarming",
-    "title": "Gargalo no Fluxo de Trabalho: Força-Tarefa para Destravar Testes",
+    id: "quality_2_lean_gargalo_qa_swarming",
+    title: "O Gargalo da Homologação (Teoria das Restrições e Mobilização da Equipe)",
     category: EventCategory.EXECUTION,
     difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "gargalo",
-      "teoria_das_restricoes",
-      "forca_tarefa",
-      "qa"
-    ],
-    "learningObjective": "Aplicar a Teoria das Restrições e concentração de esforços da equipe para desbloquear gargalos operacionais.",
-    "communicationType": "slack",
-    "senderRole": "Líder Técnico",
-    "description": "A esteira de QA está com 45 histórias acumuladas aguardando validação técnica. Enquanto isso, desenvolvedores continuam codificando novas tarefas, gerando estoque massivo de código parado e sobrecarregando a equipe de testes.",
-    "domainTag": "Recursos › Monitorar e Controlar Recursos",
-    "resourceType": "humano",
-    "resourceProcess": "monitorar",
-    "senderName": "Paulyne (Qualidade)",
-    "senderInitials": "PQ",
-    "avatarImage": "/Personagens/Paulyne.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["toc", "gargalo", "qa", "mobilizacao_equipe", "lean"],
+    learningObjective: "Aplicar a Teoria das Restrições para subordinar o ritmo produtivo à capacidade do gargalo de validação através de mobilização concentrada da equipe.",
+    communicationType: "slack",
+    senderRole: "Líder Técnico",
+    description: "Canal #engenharia: 'Temos 35 histórias de usuário programadas acumuladas na fila de testes; o único analista de QA da equipe está em colapso e o fluxo de liberação está 100% paralisado.'",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "humano",
+    resourceProcess: "monitorar",
+    senderName: "Carlos Silva",
+    senderInitials: "CS",
+    avatarImage: "/Personagens/Roberto.png",
+    responsibleRole: "techLead",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Subordinar o fluxo ao gargalo: pausar novas tarefas e direcionar a equipe em uma força-tarefa conjunta para apoiar na validação e testes.",
-        "impacts": {
-          "capacidadeEntrega": -10,
-          "qualidadeProduto": 25,
-          "saudeEquipe": 15,
-          "conhecimentoOrganizacional": 20
+        key: "a",
+        text: "Pausar o início de novos códigos e mobilizar desenvolvedores em força-tarefa conjunta para apoiar nos testes automatizados.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 15
         },
-        "feedbackNarrative": "O mutirão eliminou o estoque represado em 3 dias. Os desenvolvedores aprenderam a testar melhor e o fluxo da equipe voltou ao normal.",
-        "pmbokConcept": "Teoria das restrições e gargalos",
-        "learnings": [
-          "Na Teoria das Restrições, produzir além da capacidade do gargalo gera desperdício; recursos disponíveis devem ajudar a destravar a restrição."
+        feedbackNarrative: "O esforço conjunto eliminou a fila acumulada em dois dias e ampliou a cobertura de suítes automatizadas de teste.",
+        pmbokConcept: "Teoria das restrições e gargalos",
+        learnings: [
+          "O PMBOK 8 recomenda a Teoria das Restrições e a mobilização colaborativa para desafogar o recurso limitante e restabelecer o fluxo de valor.",
+          "Subordinar a produção de código à capacidade de validação impede o acúmulo de trabalho em andamento defeituoso."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Estoque invisível de defeitos e colapso do time de QA"
+        goodBad: "good",
+        risksEvaded: [
+          "Acúmulo de defeitos não detectados e esgotamento físico do profissional de QA"
         ],
-        "otherConsequences": [
-          "Nivelamento de competências e desbloqueio do fluxo"
+        otherConsequences: [
+          "Disseminação de competências de testes automatizados entre todos os programadores"
         ]
       },
       {
-        "key": "b",
-        "text": "Manter os programadores produzindo novas telas para exibir volume aparente de trabalho e exigir horas extras da equipe de testes.",
-        "impacts": {
-          "capacidadeEntrega": 15,
-          "qualidadeProduto": -25,
-          "saudeEquipe": -30,
-          "conhecimentoOrganizacional": -10
+        key: "b",
+        text: "Acelerar a liberação das 35 entregas em produção para cumprir a meta do ciclo e realizar inspeções posteriores.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -10
         },
-        "delayedImpacts": [
+        delayedImpacts: [
           {
-            "triggerAfterEvents": 2,
-            "impacts": {
-              "capacidadeEntrega": -20,
-              "qualidadeProduto": -15,
-              "saudeEquipe": -20,
-              "conhecimentoOrganizacional": 0
+            triggerAfterEvents: 1,
+            impacts: {
+              qualidadeProduto: -15,
+              capacidadeEntrega: -15
             },
-            "narrative": "A analista de QA adoeceu por estafa e 15 histórias com defeitos graves chegaram aos usuários finais."
+            narrative: "Defeitos graves não inspecionados paralisaram o portal acadêmico no primeiro dia de aulas."
           }
         ],
-        "feedbackNarrative": "A analista de testes entrou em burnout. Sob pressão extrema, defeitos críticos passaram para o ambiente de produção.",
-        "pmbokConcept": "Utilização e inatividade de recursos",
-        "learnings": [
-          "Superutilizar desenvolvedores sem considerar a capacidade do gargalo causa acúmulo de trabalho inacabado e exaustão."
+        feedbackNarrative: "A liberação cega inflou os números do gráfico de entregas, mas transformou o lançamento em desastre operacional.",
+        pmbokConcept: "Mapeamento do fluxo de valor",
+        learnings: [
+          "O PMBOK 8 alerta que contornar etapas essenciais de inspeção gera desperdício catastrófico quando as falhas chegam ao usuário.",
+          "Velocidade sem verificação de qualidade constitui ilusão produtiva que destrói o valor entregue pelo projeto."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Queda no volume aparente de tarefas entregues"
+        goodBad: "bad",
+        risksEvaded: [
+          "Queda aparente nas estatísticas de produtividade do ciclo de entregas"
         ],
-        "otherConsequences": [
-          "Burnout da equipe de testes e falhas em produção"
+        otherConsequences: [
+          "Paralisação geral dos serviços acadêmicos e desgaste irreparável da reputação do time"
         ]
       },
       {
-        "key": "c",
-        "text": "Contratar 5 freelancers externos avulsos sem onboarding para testarem os pacotes de software durante o fim de semana.",
-        "impacts": {
-          "capacidadeEntrega": -20,
-          "qualidadeProduto": -15,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -15
+        key: "c",
+        text: "Solicitar plantão extraordinário de homologação ao analista de QA para concluir as verificações pendentes.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -10,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -5
         },
-        "feedbackNarrative": "Sem compreender as regras acadêmicas, os terceirizados aprovaram fluxos incorretos e consumiram verba de infraestrutura.",
-        "pmbokConcept": "Recursos alternativos com riscos reconhecidos",
-        "learnings": [
-          "Inserir recursos externos sem capacitação adequada em processos críticos gera custos extras e retrabalho de validação."
+        feedbackNarrative: "Exausto, o analista deixou passar erros elementares e pediu demissão logo após o fechamento da iteração de trabalho.",
+        pmbokConcept: "Bem-estar e prevenção de burnout",
+        learnings: [
+          "O PMBOK 8 condena a sobrecarga punitiva de indivíduos como tentativa de compensar desequilíbrios estruturais da equipe.",
+          "A gestão de recursos deve calibrar a capacidade do time para manter um ritmo de trabalho saudável e sustentável."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Alocação de desenvolvedores internos em testes"
+        goodBad: "bad",
+        risksEvaded: [
+          "Necessidade de interromper o trabalho de programação dos desenvolvedores"
         ],
-        "otherConsequences": [
-          "Desperdício financeiro e testes sem eficácia"
+        otherConsequences: [
+          "Perda definitiva do único especialista em testes e aumento da vulnerabilidade do sistema"
         ]
       }
     ]
   },
   {
-    "id": "quality_3_capacidade_nuvem_pico",
-    "title": "Capacidade de Nuvem Insuficiente no Pico de Matrícula",
-    category: EventCategory.INFRASTRUCTURE,
+    id: "quality_3_capacidade_nuvem_pico",
+    title: "O Teste de Carga de Matrículas (Uso Planejado e Gráficos de Controle)",
+    category: EventCategory.EXECUTION,
     difficulty: EventDifficulty.HARD,
-    "probabilityWeight": 2,
-    "tags": [
-      "recursos_virtuais",
-      "nuvem",
-      "planejamento",
-      "capacidade_elastica"
-    ],
-    "learningObjective": "Planejar o dimensionamento e contingenciamento de recursos virtuais sob escassez orçamentária.",
-    "communicationType": "slack",
-    "senderRole": "Líder Técnico",
-    "description": "Ticket #1180 - Dimensionamento de Infraestrutura. O dimensionamento de instâncias virtuais em nuvem para a semana de matrículas está no limite orçamentário. Se a demanda superar as previsões, os servidores virtuais cairão, paralisando o acesso de 40 mil alunos.",
-    "domainTag": "Recursos › Planejar o Gerenciamento dos Recursos",
-    "resourceType": "fisico_virtual",
-    "resourceProcess": "planejar",
-    "senderName": "Kendrick (Infraestrutura)",
-    "senderInitials": "KD",
-    "avatarImage": "/Personagens/Kendrick.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["nuvem", "graficos_controle", "capacidade", "infraestrutura"],
+    learningObjective: "Utilizar gráficos de controle e análise de limites para dimensionar recursos computacionais frente a picos previsíveis de tráfego.",
+    communicationType: "email",
+    senderRole: "Líder Técnico",
+    description: "Assunto: Simulação de 100 Mil Requisições Simultâneas. A análise de tendências aponta que os ambientes computacionais virtuais atingirão o teto de capacidade em 30 segundos durante a abertura do semestre acadêmico.",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "fisico_virtual",
+    resourceProcess: "monitorar",
+    senderName: "Carlos Silva",
+    senderInitials: "CS",
+    avatarImage: "/Personagens/Roberto.png",
+    responsibleRole: "techLead",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Configurar aumento automático da capacidade dos servidores nos horários de pico, com limite orçamentário seguro e filas de espera.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": 20,
-          "saudeEquipe": 15,
-          "conhecimentoOrganizacional": 20
+        key: "a",
+        text: "Implementar fila assíncrona com controle de vazão e gráficos de controle para gerenciar a vazão dentro da capacidade estável.",
+        impacts: {
+          capacidadeEntrega: 0,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 15
         },
-        "feedbackNarrative": "A elasticidade controlada absorveu o pico com perfeição. O sistema aguentou 38 mil requisições simultâneas sem extrapolar a verba orçada.",
-        "pmbokConcept": "Planejamento de recursos sob escassez e competição entre projetos",
-        "learnings": [
-          "Planejar recursos virtuais sob restrição financeira exige combinar elasticidade sob demanda com mecanismos seguros de contingência."
+        feedbackNarrative: "A arquitetura em filas suavizou o pico de conexões e o sistema processou todas as matrículas sem quedas.",
+        pmbokConcept: "Gráficos de controle",
+        learnings: [
+          "O PMBOK 8 recomenda gráficos de controle para monitorar a estabilidade de processos e manter a operação dentro de limites seguros.",
+          "O controle da variabilidade de recursos virtuais assegura previsibilidade e resiliência nos momentos de maior demanda."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Queda de servidores virtuais e estouro de orçamento"
+        goodBad: "good",
+        risksEvaded: [
+          "Queda do portal universitário e protestos nas redes sociais no dia de abertura de turmas"
         ],
-        "otherConsequences": [
-          "Estabilidade com custos previsíveis e controlados"
+        otherConsequences: [
+          "Criação de padrão de arquitetura resiliente para todos os serviços web da universidade"
         ]
       },
       {
-        "key": "b",
-        "text": "Manter instâncias virtuais estáticas subdimensionadas para não gastar verba e torcer para a demanda ser baixa.",
-        "impacts": {
-          "capacidadeEntrega": 5,
-          "qualidadeProduto": -30,
-          "saudeEquipe": -25,
-          "conhecimentoOrganizacional": -15
+        key: "b",
+        text: "Preservar as configurações vigentes de capacidade computacional e confiar no balanceamento elástico nativo da nuvem.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -10
         },
-        "delayedImpacts": [
+        delayedImpacts: [
           {
-            "triggerAfterEvents": 1,
-            "impacts": {
-              "capacidadeEntrega": -30,
-              "qualidadeProduto": -30,
-              "saudeEquipe": -25,
-              "conhecimentoOrganizacional": 0
+            triggerAfterEvents: 1,
+            impacts: {
+              capacidadeEntrega: -15,
+              qualidadeProduto: -15
             },
-            "narrative": "No primeiro dia de matrícula, as instâncias estáticas esgotaram memória e os servidores colapsaram por 8 horas."
+            narrative: "O sistema travou nos primeiros cinco minutos de matrícula; a universidade precisou cancelar o calendário."
           }
         ],
-        "feedbackNarrative": "Os servidores virtuais caíram em 4 minutos de matrículas. A equipe precisou passar a noite reiniciando containers travados.",
-        "pmbokConcept": "Antecipação de escassez ou excedente",
-        "learnings": [
-          "Falhar na antecipação de escassez de recursos virtuais críticos conduz a interrupções graves e retrabalho emergencial."
+        feedbackNarrative: "O otimismo ingênuo custou caro: os ambientes computacionais entraram em colapso imediatamente e a matrícula precisou ser reiniciada após dias.",
+        pmbokConcept: "Análise de custo-benefício e de tendências",
+        learnings: [
+          "O PMBOK 8 adverte que ignorar tendências históricas de consumo de recursos computacionais conduz a falhas previsíveis.",
+          "O dimensionamento negligente de ativos de infraestrutura ameaça a continuidade operacional das instituições públicas."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Consumo de orçamento com instâncias elásticas"
+        goodBad: "bad",
+        risksEvaded: [
+          "Trabalho de configuração e testes de infraestrutura de mensageria"
         ],
-        "otherConsequences": [
-          "Colapso público do portal acadêmico e desgaste extremo"
+        otherConsequences: [
+          "Cancelamento do calendário acadêmico e desgaste público da reitoria"
         ]
       },
       {
-        "key": "c",
-        "text": "Contratar instâncias gigantescas de capacidade ilimitada sem teto de gastos estourando toda a verba do ano.",
-        "impacts": {
-          "capacidadeEntrega": -15,
-          "qualidadeProduto": 15,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -20
+        key: "c",
+        text: "Contratar o maior pacote de capacidade computacional em nuvem sem ajustar a aplicação, pagando dez vezes mais do que o necessário.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: 5,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -15
         },
-        "feedbackNarrative": "Os servidores aguentaram, mas a fatura de nuvem consumiu o orçamento de bolsas e contratações do semestre seguinte.",
-        "pmbokConcept": "Coordenação entre Recursos, Cronograma, Finanças e Risco",
-        "learnings": [
-          "Provisionar recursos tecnológicos sem coordenação financeira inviabiliza o custeio futuro dos recursos humanos do projeto."
+        feedbackNarrative: "O sistema aguentou o pico, mas a fatura da nuvem consumiu as verbas de pesquisa e inovação de todo o ano letivo.",
+        pmbokConcept: "Uso planejado vs. real de recursos",
+        learnings: [
+          "O PMBOK 8 preconiza o equilíbrio financeiro e a sustentabilidade no monitoramento de desvios entre consumo previsto e real.",
+          "Superdimensionar descontroladamente recursos físicos ou virtuais consome recursos essenciais de outras áreas prioritárias."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Risco técnico de sobrecarga"
+        goodBad: "bad",
+        risksEvaded: [
+          "Esforço técnico de otimização de queries e filas de processamento"
         ],
-        "otherConsequences": [
-          "Rombo orçamentário e cancelamento de bolsas futuras"
+        otherConsequences: [
+          "Déficit financeiro grave e cortes no custeio dos laboratórios de informática"
         ]
       }
     ]
   },
   {
-    "id": "quality_4_sonarqube_debito_tecnico",
-    "title": "A Bola de Neve: Acúmulo de Falhas Não Corrigidas",
-    category: EventCategory.KNOWLEDGE,
+    id: "quality_4_inspecao_estatica_debito_tecnico",
+    title: "O Radar de Qualidade (Mapeamento do Fluxo e Revisões de Desempenho)",
+    category: EventCategory.EXECUTION,
     difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "recursos_virtuais",
-      "prevencao_falhas",
-      "qualidade",
-      "retrabalho"
-    ],
-    "learningObjective": "Utilizar ferramentas virtuais de monitoramento contínuo para conter a degradação e o retrabalho técnico.",
-    "communicationType": "slack",
-    "senderRole": "Líder Técnico",
-    "description": "O relatório automatizado de auditoria apontou mais de 300 falhas acumuladas e semanas de retrabalho reprimido. A equipe pede autorização para configurar checagens automáticas que impeçam a entrada de novos erros no sistema.",
-    "domainTag": "Recursos › Monitorar e Controlar Recursos",
-    "resourceType": "fisico_virtual",
-    "resourceProcess": "monitorar",
-    "senderName": "Kendrick (Infraestrutura)",
-    "senderInitials": "KD",
-    "avatarImage": "/Personagens/Kendrick.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["qualidade", "inspecao_estatica", "revisoes", "fluxo_valor"],
+    learningObjective: "Integrar ferramentas de análise estática e revisões de desempenho para identificar desperdícios de qualidade precocemente.",
+    communicationType: "slack",
+    senderRole: "Líder Técnico",
+    description: "Canal #qualidade: 'A ferramenta de análise e inspeção apontou 120 vulnerabilidades e duplicações graves no código novo; a equipe sugere desativar a ferramenta para não bloquear a liberação operacional em produção.'",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "humano",
+    resourceProcess: "monitorar",
+    senderName: "Carlos Silva",
+    senderInitials: "CS",
+    avatarImage: "/Personagens/Roberto.png",
+    responsibleRole: "techLead",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Configurar checagens automáticas de qualidade e destinar 20% de cada ciclo de trabalho para eliminar falhas acumuladas.",
-        "impacts": {
-          "capacidadeEntrega": 5,
-          "qualidadeProduto": 25,
-          "saudeEquipe": 15,
-          "conhecimentoOrganizacional": 25
+        key: "a",
+        text: "Pactuar critérios rigorosos de inspeção nas rotinas automatizadas e reservar tempo de alinhamento técnico para sanar as falhas críticas.",
+        impacts: {
+          capacidadeEntrega: -5,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 15
         },
-        "feedbackNarrative": "A ferramenta de verificação barrou novos defeitos e as falhas acumuladas caíram 60% em um mês. O tempo gasto corrigindo erros reduziu consideravelmente.",
-        "pmbokConcept": "Melhoria contínua",
-        "learnings": [
-          "Integrar ferramentas virtuais de controle de qualidade automatiza a prevenção de falhas e promove melhoria contínua da equipe."
+        feedbackNarrative: "A barreira de qualidade impediu a entrada de código defeituoso e elevou o rigor técnico de toda a equipe de engenharia.",
+        pmbokConcept: "Revisões de desempenho",
+        learnings: [
+          "O PMBOK 8 recomenda revisões formais de desempenho e critérios objetivos de aceitação para proteger a qualidade dos artefatos.",
+          "Garantir padrões rigorosos na esteira técnica reduz os custos de manutenção corretiva durante o ciclo de vida do software."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Degradação progressiva da base de código"
+        goodBad: "good",
+        risksEvaded: [
+          "Entrada de código vulnerável a ataques de injeção e estouro de memória em produção"
         ],
-        "otherConsequences": [
-          "Cultura de excelência técnica e menos retrabalho futuro"
+        otherConsequences: [
+          "Consolidação de cultura de engenharia de software madura na universidade pública"
         ]
       },
       {
-        "key": "b",
-        "text": "Desativar a ferramenta de análise para parar de ver alertas vermelhos que supostamente atrasam as entregas.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": -30,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": -25
+        key: "b",
+        text: "Flexibilizar as travas da ferramenta de análise estática para avisos informativos, liberando as entregas de tarefas.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -10
         },
-        "delayedImpacts": [
+        delayedImpacts: [
           {
-            "triggerAfterEvents": 2,
-            "impacts": {
-              "capacidadeEntrega": -30,
-              "qualidadeProduto": -25,
-              "saudeEquipe": -25,
-              "conhecimentoOrganizacional": -10
+            triggerAfterEvents: 1,
+            impacts: {
+              qualidadeProduto: -15,
+              capacidadeEntrega: -15
             },
-            "narrative": "As vulnerabilidades não monitoradas facilitaram invasão externa que paralisou os servidores acadêmicos por dias."
+            narrative: "Vulnerabilidades ignoradas permitiram vazamento de dados de dados remuneratórios de funcionários públicos da instituição."
           }
         ],
-        "feedbackNarrative": "Desligar o monitoramento escondeu os problemas no curto prazo, mas gerou brechas que foram exploradas pouco tempo depois.",
-        "pmbokConcept": "Retrabalho e desperdício como indicadores de eficiência",
-        "learnings": [
-          "Desativar ferramentas de monitoramento para simular velocidade acumula desperdício oculto que explode adiante em falhas críticas."
+        feedbackNarrative: "A velocidade dos merges disparou por duas semanas, até que brechas graves causaram vazamento de dados institucionais.",
+        pmbokConcept: "Retrabalho e desperdício como indicadores de eficiência",
+        learnings: [
+          "O PMBOK 8 adverte que ignorar deliberadamente métricas de qualidade transforma a economia aparente em desperdício irreparável.",
+          "Remover ferramentas de verificação para acelerar tarefas destrói a confiabilidade e expõe a instituição a riscos legais."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Tempo corrigindo apontamentos de qualidade"
+        goodBad: "bad",
+        risksEvaded: [
+          "Atraso na liberação de branches de desenvolvimento"
         ],
-        "otherConsequences": [
-          "Vulnerabilidades críticas em produção e retrabalho forçado"
+        otherConsequences: [
+          "Vazamento de dados sigilosos e instauração de inquérito civil pela Polícia Federal"
         ]
       },
       {
-        "key": "c",
-        "text": "Paralisar todo o desenvolvimento por 3 meses para zerar 100% dos alertas de qualidade antes de qualquer nova entrega.",
-        "impacts": {
-          "capacidadeEntrega": -35,
-          "qualidadeProduto": 15,
-          "saudeEquipe": -10,
-          "conhecimentoOrganizacional": 10
+        key: "c",
+        text: "Instituir congelamento de código (code freeze) amplo até a revisão manual de toda a base pelo arquiteto.",
+        impacts: {
+          capacidadeEntrega: -15,
+          qualidadeProduto: 5,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -5
         },
-        "feedbackNarrative": "A universidade congelou o projeto por ausência de entregas funcionais durante todo o trimestre acadêmico.",
-        "pmbokConcept": "Uso planejado vs. real de recursos",
-        "learnings": [
-          "Desviar o uso planejado dos recursos para correções excessivas sem gerar valor de negócio compromete o patrocínio do projeto."
+        feedbackNarrative: "O excesso de zelo burocrático paralisou o projeto e desmotivou os programadores, que ficaram sem tarefas úteis.",
+        pmbokConcept: "Utilização e inatividade de recursos",
+        learnings: [
+          "O PMBOK 8 enfatiza a necessidade de equilibrar controle de qualidade e fluidez produtiva dos recursos humanos.",
+          "Paralisações desproporcionais geram ociosidade prejudicial e comprometem a entrega tempestiva de valor aos usuários."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Alertas pendentes no código"
+        goodBad: "bad",
+        risksEvaded: [
+          "Passagem de qualquer inconsistência menor de código"
         ],
-        "otherConsequences": [
-          "Paralisia nas entregas e risco de cancelamento do projeto"
+        otherConsequences: [
+          "Perda de prazos institucionais e desengajamento generalizado dos colaboradores"
         ]
       }
     ]
   },
   {
-    "id": "quality_5_designer_gargalo_toc",
-    "title": "Designer Única como Gargalo Central (Teoria das Restrições)",
+    id: "quality_5_designer_gargalo_toc",
+    title: "O Único Designer (Teoria das Restrições e Perfil Generalista-Especialista)",
     category: EventCategory.PEOPLE,
     difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "gargalo",
-      "ux",
-      "teoria_das_restricoes",
-      "recursos_humanos"
-    ],
-    "learningObjective": "Subordinar e elevar restrições de equipe multidisciplinar aplicando a Teoria das Restrições a papéis escassos.",
-    "communicationType": "slack",
-    "senderRole": "Líder de UX",
-    "description": "Canal #fluxo-trabalho - Todas as telas de 4 módulos simultâneos dependem da validação de uma única designer de telas. Ela está sobrecarregada trabalhando 12 horas por dia, enquanto outros profissionais da equipe ficam parados esperando modelos aprovados.",
-    "domainTag": "Recursos › Monitorar e Controlar Recursos",
-    "resourceType": "humano",
-    "resourceProcess": "monitorar",
-    "senderName": "Marina (Design de Telas)",
-    "senderInitials": "MD",
-    "avatarImage": "/Personagens/Beatriz.png",
-    "responsibleRole": "uxLead",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["toc", "gargalo", "designer", "generalista_especialista", "ux"],
+    learningObjective: "Aplicar o conceito de recursos generalistas-especialistas para amortecer o gargalo de especialidade no fluxo de trabalho.",
+    communicationType: "slack",
+    senderRole: "Líder de Design e Telas",
+    description: "Canal #ux: 'Temos 40 telas aguardando desenho de telas e apenas uma designer na equipe; enquanto isso, quatro desenvolvedores estão ociosos esperando especificações de tela.'",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "humano",
+    resourceProcess: "monitorar",
+    senderName: "Carla Silveira",
+    senderInitials: "CS",
+    avatarImage: "/Personagens/Carla.png",
+    responsibleRole: "uxLead",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Elevar o gargalo: padronizar componentes no Design System e capacitar desenvolvedores para montar telas padronizadas.",
-        "impacts": {
-          "capacidadeEntrega": 15,
-          "qualidadeProduto": 20,
-          "saudeEquipe": 20,
-          "conhecimentoOrganizacional": 25
+        key: "a",
+        text: "Criar biblioteca de componentes pré-aprovados e capacitar os desenvolvedores de telas em prototipagem básica.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: 15,
+          saudeEquipe: 15,
+          conhecimentoOrganizacional: 15
         },
-        "feedbackNarrative": "A designer focou apenas nos fluxos novos mais complexos. Os desenvolvedores ganharam autonomia e a sobrecarga individual foi desfeita.",
-        "pmbokConcept": "Teoria das restrições e gargalos",
-        "learnings": [
-          "Na Teoria das Restrições, deve-se elevar a capacidade do recurso restritivo por meio de padrões e capacitação dos demais membros."
+        feedbackNarrative: "O amadurecimento como generalistas-especialistas descentralizou as telas simples e liberou a designer para fluxos complexos.",
+        pmbokConcept: "Generalista-especialista",
+        learnings: [
+          "O PMBOK 8 recomenda incentivar profissionais com perfil generalista-especialista para aliviar gargalos crônicos de competência.",
+          "A autonomia técnica através de padrões compartilhados rompe dependências exclusivas e eleva a resiliência do time."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Esgotamento da designer e paralisia no desenvolvimento"
+        goodBad: "good",
+        risksEvaded: [
+          "Ociosidade de desenvolvedores de interface e sobrecarga desumana sobre a designer"
         ],
-        "otherConsequences": [
-          "Autonomia dos desenvolvedores e fluxo de entrega contínuo"
+        otherConsequences: [
+          "Autonomia do time na criação de interfaces alinhadas ao design system da instituição"
         ]
       },
       {
-        "key": "b",
-        "text": "Manter a centralização e exigir que a designer trabalhe nos fins de semana para tentar desatar a fila de protótipos.",
-        "impacts": {
-          "capacidadeEntrega": -15,
-          "qualidadeProduto": -20,
-          "saudeEquipe": -35,
-          "conhecimentoOrganizacional": -10
+        key: "b",
+        text: "Autorizar que os desenvolvedores de telas construam os componentes diretamente em código para manter a vazão do ciclo de trabalho.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -10
         },
-        "delayedImpacts": [
+        delayedImpacts: [
           {
-            "triggerAfterEvents": 2,
-            "impacts": {
-              "capacidadeEntrega": -20,
-              "qualidadeProduto": -15,
-              "saudeEquipe": -20,
-              "conhecimentoOrganizacional": 0
+            triggerAfterEvents: 1,
+            impacts: {
+              qualidadeProduto: -15,
+              capacidadeEntrega: -15
             },
-            "narrative": "A designer pediu licença médica por estafa severa e as telas de 3 módulos ficaram completamente sem direção."
+            narrative: "Telas caóticas e sem acessibilidade geraram revolta discente e exigiram redesign total pós-lançamento."
           }
         ],
-        "feedbackNarrative": "A designer entrou em licença médica por exaustão. Todo o desenvolvimento de interface foi paralisado por falta de orientação visual.",
-        "pmbokConcept": "Utilização e inatividade de recursos",
-        "learnings": [
-          "Sobrecarregar um recurso escasso gera colapso do elemento restritivo e subsequente inatividade de toda a esteira produtiva."
+        feedbackNarrative: "A equipe produziu muito código rapidamente, mas as telas ficaram confusas, despadronizadas e inacessíveis para alunos.",
+        pmbokConcept: "Retrabalho e desperdício como indicadores de eficiência",
+        learnings: [
+          "O PMBOK 8 adverte que produzir artefatos desconectados dos requisitos essenciais gera desperdício sob forma de retrabalho.",
+          "Substituir governança de design por improvisação descontrolada destrói a usabilidade e a imagem do produto público."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Tempo de criar biblioteca de componentes"
+        goodBad: "bad",
+        risksEvaded: [
+          "Tempo despendido na elaboração de biblioteca de componentes"
         ],
-        "otherConsequences": [
-          "Licença médica por burnout e paralisia total das telas"
+        otherConsequences: [
+          "Rejeição maciça da interface por alunos e necessidade de reconstrução completa"
         ]
       },
       {
-        "key": "c",
-        "text": "Eliminar o papel de design e autorizar os desenvolvedores a programarem a interface sem qualquer critério visual ou de usabilidade.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": -35,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -20
+        key: "c",
+        text: "Aguardar a finalização formal de todos os protótipos de alta fidelidade de telas antes de iniciar a codificação.",
+        impacts: {
+          capacidadeEntrega: -15,
+          qualidadeProduto: 5,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -10
         },
-        "feedbackNarrative": "O sistema virou uma colcha de retalhos com menus ilegíveis. Estudantes não conseguiram concluir matrículas sem ligar para o suporte.",
-        "pmbokConcept": "Treinamento, mentoria e coaching",
-        "learnings": [
-          "Descartar competências essenciais em vez de desenvolvê-las e apoiá-las destrói a usabilidade e o valor do entregável."
+        feedbackNarrative: "A inércia causou atraso de semanas no cronograma e os desenvolvedores desmotivaram-se com a falta de atividade útil.",
+        pmbokConcept: "Utilização e inatividade de recursos",
+        learnings: [
+          "O PMBOK 8 aponta a tolerância com inatividade involuntária de recursos como falha grave no gerenciamento de capacidade.",
+          "O gestor deve encontrar caminhos flexíveis de colaboração para manter todos os colaboradores gerando valor contínuo."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Esforço de coordenação com design"
+        goodBad: "bad",
+        risksEvaded: [
+          "Risco de divergência visual mínima em relação aos protótipos ideais"
         ],
-        "otherConsequences": [
-          "Interface confusa e enxurrada de chamados no suporte"
+        otherConsequences: [
+          "Desperdício severo de horas de trabalho e atraso no calendário de implantação"
         ]
       }
     ]
   },
   {
-    "id": "quality_6_retrabalho_historicos",
-    "title": "Retrabalho Crônico no Gerador de Históricos",
+    id: "quality_6_retrabalho_historicos",
+    title: "A Especificação Flutuante (Mapeamento do Fluxo e Redução de Desperdícios)",
+    category: EventCategory.EXECUTION,
+    difficulty: EventDifficulty.HARD,
+    probabilityWeight: 2,
+    tags: ["retrabalho", "especificacao", "desperdicio", "alinhamento"],
+    learningObjective: "Mapear o fluxo de valor para diagnosticar causas de retrabalho decorrentes de requisitos ambíguos de negócio.",
+    communicationType: "email",
+    senderRole: "Líder Técnico",
+    description: "Assunto: Módulo de Histórico Escolar Reprovado pela Terceira Vez. A comissão acadêmica rejeitou novamente a emissão do histórico porque as regras de trancamento mudam a cada reunião semanal sem registro formal.",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "humano",
+    resourceProcess: "monitorar",
+    senderName: "Carlos Silva",
+    senderInitials: "CS",
+    avatarImage: "/Personagens/Roberto.png",
+    responsibleRole: "techLead",
+    alternatives: [
+      {
+        key: "a",
+        text: "Mapear o fluxo de valor com a comissão e exigir critérios de aceitação congelados e assinados antes da codificação.",
+        impacts: {
+          capacidadeEntrega: 0,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 15
+        },
+        feedbackNarrative: "O alinhamento estruturado estancou o vaivém de requisitos e a nova versão do histórico foi aprovada com louvor.",
+        pmbokConcept: "Mapeamento do fluxo de valor",
+        learnings: [
+          "O PMBOK 8 recomenda o mapeamento do fluxo de valor para identificar onde indefinições de requisitos geram desperdício de tempo.",
+          "Pactuar critérios de aceitação precisos protege a equipe contra retrabalhos crônicos e firma compromissos com o cliente."
+        ],
+        goodBad: "good",
+        risksEvaded: [
+          "Quarta rodada de descarte completo de código e desmotivação dos programadores"
+        ],
+        otherConsequences: [
+          "Formalização do catálogo oficial de regras acadêmicas da pró-reitoria"
+        ]
+      },
+      {
+        key: "b",
+        text: "Ajustar o código iterativamente conforme as impressões e sugestões apresentadas nas reuniões semanais da comissão.",
+        impacts: {
+          capacidadeEntrega: -15,
+          qualidadeProduto: -10,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -10
+        },
+        delayedImpacts: [
+          {
+            triggerAfterEvents: 1,
+            impacts: {
+              capacidadeEntrega: -15,
+              saudeEquipe: -15
+            },
+            narrative: "O retrabalho contínuo estourou o prazo final e gerou esgotamento físico nos desenvolvedores do módulo."
+          }
+        ],
+        feedbackNarrative: "A equipe trabalhou em círculos por semanas; o estresse explodiu e o módulo acumulou lógicas contraditórias.",
+        pmbokConcept: "Retrabalho e desperdício como indicadores de eficiência",
+        learnings: [
+          "O PMBOK 8 frisa que o retrabalho descontrolado drena a moral e a eficácia das pessoas envolvidas no projeto.",
+          "Atender a mudanças caóticas sem processo estruturado de controle destrói a sustentabilidade do cronograma."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Confronto inicial de alinhamento com os membros da comissão docente"
+        ],
+        otherConsequences: [
+          "Código ininteligível com regras colidentes e atraso no encerramento do semestre"
+        ]
+      },
+      {
+        key: "c",
+        text: "Sustentar a versão original já desenvolvida perante a comissão, justificando o encerramento do prazo contratual.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -5,
+          conhecimentoOrganizacional: -15
+        },
+        feedbackNarrative: "Os históricos emitidos violaram normativas acadêmicas da universidade e geraram anulação de diplomas.",
+        pmbokConcept: "Visão e objetivos compartilhados",
+        learnings: [
+          "O PMBOK 8 destaca a necessidade de entrega de valor alinhada aos objetivos estratégicos dos clientes finais.",
+          "Impor produtos incompatíveis com as normas regulatórias destrói a legitimidade e a utilidade da solução."
+        ],
+        goodBad: "bad",
+        risksEvaded: [
+          "Esforço técnico adicional de reprogramação de rotinas acadêmicas"
+        ],
+        otherConsequences: [
+          "Nulidade de históricos emitidos e processo administrativo contra a gestão"
+        ]
+      }
+    ]
+  },
+  {
+    id: "quality_7_corte_testes_fim_sprint",
+    title: "O Corte no Fim do Ciclo de Entregas (Melhoria Contínua vs. Atalho Imediatista)",
     category: EventCategory.EXECUTION,
     difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "retrabalho",
-      "recursos_virtuais",
-      "automacao",
-      "eficiencia"
-    ],
-    "learningObjective": "Eliminar retrabalho crônico automatizando suítes de testes para proteger a capacidade produtiva da equipe.",
-    "communicationType": "ticket",
-    "senderRole": "Líder Técnico",
-    "description": "Ticket #1195 - Retrabalho Recorrente. O gerador de relatórios e históricos escolares quebrou pela quarta vez após pequenas alterações de formato. A equipe gasta 2 dias a cada ciclo consertando o mesmo módulo, desperdiçando tempo útil de trabalho.",
-    "domainTag": "Recursos › Monitorar e Controlar Recursos",
-    "resourceType": "fisico_virtual",
-    "resourceProcess": "monitorar",
-    "senderName": "Kenedy (Programador)",
-    "senderInitials": "KB",
-    "avatarImage": "/Personagens/Kenedy.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["testes", "qualidade", "melhoria_continua", "sustentabilidade"],
+    learningObjective: "Defender a disciplina de testes automatizados como salvaguarda da capacidade futura em oposição a ganhos efêmeros de prazo.",
+    communicationType: "slack",
+    senderRole: "Líder Técnico",
+    description: "Canal #dev: 'Faltam 48 horas para a entrega do ciclo e o módulo de rematrícula está pronto, mas sem os testes unitários obrigatórios; a diretoria pede para entregar assim mesmo.'",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "humano",
+    resourceProcess: "monitorar",
+    senderName: "Carlos Silva",
+    senderInitials: "CS",
+    avatarImage: "/Personagens/Roberto.png",
+    responsibleRole: "techLead",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Separar o módulo de relatórios e criar testes automáticos que verifiquem o funcionamento a cada alteração, erradicando o retrabalho.",
-        "impacts": {
-          "capacidadeEntrega": 15,
-          "qualidadeProduto": 25,
-          "saudeEquipe": 20,
-          "conhecimentoOrganizacional": 20
+        key: "a",
+        text: "Manter a definição de pronto exigindo testes unitários e negociar o adiamento da história menor para a próxima iteração de trabalho.",
+        impacts: {
+          capacidadeEntrega: -5,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 15
         },
-        "feedbackNarrative": "Os testes automatizados protegeram o módulo contra regressões. O retrabalho zerou e a equipe economizou 4 dias de desenvolvimento por mês.",
-        "pmbokConcept": "Retrabalho e desperdício como indicadores de eficiência",
-        "learnings": [
-          "O retrabalho contínuo deve ser monitorado e eliminado com automação para assegurar a utilização eficiente das pessoas."
+        feedbackNarrative: "A integridade da definição de pronto evitou a entrada de falhas sutis de concorrência e garantiu código estável.",
+        pmbokConcept: "Melhoria contínua",
+        learnings: [
+          "O PMBOK 8 apoia a melhoria contínua e a preservação de padrões rigorosos como salvaguarda da capacidade a longo prazo.",
+          "Respeitar os critérios de conclusão evita a degradação silenciosa da base tecnológica e garante sustentabilidade."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Desperdício crônico de horas com reparos repetitivos"
+        goodBad: "good",
+        risksEvaded: [
+          "Erros ocultos de duplicidade de vaga em turmas concorridas de graduação"
         ],
-        "otherConsequences": [
-          "Liberação permanente de tempo da equipe para novas entregas"
+        otherConsequences: [
+          "Fortalecimento da disciplina técnica em toda a equipe de desenvolvimento"
         ]
       },
       {
-        "key": "b",
-        "text": "Continuar fazendo remendos manuais a cada ciclo sempre que o relatório quebrar, tratando o sintoma sem mexer na causa raiz.",
-        "impacts": {
-          "capacidadeEntrega": -20,
-          "qualidadeProduto": -20,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": -10
+        key: "b",
+        text: "Aprovar a entrega funcional do módulo no ciclo de entregas e agendar a cobertura de testes automatizados para o ciclo seguinte.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -10
         },
-        "delayedImpacts": [
+        delayedImpacts: [
           {
-            "triggerAfterEvents": 2,
-            "impacts": {
-              "capacidadeEntrega": -15,
-              "qualidadeProduto": -10,
-              "saudeEquipe": -15,
-              "conhecimentoOrganizacional": 0
+            triggerAfterEvents: 1,
+            impacts: {
+              qualidadeProduto: -15,
+              capacidadeEntrega: -15
             },
-            "narrative": "Os remendos manuais acumularam inconsistências e os históricos passaram a omitir notas de formandos."
+            narrative: "Uma falha de concorrência não testada permitiu matrículas duplicadas acima da lotação de salas físicas."
           }
         ],
-        "feedbackNarrative": "O módulo continuou drenando 20% do tempo de dois desenvolvedores a cada ciclo. A frustração com a repetição de tarefas aumentou.",
-        "pmbokConcept": "Utilização e inatividade de recursos",
-        "learnings": [
-          "Aceitar retrabalho recorrente sem agir drena a capacidade produtiva e gera inatividade forçada em tarefas inovadoras."
+        feedbackNarrative: "A comemoração da entrega pontual durou pouco: turmas superlotadas geraram conflitos físicos entre alunos nos campi.",
+        pmbokConcept: "Retrabalho e desperdício como indicadores de eficiência",
+        learnings: [
+          "O PMBOK 8 adverte que suprimir salvaguardas de qualidade transfere o custo do teste para o usuário final com juros exponenciais.",
+          "A pressa em bater métricas superficiais de velocidade mina a credibilidade institucional das entregas."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Tempo investido em reestruturar o gerador"
+        goodBad: "bad",
+        risksEvaded: [
+          "Justificativa formal do adiamento de uma história de usuário"
         ],
-        "otherConsequences": [
-          "Dreno contínuo de esforço e desmotivação dos profissionais"
+        otherConsequences: [
+          "Superlotação de turmas e necessidade de cancelamento manual de matrículas"
         ]
       },
       {
-        "key": "c",
-        "text": "Desativar a geração de PDFs e passar a enviar apenas relatórios em texto sem formatação por e-mail.",
-        "impacts": {
-          "capacidadeEntrega": 0,
-          "qualidadeProduto": -30,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -15
+        key: "c",
+        text: "Designar a confecção dos testes unitários pendentes aos bolsistas de graduação como atividade formativa complementar.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -10,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -10
         },
-        "feedbackNarrative": "Universidades do exterior recusaram os documentos por ausência de autenticidade visual, prejudicando discentes em intercâmbio.",
-        "pmbokConcept": "Melhoria contínua",
-        "learnings": [
-          "Degradar entregáveis para evitar retrabalho técnico viola padrões de qualidade e prejudica os usuários finais."
+        feedbackNarrative: "Os testes criados às pressas tinham asserções vazias apenas para passar no coverage, gerando falsa sensação de segurança.",
+        pmbokConcept: "Integridade e transparência do gerente de projetos",
+        learnings: [
+          "O PMBOK 8 estabelece a autenticidade e integridade como pilares das medições de desempenho da equipe.",
+          "Métricas maquiadas camuflam vulnerabilidades e violam os preceitos éticos da gestão responsável de recursos."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Trabalho com bibliotecas de renderização visual"
+        goodBad: "bad",
+        risksEvaded: [
+          "Esforço de negociação de escopo com o comitê de usuários"
         ],
-        "otherConsequences": [
-          "Documentos oficiais rejeitados e prejuízo a estudantes"
+        otherConsequences: [
+          "Suíte de testes inócua que consome tempo de compilação sem detectar falhas"
         ]
       }
     ]
   },
   {
-    "id": "quality_7_corte_testes_fim_sprint",
-    "title": "Fim do Ciclo de Entregas: Cortar Testes para Bater Metas?",
-    category: EventCategory.EXECUTION,
-    difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "ciclo_entregas",
-      "compromisso",
-      "propriedade_compartilhada",
-      "recursos_humanos"
-    ],
-    "learningObjective": "Manter a propriedade compartilhada da qualidade e proteger a equipe contra dívidas operacionais futuras.",
-    "communicationType": "slack",
-    "senderRole": "Líder Técnico",
-    "description": "Faltam 2 dias para o fechamento do ciclo de trabalho e o trancamento de matrícula está pronto na lógica, mas sem testes de validação. Alguns membros sugerem marcar a tarefa como concluída para bater a meta aparente, adiando os testes para depois.",
-    "domainTag": "Recursos › Liderar a Equipe",
-    "resourceType": "humano",
-    "resourceProcess": "liderar",
-    "senderName": "Paulyne (Qualidade)",
-    "senderInitials": "PQ",
-    "avatarImage": "/Personagens/Paulyne.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
-      {
-        "key": "a",
-        "text": "Assumir com transparência que a tarefa não está totalmente pronta e transferi-la para o próximo ciclo com validação e testes completos.",
-        "impacts": {
-          "capacidadeEntrega": 5,
-          "qualidadeProduto": 20,
-          "saudeEquipe": 15,
-          "conhecimentoOrganizacional": 15
-        },
-        "feedbackNarrative": "A postura íntegra fortaleceu o compromisso coletivo. No ciclo seguinte a funcionalidade foi entregue com testes completos e zero falhas no sistema oficial.",
-        "pmbokConcept": "Propriedade compartilhada do projeto",
-        "learnings": [
-          "Equipes com propriedade compartilhada protegem a integridade do trabalho, recusando atalhos que gerem débitos futuros."
-        ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Lançamento de código defeituoso e incidentes em produção"
-        ],
-        "otherConsequences": [
-          "Cultura sólida de responsabilidade e entregas confiáveis"
-        ]
-      },
-      {
-        "key": "b",
-        "text": "Marcar o item como pronto sem testes para simular 100% de conclusão nas métricas de velocidade da equipe.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": -25,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": -15
-        },
-        "delayedImpacts": [
-          {
-            "triggerAfterEvents": 1,
-            "impacts": {
-              "capacidadeEntrega": -20,
-              "qualidadeProduto": -20,
-              "saudeEquipe": -20,
-              "conhecimentoOrganizacional": 0
-            },
-            "narrative": "A funcionalidade de trancamento sem validação permitiu que estudantes trancassem cursos acidentalmente."
-          }
-        ],
-        "feedbackNarrative": "A falsa sensação de meta batida escondeu falhas sérias. O módulo travou turmas em produção e exigiu correções de madrugada.",
-        "pmbokConcept": "Retrabalho e desperdício como indicadores de eficiência",
-        "learnings": [
-          "Entregar tarefas incompletas para inflar métricas imediatas gera retrabalho multiplicado e consome a capacidade futura da equipe."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Exibir pendências na reunião de fechamento do ciclo"
-        ],
-        "otherConsequences": [
-          "Incidentes críticos em produção e perda de confiabilidade"
-        ]
-      },
-      {
-        "key": "c",
-        "text": "Inserir testes vazios no código que sempre retornam verdadeiro para burlar o validador automático do repositório.",
-        "impacts": {
-          "capacidadeEntrega": 5,
-          "qualidadeProduto": -35,
-          "saudeEquipe": -25,
-          "conhecimentoOrganizacional": -30
-        },
-        "feedbackNarrative": "A fraude nos testes foi descoberta na revisão de código. A confiança técnica no time foi severamente abalada.",
-        "pmbokConcept": "Ambiente seguro e transparência sobre vieses",
-        "learnings": [
-          "Burlar verificações de qualidade destrói a transparência, mina a segurança psicológica e viola a integridade profissional."
-        ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Cobrança imediata pela escrita de testes"
-        ],
-        "otherConsequences": [
-          "Quebra ética profunda e desmoralização da equipe"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "quality_8_acessibilidade_wcag",
-    "title": "Acessibilidade Digital: Capacitação para Inclusão de Usuários com Deficiência",
+    id: "quality_8_acessibilidade_wcag",
+    title: "O Padrão de Acessibilidade (Sustentabilidade dos Recursos e Inclusão)",
     category: EventCategory.PEOPLE,
     difficulty: EventDifficulty.MEDIUM,
-    "probabilityWeight": 2,
-    "tags": [
-      "acessibilidade",
-      "capacitacao",
-      "mentoria",
-      "competencias"
-    ],
-    "learningObjective": "Identificar lacunas de conhecimento técnico e desenvolver competências da equipe em acessibilidade digital.",
-    "communicationType": "email",
-    "senderRole": "Comitê de Acessibilidade da UFC",
-    "description": "Assunto: Laudo de Acessibilidade. O comitê identificou que os formulários do sistema não possuem recursos de acessibilidade, impedindo alunos cegos de usarem leitores de tela. A equipe admite que não domina as normas técnicas de acessibilidade digital.",
-    "domainTag": "Recursos › Liderar a Equipe",
-    "resourceType": "humano",
-    "resourceProcess": "liderar",
-    "senderName": "Marina (Design de Telas)",
-    "senderInitials": "MD",
-    "avatarImage": "/Personagens/Beatriz.png",
-    "responsibleRole": "uxLead",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["acessibilidade", "wcag", "inclusao", "sustentabilidade"],
+    learningObjective: "Integrar requisitos de acessibilidade (WCAG) desde o início do fluxo de design e desenvolvimento para evitar retrabalhos custosos.",
+    communicationType: "slack",
+    senderRole: "Líder de Design e Telas",
+    description: "Canal #design: 'O comitê de acessibilidade da universidade identificou que o novo portal não possui navegação por leitor de tela para deficientes visuais; a liderança debate se ajusta agora ou pós-lançamento.'",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "humano",
+    resourceProcess: "monitorar",
+    senderName: "Carla Silveira",
+    senderInitials: "CS",
+    avatarImage: "/Personagens/Carla.png",
+    responsibleRole: "uxLead",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Promover oficina prática com especialista em acessibilidade e estabelecer uma lista padrão de verificação para todas as novas telas.",
-        "impacts": {
-          "capacidadeEntrega": 5,
-          "qualidadeProduto": 25,
-          "saudeEquipe": 20,
-          "conhecimentoOrganizacional": 25
+        key: "a",
+        text: "Integrar testes com leitores de tela nos componentes do design system e treinar o time nas diretrizes WCAG 2.1.",
+        impacts: {
+          capacidadeEntrega: -10,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 15
         },
-        "feedbackNarrative": "O treinamento supriu a lacuna de competência da equipe. O portal se tornou referência nacional e os estudantes com deficiência navegaram com autonomia.",
-        "pmbokConcept": "Treinamento, mentoria e coaching",
-        "learnings": [
-          "Identificar lacunas de competência e capacitar a equipe técnica assegura produtos inclusivos e desenvolvimento profissional contínuo."
+        feedbackNarrative: "A conformidade de acessibilidade foi incorporada nativamente nos componentes, garantindo inclusão plena a baixo custo.",
+        pmbokConcept: "Sustentabilidade na gestão de recursos",
+        learnings: [
+          "O PMBOK 8 ressalta a sustentabilidade e a responsabilidade social como dimensões transversais indispensáveis na gestão pública.",
+          "Projetar de forma inclusiva desde a origem previne retrabalhos monumentais de reconstrução de interfaces no futuro."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Exclusão de estudantes com deficiência e processos jurídicos"
+        goodBad: "good",
+        risksEvaded: [
+          "Ação civil pública do Ministério Público Federal por desobediência à Lei Brasileira de Inclusão"
         ],
-        "otherConsequences": [
-          "Equipe tecnicamente capacitada e reconhecimento social"
+        otherConsequences: [
+          "Reconhecimento do novo SIGAA como referência nacional de acessibilidade digital"
         ]
       },
       {
-        "key": "b",
-        "text": "Ignorar o laudo alegando que acessibilidade é responsabilidade exclusiva de órgãos de assistência estudantil.",
-        "impacts": {
-          "capacidadeEntrega": 0,
-          "qualidadeProduto": -35,
-          "saudeEquipe": -30,
-          "conhecimentoOrganizacional": -20
+        key: "b",
+        text: "Concentrar o lançamento nas funcionalidades centrais e planejar a suíte completa de acessibilidade para o próximo release.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -10
         },
-        "delayedImpacts": [
+        delayedImpacts: [
           {
-            "triggerAfterEvents": 2,
-            "impacts": {
-              "capacidadeEntrega": -15,
-              "qualidadeProduto": -15,
-              "saudeEquipe": -20,
-              "conhecimentoOrganizacional": 0
+            triggerAfterEvents: 1,
+            impacts: {
+              qualidadeProduto: -15,
+              capacidadeEntrega: -15
             },
-            "narrative": "O Ministério Público ajuizou ação civil pública por discriminação e exigiu readequação imediata sob multa."
+            narrative: "Liminar judicial imposta pelo MPF paralisou a implantação do sistema até a correção integral de acessibilidade."
           }
         ],
-        "feedbackNarrative": "A omissão gerou revolta no campus. O Ministério Público ajuizou ação por descumprimento legal de acessibilidade no serviço público.",
-        "pmbokConcept": "Papéis, responsabilidades e lacunas de conhecimento",
-        "learnings": [
-          "Negligenciar lacunas de conhecimento e responsabilidades sociais essenciais expõe o projeto a sanções legais severas."
+        feedbackNarrative: "A omissão resultou em notificação judicial imediata e denúncia de entidades estudantis na imprensa.",
+        pmbokConcept: "Visão e objetivos compartilhados",
+        learnings: [
+          "O PMBOK 8 adverte que ignorar compromissos sociais e éticos da organização rompe o alinhamento com a sociedade.",
+          "Entregar produtos excludentes vulnerabiliza o projeto a sanções jurídicas e rejeição comunitária generalizada."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Tempo dedicado a aprender novas tecnologias"
+        goodBad: "bad",
+        risksEvaded: [
+          "Tempo despendido em ajustes de contraste, tags semânticas e navegação por teclado"
         ],
-        "otherConsequences": [
-          "Ação judicial do Ministério Público e desgaste institucional"
+        otherConsequences: [
+          "Paralisação judicial do projeto e danos gravíssimos à imagem da universidade"
         ]
       },
       {
-        "key": "c",
-        "text": "Adicionar um botão cosmético de contraste de tela sem alterar a estrutura semântica dos componentes de código.",
-        "impacts": {
-          "capacidadeEntrega": 5,
-          "qualidadeProduto": -20,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -15
+        key: "c",
+        text: "Acoplar uma barra externa de acessibilidade automatizada na interface para atender rapidamente aos requisitos de conformidade.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -10,
+          saudeEquipe: -5,
+          conhecimentoOrganizacional: -15
         },
-        "feedbackNarrative": "O artifício superficial não resolveu os leitores de tela e foi reprovado prontamente no teste com usuários deficientes visuais.",
-        "pmbokConcept": "Ambiente seguro e transparência sobre vieses",
-        "learnings": [
-          "Simulações cosméticas que não tratam a causa-raiz demonstram falta de transparência e desrespeito aos usuários finais."
+        feedbackNarrative: "O widget atrapalhou os leitores de tela reais de discentes cegos e gerou protestos do comitê de inclusão.",
+        pmbokConcept: "Retrabalho e desperdício como indicadores de eficiência",
+        learnings: [
+          "O PMBOK 8 aponta que soluções paliativas ilusórias geram retrabalho e não resolvem a barreira de acesso real.",
+          "A acessibilidade genuína depende de estrutura semântica sólida e não de recursos cosméticos superficiais."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Reformulação profunda de componentes"
+        goodBad: "bad",
+        risksEvaded: [
+          "Trabalho de revisão semântica das tags HTML de formulários e tabelas"
         ],
-        "otherConsequences": [
-          "Reprovação técnica no laudo e frustração da comunidade"
+        otherConsequences: [
+          "Rejeição pública pelas associações de estudantes com deficiência visual"
         ]
       }
     ]
   },
   {
-    "id": "quality_9_testes_carga_estresse",
-    "title": "Testes de Carga para o \"Pico das Matrículas\"",
-    category: EventCategory.INFRASTRUCTURE,
+    id: "quality_9_testes_carga_estresse",
+    title: "O Dia da Homologação (Uso Planejado vs. Real e Teoria das Restrições)",
+    category: EventCategory.EXECUTION,
     difficulty: EventDifficulty.HARD,
-    "probabilityWeight": 2,
-    "tags": [
-      "recursos_virtuais",
-      "estimativa",
-      "capacidade",
-      "performance"
-    ],
-    "learningObjective": "Estimar a capacidade necessária de recursos virtuais sob condições extremas de demanda.",
-    "communicationType": "slack",
-    "senderRole": "Líder Técnico",
-    "description": "Faltam 3 semanas para a abertura de matrículas com previsão de 35.000 requisições simultâneas. A liderança precisa decidir se aloca 4 dias da equipe para estimar e calibrar a capacidade com testes de carga automatizados ou confia nas estimativas teóricas.",
-    "domainTag": "Recursos › Estimar Recursos",
-    "resourceType": "fisico_virtual",
-    "resourceProcess": "estimar",
-    "senderName": "Kendrick (Infraestrutura)",
-    "senderInitials": "KD",
-    "avatarImage": "/Personagens/Kendrick.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["testes_carga", "infraestrutura", "gargalos", "toc"],
+    learningObjective: "Executar testes de estresse em recursos computacionais para identificar e neutralizar pontos únicos de falha antes da entrega.",
+    communicationType: "email",
+    senderRole: "Líder Técnico",
+    description: "Assunto: Testes de Carga Finais. O teste com 50 mil requisições revelou que o gateway de autenticação trava por exaustão de conexões TCP, inviabilizando qualquer acesso ao sistema.",
+    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    resourceType: "fisico_virtual",
+    resourceProcess: "monitorar",
+    senderName: "Carlos Silva",
+    senderInitials: "CS",
+    avatarImage: "/Personagens/Roberto.png",
+    responsibleRole: "techLead",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Simular carga com 50.000 acessos virtuais para estimar a capacidade real de banco e dimensionar threads e caches.",
-        "impacts": {
-          "capacidadeEntrega": 5,
-          "qualidadeProduto": 25,
-          "saudeEquipe": 20,
-          "conhecimentoOrganizacional": 20
+        key: "a",
+        text: "Configurar balanceamento de carga com pool de conexões reutilizáveis e otimizar o gateway conforme a TOC.",
+        impacts: {
+          capacidadeEntrega: 0,
+          qualidadeProduto: 15,
+          saudeEquipe: 5,
+          conhecimentoOrganizacional: 15
         },
-        "feedbackNarrative": "A simulação revelou um estrangulamento de conexões que teria derrubado o sistema. Com a calibração prévia, as matrículas ocorreram com estabilidade absoluta.",
-        "pmbokConcept": "Antecipação de escassez ou excedente",
-        "learnings": [
-          "Estimar empiricamente o comportamento de recursos virtuais sob carga antecipa escassez e protege a integridade operacional."
+        feedbackNarrative: "A reconfiguração do gateway eliminou o ponto único de falha e garantiu fluidez no processamento de requisições.",
+        pmbokConcept: "Teoria das restrições e gargalos",
+        learnings: [
+          "O PMBOK 8 preconiza a Teoria das Restrições para atuar no gargalo de fluxo antes que ele interrompa as operações gerais.",
+          "Ajustar a arquitetura de conexões preserva a capacidade dos ambientes operacionais e impede colapsos sob carga pesada."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Queda generalizada do sistema em horário de pico"
+        goodBad: "good",
+        risksEvaded: [
+          "Travamento total de logins e tela de erro 504 no lançamento oficial do sistema"
         ],
-        "otherConsequences": [
-          "Estabilidade comprovada e dimensionamento preciso da infraestrutura"
+        otherConsequences: [
+          "Estabilidade da infraestrutura de rede para todos os serviços acadêmicos integrados"
         ]
       },
       {
-        "key": "b",
-        "text": "Abrir mão de testes de estresse para poupar dias de trabalho e confiar nas estimativas teóricas do fabricante.",
-        "impacts": {
-          "capacidadeEntrega": 10,
-          "qualidadeProduto": -35,
-          "saudeEquipe": -30,
-          "conhecimentoOrganizacional": -25
+        key: "b",
+        text: "Manter o lançamento programado confiando que a distribuição de acessos no primeiro dia ocorrerá de forma gradual.",
+        impacts: {
+          capacidadeEntrega: 10,
+          qualidadeProduto: -15,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -10
         },
-        "delayedImpacts": [
+        delayedImpacts: [
           {
-            "triggerAfterEvents": 1,
-            "impacts": {
-              "capacidadeEntrega": -35,
-              "qualidadeProduto": -35,
-              "saudeEquipe": -35,
-              "conhecimentoOrganizacional": 0
+            triggerAfterEvents: 1,
+            impacts: {
+              capacidadeEntrega: -15,
+              qualidadeProduto: -15
             },
-            "narrative": "No primeiro minuto das matrículas, a infraestrutura travou e as inscrições precisaram ser adiadas em uma semana."
+            narrative: "O gateway travou na primeira hora de matrícula; 40 mil alunos ficaram impedidos de acessar a plataforma."
           }
         ],
-        "feedbackNarrative": "No momento do pico, a infraestrutura virtual travou com 20% do volume esperado. As matrículas tiveram que ser suspensas por uma semana.",
-        "pmbokConcept": "Uso planejado vs. real de recursos",
-        "learnings": [
-          "Desvios entre a estimativa teórica e o uso real de recursos em momentos de alta concorrência geram falhas catastróficas."
+        feedbackNarrative: "O gateway desabou na primeira hora de uso real; a imprensa noticiou a pane e o comitê acadêmico entrou em crise.",
+        pmbokConcept: "Uso planejado vs. real de recursos",
+        learnings: [
+          "O PMBOK 8 alerta que desconsiderar evidências concretas de estresse em recursos virtuais leva a desastres operacionais certos.",
+          "A postura negligente diante de gargalos conhecidos viola os deveres de controle e gestão de riscos do projeto."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Esforço em preparar roteiros de teste de carga"
+        goodBad: "bad",
+        risksEvaded: [
+          "Horas de testes e calibração de parâmetros de rede e proxies reversos"
         ],
-        "otherConsequences": [
-          "Paralisação geral e suspensão das matrículas da universidade"
+        otherConsequences: [
+          "Colapso dos serviços digitais da instituição e abertura de sindicância na STI"
         ]
       },
       {
-        "key": "c",
-        "text": "Executar a bateria de testes de estresse diretamente contra o banco de produção durante horário de expediente letivo.",
-        "impacts": {
-          "capacidadeEntrega": -20,
-          "qualidadeProduto": -30,
-          "saudeEquipe": -20,
-          "conhecimentoOrganizacional": -20
+        key: "c",
+        text: "Implementar uma sala de espera virtual que limite a concorrência a lotes controlados de estudantes simultâneos.",
+        impacts: {
+          capacidadeEntrega: -15,
+          qualidadeProduto: -10,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -5
         },
-        "feedbackNarrative": "O teste de carga derrubou o servidor onde professores lançavam notas e causou perda de sessões ativas no campus.",
-        "pmbokConcept": "Análise de alternativas na estimativa",
-        "learnings": [
-          "Avaliar alternativas de estimativa de capacidade exige planejar ambientes isolados para não impactar operações reais em andamento."
+        feedbackNarrative: "A fila virtual demorava quatro horas por estudante, gerando revolta nos centros acadêmicos e protestos nos campi.",
+        pmbokConcept: "Mapeamento do fluxo de valor",
+        learnings: [
+          "O PMBOK 8 demonstra que criar filas de espera desproporcionais restringe o valor entregue e gera insatisfação nos clientes.",
+          "Restrições artificiais de capacidade indicam incapacidade do projeto de dimensionar seus recursos adequadamente."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Custo de ambiente isolado de homologação"
+        goodBad: "bad",
+        risksEvaded: [
+          "Necessidade de reestruturar as regras de pooling de conexões nas regras centrais de processamento"
         ],
-        "otherConsequences": [
-          "Queda de produção em horário comercial e perda de dados de usuários"
+        otherConsequences: [
+          "Protestos de estudantes e atraso generalizado na consolidação das matrículas"
         ]
       }
     ]
   },
   {
-    "id": "quality_10_vulnerabilidade_sql_injection",
-    "title": "Vulnerabilidade Crítica: Brecha de Segurança no Banco de Dados de Alunos",
-    category: EventCategory.INFRASTRUCTURE,
+    id: "quality_10_vulnerabilidade_sql_injection",
+    title: "A Brecha no Portal Docente (Ambiente Seguro e Resolução de Problemas)",
+    category: EventCategory.EXECUTION,
     difficulty: EventDifficulty.HARD,
-    "probabilityWeight": 2,
-    "tags": [
-      "seguranca",
-      "treinamento",
-      "capacitacao",
-      "recursos_humanos"
-    ],
-    "learningObjective": "Capacitar a equipe em práticas de segurança da informação e mentoria para evitar brechas críticas de acesso a dados.",
-    "communicationType": "ticket",
-    "senderRole": "Líder Técnico",
-    "description": "Ticket #1250 - Alerta de Segurança. Foi detectada uma brecha crítica de segurança na busca de disciplinas, permitindo que invasores extraiam senhas e dados confidenciais de alunos. O incidente evidenciou que os novos membros da equipe não receberam orientação sobre práticas de segurança.",
-    "domainTag": "Recursos › Liderar a Equipe",
-    "resourceType": "humano",
-    "resourceProcess": "liderar",
-    "senderName": "Geraldo (Auditoria)",
-    "senderInitials": "GA",
-    "avatarImage": "/Personagens/Geraldo.png",
-    "responsibleRole": "techLead",
-    "alternatives": [
+    probabilityWeight: 2,
+    tags: ["seguranca", "vulnerabilidade", "ambiente_seguro", "governanca"],
+    learningObjective: "Conduzir a remediação de incidentes de segurança sob postura de colaboração e aprendizado sem punições predatórias.",
+    communicationType: "slack",
+    senderRole: "Líder Técnico",
+    description: "Canal #seguranca: 'Auditoria de segurança encontrou vulnerabilidade de segurança nas consultas do módulo de lançamento de notas digitado por desenvolvedor júnior; a diretoria quer punição imediata.'",
+    domainTag: "Recursos › Liderar a Equipe",
+    resourceType: "humano",
+    resourceProcess: "liderar",
+    senderName: "Mariana Costa",
+    senderInitials: "MC",
+    avatarImage: "/Personagens/Mariana.png",
+    responsibleRole: "techLead",
+    alternatives: [
       {
-        "key": "a",
-        "text": "Corrigir as consultas com parâmetros e conduzir mentoria de segurança e revisão por pares em todo o código.",
-        "impacts": {
-          "capacidadeEntrega": 0,
-          "qualidadeProduto": 30,
-          "saudeEquipe": 15,
-          "conhecimentoOrganizacional": 25
+        key: "a",
+        text: "Corrigir a brecha com queries parametrizadas em acompanhamento conjunto e implementar testes de segurança automatizados de integridade.",
+        impacts: {
+          capacidadeEntrega: -5,
+          qualidadeProduto: 15,
+          saudeEquipe: 10,
+          conhecimentoOrganizacional: 15
         },
-        "feedbackNarrative": "A mentoria elevou a maturidade técnica da equipe. Consultas seguras foram padronizadas e a varredura subsequente aprovou o sistema com nota máxima.",
-        "pmbokConcept": "Treinamento, mentoria e coaching",
-        "learnings": [
-          "Investir em mentoria técnica e desenvolvimento de competências previne falhas de segurança recorrentes na base de código."
+        feedbackNarrative: "A correção rápida aliada a automação de testes impediu novas falhas e protegeu o clima de segurança psicológica da equipe.",
+        pmbokConcept: "Ambiente seguro e transparência sobre vieses",
+        learnings: [
+          "O PMBOK 8 destaca que um ambiente seguro e a aprendizagem construtiva com falhas fortalecem a resiliência do time.",
+          "Substituir culpabilização por automação de processos fecha brechas de segurança de modo definitivo e sustentável."
         ],
-        "goodBad": "good",
-        "risksEvaded": [
-          "Vazamento de credenciais e invasão de banco de dados"
+        goodBad: "good",
+        risksEvaded: [
+          "Invasão maliciosa do repositório de dados institucional e alteração fraudulenta de notas de estudantes"
         ],
-        "otherConsequences": [
-          "Equipe capacitada em segurança e software blindado"
+        otherConsequences: [
+          "Blindagem permanente contra falhas de segurança nas consultas em todos os repositórios da STI"
         ]
       },
       {
-        "key": "b",
-        "text": "Adiar a correção e o treinamento para o ano seguinte porque \"ninguém teria interesse em hackear o sistema acadêmico\".",
-        "impacts": {
-          "capacidadeEntrega": 5,
-          "qualidadeProduto": -35,
-          "saudeEquipe": -30,
-          "conhecimentoOrganizacional": -30
+        key: "b",
+        text: "Instaurar advertência formal e determinar que o autor do script execute a revisão e correção prioritária do módulo.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -10,
+          saudeEquipe: -15,
+          conhecimentoOrganizacional: -10
         },
-        "delayedImpacts": [
+        delayedImpacts: [
           {
-            "triggerAfterEvents": 1,
-            "impacts": {
-              "capacidadeEntrega": -35,
-              "qualidadeProduto": -35,
-              "saudeEquipe": -35,
-              "conhecimentoOrganizacional": -30
+            triggerAfterEvents: 1,
+            impacts: {
+              saudeEquipe: -15,
+              capacidadeEntrega: -10
             },
-            "narrative": "A falha foi explorada publicamente e dados de servidores vazaram na internet, exigindo auditoria externa."
+            narrative: "O clima de medo fez outros desenvolvedores ocultarem vulnerabilidades conhecidas para não serem humilhados."
           }
         ],
-        "feedbackNarrative": "A falha foi explorada em menos de 10 dias. Dados de servidores vazaram e o comitê foi submetido a processo administrativo.",
-        "pmbokConcept": "Retrabalho e desperdício como indicadores de eficiência",
-        "learnings": [
-          "Ignorar defeitos conhecidos multiplica o retrabalho emergencial com investigações forenses e reparos desesperados."
+        feedbackNarrative: "A humilhação pública instaurou o pânico na equipe; ninguém mais confessava falhas, multiplicando os riscos ocultos.",
+        pmbokConcept: "Liderança servidora",
+        learnings: [
+          "O PMBOK 8 ensina que a liderança punitiva destrói a confiança mútua e estimula o acobertamento perigoso de defeitos graves.",
+          "O líder deve atuar como servidor e mentor, corrigindo falhas de processos em vez de perseguir indivíduos."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Pausa técnica no ciclo de entregas"
+        goodBad: "bad",
+        risksEvaded: [
+          "Desconforto político de assumir perante a diretoria a responsabilidade coletiva da entrega"
         ],
-        "otherConsequences": [
-          "Vazamento massivo de senhas e processos administrativos"
+        otherConsequences: [
+          "Cultura do medo, desconfiança mútua e evasão de profissionais juniores"
         ]
       },
       {
-        "key": "c",
-        "text": "Desativar a busca de disciplinas para não ter que treinar a equipe nem corrigir as brechas no banco de dados.",
-        "impacts": {
-          "capacidadeEntrega": -10,
-          "qualidadeProduto": -25,
-          "saudeEquipe": -15,
-          "conhecimentoOrganizacional": -15
+        key: "c",
+        text: "Postergar a otimização técnica das rotinas de consulta ao repositório para a manutenção programada semestral, mantendo o serviço ativo.",
+        impacts: {
+          capacidadeEntrega: 5,
+          qualidadeProduto: -15,
+          saudeEquipe: -10,
+          conhecimentoOrganizacional: -15
         },
-        "feedbackNarrative": "A remoção da funcionalidade tornou o sistema impraticável para os estudantes, gerando reclamações generalizadas.",
-        "pmbokConcept": "Papéis, responsabilidades e lacunas de conhecimento",
-        "learnings": [
-          "Suprimir funcionalidades em vez de capacitar os responsáveis técnicos denota fuga de responsabilidades e enfraquece o time."
+        feedbackNarrative: "Um estudante explorou a vulnerabilidade pública e alterou notas de cem alunos, gerando escândalo nacional.",
+        pmbokConcept: "Integridade e transparência do gerente de projetos",
+        learnings: [
+          "O PMBOK 8 preconiza a integridade e transparência intransigentes no tratamento de dados e segurança do produto.",
+          "A negligência perante riscos de segurança configura omissão grave que destrói a credibilidade da liderança."
         ],
-        "goodBad": "bad",
-        "risksEvaded": [
-          "Esforço de treinamento técnico"
+        goodBad: "bad",
+        risksEvaded: [
+          "Trabalho emergencial de otimização técnica das rotinas de consulta ao repositório do módulo docente"
         ],
-        "otherConsequences": [
-          "Péssima usabilidade e descontentamento dos usuários"
+        otherConsequences: [
+          "Invasão comprovada de dados acadêmicos, escândalo na imprensa e ação do Ministério Público"
         ]
       }
     ]

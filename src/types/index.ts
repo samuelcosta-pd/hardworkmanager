@@ -108,9 +108,20 @@ export interface GameEvent {
   resourceProcess?: ResourceProcess;
 }
 
+export type VoteChoice = AlternativeKey | 'abstain';
+
+export type TimerPreset = 'short' | 'standard' | 'long' | 'none';
+
+export interface TimerSettings {
+  preset: TimerPreset;
+  readingSeconds: number;
+  votingSeconds: number;
+  enabled: boolean;
+}
+
 export interface Vote {
   playerId: string;
-  alternative: AlternativeKey;
+  alternative: VoteChoice;
   round: 1 | 2;
 }
 
@@ -130,7 +141,7 @@ export interface Decision {
   chosenText: string;
   wasUnanimous: boolean;
   dissentingPlayer?: Player;
-  dissentingAlternative?: AlternativeKey;
+  dissentingAlternative?: VoteChoice;
   feedbackNarrative: string;
   metricsAfter: Metrics;
 }
