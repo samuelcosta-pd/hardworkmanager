@@ -13,9 +13,9 @@ export const SoftCard = forwardRef<HTMLDivElement, Props>(function SoftCard(
 ) {
   const base = "rounded-3xl p-6 transition-all duration-300";
   const variants: Record<Variant, string> = {
-    default: "bg-card shadow-[var(--shadow-soft)]",
+    default: "bg-card border border-border",
     muted: "bg-muted",
-    inset: "bg-muted shadow-[var(--shadow-inset-soft)]",
+    inset: "bg-muted",
   };
   return <div ref={ref} className={cn(base, variants[variant], className)} {...rest} />;
 });

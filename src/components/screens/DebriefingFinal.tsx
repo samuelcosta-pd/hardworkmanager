@@ -1,358 +1,218 @@
 import { useState } from "react";
-import { useGameStore } from "@/store/gameStore";
-import { SoftCard } from "@/components/ui/SoftCard";
+import { ArrowLeft, ArrowRight, BookOpen, Briefcase, Check, RotateCcw, X } from "lucide-react";
 import { SoftButton } from "@/components/ui/SoftButton";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  BookOpen,
-  TrendingUp,
-  Award,
-  RotateCcw,
-  ArrowLeft,
-  ArrowRight,
-  Briefcase,
-} from "lucide-react";
+import { AltBadge } from "@/components/game/AltShape";
+import { Chip } from "@/components/game/Chip";
+import { LEVEL_BG, LEVEL_LABEL, LEVEL_TEXT, METRIC_META, levelOf } from "@/components/game/GameHud";
+import { useGameStore } from "@/store/gameStore";
 import { ALL_DYNAMIC_EVENTS as GAME_EVENTS } from "@/data/dynamicEvents";
-import { metricLevel } from "@/lib/gameLogic";
 import { MENTOR } from "@/data/avatars";
+import { shortTitle } from "@/lib/text";
+import { cn } from "@/lib/utils";
 
+const STEPS = ["Resultado", "Conceitos do PMBOK 8", "Na vida profissional"] as const;
+
+/** Debriefing em 3 passos curtos: resultado, conceitos trabalhados e aplicação profissional. */
 export function DebriefingFinal() {
-  const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [step, setStep] = useState(0);
   const { decisions, metrics, gameOverReason, matchDeck, events, quitGame } = useGameStore();
+  const isSuccess = !gameOverReason;
 
-  const handleSetStep = (newStep: 1 | 2 | 3) => {
-    setStep(newStep);
+  const go = (n: number) => {
+    setStep(n);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const allLearnings = decisions.map((d) => {
-    const event =
-      matchDeck?.find((e) => e.id === d.eventId) ||
-      events?.find((e) => e.id === d.eventId) ||
+  const learnings = decisions.map((d) => {
+    const ev =
+      matchDeck.find((e) => e.id === d.eventId) ||
+      events.find((e) => e.id === d.eventId) ||
       GAME_EVENTS.find((e) => e.id === d.eventId);
-    const alt = event?.alternatives.find((a) => a.key === d.chosenAlternative);
+    const alt = ev?.alternatives.find((a) => a.key === d.chosenAlternative);
     return {
-      eventTitle: d.eventTitle,
-      pmbokConcept: alt?.pmbokConcept ?? "",
-      learnings: alt?.learnings?.join(". ") ?? "",
+      title: shortTitle(d.eventTitle),
+      key: d.chosenAlternative,
+      good: alt?.goodBad === "good",
+      concept: alt?.pmbokConcept ?? "",
+      lesson: alt?.learnings?.[0] ?? "",
     };
   });
-
-  const efLevel = metricLevel(metrics.capacidadeEntrega);
-  const quaLevel = metricLevel(metrics.qualidadeProduto);
-  const seLevel = metricLevel(metrics.saudeEquipe);
-  const coLevel =
-    metrics.conhecimentoOrganizacional < 20
-      ? "critical"
-      : metrics.conhecimentoOrganizacional < 35
-        ? "warning"
-        : "stable";
-
-  const isSuccess = !gameOverReason;
-
-  const reflectionText = (() => {
-    const good: string[] = [];
-    const bad: string[] = [];
-    if (efLevel === "stable") good.push("Capacidade de Entrega");
-    else if (efLevel === "critical") bad.push("Capacidade de Entrega");
-    if (quaLevel === "stable") good.push("Qualidade do Produto");
-    else if (quaLevel === "critical") bad.push("Qualidade do Produto");
-    if (seLevel === "stable") good.push("Saúde da Equipe");
-    else if (seLevel === "critical") bad.push("Saúde da Equipe");
-    if (coLevel === "stable") good.push("Conhecimento Organizacional");
-    else if (coLevel === "critical") bad.push("Conhecimento Organizacional");
-    return { good, bad };
-  })();
+  const goodCount = learnings.filter((l) => l.good).length;
 
   return (
-    <div className="mx-auto min-h-screen max-w-4xl px-6 py-12">
-      {/* Indicador de Etapas do Debriefing */}
-      <div className="mb-8 animate-float-in">
-        <div className="flex items-center justify-between max-w-xl mx-auto mb-2">
-          {[
-            { stepNumber: 1, label: "Resumo & Reflexão" },
-            { stepNumber: 2, label: "Conceitos PMBOK 8" },
-            { stepNumber: 3, label: "Aplicação Profissional" },
-          ].map((item, index) => {
-            const isActive = step === item.stepNumber;
-            const isPassed = step > item.stepNumber;
-            return (
-              <div key={item.stepNumber} className="flex items-center flex-1 last:flex-none">
-                <button
-                  type="button"
-                  onClick={() => handleSetStep(item.stepNumber as 1 | 2 | 3)}
-                  className={`flex items-center gap-2 group focus:outline-none transition-colors cursor-pointer ${
-                    isActive
-                      ? "text-primary font-bold"
-                      : isPassed
-                        ? "text-slate-700 font-medium"
-                        : "text-slate-400"
-                  }`}
-                >
-                  <span
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
-                      isActive
-                        ? "bg-primary text-primary-foreground shadow-md ring-2 ring-primary/20"
-                        : isPassed
-                          ? "bg-primary/20 text-primary"
-                          : "bg-slate-200 text-slate-500"
-                    }`}
-                  >
-                    {item.stepNumber}
-                  </span>
-                  <span className="text-xs sm:text-sm hidden sm:inline">{item.label}</span>
-                </button>
-                {index < 2 && (
-                  <div
-                    className={`flex-1 h-0.5 mx-3 transition-all ${
-                      step > index + 1 ? "bg-primary" : "bg-slate-200"
-                    }`}
-                  />
-                )}
-              </div>
-            );
-          })}
+    <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-8">
+      <nav className="flex flex-wrap items-center gap-2 pr-16" aria-label="Etapas do debriefing">
+        {STEPS.map((label, i) => (
+          <button
+            key={label}
+            type="button"
+            onClick={() => go(i)}
+            className={cn(
+              "flex items-center gap-2 rounded-full px-4 py-2 text-base font-extrabold transition",
+              i === step
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted text-muted-foreground hover:text-foreground",
+            )}
+            aria-current={i === step ? "step" : undefined}
+          >
+            <span>{i + 1}</span>
+            {label}
+          </button>
+        ))}
+      </nav>
+
+      <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center animate-float-in">
+        <img
+          src={MENTOR.imagePath}
+          alt="Helena"
+          className="h-20 w-20 shrink-0 rounded-full bg-[#dce3f5] object-cover ring-4 ring-primary"
+        />
+        <div className="flex flex-col gap-1">
+          <span
+            className={cn("text-lg font-extrabold", isSuccess ? "text-success" : "text-critical")}
+          >
+            {isSuccess ? "Projeto concluído" : "O projeto parou"}
+          </span>
+          <h1 className="m-0 text-3xl font-black leading-tight tracking-tight sm:text-4xl">
+            {step === 0 &&
+              (isSuccess
+                ? "Vocês chegaram ao fim. Vamos olhar o caminho."
+                : "Vamos entender o que levou a isso.")}
+            {step === 1 && "O que cada decisão ensinou"}
+            {step === 2 && "E fora do jogo?"}
+          </h1>
         </div>
       </div>
 
-      {/* TELA 1: Informações até "Reflexão Final" */}
-      {step === 1 && (
-        <div className="animate-float-in">
-          {/* Helena's closing */}
-          <div className="flex items-center gap-4 bg-white p-5 rounded-2xl shadow-sm border border-slate-100 mb-8 animate-float-in">
-            <Avatar className="h-16 w-16 border-2 border-primary/20 shrink-0">
-              <AvatarImage src={MENTOR.imagePath} alt={MENTOR.name} />
-              <AvatarFallback>HE</AvatarFallback>
-            </Avatar>
-            <div>
-              <h2 className="text-xl font-bold text-slate-800">Debriefing Final : {MENTOR.name}</h2>
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed mt-1">
-                {isSuccess
-                  ? '"Parabéns, equipe! Vocês concluíram o projeto. Vamos revisar juntos o que aprendemos para consolidar o conhecimento."'
-                  : `"Infelizmente o projeto não pôde ser concluído. Motivo: ${gameOverReason}. Mas o mais importante agora é refletir sobre as decisões tomadas."`}
-              </p>
-            </div>
-          </div>
-
-          <div className="mb-8 text-center animate-float-in">
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-              {isSuccess ? "🎉 Projeto Concluído" : "⚠️ Projeto Encerrado"}
-            </h1>
-          </div>
-
-          {/* Resumo da Simulação */}
-          <SoftCard className="mb-6 animate-float-in">
-            <div className="flex items-center gap-3 mb-4">
-              <Award className="h-5 w-5 text-primary" />
-              <h2 className="text-lg font-semibold">Resumo da Simulação</h2>
-            </div>
-            <div className="grid grid-cols-3 gap-4 text-center">
-              <div className="bg-muted rounded-2xl p-4">
-                <p className="text-2xl font-bold">{decisions.length}</p>
-                <p className="text-xs text-muted-foreground">Decisões Tomadas</p>
-              </div>
-              <div className="bg-muted rounded-2xl p-4">
-                <p className="text-2xl font-bold">
-                  {decisions.filter((d) => d.wasUnanimous).length}
-                </p>
-                <p className="text-xs text-muted-foreground">Decisões Unânimes</p>
-              </div>
-              <div className="bg-muted rounded-2xl p-4">
-                <p className="text-2xl font-bold">{decisions.length}</p>
-                <p className="text-xs text-muted-foreground">Eventos Enfrentados</p>
-              </div>
-            </div>
-          </SoftCard>
-
-          {/* Desempenho Geral */}
-          <SoftCard className="mb-6 animate-float-in">
-            <div className="flex items-center gap-3 mb-4">
-              <TrendingUp className="h-5 w-5 text-primary" />
-              <h2 className="text-lg font-semibold">Desempenho Geral</h2>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {[
-                {
-                  label: "Capacidade de Entrega",
-                  value: metrics.capacidadeEntrega,
-                  level: efLevel,
-                },
-                { label: "Qualidade do Produto", value: metrics.qualidadeProduto, level: quaLevel },
-                { label: "Saúde da Equipe", value: metrics.saudeEquipe, level: seLevel },
-                {
-                  label: "Conhecimento Organizacional",
-                  value: metrics.conhecimentoOrganizacional,
-                  level: coLevel,
-                },
-              ].map((m) => (
-                <div
-                  key={m.label}
-                  className={`rounded-2xl p-4 text-center ${
-                    m.level === "critical"
-                      ? "bg-red-50 border border-red-200"
-                      : m.level === "warning"
-                        ? "bg-amber-50 border border-amber-200"
-                        : "bg-green-50 border border-green-200"
-                  }`}
-                >
-                  <p className="text-sm text-muted-foreground">{m.label}</p>
-                  <p className="text-3xl font-bold mt-1">{m.value}</p>
-                </div>
-              ))}
-            </div>
-          </SoftCard>
-
-          {/* Reflexão */}
-          <SoftCard className="mb-6 animate-float-in">
-            <h2 className="text-lg font-semibold mb-3">Reflexão Final</h2>
-            {reflectionText.good.length > 0 && (
-              <p className="text-sm text-green-700 bg-green-50 p-3 rounded-lg mb-2">
-                ✅ <strong>Pontos fortes:</strong> A equipe manteve {reflectionText.good.join(", ")}{" "}
-                em bom nível ao longo da simulação.
-              </p>
-            )}
-            {reflectionText.bad.length > 0 && (
-              <p className="text-sm text-red-700 bg-red-50 p-3 rounded-lg mb-2">
-                ❌ <strong>Atenção:</strong> {reflectionText.bad.join(", ")} atingiu nível crítico.
-                Reflitam sobre quais decisões levaram a isso.
-              </p>
-            )}
-            {reflectionText.good.length === 0 && reflectionText.bad.length === 0 && (
-              <p className="text-sm text-slate-600 bg-slate-50 p-3 rounded-lg mb-2">
-                ℹ️ <strong>Equilíbrio:</strong> A equipe manteve os indicadores em níveis
-                intermediários ao longo do projeto.
-              </p>
-            )}
-          </SoftCard>
-
-          {/* Botão de Navegação para Tela 2 */}
-          <div className="flex justify-end animate-float-in mt-8">
-            <SoftButton size="lg" onClick={() => handleSetStep(2)}>
-              Avançar para Conceitos PMBOK 8
-              <ArrowRight className="h-4 w-4 ml-2" />
-            </SoftButton>
-          </div>
-        </div>
-      )}
-
-      {/* TELA 2: Somente os Conceitos PMBOK 8 Aprendidos */}
-      {step === 2 && (
-        <div className="animate-float-in">
-          {/* Helena's closing - Contexto PMBOK */}
-          <div className="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-slate-100 mb-8 animate-float-in">
-            <Avatar className="h-16 w-16 border-2 border-primary/20">
-              <AvatarImage src={MENTOR.imagePath} alt={MENTOR.name} />
-              <AvatarFallback>HE</AvatarFallback>
-            </Avatar>
-            <div>
-              <h2 className="text-xl font-bold text-slate-800">Debriefing Final : {MENTOR.name}</h2>
-              <p className="text-slate-600">
-                "Cada desafio enfrentado pelo time esteve diretamente conectado aos processos e
-                práticas essenciais do Domínio de Recursos (PMBOK 8). Vejam a síntese dos conceitos
-                trabalhados:"
-              </p>
-            </div>
-          </div>
-
-          <div className="mb-8 text-center animate-float-in">
-            <h1 className="text-3xl font-bold tracking-tight">
-              📘 Conceitos de Recursos (PMBOK 8) Aprendidos
-            </h1>
-          </div>
-
-          {/* Conceitos PMBOK Aprendidos */}
-          <SoftCard className="mb-8 animate-float-in">
-            <div className="flex items-center gap-3 mb-4">
-              <BookOpen className="h-6 w-6 text-primary" />
-              <h2 className="text-xl font-bold">Conceitos de Recursos Aprendidos</h2>
-            </div>
-            {allLearnings.length === 0 ? (
-              <p className="text-base text-slate-500 italic p-4 text-center">
-                Nenhum conceito registrado nesta rodada.
-              </p>
-            ) : (
-              <div className="space-y-4">
-                {allLearnings.map((l, i) => (
-                  <div key={i} className="bg-muted rounded-xl p-4 sm:p-5">
-                    <p className="text-base sm:text-lg font-bold text-foreground">{l.eventTitle}</p>
-                    <p className="text-sm sm:text-base text-primary mt-1 font-bold">
-                      📘 {l.pmbokConcept}
-                    </p>
-                    <p className="text-base text-muted-foreground mt-1.5 leading-relaxed">
-                      {l.learnings}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </SoftCard>
-
-          {/* Botões de Navegação */}
-          <div className="flex items-center justify-between animate-float-in mt-8 gap-4">
-            <SoftButton variant="ghost" size="lg" onClick={() => handleSetStep(1)}>
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Voltar para Resumo
-            </SoftButton>
-            <SoftButton size="lg" onClick={() => handleSetStep(3)}>
-              Avançar para Aplicação Profissional
-              <ArrowRight className="h-4 w-4 ml-2" />
-            </SoftButton>
-          </div>
-        </div>
-      )}
-
-      {/* TELA 3: Aplicação Profissional */}
-      {step === 3 && (
-        <div className="animate-float-in">
-          {/* Helena's closing - Contexto Aplicação Profissional */}
-          <div className="flex items-center gap-4 bg-white p-5 rounded-2xl shadow-sm border border-slate-100 mb-8 animate-float-in">
-            <Avatar className="h-16 w-16 border-2 border-primary/20 shrink-0">
-              <AvatarImage src={MENTOR.imagePath} alt={MENTOR.name} />
-              <AvatarFallback>HE</AvatarFallback>
-            </Avatar>
-            <div>
-              <h2 className="text-xl font-bold text-slate-800">Debriefing Final : {MENTOR.name}</h2>
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed mt-1">
-                "Para consolidar nossa jornada, vejam como as lições deste projeto se traduzem na
-                prática profissional e no dia a dia da liderança ágil."
-              </p>
-            </div>
-          </div>
-
-          <div className="mb-8 text-center animate-float-in">
-            <h1 className="text-3xl font-bold tracking-tight">💼 Aplicação Profissional</h1>
-          </div>
-
-          {/* Aplicação Profissional */}
-          <SoftCard className="mb-8 animate-float-in border-t-4 border-t-primary p-6">
-            <div className="flex items-center gap-3 mb-3">
-              <Briefcase className="h-6 w-6 text-primary" />
-              <h2 className="text-xl font-bold">Aplicação Profissional</h2>
-            </div>
-            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-              Os cenários que vocês enfrentaram refletem dilemas reais do dia a dia de projetos de
-              software. A habilidade de equilibrar eficiência operacional, qualidade técnica e saúde
-              da equipe é central no Domínio de Desempenho <strong>Recursos</strong> (PMBOK 8). Em
-              projetos reais, busquem sempre garantir os recursos certos no momento e lugar certos,
-              negociar prazos com base na capacidade real, proteger o time contra sobrecarga e
-              investir na eficiência dos ambientes e ferramentas, exatamente como vocês praticaram
-              aqui.
+      {step === 0 && (
+        <div className="flex flex-col gap-5 animate-float-in">
+          {gameOverReason && (
+            <p className="m-0 rounded-2xl bg-critical p-4 text-lg font-bold text-[#0e1633]">
+              {gameOverReason}
             </p>
-          </SoftCard>
-
-          {/* Botões de Ação Final */}
-          <div className="flex items-center justify-between animate-float-in mt-8 gap-4">
-            <SoftButton variant="ghost" size="lg" onClick={() => handleSetStep(2)}>
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Voltar para Conceitos PMBOK
-            </SoftButton>
-            <SoftButton size="lg" onClick={quitGame}>
-              <RotateCcw className="h-4 w-4 mr-2" />
-              Reiniciar Simulação
-            </SoftButton>
+          )}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="rounded-2xl bg-muted p-4">
+              <div className="text-4xl font-black tabular-nums">{decisions.length}</div>
+              <div className="text-base font-bold text-muted-foreground">decisões</div>
+            </div>
+            <div className="rounded-2xl bg-muted p-4">
+              <div className="text-4xl font-black tabular-nums">
+                {decisions.filter((d) => d.wasUnanimous).length}
+              </div>
+              <div className="text-base font-bold text-muted-foreground">unânimes</div>
+            </div>
+            <div className="rounded-2xl bg-muted p-4">
+              <div className="text-4xl font-black tabular-nums">{goodCount}</div>
+              <div className="text-base font-bold text-muted-foreground">recomendadas</div>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+            {METRIC_META.map((m) => {
+              const v = metrics[m.key];
+              const level = levelOf(m.key, v);
+              return (
+                <div
+                  key={m.key}
+                  className="flex flex-col gap-2 rounded-2xl border border-border bg-card p-4"
+                >
+                  <span
+                    className={cn(
+                      "flex items-center gap-2 text-base font-extrabold",
+                      LEVEL_TEXT[level],
+                    )}
+                  >
+                    {m.icon}
+                    <span className="text-muted-foreground">{m.long}</span>
+                  </span>
+                  <span className="text-4xl font-black tabular-nums">{v}</span>
+                  <div className="h-2 overflow-hidden rounded-full bg-muted">
+                    <div
+                      className={cn("h-full rounded-full", LEVEL_BG[level])}
+                      style={{ width: `${v}%` }}
+                    />
+                  </div>
+                  <span className={cn("text-sm font-extrabold", LEVEL_TEXT[level])}>
+                    {LEVEL_LABEL[level]}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex flex-col gap-2 rounded-3xl border border-border bg-card p-5">
+            <span className="text-xl font-black">Decisões da partida</span>
+            {learnings.map((l, i) => (
+              <div key={i} className="flex items-center gap-3 rounded-2xl bg-muted p-3">
+                <AltBadge k={l.key} size="sm" />
+                <span className="flex-1 text-base font-bold">{l.title}</span>
+                {l.good ? (
+                  <Chip tone="success">
+                    <Check className="h-4 w-4" strokeWidth={3} /> recomendada
+                  </Chip>
+                ) : (
+                  <Chip tone="warning">
+                    <X className="h-4 w-4" strokeWidth={3} /> arriscada
+                  </Chip>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       )}
+
+      {step === 1 && (
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 animate-float-in">
+          {learnings.length === 0 && (
+            <p className="text-lg text-muted-foreground">Nenhum conceito registrado.</p>
+          )}
+          {learnings.map((l, i) => (
+            <div
+              key={i}
+              className="flex flex-col gap-2 rounded-3xl border border-border bg-card p-5"
+            >
+              <span className="text-base font-bold text-muted-foreground">{l.title}</span>
+              <span className="flex items-center gap-2 text-xl font-black text-primary">
+                <BookOpen className="h-5 w-5 shrink-0" /> {l.concept}
+              </span>
+              {l.lesson && <p className="m-0 text-lg font-semibold leading-relaxed">{l.lesson}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {step === 2 && (
+        <div className="flex flex-col gap-4 rounded-3xl border border-border bg-card p-6 animate-float-in">
+          <span className="flex items-center gap-2 text-xl font-black">
+            <Briefcase className="h-6 w-6 text-primary" /> Em projetos reais
+          </span>
+          <ul className="m-0 flex flex-col gap-3 pl-6 text-xl font-semibold leading-relaxed">
+            <li>Garantam as pessoas e os recursos certos no momento certo.</li>
+            <li>Negociem prazos com base na capacidade real da equipe.</li>
+            <li>Protejam o time contra sobrecarga e horas extras crônicas.</li>
+            <li>Documentem e compartilhem conhecimento para não depender de uma só pessoa.</li>
+            <li>Acompanhem o uso real de ambientes, ferramentas e licenças.</li>
+          </ul>
+        </div>
+      )}
+
+      <div className="mt-auto flex flex-wrap items-center justify-between gap-4">
+        {step > 0 ? (
+          <SoftButton variant="ghost" onClick={() => go(step - 1)}>
+            <ArrowLeft className="h-5 w-5" /> Voltar
+          </SoftButton>
+        ) : (
+          <span />
+        )}
+        {step < 2 ? (
+          <SoftButton size="lg" onClick={() => go(step + 1)}>
+            {STEPS[step + 1]} <ArrowRight className="h-5 w-5" />
+          </SoftButton>
+        ) : (
+          <SoftButton size="lg" onClick={quitGame}>
+            <RotateCcw className="h-5 w-5" /> Jogar de novo
+          </SoftButton>
+        )}
+      </div>
     </div>
   );
 }

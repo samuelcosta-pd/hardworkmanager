@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Plus, Sparkles, Trash2, Users, X, Pencil, Clock } from "lucide-react";
-import { SoftCard } from "@/components/ui/SoftCard";
+import { ArrowLeft, ArrowRight, Pencil, Plus, Trash2, X } from "lucide-react";
 import { SoftButton } from "@/components/ui/SoftButton";
-import { useGameStore, TIMER_PRESETS } from "@/store/gameStore";
-import { ROLE_LABELS, type PlayerRole, type TimerPreset } from "@/types";
+import { Chip } from "@/components/game/Chip";
+import { useGameStore } from "@/store/gameStore";
+import { ROLE_LABELS, type PlayerRole } from "@/types";
 import { AVAILABLE_AVATARES } from "@/data/avatars";
-import { ROLES_DETAILS } from "@/data/roles";
+import { ROLE_CARDS } from "@/data/roles";
+import { cn } from "@/lib/utils";
 
 interface Draft {
   name: string;
@@ -15,278 +16,220 @@ interface Draft {
   avatarImage?: string;
 }
 
-const DEFAULT_ROLES: PlayerRole[] = ["pm", "techLead", "uxLead"];
+const SLOT_TAG: Record<number, string> = { 0: "GP", 1: "Técnico", 2: "Design", 3: "Colíder" };
 
+/**
+ * Cada papel tem um lugar fixo (não há como escolher papel repetido):
+ * 1 GP, 1 Líder Técnico, 1 Líder de Design e Telas e, opcionalmente, um colíder de Design e Telas.
+ */
 export function PlayerSetup() {
   const setupPlayers = useGameStore((s) => s.setupPlayers);
   const goTo = useGameStore((s) => s.goTo);
-
   const [drafts, setDrafts] = useState<Draft[]>([
     { name: "", role: "pm" },
     { name: "", role: "techLead" },
     { name: "", role: "uxLead" },
   ]);
-
   const [avatarModalOpenFor, setAvatarModalOpenFor] = useState<number | null>(null);
 
-  const canAdd = drafts.length < 4;
-  const canRemove = drafts.length > 3;
-
-  const addPlayer = () => {
-    if (!canAdd) return;
-    setDrafts([...drafts, { name: "", role: "uxLead" }]);
-  };
-
-  const removeLast = () => {
-    if (!canRemove) return;
-    setDrafts(drafts.slice(0, -1));
-  };
-
-  const updateDraft = (i: number, patch: Partial<Draft>) => {
+  const updateDraft = (i: number, patch: Partial<Draft>) =>
     setDrafts(drafts.map((d, idx) => (idx === i ? { ...d, ...patch } : d)));
-  };
 
-  // Cada partida precisa de exatamente um GP, um Líder Técnico e um Líder de Design e Telas
-  // entre os três primeiros jogadores (o 4º é sempre colíder de Design e Telas).
-  const coreRoles = drafts.slice(0, 3).map((d) => d.role);
-  const missingRoles = DEFAULT_ROLES.filter((r) => !coreRoles.includes(r));
-  const rolesValid = missingRoles.length === 0;
-  const namesAndAvatarsValid = drafts.every((d) => d.name.trim().length > 0 && !!d.avatarId);
-  const allValid = rolesValid && namesAndAvatarsValid;
+  const missing = drafts
+    .map((d, i) => ({ d, i }))
+    .filter(({ d }) => !d.name.trim() || !d.avatarId)
+    .map(({ d, i }) => {
+      const what =
+        !d.name.trim() && !d.avatarId
+          ? "o nome e o avatar"
+          : !d.name.trim()
+            ? "o nome"
+            : "o avatar";
+      return `${what} ${i === 3 ? "do 4º jogador" : `do ${ROLE_LABELS[d.role]}`}`;
+    });
+  const allValid = missing.length === 0;
 
-  const getAvatarAssignedTo = (avatarId: string, currentDraftIndex: number) => {
-    const foundIndex = drafts.findIndex(
-      (d, idx) => d.avatarId === avatarId && idx !== currentDraftIndex,
-    );
-    if (foundIndex !== -1 && drafts[foundIndex].name.trim()) {
-      return drafts[foundIndex].name.trim();
-    }
-    if (foundIndex !== -1) {
-      return `Jogador ${foundIndex + 1}`;
-    }
-    return null;
-  };
-
-  const handleStart = () => {
-    if (!allValid) return;
-    const final = drafts.map((d, i) => (i === 3 ? { ...d, role: "uxLead" as PlayerRole } : d));
-    setupPlayers(final);
+  const takenBy = (avatarId: string, current: number) => {
+    const i = drafts.findIndex((d, idx) => d.avatarId === avatarId && idx !== current);
+    if (i === -1) return null;
+    return drafts[i].name.trim() || `Jogador ${i + 1}`;
   };
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-3xl flex-col justify-center px-6 py-10">
-      <div className="mb-8 text-center animate-float-in">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-3xl bg-card shadow-[var(--shadow-soft)]">
-          <Sparkles className="h-7 w-7 text-primary" />
+    <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-8 sm:px-8">
+      <div className="flex flex-wrap items-end justify-between gap-4 animate-float-in">
+        <div className="flex flex-col gap-1.5">
+          <h1 className="m-0 text-4xl font-black tracking-tight sm:text-5xl">Montem a equipe</h1>
+          <span className="text-lg font-bold text-muted-foreground">
+            Um papel para cada pessoa. O 4º jogador é opcional.
+          </span>
         </div>
-        <h1 className="text-3xl font-bold tracking-tight">Hard Work Manager</h1>
-        <p className="mt-2 text-muted-foreground">
-          Simulador do Domínio de Recursos do PMBOK 8ª Edição
-        </p>
+        <div className="flex gap-2">
+          <Chip>2 min de leitura</Chip>
+          <Chip>45 s por voto</Chip>
+        </div>
       </div>
 
-      <SoftCard className="animate-float-in">
-        <div className="mb-6 flex items-center gap-3">
-          <Users className="h-5 w-5 text-primary" />
-          <h2 className="text-lg font-semibold">Configuração da Equipe</h2>
-          <span className="ml-auto text-xs text-muted-foreground">3 a 4 jogadores</span>
-        </div>
-
-        <div className="space-y-4">
-          {drafts.map((d, i) => {
-            const isFourth = i === 3;
-            return (
-              <div key={i} className="rounded-2xl bg-muted p-4 space-y-2">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-card text-sm font-bold text-primary shadow-[var(--shadow-soft)]">
-                    {i + 1}
-                  </div>
-                  <input
-                    type="text"
-                    placeholder={`Nome do jogador ${i + 1}`}
-                    value={d.name}
-                    onChange={(e) => updateDraft(i, { name: e.target.value })}
-                    className="flex-1 rounded-2xl bg-card px-4 py-3 text-sm outline-none ring-0 shadow-[var(--shadow-inset-soft)] focus:shadow-[var(--shadow-soft)] min-w-[140px]"
-                  />
-                  {isFourth ? (
-                    <div className="rounded-2xl bg-card px-4 py-3 text-sm text-muted-foreground shadow-[var(--shadow-soft)] shrink-0">
-                      {ROLE_LABELS.uxLead} (obrigatório)
-                    </div>
-                  ) : (
-                    <select
-                      value={d.role}
-                      onChange={(e) => updateDraft(i, { role: e.target.value as PlayerRole })}
-                      className="rounded-2xl bg-card px-4 py-3 text-sm outline-none shadow-[var(--shadow-soft)] shrink-0"
-                    >
-                      {DEFAULT_ROLES.map((r) => (
-                        <option key={r} value={r}>
-                          {ROLE_LABELS[r]}
-                        </option>
-                      ))}
-                    </select>
-                  )}
-
-                  {/* Unified Avatar Selector Button */}
+      <div className="mt-8 grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {drafts.map((d, i) => {
+          const card = ROLE_CARDS[d.role];
+          return (
+            <div
+              key={i}
+              className="flex flex-col items-center gap-3 rounded-3xl border border-border bg-card p-5 text-center animate-float-in"
+            >
+              <div className="flex w-full items-center justify-between">
+                <Chip tone="accent">{SLOT_TAG[i]}</Chip>
+                {i === 3 && (
                   <button
                     type="button"
-                    onClick={() => setAvatarModalOpenFor(i)}
-                    className={`flex items-center gap-2.5 rounded-2xl px-4 py-2.5 text-sm font-medium transition-all duration-200 shrink-0 ${
-                      d.avatarImage
-                        ? "bg-card text-foreground shadow-[var(--shadow-soft)] hover:-translate-y-0.5 border border-primary/30 hover:border-primary"
-                        : "bg-card text-muted-foreground shadow-[var(--shadow-soft)] hover:-translate-y-0.5 hover:text-foreground border border-dashed border-slate-300 hover:border-primary/50"
-                    }`}
+                    onClick={() => setDrafts(drafts.slice(0, 3))}
+                    aria-label="Remover 4º jogador"
+                    className="flex h-10 w-10 items-center justify-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"
                   >
-                    {d.avatarImage ? (
-                      <>
-                        <img
-                          src={d.avatarImage}
-                          alt={d.avatarName}
-                          className="h-6 w-6 rounded-full object-cover bg-slate-100 ring-1 ring-primary/30"
-                        />
-                        <span className="font-semibold">{d.avatarName}</span>
-                        <Pencil className="h-3.5 w-3.5 text-muted-foreground ml-1 opacity-70" />
-                      </>
-                    ) : (
-                      <>
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-slate-400">
-                          <Users className="h-3.5 w-3.5" />
-                        </div>
-                        <span>Nenhum Avatar</span>
-                        <Plus className="h-3.5 w-3.5 text-primary ml-1" />
-                      </>
-                    )}
+                    <Trash2 className="h-5 w-5" />
                   </button>
-                </div>
-
-                {/* Linha explicativa rápida do papel sob o PMBOK 8 */}
-                <div className="text-[11px] text-muted-foreground pl-1">
-                  {ROLES_DETAILS[isFourth ? "uxLead" : d.role].badge} ·{" "}
-                  {ROLES_DETAILS[isFourth ? "uxLead" : d.role].mindset}
-                </div>
+                )}
               </div>
-            );
-          })}
-        </div>
-
-        <div className="mt-5 flex flex-wrap gap-2">
-          <SoftButton variant="ghost" size="sm" onClick={addPlayer} disabled={!canAdd}>
-            <Plus className="h-4 w-4" /> Adicionar 4º jogador
-          </SoftButton>
-          {canRemove && (
-            <SoftButton variant="ghost" size="sm" onClick={removeLast}>
-              <Trash2 className="h-4 w-4" /> Remover último
-            </SoftButton>
-          )}
-        </div>
-
-        {/* Regra de Negócio: Limitação de Tempo (PMBOK 8) */}
-        <div className="mt-8 pt-6 border-t border-slate-200/80">
-          <div className="rounded-2xl bg-muted/70 p-4 border border-slate-200/70 flex items-start gap-3">
-            <Clock className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-            <div className="text-xs text-slate-600 leading-relaxed">
-              <span className="font-bold text-foreground block mb-0.5">
-                Regra Oficial de Tempo da Simulação
+              <button
+                type="button"
+                onClick={() => setAvatarModalOpenFor(i)}
+                aria-label={d.avatarId ? `Trocar avatar (${d.avatarName})` : "Escolher avatar"}
+                className="rounded-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/60"
+              >
+                {d.avatarImage ? (
+                  <img
+                    src={d.avatarImage}
+                    alt=""
+                    className="h-24 w-24 rounded-full bg-[#dce3f5] object-cover ring-4 ring-primary"
+                  />
+                ) : (
+                  <span className="flex h-24 w-24 items-center justify-center rounded-full border-[3px] border-dashed border-border text-muted-foreground">
+                    <Plus className="h-9 w-9" />
+                  </span>
+                )}
+              </button>
+              <span className="text-xl font-black leading-tight">
+                {i === 3 ? "Colíder de Design e Telas" : ROLE_LABELS[d.role]}
               </span>
-              Para exercitar a tomada de decisão sob pressão controlada e a comunicação assertiva, a
-              simulação opera com <strong>2 minutos para discussão e leitura coletiva</strong> do
-              dilema e <strong>45 segundos para cada voto individual</strong>.
+              <span className="text-base font-bold text-muted-foreground">{card.headline}</span>
+              <label className="flex w-full flex-col gap-1.5 text-left">
+                <span className="text-sm font-extrabold text-muted-foreground">Nome</span>
+                <input
+                  type="text"
+                  value={d.name}
+                  placeholder="Digite o nome"
+                  onChange={(e) => updateDraft(i, { name: e.target.value })}
+                  className="h-12 w-full rounded-xl border-2 border-border bg-background px-4 text-lg font-extrabold text-foreground placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none"
+                />
+              </label>
+              <SoftButton
+                variant="ghost"
+                size="sm"
+                className="w-full"
+                onClick={() => setAvatarModalOpenFor(i)}
+              >
+                {d.avatarId ? <Pencil className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                {d.avatarId ? "Trocar avatar" : "Escolher avatar"}
+              </SoftButton>
             </div>
-          </div>
-        </div>
-
-        {!rolesValid && (
-          <p className="mt-6 rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm font-semibold text-amber-900">
-            Cada partida precisa de um Gerente de Projetos, um Líder Técnico e um Líder de Design e
-            Telas. Falta: {missingRoles.map((r) => ROLE_LABELS[r]).join(", ")}.
-          </p>
+          );
+        })}
+        {drafts.length < 4 && (
+          <button
+            type="button"
+            onClick={() => setDrafts([...drafts, { name: "", role: "uxLead" }])}
+            className="flex min-h-48 flex-col items-center justify-center gap-2 rounded-3xl border-2 border-dashed border-border p-5 text-muted-foreground transition hover:border-primary hover:text-foreground"
+          >
+            <Plus className="h-9 w-9" />
+            <span className="text-lg font-extrabold">4º jogador</span>
+            <span className="text-sm font-bold">colíder de Design e Telas</span>
+          </button>
         )}
-        {rolesValid && !namesAndAvatarsValid && (
-          <p className="mt-6 text-center text-xs text-muted-foreground">
-            Preencha o nome e escolha um avatar para cada jogador.
-          </p>
-        )}
-        <div className="mt-8 flex items-center justify-between">
-          <SoftButton variant="ghost" size="md" onClick={() => goTo("intro")}>
-            ← Voltar ao Guia
-          </SoftButton>
+      </div>
 
-          <SoftButton size="lg" onClick={handleStart} disabled={!allValid}>
-            Iniciar Partida
-          </SoftButton>
-        </div>
-      </SoftCard>
+      <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+        <SoftButton variant="ghost" onClick={() => goTo("intro")}>
+          <ArrowLeft className="h-5 w-5" /> Voltar
+        </SoftButton>
+        {!allValid && (
+          <span className="text-base font-bold text-warning" role="status">
+            Falta {missing[0]}
+            {missing.length > 1 ? ` (+${missing.length - 1})` : ""}
+          </span>
+        )}
+        <SoftButton size="lg" onClick={() => allValid && setupPlayers(drafts)} disabled={!allValid}>
+          Começar <ArrowRight className="h-5 w-5" />
+        </SoftButton>
+      </div>
 
       {avatarModalOpenFor !== null && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in">
-          <div className="w-full max-w-3xl rounded-3xl bg-white p-6 shadow-2xl animate-in zoom-in-95">
-            <div className="mb-6 flex items-center justify-between border-b pb-4">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Escolher avatar"
+        >
+          <div className="w-full max-w-3xl rounded-3xl border border-border bg-card p-6 shadow-2xl">
+            <div className="mb-5 flex items-center justify-between border-b border-border pb-4">
               <div>
-                <h2 className="text-xl font-bold text-slate-800">Escolha o Avatar</h2>
-                <p className="text-sm text-slate-500 mt-1">
-                  Jogador: {drafts[avatarModalOpenFor].name || `Jogador ${avatarModalOpenFor + 1}`}
+                <h2 className="m-0 text-2xl font-black">Escolha o avatar</h2>
+                <p className="m-0 mt-1 text-base font-bold text-muted-foreground">
+                  {drafts[avatarModalOpenFor].name ||
+                    (avatarModalOpenFor === 3
+                      ? "Colíder de Design e Telas"
+                      : ROLE_LABELS[drafts[avatarModalOpenFor].role])}
                 </p>
               </div>
               <button
+                type="button"
                 onClick={() => setAvatarModalOpenFor(null)}
-                className="rounded-full p-2 hover:bg-slate-100 transition-colors"
+                aria-label="Fechar"
+                className="flex h-11 w-11 items-center justify-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"
               >
-                <X className="h-6 w-6 text-slate-500" />
+                <X className="h-6 w-6" />
               </button>
             </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-h-[60vh] overflow-y-auto p-1 custom-scrollbar">
+            <div className="grid max-h-[60vh] grid-cols-2 gap-3 overflow-y-auto p-1 sm:grid-cols-4">
               {AVAILABLE_AVATARES.map((avatar) => {
-                const assignedTo = getAvatarAssignedTo(avatar.id, avatarModalOpenFor);
-                const isSelectedByMe = drafts[avatarModalOpenFor].avatarId === avatar.id;
-                const isUnavailable = !!assignedTo;
-
+                const owner = takenBy(avatar.id, avatarModalOpenFor);
+                const mine = drafts[avatarModalOpenFor].avatarId === avatar.id;
                 return (
                   <button
                     key={avatar.id}
+                    type="button"
+                    disabled={!!owner}
                     onClick={() => {
-                      if (!isUnavailable) {
-                        updateDraft(avatarModalOpenFor, {
-                          avatarId: avatar.id,
-                          avatarName: avatar.name,
-                          avatarImage: avatar.imagePath,
-                        });
-                        setAvatarModalOpenFor(null);
-                      }
+                      updateDraft(avatarModalOpenFor, {
+                        avatarId: avatar.id,
+                        avatarName: avatar.name,
+                        avatarImage: avatar.imagePath,
+                      });
+                      setAvatarModalOpenFor(null);
                     }}
-                    disabled={isUnavailable}
-                    className={`group relative flex flex-col items-center gap-3 rounded-2xl border-2 p-4 text-center transition-all duration-200 ${
-                      isSelectedByMe
-                        ? "border-primary bg-primary/5 ring-2 ring-primary/20 shadow-sm"
-                        : isUnavailable
-                          ? "border-slate-100 bg-slate-50/50 opacity-60 cursor-not-allowed"
-                          : "border-slate-200 bg-white hover:border-primary/50 hover:shadow-md"
-                    }`}
+                    className={cn(
+                      "flex flex-col items-center gap-2 rounded-2xl border-2 p-3 transition",
+                      mine
+                        ? "border-primary bg-primary/10"
+                        : owner
+                          ? "cursor-not-allowed border-transparent opacity-50"
+                          : "border-border hover:border-primary",
+                    )}
                   >
                     <img
                       src={avatar.imagePath}
-                      alt={avatar.name}
-                      className={`h-20 w-20 rounded-full object-cover shadow-sm bg-slate-100 transition-transform duration-200 ${
-                        isUnavailable ? "grayscale" : "group-hover:scale-105"
-                      }`}
+                      alt=""
+                      className={cn(
+                        "h-20 w-20 rounded-full bg-[#dce3f5] object-cover",
+                        owner && "grayscale",
+                      )}
                     />
-                    <div>
-                      <p
-                        className={`font-bold ${isUnavailable ? "text-slate-500" : "text-slate-800"}`}
-                      >
-                        {avatar.name}
-                      </p>
-                      {isUnavailable ? (
-                        <p className="mt-1 text-xs font-medium text-red-500 bg-red-50 px-2 py-0.5 rounded-full inline-block">
-                          Selecionado por {assignedTo.split(" ")[0]}
-                        </p>
-                      ) : avatar.preferredRoles ? (
-                        <p className="mt-1 text-xs text-muted-foreground">
-                          {avatar.preferredRoles
-                            .map((r) => ROLE_LABELS[r].split(" ")[0])
-                            .join(", ")}
-                        </p>
-                      ) : null}
-                    </div>
+                    <span className="text-base font-extrabold">{avatar.name}</span>
+                    {owner && (
+                      <span className="text-xs font-bold text-muted-foreground">
+                        com {owner.split(" ")[0]}
+                      </span>
+                    )}
                   </button>
                 );
               })}

@@ -1,11 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
-import { SkipForward, Timer, MessageSquare, Check, ArrowRight } from "lucide-react";
-import { SoftCard } from "@/components/ui/SoftCard";
+import { ArrowRight, Check, MessageSquare, SkipForward } from "lucide-react";
 import { SoftButton } from "@/components/ui/SoftButton";
 import { Avatar3D } from "@/components/ui/Avatar3D";
+import { AltBadge } from "@/components/game/AltShape";
+import { GameScreen } from "@/components/game/GameScreen";
+import { TeamBar } from "@/components/game/TeamBar";
+import { TimerRing } from "@/components/game/TimerRing";
 import { useGameStore } from "@/store/gameStore";
 import { tallyVotes } from "@/lib/gameLogic";
-import { ROLE_LABELS, type DebateSpeaker, type Player } from "@/types";
+import { ROLE_LABELS, type AlternativeKey, type DebateSpeaker, type Player } from "@/types";
 
 /**
  * Ordem de fala: (1) quem se absteve, (2) quem votou na alternativa menos escolhida,
@@ -55,6 +58,9 @@ export function DebateStructured() {
     return buildOrder(players, voteCountOf);
   }, [players, round1, tally]);
 
+  const voteOf = (playerId: string): AlternativeKey | "abstain" | undefined =>
+    round1.find((v) => v.playerId === playerId)?.alternative;
+
   const [idx, setIdx] = useState(0);
   const speaker = speakers[idx];
   const [secondsLeft, setSecondsLeft] = useState(speaker?.durationSeconds ?? 30);
@@ -66,130 +72,125 @@ export function DebateStructured() {
   // O tempo de fala não pode ser pausado: a pressão do tempo faz parte da dinâmica.
   useEffect(() => {
     if (secondsLeft <= 0) return;
-
-    const timer = setInterval(() => {
-      setSecondsLeft((s) => s - 1);
-    }, 1000);
-
-    return () => clearInterval(timer);
+    const t = setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
+    return () => clearTimeout(t);
   }, [secondsLeft]);
 
-  const next = () => {
-    if (idx < speakers.length - 1) setIdx(idx + 1);
-  };
-
-  const mm = String(Math.floor(secondsLeft / 60)).padStart(2, "0");
-  const ss = String(secondsLeft % 60).padStart(2, "0");
+  if (!speaker) return null;
   const isLast = idx === speakers.length - 1;
-  const fullDur = speaker?.durationSeconds ?? 30;
-  const progress = ((fullDur - secondsLeft) / fullDur) * 100;
+  const isPm = speaker.playerRole === "pm";
+  const spVote = voteOf(speaker.playerId);
 
   return (
-    <div className="mx-auto min-h-screen max-w-3xl px-6 py-10">
-      <div className="mb-6 text-center animate-float-in">
-        <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-          <MessageSquare className="h-5 w-5" />
-        </div>
-        <p className="text-xs uppercase tracking-[0.2em] text-primary font-bold">
-          Debate Estruturado
-        </p>
-        <h1 className="mt-1 text-2xl font-bold tracking-tight">Defendam seus pontos de vista</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Quem se absteve e a voz minoritária falam primeiro, para evitar o efeito manada
-          (Groupthink).
-        </p>
-      </div>
-
-      {/* Card do Orador Atual */}
-      <SoftCard className="mb-6 animate-pop-in text-center p-8">
-        <div className="flex flex-col items-center">
-          <div className="relative">
+    <GameScreen footer={<TeamBar status={{ [speaker.playerId]: "falando" }} />}>
+      <div className="grid flex-1 grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_400px]">
+        <section
+          className="flex flex-col items-center gap-4 text-center animate-pop-in"
+          key={speaker.playerId}
+        >
+          <span className="flex items-center gap-2 text-lg font-extrabold text-primary">
+            <MessageSquare className="h-5 w-5" />
+            {isPm ? "Síntese do GP" : "Debate · a minoria fala primeiro"}
+          </span>
+          <div className="rounded-full ring-4 ring-primary">
             <Avatar3D
               initials={speaker.playerName.slice(0, 2)}
               role={speaker.playerRole}
               imageUrl={speaker.avatarImage}
               size="lg"
+              className="h-36 w-36 text-4xl"
             />
-            <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
-              {speaker.order}
+          </div>
+          <div className="flex flex-col items-center gap-1">
+            <span className="text-4xl font-black">{speaker.playerName}</span>
+            <span className="flex items-center gap-2 text-lg font-extrabold text-muted-foreground">
+              {ROLE_LABELS[speaker.playerRole]}
+              {spVote && spVote !== "abstain" && (
+                <>
+                  · defende <AltBadge k={spVote} size="sm" />
+                </>
+              )}
+              {spVote === "abstain" && <> · se absteve: conte o que faltou para decidir</>}
             </span>
           </div>
+          <TimerRing
+            secondsLeft={secondsLeft}
+            totalSeconds={speaker.durationSeconds}
+            label="Tempo de fala"
+            size={140}
+          />
+        </section>
 
-          <p className="mt-3 text-2xl font-bold text-foreground">{speaker.playerName}</p>
-          <span className="mt-1 inline-block rounded-full bg-primary/10 px-3 py-0.5 text-xs font-semibold text-primary">
-            {ROLE_LABELS[speaker.playerRole]}
+        <aside className="flex flex-col gap-3">
+          <span className="text-sm font-black tracking-wide text-muted-foreground">
+            ORDEM DE FALA
           </span>
-
-          {/* Cronômetro */}
-          <div className="mt-6 flex flex-col items-center">
-            <div className="flex items-center gap-1.5 text-muted-foreground text-xs font-semibold uppercase tracking-wider">
-              <Timer className="h-4 w-4" />
-              <span>Tempo de Fala</span>
-            </div>
-
-            <p className="mt-1 font-mono text-6xl font-extrabold tabular-nums text-foreground">
-              {mm}:{ss}
-            </p>
-
-            <div className="mt-4 h-2.5 w-full max-w-xs overflow-hidden rounded-full bg-muted shadow-inner">
+          {speakers.map((s, i) => {
+            const v = voteOf(s.playerId);
+            const active = i === idx;
+            return (
               <div
-                className={`h-full rounded-full transition-all duration-1000 ease-linear ${
-                  secondsLeft <= 5 ? "bg-rose-500" : "bg-primary"
-                }`}
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-          </div>
-
-          {/* Controles de Tempo */}
-          <div className="mt-6 flex flex-wrap justify-center gap-2">
+                key={s.playerId + i}
+                className={
+                  active
+                    ? "flex items-center gap-3 rounded-2xl border-2 border-primary bg-muted px-4 py-3"
+                    : "flex items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3"
+                }
+              >
+                <span
+                  className={
+                    i < idx
+                      ? "flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-success text-[#0e1633]"
+                      : active
+                        ? "flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-base font-black text-primary-foreground"
+                        : "flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted text-base font-black text-muted-foreground"
+                  }
+                >
+                  {i < idx ? <Check className="h-4 w-4" strokeWidth={3} /> : s.order}
+                </span>
+                <Avatar3D
+                  initials={s.playerName.slice(0, 2)}
+                  role={s.playerRole}
+                  imageUrl={s.avatarImage}
+                  size="sm"
+                />
+                <div className="flex min-w-0 flex-1 flex-col leading-tight">
+                  <span className="truncate text-lg font-black">{s.playerName}</span>
+                  <span className="text-sm font-bold text-muted-foreground">
+                    {s.playerRole === "pm"
+                      ? "GP · síntese"
+                      : v === "abstain"
+                        ? "Absteve-se"
+                        : v
+                          ? `Votou ${v.toUpperCase()}`
+                          : ""}
+                  </span>
+                </div>
+                <span
+                  className={
+                    active
+                      ? "text-sm font-extrabold text-primary"
+                      : "text-sm font-bold text-muted-foreground"
+                  }
+                >
+                  {s.durationSeconds} s
+                </span>
+              </div>
+            );
+          })}
+          <div className="mt-2 flex gap-3">
             {!isLast ? (
-              <SoftButton size="sm" onClick={next}>
-                <SkipForward className="h-4 w-4 mr-1.5" /> Próximo Colega
+              <SoftButton className="flex-1" onClick={() => setIdx(idx + 1)}>
+                Próximo <SkipForward className="h-5 w-5" />
               </SoftButton>
             ) : (
-              <SoftButton variant="success" size="sm" onClick={beginRound2}>
-                Encerrar Debate · Votação Final <ArrowRight className="h-4 w-4 ml-1.5" />
+              <SoftButton className="flex-1" onClick={beginRound2}>
+                Votação final <ArrowRight className="h-5 w-5" />
               </SoftButton>
             )}
           </div>
-        </div>
-      </SoftCard>
-
-      {/* Ordem dos Falantes */}
-      <SoftCard variant="inset" className="p-4">
-        <p className="mb-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-          Fila de Fala
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-          {speakers.map((s, i) => (
-            <div
-              key={s.playerId + i}
-              className={`flex items-center gap-2.5 rounded-2xl p-2.5 text-xs transition-all ${
-                i === idx
-                  ? "bg-card font-bold text-foreground shadow-sm ring-2 ring-primary/40"
-                  : i < idx
-                    ? "bg-muted/40 text-muted-foreground opacity-60"
-                    : "bg-muted/60 text-muted-foreground"
-              }`}
-            >
-              <div
-                className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-                  i < idx
-                    ? "bg-emerald-100 text-emerald-700"
-                    : i === idx
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-slate-200 text-slate-600"
-                }`}
-              >
-                {i < idx ? <Check className="h-3.5 w-3.5" /> : s.order}
-              </div>
-              <span className="truncate flex-1">{s.playerName}</span>
-              <span className="text-xs text-muted-foreground">{s.durationSeconds}s</span>
-            </div>
-          ))}
-        </div>
-      </SoftCard>
-    </div>
+        </aside>
+      </div>
+    </GameScreen>
   );
 }

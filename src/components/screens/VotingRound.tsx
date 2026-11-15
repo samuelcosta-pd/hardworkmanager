@@ -1,27 +1,31 @@
 import { useState } from "react";
-import { EyeOff, Lock, HelpCircle, AlertTriangle, UserX } from "lucide-react";
-import { SoftCard } from "@/components/ui/SoftCard";
+import { ArrowRight, EyeOff, Lock, UserX } from "lucide-react";
 import { SoftButton } from "@/components/ui/SoftButton";
+import { SoftCard } from "@/components/ui/SoftCard";
 import { Avatar3D } from "@/components/ui/Avatar3D";
-import { CountdownTimer } from "@/components/ui/CountdownTimer";
+import { ALT_BG, AltShape } from "@/components/game/AltShape";
+import { GameScreen } from "@/components/game/GameScreen";
+import { HelpButton } from "@/components/game/ResponsibleBadge";
+import { TeamBar, type PlayerStatus } from "@/components/game/TeamBar";
+import { TimerRing } from "@/components/game/TimerRing";
 import { useCountdown } from "@/hooks/useCountdown";
 import { useGameStore } from "@/store/gameStore";
-import { ROLE_LABELS, type AlternativeKey, type VoteChoice } from "@/types";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { ROLE_LABELS, type VoteChoice } from "@/types";
 import { detectTechTerms } from "@/data/glossary";
+import { shortTitle } from "@/lib/text";
 
 interface Props {
   round: 1 | 2;
 }
 
+/** Voto secreto: o dispositivo passa de mão em mão; cada alternativa é um bloco grande com cor e forma. */
 export function VotingRound({ round }: Props) {
   const {
     players,
     events,
-    matchDeck,
     currentEventIndex,
     currentVoterIndex,
-    pendingDelayedImpacts,
+    votes,
     timerSettings,
     castVote,
     finalizeRound1,
@@ -29,14 +33,13 @@ export function VotingRound({ round }: Props) {
     goTo,
   } = useGameStore();
 
-  const event = events && events.length > 0 ? events[currentEventIndex] || events[0] : null;
+  const event = events[currentEventIndex] ?? events[0];
   const [handoff, setHandoff] = useState(true);
 
-  const allVoted = currentVoterIndex >= (players?.length || 0) && (players?.length || 0) > 0;
-  const player = players && players[currentVoterIndex] ? players[currentVoterIndex] : null;
+  const allVoted = players.length > 0 && currentVoterIndex >= players.length;
+  const player = players[currentVoterIndex] ?? null;
 
-  // Regra de desempate: na 2ª votação o GP não pode se abster, para que seu voto
-  // sempre esteja entre as alternativas empatadas.
+  // Regra de desempate: na 2ª votação o GP não pode se abster.
   const mustVote = round === 2 && player?.role === "pm";
 
   const handleVote = (choice: VoteChoice) => {
@@ -45,263 +48,174 @@ export function VotingRound({ round }: Props) {
     setHandoff(true);
   };
 
-  // Cronômetro individual de voto: só roda quando handoff === false
   const countdown = useCountdown({
     durationSeconds: timerSettings.votingSeconds,
     enabled: !handoff && !allVoted && timerSettings.enabled && timerSettings.votingSeconds > 0,
-    onExpire: () => {
-      // Quando o tempo de voto expira, o voto é computado como abstenção
-      // (exceto para o GP na 2ª votação, que precisa votar para desempatar).
-      handleVote("abstain");
-    },
+    onExpire: () => handleVote("abstain"),
   });
 
-  // 1. Quando todos já votaram nesta rodada
+  const roundVotes = votes.filter((v) => v.round === round);
+  const status: Record<string, PlayerStatus> = {};
+  players.forEach((p, i) => {
+    const v = roundVotes.find((x) => x.playerId === p.id);
+    status[p.id] = v
+      ? v.alternative === "abstain"
+        ? "absteve"
+        : "votou"
+      : i === currentVoterIndex
+        ? "vez"
+        : "aguarda";
+  });
+  const footer = <TeamBar status={status} />;
+
   if (allVoted) {
     return (
-      <div className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-6">
-        <SoftCard className="w-full text-center animate-pop-in p-8">
-          <Lock className="mx-auto h-12 w-12 text-primary" />
-          <h2 className="mt-4 text-2xl font-bold text-foreground">Todos os votos registrados!</h2>
-          <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+      <GameScreen footer={footer} className="items-center justify-center">
+        <SoftCard className="w-full max-w-xl p-10 text-center animate-pop-in">
+          <Lock className="mx-auto h-14 w-14 text-primary" />
+          <h2 className="mt-4 text-3xl font-black">Todos votaram</h2>
+          <p className="mt-2 text-lg font-semibold text-muted-foreground">
             {round === 1
-              ? "Reúna toda a equipe ao redor da tela para ver se houve consenso ou se será necessário um debate estruturado."
-              : "Votação final concluída. Hora de aplicar a decisão colegiada e conferir o impacto no projeto."}
+              ? "Reúnam-se em volta da tela para ver o resultado."
+              : "Vamos aplicar a decisão da equipe."}
           </p>
-          <div className="mt-6">
-            <SoftButton size="lg" onClick={round === 1 ? finalizeRound1 : finalizeRound2}>
-              {round === 1 ? "Revelar votos da equipe" : "Aplicar decisão final"}
-            </SoftButton>
-          </div>
+          <SoftButton
+            className="mt-6"
+            size="lg"
+            onClick={round === 1 ? finalizeRound1 : finalizeRound2}
+          >
+            {round === 1 ? "Revelar votos" : "Aplicar decisão"} <ArrowRight className="h-5 w-5" />
+          </SoftButton>
         </SoftCard>
-      </div>
+      </GameScreen>
     );
   }
 
-  // 2. Proteção caso não haja evento ou jogadores configurados
-  if (!event || (!player && !allVoted)) {
+  if (!event || !player) {
     return (
-      <div className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center px-6 py-20 text-center">
-        <SoftCard className="w-full p-8 text-center animate-pop-in">
-          <h2 className="text-xl font-bold text-foreground">Sessão de votação aguardando dados</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Configure os integrantes da equipe para iniciar o jogo.
-          </p>
-          <div className="mt-6 flex justify-center">
-            <SoftButton size="lg" onClick={() => goTo("setup")}>
-              Ir para Configuração
-            </SoftButton>
-          </div>
+      <div className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center px-6 text-center">
+        <SoftCard className="w-full p-8">
+          <h2 className="text-2xl font-black">Votação sem jogadores</h2>
+          <SoftButton className="mt-6" size="lg" onClick={() => goTo("setup")}>
+            Montar a equipe
+          </SoftButton>
         </SoftCard>
       </div>
     );
   }
 
-  const imminentEco = pendingDelayedImpacts?.find((p) => p.remainingEvents === 1);
-
-  // 3. Tela de Bloqueio (Handoff Intermediário para Voto Secreto)
   if (handoff) {
-    if (!player) return null;
     return (
-      <div className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center px-6 text-center">
-        <SoftCard className="w-full animate-pop-in p-8">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl bg-primary/10">
-            <EyeOff className="h-8 w-8 text-primary" />
-          </div>
-          <p className="mt-4 text-xs font-bold uppercase tracking-[0.2em] text-primary">
-            Votação Secreta · Rodada {round}
-          </p>
-          <h2 className="mt-2 text-2xl font-bold text-foreground">Passe o dispositivo para:</h2>
-
-          <div className="my-6 flex flex-col items-center gap-2 rounded-2xl bg-muted/60 p-4">
+      <GameScreen footer={footer} className="items-center justify-center">
+        <div className="flex w-full max-w-md flex-col items-center gap-5 text-center animate-pop-in">
+          <span className="flex items-center gap-2 text-lg font-extrabold text-primary">
+            <EyeOff className="h-6 w-6" /> Voto secreto · rodada {round}
+          </span>
+          <h2 className="m-0 text-3xl font-black">Passe o dispositivo para</h2>
+          <div className="rounded-full ring-4 ring-primary">
             <Avatar3D
               initials={player.name.slice(0, 2)}
               role={player.role}
               imageUrl={player.avatarImage}
               size="lg"
+              className="h-28 w-28 text-3xl"
             />
-            <p className="text-xl font-bold text-foreground">{player.name}</p>
-            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
+          </div>
+          <div className="flex flex-col">
+            <span className="text-4xl font-black">{player.name}</span>
+            <span className="text-lg font-extrabold text-muted-foreground">
               {ROLE_LABELS[player.role]}
             </span>
           </div>
-
-          <p className="text-xs text-muted-foreground leading-relaxed">
-            Mantenha seu voto confidencial. O tempo para decisão individual começará assim que você
-            clicar abaixo.
+          <p className="m-0 text-base font-semibold text-muted-foreground">
+            Os outros não olham a tela. O tempo começa quando você tocar no botão.
           </p>
-
-          <div className="mt-6">
-            <SoftButton size="lg" className="w-full" onClick={() => setHandoff(false)}>
-              Sou {player.name}, estou pronto
-            </SoftButton>
-          </div>
-        </SoftCard>
-      </div>
+          <SoftButton size="lg" className="w-full" onClick={() => setHandoff(false)}>
+            Sou {player.name}, vou votar
+          </SoftButton>
+        </div>
+      </GameScreen>
     );
   }
 
-  // 4. Tela Ativa de Votação
+  const terms = detectTechTerms(event.alternatives.map((a) => a.text).join(" "), 4);
+
   return (
-    <div className="mx-auto min-h-screen max-w-2xl px-6 py-8">
-      {/* Cabeçalho de Navegação, Cronômetro de Voto e Contexto do Jogador */}
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        {/* Sem botão "Voltar": ele reiniciava o tempo de voto. */}
-        <span />
-
-        <div className="flex items-center gap-2.5">
-          {timerSettings.enabled && timerSettings.votingSeconds > 0 && (
-            <CountdownTimer
-              formatted={countdown.formatted}
-              progressPercent={countdown.progressPercent}
-              isUrgent={countdown.isUrgent}
-              isExpired={countdown.isExpired}
-              label="Tempo de Voto"
-              size="sm"
-            />
-          )}
-
-          <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
-            Jogador {currentVoterIndex + 1} de {players.length} · Rodada {round}
-          </span>
-        </div>
-      </div>
-
-      <div className="mb-5 flex items-center gap-3 animate-float-in">
-        <Avatar3D
-          initials={player!.name.slice(0, 2)}
-          role={player!.role}
-          imageUrl={player!.avatarImage}
-          size="md"
-        />
-        <div>
-          <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
-            Voto Secreto de:
-          </p>
-          <p className="font-bold text-foreground text-lg">
-            {player!.name} ·{" "}
-            <span className="font-normal text-muted-foreground">{ROLE_LABELS[player!.role]}</span>
-          </p>
-        </div>
-      </div>
-
-      {/* Resumo do Dilema */}
-      <SoftCard className="mb-4 animate-float-in" variant="inset">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-primary">
-            Dilema {currentEventIndex + 1} de {matchDeck.length}
-          </span>
-          <span className="text-xs sm:text-sm font-semibold text-muted-foreground">
-            {event.domainTag}
-          </span>
-        </div>
-        <h2 className="mt-1.5 text-lg sm:text-xl font-bold text-foreground">{event.title}</h2>
-      </SoftCard>
-
-      {/* Alerta de Radar se houver Eco Iminente na Votação */}
-      {pendingDelayedImpacts && pendingDelayedImpacts.length > 0 && (
-        <div
-          className={`mb-4 flex items-center gap-2 p-3 rounded-xl border text-xs sm:text-sm animate-pop-in ${
-            imminentEco
-              ? "bg-rose-50 border-rose-300 text-rose-950 ring-1 ring-rose-200"
-              : "bg-amber-50 border-amber-200 text-amber-900"
-          }`}
-        >
-          <AlertTriangle
-            className={`w-4 h-4 shrink-0 ${imminentEco ? "text-rose-600" : "text-amber-600"}`}
+    <GameScreen footer={footer} className="max-w-7xl">
+      <div className="flex flex-wrap items-center gap-5">
+        <div className="rounded-full ring-4 ring-primary">
+          <Avatar3D
+            initials={player.name.slice(0, 2)}
+            role={player.role}
+            imageUrl={player.avatarImage}
+            size="lg"
           />
-          <span className="font-semibold">
-            {imminentEco
-              ? `Atenção: O eco de "${imminentEco.sourceEventTitle}" detonará no término deste dilema!`
-              : `Radar: Há ${pendingDelayedImpacts.length} débito(s) sistêmico(s) ativo(s) no radar.`}
+        </div>
+        <div className="flex min-w-0 flex-1 flex-col">
+          <span className="flex items-center gap-1.5 text-base font-extrabold text-muted-foreground">
+            <Lock className="h-4 w-4 shrink-0" /> Voto secreto · rodada {round}
+            <span className="hidden sm:inline">· {shortTitle(event.title)}</span>
+          </span>
+          <span className="text-2xl font-black sm:text-3xl">
+            {player.name}, qual é a sua escolha?
           </span>
         </div>
-      )}
+        {timerSettings.enabled && timerSettings.votingSeconds > 0 && (
+          <TimerRing
+            secondsLeft={countdown.secondsLeft}
+            totalSeconds={timerSettings.votingSeconds}
+            label="Seu tempo"
+            size={96}
+          />
+        )}
+      </div>
 
-      {/* Cards de Alternativas com Formatação Uniforme */}
-      <TooltipProvider delayDuration={200}>
-        <div className="space-y-4">
-          {event.alternatives.map((alt, i) => {
-            const techTerms = detectTechTerms(alt.text);
-            return (
-              // O botão de ajuda fica fora do botão de voto (botão dentro de botão é HTML inválido
-              // e causava erro de hidratação).
-              <div key={alt.key} className="relative">
-                <button
-                  type="button"
-                  onClick={() => handleVote(alt.key)}
-                  className="group block w-full rounded-3xl bg-card p-5 sm:p-6 pr-12 sm:pr-14 text-left shadow-[var(--shadow-soft)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-soft-lg)] border-2 border-transparent hover:border-primary/40 animate-float-in"
-                  style={{ animationDelay: `${i * 60}ms` }}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary text-primary-foreground font-black text-xl uppercase shadow-sm group-hover:scale-105 transition-transform">
-                      {alt.key}
-                    </div>
-
-                    <div className="min-w-0 flex-1 pt-0.5">
-                      <p className="font-semibold text-foreground text-base sm:text-lg leading-relaxed group-hover:text-primary transition-colors">
-                        {alt.text}
-                      </p>
-                    </div>
-                  </div>
-                </button>
-
-                {/* Ícone de ajuda com termos técnicos */}
-                {techTerms.length > 0 && (
-                  <Tooltip>
-                    <TooltipTrigger
-                      type="button"
-                      className="absolute right-4 top-5 sm:right-5 sm:top-6 text-muted-foreground/70 hover:text-primary transition-colors"
-                      aria-label="Ver termos técnicos"
-                    >
-                      <HelpCircle className="h-5 w-5" />
-                    </TooltipTrigger>
-                    <TooltipContent
-                      side="top"
-                      align="end"
-                      className="max-w-xs rounded-2xl bg-slate-900 p-3 text-left shadow-xl"
-                    >
-                      <p className="text-xs font-bold uppercase tracking-wider text-primary mb-2">
-                        Termos Técnicos (PMBOK 8)
-                      </p>
-                      <div className="space-y-2">
-                        {techTerms.map(({ term, definition }) => (
-                          <div key={term}>
-                            <p className="text-xs font-semibold text-white capitalize">{term}</p>
-                            <p className="text-xs text-slate-300 leading-relaxed">{definition}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </TooltipContent>
-                  </Tooltip>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </TooltipProvider>
-
-      {mustVote && (
-        <p className="mt-6 rounded-xl border border-primary/30 bg-primary/5 p-3 text-center text-xs sm:text-sm font-semibold text-primary">
-          {countdown.isExpired
-            ? "Tempo esgotado. Como Gerente de Projetos, você precisa votar: em caso de empate, seu voto decide."
-            : "Como Gerente de Projetos, você não pode se abster nesta votação: em caso de empate, seu voto decide."}
-        </p>
-      )}
-
-      {/* Botão de Abstenção Voluntária */}
-      {!mustVote && (
-        <div className="mt-6 flex justify-center">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        {event.alternatives.map((alt, i) => (
           <button
+            key={alt.key}
             type="button"
-            onClick={() => handleVote("abstain")}
-            className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-rose-600 transition-colors py-2 px-4 rounded-xl hover:bg-rose-50 border border-transparent hover:border-rose-200"
+            onClick={() => handleVote(alt.key)}
+            className={`${ALT_BG[alt.key]} flex min-h-40 flex-col gap-4 rounded-3xl p-6 text-left text-white shadow-[0_6px_0_rgba(0,0,0,0.3)] transition hover:-translate-y-1 hover:brightness-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary animate-float-in lg:min-h-72`}
+            style={{ animationDelay: `${i * 60}ms` }}
           >
-            <UserX className="h-3.5 w-3.5" />
-            Não me sinto apto a escolher · Registrar Abstenção
+            <span className="flex items-center gap-3">
+              <AltShape k={alt.key} size={28} />
+              <span className="text-3xl font-black uppercase">{alt.key}</span>
+            </span>
+            <span className="text-xl font-extrabold leading-relaxed sm:text-2xl">{alt.text}</span>
           </button>
-        </div>
-      )}
-    </div>
+        ))}
+      </div>
+
+      <div className="flex flex-wrap items-center justify-center gap-4">
+        {terms.length > 0 && (
+          <span className="flex items-center gap-2 text-base font-bold text-muted-foreground">
+            <HelpButton label="Termos técnicos das alternativas">
+              <div className="flex flex-col gap-3">
+                {terms.map(({ term, definition }) => (
+                  <div key={term}>
+                    <p className="m-0 font-extrabold capitalize">{term}</p>
+                    <p className="m-0 text-sm font-semibold">{definition}</p>
+                  </div>
+                ))}
+              </div>
+            </HelpButton>
+            Termos
+          </span>
+        )}
+        {mustVote ? (
+          <span className="rounded-2xl border border-primary/40 bg-primary/10 px-4 py-2.5 text-center text-base font-extrabold text-primary">
+            {countdown.isExpired
+              ? "Tempo esgotado. Como GP, você precisa votar: em caso de empate, seu voto decide."
+              : "Como GP, você não pode se abster nesta votação: em caso de empate, seu voto decide."}
+          </span>
+        ) : (
+          <SoftButton variant="ghost" size="sm" onClick={() => handleVote("abstain")}>
+            <UserX className="h-5 w-5" /> Não sei escolher · abster-me
+          </SoftButton>
+        )}
+      </div>
+    </GameScreen>
   );
 }

@@ -117,3 +117,40 @@ export const ROLES_DETAILS: Record<PlayerRole, RoleDetail> = {
     },
   },
 };
+
+/** Versão curta para as telas (menos texto, leitura no projetor). */
+export const ROLE_CARDS: Record<
+  PlayerRole,
+  { headline: string; mission: string; decides: string[]; notMine: string[] }
+> = {
+  pm: {
+    headline: "Cuida das pessoas",
+    mission: "Monta, protege e motiva a equipe. Negocia recursos com a Reitoria.",
+    decides: [
+      "Contratações, alocação e horas extras",
+      "Clima, conflitos e bem-estar",
+      "Desempata a votação final",
+    ],
+    notMine: ["Arquitetura técnica e banco de dados", "Detalhes visuais das telas"],
+  },
+  techLead: {
+    headline: "Cuida da tecnologia",
+    mission: "Responde por servidores, nuvem, licenças e ambientes de teste.",
+    decides: [
+      "Infraestrutura e capacidade técnica",
+      "Estimativas de esforço técnico",
+      "Retrabalho e qualidade do código",
+    ],
+    notMine: ["Negociar bolsas e orçamento com a Reitoria", "Conflitos de pessoas e RH"],
+  },
+  uxLead: {
+    headline: "Cuida dos usuários",
+    mission: "Garante que o sistema seja fácil de usar e acessível para alunos e professores.",
+    decides: [
+      "Usabilidade e testes com usuários",
+      "Acessibilidade das telas",
+      "Experiência de quem usa o sistema",
+    ],
+    notMine: ["Servidores e infraestrutura de nuvem", "Prazos do calendário acadêmico"],
+  },
+};

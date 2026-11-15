@@ -1,15 +1,16 @@
-import { CheckCircle2, TrendingDown, Gauge, Sparkle, Heart, BookOpen } from "lucide-react";
-import { SoftCard } from "@/components/ui/SoftCard";
+import { AlertTriangle, ArrowRight, Clock, TrendingDown } from "lucide-react";
 import { SoftButton } from "@/components/ui/SoftButton";
-import { MetricBar, KNOWLEDGE_BAR_PROPS } from "@/components/ui/MetricBar";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { AltBadge } from "@/components/game/AltShape";
+import { Chip } from "@/components/game/Chip";
+import { GameScreen } from "@/components/game/GameScreen";
 import { useGameStore } from "@/store/gameStore";
 import { MENTOR } from "@/data/avatars";
+import { shortTitle } from "@/lib/text";
 
+/** Revisão de ciclo: decisões do ciclo, consequências sofridas e ameaças pendentes. */
 export function SprintReview() {
   const {
     currentSprint,
-    metrics,
     decisions,
     matchDeck,
     pendingDelayedImpacts,
@@ -18,139 +19,97 @@ export function SprintReview() {
     goTo,
   } = useGameStore();
 
-  const sprintDecisions = decisions.slice(-3);
+  const cycleDecisions = decisions.slice(-3);
   const isMatchComplete = decisions.length >= matchDeck.length;
 
   return (
-    <div className="mx-auto min-h-screen max-w-4xl px-6 py-12">
-      <div className="mb-8 text-center animate-float-in">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-3xl bg-indigo-100">
-          <CheckCircle2 className="h-8 w-8 text-indigo-600" />
-        </div>
-        <p className="text-xs uppercase tracking-[0.2em] text-primary">Encerramento de Ciclo</p>
-        <h1 className="mt-1 text-3xl font-bold tracking-tight">
-          Ciclo de Entregas {currentSprint} Concluído
-        </h1>
-      </div>
-
-      <div className="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-slate-100 mb-8 animate-float-in">
-        <Avatar className="h-16 w-16 border-2 border-primary/20">
-          <AvatarImage src={MENTOR.imagePath} alt={MENTOR.name} />
-          <AvatarFallback>HE</AvatarFallback>
-        </Avatar>
-        <div>
-          <h2 className="text-xl font-bold text-slate-800">Revisão do Ciclo : {MENTOR.name}</h2>
-          <p className="text-slate-600">
-            "Mais um ciclo fechado. Confiram como ficaram nossas métricas principais após as últimas
-            decisões. Lembrem-se que atalhos tomados hoje podem retornar como dívida no futuro."
-          </p>
+    <GameScreen>
+      <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center animate-float-in">
+        <img
+          src={MENTOR.imagePath}
+          alt="Helena"
+          className="h-20 w-20 shrink-0 rounded-full bg-[#dce3f5] object-cover ring-4 ring-primary"
+        />
+        <div className="flex flex-col gap-1">
+          <span className="text-lg font-extrabold text-primary">
+            Revisão do ciclo {currentSprint}
+          </span>
+          <h1 className="m-0 text-3xl font-black tracking-tight sm:text-4xl">
+            {isMatchComplete
+              ? "Fim da partida: vejam como o projeto terminou"
+              : "Atalhos de hoje podem voltar amanhã"}
+          </h1>
         </div>
       </div>
 
-      <section className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 animate-pop-in">
-        <MetricBar
-          label="Capacidade de Entrega"
-          value={metrics.capacidadeEntrega}
-          icon={<Gauge className="h-5 w-5 text-primary" />}
-        />
-        <MetricBar
-          label="Qualidade do Produto"
-          value={metrics.qualidadeProduto}
-          icon={<Sparkle className="h-5 w-5 text-primary" />}
-        />
-        <MetricBar
-          label="Saúde da Equipe"
-          value={metrics.saudeEquipe}
-          icon={<Heart className="h-5 w-5 text-primary" />}
-        />
-        <MetricBar
-          {...KNOWLEDGE_BAR_PROPS}
-          value={metrics.conhecimentoOrganizacional}
-          icon={<BookOpen className="h-5 w-5 text-primary" />}
-        />
-      </section>
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <section className="flex flex-col gap-3 rounded-3xl border border-border bg-card p-5 lg:col-span-1">
+          <span className="text-xl font-black">Decisões do ciclo</span>
+          {cycleDecisions.map((d, i) => (
+            <div key={i} className="flex items-center gap-3 rounded-2xl bg-muted p-3">
+              <AltBadge k={d.chosenAlternative} size="sm" />
+              <span className="text-base font-bold leading-snug">{shortTitle(d.eventTitle)}</span>
+            </div>
+          ))}
+        </section>
 
-      <div className="grid gap-6 md:grid-cols-2 mb-8">
-        <SoftCard className="animate-float-in">
-          <h2 className="text-lg font-bold mb-4">Decisões deste Ciclo</h2>
-          <div className="space-y-3">
-            {sprintDecisions.map((d, i) => (
-              <div key={i} className="bg-slate-50 p-3 rounded-lg border border-slate-100 text-sm">
-                <p className="font-semibold text-slate-800">{d.eventTitle}</p>
-                <p className="text-slate-600 mt-1 line-clamp-2">{d.chosenText}</p>
+        <section className="flex flex-col gap-3 rounded-3xl border border-border bg-card p-5">
+          <span className="flex items-center gap-2 text-xl font-black">
+            <Clock className="h-5 w-5 text-warning" /> Ameaças pendentes
+          </span>
+          {pendingDelayedImpacts.length === 0 ? (
+            <span className="text-base font-semibold text-muted-foreground">Nenhuma no radar.</span>
+          ) : (
+            pendingDelayedImpacts.map((p) => (
+              <div key={p.id} className="flex flex-col gap-1 rounded-2xl bg-muted p-3">
+                <span className="text-base font-bold leading-snug">
+                  {shortTitle(p.sourceEventTitle)}
+                </span>
+                <span className="text-sm font-extrabold text-warning">
+                  {isMatchComplete
+                    ? "Ficou para depois do projeto"
+                    : `Volta em ${p.remainingEvents} ${p.remainingEvents === 1 ? "dilema" : "dilemas"}`}
+                </span>
               </div>
-            ))}
-          </div>
-        </SoftCard>
+            ))
+          )}
+        </section>
 
-        <SoftCard className="animate-float-in">
-          <h2 className="text-lg font-bold mb-4">Radar de Impactos Diferidos</h2>
-
-          <div className="space-y-4">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-amber-700 mb-2">
-                Ameaças Pendentes
-              </p>
-              {pendingDelayedImpacts.length === 0 ? (
-                <p className="text-sm text-slate-500 italic">
-                  Nenhum risco sistêmico mapeado no radar.
-                </p>
-              ) : (
-                <div className="space-y-2">
-                  {pendingDelayedImpacts.map((p, i) => (
-                    <div
-                      key={i}
-                      className="flex justify-between items-center bg-amber-50 p-2 rounded text-sm text-amber-800 border border-amber-100"
-                    >
-                      <span>Eco de: {p.sourceEventTitle}</span>
-                      <span className="font-semibold">
-                        {isMatchComplete
-                          ? "Ficou para depois do projeto"
-                          : `Em ${p.remainingEvents} ${p.remainingEvents === 1 ? "dilema" : "dilemas"}`}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-red-700 mb-2">
-                Impactos Sofridos até Aqui
-              </p>
-              {appliedDelayedImpactsHistory.length === 0 ? (
-                <p className="text-sm text-slate-500 italic">
-                  Nenhum impacto passado retornou ainda.
-                </p>
-              ) : (
-                <div className="space-y-2 max-h-32 overflow-y-auto pr-2">
-                  {appliedDelayedImpactsHistory.map((a, i) => (
-                    <div
-                      key={i}
-                      className="bg-red-50 p-2 rounded text-sm text-red-800 border border-red-100 flex items-start gap-2"
-                    >
-                      <TrendingDown className="w-4 h-4 mt-0.5 shrink-0" />
-                      <span>{a.sourceEventTitle}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </SoftCard>
+        <section className="flex flex-col gap-3 rounded-3xl border border-border bg-card p-5">
+          <span className="flex items-center gap-2 text-xl font-black">
+            <TrendingDown className="h-5 w-5 text-critical" /> Consequências sofridas
+          </span>
+          {appliedDelayedImpactsHistory.length === 0 ? (
+            <span className="text-base font-semibold text-muted-foreground">
+              Nenhuma até agora.
+            </span>
+          ) : (
+            appliedDelayedImpactsHistory.map((a, i) => (
+              <div key={i} className="flex items-start gap-2 rounded-2xl bg-muted p-3">
+                <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-critical" />
+                <span className="text-base font-bold leading-snug">
+                  {shortTitle(a.sourceEventTitle)}
+                </span>
+              </div>
+            ))
+          )}
+        </section>
       </div>
 
-      <div className="flex justify-center mt-8 animate-float-in">
+      <div className="mt-auto flex flex-wrap items-center justify-between gap-4">
+        <Chip>
+          {decisions.length} de {matchDeck.length} dilemas
+        </Chip>
         {isMatchComplete ? (
           <SoftButton size="lg" onClick={() => goTo("debriefing")}>
-            Avançar para o Debriefing Final
+            Debriefing final <ArrowRight className="h-5 w-5" />
           </SoftButton>
         ) : (
           <SoftButton size="lg" onClick={startNextSprint}>
-            Iniciar Ciclo {currentSprint + 1}
+            Começar o ciclo {currentSprint + 1} <ArrowRight className="h-5 w-5" />
           </SoftButton>
         )}
       </div>
-    </div>
+    </GameScreen>
   );
 }

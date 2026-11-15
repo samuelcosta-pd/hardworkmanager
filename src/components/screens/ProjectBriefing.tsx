@@ -1,176 +1,80 @@
-import {
-  Calendar,
-  GraduationCap,
-  MapPin,
-  ShieldCheck,
-  Target,
-  User,
-  Users,
-  CheckCircle,
-  XCircle,
-  Clock,
-  ArrowRight,
-} from "lucide-react";
-import { SoftCard } from "@/components/ui/SoftCard";
+import { ArrowRight, LayoutGrid, Target } from "lucide-react";
 import { SoftButton } from "@/components/ui/SoftButton";
+import { Chip } from "@/components/game/Chip";
+import { METRIC_META } from "@/components/game/GameHud";
+import { INITIAL_METRICS, MATCH_DILEMMA_COUNT } from "@/lib/gameLogic";
 import { useGameStore } from "@/store/gameStore";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MENTOR } from "@/data/avatars";
 
+const RULE: Record<string, string> = {
+  capacidadeEntrega: "abaixo de 40: fim de jogo",
+  qualidadeProduto: "abaixo de 40: fim de jogo",
+  saudeEquipe: "abaixo de 40: fim de jogo",
+  conhecimentoOrganizacional: "abaixo de 20: perdas de Entrega dobram",
+};
+
+/** Missão do projeto em uma tela: o que entregar, como é a partida e as métricas iniciais. */
 export function ProjectBriefing() {
-  const beginEvent = useGameStore((s) => s.beginEvent);
+  const goTo = useGameStore((s) => s.goTo);
 
   return (
-    <div className="mx-auto min-h-screen max-w-4xl px-6 py-12">
-      <div className="mb-8 animate-float-in">
-        <div className="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-slate-100 mb-6">
-          <Avatar className="h-16 w-16 border-2 border-primary/20">
-            <AvatarImage src={MENTOR.imagePath} alt={MENTOR.name} />
-            <AvatarFallback>HE</AvatarFallback>
-          </Avatar>
-          <div>
-            <h2 className="text-xl font-bold text-slate-800">Briefing Inicial com Helena</h2>
-            <p className="text-slate-600">
-              "Atenção, equipe. O cenário é crítico. O projeto anterior de modernização fracassou
-              por falta de alinhamento. Agora, a responsabilidade é de vocês. Leiam o escopo com
-              atenção antes de começarmos."
-            </p>
+    <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-8 sm:px-8">
+      <main className="flex flex-1 flex-col justify-center gap-6 animate-float-in">
+        <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+          <img
+            src={MENTOR.imagePath}
+            alt="Helena"
+            className="h-20 w-20 shrink-0 rounded-full bg-[#dce3f5] object-cover ring-4 ring-primary"
+          />
+          <div className="flex flex-col gap-1">
+            <span className="text-lg font-extrabold text-primary">A missão de vocês</span>
+            <h1 className="m-0 text-3xl font-black leading-tight tracking-tight sm:text-4xl">
+              Modernizar o sistema acadêmico sem quebrar a equipe
+            </h1>
           </div>
         </div>
 
-        <p className="text-xs uppercase tracking-[0.2em] text-primary">Contexto do Projeto</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight">
-          Modernização do Sistema de Gestão Acadêmica
-        </h1>
-        <p className="mt-4 text-muted-foreground leading-relaxed">
-          O sistema atual da instituição sofre com quedas nos períodos de matrícula, usabilidade
-          defasada e alto acoplamento de código. O desafio de vocês é entregar a nova versão
-          equilibrando a <strong>Eficiência</strong>, a <strong>Qualidade Técnica</strong> e a{" "}
-          <strong>Saúde da Equipe</strong> frente a imprevistos.
-        </p>
-      </div>
-
-      <div className="grid gap-6 md:grid-cols-2 mb-8">
-        <SoftCard className="animate-float-in">
-          <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
-              <User className="h-5 w-5" />
+        <div className="flex flex-col gap-4 md:flex-row">
+          <section className="flex flex-1 flex-col gap-3 rounded-3xl border border-border bg-card p-6">
+            <span className="flex items-center gap-2.5 text-xl font-black">
+              <Target className="h-6 w-6 text-primary" /> O que entregar
+            </span>
+            <div className="flex flex-wrap gap-2">
+              <Chip className="bg-muted text-foreground">Matrícula online</Chip>
+              <Chip className="bg-muted text-foreground">Histórico mais rápido</Chip>
+              <Chip className="bg-muted text-foreground">Integração com bolsas</Chip>
             </div>
-            <div>
-              <h2 className="text-lg font-semibold">Seu Papel na Simulação</h2>
-              <ul className="mt-2 space-y-1 text-sm text-muted-foreground list-disc list-inside">
-                <li>
-                  <strong>Quem você representa:</strong> O Comitê Gestor (Liderança do Projeto).
-                </li>
-                <li>
-                  <strong>Sua responsabilidade:</strong> Tomar decisões táticas e colegiadas para
-                  gerenciar crises.
-                </li>
-                <li>
-                  <strong>Impacto:</strong> Suas decisões definem o futuro tecnológico da
-                  instituição e o bem-estar dos desenvolvedores.
-                </li>
-              </ul>
-            </div>
-          </div>
-        </SoftCard>
-
-        <SoftCard className="animate-float-in">
-          <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
-              <Target className="h-5 w-5" />
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold">O Que Precisa Ser Entregue</h2>
-              <ul className="mt-2 space-y-1 text-sm text-muted-foreground list-disc list-inside">
-                <li>Novo módulo de matrículas online.</li>
-                <li>Emissão otimizada de históricos.</li>
-                <li>Integração com novo sistema de bolsas.</li>
-              </ul>
-            </div>
-          </div>
-        </SoftCard>
-      </div>
-
-      <div className="mb-6 grid gap-4 md:grid-cols-4">
-        <SoftCard className="animate-float-in">
-          <Clock className="mb-3 h-5 w-5 text-primary" />
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">Prazo</p>
-          <p className="mt-1 font-semibold text-sm">3 Meses</p>
-        </SoftCard>
-        <SoftCard className="animate-float-in">
-          <Calendar className="mb-3 h-5 w-5 text-primary" />
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">
-            Ciclos de Trabalho
-          </p>
-          <p className="mt-1 font-semibold text-sm">6 Ciclos (15 dias)</p>
-        </SoftCard>
-        <SoftCard className="animate-float-in">
-          <Users className="mb-3 h-5 w-5 text-primary" />
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">
-            Partes Interessadas
-          </p>
-          <p className="mt-1 font-semibold text-sm">Reitoria e Pró-Reitorias</p>
-        </SoftCard>
-        <SoftCard className="animate-float-in">
-          <GraduationCap className="mb-3 h-5 w-5 text-primary" />
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">Público</p>
-          <p className="mt-1 font-semibold text-sm">Alunos e Docentes</p>
-        </SoftCard>
-      </div>
-
-      <div className="grid gap-6 md:grid-cols-2 mb-8">
-        <SoftCard className="animate-float-in border-l-4 border-l-green-500">
-          <div className="flex items-start gap-4">
-            <CheckCircle className="h-6 w-6 text-green-500 shrink-0" />
-            <div>
-              <h2 className="text-md font-semibold">Critérios de Sucesso</h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Entregar os módulos críticos mantendo Eficiência, Qualidade e Saúde da Equipe acima
-                de 40 pontos no término da simulação.
-              </p>
-            </div>
-          </div>
-        </SoftCard>
-        <SoftCard className="animate-float-in border-l-4 border-l-red-500">
-          <div className="flex items-start gap-4">
-            <XCircle className="h-6 w-6 text-red-500 shrink-0" />
-            <div>
-              <h2 className="text-md font-semibold">Critérios de Falha</h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Qualquer uma das três métricas principais chegar abaixo de 40 pontos (nível crítico)
-                durante os eventos.
-              </p>
-            </div>
-          </div>
-        </SoftCard>
-      </div>
-
-      <SoftCard className="mb-8 animate-float-in" variant="inset">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Métricas Iniciais do Projeto
-        </p>
-        <div className="grid gap-3 sm:grid-cols-4">
-          {[
-            { label: "Capacidade de Entrega", value: "100 pts (Estável)" },
-            { label: "Qualidade do Produto", value: "100 pts (Estável)" },
-            { label: "Saúde da Equipe", value: "100 pts (Estável)" },
-            { label: "Conhecimento Organizacional", value: "50 pts (Base)" },
-          ].map((s) => (
-            <div
-              key={s.label}
-              className="rounded-2xl bg-card p-3 shadow-sm border border-slate-100"
-            >
-              <p className="text-xs text-muted-foreground">{s.label}</p>
-              <p className="font-bold text-foreground text-sm mt-0.5">{s.value}</p>
-            </div>
-          ))}
+          </section>
+          <section className="flex flex-col gap-2 rounded-3xl border border-border bg-card p-6 md:w-96">
+            <span className="flex items-center gap-2.5 text-xl font-black">
+              <LayoutGrid className="h-6 w-6 text-primary" /> A partida
+            </span>
+            <span className="text-lg font-bold text-muted-foreground">
+              {MATCH_DILEMMA_COUNT} dilemas em 2 ciclos de 3, com revisão ao fim de cada ciclo.
+            </span>
+          </section>
         </div>
-      </SoftCard>
 
-      <div className="flex justify-end">
-        <SoftButton size="lg" onClick={() => useGameStore.getState().goTo("dashboard")}>
-          Acessar Sala de Comando e Iniciar <ArrowRight className="ml-2 h-4 w-4" />
+        <section className="flex flex-col gap-3">
+          <span className="text-xl font-black">Vocês começam assim</span>
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+            {METRIC_META.map((m) => (
+              <div key={m.key} className="flex flex-col gap-1 rounded-2xl bg-muted p-4">
+                <span className="flex items-center gap-2 text-base font-extrabold text-muted-foreground">
+                  <span className="text-success">{m.icon}</span>
+                  {m.label}
+                </span>
+                <span className="text-3xl font-black tabular-nums">{INITIAL_METRICS[m.key]}</span>
+                <span className="text-sm font-bold text-muted-foreground">{RULE[m.key]}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <div className="mt-8 flex justify-end">
+        <SoftButton size="lg" onClick={() => goTo("dashboard")}>
+          Ir para a sala de comando <ArrowRight className="h-5 w-5" />
         </SoftButton>
       </div>
     </div>

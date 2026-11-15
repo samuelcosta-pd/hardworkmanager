@@ -1,64 +1,50 @@
-import { useState } from "react";
 import {
-  Gauge,
-  Heart,
-  Sparkle,
-  Clock,
-  ShieldCheck,
   AlertTriangle,
-  Lightbulb,
+  ArrowRight,
   ChevronDown,
   ChevronUp,
-  ArrowRight,
+  Clock,
+  Lightbulb,
+  ShieldCheck,
   TrendingDown,
-  BookOpen,
+  TrendingUp,
 } from "lucide-react";
-import { SoftCard } from "@/components/ui/SoftCard";
+import { useState, type ReactNode } from "react";
 import { SoftButton } from "@/components/ui/SoftButton";
-import { MetricBar, KNOWLEDGE_BAR_PROPS } from "@/components/ui/MetricBar";
+import { SoftCard } from "@/components/ui/SoftCard";
+import { AltBadge } from "@/components/game/AltShape";
+import { Chip } from "@/components/game/Chip";
+import { GameScreen } from "@/components/game/GameScreen";
+import { METRIC_META } from "@/components/game/GameHud";
 import { useGameStore } from "@/store/gameStore";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MENTOR } from "@/data/avatars";
+import { shortTitle } from "@/lib/text";
 import type { Metrics } from "@/types";
+import { cn } from "@/lib/utils";
 
-function SvgTrendUp({ className = "w-4 h-4" }: { className?: string }) {
+function DeltaCard({ label, icon, value }: { label: string; icon: ReactNode; value: number }) {
+  const up = value > 0;
   return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
-      <polyline points="17 6 23 6 23 12" />
-    </svg>
+    <div className="flex items-center gap-3 rounded-2xl bg-muted px-5 py-4">
+      <span className={up ? "text-success" : "text-critical"}>{icon}</span>
+      <span className="flex-1 text-lg font-extrabold">{label}</span>
+      <span
+        className={cn(
+          "flex items-center gap-1 text-3xl font-black tabular-nums",
+          up ? "text-success" : "text-critical",
+        )}
+      >
+        {up ? <TrendingUp className="h-6 w-6" /> : <TrendingDown className="h-6 w-6" />}
+        {up ? `+${value}` : value}
+      </span>
+    </div>
   );
 }
 
-function SvgTrendDown({ className = "w-4 h-4" }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polyline points="23 18 13.5 8.5 8.5 13.5 1 6" />
-      <polyline points="17 18 23 18 23 12" />
-    </svg>
-  );
-}
-
+/** Consequência: veredito da Helena e variação real das métricas; lições abrem só quando pedidas. */
 export function ConsequenceFeedback() {
   const {
     decisions,
-    metrics,
     nextEvent,
     gameOverReason,
     events,
@@ -67,365 +53,170 @@ export function ConsequenceFeedback() {
     delayedImpactsTriggeredThisRound,
     goTo,
   } = useGameStore();
-  const [showPedagogicalDetails, setShowPedagogicalDetails] = useState(false);
+  const [showLessons, setShowLessons] = useState(false);
 
-  const decision = decisions && decisions.length > 0 ? decisions[decisions.length - 1] : null;
-  const event = events && events.length > 0 ? events[currentEventIndex] || events[0] : null;
+  const decision = decisions[decisions.length - 1];
+  const event = events[currentEventIndex] ?? events[0];
   const alt =
-    event && decision ? event.alternatives.find((a) => a.key === decision.chosenAlternative) : null;
+    event && decision
+      ? event.alternatives.find((a) => a.key === decision.chosenAlternative)
+      : undefined;
 
   if (!decision || !event || !alt) {
     return (
-      <div className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center px-6 py-20 text-center">
-        <SoftCard className="w-full p-8 text-center animate-pop-in">
-          <h2 className="text-xl font-bold text-foreground">Nenhuma decisão recente para exibir</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Retorne ao painel para prosseguir na simulação.
-          </p>
-          <div className="mt-6 flex justify-center">
-            <SoftButton size="lg" onClick={() => goTo("dashboard")}>
-              Ir ao Painel
-            </SoftButton>
-          </div>
+      <div className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center px-6 text-center">
+        <SoftCard className="w-full p-8">
+          <h2 className="text-2xl font-black">Nenhuma decisão para mostrar</h2>
+          <SoftButton className="mt-6" size="lg" onClick={() => goTo("dashboard")}>
+            Ir ao painel
+          </SoftButton>
         </SoftCard>
       </div>
     );
   }
 
-  const totalDilemmas = matchDeck.length;
-  const isLast = currentEventIndex >= totalDilemmas - 1;
-  const isSprintEnd = (currentEventIndex + 1) % 3 === 0;
-
-  const ctaLabel = gameOverReason
+  const isLast = currentEventIndex >= matchDeck.length - 1;
+  const isCycleEnd = (currentEventIndex + 1) % 3 === 0;
+  const cta = gameOverReason
     ? "Ver desfecho do projeto"
-    : isLast
-      ? "Avançar para a Revisão Final do Ciclo"
-      : isSprintEnd
-        ? "Avançar para Revisão do Ciclo"
-        : "Avançar para o Próximo Dilema";
+    : isLast || isCycleEnd
+      ? "Revisão do ciclo"
+      : "Próximo dilema";
 
-  // Variação real da decisão (inclui a penalidade cruzada e os limites 0–100).
-  // Partidas salvas antes desta versão não têm immediateDelta: usa o valor nominal.
+  // Variação real (inclui a penalidade cruzada e os limites 0–100); partidas antigas usam o valor nominal.
   const delta: Partial<Metrics> = decision.immediateDelta ?? alt.impacts;
-
-  const renderDeltaChip = (key: keyof Metrics, label: string) => {
-    const v = delta[key] ?? 0;
-    if (v === 0) return null;
-    const isPositive = v > 0;
-
-    return (
-      <div
-        className={`flex items-center justify-between p-3 rounded-2xl border ${
-          isPositive
-            ? "bg-emerald-50/70 border-emerald-200 text-emerald-800"
-            : "bg-rose-50/70 border-rose-200 text-rose-800"
-        }`}
-      >
-        <span className="text-xs font-semibold">{label}</span>
-        <span className="flex items-center gap-1 text-sm font-bold">
-          {isPositive ? (
-            <SvgTrendUp className="w-4 h-4 text-emerald-600" />
-          ) : (
-            <SvgTrendDown className="w-4 h-4 text-rose-600" />
-          )}
-          {isPositive ? `+${v}` : v}
-        </span>
-      </div>
-    );
-  };
+  const changed = METRIC_META.filter((m) => (delta[m.key] ?? 0) !== 0);
+  const good = alt.goodBad === "good";
 
   return (
-    <div className="mx-auto min-h-screen max-w-3xl px-6 py-10">
-      {/* Cabeçalho */}
-      <div className="mb-6 animate-float-in">
-        <p className="text-xs sm:text-sm uppercase tracking-[0.2em] text-primary font-bold">
-          Desfecho da Decisão
-        </p>
-        <h1 className="mt-1 text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
-          {decision.eventTitle}
-        </h1>
+    <GameScreen deltas={delta}>
+      <div className="flex flex-wrap items-center gap-2 animate-float-in">
+        <Chip tone={good ? "success" : "warning"}>
+          {good ? "Decisão recomendada" : "Decisão arriscada"}
+        </Chip>
+        <Chip>
+          Escolha da equipe: <AltBadge k={decision.chosenAlternative} size="sm" />
+        </Chip>
+        <span className="text-base font-bold text-muted-foreground">
+          {shortTitle(decision.eventTitle)}
+        </span>
       </div>
 
-      {/* Alerta Destacado: Ecos e Impactos Diferidos que Detonaram Nesta Rodada */}
-      {delayedImpactsTriggeredThisRound && delayedImpactsTriggeredThisRound.length > 0 && (
-        <div className="mb-6 space-y-3 animate-pop-in">
-          {delayedImpactsTriggeredThisRound.map((impact, i) => (
-            <div
-              key={i}
-              className="bg-rose-50 p-5 rounded-2xl border-2 border-rose-400 text-rose-950 shadow-md ring-2 ring-rose-100"
-            >
-              <div className="flex items-start gap-3.5">
-                <div className="p-2.5 rounded-xl bg-rose-200 text-rose-800 shrink-0">
-                  <AlertTriangle className="w-6 h-6 text-rose-700" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between gap-2 flex-wrap">
-                    <span className="text-xs sm:text-sm font-black uppercase tracking-wider bg-rose-200 text-rose-900 px-2.5 py-0.5 rounded-full border border-rose-300">
-                      💥 Consequência Detonou Nesta Rodada
-                    </span>
-                    <span className="text-xs sm:text-sm font-bold text-rose-700">
-                      Eco de: {impact.sourceEventTitle}
-                    </span>
-                  </div>
-                  <p className="text-base sm:text-lg font-semibold mt-2.5 text-rose-900 leading-relaxed">
-                    {impact.narrative}
-                  </p>
-                  {impact.metricsDelta && (
-                    <div className="mt-3 flex flex-wrap items-center gap-2 pt-2.5 border-t border-rose-200">
-                      <span className="text-xs sm:text-sm font-bold text-rose-800">
-                        Penalidade aplicada no time:
-                      </span>
-                      {Object.entries(impact.metricsDelta).map(([k, v]) => {
-                        if (!v) return null;
-                        const label =
-                          k === "capacidadeEntrega"
-                            ? "Capacidade"
-                            : k === "qualidadeProduto"
-                              ? "Qualidade"
-                              : k === "saudeEquipe"
-                                ? "Saúde"
-                                : "Conhecimento";
-                        return (
-                          <span
-                            key={k}
-                            className="text-xs sm:text-sm font-extrabold bg-white border border-rose-300 px-2.5 py-1 rounded-lg text-rose-800 shadow-2xs"
-                          >
-                            {label}: {v > 0 ? `+${v}` : v}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              </div>
+      {gameOverReason && (
+        <div
+          className="flex items-start gap-3 rounded-3xl bg-critical p-5 text-[#0e1633] animate-pop-in"
+          role="alert"
+        >
+          <AlertTriangle className="mt-1 h-7 w-7 shrink-0" />
+          <div>
+            <p className="m-0 text-xl font-black">Limite crítico atingido</p>
+            <p className="m-0 text-lg font-bold">{gameOverReason}</p>
+          </div>
+        </div>
+      )}
+
+      {delayedImpactsTriggeredThisRound.map((impact, i) => (
+        <div
+          key={i}
+          className="flex items-start gap-3 rounded-3xl border-2 border-critical bg-card p-5 animate-pop-in"
+        >
+          <AlertTriangle className="mt-1 h-7 w-7 shrink-0 text-critical" />
+          <div className="flex flex-col gap-1.5">
+            <span className="text-base font-extrabold text-critical">
+              Consequência de "{shortTitle(impact.sourceEventTitle)}"
+            </span>
+            <p className="m-0 text-lg font-bold leading-relaxed">{impact.narrative}</p>
+            <div className="flex flex-wrap gap-2">
+              {METRIC_META.filter((m) => impact.metricsDelta?.[m.key]).map((m) => (
+                <Chip key={m.key} tone="critical">
+                  {m.label} {(impact.metricsDelta[m.key] ?? 0) > 0 ? "+" : ""}
+                  {impact.metricsDelta[m.key]}
+                </Chip>
+              ))}
             </div>
+          </div>
+        </div>
+      ))}
+
+      <section className="flex flex-col gap-5 rounded-[2rem] border border-border bg-card p-6 sm:flex-row sm:p-8 animate-float-in">
+        <img
+          src={MENTOR.imagePath}
+          alt="Helena"
+          className="h-24 w-24 shrink-0 rounded-full bg-[#dce3f5] object-cover"
+        />
+        <div className="flex flex-col gap-3">
+          <span className="text-base font-extrabold text-muted-foreground">Helena, consultora</span>
+          <p className="m-0 text-2xl font-extrabold leading-snug sm:text-3xl">
+            {decision.feedbackNarrative}
+          </p>
+          <span className="text-lg font-extrabold text-primary">Conceito: {alt.pmbokConcept}</span>
+        </div>
+      </section>
+
+      {changed.length > 0 && (
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+          {changed.map((m) => (
+            <DeltaCard key={m.key} label={m.long} icon={m.icon} value={delta[m.key] ?? 0} />
           ))}
         </div>
       )}
-
-      {/* Alerta de Novo Risco Registrado no Radar */}
+      {decision.penaltyApplied && (
+        <p className="m-0 rounded-2xl border border-critical/60 p-4 text-base font-bold">
+          Penalidade cruzada: com o Conhecimento Organizacional abaixo de 20, a perda de Capacidade
+          de Entrega desta decisão dobrou.
+        </p>
+      )}
       {alt.delayedImpacts && alt.delayedImpacts.length > 0 && (
-        <div className="mb-6 flex items-start gap-3.5 bg-amber-50 p-4 sm:p-5 rounded-2xl border-2 border-amber-300 text-amber-950 shadow-sm animate-pop-in">
-          <Clock className="w-6 h-6 text-amber-600 mt-0.5 shrink-0" />
-          <div className="flex-1">
-            <div className="flex items-center justify-between gap-2 flex-wrap">
-              <span className="text-xs sm:text-sm font-black uppercase tracking-wider bg-amber-200 text-amber-900 px-2.5 py-0.5 rounded-full border border-amber-300">
-                ⚠️ Risco Sistêmico Registrado no Radar
-              </span>
-              <span className="text-xs sm:text-sm font-extrabold bg-white px-2.5 py-0.5 rounded border border-amber-200 text-amber-800">
-                Detonará em {alt.delayedImpacts[0].triggerAfterEvents}{" "}
-                {alt.delayedImpacts[0].triggerAfterEvents === 1 ? "dilema" : "dilemas"}
-              </span>
-            </div>
-            <p className="text-base sm:text-lg mt-2 text-amber-900 leading-relaxed font-medium">
-              Esta escolha postergou um problema técnico ou de processos. Um eco foi engatilhado no{" "}
-              <strong>Radar de Ameaças</strong> e retornará com consequências nas métricas caso a
-              equipe não se atente.
-            </p>
-          </div>
-        </div>
+        <p className="m-0 flex items-center gap-2 text-base font-bold text-warning">
+          <Clock className="h-5 w-5 shrink-0" />
+          Esta escolha deixou uma consequência para depois. Ela aparece no radar.
+        </p>
       )}
 
-      {/* INSIGHT CARD 1: Análise da Mentora Helena & Conceito PMBOK 8 */}
-      <SoftCard className="mb-5 animate-float-in p-6">
-        <div className="flex items-start gap-4">
-          <Avatar className="h-16 w-16 border-2 border-primary/20 shrink-0 shadow-sm">
-            <AvatarImage src={MENTOR.imagePath} alt={MENTOR.name} />
-            <AvatarFallback>HE</AvatarFallback>
-          </Avatar>
-          <div className="min-w-0 flex-1">
-            <div className="flex items-center justify-between gap-2">
-              <p className="text-base font-bold text-foreground">{MENTOR.name} · Mentoria Ágil</p>
-              <span
-                className={`text-xs sm:text-sm font-bold px-2.5 py-0.5 rounded-full ${
-                  alt.goodBad === "good"
-                    ? "bg-emerald-100 text-emerald-800"
-                    : "bg-rose-100 text-rose-800"
-                }`}
-              >
-                {alt.goodBad === "good" ? "Decisão Recomendada" : "Decisão Arriscada"}
-              </span>
-            </div>
-
-            <p className="mt-2.5 text-base sm:text-lg text-slate-700 leading-relaxed font-medium">
-              "{decision.feedbackNarrative}"
+      {showLessons && (
+        <section className="grid grid-cols-1 gap-4 md:grid-cols-2 animate-float-in">
+          <div className="rounded-3xl bg-muted p-5">
+            <p className="m-0 mb-2 flex items-center gap-2 text-lg font-black">
+              <Lightbulb className="h-5 w-5 text-primary" /> Lições
             </p>
-
-            {/* Conceito PMBOK 8 em Destaque */}
-            <div className="mt-4 rounded-2xl bg-primary/5 p-4 border border-primary/20">
-              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-primary">
-                Conceito de Recursos (PMBOK 8)
+            <ul className="m-0 flex flex-col gap-2 pl-5 text-lg font-semibold leading-relaxed">
+              {alt.learnings.map((l, i) => (
+                <li key={i}>{l}</li>
+              ))}
+            </ul>
+          </div>
+          {(alt.risksEvaded.length > 0 || alt.otherConsequences.length > 0) && (
+            <div className="rounded-3xl bg-muted p-5">
+              <p className="m-0 mb-2 flex items-center gap-2 text-lg font-black">
+                <ShieldCheck className="h-5 w-5 text-success" />{" "}
+                {alt.risksEvaded.length > 0 ? "Riscos evitados" : "Outras consequências"}
               </p>
-              <p className="text-base sm:text-lg font-bold text-foreground mt-0.5">
-                {alt.pmbokConcept}
-              </p>
-            </div>
-          </div>
-        </div>
-      </SoftCard>
-
-      {/* INSIGHT CARD 2: Impacto nas Métricas */}
-      <SoftCard className="mb-5 animate-pop-in p-6">
-        <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">
-          Impacto Direto nas Barras de Desempenho
-        </p>
-
-        {/* Chips de Variação Imediata da Decisão */}
-        <div className="mb-4">
-          <p className="text-xs font-semibold text-slate-600 mb-2">Variação da Decisão Tomada:</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            {renderDeltaChip("capacidadeEntrega", "Capacidade de Entrega")}
-            {renderDeltaChip("qualidadeProduto", "Qualidade")}
-            {renderDeltaChip("saudeEquipe", "Saúde da Equipe")}
-            {renderDeltaChip("conhecimentoOrganizacional", "Conhecimento")}
-          </div>
-          {decision.penaltyApplied && (
-            <p className="mt-2.5 rounded-xl border border-rose-200 bg-rose-50 p-2.5 text-xs font-semibold text-rose-900">
-              Penalidade cruzada: com o Conhecimento Organizacional abaixo de 20, a perda de
-              Capacidade de Entrega desta decisão foi dobrada (falta de documentação e silos de
-              conhecimento tornam a recuperação mais lenta).
-            </p>
-          )}
-        </div>
-
-        {/* Penalidade de Ecos Ativados Nesta Rodada */}
-        {delayedImpactsTriggeredThisRound && delayedImpactsTriggeredThisRound.length > 0 && (
-          <div className="mb-4 bg-rose-50/70 p-3 rounded-xl border border-rose-200">
-            <p className="text-xs font-bold uppercase tracking-wider text-rose-800 mb-2 flex items-center gap-1.5">
-              <TrendingDown className="w-3.5 h-3.5" /> Penalidade Cumulativa do Eco:
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              {delayedImpactsTriggeredThisRound.map((imp, idx) => {
-                if (!imp.metricsDelta) return null;
-                return Object.entries(imp.metricsDelta).map(([k, v]) => {
-                  if (!v) return null;
-                  const label =
-                    k === "capacidadeEntrega"
-                      ? "Capacidade"
-                      : k === "qualidadeProduto"
-                        ? "Qualidade"
-                        : k === "saudeEquipe"
-                          ? "Saúde"
-                          : "Conhecimento";
-                  return (
-                    <div
-                      key={`${idx}_${k}`}
-                      className="flex items-center justify-between p-2.5 rounded-xl border bg-white border-rose-200 text-rose-900"
-                    >
-                      <span className="text-xs font-semibold">{label}</span>
-                      <span className="text-xs font-bold text-rose-700">{v > 0 ? `+${v}` : v}</span>
-                    </div>
-                  );
-                });
-              })}
-            </div>
-          </div>
-        )}
-
-        {/* Barras de Métricas com Níveis Atualizados */}
-        <div className="space-y-4 pt-4 border-t border-slate-100">
-          <MetricBar
-            label="Capacidade de Entrega"
-            value={metrics.capacidadeEntrega}
-            icon={<Gauge className="h-5 w-5 text-primary" />}
-          />
-          <MetricBar
-            label="Qualidade do Produto"
-            value={metrics.qualidadeProduto}
-            icon={<Sparkle className="h-5 w-5 text-primary" />}
-          />
-          <MetricBar
-            label="Saúde da Equipe"
-            value={metrics.saudeEquipe}
-            icon={<Heart className="h-5 w-5 text-primary" />}
-          />
-          <MetricBar
-            {...KNOWLEDGE_BAR_PROPS}
-            value={metrics.conhecimentoOrganizacional}
-            icon={<BookOpen className="h-5 w-5 text-primary" />}
-          />
-        </div>
-      </SoftCard>
-
-      {/* INSIGHT CARD 3: Sanfona Retrátil para Lições e Riscos Evitados */}
-      <SoftCard className="mb-6 animate-float-in p-5">
-        <button
-          type="button"
-          onClick={() => setShowPedagogicalDetails(!showPedagogicalDetails)}
-          className="flex w-full items-center justify-between text-left text-sm font-bold text-foreground hover:text-primary transition-colors"
-        >
-          <div className="flex items-center gap-2">
-            <Lightbulb className="h-5 w-5 text-amber-500" />
-            <span>Lições Aprendidas e Riscos do Cenário</span>
-          </div>
-          {showPedagogicalDetails ? (
-            <ChevronUp className="h-5 w-5 text-muted-foreground" />
-          ) : (
-            <ChevronDown className="h-5 w-5 text-muted-foreground" />
-          )}
-        </button>
-
-        {showPedagogicalDetails && (
-          <div className="mt-4 space-y-4 pt-4 border-t border-slate-100 animate-in fade-in">
-            {/* Lições Práticas */}
-            <div className="rounded-2xl bg-muted/60 p-4">
-              <p className="text-xs font-bold uppercase tracking-wider text-primary mb-1.5">
-                Aprendizados Práticos
-              </p>
-              <ul className="text-sm text-slate-700 leading-relaxed list-disc list-inside space-y-1.5">
-                {alt.learnings.map((l, i) => (
-                  <li key={i}>{l}</li>
-                ))}
+              <ul className="m-0 flex flex-col gap-2 pl-5 text-lg font-semibold leading-relaxed">
+                {(alt.risksEvaded.length > 0 ? alt.risksEvaded : alt.otherConsequences).map(
+                  (r, i) => (
+                    <li key={i}>{r}</li>
+                  ),
+                )}
               </ul>
             </div>
-
-            {/* Riscos Evitados */}
-            {alt.risksEvaded.length > 0 && (
-              <div className="rounded-2xl bg-emerald-50/60 p-4 border border-emerald-100">
-                <div className="flex items-center gap-1.5 mb-1.5 text-xs font-bold uppercase tracking-wider text-emerald-800">
-                  <ShieldCheck className="h-4 w-4 text-emerald-600" />
-                  <span>Riscos Evitados</span>
-                </div>
-                <ul className="text-sm text-emerald-900 leading-relaxed list-disc list-inside space-y-1.5">
-                  {alt.risksEvaded.map((r, i) => (
-                    <li key={i}>{r}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Outras Consequências / E se? */}
-            {alt.otherConsequences.length > 0 && (
-              <div className="rounded-2xl bg-amber-50/60 p-4 border border-amber-100">
-                <div className="flex items-center gap-1.5 mb-1.5 text-xs font-bold uppercase tracking-wider text-amber-800">
-                  <AlertTriangle className="h-4 w-4 text-amber-600" />
-                  <span>Cenários e Trade-offs Alternativos</span>
-                </div>
-                <ul className="text-sm text-amber-900 leading-relaxed list-disc list-inside space-y-1.5">
-                  {alt.otherConsequences.map((c, i) => (
-                    <li key={i}>{c}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        )}
-      </SoftCard>
-
-      {/* Alerta de Fim de Jogo Crítico */}
-      {gameOverReason && (
-        <SoftCard className="mb-6 border-2 border-rose-500 bg-rose-50 text-rose-900 shadow-lg animate-pop-in">
-          <p className="font-bold text-base">Limite Crítico Atingido!</p>
-          <p className="mt-1 text-sm">{gameOverReason}</p>
-        </SoftCard>
+          )}
+        </section>
       )}
 
-      {/* Ação de Avanço */}
-      <div className="mt-8 flex justify-end">
+      <div className="mt-auto flex flex-wrap items-center justify-between gap-4">
+        <SoftButton
+          variant="ghost"
+          onClick={() => setShowLessons((v) => !v)}
+          aria-expanded={showLessons}
+        >
+          <Lightbulb className="h-5 w-5" />
+          {showLessons ? "Esconder lições" : "Lições e riscos"}
+          {showLessons ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+        </SoftButton>
         <SoftButton size="lg" onClick={nextEvent}>
-          {ctaLabel} <ArrowRight className="ml-1.5 h-4 w-4" />
+          {cta} <ArrowRight className="h-5 w-5" />
         </SoftButton>
       </div>
-    </div>
+    </GameScreen>
   );
 }
