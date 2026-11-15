@@ -18,7 +18,7 @@ export const systemsThinkingEvents: GameEvent[] = [
     communicationType: "ticket",
     senderRole: "Líder Técnico",
     description: "Ticket #1088 - Faltam dez dias para o início das matrículas da instituição. O algoritmo de alocação de turmas satura a capacidade de processamento do repositório de dados, ameaçando paralisar as instâncias operacionais da instituição.",
-    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "monitorar",
     senderName: "Carlos Silva",
@@ -118,12 +118,11 @@ export const systemsThinkingEvents: GameEvent[] = [
     communicationType: "email",
     senderRole: "Superintendência de TI",
     description: "Assunto: Fatura da Nuvem Governamental. O consumo de recursos computacionais virtuais durante os testes de carga ultrapassou a previsão inicial em 80%, consumindo a dotação de infraestrutura do trimestre.",
-    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "monitorar",
     senderName: "Prof. Alberto Silva",
     senderInitials: "AS",
-    avatarImage: "/Personagens/Alberto.png",
     responsibleRole: "techLead",
     alternatives: [
       {
@@ -233,7 +232,6 @@ export const systemsThinkingEvents: GameEvent[] = [
     resourceProcess: "estimar",
     senderName: "Mariana Costa",
     senderInitials: "MC",
-    avatarImage: "/Personagens/Mariana.png",
     responsibleRole: "techLead",
     alternatives: [
       {
@@ -328,12 +326,11 @@ export const systemsThinkingEvents: GameEvent[] = [
     communicationType: "slack",
     senderRole: "Líder Técnico",
     description: "Canal #arquitetura: 'Para manter a meta de histórias entregues no ciclo de trabalho, os membros da equipe usaram dados simulados isolados e não testaram a integração com o barramento real da STI.'",
-    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "monitorar",
     senderName: "Mariana Costa",
     senderInitials: "MC",
-    avatarImage: "/Personagens/Mariana.png",
     responsibleRole: "techLead",
     alternatives: [
       {
@@ -428,12 +425,11 @@ export const systemsThinkingEvents: GameEvent[] = [
     communicationType: "email",
     senderRole: "Superintendência de TI",
     description: "Assunto: Renovação de Licenças Proprietárias. A renovação anual do ativo de software comercial consumirá 70% do orçamento total; a equipe propõe migração para recurso de tecnologia aberta.",
-    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "monitorar",
     senderName: "Prof. Alberto Silva",
     senderInitials: "AS",
-    avatarImage: "/Personagens/Alberto.png",
     responsibleRole: "techLead",
     alternatives: [
       {
@@ -533,7 +529,6 @@ export const systemsThinkingEvents: GameEvent[] = [
     resourceProcess: "estimar",
     senderName: "Carla Silveira",
     senderInitials: "CS",
-    avatarImage: "/Personagens/Carla.png",
     responsibleRole: "uxLead",
     alternatives: [
       {
@@ -628,7 +623,7 @@ export const systemsThinkingEvents: GameEvent[] = [
     communicationType: "ticket",
     senderRole: "Líder Técnico",
     description: "Ticket #1102 - O espaço de armazenamento em nuvem está no limite; a equipe desativou os cópias diárias de segurança do repositório para economizar capacidade e evitar aquisição emergencial de ativos físicos de armazenamento.",
-    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "monitorar",
     senderName: "Carlos Silva",
@@ -728,12 +723,11 @@ export const systemsThinkingEvents: GameEvent[] = [
     communicationType: "email",
     senderRole: "Gerente de Projetos",
     description: "Assunto: Módulo de Reconhecimento Facial para Acesso a Restaurantes Universitários. A reitoria propõe contratar fábrica de software externa por valor milionário em vez de capacitar o time próprio.",
-    domainTag: "Recursos › Adquirir Recursos",
+    domainTag: "Recursos › Adquirir os Recursos",
     resourceType: "humano",
     resourceProcess: "adquirir",
     senderName: "Você (Gerente de Projetos)",
     senderInitials: "GP",
-    avatarImage: "/Personagens/Narrador.png",
     responsibleRole: "pm",
     alternatives: [
       {
@@ -828,12 +822,11 @@ export const systemsThinkingEvents: GameEvent[] = [
     communicationType: "slack",
     senderRole: "Líder de Design e Telas",
     description: "Canal #design: 'Descobrimos que a universidade paga 40 licenças de uma suíte cara de modelagem 3D contratada no passado; apenas duas estão em uso ativo pelos designers neste ano.'",
-    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "monitorar",
     senderName: "Carla Silveira",
     senderInitials: "CS",
-    avatarImage: "/Personagens/Carla.png",
     responsibleRole: "uxLead",
     alternatives: [
       {
@@ -928,12 +921,11 @@ export const systemsThinkingEvents: GameEvent[] = [
     communicationType: "slack",
     senderRole: "Líder Técnico",
     description: "Canal #infra: 'A máquina física que hospeda o ambiente de testes de integração queimou a fonte no datacenter da universidade; a reposição da peça levará cinco dias úteis.'",
-    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "monitorar",
     senderName: "Mariana Costa",
     senderInitials: "MC",
-    avatarImage: "/Personagens/Mariana.png",
     responsibleRole: "techLead",
     alternatives: [
       {

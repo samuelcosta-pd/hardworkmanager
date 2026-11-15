@@ -4,7 +4,7 @@ import type { PlayerRole } from '@/types';
 interface Props {
   initials: string;
   role?: PlayerRole | 'sender';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   className?: string;
   imageUrl?: string;
 }
@@ -17,7 +17,7 @@ const ROLE_BG: Record<PlayerRole | 'sender', string> = {
 };
 
 export function Avatar3D({ initials, role = 'sender', size = 'md', className, imageUrl }: Props) {
-  const dims = size === 'sm' ? 'h-9 w-9 text-xs' : size === 'lg' ? 'h-16 w-16 text-lg' : 'h-12 w-12 text-sm';
+  const dims = size === 'xs' ? 'h-6 w-6 text-[10px]' : size === 'sm' ? 'h-9 w-9 text-xs' : size === 'lg' ? 'h-16 w-16 text-lg' : 'h-12 w-12 text-sm';
   return (
     <div
       className={cn(

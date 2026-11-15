@@ -118,12 +118,11 @@ export const changeManagementEvents: GameEvent[] = [
     communicationType: "email",
     senderRole: "Superintendência de TI",
     description: "Assunto: Remanejamento de Especialista. O chefe do setor de redes quer recolher o especialista em infraestrutura e automação dedicado ao SIGAA para atender suporte de impressoras e switches nos centros acadêmicos.",
-    domainTag: "Recursos › Adquirir Recursos",
+    domainTag: "Recursos › Adquirir os Recursos",
     resourceType: "humano",
     resourceProcess: "adquirir",
     senderName: "Prof. Alberto Silva",
     senderInitials: "AS",
-    avatarImage: "/Personagens/Alberto.png",
     responsibleRole: "pm",
     alternatives: [
       {
@@ -218,12 +217,11 @@ export const changeManagementEvents: GameEvent[] = [
     communicationType: "email",
     senderRole: "Líder Técnico",
     description: "Assunto: Substituição de Desenvolvedor. O analista responsável pelo módulo financeiro pediu exoneração do cargo público; o substituto concursado acabou de se apresentar na unidade.",
-    domainTag: "Recursos › Adquirir Recursos",
+    domainTag: "Recursos › Adquirir os Recursos",
     resourceType: "humano",
     resourceProcess: "adquirir",
     senderName: "Mariana Costa",
     senderInitials: "MC",
-    avatarImage: "/Personagens/Mariana.png",
     responsibleRole: "techLead",
     alternatives: [
       {
@@ -318,12 +316,11 @@ export const changeManagementEvents: GameEvent[] = [
     communicationType: "slack",
     senderRole: "Gerente de Projetos",
     description: "Canal #planejamento: Diante do atraso na contratação de engenheiros, surge a oportunidade de convocar dez estudantes voluntários para atuar na codificação dos módulos de matrícula.",
-    domainTag: "Recursos › Adquirir Recursos",
+    domainTag: "Recursos › Adquirir os Recursos",
     resourceType: "humano",
     resourceProcess: "adquirir",
     senderName: "Você (Gerente de Projetos)",
     senderInitials: "GP",
-    avatarImage: "/Personagens/Narrador.png",
     responsibleRole: "pm",
     alternatives: [
       {
@@ -523,7 +520,6 @@ export const changeManagementEvents: GameEvent[] = [
     resourceProcess: "liderar",
     senderName: "Você (Gerente de Projetos)",
     senderInitials: "GP",
-    avatarImage: "/Personagens/Narrador.png",
     responsibleRole: "pm",
     alternatives: [
       {
@@ -623,7 +619,6 @@ export const changeManagementEvents: GameEvent[] = [
     resourceProcess: "liderar",
     senderName: "Mariana Costa",
     senderInitials: "MC",
-    avatarImage: "/Personagens/Mariana.png",
     responsibleRole: "techLead",
     alternatives: [
       {
@@ -718,12 +713,11 @@ export const changeManagementEvents: GameEvent[] = [
     communicationType: "slack",
     senderRole: "Líder de Design e Telas",
     description: "Canal #ux: 'O teste piloto com 200 alunos revelou que 75% não entenderam o fluxo de trancamento de matrícula no celular; o time de design quer redesenhar a tela inteira em três dias.'",
-    domainTag: "Recursos › Monitorar e Controlar Recursos",
+    domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "humano",
     resourceProcess: "monitorar",
     senderName: "Carla Silveira",
     senderInitials: "CS",
-    avatarImage: "/Personagens/Carla.png",
     responsibleRole: "uxLead",
     alternatives: [
       {
@@ -923,7 +917,6 @@ export const changeManagementEvents: GameEvent[] = [
     resourceProcess: "liderar",
     senderName: "Assessoria de Comunicação",
     senderInitials: "AC",
-    avatarImage: "/Personagens/Carla.png",
     responsibleRole: "uxLead",
     alternatives: [
       {

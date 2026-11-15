@@ -5,10 +5,28 @@ interface Props {
   label: string;
   value: number;
   icon: React.ReactNode;
+  /** Limiares próprios (o Conhecimento Organizacional usa 20 como nível crítico). */
+  criticalBelow?: number;
+  warningBelow?: number;
+  hint?: string;
 }
 
-export function MetricBar({ label, value, icon }: Props) {
-  const level = metricLevel(value);
+export const KNOWLEDGE_BAR_PROPS = {
+  label: 'Conhecimento Organizacional',
+  criticalBelow: 20,
+  warningBelow: 35,
+  hint: 'Abaixo de 20, as perdas de Capacidade de Entrega dobram.',
+} as const;
+
+export function MetricBar({ label, value, icon, criticalBelow, warningBelow, hint }: Props) {
+  const level =
+    criticalBelow === undefined
+      ? metricLevel(value)
+      : value < criticalBelow
+        ? 'critical'
+        : value < (warningBelow ?? criticalBelow + 20)
+          ? 'warning'
+          : 'stable';
   const color =
     level === 'critical' ? 'bg-critical' : level === 'warning' ? 'bg-warning' : 'bg-success';
   const shadow =
@@ -41,6 +59,7 @@ export function MetricBar({ label, value, icon }: Props) {
           style={{ width: `${value}%` }}
         />
       </div>
+      {hint && <p className="mt-2 text-xs text-muted-foreground">{hint}</p>}
     </div>
   );
 }

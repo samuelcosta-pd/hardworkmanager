@@ -10,11 +10,12 @@ import {
   Clock,
   ShieldAlert,
   ArrowLeft,
+  BookOpen,
 } from "lucide-react";
 import { SoftCard } from "@/components/ui/SoftCard";
 import { SoftButton } from "@/components/ui/SoftButton";
 import { Avatar3D } from "@/components/ui/Avatar3D";
-import { MetricBar } from "@/components/ui/MetricBar";
+import { MetricBar, KNOWLEDGE_BAR_PROPS } from "@/components/ui/MetricBar";
 import { useGameStore } from "@/store/gameStore";
 import { ROLE_LABELS } from "@/types";
 
@@ -106,7 +107,7 @@ export function Dashboard() {
                         if (!v) return null;
                         const label =
                           k === "capacidadeEntrega"
-                            ? "Velocidade"
+                            ? "Capacidade"
                             : k === "qualidadeProduto"
                               ? "Qualidade"
                               : k === "saudeEquipe"
@@ -130,9 +131,9 @@ export function Dashboard() {
         </div>
       )}
 
-      {/* 3 Métricas Principais */}
+      {/* 4 Métricas do Projeto */}
       {page === 0 && (<>
-      <section className="mb-5 grid gap-4 md:grid-cols-3">
+      <section className="mb-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <MetricBar
           label="Capacidade de Entrega"
           value={metrics.capacidadeEntrega}
@@ -147,6 +148,11 @@ export function Dashboard() {
           label="Saúde da Equipe"
           value={metrics.saudeEquipe}
           icon={<Heart className="h-5 w-5 text-primary" />}
+        />
+        <MetricBar
+          {...KNOWLEDGE_BAR_PROPS}
+          value={metrics.conhecimentoOrganizacional}
+          icon={<BookOpen className="h-5 w-5 text-primary" />}
         />
       </section>
 

@@ -42,18 +42,26 @@ export function DebriefingFinal() {
   const efLevel = metricLevel(metrics.capacidadeEntrega);
   const quaLevel = metricLevel(metrics.qualidadeProduto);
   const seLevel = metricLevel(metrics.saudeEquipe);
+  const coLevel =
+    metrics.conhecimentoOrganizacional < 20
+      ? "critical"
+      : metrics.conhecimentoOrganizacional < 35
+        ? "warning"
+        : "stable";
 
   const isSuccess = !gameOverReason;
 
   const reflectionText = (() => {
     const good: string[] = [];
     const bad: string[] = [];
-    if (efLevel === "stable") good.push("Capacidade de Entrega (Velocity)");
-    else if (efLevel === "critical") bad.push("Capacidade de Entrega (Velocity)");
+    if (efLevel === "stable") good.push("Capacidade de Entrega");
+    else if (efLevel === "critical") bad.push("Capacidade de Entrega");
     if (quaLevel === "stable") good.push("Qualidade do Produto");
     else if (quaLevel === "critical") bad.push("Qualidade do Produto");
     if (seLevel === "stable") good.push("Saúde da Equipe");
     else if (seLevel === "critical") bad.push("Saúde da Equipe");
+    if (coLevel === "stable") good.push("Conhecimento Organizacional");
+    else if (coLevel === "critical") bad.push("Conhecimento Organizacional");
     return { good, bad };
   })();
 
@@ -163,7 +171,7 @@ export function DebriefingFinal() {
               <TrendingUp className="h-5 w-5 text-primary" />
               <h2 className="text-lg font-semibold">Desempenho Geral</h2>
             </div>
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 {
                   label: "Capacidade de Entrega",
@@ -172,6 +180,11 @@ export function DebriefingFinal() {
                 },
                 { label: "Qualidade do Produto", value: metrics.qualidadeProduto, level: quaLevel },
                 { label: "Saúde da Equipe", value: metrics.saudeEquipe, level: seLevel },
+                {
+                  label: "Conhecimento Organizacional",
+                  value: metrics.conhecimentoOrganizacional,
+                  level: coLevel,
+                },
               ].map((m) => (
                 <div
                   key={m.label}

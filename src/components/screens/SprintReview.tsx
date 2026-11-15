@@ -1,7 +1,7 @@
-import { CheckCircle2, TrendingDown, Gauge, Sparkle, Heart } from 'lucide-react';
+import { CheckCircle2, TrendingDown, Gauge, Sparkle, Heart, BookOpen } from 'lucide-react';
 import { SoftCard } from '@/components/ui/SoftCard';
 import { SoftButton } from '@/components/ui/SoftButton';
-import { MetricBar } from '@/components/ui/MetricBar';
+import { MetricBar, KNOWLEDGE_BAR_PROPS } from '@/components/ui/MetricBar';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useGameStore } from '@/store/gameStore';
 import { MENTOR } from '@/data/avatars';
@@ -44,10 +44,11 @@ export function SprintReview() {
         </div>
       </div>
 
-      <section className="mb-8 grid gap-4 md:grid-cols-3 animate-pop-in">
+      <section className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 animate-pop-in">
         <MetricBar label="Capacidade de Entrega" value={metrics.capacidadeEntrega} icon={<Gauge className="h-5 w-5 text-primary" />} />
         <MetricBar label="Qualidade do Produto" value={metrics.qualidadeProduto} icon={<Sparkle className="h-5 w-5 text-primary" />} />
         <MetricBar label="Saúde da Equipe" value={metrics.saudeEquipe} icon={<Heart className="h-5 w-5 text-primary" />} />
+        <MetricBar {...KNOWLEDGE_BAR_PROPS} value={metrics.conhecimentoOrganizacional} icon={<BookOpen className="h-5 w-5 text-primary" />} />
       </section>
 
       <div className="grid gap-6 md:grid-cols-2 mb-8">
@@ -76,7 +77,11 @@ export function SprintReview() {
                   {pendingDelayedImpacts.map((p, i) => (
                     <div key={i} className="flex justify-between items-center bg-amber-50 p-2 rounded text-sm text-amber-800 border border-amber-100">
                       <span>Eco de: {p.sourceEventTitle}</span>
-                      <span className="font-semibold">Em {p.remainingEvents} turnos</span>
+                      <span className="font-semibold">
+                        {isMatchComplete
+                          ? 'Ficou para depois do projeto'
+                          : `Em ${p.remainingEvents} ${p.remainingEvents === 1 ? 'dilema' : 'dilemas'}`}
+                      </span>
                     </div>
                   ))}
                 </div>

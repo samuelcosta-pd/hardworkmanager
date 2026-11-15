@@ -46,7 +46,13 @@ export function PlayerSetup() {
     setDrafts(drafts.map((d, idx) => (idx === i ? { ...d, ...patch } : d)));
   };
 
-  const allValid = drafts.every((d) => d.name.trim().length > 0 && !!d.avatarId);
+  // Cada partida precisa de exatamente um GP, um Líder Técnico e um Líder de Design e Telas
+  // entre os três primeiros jogadores (o 4º é sempre colíder de Design e Telas).
+  const coreRoles = drafts.slice(0, 3).map((d) => d.role);
+  const missingRoles = DEFAULT_ROLES.filter((r) => !coreRoles.includes(r));
+  const rolesValid = missingRoles.length === 0;
+  const namesAndAvatarsValid = drafts.every((d) => d.name.trim().length > 0 && !!d.avatarId);
+  const allValid = rolesValid && namesAndAvatarsValid;
 
   const getAvatarAssignedTo = (avatarId: string, currentDraftIndex: number) => {
     const foundIndex = drafts.findIndex((d, idx) => d.avatarId === avatarId && idx !== currentDraftIndex);
@@ -185,6 +191,17 @@ export function PlayerSetup() {
           </div>
         </div>
 
+        {!rolesValid && (
+          <p className="mt-6 rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm font-semibold text-amber-900">
+            Cada partida precisa de um Gerente de Projetos, um Líder Técnico e um Líder de Design e Telas.
+            Falta: {missingRoles.map((r) => ROLE_LABELS[r]).join(', ')}.
+          </p>
+        )}
+        {rolesValid && !namesAndAvatarsValid && (
+          <p className="mt-6 text-center text-xs text-muted-foreground">
+            Preencha o nome e escolha um avatar para cada jogador.
+          </p>
+        )}
         <div className="mt-8 flex items-center justify-between">
           <SoftButton variant="ghost" size="md" onClick={() => goTo('intro')}>
             ← Voltar ao Guia

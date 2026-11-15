@@ -1,17 +1,16 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { AVAILABLE_AVATARES } from '@/data/avatars';
 import {
   INITIAL_METRICS,
-  applyImpacts,
   isGameOver,
-  tallyVotes,
-  evaluateCondition,
+  decideWinner,
+  resolveTurn,
   generateMatchDeck,
   MATCH_DILEMMA_COUNT,
+  type PendingImpact,
+  type TriggeredImpact,
 } from '@/lib/gameLogic';
 import type {
-  AlternativeKey,
   Decision,
   GameEvent,
   GamePhase,
@@ -22,7 +21,6 @@ import type {
   VoteChoice,
   TimerPreset,
   TimerSettings,
-  DelayedImpact,
 } from '@/types';
 
 export const TIMER_PRESETS: Record<TimerPreset, { readingSeconds: number; votingSeconds: number; enabled: boolean }> = {
@@ -40,18 +38,8 @@ interface PlayerDraft {
   avatarImage?: string;
 }
 
-export interface PendingDelayedImpact {
-  id: string;
-  remainingEvents: number;
-  impact: DelayedImpact;
-  sourceEventTitle: string;
-}
-
-export interface AppliedImpactHistory {
-  narrative: string;
-  metricsDelta: Partial<Metrics>;
-  sourceEventTitle: string;
-}
+export type PendingDelayedImpact = PendingImpact;
+export type AppliedImpactHistory = TriggeredImpact;
 
 interface GameState {
   phase: GamePhase;
@@ -116,42 +104,6 @@ const initialState = {
 };
 
 
-function injectNPC(event: GameEvent, players: Player[]): GameEvent {
-  const npcRoles = [
-    'Marina Design', 
-    'Desenvolvedor Pleno', 
-    'Novo Desenvolvedor', 
-    'Suporte Nível 2', 
-    'Líder Técnico Adjunto', 
-    'Líder Técnico', 
-    'Vice-Reitor',
-    'RH',
-    'Atendimento',
-    'Consultoria Externa',
-    'Equipe de Análise',
-    'QA Team'
-  ];
-
-  if (!npcRoles.includes(event.senderName)) {
-    return event;
-  }
-
-  const usedAvatarIds = players.map(p => p.avatarId);
-  const unusedAvatars = AVAILABLE_AVATARES.filter(a => !usedAvatarIds.includes(a.id));
-  
-  if (unusedAvatars.length === 0) return event;
-  
-  const randomIndex = Math.floor(Math.random() * unusedAvatars.length);
-  const npc = unusedAvatars[randomIndex];
-
-  return {
-    ...event,
-    senderName: npc.name,
-    senderInitials: npc.name.substring(0, 2).toUpperCase(),
-    avatarImage: npc.imagePath,
-  };
-}
-
 export const useGameStore = create<GameState>()(
   persist(
     (set, get) => ({
@@ -168,8 +120,7 @@ export const useGameStore = create<GameState>()(
           isReady: false,
         }));
 
-        const rawDeck = generateMatchDeck();
-        const matchDeck = rawDeck.map((e) => injectNPC(e, players));
+        const matchDeck = generateMatchDeck();
         const firstEvent = matchDeck[0];
 
         const timerSettings = preset
@@ -201,11 +152,10 @@ export const useGameStore = create<GameState>()(
       goTo: (phase) => set({ phase }),
 
       startGame: () => {
-        const { matchDeck, players } = get();
+        const { matchDeck } = get();
         // Se ainda não gerou o deck, inicializa
         if (!matchDeck || matchDeck.length === 0) {
-          const rawDeck = generateMatchDeck();
-          const deck = rawDeck.map((e) => injectNPC(e, players));
+          const deck = generateMatchDeck();
           const firstEvent = deck[0];
           set({
             phase: 'briefing',
@@ -268,61 +218,15 @@ export const useGameStore = create<GameState>()(
         
         const event = events[currentEventIndex];
         const round2Votes = votes.filter((v) => v.round === 2);
-        const tally = tallyVotes(round2Votes.length > 0 ? round2Votes : votes.filter((v) => v.round === 1));
-        
-        let chosenKey: AlternativeKey = tally.winner || event.alternatives[0].key;
-        if (tally.tied) {
-          const pm = players.find((p) => p.role === 'pm');
-          const pmVote = round2Votes.find((v) => v.playerId === pm?.id);
-          if (pmVote && pmVote.alternative !== 'abstain' && tally.topAlternatives.includes(pmVote.alternative)) {
-            chosenKey = pmVote.alternative;
-          }
-        }
-
+        const pm = players.find((p) => p.role === 'pm');
+        const { chosenKey, tally } = decideWinner(votes, pm?.id, event.alternatives[0].key);
         const chosenAlt = event.alternatives.find((a) => a.key === chosenKey) || event.alternatives[0];
 
-        // 1. Processar Delayed Impacts que já estavam pendentes
-        let currentMetrics = { ...metrics };
-        const newlyAppliedHistory: AppliedImpactHistory[] = [];
+        const turn = resolveTurn(metrics, pendingDelayedImpacts, event, chosenAlt, `_${Date.now()}`);
+        const nextMetrics = turn.metrics;
 
-        const remainingDelayedImpacts: PendingDelayedImpact[] = [];
-
-        for (const item of pendingDelayedImpacts) {
-          const decremented = item.remainingEvents - 1;
-          if (decremented <= 0) {
-            // Checar se a condição de ativação é satisfeita
-            if (evaluateCondition(currentMetrics, item.impact.condition)) {
-              currentMetrics = applyImpacts(currentMetrics, item.impact.impacts);
-              newlyAppliedHistory.push({
-                narrative: item.impact.narrative,
-                metricsDelta: item.impact.impacts,
-                sourceEventTitle: item.sourceEventTitle,
-              });
-            }
-          } else {
-            remainingDelayedImpacts.push({
-              ...item,
-              remainingEvents: decremented,
-            });
-          }
-        }
-
-        // 2. Aplicar impactos imediatos da alternativa escolhida
-        const nextMetrics = applyImpacts(currentMetrics, chosenAlt.impacts);
-
-        // 3. Registrar novos Delayed Impacts gerados pela escolha atual
-        if (chosenAlt.delayedImpacts && chosenAlt.delayedImpacts.length > 0) {
-          chosenAlt.delayedImpacts.forEach((di, idx) => {
-            remainingDelayedImpacts.push({
-              id: `${event.id}_di_${idx}_${Date.now()}`,
-              remainingEvents: di.triggerAfterEvents,
-              impact: di,
-              sourceEventTitle: event.title,
-            });
-          });
-        }
-
-        const dissentingVote = round2Votes.find((v) => v.alternative !== chosenKey);
+        const decisiveVotes = round2Votes.length > 0 ? round2Votes : votes.filter((v) => v.round === 1);
+        const dissentingVote = decisiveVotes.find((v) => v.alternative !== chosenKey);
         const dissentingPlayer = dissentingVote ? players.find((p) => p.id === dissentingVote.playerId) : undefined;
 
         const decision: Decision = {
@@ -335,6 +239,8 @@ export const useGameStore = create<GameState>()(
           dissentingAlternative: dissentingVote?.alternative,
           feedbackNarrative: chosenAlt.feedbackNarrative,
           metricsAfter: nextMetrics,
+          immediateDelta: turn.immediateDelta,
+          penaltyApplied: turn.penaltyApplied,
         };
 
         const over = isGameOver(nextMetrics);
@@ -343,9 +249,9 @@ export const useGameStore = create<GameState>()(
           metrics: nextMetrics,
           decisions: [...decisions, decision],
           gameOverReason: over.over ? over.reason : undefined,
-          pendingDelayedImpacts: remainingDelayedImpacts,
-          appliedDelayedImpactsHistory: [...appliedDelayedImpactsHistory, ...newlyAppliedHistory],
-          delayedImpactsTriggeredThisRound: newlyAppliedHistory,
+          pendingDelayedImpacts: turn.pending,
+          appliedDelayedImpactsHistory: [...appliedDelayedImpactsHistory, ...turn.triggered],
+          delayedImpactsTriggeredThisRound: turn.triggered,
           phase: 'feedback_narrative',
         });
       },
@@ -359,7 +265,7 @@ export const useGameStore = create<GameState>()(
 
         const next = currentEventIndex + 1;
         
-        // Ao finalizar os dilemas do deck (ex: 3 dilemas no modo demo de 1 sprint), abre a Sprint Review
+        // Revisão de ciclo a cada 3 dilemas e ao fim do baralho
         if (next >= matchDeck.length) {
           set({ phase: 'sprint_review' });
         } else if (next % 3 === 0) {
@@ -405,10 +311,18 @@ export const useGameStore = create<GameState>()(
     }),
     {
       name: 'hardwork-manager-storage',
+      // A reidratação é feita no cliente (useHydrateGame) para evitar divergência com o HTML do servidor.
+      skipHydration: true,
       // Descarta partida salva com tamanho de baralho diferente de MATCH_DILEMMA_COUNT
       merge: (persisted, current) => {
         const saved = persisted as Partial<GameState> | undefined;
-        if (saved?.matchDeck && saved.matchDeck.length > 0 && saved.matchDeck.length !== MATCH_DILEMMA_COUNT) {
+        if (
+          saved?.matchDeck &&
+          saved.matchDeck.length > 0 &&
+          (saved.matchDeck.length !== MATCH_DILEMMA_COUNT ||
+            // partida salva sem GP (versão antiga sem validação de papéis) travaria no debate
+            !saved.players?.some((p) => p.role === 'pm'))
+        ) {
           return current;
         }
         return { ...current, ...(saved ?? {}) };

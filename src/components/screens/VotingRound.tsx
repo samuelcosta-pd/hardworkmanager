@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { EyeOff, Lock, ArrowLeft, HelpCircle, AlertTriangle, UserX, Clock } from "lucide-react";
+import { EyeOff, Lock, HelpCircle, AlertTriangle, UserX } from "lucide-react";
 import { SoftCard } from "@/components/ui/SoftCard";
 import { SoftButton } from "@/components/ui/SoftButton";
 import { Avatar3D } from "@/components/ui/Avatar3D";
@@ -35,7 +35,12 @@ export function VotingRound({ round }: Props) {
   const allVoted = currentVoterIndex >= (players?.length || 0) && (players?.length || 0) > 0;
   const player = players && players[currentVoterIndex] ? players[currentVoterIndex] : null;
 
+  // Regra de desempate: na 2ª votação o GP não pode se abster, para que seu voto
+  // sempre esteja entre as alternativas empatadas.
+  const mustVote = round === 2 && player?.role === "pm";
+
   const handleVote = (choice: VoteChoice) => {
+    if (choice === "abstain" && mustVote) return;
     castVote(choice);
     setHandoff(true);
   };
@@ -46,7 +51,8 @@ export function VotingRound({ round }: Props) {
     enabled: !handoff && !allVoted && timerSettings.enabled && timerSettings.votingSeconds > 0,
     onExpire: () => {
       // Quando o tempo de voto expira, o voto é computado como abstenção
-      handleVote('abstain');
+      // (exceto para o GP na 2ª votação, que precisa votar para desempatar).
+      handleVote("abstain");
     },
   });
 
@@ -139,13 +145,8 @@ export function VotingRound({ round }: Props) {
     <div className="mx-auto min-h-screen max-w-2xl px-6 py-8">
       {/* Cabeçalho de Navegação, Cronômetro de Voto e Contexto do Jogador */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <button
-          type="button"
-          onClick={() => setHandoff(true)}
-          className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors cursor-pointer"
-        >
-          <ArrowLeft className="h-4 w-4" /> Voltar
-        </button>
+        {/* Sem botão "Voltar": ele reiniciava o tempo de voto. */}
+        <span />
 
         <div className="flex items-center gap-2.5">
           {timerSettings.enabled && timerSettings.votingSeconds > 0 && (
@@ -157,7 +158,7 @@ export function VotingRound({ round }: Props) {
               isRunning={countdown.isRunning}
               label="Tempo de Voto"
               onToggle={countdown.toggle}
-              showControls
+              showControls={false}
               size="sm"
             />
           )}
@@ -190,7 +191,7 @@ export function VotingRound({ round }: Props) {
       <SoftCard className="mb-4 animate-float-in" variant="inset">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-primary">
-            Dilema {currentEventIndex + 1} de {matchDeck?.length || 10}
+            Dilema {currentEventIndex + 1} de {matchDeck.length}
           </span>
           <span className="text-xs sm:text-sm font-semibold text-muted-foreground">{event.domainTag}</span>
         </div>
@@ -223,62 +224,73 @@ export function VotingRound({ round }: Props) {
           {event.alternatives.map((alt, i) => {
             const techTerms = detectTechTerms(alt.text);
             return (
-              <button
-                key={alt.key}
-                type="button"
-                onClick={() => handleVote(alt.key)}
-                className="group block w-full rounded-3xl bg-card p-5 sm:p-6 text-left shadow-[var(--shadow-soft)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-soft-lg)] border-2 border-transparent hover:border-primary/40 animate-float-in"
-                style={{ animationDelay: `${i * 60}ms` }}
-              >
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary text-primary-foreground font-black text-xl uppercase shadow-sm group-hover:scale-105 transition-transform">
-                    {alt.key}
-                  </div>
+              // O botão de ajuda fica fora do botão de voto (botão dentro de botão é HTML inválido
+              // e causava erro de hidratação).
+              <div key={alt.key} className="relative">
+                <button
+                  type="button"
+                  onClick={() => handleVote(alt.key)}
+                  className="group block w-full rounded-3xl bg-card p-5 sm:p-6 pr-12 sm:pr-14 text-left shadow-[var(--shadow-soft)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-soft-lg)] border-2 border-transparent hover:border-primary/40 animate-float-in"
+                  style={{ animationDelay: `${i * 60}ms` }}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary text-primary-foreground font-black text-xl uppercase shadow-sm group-hover:scale-105 transition-transform">
+                      {alt.key}
+                    </div>
 
-                  <div className="min-w-0 flex-1 pt-0.5">
-                    <p className="font-semibold text-foreground text-base sm:text-lg leading-relaxed group-hover:text-primary transition-colors">
-                      {alt.text}
-                    </p>
+                    <div className="min-w-0 flex-1 pt-0.5">
+                      <p className="font-semibold text-foreground text-base sm:text-lg leading-relaxed group-hover:text-primary transition-colors">
+                        {alt.text}
+                      </p>
+                    </div>
                   </div>
+                </button>
 
-                  {/* Ícone de ajuda com termos técnicos */}
-                  {techTerms.length > 0 && (
-                    <Tooltip>
-                      <TooltipTrigger
-                        type="button"
-                        onClick={(e) => e.stopPropagation()}
-                        className="shrink-0 mt-0.5 text-muted-foreground/50 hover:text-primary transition-colors"
-                        aria-label="Ver termos técnicos"
-                      >
-                        <HelpCircle className="h-4 w-4" />
-                      </TooltipTrigger>
-                      <TooltipContent
-                        side="top"
-                        align="end"
-                        className="max-w-xs rounded-2xl bg-slate-900 p-3 text-left shadow-xl"
-                      >
-                        <p className="text-xs font-bold uppercase tracking-wider text-primary mb-2">
-                          Termos Técnicos (PMBOK 8)
-                        </p>
-                        <div className="space-y-2">
-                          {techTerms.map(({ term, definition }) => (
-                            <div key={term}>
-                              <p className="text-xs font-semibold text-white capitalize">{term}</p>
-                              <p className="text-xs text-slate-300 leading-relaxed">{definition}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </TooltipContent>
-                    </Tooltip>
-                  )}
-                </div>
-              </button>
+                {/* Ícone de ajuda com termos técnicos */}
+                {techTerms.length > 0 && (
+                  <Tooltip>
+                    <TooltipTrigger
+                      type="button"
+                      className="absolute right-4 top-5 sm:right-5 sm:top-6 text-muted-foreground/70 hover:text-primary transition-colors"
+                      aria-label="Ver termos técnicos"
+                    >
+                      <HelpCircle className="h-5 w-5" />
+                    </TooltipTrigger>
+                    <TooltipContent
+                      side="top"
+                      align="end"
+                      className="max-w-xs rounded-2xl bg-slate-900 p-3 text-left shadow-xl"
+                    >
+                      <p className="text-xs font-bold uppercase tracking-wider text-primary mb-2">
+                        Termos Técnicos (PMBOK 8)
+                      </p>
+                      <div className="space-y-2">
+                        {techTerms.map(({ term, definition }) => (
+                          <div key={term}>
+                            <p className="text-xs font-semibold text-white capitalize">{term}</p>
+                            <p className="text-xs text-slate-300 leading-relaxed">{definition}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </TooltipContent>
+                  </Tooltip>
+                )}
+              </div>
             );
           })}
         </div>
       </TooltipProvider>
 
+      {mustVote && (
+        <p className="mt-6 rounded-xl border border-primary/30 bg-primary/5 p-3 text-center text-xs sm:text-sm font-semibold text-primary">
+          {countdown.isExpired
+            ? "Tempo esgotado. Como Gerente de Projetos, você precisa votar: em caso de empate, seu voto decide."
+            : "Como Gerente de Projetos, você não pode se abster nesta votação: em caso de empate, seu voto decide."}
+        </p>
+      )}
+
       {/* Botão de Abstenção Voluntária */}
+      {!mustVote && (
       <div className="mt-6 flex justify-center">
         <button
           type="button"
@@ -289,6 +301,7 @@ export function VotingRound({ round }: Props) {
           Não me sinto apto a escolher · Registrar Abstenção
         </button>
       </div>
+      )}
     </div>
   );
 }

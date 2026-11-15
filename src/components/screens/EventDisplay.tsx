@@ -64,12 +64,12 @@ export function EventDisplay() {
     ? event.resourceProcess === 'planejar'
       ? 'Planejar o Gerenciamento dos Recursos'
       : event.resourceProcess === 'estimar'
-        ? 'Estimar Recursos'
+        ? 'Estimar os Recursos'
         : event.resourceProcess === 'adquirir'
-          ? 'Adquirir Recursos'
+          ? 'Adquirir os Recursos'
           : event.resourceProcess === 'liderar'
             ? 'Liderar a Equipe'
-            : 'Monitorar e Controlar Recursos'
+            : 'Monitorar e Controlar os Recursos'
     : null;
 
   return (
@@ -102,7 +102,7 @@ export function EventDisplay() {
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-primary bg-primary/10 px-3 py-1.5 rounded-2xl">
             <Sparkles className="h-3.5 w-3.5" />
             <span>
-              Dilema {currentEventIndex + 1} de {matchDeck?.length || 10}
+              Dilema {currentEventIndex + 1} de {matchDeck.length}
             </span>
           </div>
         </div>

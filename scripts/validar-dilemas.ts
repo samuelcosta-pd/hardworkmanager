@@ -2,13 +2,13 @@
  * Validador de invariantes do catálogo de dilemas do Hard Work Manager.
  *
  * Uso (na raiz do projeto):
- *   npx tsx .agents/skills/hwm-dilemas-recursos/scripts/validar-dilemas.ts
+ *   npx tsx scripts/validar-dilemas.ts
  *
  * Opções:
  *   --dir <caminho>        pasta dos arquivos de eventos (padrão: src/data/events)
  *   --por-arquivo <n>      dilemas esperados por arquivo (padrão: 10)
  *   --recursos             exige resourceType e resourceProcess em todo dilema (Fase 1 concluída)
- *   --vocabulario <arq>    arquivo .md com o vocabulário de pmbokConcept (padrão: references/pmbok8-recursos.md
+ *   --vocabulario <arq>    arquivo .md com o vocabulário de pmbokConcept (padrão: vocabulario-pmbok8-recursos.md
  *                          ao lado deste script); ativa a checagem de conceitos
  *   --json                 saída em JSON
  *
@@ -53,7 +53,7 @@ const saidaJson = temFlag('--json');
 const aqui = dirname(fileURLToPath(import.meta.url));
 const arquivoVocab = opt('--vocabulario')
   ? resolve(process.cwd(), opt('--vocabulario')!)
-  : join(aqui, '..', 'references', 'pmbok8-recursos.md');
+  : join(aqui, 'vocabulario-pmbok8-recursos.md');
 
 // ---------- utilidades ----------
 const resultados: Resultado[] = [];

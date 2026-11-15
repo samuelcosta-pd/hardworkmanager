@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { useGameStore } from '@/store/gameStore';
 import { Onboarding } from '@/components/screens/Onboarding';
@@ -34,6 +35,21 @@ export const Route = createFileRoute('/')({
 
 function Game() {
   const phase = useGameStore((s) => s.phase);
+  const [hydrated, setHydrated] = useState(false);
+
+  // Restaura a partida salva só no cliente, depois da hidratação do React,
+  // para que o HTML do servidor e a primeira renderização do navegador coincidam.
+  useEffect(() => {
+    Promise.resolve(useGameStore.persist.rehydrate()).finally(() => setHydrated(true));
+  }, []);
+
+  if (!hydrated) {
+    return (
+      <div className="flex min-h-screen items-center justify-center text-sm text-muted-foreground">
+        Carregando partida…
+      </div>
+    );
+  }
 
   switch (phase) {
     case 'intro':

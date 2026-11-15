@@ -12,7 +12,6 @@ export type GamePhase =
   | 'decision_resolved'
   | 'feedback_narrative'
   | 'sprint_review'
-  | 'gameover'
   | 'debriefing'
   | 'completed';
 
@@ -144,6 +143,10 @@ export interface Decision {
   dissentingAlternative?: VoteChoice;
   feedbackNarrative: string;
   metricsAfter: Metrics;
+  /** Variação real causada pela decisão (após penalidade cruzada e limites 0–100). */
+  immediateDelta?: Metrics;
+  /** true se a perda de Capacidade de Entrega foi dobrada por Conhecimento < 20. */
+  penaltyApplied?: boolean;
 }
 
 export const ROLE_LABELS: Record<PlayerRole, string> = {

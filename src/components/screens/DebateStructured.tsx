@@ -7,28 +7,40 @@ import { useGameStore } from '@/store/gameStore';
 import { tallyVotes } from '@/lib/gameLogic';
 import { ROLE_LABELS, type DebateSpeaker, type Player } from '@/types';
 
-function buildOrder(players: Player[], minorityIds: string[]): DebateSpeaker[] {
-  const pm = players.find((p) => p.role === 'pm')!;
-  const nonPm = players.filter((p) => p.role !== 'pm');
-  const minorityNonPm = nonPm.filter((p) => minorityIds.includes(p.id));
-  const majorityNonPm = nonPm.filter((p) => !minorityIds.includes(p.id));
-  const ordered = [...minorityNonPm, ...majorityNonPm];
-  const list: DebateSpeaker[] = ordered.map((p, i) => ({
+/**
+ * Ordem de fala: (1) quem se absteve, (2) quem votou na alternativa menos escolhida,
+ * (3) quem votou na mais escolhida — 30 s cada — e, por último, o GP (20 s) para sintetizar.
+ */
+function buildOrder(
+  players: Player[],
+  voteCountOf: (playerId: string) => number,
+): DebateSpeaker[] {
+  const pm = players.find((p) => p.role === 'pm');
+  const nonPm = players
+    .map((p, i) => ({ p, i }))
+    .filter(({ p }) => p.id !== pm?.id)
+    // abstenção = 0 votos → fala primeiro; depois, do menos ao mais votado; empate mantém a ordem de cadastro
+    .sort((x, y) => voteCountOf(x.p.id) - voteCountOf(y.p.id) || x.i - y.i)
+    .map(({ p }) => p);
+
+  const list: DebateSpeaker[] = nonPm.map((p, i) => ({
     playerId: p.id,
     playerName: p.name,
     playerRole: p.role,
     avatarImage: p.avatarImage,
     durationSeconds: 30,
-    order: (i + 1) as 1 | 2 | 3,
+    order: (i + 1) as DebateSpeaker['order'],
   }));
-  list.push({
-    playerId: pm.id,
-    playerName: pm.name,
-    playerRole: pm.role,
-    avatarImage: pm.avatarImage,
-    durationSeconds: 20,
-    order: (list.length + 1) as 1 | 2 | 3 | 4,
-  });
+  if (pm) {
+    list.push({
+      playerId: pm.id,
+      playerName: pm.name,
+      playerRole: pm.role,
+      avatarImage: pm.avatarImage,
+      durationSeconds: 20,
+      order: (list.length + 1) as DebateSpeaker['order'],
+    });
+  }
   return list;
 }
 
@@ -38,13 +50,12 @@ export function DebateStructured() {
   const tally = useMemo(() => tallyVotes(round1), [round1]);
 
   const speakers = useMemo(() => {
-    const minorityKey = tally.tied
-      ? tally.topAlternatives[0]
-      : (Object.entries(tally.counts) as [string, number][])
-          .filter(([, n]) => n > 0 && n < tally.counts[tally.winner])
-          .sort((a, b) => a[1] - b[1])[0]?.[0] ?? tally.winner;
-    const minorityIds = round1.filter((v) => v.alternative === minorityKey).map((v) => v.playerId);
-    return buildOrder(players, minorityIds);
+    const voteCountOf = (playerId: string) => {
+      const v = round1.find((x) => x.playerId === playerId);
+      if (!v || v.alternative === 'abstain') return 0;
+      return tally.counts[v.alternative];
+    };
+    return buildOrder(players, voteCountOf);
   }, [players, round1, tally]);
 
   const [idx, setIdx] = useState(0);
@@ -87,7 +98,7 @@ export function DebateStructured() {
         <p className="text-xs uppercase tracking-[0.2em] text-primary font-bold">Debate Estruturado</p>
         <h1 className="mt-1 text-2xl font-bold tracking-tight">Defendam seus pontos de vista</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Voz minoritária fala primeiro para evitar o efeito manada (Groupthink).
+          Quem se absteve e a voz minoritária falam primeiro, para evitar o efeito manada (Groupthink).
         </p>
       </div>
 
@@ -95,7 +106,7 @@ export function DebateStructured() {
       <SoftCard className="mb-6 animate-pop-in text-center p-8">
         <div className="flex flex-col items-center">
           <div className="relative">
-            <Avatar3D initials={speaker.playerName.slice(0, 2)} role={speaker.playerRole} imageUrl={(speaker as any).avatarImage} size="lg" />
+            <Avatar3D initials={speaker.playerName.slice(0, 2)} role={speaker.playerRole} imageUrl={speaker.avatarImage} size="lg" />
             <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
               {speaker.order}
             </span>

@@ -63,7 +63,9 @@ export function VoteReveal() {
             <p className="text-sm text-muted-foreground leading-relaxed">
               {tally.unanimous
                 ? `Todos concordaram com a Alternativa ${tally.winner.toUpperCase()}. A decisão será aplicada de imediato.`
-                : 'É hora de abrir o debate estruturado para alinhar as visões antes da votação final.'}
+                : tally.abstentions > 0 && tally.topAlternatives.length === 1
+                  ? 'Houve abstenção: a decisão só é unânime quando todos votam na mesma alternativa. No debate, quem se absteve fala primeiro.'
+                  : 'É hora de abrir o debate estruturado para alinhar as visões antes da votação final.'}
             </p>
           </div>
         </div>

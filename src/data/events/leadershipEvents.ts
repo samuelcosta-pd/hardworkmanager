@@ -123,7 +123,6 @@ export const leadershipEvents: GameEvent[] = [
     resourceProcess: "liderar",
     senderName: "Mariana Costa",
     senderInitials: "MC",
-    avatarImage: "/Personagens/Mariana.png",
     responsibleRole: "techLead",
     alternatives: [
       {
@@ -223,7 +222,6 @@ export const leadershipEvents: GameEvent[] = [
     resourceProcess: "liderar",
     senderName: "Mariana Costa",
     senderInitials: "MC",
-    avatarImage: "/Personagens/Mariana.png",
     responsibleRole: "techLead",
     alternatives: [
       {
@@ -323,7 +321,6 @@ export const leadershipEvents: GameEvent[] = [
     resourceProcess: "liderar",
     senderName: "Carla Silveira",
     senderInitials: "CS",
-    avatarImage: "/Personagens/Carla.png",
     responsibleRole: "uxLead",
     alternatives: [
       {
@@ -423,7 +420,6 @@ export const leadershipEvents: GameEvent[] = [
     resourceProcess: "liderar",
     senderName: "Prof. Alberto Silva",
     senderInitials: "AS",
-    avatarImage: "/Personagens/Alberto.png",
     responsibleRole: "pm",
     alternatives: [
       {
@@ -523,7 +519,6 @@ export const leadershipEvents: GameEvent[] = [
     resourceProcess: "liderar",
     senderName: "Mariana Costa",
     senderInitials: "MC",
-    avatarImage: "/Personagens/Mariana.png",
     responsibleRole: "techLead",
     alternatives: [
       {
@@ -623,7 +618,6 @@ export const leadershipEvents: GameEvent[] = [
     resourceProcess: "liderar",
     senderName: "Você (Gerente de Projetos)",
     senderInitials: "GP",
-    avatarImage: "/Personagens/Narrador.png",
     responsibleRole: "pm",
     alternatives: [
       {
@@ -723,7 +717,6 @@ export const leadershipEvents: GameEvent[] = [
     resourceProcess: "liderar",
     senderName: "Mariana Costa",
     senderInitials: "MC",
-    avatarImage: "/Personagens/Mariana.png",
     responsibleRole: "techLead",
     alternatives: [
       {
@@ -823,7 +816,6 @@ export const leadershipEvents: GameEvent[] = [
     resourceProcess: "liderar",
     senderName: "Mariana Costa",
     senderInitials: "MC",
-    avatarImage: "/Personagens/Mariana.png",
     responsibleRole: "techLead",
     alternatives: [
       {
@@ -923,7 +915,6 @@ export const leadershipEvents: GameEvent[] = [
     resourceProcess: "liderar",
     senderName: "Mariana Costa",
     senderInitials: "MC",
-    avatarImage: "/Personagens/Mariana.png",
     responsibleRole: "techLead",
     alternatives: [
       {

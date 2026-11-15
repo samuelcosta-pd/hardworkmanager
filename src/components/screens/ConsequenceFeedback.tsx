@@ -11,10 +11,11 @@ import {
   ChevronUp,
   ArrowRight,
   TrendingDown,
+  BookOpen,
 } from "lucide-react";
 import { SoftCard } from "@/components/ui/SoftCard";
 import { SoftButton } from "@/components/ui/SoftButton";
-import { MetricBar } from "@/components/ui/MetricBar";
+import { MetricBar, KNOWLEDGE_BAR_PROPS } from "@/components/ui/MetricBar";
 import { useGameStore } from "@/store/gameStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MENTOR } from "@/data/avatars";
@@ -91,20 +92,24 @@ export function ConsequenceFeedback() {
     );
   }
 
-  const totalDilemmas = matchDeck?.length || 10;
+  const totalDilemmas = matchDeck.length;
   const isLast = currentEventIndex >= totalDilemmas - 1;
   const isSprintEnd = (currentEventIndex + 1) % 3 === 0;
 
   const ctaLabel = gameOverReason
     ? "Ver desfecho do projeto"
     : isLast
-      ? "Ver Debriefing Final"
+      ? "Avançar para a Revisão Final do Ciclo"
       : isSprintEnd
         ? "Avançar para Revisão do Ciclo"
         : "Avançar para o Próximo Dilema";
 
+  // Variação real da decisão (inclui a penalidade cruzada e os limites 0–100).
+  // Partidas salvas antes desta versão não têm immediateDelta: usa o valor nominal.
+  const delta: Partial<Metrics> = decision.immediateDelta ?? alt.impacts;
+
   const renderDeltaChip = (key: keyof Metrics, label: string) => {
-    const v = alt.impacts[key] ?? 0;
+    const v = delta[key] ?? 0;
     if (v === 0) return null;
     const isPositive = v > 0;
 
@@ -174,7 +179,7 @@ export function ConsequenceFeedback() {
                         if (!v) return null;
                         const label =
                           k === "capacidadeEntrega"
-                            ? "Velocidade"
+                            ? "Capacidade"
                             : k === "qualidadeProduto"
                               ? "Qualidade"
                               : k === "saudeEquipe"
@@ -266,11 +271,19 @@ export function ConsequenceFeedback() {
         {/* Chips de Variação Imediata da Decisão */}
         <div className="mb-4">
           <p className="text-xs font-semibold text-slate-600 mb-2">Variação da Decisão Tomada:</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-            {renderDeltaChip("capacidadeEntrega", "Velocidade")}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            {renderDeltaChip("capacidadeEntrega", "Capacidade de Entrega")}
             {renderDeltaChip("qualidadeProduto", "Qualidade")}
-            {renderDeltaChip("saudeEquipe", "Saúde do Time")}
+            {renderDeltaChip("saudeEquipe", "Saúde da Equipe")}
+            {renderDeltaChip("conhecimentoOrganizacional", "Conhecimento")}
           </div>
+          {decision.penaltyApplied && (
+            <p className="mt-2.5 rounded-xl border border-rose-200 bg-rose-50 p-2.5 text-xs font-semibold text-rose-900">
+              Penalidade cruzada: com o Conhecimento Organizacional abaixo de 20, a perda de
+              Capacidade de Entrega desta decisão foi dobrada (falta de documentação e silos de
+              conhecimento tornam a recuperação mais lenta).
+            </p>
+          )}
         </div>
 
         {/* Penalidade de Ecos Ativados Nesta Rodada */}
@@ -286,7 +299,7 @@ export function ConsequenceFeedback() {
                   if (!v) return null;
                   const label =
                     k === "capacidadeEntrega"
-                      ? "Velocidade"
+                      ? "Capacidade"
                       : k === "qualidadeProduto"
                         ? "Qualidade"
                         : k === "saudeEquipe"
@@ -310,7 +323,7 @@ export function ConsequenceFeedback() {
         {/* Barras de Métricas com Níveis Atualizados */}
         <div className="space-y-4 pt-4 border-t border-slate-100">
           <MetricBar
-            label="Capacidade de Entrega (Velocity)"
+            label="Capacidade de Entrega"
             value={metrics.capacidadeEntrega}
             icon={<Gauge className="h-5 w-5 text-primary" />}
           />
@@ -323,6 +336,11 @@ export function ConsequenceFeedback() {
             label="Saúde da Equipe"
             value={metrics.saudeEquipe}
             icon={<Heart className="h-5 w-5 text-primary" />}
+          />
+          <MetricBar
+            {...KNOWLEDGE_BAR_PROPS}
+            value={metrics.conhecimentoOrganizacional}
+            icon={<BookOpen className="h-5 w-5 text-primary" />}
           />
         </div>
       </SoftCard>

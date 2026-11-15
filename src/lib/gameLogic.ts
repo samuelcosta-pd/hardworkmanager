@@ -1,4 +1,12 @@
-import type { AlternativeKey, MetricLevel, Metrics, Vote, GameEvent, DelayedImpact } from "@/types";
+import type {
+  Alternative,
+  AlternativeKey,
+  MetricLevel,
+  Metrics,
+  Vote,
+  GameEvent,
+  DelayedImpact,
+} from "@/types";
 import { tailoringEvents } from "@/data/events/tailoringEvents";
 import { leadershipEvents } from "@/data/events/leadershipEvents";
 import { systemsThinkingEvents } from "@/data/events/systemsThinkingEvents";
@@ -11,6 +19,20 @@ export const INITIAL_METRICS: Metrics = {
   saudeEquipe: 100,
   conhecimentoOrganizacional: 50,
 };
+
+/**
+ * Embaralhamento uniforme (Fisher-Yates). Substitui `sort(() => Math.random() - 0.5)`,
+ * que é enviesado: com ele a alternativa recomendada caía na posição A em ~44% das vezes
+ * e alguns dilemas apareciam em até 24% das partidas (em vez de 12%).
+ */
+export function shuffle<T>(arr: readonly T[], random: () => number = Math.random): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 export function clamp(n: number): number {
   return Math.max(0, Math.min(100, n));
@@ -46,7 +68,7 @@ export function isGameOver(m: Metrics): { over: boolean; reason?: string } {
     return {
       over: true,
       reason:
-        "A capacidade de entrega (Velocity) colapsou. Gargalos crônicos e lentidão inviabilizaram a continuidade do projeto.",
+        "A capacidade de entrega colapsou. Gargalos crônicos e lentidão inviabilizaram a continuidade do projeto.",
     };
   if (m.qualidadeProduto < 40)
     return {
@@ -92,7 +114,10 @@ export function tallyVotes(votes: Vote[]): VoteTally {
   const topAlternatives = entries.filter(([, n]) => n === max).map(([k]) => k);
 
   const tied = max === 0 || topAlternatives.length > 1;
-  const unanimous = validVotesCount > 0 && topAlternatives.length === 1 && max === validVotesCount;
+  // Regra: só é unânime se todos votaram (nenhuma abstenção) e na mesma alternativa.
+  // Uma abstenção indica dúvida e abre o debate, no qual quem se absteve fala primeiro.
+  const unanimous =
+    abstentions === 0 && validVotesCount > 0 && topAlternatives.length === 1 && max === validVotesCount;
 
   return {
     counts,
@@ -133,9 +158,7 @@ export function evaluateCondition(
  */
 export function shuffleEventAlternatives(event: GameEvent): GameEvent {
   const keys: AlternativeKey[] = ['a', 'b', 'c'];
-  const shuffledAlts = [...event.alternatives]
-    .sort(() => Math.random() - 0.5)
-    .map((alt, idx) => ({
+  const shuffledAlts = shuffle(event.alternatives).map((alt, idx) => ({
       ...alt,
       key: keys[idx],
     }));
@@ -153,10 +176,8 @@ export function shuffleEventAlternatives(event: GameEvent): GameEvent {
 export const MATCH_DILEMMA_COUNT = 6;
 
 export function generateMatchDeck(): GameEvent[] {
-  const sampleRandom = (arr: GameEvent[], count: number = 1): GameEvent[] => {
-    const shuffled = [...arr].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, count);
-  };
+  const sampleRandom = (arr: GameEvent[], count: number = 1): GameEvent[] =>
+    shuffle(arr).slice(0, count);
 
   const poolTailoring = sampleRandom(tailoringEvents, 2);
   const poolLeadership = sampleRandom(leadershipEvents, 2);
@@ -170,7 +191,7 @@ export function generateMatchDeck(): GameEvent[] {
     poolSystems[0],
     poolChange[0],
     poolQuality[0],
-  ].sort(() => Math.random() - 0.5);
+  ];
 
   const round2 = [
     poolTailoring[1],
@@ -178,9 +199,137 @@ export function generateMatchDeck(): GameEvent[] {
     poolSystems[1],
     poolChange[1],
     poolQuality[1],
-  ].sort(() => Math.random() - 0.5);
+  ];
 
-  const selectedDeck = [...round1, ...round2].slice(0, MATCH_DILEMMA_COUNT);
+  // Cinco dilemas (um de cada módulo) em ordem aleatória + o sexto, de um módulo sorteado.
+  const selectedDeck = [...shuffle(round1), ...shuffle(round2)].slice(0, MATCH_DILEMMA_COUNT);
   return selectedDeck.map(shuffleEventAlternatives);
 }
 
+
+/**
+ * Escolhe a alternativa vencedora a partir dos votos.
+ * - Usa a 2ª votação quando existir; senão, a 1ª.
+ * - Empate: prevalece o voto do GP (que não pode se abster na 2ª votação).
+ * - Salvaguarda: se ainda houver empate sem voto do GP entre as empatadas,
+ *   usa a contagem da 1ª votação entre as empatadas e, persistindo, a primeira delas.
+ */
+export function decideWinner(
+  votes: Vote[],
+  pmPlayerId: string | undefined,
+  fallbackKey: AlternativeKey,
+): { chosenKey: AlternativeKey; tally: VoteTally } {
+  const round1 = votes.filter((v) => v.round === 1);
+  const round2 = votes.filter((v) => v.round === 2);
+  const decisive = round2.length > 0 ? round2 : round1;
+  const tally = tallyVotes(decisive);
+
+  if (!tally.tied) return { chosenKey: tally.winner, tally };
+
+  const candidates = tally.counts.a + tally.counts.b + tally.counts.c === 0
+    ? (["a", "b", "c"] as AlternativeKey[])
+    : tally.topAlternatives;
+
+  const pmVote = decisive.find((v) => v.playerId === pmPlayerId);
+  if (pmVote && pmVote.alternative !== "abstain" && candidates.includes(pmVote.alternative)) {
+    return { chosenKey: pmVote.alternative, tally };
+  }
+
+  if (round2.length > 0) {
+    const r1 = tallyVotes(round1);
+    const best = [...candidates].sort((x, y) => r1.counts[y] - r1.counts[x]);
+    if (best.length > 0 && (best.length === 1 || r1.counts[best[0]] > r1.counts[best[1]])) {
+      return { chosenKey: best[0], tally };
+    }
+  }
+
+  return { chosenKey: candidates[0] ?? fallbackKey, tally };
+}
+
+export interface PendingImpact {
+  id: string;
+  remainingEvents: number;
+  impact: DelayedImpact;
+  sourceEventTitle: string;
+}
+
+export interface TriggeredImpact {
+  narrative: string;
+  metricsDelta: Partial<Metrics>;
+  sourceEventTitle: string;
+}
+
+export interface TurnResult {
+  metrics: Metrics;
+  pending: PendingImpact[];
+  triggered: TriggeredImpact[];
+  /** Variação real causada pela decisão (após penalidade e limites 0–100). */
+  immediateDelta: Metrics;
+  /** true se a perda de Capacidade foi dobrada por Conhecimento < 20. */
+  penaltyApplied: boolean;
+}
+
+function diff(after: Metrics, before: Metrics): Metrics {
+  return {
+    capacidadeEntrega: after.capacidadeEntrega - before.capacidadeEntrega,
+    qualidadeProduto: after.qualidadeProduto - before.qualidadeProduto,
+    saudeEquipe: after.saudeEquipe - before.saudeEquipe,
+    conhecimentoOrganizacional: after.conhecimentoOrganizacional - before.conhecimentoOrganizacional,
+  };
+}
+
+/**
+ * Regra única de avanço de um dilema, usada pelo jogo e pelo simulador:
+ * 1) dispara consequências tardias vencidas; 2) aplica a decisão; 3) agenda as novas.
+ * O fim de jogo é verificado depois dos dois passos.
+ */
+export function resolveTurn(
+  metrics: Metrics,
+  pending: PendingImpact[],
+  event: GameEvent,
+  alt: Alternative,
+  idSuffix = "",
+): TurnResult {
+  let current = { ...metrics };
+  const triggered: TriggeredImpact[] = [];
+  const remaining: PendingImpact[] = [];
+
+  for (const item of pending) {
+    const left = item.remainingEvents - 1;
+    if (left <= 0) {
+      if (evaluateCondition(current, item.impact.condition)) {
+        const before = current;
+        current = applyImpacts(current, item.impact.impacts);
+        triggered.push({
+          narrative: item.impact.narrative,
+          metricsDelta: diff(current, before),
+          sourceEventTitle: item.sourceEventTitle,
+        });
+      }
+    } else {
+      remaining.push({ ...item, remainingEvents: left });
+    }
+  }
+
+  const before = current;
+  const after = applyImpacts(before, alt.impacts);
+  const penaltyApplied =
+    before.conhecimentoOrganizacional < 20 && (alt.impacts.capacidadeEntrega ?? 0) < 0;
+
+  (alt.delayedImpacts ?? []).forEach((di, idx) => {
+    remaining.push({
+      id: `${event.id}_di_${idx}${idSuffix}`,
+      remainingEvents: di.triggerAfterEvents,
+      impact: di,
+      sourceEventTitle: event.title,
+    });
+  });
+
+  return {
+    metrics: after,
+    pending: remaining,
+    triggered,
+    immediateDelta: diff(after, before),
+    penaltyApplied,
+  };
+}
