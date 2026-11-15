@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { useGameStore } from "@/store/gameStore";
 import type { Metrics } from "@/types";
 import { cn } from "@/lib/utils";
+import { RulesButton } from "./RulesButton";
 
 type Level = "stable" | "warning" | "critical";
 
@@ -167,7 +168,10 @@ export function GameHud({ deltas, action }: { deltas?: Partial<Metrics>; action?
           />
         ))}
       </div>
-      {action}
+      <div className="flex items-center gap-2">
+        <RulesButton />
+        {action}
+      </div>
       <div className="flex flex-col items-end gap-1.5">
         <span className="whitespace-nowrap text-sm font-bold text-muted-foreground">
           Dilema {Math.min(current + 1, total)} de {total}

@@ -29,7 +29,9 @@ export function ExitButton() {
           <Button
             variant="destructive"
             size="icon"
-            className="rounded-full shadow-lg h-10 w-10 opacity-70 hover:opacity-100 transition-opacity"
+            aria-label="Sair da partida"
+            title="Sair da partida"
+            className="h-11 w-11 rounded-full shadow-lg opacity-80 transition-opacity hover:opacity-100"
           >
             <LogOut className="h-5 w-5" />
           </Button>

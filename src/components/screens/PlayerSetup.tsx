@@ -16,12 +16,17 @@ interface Draft {
   avatarImage?: string;
 }
 
-const SLOT_TAG: Record<number, string> = { 0: "GP", 1: "Técnico", 2: "Design", 3: "Colíder" };
-
 /**
  * Cada papel tem um lugar fixo (não há como escolher papel repetido):
  * 1 GP, 1 Líder Técnico, 1 Líder de Design e Telas e, opcionalmente, um colíder de Design e Telas.
  */
+const SLOT_TITLE = (i: number, role: PlayerRole) =>
+  i === 3
+    ? "Colíder de Design e Telas"
+    : role === "pm"
+      ? "Gerente de Projetos (GP)"
+      : ROLE_LABELS[role];
+
 export function PlayerSetup() {
   const setupPlayers = useGameStore((s) => s.setupPlayers);
   const goTo = useGameStore((s) => s.goTo);
@@ -47,7 +52,10 @@ export function PlayerSetup() {
             : "o avatar";
       return `${what} ${i === 3 ? "do 4º jogador" : `do ${ROLE_LABELS[d.role]}`}`;
     });
-  const allValid = missing.length === 0;
+  // Nomes repetidos confundem a votação e o debate ("Ana" e "Ana").
+  const names = drafts.map((d) => d.name.trim().toLocaleLowerCase("pt-BR")).filter(Boolean);
+  const hasDuplicateName = new Set(names).size !== names.length;
+  const allValid = missing.length === 0 && !hasDuplicateName;
 
   const takenBy = (avatarId: string, current: number) => {
     const i = drafts.findIndex((d, idx) => d.avatarId === avatarId && idx !== current);
@@ -78,8 +86,7 @@ export function PlayerSetup() {
               key={i}
               className="flex flex-col items-center gap-3 rounded-3xl border border-border bg-card p-5 text-center animate-float-in"
             >
-              <div className="flex w-full items-center justify-between">
-                <Chip tone="accent">{SLOT_TAG[i]}</Chip>
+              <div className="flex h-10 w-full items-center justify-end">
                 {i === 3 && (
                   <button
                     type="button"
@@ -109,8 +116,9 @@ export function PlayerSetup() {
                   </span>
                 )}
               </button>
-              <span className="text-xl font-black leading-tight">
-                {i === 3 ? "Colíder de Design e Telas" : ROLE_LABELS[d.role]}
+              {/* Altura fixa para o título (até 2 linhas): mantém nome e botões alinhados entre os cartões */}
+              <span className="flex min-h-[3.5rem] items-center text-xl font-black leading-tight">
+                {SLOT_TITLE(i, d.role)}
               </span>
               <span className="text-base font-bold text-muted-foreground">{card.headline}</span>
               <label className="flex w-full flex-col gap-1.5 text-left">
@@ -119,6 +127,7 @@ export function PlayerSetup() {
                   type="text"
                   value={d.name}
                   placeholder="Digite o nome"
+                  maxLength={20}
                   onChange={(e) => updateDraft(i, { name: e.target.value })}
                   className="h-12 w-full rounded-xl border-2 border-border bg-background px-4 text-lg font-extrabold text-foreground placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none"
                 />
@@ -154,8 +163,9 @@ export function PlayerSetup() {
         </SoftButton>
         {!allValid && (
           <span className="text-base font-bold text-warning" role="status">
-            Falta {missing[0]}
-            {missing.length > 1 ? ` (+${missing.length - 1})` : ""}
+            {missing.length > 0
+              ? `Falta ${missing[0]}${missing.length > 1 ? ` (+${missing.length - 1})` : ""}`
+              : "Cada jogador precisa de um nome diferente"}
           </span>
         )}
         <SoftButton size="lg" onClick={() => allValid && setupPlayers(drafts)} disabled={!allValid}>

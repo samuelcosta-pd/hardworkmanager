@@ -1,4 +1,4 @@
-import { ArrowRight, LayoutGrid, Target } from "lucide-react";
+import { ArrowLeft, ArrowRight, LayoutGrid, Target } from "lucide-react";
 import { SoftButton } from "@/components/ui/SoftButton";
 import { Chip } from "@/components/game/Chip";
 import { METRIC_META } from "@/components/game/GameHud";
@@ -72,7 +72,10 @@ export function ProjectBriefing() {
         </section>
       </main>
 
-      <div className="mt-8 flex justify-end">
+      <div className="mt-8 flex items-center justify-between gap-4">
+        <SoftButton variant="ghost" onClick={() => goTo("role_explanation")}>
+          <ArrowLeft className="h-5 w-5" /> Voltar
+        </SoftButton>
         <SoftButton size="lg" onClick={() => goTo("dashboard")}>
           Ir para a sala de comando <ArrowRight className="h-5 w-5" />
         </SoftButton>

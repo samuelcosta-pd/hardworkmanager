@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { FileText, Mail, MessageSquare, Ticket } from "lucide-react";
+import { ChevronDown, FileText, Mail, MessageSquare, Ticket } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
 import { Avatar3D } from "@/components/ui/Avatar3D";
 import { ALT_BG, AltShape } from "@/components/game/AltShape";
@@ -205,5 +206,28 @@ export function DecisionDetails({
         </div>
       )}
     </div>
+  );
+}
+
+/**
+ * Botão com a alternativa (cor + forma + letra): um toque mostra o texto completo.
+ * Mantém a tela limpa e evita que o jogador precise lembrar o que a letra significa.
+ */
+export function AltRevealButton({ k, text }: { k: AlternativeKey; text: string }) {
+  return (
+    <Popover>
+      <PopoverTrigger
+        aria-label={`Ver o texto da alternativa ${k.toUpperCase()}`}
+        className={`${ALT_BG[k]} inline-flex min-h-11 items-center gap-2 rounded-xl px-3 text-base font-black text-white shadow-[0_3px_0_rgba(0,0,0,0.3)] transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary`}
+      >
+        <AltShape k={k} size={16} />
+        {k.toUpperCase()}
+        <ChevronDown className="h-4 w-4" aria-hidden="true" />
+      </PopoverTrigger>
+      <PopoverContent className="w-[min(420px,90vw)] rounded-2xl border-0 bg-white p-4 text-left text-lg font-bold leading-snug text-[#0e1633] shadow-2xl">
+        <span className="mr-1.5 font-black">{k.toUpperCase()}.</span>
+        {text}
+      </PopoverContent>
+    </Popover>
   );
 }

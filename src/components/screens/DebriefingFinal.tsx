@@ -201,7 +201,7 @@ export function DebriefingFinal() {
           <span className="flex items-center gap-2 text-xl font-black">
             <Briefcase className="h-6 w-6 text-primary" /> Em projetos reais
           </span>
-          <ul className="m-0 flex flex-col gap-3 pl-6 text-xl font-semibold leading-relaxed">
+          <ul className="m-0 flex list-disc flex-col gap-3 pl-6 text-xl font-semibold leading-relaxed">
             <li>Garantam as pessoas e os recursos certos no momento certo.</li>
             <li>Negociem prazos com base na capacidade real da equipe.</li>
             <li>Protejam o time contra sobrecarga e horas extras crônicas.</li>

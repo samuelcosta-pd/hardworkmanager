@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, EyeOff, Lock, UserX } from "lucide-react";
+import { ArrowRight, EyeOff, Lock, Undo2, UserX } from "lucide-react";
 import { SoftButton } from "@/components/ui/SoftButton";
 import { SoftCard } from "@/components/ui/SoftCard";
 import { Avatar3D } from "@/components/ui/Avatar3D";
@@ -29,6 +29,7 @@ export function VotingRound({ round }: Props) {
     votes,
     timerSettings,
     castVote,
+    undoLastVote,
     finalizeRound1,
     finalizeRound2,
     goTo,
@@ -68,6 +69,12 @@ export function VotingRound({ round }: Props) {
         : "aguarda";
   });
   const footer = <TeamBar status={status} />;
+  const prevVoter = currentVoterIndex > 0 ? players[currentVoterIndex - 1] : undefined;
+  const undoButton = prevVoter ? (
+    <SoftButton variant="ghost" size="sm" onClick={undoLastVote}>
+      <Undo2 className="h-5 w-5" /> {prevVoter.name}, corrigir meu voto
+    </SoftButton>
+  ) : null;
   const timerOn = !handoff && !allVoted && timerSettings.enabled && timerSettings.votingSeconds > 0;
   const drawer = event ? (
     <DilemmaDrawer
@@ -102,6 +109,7 @@ export function VotingRound({ round }: Props) {
           >
             {round === 1 ? "Revelar votos" : "Aplicar decisão"} <ArrowRight className="h-5 w-5" />
           </SoftButton>
+          {undoButton && <div className="mt-4 flex justify-center">{undoButton}</div>}
         </SoftCard>
       </GameScreen>
     );
@@ -149,6 +157,7 @@ export function VotingRound({ round }: Props) {
           <SoftButton size="lg" className="w-full" onClick={() => setHandoff(false)}>
             Sou {player.name}, vou votar
           </SoftButton>
+          {undoButton}
         </div>
       </GameScreen>
     );
@@ -223,8 +232,8 @@ export function VotingRound({ round }: Props) {
         {mustVote ? (
           <span className="rounded-2xl border border-primary/40 bg-primary/10 px-4 py-2.5 text-center text-base font-extrabold text-primary">
             {countdown.isExpired
-              ? "Tempo esgotado. Como GP, você precisa votar: em caso de empate, seu voto decide."
-              : "Como GP, você não pode se abster nesta votação: em caso de empate, seu voto decide."}
+              ? "Tempo esgotado. Como Gerente de Projetos, você precisa votar: em caso de empate, seu voto decide."
+              : "Como Gerente de Projetos, você não pode se abster nesta votação: em caso de empate, seu voto decide."}
           </span>
         ) : (
           <SoftButton variant="ghost" size="sm" onClick={() => handleVote("abstain")}>

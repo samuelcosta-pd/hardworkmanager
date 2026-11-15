@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, Check, MessageSquare, SkipForward } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, MessageSquare, SkipForward } from "lucide-react";
 import { SoftButton } from "@/components/ui/SoftButton";
 import { Avatar3D } from "@/components/ui/Avatar3D";
-import { AltBadge } from "@/components/game/AltShape";
-import { AlternativeLine, DilemmaDrawer, DilemmaMessage } from "@/components/game/DilemmaDrawer";
+import { AltRevealButton, DilemmaDrawer } from "@/components/game/DilemmaDrawer";
 import { GameScreen } from "@/components/game/GameScreen";
 import { TeamBar } from "@/components/game/TeamBar";
 import { TimerRing } from "@/components/game/TimerRing";
@@ -96,11 +95,6 @@ export function DebateStructured() {
         ) : undefined
       }
     >
-      {event && (
-        <div className="rounded-3xl border border-border bg-card p-4 [&_p]:line-clamp-2">
-          <DilemmaMessage event={event} compact />
-        </div>
-      )}
       <div className="grid flex-1 grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_400px]">
         <section
           className="flex flex-col items-center gap-4 text-center animate-pop-in"
@@ -108,7 +102,7 @@ export function DebateStructured() {
         >
           <span className="flex items-center gap-2 text-lg font-extrabold text-primary">
             <MessageSquare className="h-5 w-5" />
-            {isPm ? "Síntese do GP" : "Debate · a minoria fala primeiro"}
+            {isPm ? "Síntese do Gerente de Projetos" : "Debate · a minoria fala primeiro"}
           </span>
           <div className="rounded-full ring-4 ring-primary">
             <Avatar3D
@@ -121,24 +115,24 @@ export function DebateStructured() {
           </div>
           <div className="flex flex-col items-center gap-1">
             <span className="text-4xl font-black">{speaker.playerName}</span>
-            <span className="flex items-center gap-2 text-lg font-extrabold text-muted-foreground">
+            <span className="text-lg font-extrabold text-muted-foreground">
               {ROLE_LABELS[speaker.playerRole]}
-              {spVote && spVote !== "abstain" && (
-                <>
-                  · defende <AltBadge k={spVote} size="sm" />
-                </>
-              )}
-              {spVote === "abstain" && <> · se absteve: conte o que faltou para decidir</>}
             </span>
+            {spVote && spVote !== "abstain" && event && (
+              <span className="mt-1 flex items-center gap-2 text-lg font-extrabold text-muted-foreground">
+                Defende
+                <AltRevealButton
+                  k={spVote}
+                  text={event.alternatives.find((a) => a.key === spVote)?.text ?? ""}
+                />
+              </span>
+            )}
+            {spVote === "abstain" && (
+              <span className="mt-1 text-lg font-extrabold text-muted-foreground">
+                Absteve-se: conte o que faltou para decidir
+              </span>
+            )}
           </div>
-          {event && spVote && spVote !== "abstain" && (
-            <div className="w-full max-w-xl text-left">
-              <AlternativeLine
-                k={spVote}
-                text={event.alternatives.find((a) => a.key === spVote)?.text ?? ""}
-              />
-            </div>
-          )}
           <TimerRing
             secondsLeft={secondsLeft}
             totalSeconds={speaker.durationSeconds}
@@ -205,6 +199,15 @@ export function DebateStructured() {
             );
           })}
           <div className="mt-2 flex gap-3">
+            {idx > 0 && (
+              <SoftButton
+                variant="ghost"
+                onClick={() => setIdx(idx - 1)}
+                aria-label="Voltar ao orador anterior"
+              >
+                <ArrowLeft className="h-5 w-5" />
+              </SoftButton>
+            )}
             {!isLast ? (
               <SoftButton className="flex-1" onClick={() => setIdx(idx + 1)}>
                 Próximo <SkipForward className="h-5 w-5" />

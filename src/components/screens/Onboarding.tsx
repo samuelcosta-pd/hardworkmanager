@@ -145,7 +145,7 @@ export function Onboarding() {
               n={3}
               icon={<Mic className="h-7 w-7" />}
               title="Debatam se discordarem"
-              time="30 s cada · GP por último"
+              time="30 s cada"
             />
             <StepCard
               n={4}
@@ -162,7 +162,7 @@ export function Onboarding() {
               <strong>Conhecimento</strong> abaixo de 20 dobra as perdas de Entrega.
             </Rule>
             <Rule icon={<Users className="h-7 w-7 text-primary" />}>
-              <strong>Empate</strong> na votação final: o GP decide.
+              <strong>Empate</strong> na votação final: decide o Gerente de Projetos (GP).
             </Rule>
           </div>
           <div className="flex items-center gap-4">

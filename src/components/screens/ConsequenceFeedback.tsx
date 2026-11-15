@@ -204,7 +204,7 @@ export function ConsequenceFeedback() {
             <p className="m-0 mb-2 flex items-center gap-2 text-lg font-black">
               <Lightbulb className="h-5 w-5 text-primary" /> Lições
             </p>
-            <ul className="m-0 flex flex-col gap-2 pl-5 text-lg font-semibold leading-relaxed">
+            <ul className="m-0 flex list-disc flex-col gap-2 pl-5 text-lg font-semibold leading-relaxed">
               {alt.learnings.map((l, i) => (
                 <li key={i}>{l}</li>
               ))}
@@ -216,7 +216,7 @@ export function ConsequenceFeedback() {
                 <ShieldCheck className="h-5 w-5 text-success" />{" "}
                 {alt.risksEvaded.length > 0 ? "Riscos evitados" : "Outras consequências"}
               </p>
-              <ul className="m-0 flex flex-col gap-2 pl-5 text-lg font-semibold leading-relaxed">
+              <ul className="m-0 flex list-disc flex-col gap-2 pl-5 text-lg font-semibold leading-relaxed">
                 {(alt.risksEvaded.length > 0 ? alt.risksEvaded : alt.otherConsequences).map(
                   (r, i) => (
                     <li key={i}>{r}</li>

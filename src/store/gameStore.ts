@@ -73,6 +73,7 @@ interface GameState {
   startGame: () => void;
   beginEvent: () => void;
   castVote: (alt: VoteChoice) => void;
+  undoLastVote: () => void;
   finalizeRound1: () => void;
   startDebate: () => void;
   beginRound2: () => void;
@@ -201,6 +202,19 @@ export const useGameStore = create<GameState>()(
         ];
         const nextIdx = currentVoterIndex + 1;
         set({ votes: newVotes, currentVoterIndex: nextIdx });
+      },
+
+      // Permite corrigir um toque errado: volta para o jogador anterior da mesma rodada.
+      undoLastVote: () => {
+        const { votes, currentVoterIndex, players, phase } = get();
+        if (currentVoterIndex <= 0) return;
+        const round = phase === "voting_round_2" ? 2 : 1;
+        const prev = players[currentVoterIndex - 1];
+        if (!prev) return;
+        set({
+          votes: votes.filter((v) => !(v.playerId === prev.id && v.round === round)),
+          currentVoterIndex: currentVoterIndex - 1,
+        });
       },
 
       finalizeRound1: () => set({ phase: "vote_reveal" }),

@@ -40,7 +40,11 @@ export function RoleExplanation() {
                 <div className="flex min-w-0 flex-col">
                   <span className="truncate text-2xl font-black">{p.name}</span>
                   <span className="text-base font-extrabold text-muted-foreground">
-                    {i === 3 ? "Colíder de Design e Telas" : ROLE_LABELS[p.role]}
+                    {i === 3
+                      ? "Colíder de Design e Telas"
+                      : p.role === "pm"
+                        ? "Gerente de Projetos (GP)"
+                        : ROLE_LABELS[p.role]}
                   </span>
                 </div>
               </div>
