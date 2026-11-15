@@ -8,16 +8,19 @@ export function GameScreen({
   children,
   footer,
   deltas,
+  hudAction,
   className,
 }: {
   children: ReactNode;
   footer?: ReactNode;
   deltas?: Partial<Metrics>;
+  /** Ação fixa na barra do topo (ex.: botão "Rever dilema"). */
+  hudAction?: ReactNode;
   className?: string;
 }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <GameHud deltas={deltas} />
+      <GameHud deltas={deltas} action={hudAction} />
       <main
         className={cn(
           "mx-auto flex w-full max-w-6xl flex-1 flex-col gap-6 px-4 py-6 sm:px-8 sm:py-8",

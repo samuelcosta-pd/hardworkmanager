@@ -2,7 +2,10 @@ import { AlertTriangle, ArrowRight, Mail, MessageSquare, Ticket } from "lucide-r
 import { SoftButton } from "@/components/ui/SoftButton";
 import { SoftCard } from "@/components/ui/SoftCard";
 import { Chip } from "@/components/game/Chip";
+import { DecisionDetails } from "@/components/game/DilemmaDrawer";
+import { Disclosure } from "@/components/game/Disclosure";
 import { GameScreen } from "@/components/game/GameScreen";
+import { decisionForTitle, findEvent } from "@/lib/history";
 import { ResponsibleBadge } from "@/components/game/ResponsibleBadge";
 import { TeamBar } from "@/components/game/TeamBar";
 import { useGameStore } from "@/store/gameStore";
@@ -16,8 +19,15 @@ const CHANNEL = {
 
 /** Sala de comando: o próximo dilema em destaque e o radar de consequências pendentes. */
 export function Dashboard() {
-  const { matchDeck, currentEventIndex, currentSprint, beginEvent, pendingDelayedImpacts, goTo } =
-    useGameStore();
+  const {
+    matchDeck,
+    decisions,
+    currentEventIndex,
+    currentSprint,
+    beginEvent,
+    pendingDelayedImpacts,
+    goTo,
+  } = useGameStore();
   const currentEvent = matchDeck[currentEventIndex];
 
   if (!currentEvent) {
@@ -74,27 +84,40 @@ export function Dashboard() {
                 Nenhuma consequência pendente.
               </span>
             ) : (
-              <ul className="m-0 flex list-none flex-col gap-2 p-0">
-                {pendingDelayedImpacts.map((p) => (
-                  <li
-                    key={p.id}
-                    className="rounded-xl bg-muted p-3 text-base font-bold leading-snug"
-                  >
-                    {shortTitle(p.sourceEventTitle)}
-                    <span
-                      className={
-                        p.remainingEvents === 1
-                          ? "mt-0.5 block text-sm text-critical"
-                          : "mt-0.5 block text-sm text-warning"
+              <div className="flex flex-col gap-2">
+                {pendingDelayedImpacts.map((p) => {
+                  const src = decisionForTitle(decisions, p.sourceEventTitle);
+                  return (
+                    <Disclosure
+                      key={p.id}
+                      summary={
+                        <span className="text-base font-bold leading-snug">
+                          {shortTitle(p.sourceEventTitle)}
+                          <span
+                            className={
+                              p.remainingEvents === 1
+                                ? "mt-0.5 block text-sm text-critical"
+                                : "mt-0.5 block text-sm text-warning"
+                            }
+                          >
+                            {p.remainingEvents === 1
+                              ? "volta no fim deste dilema"
+                              : `volta em ${p.remainingEvents} dilemas`}
+                          </span>
+                        </span>
                       }
                     >
-                      {p.remainingEvents === 1
-                        ? "volta no fim deste dilema"
-                        : `volta em ${p.remainingEvents} dilemas`}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+                      {src && (
+                        <DecisionDetails
+                          event={findEvent(matchDeck, src.eventId)}
+                          chosenKey={src.chosenAlternative}
+                          chosenText={src.chosenText}
+                        />
+                      )}
+                    </Disclosure>
+                  );
+                })}
+              </div>
             )}
             {imminent > 0 && (
               <span className="sr-only">{imminent} consequência(s) iminente(s)</span>

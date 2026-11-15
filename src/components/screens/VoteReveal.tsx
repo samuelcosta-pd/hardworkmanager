@@ -2,6 +2,7 @@ import { ArrowRight, CheckCircle2, Users2 } from "lucide-react";
 import { SoftButton } from "@/components/ui/SoftButton";
 import { Avatar3D } from "@/components/ui/Avatar3D";
 import { ALT_BG, AltShape } from "@/components/game/AltShape";
+import { DilemmaDrawer } from "@/components/game/DilemmaDrawer";
 import { GameScreen } from "@/components/game/GameScreen";
 import { TeamBar, type PlayerStatus } from "@/components/game/TeamBar";
 import { useGameStore } from "@/store/gameStore";
@@ -41,7 +42,10 @@ export function VoteReveal() {
   const max = Math.max(1, players.length);
 
   return (
-    <GameScreen footer={<TeamBar status={status} />}>
+    <GameScreen
+      footer={<TeamBar status={status} />}
+      hudAction={<DilemmaDrawer event={event} showAlternatives />}
+    >
       <div className="flex flex-wrap items-center justify-between gap-4 animate-float-in">
         <div className="flex flex-col gap-1">
           <span
@@ -117,7 +121,7 @@ export function VoteReveal() {
                 <AltShape k={alt.key} size={22} />
                 {alt.key.toUpperCase()}
               </span>
-              <p className="m-0 line-clamp-3 max-w-72 text-center text-base font-bold leading-snug text-muted-foreground">
+              <p className="m-0 max-w-72 text-center text-base font-bold leading-snug text-muted-foreground">
                 {alt.text}
               </p>
             </div>

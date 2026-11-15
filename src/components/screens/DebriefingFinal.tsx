@@ -3,6 +3,8 @@ import { ArrowLeft, ArrowRight, BookOpen, Briefcase, Check, RotateCcw, X } from 
 import { SoftButton } from "@/components/ui/SoftButton";
 import { AltBadge } from "@/components/game/AltShape";
 import { Chip } from "@/components/game/Chip";
+import { DecisionDetails } from "@/components/game/DilemmaDrawer";
+import { Disclosure } from "@/components/game/Disclosure";
 import { LEVEL_BG, LEVEL_LABEL, LEVEL_TEXT, METRIC_META, levelOf } from "@/components/game/GameHud";
 import { useGameStore } from "@/store/gameStore";
 import { ALL_DYNAMIC_EVENTS as GAME_EVENTS } from "@/data/dynamicEvents";
@@ -30,6 +32,8 @@ export function DebriefingFinal() {
       GAME_EVENTS.find((e) => e.id === d.eventId);
     const alt = ev?.alternatives.find((a) => a.key === d.chosenAlternative);
     return {
+      decision: d,
+      event: ev,
       title: shortTitle(d.eventTitle),
       key: d.chosenAlternative,
       good: alt?.goodBad === "good",
@@ -142,19 +146,31 @@ export function DebriefingFinal() {
           <div className="flex flex-col gap-2 rounded-3xl border border-border bg-card p-5">
             <span className="text-xl font-black">Decisões da partida</span>
             {learnings.map((l, i) => (
-              <div key={i} className="flex items-center gap-3 rounded-2xl bg-muted p-3">
-                <AltBadge k={l.key} size="sm" />
-                <span className="flex-1 text-base font-bold">{l.title}</span>
-                {l.good ? (
-                  <Chip tone="success">
-                    <Check className="h-4 w-4" strokeWidth={3} /> recomendada
-                  </Chip>
-                ) : (
-                  <Chip tone="warning">
-                    <X className="h-4 w-4" strokeWidth={3} /> arriscada
-                  </Chip>
-                )}
-              </div>
+              <Disclosure
+                key={i}
+                summary={
+                  <>
+                    <AltBadge k={l.key} size="sm" />
+                    <span className="flex-1 text-base font-bold">{l.title}</span>
+                    {l.good ? (
+                      <Chip tone="success">
+                        <Check className="h-4 w-4" strokeWidth={3} /> recomendada
+                      </Chip>
+                    ) : (
+                      <Chip tone="warning">
+                        <X className="h-4 w-4" strokeWidth={3} /> arriscada
+                      </Chip>
+                    )}
+                  </>
+                }
+              >
+                <DecisionDetails
+                  event={l.event}
+                  chosenKey={l.key}
+                  chosenText={l.decision.chosenText}
+                  narrative={l.decision.feedbackNarrative}
+                />
+              </Disclosure>
             ))}
           </div>
         </div>

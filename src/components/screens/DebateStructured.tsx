@@ -3,6 +3,7 @@ import { ArrowRight, Check, MessageSquare, SkipForward } from "lucide-react";
 import { SoftButton } from "@/components/ui/SoftButton";
 import { Avatar3D } from "@/components/ui/Avatar3D";
 import { AltBadge } from "@/components/game/AltShape";
+import { AlternativeLine, DilemmaDrawer, DilemmaMessage } from "@/components/game/DilemmaDrawer";
 import { GameScreen } from "@/components/game/GameScreen";
 import { TeamBar } from "@/components/game/TeamBar";
 import { TimerRing } from "@/components/game/TimerRing";
@@ -45,7 +46,8 @@ function buildOrder(players: Player[], voteCountOf: (playerId: string) => number
 }
 
 export function DebateStructured() {
-  const { players, votes, beginRound2 } = useGameStore();
+  const { players, votes, beginRound2, events, currentEventIndex } = useGameStore();
+  const event = events[currentEventIndex];
   const round1 = useMemo(() => votes.filter((v) => v.round === 1), [votes]);
   const tally = useMemo(() => tallyVotes(round1), [round1]);
 
@@ -82,7 +84,23 @@ export function DebateStructured() {
   const spVote = voteOf(speaker.playerId);
 
   return (
-    <GameScreen footer={<TeamBar status={{ [speaker.playerId]: "falando" }} />}>
+    <GameScreen
+      footer={<TeamBar status={{ [speaker.playerId]: "falando" }} />}
+      hudAction={
+        event ? (
+          <DilemmaDrawer
+            event={event}
+            showAlternatives
+            timer={{ secondsLeft, totalSeconds: speaker.durationSeconds, label: "Tempo de fala" }}
+          />
+        ) : undefined
+      }
+    >
+      {event && (
+        <div className="rounded-3xl border border-border bg-card p-4 [&_p]:line-clamp-2">
+          <DilemmaMessage event={event} compact />
+        </div>
+      )}
       <div className="grid flex-1 grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_400px]">
         <section
           className="flex flex-col items-center gap-4 text-center animate-pop-in"
@@ -113,6 +131,14 @@ export function DebateStructured() {
               {spVote === "abstain" && <> · se absteve: conte o que faltou para decidir</>}
             </span>
           </div>
+          {event && spVote && spVote !== "abstain" && (
+            <div className="w-full max-w-xl text-left">
+              <AlternativeLine
+                k={spVote}
+                text={event.alternatives.find((a) => a.key === spVote)?.text ?? ""}
+              />
+            </div>
+          )}
           <TimerRing
             secondsLeft={secondsLeft}
             totalSeconds={speaker.durationSeconds}

@@ -141,7 +141,7 @@ function ProgressDots({ total, done, current }: { total: number; done: number; c
 }
 
 /** Barra fixa do topo: 4 métricas compactas e progresso da partida. */
-export function GameHud({ deltas }: { deltas?: Partial<Metrics> }) {
+export function GameHud({ deltas, action }: { deltas?: Partial<Metrics>; action?: ReactNode }) {
   const metrics = useGameStore((s) => s.metrics);
   const matchDeck = useGameStore((s) => s.matchDeck);
   const decisions = useGameStore((s) => s.decisions);
@@ -167,6 +167,7 @@ export function GameHud({ deltas }: { deltas?: Partial<Metrics> }) {
           />
         ))}
       </div>
+      {action}
       <div className="flex flex-col items-end gap-1.5">
         <span className="whitespace-nowrap text-sm font-bold text-muted-foreground">
           Dilema {Math.min(current + 1, total)} de {total}

@@ -4,6 +4,7 @@ import { SoftButton } from "@/components/ui/SoftButton";
 import { SoftCard } from "@/components/ui/SoftCard";
 import { Avatar3D } from "@/components/ui/Avatar3D";
 import { ALT_BG, AltShape } from "@/components/game/AltShape";
+import { DilemmaDrawer } from "@/components/game/DilemmaDrawer";
 import { GameScreen } from "@/components/game/GameScreen";
 import { HelpButton } from "@/components/game/ResponsibleBadge";
 import { TeamBar, type PlayerStatus } from "@/components/game/TeamBar";
@@ -67,10 +68,25 @@ export function VotingRound({ round }: Props) {
         : "aguarda";
   });
   const footer = <TeamBar status={status} />;
+  const timerOn = !handoff && !allVoted && timerSettings.enabled && timerSettings.votingSeconds > 0;
+  const drawer = event ? (
+    <DilemmaDrawer
+      event={event}
+      timer={
+        timerOn
+          ? {
+              secondsLeft: countdown.secondsLeft,
+              totalSeconds: timerSettings.votingSeconds,
+              label: "Seu tempo",
+            }
+          : undefined
+      }
+    />
+  ) : undefined;
 
   if (allVoted) {
     return (
-      <GameScreen footer={footer} className="items-center justify-center">
+      <GameScreen footer={footer} hudAction={drawer} className="items-center justify-center">
         <SoftCard className="w-full max-w-xl p-10 text-center animate-pop-in">
           <Lock className="mx-auto h-14 w-14 text-primary" />
           <h2 className="mt-4 text-3xl font-black">Todos votaram</h2>
@@ -106,7 +122,7 @@ export function VotingRound({ round }: Props) {
 
   if (handoff) {
     return (
-      <GameScreen footer={footer} className="items-center justify-center">
+      <GameScreen footer={footer} hudAction={drawer} className="items-center justify-center">
         <div className="flex w-full max-w-md flex-col items-center gap-5 text-center animate-pop-in">
           <span className="flex items-center gap-2 text-lg font-extrabold text-primary">
             <EyeOff className="h-6 w-6" /> Voto secreto · rodada {round}
@@ -141,7 +157,7 @@ export function VotingRound({ round }: Props) {
   const terms = detectTechTerms(event.alternatives.map((a) => a.text).join(" "), 4);
 
   return (
-    <GameScreen footer={footer} className="max-w-7xl">
+    <GameScreen footer={footer} hudAction={drawer} className="max-w-7xl">
       <div className="flex flex-wrap items-center gap-5">
         <div className="rounded-full ring-4 ring-primary">
           <Avatar3D

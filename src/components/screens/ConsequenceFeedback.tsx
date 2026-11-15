@@ -14,7 +14,10 @@ import { SoftButton } from "@/components/ui/SoftButton";
 import { SoftCard } from "@/components/ui/SoftCard";
 import { AltBadge } from "@/components/game/AltShape";
 import { Chip } from "@/components/game/Chip";
+import { DecisionDetails, DilemmaDrawer } from "@/components/game/DilemmaDrawer";
+import { Disclosure } from "@/components/game/Disclosure";
 import { GameScreen } from "@/components/game/GameScreen";
+import { decisionForTitle, findEvent } from "@/lib/history";
 import { METRIC_META } from "@/components/game/GameHud";
 import { useGameStore } from "@/store/gameStore";
 import { MENTOR } from "@/data/avatars";
@@ -89,7 +92,12 @@ export function ConsequenceFeedback() {
   const good = alt.goodBad === "good";
 
   return (
-    <GameScreen deltas={delta}>
+    <GameScreen
+      deltas={delta}
+      hudAction={
+        <DilemmaDrawer event={event} showAlternatives chosenKey={decision.chosenAlternative} />
+      }
+    >
       <div className="flex flex-wrap items-center gap-2 animate-float-in">
         <Chip tone={good ? "success" : "warning"}>
           {good ? "Decisão recomendada" : "Decisão arriscada"}
@@ -115,28 +123,45 @@ export function ConsequenceFeedback() {
         </div>
       )}
 
-      {delayedImpactsTriggeredThisRound.map((impact, i) => (
-        <div
-          key={i}
-          className="flex items-start gap-3 rounded-3xl border-2 border-critical bg-card p-5 animate-pop-in"
-        >
-          <AlertTriangle className="mt-1 h-7 w-7 shrink-0 text-critical" />
-          <div className="flex flex-col gap-1.5">
-            <span className="text-base font-extrabold text-critical">
-              Consequência de "{shortTitle(impact.sourceEventTitle)}"
-            </span>
-            <p className="m-0 text-lg font-bold leading-relaxed">{impact.narrative}</p>
-            <div className="flex flex-wrap gap-2">
-              {METRIC_META.filter((m) => impact.metricsDelta?.[m.key]).map((m) => (
-                <Chip key={m.key} tone="critical">
-                  {m.label} {(impact.metricsDelta[m.key] ?? 0) > 0 ? "+" : ""}
-                  {impact.metricsDelta[m.key]}
-                </Chip>
-              ))}
+      {delayedImpactsTriggeredThisRound.map((impact, i) => {
+        const source = decisionForTitle(decisions, impact.sourceEventTitle);
+        return (
+          <div
+            key={i}
+            className="flex items-start gap-3 rounded-3xl border-2 border-critical bg-card p-5 animate-pop-in"
+          >
+            <AlertTriangle className="mt-1 h-7 w-7 shrink-0 text-critical" />
+            <div className="flex flex-col gap-1.5">
+              <span className="text-base font-extrabold text-critical">
+                Consequência de "{shortTitle(impact.sourceEventTitle)}"
+              </span>
+              <p className="m-0 text-lg font-bold leading-relaxed">{impact.narrative}</p>
+              <div className="flex flex-wrap gap-2">
+                {METRIC_META.filter((m) => impact.metricsDelta?.[m.key]).map((m) => (
+                  <Chip key={m.key} tone="critical">
+                    {m.label} {(impact.metricsDelta[m.key] ?? 0) > 0 ? "+" : ""}
+                    {impact.metricsDelta[m.key]}
+                  </Chip>
+                ))}
+              </div>
+              {source && (
+                <Disclosure
+                  summary={
+                    <span className="text-base font-extrabold">Ver a decisão que causou isso</span>
+                  }
+                  className="mt-1"
+                >
+                  <DecisionDetails
+                    event={findEvent(matchDeck, source.eventId)}
+                    chosenKey={source.chosenAlternative}
+                    chosenText={source.chosenText}
+                  />
+                </Disclosure>
+              )}
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       <section className="flex flex-col gap-5 rounded-[2rem] border border-border bg-card p-6 sm:flex-row sm:p-8 animate-float-in">
         <img
