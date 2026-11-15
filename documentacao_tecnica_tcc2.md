@@ -118,7 +118,6 @@ hardworkmanager/
 │   │   ├── error-capture.ts     # Interceptação de falhas em SSR
 │   │   ├── error-page.ts        # Template estático de página de erro
 │   │   ├── gameLogic.ts         # Funções puras de regras, cálculos, pesos e condições de derrota
-│   │   ├── lovable-error-reporting.ts # Integração cliente com reporte de diagnósticos
 │   │   └── utils.ts             # Função utilitária `cn` (clsx + tailwind-merge)
 │   ├── routes/
 │   │   ├── __root.tsx           # Layout raiz com QueryClient, ExitButton e metadados SEO

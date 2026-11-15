@@ -127,45 +127,57 @@ export function ConsequenceFeedback() {
         </div>
       )}
 
-      {delayedImpactsTriggeredThisRound.map((impact, i) => {
-        const source = decisionForTitle(decisions, impact.sourceEventTitle);
-        return (
-          <div
-            key={i}
-            className="flex items-start gap-3 rounded-3xl border-2 border-critical bg-card p-4 animate-pop-in"
-          >
-            <AlertTriangle className="mt-0.5 h-6 w-6 shrink-0 text-critical" />
-            <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-              <span className="text-base font-extrabold text-critical">
-                Consequência de "{shortTitle(impact.sourceEventTitle)}"
-              </span>
-              <p className="m-0 text-base font-bold leading-relaxed">{impact.narrative}</p>
-              <div className="flex flex-wrap items-center gap-2">
-                {METRIC_META.filter((m) => impact.metricsDelta?.[m.key]).map((m) => (
-                  <Chip key={m.key} tone="critical">
-                    {m.label} {(impact.metricsDelta[m.key] ?? 0) > 0 ? "+" : ""}
-                    {impact.metricsDelta[m.key]}
-                  </Chip>
-                ))}
-                {source && (
-                  <DetailsPopover
-                    summary={
-                      <span className="text-sm font-extrabold">Ver a decisão que causou isso</span>
-                    }
-                    className="w-auto py-1.5"
-                  >
-                    <DecisionDetails
-                      event={findEvent(matchDeck, source.eventId)}
-                      chosenKey={source.chosenAlternative}
-                      chosenText={source.chosenText}
-                    />
-                  </DetailsPopover>
-                )}
+      {/* Duas consequências no mesmo turno ficam lado a lado (cabe sem rolagem em 1366×768) */}
+      {delayedImpactsTriggeredThisRound.length > 0 && (
+        <div
+          className={cn(
+            "grid grid-cols-1 gap-3",
+            delayedImpactsTriggeredThisRound.length > 1 && "lg:grid-cols-2",
+          )}
+        >
+          {delayedImpactsTriggeredThisRound.map((impact, i) => {
+            const source = decisionForTitle(decisions, impact.sourceEventTitle);
+            return (
+              <div
+                key={i}
+                className="flex items-start gap-3 rounded-3xl border-2 border-critical bg-card p-4 animate-pop-in"
+              >
+                <AlertTriangle className="mt-0.5 h-6 w-6 shrink-0 text-critical" />
+                <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+                  <span className="text-base font-extrabold text-critical">
+                    Consequência de "{shortTitle(impact.sourceEventTitle)}"
+                  </span>
+                  <p className="m-0 text-base font-bold leading-relaxed">{impact.narrative}</p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {METRIC_META.filter((m) => impact.metricsDelta?.[m.key]).map((m) => (
+                      <Chip key={m.key} tone="critical">
+                        {m.label} {(impact.metricsDelta[m.key] ?? 0) > 0 ? "+" : ""}
+                        {impact.metricsDelta[m.key]}
+                      </Chip>
+                    ))}
+                    {source && (
+                      <DetailsPopover
+                        summary={
+                          <span className="text-sm font-extrabold">
+                            Ver a decisão que causou isso
+                          </span>
+                        }
+                        className="w-auto py-1.5"
+                      >
+                        <DecisionDetails
+                          event={findEvent(matchDeck, source.eventId)}
+                          chosenKey={source.chosenAlternative}
+                          chosenText={source.chosenText}
+                        />
+                      </DetailsPopover>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        );
-      })}
+            );
+          })}
+        </div>
+      )}
 
       <section className="flex flex-col gap-5 rounded-[2rem] border border-border bg-card p-5 sm:flex-row sm:p-6 animate-float-in">
         <img
