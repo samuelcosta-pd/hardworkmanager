@@ -11,7 +11,8 @@ import { detectTechTerms } from "@/data/glossary";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export function EventDisplay() {
-  const { events, matchDeck, currentEventIndex, pendingDelayedImpacts, timerSettings, goTo } = useGameStore();
+  const { events, matchDeck, currentEventIndex, pendingDelayedImpacts, timerSettings, goTo } =
+    useGameStore();
   const event = events && events.length > 0 ? events[currentEventIndex] || events[0] : null;
 
   const [autoAdvanceCountdown, setAutoAdvanceCountdown] = useState<number | null>(null);
@@ -61,15 +62,15 @@ export function EventDisplay() {
   const descriptionTechTerms = detectTechTerms(event.description, 4);
 
   const processName = event.resourceProcess
-    ? event.resourceProcess === 'planejar'
-      ? 'Planejar o Gerenciamento dos Recursos'
-      : event.resourceProcess === 'estimar'
-        ? 'Estimar os Recursos'
-        : event.resourceProcess === 'adquirir'
-          ? 'Adquirir os Recursos'
-          : event.resourceProcess === 'liderar'
-            ? 'Liderar a Equipe'
-            : 'Monitorar e Controlar os Recursos'
+    ? event.resourceProcess === "planejar"
+      ? "Planejar o Gerenciamento dos Recursos"
+      : event.resourceProcess === "estimar"
+        ? "Estimar os Recursos"
+        : event.resourceProcess === "adquirir"
+          ? "Adquirir os Recursos"
+          : event.resourceProcess === "liderar"
+            ? "Liderar a Equipe"
+            : "Monitorar e Controlar os Recursos"
     : null;
 
   return (
@@ -117,7 +118,9 @@ export function EventDisplay() {
             </span>
             <div>
               <p className="font-bold text-sm">Tempo de discussão coletiva encerrado!</p>
-              <p className="text-xs text-amber-900">Iniciando a votação secreta automaticamente...</p>
+              <p className="text-xs text-amber-900">
+                Iniciando a votação secreta automaticamente...
+              </p>
             </div>
           </div>
           <SoftButton size="sm" onClick={() => goTo("voting_round_1")}>
@@ -157,18 +160,18 @@ export function EventDisplay() {
           )}
           {event.resourceType && (
             <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
-              {event.resourceType === 'humano' ? 'Recurso Humano' : 'Recurso Físico/Virtual'}
+              {event.resourceType === "humano" ? "Recurso Humano" : "Recurso Físico/Virtual"}
             </span>
           )}
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">{event.title}</h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
+          {event.title}
+        </h1>
         <p className="mt-1.5 text-base sm:text-lg text-muted-foreground">
           Liderança responsável:{" "}
-          <span className="font-bold text-foreground">
-            {ROLE_LABELS[event.responsibleRole]}
-          </span>{" "}
-          · <span className="text-sm font-medium">{event.domainTag}</span>
+          <span className="font-bold text-foreground">{ROLE_LABELS[event.responsibleRole]}</span> ·{" "}
+          <span className="text-sm font-medium">{event.domainTag}</span>
         </p>
       </div>
 
@@ -194,7 +197,10 @@ export function EventDisplay() {
                     {term}
                   </button>
                 </TooltipTrigger>
-                <TooltipContent side="top" className="max-w-xs rounded-xl bg-slate-900 text-white p-2.5 text-xs">
+                <TooltipContent
+                  side="top"
+                  className="max-w-xs rounded-xl bg-slate-900 text-white p-2.5 text-xs"
+                >
                   <p className="font-bold text-primary capitalize mb-1">{term}</p>
                   <p className="text-slate-300 leading-relaxed">{definition}</p>
                 </TooltipContent>
@@ -214,7 +220,8 @@ export function EventDisplay() {
                 Dica da Mentora Helena
               </p>
               <p className="mt-1.5 text-base sm:text-lg leading-relaxed text-slate-700">
-                Discutam a situação em equipe considerando as restrições de cada papel. Em seguida, iniciem a votação secreta passando o dispositivo de mão em mão.
+                Discutam a situação em equipe considerando as restrições de cada papel. Em seguida,
+                iniciem a votação secreta passando o dispositivo de mão em mão.
               </p>
             </div>
           </div>
@@ -222,7 +229,8 @@ export function EventDisplay() {
       ) : (
         <SoftCard className="mt-6 animate-float-in text-center" variant="inset">
           <p className="text-base text-muted-foreground">
-            Discutam as alternativas em grupo. Quando estiverem prontos, passem o dispositivo para cada líder votar em sigilo.
+            Discutam as alternativas em grupo. Quando estiverem prontos, passem o dispositivo para
+            cada líder votar em sigilo.
           </p>
         </SoftCard>
       )}

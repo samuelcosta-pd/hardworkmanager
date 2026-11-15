@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Mail, MessageSquare, Ticket, ChevronDown, ChevronUp, FileText } from 'lucide-react';
-import { SoftCard } from '@/components/ui/SoftCard';
-import { Avatar3D } from '@/components/ui/Avatar3D';
-import type { GameEvent } from '@/types';
+import { useState } from "react";
+import { Mail, MessageSquare, Ticket, ChevronDown, ChevronUp, FileText } from "lucide-react";
+import { SoftCard } from "@/components/ui/SoftCard";
+import { Avatar3D } from "@/components/ui/Avatar3D";
+import type { GameEvent } from "@/types";
 
 interface Props {
   event: GameEvent;
@@ -12,12 +12,14 @@ export function EmailView({ event }: Props) {
   const [showDetails, setShowDetails] = useState(false);
   const subjectMatch = event.description.match(/^Assunto:\s*([^.]+)\./i);
   const subject = subjectMatch ? subjectMatch[1] : event.title;
-  const fullBody = subjectMatch ? event.description.replace(subjectMatch[0], '').trim() : event.description;
+  const fullBody = subjectMatch
+    ? event.description.replace(subjectMatch[0], "").trim()
+    : event.description;
 
   // Obter a primeira frase marcante do corpo
-  const sentences = fullBody.split('. ');
-  const mainSentence = sentences[0] + (sentences.length > 1 ? '.' : '');
-  const remainingText = sentences.slice(1).join('. ');
+  const sentences = fullBody.split(". ");
+  const mainSentence = sentences[0] + (sentences.length > 1 ? "." : "");
+  const remainingText = sentences.slice(1).join(". ");
 
   return (
     <SoftCard className="animate-float-in">
@@ -39,9 +41,9 @@ export function EmailView({ event }: Props) {
               <span className="text-xs text-muted-foreground font-medium">Urgente</span>
             </div>
             <p className="text-xs text-muted-foreground">{event.senderRole}</p>
-            
+
             <h2 className="mt-2 text-lg sm:text-xl font-bold text-foreground">{subject}</h2>
-            
+
             {/* Balão de Fala Conciso */}
             <div className="mt-3 rounded-2xl bg-card p-4 shadow-[var(--shadow-soft)] border-l-4 border-primary">
               <p className="text-base sm:text-lg font-medium leading-relaxed text-foreground">
@@ -58,10 +60,14 @@ export function EmailView({ event }: Props) {
                   className="flex items-center gap-1.5 text-sm sm:text-base font-semibold text-primary hover:underline transition-all"
                 >
                   <FileText className="h-4 w-4" />
-                  {showDetails ? 'Recolher detalhes técnicos' : 'Ver contexto completo do e-mail'}
-                  {showDetails ? <ChevronUp className="h-4 w-4 ml-0.5" /> : <ChevronDown className="h-4 w-4 ml-0.5" />}
+                  {showDetails ? "Recolher detalhes técnicos" : "Ver contexto completo do e-mail"}
+                  {showDetails ? (
+                    <ChevronUp className="h-4 w-4 ml-0.5" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4 ml-0.5" />
+                  )}
                 </button>
-                
+
                 {showDetails && (
                   <div className="mt-2 rounded-xl bg-card/60 p-4 text-base leading-relaxed text-muted-foreground animate-in fade-in">
                     {remainingText}
@@ -78,9 +84,9 @@ export function EmailView({ event }: Props) {
 
 export function SlackView({ event }: Props) {
   const [showDetails, setShowDetails] = useState(false);
-  const sentences = event.description.split('. ');
-  const mainSentence = sentences[0] + (sentences.length > 1 ? '.' : '');
-  const remainingText = sentences.slice(1).join('. ');
+  const sentences = event.description.split(". ");
+  const mainSentence = sentences[0] + (sentences.length > 1 ? "." : "");
+  const remainingText = sentences.slice(1).join(". ");
 
   return (
     <SoftCard className="animate-float-in">
@@ -118,10 +124,14 @@ export function SlackView({ event }: Props) {
                 className="flex items-center gap-1.5 text-sm sm:text-base font-semibold text-primary hover:underline transition-all"
               >
                 <FileText className="h-4 w-4" />
-                {showDetails ? 'Recolher detalhes' : 'Ver contexto completo da mensagem'}
-                {showDetails ? <ChevronUp className="h-4 w-4 ml-0.5" /> : <ChevronDown className="h-4 w-4 ml-0.5" />}
+                {showDetails ? "Recolher detalhes" : "Ver contexto completo da mensagem"}
+                {showDetails ? (
+                  <ChevronUp className="h-4 w-4 ml-0.5" />
+                ) : (
+                  <ChevronDown className="h-4 w-4 ml-0.5" />
+                )}
               </button>
-              
+
               {showDetails && (
                 <div className="mt-2 rounded-xl bg-muted/60 p-4 text-base leading-relaxed text-muted-foreground animate-in fade-in">
                   {remainingText}
@@ -137,9 +147,9 @@ export function SlackView({ event }: Props) {
 
 export function TicketView({ event }: Props) {
   const [showDetails, setShowDetails] = useState(false);
-  const sentences = event.description.split('. ');
-  const mainSentence = sentences[0] + (sentences.length > 1 ? '.' : '');
-  const remainingText = sentences.slice(1).join('. ');
+  const sentences = event.description.split(". ");
+  const mainSentence = sentences[0] + (sentences.length > 1 ? "." : "");
+  const remainingText = sentences.slice(1).join(". ");
 
   return (
     <SoftCard className="animate-float-in">
@@ -156,9 +166,9 @@ export function TicketView({ event }: Props) {
         <div className="mb-3 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs sm:text-sm font-semibold text-primary">
           {event.domainTag}
         </div>
-        
+
         <h2 className="text-xl sm:text-2xl font-bold text-foreground">{event.title}</h2>
-        
+
         <div className="mt-3 flex items-center gap-3">
           <Avatar3D initials={event.senderInitials} imageUrl={event.avatarImage} size="sm" />
           <div>
@@ -183,10 +193,14 @@ export function TicketView({ event }: Props) {
               className="flex items-center gap-1.5 text-sm sm:text-base font-semibold text-primary hover:underline transition-all"
             >
               <FileText className="h-4 w-4" />
-              {showDetails ? 'Ocultar logs técnicos' : 'Ver logs e descrição detalhada do ticket'}
-              {showDetails ? <ChevronUp className="h-4 w-4 ml-0.5" /> : <ChevronDown className="h-4 w-4 ml-0.5" />}
+              {showDetails ? "Ocultar logs técnicos" : "Ver logs e descrição detalhada do ticket"}
+              {showDetails ? (
+                <ChevronUp className="h-4 w-4 ml-0.5" />
+              ) : (
+                <ChevronDown className="h-4 w-4 ml-0.5" />
+              )}
             </button>
-            
+
             {showDetails && (
               <div className="mt-2 rounded-xl bg-card/60 p-4 text-base leading-relaxed text-muted-foreground animate-in fade-in font-mono">
                 {remainingText}

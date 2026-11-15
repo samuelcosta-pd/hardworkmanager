@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from "react";
 
 interface UseCountdownOptions {
   durationSeconds: number;
@@ -6,11 +6,7 @@ interface UseCountdownOptions {
   onExpire?: () => void;
 }
 
-export function useCountdown({
-  durationSeconds,
-  enabled = true,
-  onExpire,
-}: UseCountdownOptions) {
+export function useCountdown({ durationSeconds, enabled = true, onExpire }: UseCountdownOptions) {
   const [secondsLeft, setSecondsLeft] = useState(durationSeconds);
   const [isRunning, setIsRunning] = useState(enabled);
   const hasExpiredRef = useRef(false);
@@ -50,15 +46,16 @@ export function useCountdown({
       setIsRunning(enabled);
       hasExpiredRef.current = false;
     },
-    [durationSeconds, enabled]
+    [durationSeconds, enabled],
   );
 
-  const mm = String(Math.floor(secondsLeft / 60)).padStart(2, '0');
-  const ss = String(secondsLeft % 60).padStart(2, '0');
+  const mm = String(Math.floor(secondsLeft / 60)).padStart(2, "0");
+  const ss = String(secondsLeft % 60).padStart(2, "0");
   const formatted = `${mm}:${ss}`;
   const progressPercent = durationSeconds > 0 ? (secondsLeft / durationSeconds) * 100 : 0;
   const isExpired = secondsLeft <= 0;
-  const isUrgent = secondsLeft > 0 && secondsLeft <= Math.max(10, Math.floor(durationSeconds * 0.2));
+  const isUrgent =
+    secondsLeft > 0 && secondsLeft <= Math.max(10, Math.floor(durationSeconds * 0.2));
 
   return {
     secondsLeft,

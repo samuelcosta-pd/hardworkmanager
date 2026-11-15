@@ -1,9 +1,9 @@
-import { tailoringEvents } from './events/tailoringEvents';
-import { leadershipEvents } from './events/leadershipEvents';
-import { systemsThinkingEvents } from './events/systemsThinkingEvents';
-import { changeManagementEvents } from './events/changeManagementEvents';
-import { qualityEvents } from './events/qualityEvents';
-import type { GameEvent } from '@/types';
+import { tailoringEvents } from "./events/tailoringEvents";
+import { leadershipEvents } from "./events/leadershipEvents";
+import { systemsThinkingEvents } from "./events/systemsThinkingEvents";
+import { changeManagementEvents } from "./events/changeManagementEvents";
+import { qualityEvents } from "./events/qualityEvents";
+import type { GameEvent } from "@/types";
 
 /**
  * Catálogo Completo dos 50 Dilemas do Hard Work Manager

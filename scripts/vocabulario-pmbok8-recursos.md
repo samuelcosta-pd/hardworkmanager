@@ -10,45 +10,45 @@
 
 O domínio trata de como a equipe planeja e usa de forma eficaz e eficiente os recursos disponíveis. Há dois tipos:
 
-| `resourceType` | O que é | Exemplos no cenário SIGAA |
-|---|---|---|
-| `humano` | Pessoas com papéis e responsabilidades que trabalham por um objetivo comum | Desenvolvedores, QA, UX, bolsistas e estagiários, gerente de projetos |
+| `resourceType`   | O que é                                                                                                                                                   | Exemplos no cenário SIGAA                                                                   |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `humano`         | Pessoas com papéis e responsabilidades que trabalham por um objetivo comum                                                                                | Desenvolvedores, QA, UX, bolsistas e estagiários, gerente de projetos                       |
 | `fisico_virtual` | Qualquer recurso que não seja pessoa: equipamentos, materiais, instalações, infraestrutura, software, ambientes de teste, licenças, serviços, informações | Servidores e nuvem, banco de dados, ambiente de homologação, licenças, ferramentas de CI/CD |
 
 **Terminologia.** O guia fala em recursos "físicos ou virtuais". O documento de adaptação usa "tecnológicos". No código use `fisico_virtual`; nos textos do jogo, "recursos de infraestrutura e ferramentas" ou "recursos físicos e virtuais" são ambos aceitáveis.
 
 ## Os 5 processos (`resourceProcess`)
 
-| Valor | Processo | Em uma frase |
-|---|---|---|
-| `planejar` | Planejar o Gerenciamento dos Recursos | Definir como estimar, adquirir, liderar e usar recursos, considerando escassez e competição |
-| `estimar` | Estimar Recursos | Estimar tipo, quantidade e características dos recursos necessários |
-| `adquirir` | Adquirir Recursos | Obter e atribuir recursos, negociando e influenciando quem os fornece |
-| `liderar` | Liderar a Equipe | Desenvolver, motivar e orientar a equipe; resolver problemas e mudanças na equipe |
-| `monitorar` | Monitorar e Controlar Recursos | Acompanhar o uso planejado vs. real de recursos físicos/virtuais e agir; é contínuo |
+| Valor       | Processo                              | Em uma frase                                                                                |
+| ----------- | ------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `planejar`  | Planejar o Gerenciamento dos Recursos | Definir como estimar, adquirir, liderar e usar recursos, considerando escassez e competição |
+| `estimar`   | Estimar Recursos                      | Estimar tipo, quantidade e características dos recursos necessários                         |
+| `adquirir`  | Adquirir Recursos                     | Obter e atribuir recursos, negociando e influenciando quem os fornece                       |
+| `liderar`   | Liderar a Equipe                      | Desenvolver, motivar e orientar a equipe; resolver problemas e mudanças na equipe           |
+| `monitorar` | Monitorar e Controlar Recursos        | Acompanhar o uso planejado vs. real de recursos físicos/virtuais e agir; é contínuo         |
 
 Observação importante: **Monitorar e Controlar trata de recursos físicos e virtuais**. As pessoas são tratadas em Liderar a Equipe.
 
 ## Os 7 resultados esperados
 
-| Cód. | Resultado | Como o jogo o enxerga |
-|---|---|---|
-| R1 | Propriedade compartilhada do projeto | Equipe conhece a visão e assume as entregas |
-| R2 | Equipe de alto desempenho | Confiança, colaboração, adaptação, resiliência |
-| R3 | Utilização eficaz de recursos | Uso real próximo do planejado |
-| R4 | Percentual aceitável de inatividade | Pouco tempo ocioso de pessoas e recursos |
-| R5 | Equipe produtiva | Entregas proporcionais ao esforço, KPIs revisados |
-| R6 | Gestão eficiente de recursos físicos/virtuais | Pouco retrabalho e desperdício |
-| R7 | Gestão de aquisição de recursos | Aquisições conduzidas com sucesso |
+| Cód. | Resultado                                     | Como o jogo o enxerga                             |
+| ---- | --------------------------------------------- | ------------------------------------------------- |
+| R1   | Propriedade compartilhada do projeto          | Equipe conhece a visão e assume as entregas       |
+| R2   | Equipe de alto desempenho                     | Confiança, colaboração, adaptação, resiliência    |
+| R3   | Utilização eficaz de recursos                 | Uso real próximo do planejado                     |
+| R4   | Percentual aceitável de inatividade           | Pouco tempo ocioso de pessoas e recursos          |
+| R5   | Equipe produtiva                              | Entregas proporcionais ao esforço, KPIs revisados |
+| R6   | Gestão eficiente de recursos físicos/virtuais | Pouco retrabalho e desperdício                    |
+| R7   | Gestão de aquisição de recursos               | Aquisições conduzidas com sucesso                 |
 
 ## Mapeamento com as 4 métricas do jogo
 
-| Métrica | Resultados esperados mais ligados |
-|---|---|
-| `saudeEquipe` | R2 (alto desempenho), bem-estar (burnout, desengajamento) |
+| Métrica                      | Resultados esperados mais ligados                                       |
+| ---------------------------- | ----------------------------------------------------------------------- |
+| `saudeEquipe`                | R2 (alto desempenho), bem-estar (burnout, desengajamento)               |
 | `conhecimentoOrganizacional` | R1 (propriedade compartilhada), papéis claros e lacunas de conhecimento |
-| `capacidadeEntrega` | R3, R4, R5 (utilização, inatividade, produtividade) |
-| `qualidadeProduto` | R6 (retrabalho e desperdício) |
+| `capacidadeEntrega`          | R3, R4, R5 (utilização, inatividade, produtividade)                     |
+| `qualidadeProduto`           | R6 (retrabalho e desperdício)                                           |
 
 Conceitos de qualidade de software (dívida técnica, refatoração, testes) **não são do domínio Recursos**. Em dilemas de qualidade, enquadre-os pelo efeito sobre recursos: retrabalho consome capacidade da equipe, código difícil de manter exige mais esforço futuro, ambiente de testes indisponível gera ociosidade.
 
@@ -58,9 +58,10 @@ Comunicação aberta, entendimento compartilhado, propriedade compartilhada, con
 
 ## Vocabulário permitido para `pmbokConcept`
 
-Use **exatamente** estes nomes (ou combine no máximo dois, ligados por " e "). Cada alternativa recebe um conceito que descreve o que a decisão *ilustra*, não o que ela *é*.
+Use **exatamente** estes nomes (ou combine no máximo dois, ligados por " e "). Cada alternativa recebe um conceito que descreve o que a decisão _ilustra_, não o que ela _é_.
 
 **Planejar**
+
 - Matriz de responsabilidades (RAM) e papéis claros
 - Análise SWOT de recursos
 - Planejamento de recursos sob escassez e competição entre projetos
@@ -71,6 +72,7 @@ Use **exatamente** estes nomes (ou combine no máximo dois, ligados por " e "). 
 - Gestão verde de recursos humanos
 
 **Estimar**
+
 - Estimativa bottom-up de recursos
 - Estimativa análoga e paramétrica
 - Análise de alternativas na estimativa
@@ -82,6 +84,7 @@ Use **exatamente** estes nomes (ou combine no máximo dois, ligados por " e "). 
 - Opinião especializada na estimativa
 
 **Adquirir**
+
 - Negociação e influência para obter recursos
 - Recursos alternativos com riscos reconhecidos
 - Impacto da indisponibilidade de recursos nos demais planos
@@ -93,6 +96,7 @@ Use **exatamente** estes nomes (ou combine no máximo dois, ligados por " e "). 
 - Recursos internos e externos
 
 **Liderar a Equipe**
+
 - Visão e objetivos compartilhados
 - Papéis, responsabilidades e lacunas de conhecimento
 - Generalista-especialista
@@ -118,6 +122,7 @@ Use **exatamente** estes nomes (ou combine no máximo dois, ligados por " e "). 
 - Atividades de gestão e de liderança
 
 **Monitorar e Controlar**
+
 - Uso planejado vs. real de recursos
 - Escassez e excedente de recursos
 - Utilização e inatividade de recursos
@@ -131,6 +136,7 @@ Use **exatamente** estes nomes (ou combine no máximo dois, ligados por " e "). 
 - Revisões de desempenho
 
 **Transversais**
+
 - Sustentabilidade na gestão de recursos
 - Coordenação entre Recursos, Cronograma, Finanças e Risco
 - Competição entre projetos pelos mesmos recursos

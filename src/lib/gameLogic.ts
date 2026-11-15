@@ -99,7 +99,7 @@ export function tallyVotes(votes: Vote[]): VoteTally {
   let abstentions = 0;
 
   votes.forEach((v) => {
-    if (v.alternative === 'abstain') {
+    if (v.alternative === "abstain") {
       abstentions += 1;
     } else {
       counts[v.alternative] += 1;
@@ -117,7 +117,10 @@ export function tallyVotes(votes: Vote[]): VoteTally {
   // Regra: só é unânime se todos votaram (nenhuma abstenção) e na mesma alternativa.
   // Uma abstenção indica dúvida e abre o debate, no qual quem se absteve fala primeiro.
   const unanimous =
-    abstentions === 0 && validVotesCount > 0 && topAlternatives.length === 1 && max === validVotesCount;
+    abstentions === 0 &&
+    validVotesCount > 0 &&
+    topAlternatives.length === 1 &&
+    max === validVotesCount;
 
   return {
     counts,
@@ -157,11 +160,11 @@ export function evaluateCondition(
  * não seja sempre a primeira ('a').
  */
 export function shuffleEventAlternatives(event: GameEvent): GameEvent {
-  const keys: AlternativeKey[] = ['a', 'b', 'c'];
+  const keys: AlternativeKey[] = ["a", "b", "c"];
   const shuffledAlts = shuffle(event.alternatives).map((alt, idx) => ({
-      ...alt,
-      key: keys[idx],
-    }));
+    ...alt,
+    key: keys[idx],
+  }));
 
   return {
     ...event,
@@ -206,7 +209,6 @@ export function generateMatchDeck(): GameEvent[] {
   return selectedDeck.map(shuffleEventAlternatives);
 }
 
-
 /**
  * Escolhe a alternativa vencedora a partir dos votos.
  * - Usa a 2ª votação quando existir; senão, a 1ª.
@@ -226,9 +228,10 @@ export function decideWinner(
 
   if (!tally.tied) return { chosenKey: tally.winner, tally };
 
-  const candidates = tally.counts.a + tally.counts.b + tally.counts.c === 0
-    ? (["a", "b", "c"] as AlternativeKey[])
-    : tally.topAlternatives;
+  const candidates =
+    tally.counts.a + tally.counts.b + tally.counts.c === 0
+      ? (["a", "b", "c"] as AlternativeKey[])
+      : tally.topAlternatives;
 
   const pmVote = decisive.find((v) => v.playerId === pmPlayerId);
   if (pmVote && pmVote.alternative !== "abstain" && candidates.includes(pmVote.alternative)) {
@@ -274,7 +277,8 @@ function diff(after: Metrics, before: Metrics): Metrics {
     capacidadeEntrega: after.capacidadeEntrega - before.capacidadeEntrega,
     qualidadeProduto: after.qualidadeProduto - before.qualidadeProduto,
     saudeEquipe: after.saudeEquipe - before.saudeEquipe,
-    conhecimentoOrganizacional: after.conhecimentoOrganizacional - before.conhecimentoOrganizacional,
+    conhecimentoOrganizacional:
+      after.conhecimentoOrganizacional - before.conhecimentoOrganizacional,
   };
 }
 

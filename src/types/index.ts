@@ -1,40 +1,40 @@
 export type GamePhase =
-  | 'intro'
-  | 'setup'
-  | 'role_explanation'
-  | 'briefing'
-  | 'dashboard'
-  | 'event_display'
-  | 'voting_round_1'
-  | 'vote_reveal'
-  | 'debate_structured'
-  | 'voting_round_2'
-  | 'decision_resolved'
-  | 'feedback_narrative'
-  | 'sprint_review'
-  | 'debriefing'
-  | 'completed';
+  | "intro"
+  | "setup"
+  | "role_explanation"
+  | "briefing"
+  | "dashboard"
+  | "event_display"
+  | "voting_round_1"
+  | "vote_reveal"
+  | "debate_structured"
+  | "voting_round_2"
+  | "decision_resolved"
+  | "feedback_narrative"
+  | "sprint_review"
+  | "debriefing"
+  | "completed";
 
 export enum EventCategory {
-  INFRASTRUCTURE = 'INFRASTRUCTURE',
-  PEOPLE = 'PEOPLE',
-  KNOWLEDGE = 'KNOWLEDGE',
-  EXECUTION = 'EXECUTION',
-  EXTERNAL_PRESSURE = 'EXTERNAL_PRESSURE',
+  INFRASTRUCTURE = "INFRASTRUCTURE",
+  PEOPLE = "PEOPLE",
+  KNOWLEDGE = "KNOWLEDGE",
+  EXECUTION = "EXECUTION",
+  EXTERNAL_PRESSURE = "EXTERNAL_PRESSURE",
 }
 
 export enum EventDifficulty {
-  EASY = 'easy',
-  MEDIUM = 'medium',
-  HARD = 'hard',
+  EASY = "easy",
+  MEDIUM = "medium",
+  HARD = "hard",
 }
 
-export type PlayerRole = 'pm' | 'techLead' | 'uxLead';
-export type AlternativeKey = 'a' | 'b' | 'c';
-export type MetricLevel = 'stable' | 'warning' | 'critical';
-export type CommunicationType = 'email' | 'slack' | 'ticket';
-export type ResourceType = 'humano' | 'fisico_virtual';
-export type ResourceProcess = 'planejar' | 'estimar' | 'adquirir' | 'liderar' | 'monitorar';
+export type PlayerRole = "pm" | "techLead" | "uxLead";
+export type AlternativeKey = "a" | "b" | "c";
+export type MetricLevel = "stable" | "warning" | "critical";
+export type CommunicationType = "email" | "slack" | "ticket";
+export type ResourceType = "humano" | "fisico_virtual";
+export type ResourceProcess = "planejar" | "estimar" | "adquirir" | "liderar" | "monitorar";
 
 export interface Avatar {
   id: string;
@@ -68,7 +68,7 @@ export interface DelayedImpact {
   narrative: string;
   condition?: {
     metric: keyof Metrics;
-    operator: '<' | '>' | '===' | '<=' | '>=';
+    operator: "<" | ">" | "===" | "<=" | ">=";
     value: number;
   };
 }
@@ -107,9 +107,9 @@ export interface GameEvent {
   resourceProcess?: ResourceProcess;
 }
 
-export type VoteChoice = AlternativeKey | 'abstain';
+export type VoteChoice = AlternativeKey | "abstain";
 
-export type TimerPreset = 'short' | 'standard' | 'long' | 'none';
+export type TimerPreset = "short" | "standard" | "long" | "none";
 
 export interface TimerSettings {
   preset: TimerPreset;
@@ -150,7 +150,7 @@ export interface Decision {
 }
 
 export const ROLE_LABELS: Record<PlayerRole, string> = {
-  pm: 'Gerente de Projetos',
-  techLead: 'Líder Técnico',
-  uxLead: 'Líder de Design e Telas',
+  pm: "Gerente de Projetos",
+  techLead: "Líder Técnico",
+  uxLead: "Líder de Design e Telas",
 };

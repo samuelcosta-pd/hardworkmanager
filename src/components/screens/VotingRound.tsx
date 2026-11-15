@@ -127,7 +127,8 @@ export function VotingRound({ round }: Props) {
           </div>
 
           <p className="text-xs text-muted-foreground leading-relaxed">
-            Mantenha seu voto confidencial. O tempo para decisão individual começará assim que você clicar abaixo.
+            Mantenha seu voto confidencial. O tempo para decisão individual começará assim que você
+            clicar abaixo.
           </p>
 
           <div className="mt-6">
@@ -193,7 +194,9 @@ export function VotingRound({ round }: Props) {
           <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-primary">
             Dilema {currentEventIndex + 1} de {matchDeck.length}
           </span>
-          <span className="text-xs sm:text-sm font-semibold text-muted-foreground">{event.domainTag}</span>
+          <span className="text-xs sm:text-sm font-semibold text-muted-foreground">
+            {event.domainTag}
+          </span>
         </div>
         <h2 className="mt-1.5 text-lg sm:text-xl font-bold text-foreground">{event.title}</h2>
       </SoftCard>
@@ -291,16 +294,16 @@ export function VotingRound({ round }: Props) {
 
       {/* Botão de Abstenção Voluntária */}
       {!mustVote && (
-      <div className="mt-6 flex justify-center">
-        <button
-          type="button"
-          onClick={() => handleVote('abstain')}
-          className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-rose-600 transition-colors py-2 px-4 rounded-xl hover:bg-rose-50 border border-transparent hover:border-rose-200"
-        >
-          <UserX className="h-3.5 w-3.5" />
-          Não me sinto apto a escolher · Registrar Abstenção
-        </button>
-      </div>
+        <div className="mt-6 flex justify-center">
+          <button
+            type="button"
+            onClick={() => handleVote("abstain")}
+            className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-rose-600 transition-colors py-2 px-4 rounded-xl hover:bg-rose-50 border border-transparent hover:border-rose-200"
+          >
+            <UserX className="h-3.5 w-3.5" />
+            Não me sinto apto a escolher · Registrar Abstenção
+          </button>
+        </div>
       )}
     </div>
   );

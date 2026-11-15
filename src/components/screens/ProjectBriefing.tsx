@@ -1,9 +1,21 @@
-import { Calendar, GraduationCap, MapPin, ShieldCheck, Target, User, Users, CheckCircle, XCircle, Clock, ArrowRight } from 'lucide-react';
-import { SoftCard } from '@/components/ui/SoftCard';
-import { SoftButton } from '@/components/ui/SoftButton';
-import { useGameStore } from '@/store/gameStore';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { MENTOR } from '@/data/avatars';
+import {
+  Calendar,
+  GraduationCap,
+  MapPin,
+  ShieldCheck,
+  Target,
+  User,
+  Users,
+  CheckCircle,
+  XCircle,
+  Clock,
+  ArrowRight,
+} from "lucide-react";
+import { SoftCard } from "@/components/ui/SoftCard";
+import { SoftButton } from "@/components/ui/SoftButton";
+import { useGameStore } from "@/store/gameStore";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { MENTOR } from "@/data/avatars";
 
 export function ProjectBriefing() {
   const beginEvent = useGameStore((s) => s.beginEvent);
@@ -19,16 +31,22 @@ export function ProjectBriefing() {
           <div>
             <h2 className="text-xl font-bold text-slate-800">Briefing Inicial com Helena</h2>
             <p className="text-slate-600">
-              "Atenção, equipe. O cenário é crítico. O projeto anterior de modernização fracassou por falta de alinhamento. Agora, a responsabilidade é de vocês. Leiam o escopo com atenção antes de começarmos."
+              "Atenção, equipe. O cenário é crítico. O projeto anterior de modernização fracassou
+              por falta de alinhamento. Agora, a responsabilidade é de vocês. Leiam o escopo com
+              atenção antes de começarmos."
             </p>
           </div>
         </div>
 
         <p className="text-xs uppercase tracking-[0.2em] text-primary">Contexto do Projeto</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight">Modernização do Sistema de Gestão Acadêmica</h1>
+        <h1 className="mt-2 text-3xl font-bold tracking-tight">
+          Modernização do Sistema de Gestão Acadêmica
+        </h1>
         <p className="mt-4 text-muted-foreground leading-relaxed">
-          O sistema atual da instituição sofre com quedas nos períodos de matrícula, usabilidade defasada e alto acoplamento de código. 
-          O desafio de vocês é entregar a nova versão equilibrando a <strong>Eficiência</strong>, a <strong>Qualidade Técnica</strong> e a <strong>Saúde da Equipe</strong> frente a imprevistos.
+          O sistema atual da instituição sofre com quedas nos períodos de matrícula, usabilidade
+          defasada e alto acoplamento de código. O desafio de vocês é entregar a nova versão
+          equilibrando a <strong>Eficiência</strong>, a <strong>Qualidade Técnica</strong> e a{" "}
+          <strong>Saúde da Equipe</strong> frente a imprevistos.
         </p>
       </div>
 
@@ -41,9 +59,17 @@ export function ProjectBriefing() {
             <div>
               <h2 className="text-lg font-semibold">Seu Papel na Simulação</h2>
               <ul className="mt-2 space-y-1 text-sm text-muted-foreground list-disc list-inside">
-                <li><strong>Quem você representa:</strong> O Comitê Gestor (Liderança do Projeto).</li>
-                <li><strong>Sua responsabilidade:</strong> Tomar decisões táticas e colegiadas para gerenciar crises.</li>
-                <li><strong>Impacto:</strong> Suas decisões definem o futuro tecnológico da instituição e o bem-estar dos desenvolvedores.</li>
+                <li>
+                  <strong>Quem você representa:</strong> O Comitê Gestor (Liderança do Projeto).
+                </li>
+                <li>
+                  <strong>Sua responsabilidade:</strong> Tomar decisões táticas e colegiadas para
+                  gerenciar crises.
+                </li>
+                <li>
+                  <strong>Impacto:</strong> Suas decisões definem o futuro tecnológico da
+                  instituição e o bem-estar dos desenvolvedores.
+                </li>
               </ul>
             </div>
           </div>
@@ -74,12 +100,16 @@ export function ProjectBriefing() {
         </SoftCard>
         <SoftCard className="animate-float-in">
           <Calendar className="mb-3 h-5 w-5 text-primary" />
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">Ciclos de Trabalho</p>
+          <p className="text-xs uppercase tracking-wider text-muted-foreground">
+            Ciclos de Trabalho
+          </p>
           <p className="mt-1 font-semibold text-sm">6 Ciclos (15 dias)</p>
         </SoftCard>
         <SoftCard className="animate-float-in">
           <Users className="mb-3 h-5 w-5 text-primary" />
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">Partes Interessadas</p>
+          <p className="text-xs uppercase tracking-wider text-muted-foreground">
+            Partes Interessadas
+          </p>
           <p className="mt-1 font-semibold text-sm">Reitoria e Pró-Reitorias</p>
         </SoftCard>
         <SoftCard className="animate-float-in">
@@ -96,7 +126,8 @@ export function ProjectBriefing() {
             <div>
               <h2 className="text-md font-semibold">Critérios de Sucesso</h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                Entregar os módulos críticos mantendo Eficiência, Qualidade e Saúde da Equipe acima de 40 pontos no término da simulação.
+                Entregar os módulos críticos mantendo Eficiência, Qualidade e Saúde da Equipe acima
+                de 40 pontos no término da simulação.
               </p>
             </div>
           </div>
@@ -107,7 +138,8 @@ export function ProjectBriefing() {
             <div>
               <h2 className="text-md font-semibold">Critérios de Falha</h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                Qualquer uma das três métricas principais chegar abaixo de 40 pontos (nível crítico) durante os eventos.
+                Qualquer uma das três métricas principais chegar abaixo de 40 pontos (nível crítico)
+                durante os eventos.
               </p>
             </div>
           </div>
@@ -120,12 +152,15 @@ export function ProjectBriefing() {
         </p>
         <div className="grid gap-3 sm:grid-cols-4">
           {[
-            { label: 'Capacidade de Entrega', value: '100 pts (Estável)' },
-            { label: 'Qualidade do Produto', value: '100 pts (Estável)' },
-            { label: 'Saúde da Equipe', value: '100 pts (Estável)' },
-            { label: 'Conhecimento Organizacional', value: '50 pts (Base)' },
+            { label: "Capacidade de Entrega", value: "100 pts (Estável)" },
+            { label: "Qualidade do Produto", value: "100 pts (Estável)" },
+            { label: "Saúde da Equipe", value: "100 pts (Estável)" },
+            { label: "Conhecimento Organizacional", value: "50 pts (Base)" },
           ].map((s) => (
-            <div key={s.label} className="rounded-2xl bg-card p-3 shadow-sm border border-slate-100">
+            <div
+              key={s.label}
+              className="rounded-2xl bg-card p-3 shadow-sm border border-slate-100"
+            >
               <p className="text-xs text-muted-foreground">{s.label}</p>
               <p className="font-bold text-foreground text-sm mt-0.5">{s.value}</p>
             </div>
@@ -134,7 +169,7 @@ export function ProjectBriefing() {
       </SoftCard>
 
       <div className="flex justify-end">
-        <SoftButton size="lg" onClick={() => useGameStore.getState().goTo('dashboard')}>
+        <SoftButton size="lg" onClick={() => useGameStore.getState().goTo("dashboard")}>
           Acessar Sala de Comando e Iniciar <ArrowRight className="ml-2 h-4 w-4" />
         </SoftButton>
       </div>

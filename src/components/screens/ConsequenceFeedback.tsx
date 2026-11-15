@@ -256,7 +256,9 @@ export function ConsequenceFeedback() {
               <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-primary">
                 Conceito de Recursos (PMBOK 8)
               </p>
-              <p className="text-base sm:text-lg font-bold text-foreground mt-0.5">{alt.pmbokConcept}</p>
+              <p className="text-base sm:text-lg font-bold text-foreground mt-0.5">
+                {alt.pmbokConcept}
+              </p>
             </div>
           </div>
         </div>

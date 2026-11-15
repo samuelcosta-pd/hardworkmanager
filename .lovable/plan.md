@@ -1,9 +1,9 @@
-
 ## HardWorkManager - Plano de Implementação (v2)
 
 Simulador educacional web (single-device, pass-the-laptop) para ensinar o domínio **Trabalho do Projeto** do PMBOK 7, usando o contexto do XIX WTISC.
 
 ### Stack
+
 - React + TypeScript (TanStack Start já existente)
 - Tailwind CSS v4 (já configurado em `src/styles.css`)
 - Zustand (a instalar)
@@ -58,6 +58,7 @@ condição crítica atingida → gameover
 ```
 
 ### Regras chave (corrigidas)
+
 - 3 ou 4 jogadores; o 4º é forçado a `opsManager`
 - Métricas começam em 100
 - Níveis visuais: `critical` < 40, `warning` < 70, `stable` ≥ 70
@@ -76,7 +77,9 @@ condição crítica atingida → gameover
 - GameOver mostra qual métrica colapsou + narrativa de falha; "completed" mostra histórico completo de decisões
 
 ### Design System (Soft UI)
+
 Tokens em `src/styles.css`:
+
 - `--background: oklch(0.98 0.005 250)` (#f7f9fc)
 - `--card: oklch(1 0 0)` (#ffffff)
 - `--primary`: roxo pastel suave
@@ -87,18 +90,22 @@ Tokens em `src/styles.css`:
 Componentes usam exclusivamente tokens semânticos.
 
 ### Comunicação visual dos dilemas
+
 - **Email**: layout caixa de entrada - assunto, remetente com avatar+cargo, corpo formal
 - **Slack**: avatar 3D pastel + balão macio com cauda + nome+cargo+timestamp
 - **Ticket**: card estilo Kanban com tag de domínio PMBOK colorida
 
 ### Animações
+
 Transições Tailwind (`transition-all duration-500 ease-out`) nas barras de métricas e nos balões/cards (fade+translate). Sem libs extras.
 
 ### Entregáveis
+
 - Jogo 100% jogável do PlayerSetup até GameOver/Completed
 - 2 eventos com 3 alternativas cada conforme enunciado (textos verbatim)
 - Histórico completo de decisões na tela final
 - Reset para nova partida
 
 ### Nota técnica
+
 `src/routes/index.tsx` é o único ponto de entrada e renderiza a tela atual baseada em `useGameStore(s => s.phase)`. Sem loaders nem server functions - tudo client-side e em memória.

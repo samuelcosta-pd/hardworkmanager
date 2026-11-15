@@ -14,10 +14,12 @@ export const changeManagementEvents: GameEvent[] = [
     difficulty: EventDifficulty.HARD,
     probabilityWeight: 2,
     tags: ["recursos_humanos", "planejamento", "capacidade", "stakeholders"],
-    learningObjective: "Negociar demandas externas não planejadas utilizando dados de capacidade real para proteger o plano de gerenciamento dos recursos.",
+    learningObjective:
+      "Negociar demandas externas não planejadas utilizando dados de capacidade real para proteger o plano de gerenciamento dos recursos.",
     communicationType: "slack",
     senderRole: "Gabinete da Reitoria",
-    description: "Canal #institucional: O Gabinete solicita inclusão emergencial de assistente virtual com inteligência artificial para o lançamento, o que exigiria redirecionar toda a equipe técnica e paralisar as entregas do sistema de matrículas.",
+    description:
+      "Canal #institucional: O Gabinete solicita inclusão emergencial de assistente virtual com inteligência artificial para o lançamento, o que exigiria redirecionar toda a equipe técnica e paralisar as entregas do sistema de matrículas.",
     domainTag: "Recursos › Planejar o Gerenciamento dos Recursos",
     resourceType: "humano",
     resourceProcess: "planejar",
@@ -33,21 +35,18 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 0,
           qualidadeProduto: 15,
           saudeEquipe: 15,
-          conhecimentoOrganizacional: 10
+          conhecimentoOrganizacional: 10,
         },
-        feedbackNarrative: "A demonstração transparente da capacidade convenceu o Reitor a aprovar recursos específicos para a IA no próximo semestre.",
+        feedbackNarrative:
+          "A demonstração transparente da capacidade convenceu o Reitor a aprovar recursos específicos para a IA no próximo semestre.",
         pmbokConcept: "Planejamento de recursos sob escassez e competição entre projetos",
         learnings: [
           "O PMBOK 8 estabelece que a capacidade planejada deve ser resguardada por negociação estruturada e visão de longo prazo.",
-          "Essa decisão evita a sobrecarga destrutiva do time sem desconsiderar o valor estratégico da inovação solicitada."
+          "Essa decisão evita a sobrecarga destrutiva do time sem desconsiderar o valor estratégico da inovação solicitada.",
         ],
         goodBad: "good",
-        risksEvaded: [
-          "Desvio generalizado de foco e atraso catastrófico no módulo de matrícula"
-        ],
-        otherConsequences: [
-          "Reconhecimento institucional da maturidade de governança da equipe"
-        ]
+        risksEvaded: ["Desvio generalizado de foco e atraso catastrófico no módulo de matrícula"],
+        otherConsequences: ["Reconhecimento institucional da maturidade de governança da equipe"],
       },
       {
         key: "b",
@@ -56,31 +55,29 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 10,
           qualidadeProduto: -15,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: -5
+          conhecimentoOrganizacional: -5,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               capacidadeEntrega: -15,
-              qualidadeProduto: -15
+              qualidadeProduto: -15,
             },
-            narrative: "A paralisação do módulo central de matrículas impediu o início do semestre acadêmico da universidade."
-          }
+            narrative:
+              "A paralisação do módulo central de matrículas impediu o início do semestre acadêmico da universidade.",
+          },
         ],
-        feedbackNarrative: "A tentativa de entregar um protótipo de IA às pressas resultou em código instável e no atraso do calendário acadêmico.",
+        feedbackNarrative:
+          "A tentativa de entregar um protótipo de IA às pressas resultou em código instável e no atraso do calendário acadêmico.",
         pmbokConcept: "Impacto da indisponibilidade de recursos nos demais planos",
         learnings: [
           "O PMBOK 8 alerta que desviar recursos sem plano integrado gera descompasso severo nos prazos e finanças do projeto.",
-          "A complacência imediatista gera instabilidade técnica e compromete as entregas prioritárias da organização."
+          "A complacência imediatista gera instabilidade técnica e compromete as entregas prioritárias da organização.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Atrito político momentâneo com o gabinete da administração superior"
-        ],
-        otherConsequences: [
-          "Colapso do cronograma de matrículas e revolta de alunos e docentes"
-        ]
+        risksEvaded: ["Atrito político momentâneo com o gabinete da administração superior"],
+        otherConsequences: ["Colapso do cronograma de matrículas e revolta de alunos e docentes"],
       },
       {
         key: "c",
@@ -89,23 +86,22 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: -5,
           qualidadeProduto: -10,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: -10
+          conhecimentoOrganizacional: -10,
         },
-        feedbackNarrative: "A resposta agressiva causou crise diplomática interna e isolou o projeto perante os financiadores universitários.",
+        feedbackNarrative:
+          "A resposta agressiva causou crise diplomática interna e isolou o projeto perante os financiadores universitários.",
         pmbokConcept: "Negociação e influência para obter recursos",
         learnings: [
           "O PMBOK 8 enfatiza a habilidade de negociação e influência interpessoal como competência vital do gestor de recursos.",
-          "Confrontos destrutivos bloqueiam parcerias futuras e fragilizam o apoio dos patrocinadores do sistema."
+          "Confrontos destrutivos bloqueiam parcerias futuras e fragilizam o apoio dos patrocinadores do sistema.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Necessidade de redigir justificativa técnica formal detalhada"
-        ],
+        risksEvaded: ["Necessidade de redigir justificativa técnica formal detalhada"],
         otherConsequences: [
-          "Perda de patrocínio institucional e ameaça de cancelamento do projeto"
-        ]
-      }
-    ]
+          "Perda de patrocínio institucional e ameaça de cancelamento do projeto",
+        ],
+      },
+    ],
   },
   {
     id: "change_2_negociacao_gerente_funcional",
@@ -114,10 +110,12 @@ export const changeManagementEvents: GameEvent[] = [
     difficulty: EventDifficulty.HARD,
     probabilityWeight: 2,
     tags: ["matricial", "negociacao", "gerente_recursos", "alocacao"],
-    learningObjective: "Negociar a cessão e dedicação de especialistas em estruturas organizacionais matriciais respeitando as atribuições funcionais.",
+    learningObjective:
+      "Negociar a cessão e dedicação de especialistas em estruturas organizacionais matriciais respeitando as atribuições funcionais.",
     communicationType: "email",
     senderRole: "Superintendência de TI",
-    description: "Assunto: Remanejamento de Especialista. O chefe do setor de redes quer recolher o especialista em infraestrutura e automação dedicado ao SIGAA para atender suporte de impressoras e switches nos centros acadêmicos.",
+    description:
+      "Assunto: Remanejamento de Especialista. O chefe do setor de redes quer recolher o especialista em infraestrutura e automação dedicado ao SIGAA para atender suporte de impressoras e switches nos centros acadêmicos.",
     domainTag: "Recursos › Adquirir os Recursos",
     resourceType: "humano",
     resourceProcess: "adquirir",
@@ -132,21 +130,22 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 0,
           qualidadeProduto: 15,
           saudeEquipe: 10,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "O pacto estruturado garantiu a presença do engenheiro nas entregas críticas e gerou scripts que aliviaram a operação da STI.",
+        feedbackNarrative:
+          "O pacto estruturado garantiu a presença do engenheiro nas entregas críticas e gerou scripts que aliviaram a operação da STI.",
         pmbokConcept: "Gerente de recursos e ambiente matricial",
         learnings: [
           "O PMBOK 8 orienta o gerente de projetos a pactuar acordos transparentes com os gerentes funcionais em estruturas matriciais.",
-          "O alinhamento colaborativo previne a canibalização de especialistas e atende às necessidades dos dois departamentos."
+          "O alinhamento colaborativo previne a canibalização de especialistas e atende às necessidades dos dois departamentos.",
         ],
         goodBad: "good",
         risksEvaded: [
-          "Perda repentina do especialista em infraestrutura e travamento da esteira de disponibilização operacional"
+          "Perda repentina do especialista em infraestrutura e travamento da esteira de disponibilização operacional",
         ],
         otherConsequences: [
-          "Padronização de protocolo de cessão de mão de obra entre setores da universidade"
-        ]
+          "Padronização de protocolo de cessão de mão de obra entre setores da universidade",
+        ],
       },
       {
         key: "b",
@@ -155,31 +154,29 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: -15,
           qualidadeProduto: -10,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: -5
+          conhecimentoOrganizacional: -5,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               capacidadeEntrega: -15,
-              qualidadeProduto: -10
+              qualidadeProduto: -10,
             },
-            narrative: "Sem o especialista em infraestrutura, os ambientes de homologação travaram e ninguém na equipe conseguiu atualizar os serviços."
-          }
+            narrative:
+              "Sem o especialista em infraestrutura, os ambientes de homologação travaram e ninguém na equipe conseguiu atualizar os serviços.",
+          },
         ],
-        feedbackNarrative: "A renúncia desprotegeu o projeto; as liberações em produção pararam e a equipe gastou dias tentando configurar ambientes computacionais.",
+        feedbackNarrative:
+          "A renúncia desprotegeu o projeto; as liberações em produção pararam e a equipe gastou dias tentando configurar ambientes computacionais.",
         pmbokConcept: "Competição entre projetos pelos mesmos recursos",
         learnings: [
           "O PMBOK 8 salienta que abrir mão passivamente de competências vitais compromete os compromissos assumidos pelo projeto.",
-          "A liderança deve sustentar as necessidades prioritárias pactuadas perante os detentores dos recursos funcionais."
+          "A liderança deve sustentar as necessidades prioritárias pactuadas perante os detentores dos recursos funcionais.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Conflito burocrático inicial com o diretor de informática"
-        ],
-        otherConsequences: [
-          "Desorganização da infraestrutura e sobrecarga nos desenvolvedores"
-        ]
+        risksEvaded: ["Conflito burocrático inicial com o diretor de informática"],
+        otherConsequences: ["Desorganização da infraestrutura e sobrecarga nos desenvolvedores"],
       },
       {
         key: "c",
@@ -188,23 +185,20 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: -15,
           saudeEquipe: -10,
-          conhecimentoOrganizacional: -15
+          conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "Configurações incorretas de firewall expuseram bancos de dados internos a acessos externos não autenticados.",
+        feedbackNarrative:
+          "Configurações incorretas de firewall expuseram bancos de dados internos a acessos externos não autenticados.",
         pmbokConcept: "Papéis, responsabilidades e lacunas de conhecimento",
         learnings: [
           "O PMBOK 8 alerta que substituir especialistas qualificados por recursos sem capacitação introduz riscos críticos de segurança.",
-          "A lacuna de conhecimento técnico em tarefas de infraestrutura coloca em xeque a sustentabilidade do ecossistema."
+          "A lacuna de conhecimento técnico em tarefas de infraestrutura coloca em xeque a sustentabilidade do ecossistema.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Tempo despendido em reuniões de conciliação de agendas"
-        ],
-        otherConsequences: [
-          "Incidente grave de segurança cibernética e investigação pericial"
-        ]
-      }
-    ]
+        risksEvaded: ["Tempo despendido em reuniões de conciliação de agendas"],
+        otherConsequences: ["Incidente grave de segurança cibernética e investigação pericial"],
+      },
+    ],
   },
   {
     id: "change_3_saida_dev_onboarding",
@@ -213,10 +207,12 @@ export const changeManagementEvents: GameEvent[] = [
     difficulty: EventDifficulty.MEDIUM,
     probabilityWeight: 2,
     tags: ["onboarding", "rotatividade", "aquisicao", "conhecimento"],
-    learningObjective: "Estruturar o processo de integração e transferência de conhecimento ao incorporar recursos substitutos em meio à execução.",
+    learningObjective:
+      "Estruturar o processo de integração e transferência de conhecimento ao incorporar recursos substitutos em meio à execução.",
     communicationType: "email",
     senderRole: "Líder Técnico",
-    description: "Assunto: Substituição de Desenvolvedor. O analista responsável pelo módulo financeiro pediu exoneração do cargo público; o substituto concursado acabou de se apresentar na unidade.",
+    description:
+      "Assunto: Substituição de Desenvolvedor. O analista responsável pelo módulo financeiro pediu exoneração do cargo público; o substituto concursado acabou de se apresentar na unidade.",
     domainTag: "Recursos › Adquirir os Recursos",
     resourceType: "humano",
     resourceProcess: "adquirir",
@@ -231,21 +227,20 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: -5,
           qualidadeProduto: 15,
           saudeEquipe: 10,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "O onboarding estruturado reduziu a curva de aprendizado e o novo analista tornou-se produtivo em poucas semanas.",
+        feedbackNarrative:
+          "O onboarding estruturado reduziu a curva de aprendizado e o novo analista tornou-se produtivo em poucas semanas.",
         pmbokConcept: "Treinamento, mentoria e coaching",
         learnings: [
           "O PMBOK 8 recomenda processos deliberados de mentoria e assimilação para integrar novos profissionais com agilidade.",
-          "Investir na recepção técnica preserva a qualidade do código e transmite os valores e práticas operacionais da equipe."
+          "Investir na recepção técnica preserva a qualidade do código e transmite os valores e práticas operacionais da equipe.",
         ],
         goodBad: "good",
         risksEvaded: [
-          "Erros primários em regras de liquidação orçamentária e retrabalho de código"
+          "Erros primários em regras de liquidação orçamentária e retrabalho de código",
         ],
-        otherConsequences: [
-          "Criação de kit institucional permanente de boas-vindas para a STI"
-        ]
+        otherConsequences: ["Criação de kit institucional permanente de boas-vindas para a STI"],
       },
       {
         key: "b",
@@ -254,31 +249,31 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 10,
           qualidadeProduto: -15,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: -10
+          conhecimentoOrganizacional: -10,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               qualidadeProduto: -15,
-              saudeEquipe: -10
+              saudeEquipe: -10,
             },
-            narrative: "Código instável subido pelo novato sem acompanhamento bloqueou a liquidação de bolsas estudantis."
-          }
+            narrative:
+              "Código instável subido pelo novato sem acompanhamento bloqueou a liquidação de bolsas estudantis.",
+          },
         ],
-        feedbackNarrative: "O novato sentiu-se sobrecarregado, cometeu falhas contábeis graves e manifestou desejo de transferir-se de setor.",
+        feedbackNarrative:
+          "O novato sentiu-se sobrecarregado, cometeu falhas contábeis graves e manifestou desejo de transferir-se de setor.",
         pmbokConcept: "Ambiente seguro e transparência sobre vieses",
         learnings: [
           "O PMBOK 8 aponta que exigir autonomia de novatos sem suporte psicológico ou técnico gera desmotivação e falhas recorrentes.",
-          "A pressa em cobrar entregas desconectadas da curva de maturação compromete os resultados da organização."
+          "A pressa em cobrar entregas desconectadas da curva de maturação compromete os resultados da organização.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Tempo dedicado por membros seniores ao acompanhamento inicial"
-        ],
+        risksEvaded: ["Tempo dedicado por membros seniores ao acompanhamento inicial"],
         otherConsequences: [
-          "Insatisfação funcional e pedido de remoção do funcionário recém-chegado"
-        ]
+          "Insatisfação funcional e pedido de remoção do funcionário recém-chegado",
+        ],
       },
       {
         key: "c",
@@ -287,23 +282,20 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: -15,
           qualidadeProduto: -5,
           saudeEquipe: -10,
-          conhecimentoOrganizacional: 0
+          conhecimentoOrganizacional: 0,
         },
-        feedbackNarrative: "O profissional desengajou-se pelo isolamento e a equipe continuou sofrendo com a sobrecarga da falta de braços.",
+        feedbackNarrative:
+          "O profissional desengajou-se pelo isolamento e a equipe continuou sofrendo com a sobrecarga da falta de braços.",
         pmbokConcept: "Utilização e inatividade de recursos",
         learnings: [
           "O PMBOK 8 orienta o aproveitamento tempestivo da capacidade disponível para evitar inatividade desnecessária de recursos.",
-          "Manter colaboradores produtivos afastados do trabalho real enfraquece o senso de pertencimento e atrasa as entregas."
+          "Manter colaboradores produtivos afastados do trabalho real enfraquece o senso de pertencimento e atrasa as entregas.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Necessidade de reorganizar as tarefas da ciclo de trabalho corrente"
-        ],
-        otherConsequences: [
-          "Desperdício de capacidade produtiva paga pelo erário público"
-        ]
-      }
-    ]
+        risksEvaded: ["Necessidade de reorganizar as tarefas da ciclo de trabalho corrente"],
+        otherConsequences: ["Desperdício de capacidade produtiva paga pelo erário público"],
+      },
+    ],
   },
   {
     id: "change_4_recurso_alternativo_risco",
@@ -312,10 +304,12 @@ export const changeManagementEvents: GameEvent[] = [
     difficulty: EventDifficulty.MEDIUM,
     probabilityWeight: 2,
     tags: ["recursos_alternativos", "riscos", "capacidade", "governanca"],
-    learningObjective: "Mobilizar recursos alternativos identificando previamente suas limitações técnicas e registrando os riscos correspondentes.",
+    learningObjective:
+      "Mobilizar recursos alternativos identificando previamente suas limitações técnicas e registrando os riscos correspondentes.",
     communicationType: "slack",
     senderRole: "Gerente de Projetos",
-    description: "Canal #planejamento: Diante do atraso na contratação de engenheiros, surge a oportunidade de convocar dez estudantes voluntários para atuar na codificação dos módulos de matrícula.",
+    description:
+      "Canal #planejamento: Diante do atraso na contratação de engenheiros, surge a oportunidade de convocar dez estudantes voluntários para atuar na codificação dos módulos de matrícula.",
     domainTag: "Recursos › Adquirir os Recursos",
     resourceType: "humano",
     resourceProcess: "adquirir",
@@ -330,21 +324,20 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: 15,
           saudeEquipe: 10,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "O escopo delimitado aproveitou o entusiasmo dos voluntários em testes exaustivos sem expor a arquitetura a riscos.",
+        feedbackNarrative:
+          "O escopo delimitado aproveitou o entusiasmo dos voluntários em testes exaustivos sem expor a arquitetura a riscos.",
         pmbokConcept: "Recursos alternativos com riscos reconhecidos",
         learnings: [
           "O PMBOK 8 prevê a mobilização de recursos alternativos desde que os riscos sejam formalmente reconhecidos e mitigados.",
-          "Alocar perfis em tarefas proporcionais à sua capacitação protege a integridade e acelera a validação do produto."
+          "Alocar perfis em tarefas proporcionais à sua capacitação protege a integridade e acelera a validação do produto.",
         ],
         goodBad: "good",
-        risksEvaded: [
-          "Inserção de vulnerabilidades graves no núcleo transacional do sistema"
-        ],
+        risksEvaded: ["Inserção de vulnerabilidades graves no núcleo transacional do sistema"],
         otherConsequences: [
-          "Engajamento pedagógico de estudantes em práticas reais de garantia da qualidade"
-        ]
+          "Engajamento pedagógico de estudantes em práticas reais de garantia da qualidade",
+        ],
       },
       {
         key: "b",
@@ -353,31 +346,33 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 10,
           qualidadeProduto: -15,
           saudeEquipe: -10,
-          conhecimentoOrganizacional: -10
+          conhecimentoOrganizacional: -10,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               qualidadeProduto: -15,
-              capacidadeEntrega: -15
+              capacidadeEntrega: -15,
             },
-            narrative: "Código desprovido de travas de segurança permitiu alteração indevida de coeficientes acadêmicos."
-          }
+            narrative:
+              "Código desprovido de travas de segurança permitiu alteração indevida de coeficientes acadêmicos.",
+          },
         ],
-        feedbackNarrative: "A ilusão de velocidade rápida ruiu quando auditorias apontaram brechas de integridade em cálculos de notas.",
+        feedbackNarrative:
+          "A ilusão de velocidade rápida ruiu quando auditorias apontaram brechas de integridade em cálculos de notas.",
         pmbokConcept: "Maturidade dos membros da equipe",
         learnings: [
           "O PMBOK 8 adverte que atribuir tarefas de alta criticidade a recursos sem maturidade verificada expõe o projeto a desastres.",
-          "Ignorar os riscos intrínsecos de alternativas precárias desestrutura a confiabilidade institucional das entregas."
+          "Ignorar os riscos intrínsecos de alternativas precárias desestrutura a confiabilidade institucional das entregas.",
         ],
         goodBad: "bad",
         risksEvaded: [
-          "Esforço de revisão minuciosa de pull requests pelos desenvolvedores seniores"
+          "Esforço de revisão minuciosa de pull requests pelos desenvolvedores seniores",
         ],
         otherConsequences: [
-          "Comprometimento de dados acadêmicos e auditoria externa investigativa"
-        ]
+          "Comprometimento de dados acadêmicos e auditoria externa investigativa",
+        ],
       },
       {
         key: "c",
@@ -386,23 +381,22 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: -10,
           qualidadeProduto: 0,
           saudeEquipe: -10,
-          conhecimentoOrganizacional: -10
+          conhecimentoOrganizacional: -10,
         },
-        feedbackNarrative: "A inflexibilidade gerou protestos de centros acadêmicos e privou o projeto de reforço relevante na fase de homologação.",
+        feedbackNarrative:
+          "A inflexibilidade gerou protestos de centros acadêmicos e privou o projeto de reforço relevante na fase de homologação.",
         pmbokConcept: "Negociação e influência para obter recursos",
         learnings: [
           "O PMBOK 8 recomenda a abertura para composição criativa de equipes através de diálogo e influência construtiva.",
-          "Posturas reativas e intransigentes reduzem as alternativas viáveis para contornar a escassez de pessoal."
+          "Posturas reativas e intransigentes reduzem as alternativas viáveis para contornar a escassez de pessoal.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Necessidade de planejar logística e espaço físico para novos membros"
-        ],
+        risksEvaded: ["Necessidade de planejar logística e espaço físico para novos membros"],
         otherConsequences: [
-          "Desconexão com a comunidade acadêmica e perda de oportunidade de atração de talentos"
-        ]
-      }
-    ]
+          "Desconexão com a comunidade acadêmica e perda de oportunidade de atração de talentos",
+        ],
+      },
+    ],
   },
   {
     id: "change_5_demanda_urgente_prograd",
@@ -411,10 +405,12 @@ export const changeManagementEvents: GameEvent[] = [
     difficulty: EventDifficulty.HARD,
     probabilityWeight: 2,
     tags: ["prograd", "regulacao", "cronograma", "coordenacao"],
-    learningObjective: "Equilibrar a entrada de novos requisitos legais obrigatórios ajustando o plano de recursos sem gerar colapso na equipe.",
+    learningObjective:
+      "Equilibrar a entrada de novos requisitos legais obrigatórios ajustando o plano de recursos sem gerar colapso na equipe.",
     communicationType: "email",
     senderRole: "Pró-Reitoria de Graduação",
-    description: "Assunto: Nova Portaria do MEC sobre Cotas. A universidade precisa implantar novo sistema de validação étnico-racial em 15 dias sob pena de cancelamento das matrículas de novos ingressantes.",
+    description:
+      "Assunto: Nova Portaria do MEC sobre Cotas. A universidade precisa implantar novo sistema de validação étnico-racial em 15 dias sob pena de cancelamento das matrículas de novos ingressantes.",
     domainTag: "Recursos › Planejar o Gerenciamento dos Recursos",
     resourceType: "humano",
     resourceProcess: "planejar",
@@ -430,21 +426,20 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: -5,
           qualidadeProduto: 15,
           saudeEquipe: 10,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "A redistribuição de metas preservou a saúde da equipe e atendeu pontualmente à exigência federal sem retrabalho.",
+        feedbackNarrative:
+          "A redistribuição de metas preservou a saúde da equipe e atendeu pontualmente à exigência federal sem retrabalho.",
         pmbokConcept: "Coordenação entre Recursos, Cronograma, Finanças e Risco",
         learnings: [
           "O PMBOK 8 orienta a harmonização contínua entre recursos, cronograma e riscos perante imprevistos mandatórios.",
-          "A flexibilidade controlada atende às imposições regulatórias preservando a sustentabilidade e os compromissos centrais."
+          "A flexibilidade controlada atende às imposições regulatórias preservando a sustentabilidade e os compromissos centrais.",
         ],
         goodBad: "good",
-        risksEvaded: [
-          "Cancelamento de matrículas e punições federais por descumprimento legal"
-        ],
+        risksEvaded: ["Cancelamento de matrículas e punições federais por descumprimento legal"],
         otherConsequences: [
-          "Fortalecimento da parceria institucional entre a STI e a pró-reitoria"
-        ]
+          "Fortalecimento da parceria institucional entre a STI e a pró-reitoria",
+        ],
       },
       {
         key: "b",
@@ -453,31 +448,31 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 10,
           qualidadeProduto: -15,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: -5
+          conhecimentoOrganizacional: -5,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               saudeEquipe: -15,
-              capacidadeEntrega: -15
+              capacidadeEntrega: -15,
             },
-            narrative: "Exaustão extrema resultou em licenças médicas sucessivas e paralisia operacional no período de matrículas."
-          }
+            narrative:
+              "Exaustão extrema resultou em licenças médicas sucessivas e paralisia operacional no período de matrículas.",
+          },
         ],
-        feedbackNarrative: "A jornada desumana produziu código com defeitos de cálculo de cotas e culminou no esgotamento físico do time.",
+        feedbackNarrative:
+          "A jornada desumana produziu código com defeitos de cálculo de cotas e culminou no esgotamento físico do time.",
         pmbokConcept: "Bem-estar e prevenção de burnout",
         learnings: [
           "O PMBOK 8 adverte que sobrecarregar cronicamente a equipe viola os preceitos de sustentabilidade humana e produtiva.",
-          "O imediatismo baseado em jornadas extenuantes gera falhas críticas e desarticula os recursos especializados do projeto."
+          "O imediatismo baseado em jornadas extenuantes gera falhas críticas e desarticula os recursos especializados do projeto.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Necessidade de renegociar entregas de relatórios secundários"
-        ],
+        risksEvaded: ["Necessidade de renegociar entregas de relatórios secundários"],
         otherConsequences: [
-          "Afastamentos médicos em cadeia e processo trabalhista perante a justiça federal"
-        ]
+          "Afastamentos médicos em cadeia e processo trabalhista perante a justiça federal",
+        ],
       },
       {
         key: "c",
@@ -486,23 +481,22 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: -15,
           saudeEquipe: 0,
-          conhecimentoOrganizacional: -15
+          conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "A omissão gerou intervenção federal nas matrículas da instituição e afastamento dos responsáveis técnicos do projeto.",
+        feedbackNarrative:
+          "A omissão gerou intervenção federal nas matrículas da instituição e afastamento dos responsáveis técnicos do projeto.",
         pmbokConcept: "Impacto da indisponibilidade de recursos nos demais planos",
         learnings: [
           "O PMBOK 8 frisa que o gestor deve calibrar os planos diante de fatores ambientais e legais inegociáveis da organização.",
-          "Negligenciar diretrizes legais externas acarreta a nulidade dos atos do projeto e danos institucionais graves."
+          "Negligenciar diretrizes legais externas acarreta a nulidade dos atos do projeto e danos institucionais graves.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Alteração no cronograma acordado de desenvolvimento da semana"
-        ],
+        risksEvaded: ["Alteração no cronograma acordado de desenvolvimento da semana"],
         otherConsequences: [
-          "Processo disciplinar da reitoria e paralisação judicial das matrículas de cotistas"
-        ]
-      }
-    ]
+          "Processo disciplinar da reitoria e paralisação judicial das matrículas de cotistas",
+        ],
+      },
+    ],
   },
   {
     id: "change_6_demo_conselho_universitario",
@@ -511,10 +505,12 @@ export const changeManagementEvents: GameEvent[] = [
     difficulty: EventDifficulty.MEDIUM,
     probabilityWeight: 2,
     tags: ["conselho", "demo", "stakeholders", "capacidade"],
-    learningObjective: "Negociar expectativas de partes interessadas e proteger a cadência de entrega contra interrupções de vaidade política.",
+    learningObjective:
+      "Negociar expectativas de partes interessadas e proteger a cadência de entrega contra interrupções de vaidade política.",
     communicationType: "slack",
     senderRole: "Gerente de Projetos",
-    description: "Canal #geral: O Conselho Universitário convocou a equipe para apresentar demonstração funcional completa em 48 horas, o que exigiria congelar os testes de homologação em andamento.",
+    description:
+      "Canal #geral: O Conselho Universitário convocou a equipe para apresentar demonstração funcional completa em 48 horas, o que exigiria congelar os testes de homologação em andamento.",
     domainTag: "Recursos › Liderar a Equipe",
     resourceType: "humano",
     resourceProcess: "liderar",
@@ -529,21 +525,20 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: 15,
           saudeEquipe: 15,
-          conhecimentoOrganizacional: 10
+          conhecimentoOrganizacional: 10,
         },
-        feedbackNarrative: "A demonstração atendeu perfeitamente à expectativa dos conselheiros sem desviar uma única hora dos desenvolvedores.",
+        feedbackNarrative:
+          "A demonstração atendeu perfeitamente à expectativa dos conselheiros sem desviar uma única hora dos desenvolvedores.",
         pmbokConcept: "Liderança servidora",
         learnings: [
           "O PMBOK 8 posiciona a liderança servidora como escudo protetor que absorve pressões externas em favor do foco da equipe.",
-          "Atender às necessidades dos patrocinadores através de formatos adequados preserva o ritmo produtivo dos especialistas."
+          "Atender às necessidades dos patrocinadores através de formatos adequados preserva o ritmo produtivo dos especialistas.",
         ],
         goodBad: "good",
         risksEvaded: [
-          "Interrupção dos testes e atraso na resolução de defeitos críticos da homologação"
+          "Interrupção dos testes e atraso na resolução de defeitos críticos da homologação",
         ],
-        otherConsequences: [
-          "Aprovação unânime do relatório parcial de progresso pelo conselho"
-        ]
+        otherConsequences: ["Aprovação unânime do relatório parcial de progresso pelo conselho"],
       },
       {
         key: "b",
@@ -552,31 +547,29 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: -15,
           qualidadeProduto: -10,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: -5
+          conhecimentoOrganizacional: -5,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               qualidadeProduto: -15,
-              capacidadeEntrega: -10
+              capacidadeEntrega: -10,
             },
-            narrative: "A falta de testes durante os três dias de demo permitiu a passagem de falhas que paralisaram a folha docente."
-          }
+            narrative:
+              "A falta de testes durante os três dias de demo permitiu a passagem de falhas que paralisaram a folha docente.",
+          },
         ],
-        feedbackNarrative: "A apresentação agradou no dia, mas o abandono dos testes gerou falhas graves no sistema durante a semana seguinte.",
+        feedbackNarrative:
+          "A apresentação agradou no dia, mas o abandono dos testes gerou falhas graves no sistema durante a semana seguinte.",
         pmbokConcept: "Retrabalho e desperdício como indicadores de eficiência",
         learnings: [
           "O PMBOK 8 adverte que interrupções não planejadas multiplicam desperdícios e quebram a eficiência da esteira de valor.",
-          "Desviar o time central para encenações de curto prazo sacrifica a robustez e a integridade da entrega final."
+          "Desviar o time central para encenações de curto prazo sacrifica a robustez e a integridade da entrega final.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Desconforto gerencial de conduzir a apresentação pessoalmente"
-        ],
-        otherConsequences: [
-          "Perda de prazos contratuais e acúmulo de débito de homologação"
-        ]
+        risksEvaded: ["Desconforto gerencial de conduzir a apresentação pessoalmente"],
+        otherConsequences: ["Perda de prazos contratuais e acúmulo de débito de homologação"],
       },
       {
         key: "c",
@@ -585,23 +578,20 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: -10,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: -15
+          conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "A afronta institucional levou o Conselho a bloquear a liberação da próxima parcela orçamentária do projeto.",
+        feedbackNarrative:
+          "A afronta institucional levou o Conselho a bloquear a liberação da próxima parcela orçamentária do projeto.",
         pmbokConcept: "Visão e objetivos compartilhados",
         learnings: [
           "O PMBOK 8 preconiza a transparência e a construção de objetivos compartilhados com os órgãos de governança superior.",
-          "O isolamento arrogante perante a liderança organizacional mina as bases de apoio indispensáveis ao sucesso do projeto."
+          "O isolamento arrogante perante a liderança organizacional mina as bases de apoio indispensáveis ao sucesso do projeto.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Preparação de qualquer material ou relatório de apresentação"
-        ],
-        otherConsequences: [
-          "Bloqueio de recursos financeiros e crise de governança institucional"
-        ]
-      }
-    ]
+        risksEvaded: ["Preparação de qualquer material ou relatório de apresentação"],
+        otherConsequences: ["Bloqueio de recursos financeiros e crise de governança institucional"],
+      },
+    ],
   },
   {
     id: "change_7_mudanca_api_governo",
@@ -610,10 +600,12 @@ export const changeManagementEvents: GameEvent[] = [
     difficulty: EventDifficulty.HARD,
     probabilityWeight: 2,
     tags: ["api_governo", "govbr", "integracao", "capacitacao"],
-    learningObjective: "Mobilizar recursos e adequar competências técnicas perante alterações compulsórias de plataformas tecnológicas externas.",
+    learningObjective:
+      "Mobilizar recursos e adequar competências técnicas perante alterações compulsórias de plataformas tecnológicas externas.",
     communicationType: "email",
     senderRole: "Líder Técnico",
-    description: "Assunto: Migração Compulsória para o Gov.br. O Ministério da Gestão determinou que todas as universidades federais devem unificar o login de seus sistemas ao Gov.br em 20 dias sob risco de desconexão.",
+    description:
+      "Assunto: Migração Compulsória para o Gov.br. O Ministério da Gestão determinou que todas as universidades federais devem unificar o login de seus sistemas ao Gov.br em 20 dias sob risco de desconexão.",
     domainTag: "Recursos › Liderar a Equipe",
     resourceType: "humano",
     resourceProcess: "liderar",
@@ -628,21 +620,20 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: -5,
           qualidadeProduto: 15,
           saudeEquipe: 10,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "A rápida assimilação das diretrizes federais permitiu integrar o login sem sobressaltos e modernizou a segurança.",
+        feedbackNarrative:
+          "A rápida assimilação das diretrizes federais permitiu integrar o login sem sobressaltos e modernizou a segurança.",
         pmbokConcept: "Treinamento, mentoria e coaching",
         learnings: [
           "O PMBOK 8 preconiza capacitação e mentoria ágeis para absorver mudanças de diretrizes tecnológicas sem perder o padrão de qualidade.",
-          "A conformidade precoce com padrões de interoperabilidade protege a instituição e eleva o nível técnico da equipe."
+          "A conformidade precoce com padrões de interoperabilidade protege a instituição e eleva o nível técnico da equipe.",
         ],
         goodBad: "good",
         risksEvaded: [
-          "Bloqueio de acessos federados e desconexão do SIGAA das bases do governo federal"
+          "Bloqueio de acessos federados e desconexão do SIGAA das bases do governo federal",
         ],
-        otherConsequences: [
-          "Modernização do sistema de autenticação com padrões OAuth2/OIDC"
-        ]
+        otherConsequences: ["Modernização do sistema de autenticação com padrões OAuth2/OIDC"],
       },
       {
         key: "b",
@@ -651,31 +642,29 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 10,
           qualidadeProduto: -15,
           saudeEquipe: -10,
-          conhecimentoOrganizacional: -15
+          conhecimentoOrganizacional: -15,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               qualidadeProduto: -15,
-              capacidadeEntrega: -15
+              capacidadeEntrega: -15,
             },
-            narrative: "Vazamento de tokens gerado pela falha de segurança obrigou a revogação de acessos de todos os usuários do sistema acadêmico."
-          }
+            narrative:
+              "Vazamento de tokens gerado pela falha de segurança obrigou a revogação de acessos de todos os usuários do sistema acadêmico.",
+          },
         ],
-        feedbackNarrative: "A solução precária violou diretrizes de segurança da informação da Presidência e expôs dados sigilosos discentes.",
+        feedbackNarrative:
+          "A solução precária violou diretrizes de segurança da informação da Presidência e expôs dados sigilosos discentes.",
         pmbokConcept: "Integridade e transparência do gerente de projetos",
         learnings: [
           "O PMBOK 8 destaca a observância estrita a normas éticas e de segurança no tratamento dos recursos de dados e sistemas.",
-          "Adotar mecanismos frágeis expõe a organização a vulnerabilidades cibernéticas severas e descrédito público."
+          "Adotar mecanismos frágeis expõe a organização a vulnerabilidades cibernéticas severas e descrédito público.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Esforço inicial de estudo das especificações de segurança do Gov.br"
-        ],
-        otherConsequences: [
-          "Notificação formal da Agência Nacional de Proteção de Dados (ANPD)"
-        ]
+        risksEvaded: ["Esforço inicial de estudo das especificações de segurança do Gov.br"],
+        otherConsequences: ["Notificação formal da Agência Nacional de Proteção de Dados (ANPD)"],
       },
       {
         key: "c",
@@ -684,23 +673,20 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: -10,
           saudeEquipe: -5,
-          conhecimentoOrganizacional: -10
+          conhecimentoOrganizacional: -10,
         },
-        feedbackNarrative: "O ministério indeferiu o pedido e suspendeu o repasse orçamentário destinado à modernização digital da universidade.",
+        feedbackNarrative:
+          "O ministério indeferiu o pedido e suspendeu o repasse orçamentário destinado à modernização digital da universidade.",
         pmbokConcept: "Planejamento de recursos sob escassez e competição entre projetos",
         learnings: [
           "O PMBOK 8 alerta contra a postergação inerte de compromissos que dependem de repasses orçamentários estratégicos vinculados.",
-          "A inação diante de mandatos legais externos fecha portas de financiamento e enfraquece a governança do projeto."
+          "A inação diante de mandatos legais externos fecha portas de financiamento e enfraquece a governança do projeto.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Trabalho de replanejamento das tarefas de integração técnica"
-        ],
-        otherConsequences: [
-          "Contingenciamento de recursos financeiros de capital e custeio"
-        ]
-      }
-    ]
+        risksEvaded: ["Trabalho de replanejamento das tarefas de integração técnica"],
+        otherConsequences: ["Contingenciamento de recursos financeiros de capital e custeio"],
+      },
+    ],
   },
   {
     id: "change_8_feedback_piloto_estudantes",
@@ -709,10 +695,12 @@ export const changeManagementEvents: GameEvent[] = [
     difficulty: EventDifficulty.MEDIUM,
     probabilityWeight: 2,
     tags: ["piloto", "estudantes", "melhoria_continua", "tailoring"],
-    learningObjective: "Incorporar o feedback de usuários em ciclos de melhoria contínua equilibrando as demandas de usabilidade com a capacidade da equipe.",
+    learningObjective:
+      "Incorporar o feedback de usuários em ciclos de melhoria contínua equilibrando as demandas de usabilidade com a capacidade da equipe.",
     communicationType: "slack",
     senderRole: "Líder de Design e Telas",
-    description: "Canal #ux: 'O teste piloto com 200 alunos revelou que 75% não entenderam o fluxo de trancamento de matrícula no celular; o time de design quer redesenhar a tela inteira em três dias.'",
+    description:
+      "Canal #ux: 'O teste piloto com 200 alunos revelou que 75% não entenderam o fluxo de trancamento de matrícula no celular; o time de design quer redesenhar a tela inteira em três dias.'",
     domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "humano",
     resourceProcess: "monitorar",
@@ -727,21 +715,22 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 0,
           qualidadeProduto: 15,
           saudeEquipe: 10,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "Ajustes micro-ergonômicos resolveram as dúvidas dos estudantes sem exigir retrabalho no código de retaguarda.",
+        feedbackNarrative:
+          "Ajustes micro-ergonômicos resolveram as dúvidas dos estudantes sem exigir retrabalho no código de retaguarda.",
         pmbokConcept: "Melhoria contínua",
         learnings: [
           "O PMBOK 8 destaca a melhoria contínua e Kaizen para aperfeiçoar processos e produtos sem rupturas desproporcionais.",
-          "Intervenções incrementais cirúrgicas elevam a usabilidade com eficiência máxima de esforço e sem desestabilizar o plano."
+          "Intervenções incrementais cirúrgicas elevam a usabilidade com eficiência máxima de esforço e sem desestabilizar o plano.",
         ],
         goodBad: "good",
         risksEvaded: [
-          "Reestruturação técnica desnecessária de controladores e rotinas já homologadas"
+          "Reestruturação técnica desnecessária de controladores e rotinas já homologadas",
         ],
         otherConsequences: [
-          "Redução drástica no volume de chamados de suporte sobre trancamento de curso"
-        ]
+          "Redução drástica no volume de chamados de suporte sobre trancamento de curso",
+        ],
       },
       {
         key: "b",
@@ -750,31 +739,31 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: -15,
           qualidadeProduto: -10,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: -5
+          conhecimentoOrganizacional: -5,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               capacidadeEntrega: -15,
-              qualidadeProduto: -10
+              qualidadeProduto: -10,
             },
-            narrative: "O redesign intempestivo não foi concluído a tempo e o módulo foi retirado do ar no dia da matrícula."
-          }
+            narrative:
+              "O redesign intempestivo não foi concluído a tempo e o módulo foi retirado do ar no dia da matrícula.",
+          },
         ],
-        feedbackNarrative: "A reconstrução intempestiva estourou o cronograma e deixou o sistema sem módulo de trancamento funcional.",
+        feedbackNarrative:
+          "A reconstrução intempestiva estourou o cronograma e deixou o sistema sem módulo de trancamento funcional.",
         pmbokConcept: "Retrabalho e desperdício como indicadores de eficiência",
         learnings: [
           "O PMBOK 8 adverte que o perfeccionismo que reinicia processos prontos gera desperdício inaceitável de capacidade.",
-          "Decisões radicais descoladas do cronograma viável ameaçam a entrega de valor prometida às partes interessadas."
+          "Decisões radicais descoladas do cronograma viável ameaçam a entrega de valor prometida às partes interessadas.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Esforço analítico de identificar causas raízes pontuais de usabilidade"
-        ],
+        risksEvaded: ["Esforço analítico de identificar causas raízes pontuais de usabilidade"],
         otherConsequences: [
-          "Indisponibilidade do serviço e protestos públicos de estudantes nos campi"
-        ]
+          "Indisponibilidade do serviço e protestos públicos de estudantes nos campi",
+        ],
       },
       {
         key: "c",
@@ -783,23 +772,22 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 10,
           qualidadeProduto: -15,
           saudeEquipe: -5,
-          conhecimentoOrganizacional: -15
+          conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "A soberba técnica gerou avalanche de trancamentos errôneos e revolta generalizada no diretório acadêmico.",
+        feedbackNarrative:
+          "A soberba técnica gerou avalanche de trancamentos errôneos e revolta generalizada no diretório acadêmico.",
         pmbokConcept: "Visão e objetivos compartilhados",
         learnings: [
           "O PMBOK 8 reforça que os recursos do projeto existem para entregar valor real e compartilhado aos usuários finais.",
-          "Desdenhar do feedback da comunidade descaracteriza o propósito de modernização pública e inclusiva do sistema."
+          "Desdenhar do feedback da comunidade descaracteriza o propósito de modernização pública e inclusiva do sistema.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Qualquer esforço de ajuste ou melhoria de telas no momento"
-        ],
+        risksEvaded: ["Qualquer esforço de ajuste ou melhoria de telas no momento"],
         otherConsequences: [
-          "Avalanche de processos administrativos de alunos prejudicados por erros de interface"
-        ]
-      }
-    ]
+          "Avalanche de processos administrativos de alunos prejudicados por erros de interface",
+        ],
+      },
+    ],
   },
   {
     id: "change_9_integracao_restaurante_universitario",
@@ -808,10 +796,12 @@ export const changeManagementEvents: GameEvent[] = [
     difficulty: EventDifficulty.MEDIUM,
     probabilityWeight: 2,
     tags: ["ru", "assistencia_estudantil", "concorrencia_recursos", "priorizacao"],
-    learningObjective: "Gerenciar a concorrência por recursos humanos entre o projeto principal e projetos correlatos da instituição.",
+    learningObjective:
+      "Gerenciar a concorrência por recursos humanos entre o projeto principal e projetos correlatos da instituição.",
     communicationType: "email",
     senderRole: "Pró-Reitoria de Assistência Estudantil",
-    description: "Assunto: Módulo de Subsídio das Refeições. A PRAE solicita que dois programadores do SIGAA sejam destacados por um mês para consertar o sistema de catracas do Restaurante Universitário.",
+    description:
+      "Assunto: Módulo de Subsídio das Refeições. A PRAE solicita que dois programadores do SIGAA sejam destacados por um mês para consertar o sistema de catracas do Restaurante Universitário.",
     domainTag: "Recursos › Planejar o Gerenciamento dos Recursos",
     resourceType: "humano",
     resourceProcess: "planejar",
@@ -827,21 +817,22 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 0,
           qualidadeProduto: 15,
           saudeEquipe: 10,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "A disponibilização de APIs conectou o restaurante sem subtrair desenvolvedores da esteira central do novo sistema.",
+        feedbackNarrative:
+          "A disponibilização de APIs conectou o restaurante sem subtrair desenvolvedores da esteira central do novo sistema.",
         pmbokConcept: "Competição entre projetos pelos mesmos recursos",
         learnings: [
           "O PMBOK 8 recomenda soluções estruturantes e interoperáveis para resolver disputas por recursos entre projetos institucionais.",
-          "O fornecimento de serviços e interfaces preserva a alocação da equipe e estende o valor da solução a outros setores."
+          "O fornecimento de serviços e interfaces preserva a alocação da equipe e estende o valor da solução a outros setores.",
         ],
         goodBad: "good",
         risksEvaded: [
-          "Desfalque de 40% da equipe técnica e atraso na entrega das notas acadêmicas"
+          "Desfalque de 40% da equipe técnica e atraso na entrega das notas acadêmicas",
         ],
         otherConsequences: [
-          "Unificação do cadastro estudantil para controle de frequência e alimentação"
-        ]
+          "Unificação do cadastro estudantil para controle de frequência e alimentação",
+        ],
       },
       {
         key: "b",
@@ -850,31 +841,31 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: -15,
           qualidadeProduto: -10,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: -5
+          conhecimentoOrganizacional: -5,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               capacidadeEntrega: -15,
-              qualidadeProduto: -10
+              qualidadeProduto: -10,
             },
-            narrative: "A saída dos dois desenvolvedores gerou colapso na homologação do portal do estudante da instituição."
-          }
+            narrative:
+              "A saída dos dois desenvolvedores gerou colapso na homologação do portal do estudante da instituição.",
+          },
         ],
-        feedbackNarrative: "O restaurante funcionou, mas a matrícula da universidade atrasou duas semanas, gerando crise com o comitê acadêmico.",
+        feedbackNarrative:
+          "O restaurante funcionou, mas a matrícula da universidade atrasou duas semanas, gerando crise com o comitê acadêmico.",
         pmbokConcept: "Impacto da indisponibilidade de recursos nos demais planos",
         learnings: [
           "O PMBOK 8 alerta que abrir mão desordenadamente de capacidade técnica provoca colapso em cascata no cronograma geral.",
-          "Ceder a solicitações paralelas sem salvaguardas prejudica o compromisso primordial pactuado com os patrocinadores."
+          "Ceder a solicitações paralelas sem salvaguardas prejudica o compromisso primordial pactuado com os patrocinadores.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Atrito político imediato com a pró-reitoria de assistência discente"
-        ],
+        risksEvaded: ["Atrito político imediato com a pró-reitoria de assistência discente"],
         otherConsequences: [
-          "Atraso crítico na entrega do novo portal discente e descontentamento geral"
-        ]
+          "Atraso crítico na entrega do novo portal discente e descontentamento geral",
+        ],
       },
       {
         key: "c",
@@ -883,23 +874,24 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: -15,
           saudeEquipe: -10,
-          conhecimentoOrganizacional: -15
+          conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "A recusa desrespeitosa gerou comoção pública e moção de censura contra o projeto no Conselho Universitário.",
+        feedbackNarrative:
+          "A recusa desrespeitosa gerou comoção pública e moção de censura contra o projeto no Conselho Universitário.",
         pmbokConcept: "Visão e objetivos compartilhados",
         learnings: [
           "O PMBOK 8 salienta a importância da visão compartilhada e da sensibilidade institucional perante a comunidade universitária.",
-          "Ignorar as demandas sociais da universidade pública destrói a legitimidade e a aceitação do software entregue."
+          "Ignorar as demandas sociais da universidade pública destrói a legitimidade e a aceitação do software entregue.",
         ],
         goodBad: "bad",
         risksEvaded: [
-          "Trabalho técnico de documentação e exposição de contratos de integração do sistema"
+          "Trabalho técnico de documentação e exposição de contratos de integração do sistema",
         ],
         otherConsequences: [
-          "Hostilidade institucional e desgaste da imagem pública da gerência do projeto"
-        ]
-      }
-    ]
+          "Hostilidade institucional e desgaste da imagem pública da gerência do projeto",
+        ],
+      },
+    ],
   },
   {
     id: "change_10_novo_manual_marca_institucional",
@@ -908,10 +900,12 @@ export const changeManagementEvents: GameEvent[] = [
     difficulty: EventDifficulty.EASY,
     probabilityWeight: 2,
     tags: ["marca", "identidade_visual", "design_system", "comunicacao"],
-    learningObjective: "Utilizar design systems componentizados para absorver diretrizes de identidade visual sem retrabalho manual generalizado.",
+    learningObjective:
+      "Utilizar design systems componentizados para absorver diretrizes de identidade visual sem retrabalho manual generalizado.",
     communicationType: "email",
     senderRole: "Coordenadoria de Comunicação Social",
-    description: "Assunto: Novo Manual de Identidade Visual da Instituição. A administração publicou novas diretrizes obrigatórias de tipografia, contraste e brasão oficial que devem ser refletidas em todas as telas.",
+    description:
+      "Assunto: Novo Manual de Identidade Visual da Instituição. A administração publicou novas diretrizes obrigatórias de tipografia, contraste e brasão oficial que devem ser refletidas em todas as telas.",
     domainTag: "Recursos › Liderar a Equipe",
     resourceType: "humano",
     resourceProcess: "liderar",
@@ -926,21 +920,22 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: 15,
           saudeEquipe: 10,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "A arquitetura de tokens centralizada absorveu a nova marca em poucas horas sem exigir alteração manual de código.",
+        feedbackNarrative:
+          "A arquitetura de tokens centralizada absorveu a nova marca em poucas horas sem exigir alteração manual de código.",
         pmbokConcept: "Melhoria contínua",
         learnings: [
           "O PMBOK 8 recomenda ferramentas e ativos padronizados que potencializem a eficiência e a flexibilidade da equipe de criação.",
-          "O uso de design systems componentizados elimina o retrabalho artesanal e assegura fidelidade às normas institucionais."
+          "O uso de design systems componentizados elimina o retrabalho artesanal e assegura fidelidade às normas institucionais.",
         ],
         goodBad: "good",
         risksEvaded: [
-          "Semanas de edição manual repetitiva de folhas de estilo e imagens em dezenas de telas"
+          "Semanas de edição manual repetitiva de folhas de estilo e imagens em dezenas de telas",
         ],
         otherConsequences: [
-          "Consolidação de biblioteca institucional reutilizável para futuros sistemas da universidade"
-        ]
+          "Consolidação de biblioteca institucional reutilizável para futuros sistemas da universidade",
+        ],
       },
       {
         key: "b",
@@ -949,31 +944,31 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: -15,
           qualidadeProduto: -5,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: -10
+          conhecimentoOrganizacional: -10,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               capacidadeEntrega: -15,
-              qualidadeProduto: -10
+              qualidadeProduto: -10,
             },
-            narrative: "Erros de digitação em arquivos de estilo manuais quebraram o layout do portal em navegadores móveis."
-          }
+            narrative:
+              "Erros de digitação em arquivos de estilo manuais quebraram o layout do portal em navegadores móveis.",
+          },
         ],
-        feedbackNarrative: "O esforço manual dispersou a equipe, gerou inconsistências visuais e atrasou a entrega das funcionalidades do ciclo de trabalho.",
+        feedbackNarrative:
+          "O esforço manual dispersou a equipe, gerou inconsistências visuais e atrasou a entrega das funcionalidades do ciclo de trabalho.",
         pmbokConcept: "Retrabalho e desperdício como indicadores de eficiência",
         learnings: [
           "O PMBOK 8 aponta que tarefas repetitivas executadas sem automação constituem fonte grave de ineficiência e desperdício.",
-          "Submeter talentos a trabalho manual mecânico esgota a energia produtiva e degrada a qualidade dos artefatos."
+          "Submeter talentos a trabalho manual mecânico esgota a energia produtiva e degrada a qualidade dos artefatos.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Configuração inicial de infraestrutura de design tokens compartilhados"
-        ],
+        risksEvaded: ["Configuração inicial de infraestrutura de design tokens compartilhados"],
         otherConsequences: [
-          "Inconsistências estéticas crônicas e fadiga desnecessária nos desenvolvedores"
-        ]
+          "Inconsistências estéticas crônicas e fadiga desnecessária nos desenvolvedores",
+        ],
       },
       {
         key: "c",
@@ -982,22 +977,21 @@ export const changeManagementEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: -15,
           saudeEquipe: -5,
-          conhecimentoOrganizacional: -15
+          conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "A recusa em atualizar a imagem do sistema provocou veto do conselho de comunicação e suspensão da campanha de lançamento.",
+        feedbackNarrative:
+          "A recusa em atualizar a imagem do sistema provocou veto do conselho de comunicação e suspensão da campanha de lançamento.",
         pmbokConcept: "Visão e objetivos compartilhados",
         learnings: [
           "O PMBOK 8 ressalta a responsabilidade do líder em alinhar os produtos entregues à identidade e estratégia da organização.",
-          "Desconsiderar a representação institucional do projeto perante o público afasta os patrocinadores e enfraquece sua reputação."
+          "Desconsiderar a representação institucional do projeto perante o público afasta os patrocinadores e enfraquece sua reputação.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Qualquer trabalho de atualização de bibliotecas gráficas no momento"
-        ],
+        risksEvaded: ["Qualquer trabalho de atualização de bibliotecas gráficas no momento"],
         otherConsequences: [
-          "Rejeição pública do sistema pela reitoria e proibição de divulgação oficial"
-        ]
-      }
-    ]
-  }
+          "Rejeição pública do sistema pela reitoria e proibição de divulgação oficial",
+        ],
+      },
+    ],
+  },
 ];

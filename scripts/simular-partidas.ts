@@ -20,19 +20,23 @@ import {
   isGameOver,
   resolveTurn,
   type PendingImpact,
-} from '../src/lib/gameLogic';
-import type { Alternative, GameEvent, Metrics } from '../src/types';
+} from "../src/lib/gameLogic";
+import type { Alternative, GameEvent, Metrics } from "../src/types";
 
-type Strategy = 'good' | 'random' | 'worst';
+type Strategy = "good" | "random" | "worst";
 
 function choose(event: GameEvent, strategy: Strategy): Alternative {
-  if (strategy === 'good') {
-    return event.alternatives.find((a) => a.goodBad === 'good') ?? event.alternatives[0];
+  if (strategy === "good") {
+    return event.alternatives.find((a) => a.goodBad === "good") ?? event.alternatives[0];
   }
-  if (strategy === 'worst') {
+  if (strategy === "worst") {
     const sum = (a: Alternative) =>
-      (a.impacts.capacidadeEntrega ?? 0) + (a.impacts.qualidadeProduto ?? 0) + (a.impacts.saudeEquipe ?? 0);
-    const bads = event.alternatives.filter((a) => a.goodBad === 'bad').sort((x, y) => sum(x) - sum(y));
+      (a.impacts.capacidadeEntrega ?? 0) +
+      (a.impacts.qualidadeProduto ?? 0) +
+      (a.impacts.saudeEquipe ?? 0);
+    const bads = event.alternatives
+      .filter((a) => a.goodBad === "bad")
+      .sort((x, y) => sum(x) - sum(y));
     return bads[0] ?? event.alternatives[0];
   }
   return event.alternatives[Math.floor(Math.random() * event.alternatives.length)];
@@ -59,10 +63,15 @@ export function runSimulation(n = 10000) {
   console.log(`SIMULAÇÃO MONTE CARLO DE PARTIDAS (${n} iterações, ${MATCH_DILEMMA_COUNT} dilemas)`);
   console.log(`======================================================\n`);
 
-  for (const strat of ['good', 'random', 'worst'] as const) {
+  for (const strat of ["good", "random", "worst"] as const) {
     let overCount = 0;
     let turnSum = 0;
-    const sums: Metrics = { capacidadeEntrega: 0, qualidadeProduto: 0, saudeEquipe: 0, conhecimentoOrganizacional: 0 };
+    const sums: Metrics = {
+      capacidadeEntrega: 0,
+      qualidadeProduto: 0,
+      saudeEquipe: 0,
+      conhecimentoOrganizacional: 0,
+    };
 
     for (let i = 0; i < n; i++) {
       const res = simulateMatch(strat);
@@ -76,7 +85,7 @@ export function runSimulation(n = 10000) {
     console.log(`- Taxa de Game Over: ${((overCount / n) * 100).toFixed(2)}% (${overCount}/${n})`);
     console.log(`- Duração média da partida: ${(turnSum / n).toFixed(2)} dilemas`);
     console.log(
-      `- Médias finais: Cap=${avg('capacidadeEntrega')}, Qual=${avg('qualidadeProduto')}, Saúde=${avg('saudeEquipe')}, Conhec=${avg('conhecimentoOrganizacional')}\n`,
+      `- Médias finais: Cap=${avg("capacidadeEntrega")}, Qual=${avg("qualidadeProduto")}, Saúde=${avg("saudeEquipe")}, Conhec=${avg("conhecimentoOrganizacional")}\n`,
     );
   }
 }

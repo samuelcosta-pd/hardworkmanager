@@ -1,21 +1,18 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Pause, Play, SkipForward, Timer, MessageSquare, Check, ArrowRight } from 'lucide-react';
-import { SoftCard } from '@/components/ui/SoftCard';
-import { SoftButton } from '@/components/ui/SoftButton';
-import { Avatar3D } from '@/components/ui/Avatar3D';
-import { useGameStore } from '@/store/gameStore';
-import { tallyVotes } from '@/lib/gameLogic';
-import { ROLE_LABELS, type DebateSpeaker, type Player } from '@/types';
+import { useEffect, useMemo, useState } from "react";
+import { Pause, Play, SkipForward, Timer, MessageSquare, Check, ArrowRight } from "lucide-react";
+import { SoftCard } from "@/components/ui/SoftCard";
+import { SoftButton } from "@/components/ui/SoftButton";
+import { Avatar3D } from "@/components/ui/Avatar3D";
+import { useGameStore } from "@/store/gameStore";
+import { tallyVotes } from "@/lib/gameLogic";
+import { ROLE_LABELS, type DebateSpeaker, type Player } from "@/types";
 
 /**
  * Ordem de fala: (1) quem se absteve, (2) quem votou na alternativa menos escolhida,
  * (3) quem votou na mais escolhida — 30 s cada — e, por último, o GP (20 s) para sintetizar.
  */
-function buildOrder(
-  players: Player[],
-  voteCountOf: (playerId: string) => number,
-): DebateSpeaker[] {
-  const pm = players.find((p) => p.role === 'pm');
+function buildOrder(players: Player[], voteCountOf: (playerId: string) => number): DebateSpeaker[] {
+  const pm = players.find((p) => p.role === "pm");
   const nonPm = players
     .map((p, i) => ({ p, i }))
     .filter(({ p }) => p.id !== pm?.id)
@@ -29,7 +26,7 @@ function buildOrder(
     playerRole: p.role,
     avatarImage: p.avatarImage,
     durationSeconds: 30,
-    order: (i + 1) as DebateSpeaker['order'],
+    order: (i + 1) as DebateSpeaker["order"],
   }));
   if (pm) {
     list.push({
@@ -38,7 +35,7 @@ function buildOrder(
       playerRole: pm.role,
       avatarImage: pm.avatarImage,
       durationSeconds: 20,
-      order: (list.length + 1) as DebateSpeaker['order'],
+      order: (list.length + 1) as DebateSpeaker["order"],
     });
   }
   return list;
@@ -52,7 +49,7 @@ export function DebateStructured() {
   const speakers = useMemo(() => {
     const voteCountOf = (playerId: string) => {
       const v = round1.find((x) => x.playerId === playerId);
-      if (!v || v.alternative === 'abstain') return 0;
+      if (!v || v.alternative === "abstain") return 0;
       return tally.counts[v.alternative];
     };
     return buildOrder(players, voteCountOf);
@@ -83,8 +80,8 @@ export function DebateStructured() {
     if (idx < speakers.length - 1) setIdx(idx + 1);
   };
 
-  const mm = String(Math.floor(secondsLeft / 60)).padStart(2, '0');
-  const ss = String(secondsLeft % 60).padStart(2, '0');
+  const mm = String(Math.floor(secondsLeft / 60)).padStart(2, "0");
+  const ss = String(secondsLeft % 60).padStart(2, "0");
   const isLast = idx === speakers.length - 1;
   const fullDur = speaker?.durationSeconds ?? 30;
   const progress = ((fullDur - secondsLeft) / fullDur) * 100;
@@ -95,10 +92,13 @@ export function DebateStructured() {
         <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
           <MessageSquare className="h-5 w-5" />
         </div>
-        <p className="text-xs uppercase tracking-[0.2em] text-primary font-bold">Debate Estruturado</p>
+        <p className="text-xs uppercase tracking-[0.2em] text-primary font-bold">
+          Debate Estruturado
+        </p>
         <h1 className="mt-1 text-2xl font-bold tracking-tight">Defendam seus pontos de vista</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Quem se absteve e a voz minoritária falam primeiro, para evitar o efeito manada (Groupthink).
+          Quem se absteve e a voz minoritária falam primeiro, para evitar o efeito manada
+          (Groupthink).
         </p>
       </div>
 
@@ -106,12 +106,17 @@ export function DebateStructured() {
       <SoftCard className="mb-6 animate-pop-in text-center p-8">
         <div className="flex flex-col items-center">
           <div className="relative">
-            <Avatar3D initials={speaker.playerName.slice(0, 2)} role={speaker.playerRole} imageUrl={speaker.avatarImage} size="lg" />
+            <Avatar3D
+              initials={speaker.playerName.slice(0, 2)}
+              role={speaker.playerRole}
+              imageUrl={speaker.avatarImage}
+              size="lg"
+            />
             <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
               {speaker.order}
             </span>
           </div>
-          
+
           <p className="mt-3 text-2xl font-bold text-foreground">{speaker.playerName}</p>
           <span className="mt-1 inline-block rounded-full bg-primary/10 px-3 py-0.5 text-xs font-semibold text-primary">
             {ROLE_LABELS[speaker.playerRole]}
@@ -123,7 +128,7 @@ export function DebateStructured() {
               <Timer className="h-4 w-4" />
               <span>Tempo de Fala</span>
             </div>
-            
+
             <p className="mt-1 font-mono text-6xl font-extrabold tabular-nums text-foreground">
               {mm}:{ss}
             </p>
@@ -131,7 +136,7 @@ export function DebateStructured() {
             <div className="mt-4 h-2.5 w-full max-w-xs overflow-hidden rounded-full bg-muted shadow-inner">
               <div
                 className={`h-full rounded-full transition-all duration-1000 ease-linear ${
-                  secondsLeft <= 5 ? 'bg-rose-500' : 'bg-primary'
+                  secondsLeft <= 5 ? "bg-rose-500" : "bg-primary"
                 }`}
                 style={{ width: `${progress}%` }}
               />
@@ -142,9 +147,9 @@ export function DebateStructured() {
           <div className="mt-6 flex flex-wrap justify-center gap-2">
             <SoftButton variant="ghost" size="sm" onClick={() => setRunning((r) => !r)}>
               {running ? <Pause className="h-4 w-4 mr-1.5" /> : <Play className="h-4 w-4 mr-1.5" />}
-              {running ? 'Pausar' : 'Retomar'}
+              {running ? "Pausar" : "Retomar"}
             </SoftButton>
-            
+
             {!isLast ? (
               <SoftButton size="sm" onClick={next}>
                 <SkipForward className="h-4 w-4 mr-1.5" /> Próximo Colega
@@ -169,15 +174,21 @@ export function DebateStructured() {
               key={s.playerId + i}
               className={`flex items-center gap-2.5 rounded-2xl p-2.5 text-xs transition-all ${
                 i === idx
-                  ? 'bg-card font-bold text-foreground shadow-sm ring-2 ring-primary/40'
+                  ? "bg-card font-bold text-foreground shadow-sm ring-2 ring-primary/40"
                   : i < idx
-                    ? 'bg-muted/40 text-muted-foreground opacity-60'
-                    : 'bg-muted/60 text-muted-foreground'
+                    ? "bg-muted/40 text-muted-foreground opacity-60"
+                    : "bg-muted/60 text-muted-foreground"
               }`}
             >
-              <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-                i < idx ? 'bg-emerald-100 text-emerald-700' : i === idx ? 'bg-primary text-primary-foreground' : 'bg-slate-200 text-slate-600'
-              }`}>
+              <div
+                className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
+                  i < idx
+                    ? "bg-emerald-100 text-emerald-700"
+                    : i === idx
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-slate-200 text-slate-600"
+                }`}
+              >
                 {i < idx ? <Check className="h-3.5 w-3.5" /> : s.order}
               </div>
               <span className="truncate flex-1">{s.playerName}</span>

@@ -38,7 +38,6 @@ export function DebriefingFinal() {
     };
   });
 
-
   const efLevel = metricLevel(metrics.capacidadeEntrega);
   const quaLevel = metricLevel(metrics.qualidadeProduto);
   const seLevel = metricLevel(metrics.saudeEquipe);
@@ -249,13 +248,16 @@ export function DebriefingFinal() {
               <h2 className="text-xl font-bold text-slate-800">Debriefing Final : {MENTOR.name}</h2>
               <p className="text-slate-600">
                 "Cada desafio enfrentado pelo time esteve diretamente conectado aos processos e
-                práticas essenciais do Domínio de Recursos (PMBOK 8). Vejam a síntese dos conceitos trabalhados:"
+                práticas essenciais do Domínio de Recursos (PMBOK 8). Vejam a síntese dos conceitos
+                trabalhados:"
               </p>
             </div>
           </div>
 
           <div className="mb-8 text-center animate-float-in">
-            <h1 className="text-3xl font-bold tracking-tight">📘 Conceitos de Recursos (PMBOK 8) Aprendidos</h1>
+            <h1 className="text-3xl font-bold tracking-tight">
+              📘 Conceitos de Recursos (PMBOK 8) Aprendidos
+            </h1>
           </div>
 
           {/* Conceitos PMBOK Aprendidos */}
@@ -273,7 +275,9 @@ export function DebriefingFinal() {
                 {allLearnings.map((l, i) => (
                   <div key={i} className="bg-muted rounded-xl p-4 sm:p-5">
                     <p className="text-base sm:text-lg font-bold text-foreground">{l.eventTitle}</p>
-                    <p className="text-sm sm:text-base text-primary mt-1 font-bold">📘 {l.pmbokConcept}</p>
+                    <p className="text-sm sm:text-base text-primary mt-1 font-bold">
+                      📘 {l.pmbokConcept}
+                    </p>
                     <p className="text-base text-muted-foreground mt-1.5 leading-relaxed">
                       {l.learnings}
                     </p>
@@ -328,10 +332,11 @@ export function DebriefingFinal() {
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
               Os cenários que vocês enfrentaram refletem dilemas reais do dia a dia de projetos de
               software. A habilidade de equilibrar eficiência operacional, qualidade técnica e saúde
-              da equipe é central no Domínio de Desempenho <strong>Recursos</strong>{" "}
-              (PMBOK 8). Em projetos reais, busquem sempre garantir os recursos certos no momento e
-              lugar certos, negociar prazos com base na capacidade real, proteger o time contra
-              sobrecarga e investir na eficiência dos ambientes e ferramentas, exatamente como vocês praticaram aqui.
+              da equipe é central no Domínio de Desempenho <strong>Recursos</strong> (PMBOK 8). Em
+              projetos reais, busquem sempre garantir os recursos certos no momento e lugar certos,
+              negociar prazos com base na capacidade real, proteger o time contra sobrecarga e
+              investir na eficiência dos ambientes e ferramentas, exatamente como vocês praticaram
+              aqui.
             </p>
           </SoftCard>
 

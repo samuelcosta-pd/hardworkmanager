@@ -12,10 +12,12 @@ export const tailoringEvents: GameEvent[] = [
     difficulty: EventDifficulty.EASY,
     probabilityWeight: 2,
     tags: ["burocracia", "lean", "processos", "recursos_humanos"],
-    learningObjective: "Eliminar desperdícios de esforço humano em atividades burocráticas substituindo relatórios manuais por radiadores de informação.",
+    learningObjective:
+      "Eliminar desperdícios de esforço humano em atividades burocráticas substituindo relatórios manuais por radiadores de informação.",
     communicationType: "email",
     senderRole: "PMO Universitário",
-    description: "Assunto: Relatórios Diários de Atividades. O PMO exige relatórios em PDF com 20 páginas todos os dias de cada desenvolvedor. O time consome 2 horas diárias preenchendo planilhas duplicadas, reduzindo a capacidade produtiva e a motivação da equipe.",
+    description:
+      "Assunto: Relatórios Diários de Atividades. O PMO exige relatórios em PDF com 20 páginas todos os dias de cada desenvolvedor. O time consome 2 horas diárias preenchendo planilhas duplicadas, reduzindo a capacidade produtiva e a motivação da equipe.",
     domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "humano",
     resourceProcess: "monitorar",
@@ -33,7 +35,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: 15,
           conhecimentoOrganizacional: 10,
         },
-        feedbackNarrative: "Investimos esforço inicial para integrar os painéis, mas eliminamos horas de retrabalho manual. A diretoria aprovou a transparência e a moral da equipe subiu.",
+        feedbackNarrative:
+          "Investimos esforço inicial para integrar os painéis, mas eliminamos horas de retrabalho manual. A diretoria aprovou a transparência e a moral da equipe subiu.",
         pmbokConcept: "Retrabalho e desperdício como indicadores de eficiência",
         learnings: [
           "O PMBOK 8 orienta eliminar atividades sem valor agregado (muda) por meio de radiadores de informação e transparência contínua.",
@@ -59,10 +62,12 @@ export const tailoringEvents: GameEvent[] = [
               capacidadeEntrega: -10,
               saudeEquipe: -10,
             },
-            narrative: "A sobrecarga administrativa repetitiva acumulou cansaço no time, provocando erros de integração e pedidos de afastamento.",
+            narrative:
+              "A sobrecarga administrativa repetitiva acumulou cansaço no time, provocando erros de integração e pedidos de afastamento.",
           },
         ],
-        feedbackNarrative: "O PMO recebeu os documentos exigidos, mas a interrupção diária causou perda de contexto técnico e insatisfação generalizada entre os engenheiros.",
+        feedbackNarrative:
+          "O PMO recebeu os documentos exigidos, mas a interrupção diária causou perda de contexto técnico e insatisfação generalizada entre os engenheiros.",
         pmbokConcept: "Utilização e inatividade de recursos",
         learnings: [
           "Exigir controles puramente documentais consome capacidade útil dos recursos sem melhorar a qualidade final do sistema.",
@@ -70,7 +75,9 @@ export const tailoringEvents: GameEvent[] = [
         ],
         goodBad: "bad",
         risksEvaded: ["Atrito imediato com auditores do PMO"],
-        otherConsequences: ["Fragmentação da atenção dos desenvolvedores e descontentamento interno"],
+        otherConsequences: [
+          "Fragmentação da atenção dos desenvolvedores e descontentamento interno",
+        ],
       },
       {
         key: "c",
@@ -81,7 +88,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: -5,
           conhecimentoOrganizacional: -10,
         },
-        feedbackNarrative: "O intermediário precisou interromper os engenheiros a todo momento para compreender termos técnicos, gerando ruído e documentos com imprecisões.",
+        feedbackNarrative:
+          "O intermediário precisou interromper os engenheiros a todo momento para compreender termos técnicos, gerando ruído e documentos com imprecisões.",
         pmbokConcept: "Papéis, responsabilidades e lacunas de conhecimento",
         learnings: [
           "Inserir intermediários sem simplificar processos aumenta canais de comunicação e gera inconsistências no compartilhamento de informações.",
@@ -89,7 +97,9 @@ export const tailoringEvents: GameEvent[] = [
         ],
         goodBad: "bad",
         risksEvaded: ["Trabalho manual direto de digitação pelos seniores"],
-        otherConsequences: ["Custo orçamentário extra e interrupções frequentes no fluxo de raciocínio"],
+        otherConsequences: [
+          "Custo orçamentário extra e interrupções frequentes no fluxo de raciocínio",
+        ],
       },
     ],
   },
@@ -100,10 +110,12 @@ export const tailoringEvents: GameEvent[] = [
     difficulty: EventDifficulty.MEDIUM,
     probabilityWeight: 2,
     tags: ["timesheet", "controle", "desperdicio", "pmo"],
-    learningObjective: "Negociar tailoring nos processos de controle de esforço com base em resultados e valor, em vez de microgestão de minutos trabalhados.",
+    learningObjective:
+      "Negociar tailoring nos processos de controle de esforço com base em resultados e valor, em vez de microgestão de minutos trabalhados.",
     communicationType: "ticket",
     senderRole: "Auditoria Interna",
-    description: "Ticket #2104 - A Auditoria exige que todos os integrantes lancem horas trabalhadas a cada intervalo de 30 minutos em um sistema legado da universidade. O preenchimento detalhado consome energia dos líderes técnicos e não reflete o valor entregue nas sprints.",
+    description:
+      "Ticket #2104 - A Auditoria exige que todos os integrantes lancem horas trabalhadas a cada intervalo de 30 minutos em um sistema legado da universidade. O preenchimento detalhado consome energia dos líderes técnicos e não reflete o valor entregue nas sprints.",
     domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "humano",
     resourceProcess: "monitorar",
@@ -121,15 +133,20 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: 15,
           conhecimentoOrganizacional: 10,
         },
-        feedbackNarrative: "Apresentamos relatórios de valor por funcionalidade homologada. A auditoria aceitou o modelo adaptado e o time manteve a autonomia operacional.",
+        feedbackNarrative:
+          "Apresentamos relatórios de valor por funcionalidade homologada. A auditoria aceitou o modelo adaptado e o time manteve a autonomia operacional.",
         pmbokConcept: "Abordagem de recursos adaptada ao projeto (tailoring)",
         learnings: [
           "O PMBOK 8 preconiza o tailoring de métodos de controle para equilibrar governança organizacional e produtividade da equipe.",
           "Fortalece a equipe produtiva (R5) e preserva o foco em entregas com alto valor público.",
         ],
         goodBad: "good",
-        risksEvaded: ["Microgerenciamento desmotivador e perda de tempo com preenchimento artificial"],
-        otherConsequences: ["Precedente institucional positivo para outros projetos de TI da universidade"],
+        risksEvaded: [
+          "Microgerenciamento desmotivador e perda de tempo com preenchimento artificial",
+        ],
+        otherConsequences: [
+          "Precedente institucional positivo para outros projetos de TI da universidade",
+        ],
       },
       {
         key: "b",
@@ -147,10 +164,12 @@ export const tailoringEvents: GameEvent[] = [
               capacidadeEntrega: -10,
               qualidadeProduto: -10,
             },
-            narrative: "Para bater metas de apontamento horário, o time passou a inflar registros fictícios, mascarando gargalos reais de desenvolvimento.",
+            narrative:
+              "Para bater metas de apontamento horário, o time passou a inflar registros fictícios, mascarando gargalos reais de desenvolvimento.",
           },
         ],
-        feedbackNarrative: "A auditoria ficou satisfeita com as planilhas cheias, mas o clima deteriorou e desenvolvedores experientes reduziram o ritmo de trabalho.",
+        feedbackNarrative:
+          "A auditoria ficou satisfeita com as planilhas cheias, mas o clima deteriorou e desenvolvedores experientes reduziram o ritmo de trabalho.",
         pmbokConcept: "Uso planejado vs. real de recursos",
         learnings: [
           "Controles punitivos geram conformidade aparente e desestimulam a transparência sobre desvios e impedimentos reais.",
@@ -169,7 +188,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: -5,
           conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "A liderança gastou horas do seu dia com burocracia mecânica e a auditoria detectou dados inconsistentes, abrindo questionamento formal.",
+        feedbackNarrative:
+          "A liderança gastou horas do seu dia com burocracia mecânica e a auditoria detectou dados inconsistentes, abrindo questionamento formal.",
         pmbokConcept: "Liderança distribuída e centralizada",
         learnings: [
           "Centralizar esforço burocrático na liderança gera gargalo gerencial e omite dados reais de utilização de recursos.",
@@ -188,10 +208,12 @@ export const tailoringEvents: GameEvent[] = [
     difficulty: EventDifficulty.HARD,
     probabilityWeight: 2,
     tags: ["estimativas", "planejamento", "legado", "banco_dados"],
-    learningObjective: "Aplicar estimativa bottom-up com base analítica nos pacotes críticos do legado para mitigar riscos de subdimensionamento de recursos.",
+    learningObjective:
+      "Aplicar estimativa bottom-up com base analítica nos pacotes críticos do legado para mitigar riscos de subdimensionamento de recursos.",
     communicationType: "slack",
     senderRole: "Engenharia de Dados",
-    description: "A migração dos registros acadêmicos históricos (20 anos de banco legado) é complexa. O Tech Lead quer usar estimativa análoga rápida de 2 semanas baseada em outro sistema, enquanto os desenvolvedores alertam que inconsistências estruturais exigem análise detalhada.",
+    description:
+      "A migração dos registros acadêmicos históricos (20 anos de banco legado) é complexa. O Tech Lead quer usar estimativa análoga rápida de 2 semanas baseada em outro sistema, enquanto os desenvolvedores alertam que inconsistências estruturais exigem análise detalhada.",
     domainTag: "Recursos › Estimar os Recursos",
     resourceType: "humano",
     resourceProcess: "estimar",
@@ -209,7 +231,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: 10,
           conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "A decomposição exigiu dois dias de análise, mas identificou 14 incompatibilidades graves antes da codificação, evitando retrabalho em massa.",
+        feedbackNarrative:
+          "A decomposição exigiu dois dias de análise, mas identificou 14 incompatibilidades graves antes da codificação, evitando retrabalho em massa.",
         pmbokConcept: "Estimativa bottom-up de recursos",
         learnings: [
           "A técnica bottom-up fornece precisão elevada em tarefas com alta incerteza, fundamentando a base das estimativas e o calendário de recursos.",
@@ -235,10 +258,12 @@ export const tailoringEvents: GameEvent[] = [
               capacidadeEntrega: -15,
               qualidadeProduto: -10,
             },
-            narrative: "Durante a execução da migração, centenas de dados de matrículas falharam por inconsistência de esquema, paralisando a equipe técnica.",
+            narrative:
+              "Durante a execução da migração, centenas de dados de matrículas falharam por inconsistência de esquema, paralisando a equipe técnica.",
           },
         ],
-        feedbackNarrative: "O ciclo de entregas começou rapidamente, mas dados incompatíveis travaram a esteira de verificação integrada. A equipe entrou em regime de hora extra emergencial.",
+        feedbackNarrative:
+          "O ciclo de entregas começou rapidamente, mas dados incompatíveis travaram a esteira de verificação integrada. A equipe entrou em regime de hora extra emergencial.",
         pmbokConcept: "Estimativa análoga e paramétrica",
         learnings: [
           "Estimativas análogas rápidas sem validação de similaridade real geram subdimensionamento severo de recursos em sistemas legados.",
@@ -257,7 +282,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: -5,
           conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "A empresa terceirizada desconhecia as particularidades do regimento acadêmico da instituição e entregou scripts que demandaram revisão completa.",
+        feedbackNarrative:
+          "A empresa terceirizada desconhecia as particularidades do regimento acadêmico da instituição e entregou scripts que demandaram revisão completa.",
         pmbokConcept: "Análise de alternativas na estimativa",
         learnings: [
           "Recorrer a recursos externos sem alinhar requisitos técnicos e contexto institucional resulta em retrabalho e perda de aprendizado interno.",
@@ -276,10 +302,12 @@ export const tailoringEvents: GameEvent[] = [
     difficulty: EventDifficulty.MEDIUM,
     probabilityWeight: 2,
     tags: ["reunioes", "comunicacao", "tempo", "foco"],
-    learningObjective: "Estabelecer acordos de comunicação assíncrona para proteger o tempo de foco e manter os recursos engajados.",
+    learningObjective:
+      "Estabelecer acordos de comunicação assíncrona para proteger o tempo de foco e manter os recursos engajados.",
     communicationType: "slack",
     senderRole: "Desenvolvedores Plenos",
-    description: "Os desenvolvedores relatam que passam mais de 4 horas por dia em reuniões de alinhamento com diferentes setores da universidade. O tempo efetivo para desenvolvimento caiu para menos de 50%, gerando atrasos em entregas essenciais.",
+    description:
+      "Os desenvolvedores relatam que passam mais de 4 horas por dia em reuniões de alinhamento com diferentes setores da universidade. O tempo efetivo para desenvolvimento caiu para menos de 50%, gerando atrasos em entregas essenciais.",
     domainTag: "Recursos › Liderar a Equipe",
     resourceType: "humano",
     resourceProcess: "liderar",
@@ -297,7 +325,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: 15,
           conhecimentoOrganizacional: 10,
         },
-        feedbackNarrative: "A proteção dos blocos de foco aumentou o volume de código entregue com testes e os desenvolvedores voltaram a trabalhar concentrados.",
+        feedbackNarrative:
+          "A proteção dos blocos de foco aumentou o volume de código entregue com testes e os desenvolvedores voltaram a trabalhar concentrados.",
         pmbokConcept: "Team charter e operações da equipe",
         learnings: [
           "Definir acordos operacionais no Team Charter sobre canais e janelas de comunicação resguarda a energia cognitiva dos recursos humanos.",
@@ -323,10 +352,12 @@ export const tailoringEvents: GameEvent[] = [
               capacidadeEntrega: -10,
               saudeEquipe: -10,
             },
-            narrative: "O cansaço das jornadas duplas provocou falhas de segurança no código e dois desenvolvedores entraram em licença médica.",
+            narrative:
+              "O cansaço das jornadas duplas provocou falhas de segurança no código e dois desenvolvedores entraram em licença médica.",
           },
         ],
-        feedbackNarrative: "A equipe cumpriu a agenda política, mas o esgotamento gerou falhas graves na validação de permissões de acesso ao sistema.",
+        feedbackNarrative:
+          "A equipe cumpriu a agenda política, mas o esgotamento gerou falhas graves na validação de permissões de acesso ao sistema.",
         pmbokConcept: "Bem-estar e prevenção de burnout",
         learnings: [
           "Jornadas excessivas para compensar ineficiência comunicativa destroem o bem-estar e a sustentabilidade dos recursos humanos.",
@@ -345,7 +376,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: -5,
           conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "O time codificou mais rápido, mas desenvolveu funcionalidades incompatíveis com as reais necessidades da Pró-Reitoria de Graduação.",
+        feedbackNarrative:
+          "O time codificou mais rápido, mas desenvolveu funcionalidades incompatíveis com as reais necessidades da Pró-Reitoria de Graduação.",
         pmbokConcept: "Visão e objetivos compartilhados",
         learnings: [
           "Cortar totalmente o diálogo com partes interessadas cria silos isolados e produz entregas desconectadas das expectativas organizacionais.",
@@ -364,10 +396,12 @@ export const tailoringEvents: GameEvent[] = [
     difficulty: EventDifficulty.MEDIUM,
     probabilityWeight: 2,
     tags: ["silos", "team_charter", "colaboracao", "ux_dev"],
-    learningObjective: "Utilizar o Team Charter para estabelecer regras claras de colaboração entre especialidades e eliminar barreiras operacionais.",
+    learningObjective:
+      "Utilizar o Team Charter para estabelecer regras claras de colaboração entre especialidades e eliminar barreiras operacionais.",
     communicationType: "slack",
     senderRole: "Design de Interface",
-    description: "Desenvolvedores e designers de UX estão trabalhando isolados. Os devs afirmam que recebem telas prontas impraticáveis no legado, enquanto o time de design reclama que suas diretrizes de acessibilidade são sumariamente ignoradas.",
+    description:
+      "Desenvolvedores e designers de UX estão trabalhando isolados. Os devs afirmam que recebem telas prontas impraticáveis no legado, enquanto o time de design reclama que suas diretrizes de acessibilidade são sumariamente ignoradas.",
     domainTag: "Recursos › Liderar a Equipe",
     resourceType: "humano",
     resourceProcess: "liderar",
@@ -384,14 +418,17 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: 15,
           conhecimentoOrganizacional: 10,
         },
-        feedbackNarrative: "A definição conjunta de acordos de trabalho gerou respeito mútuo. As telas passaram a considerar as limitações técnicas desde a prototipagem.",
+        feedbackNarrative:
+          "A definição conjunta de acordos de trabalho gerou respeito mútuo. As telas passaram a considerar as limitações técnicas desde a prototipagem.",
         pmbokConcept: "Team charter e operações da equipe",
         learnings: [
           "O Team Charter formaliza valores, acordos de convivência e diretrizes operacionais, transformando especialistas isolados em equipe coesa.",
           "Consolida a propriedade compartilhada (R1) e constrói as bases de uma equipe de alto desempenho (R2).",
         ],
         goodBad: "good",
-        risksEvaded: ["Guerra de trincheiras entre design e código e retrabalho constante de interface"],
+        risksEvaded: [
+          "Guerra de trincheiras entre design e código e retrabalho constante de interface",
+        ],
         otherConsequences: ["Processo fluido de cocriação e empatia entre especialidades"],
       },
       {
@@ -410,10 +447,12 @@ export const tailoringEvents: GameEvent[] = [
               capacidadeEntrega: -10,
               qualidadeProduto: -10,
             },
-            narrative: "Telas complexas especificadas sem consulta aos programadores foram consideradas inviáveis na arquitetura antiga, gerando impasse.",
+            narrative:
+              "Telas complexas especificadas sem consulta aos programadores foram consideradas inviáveis na arquitetura antiga, gerando impasse.",
           },
         ],
-        feedbackNarrative: "A separação estrita por fases reforçou o distanciamento entre as áreas e gerou acusações mútuas de incompetência.",
+        feedbackNarrative:
+          "A separação estrita por fases reforçou o distanciamento entre as áreas e gerou acusações mútuas de incompetência.",
         pmbokConcept: "Resolução de problemas e conflitos",
         learnings: [
           "Reforçar modelos sequenciais rígidos em contextos adaptativos aprofunda silos e impede feedback rápido sobre viabilidade técnica.",
@@ -432,7 +471,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: -5,
           conhecimentoOrganizacional: -10,
         },
-        feedbackNarrative: "As telas foram entregues rápido, mas ficaram ilegíveis para alunos e reprovadas nas diretrizes de acessibilidade governamental.",
+        feedbackNarrative:
+          "As telas foram entregues rápido, mas ficaram ilegíveis para alunos e reprovadas nas diretrizes de acessibilidade governamental.",
         pmbokConcept: "Empoderamento, delegação e autonomia",
         learnings: [
           "Delegação desprovida de critérios de qualidade técnica e especialidade compromete os padrões exigidos do produto final.",
@@ -451,10 +491,12 @@ export const tailoringEvents: GameEvent[] = [
     difficulty: EventDifficulty.HARD,
     probabilityWeight: 2,
     tags: ["gargalo", "homologacao", "ociosidade", "teoria_restricoes"],
-    learningObjective: "Aplicar a Teoria das Restrições para eliminar gargalos de aprovação centralizada que deixam desenvolvedores ociosos.",
+    learningObjective:
+      "Aplicar a Teoria das Restrições para eliminar gargalos de aprovação centralizada que deixam desenvolvedores ociosos.",
     communicationType: "ticket",
     senderRole: "Controle de Qualidade",
-    description: "Ticket #3340 - Todas as telas desenvolvidas estão paradas na fila esperando aprovação visual exclusiva do Líder de UX. Os programadores estão ficando ociosos aguardando liberação para prosseguir, enquanto o gargalo de validação cresce a cada dia.",
+    description:
+      "Ticket #3340 - Todas as telas desenvolvidas estão paradas na fila esperando aprovação visual exclusiva do Líder de UX. Os programadores estão ficando ociosos aguardando liberação para prosseguir, enquanto o gargalo de validação cresce a cada dia.",
     domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "humano",
     resourceProcess: "monitorar",
@@ -472,7 +514,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: 10,
           conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "Ao descentralizar critérios claros, as equipes aprovaram telas com autonomia e a fila de espera foi extinta em três dias.",
+        feedbackNarrative:
+          "Ao descentralizar critérios claros, as equipes aprovaram telas com autonomia e a fila de espera foi extinta em três dias.",
         pmbokConcept: "Teoria das restrições e gargalos",
         learnings: [
           "A Teoria das Restrições orienta subordinar e elevar os gargalos do fluxo produtivo para maximizar a vazão global da equipe.",
@@ -498,10 +541,12 @@ export const tailoringEvents: GameEvent[] = [
               capacidadeEntrega: -15,
               qualidadeProduto: -10,
             },
-            narrative: "Dezenas de telas acumuladas foram rejeitadas de uma só vez na revisão tardia, gerando um volume insustentável de retrabalho.",
+            narrative:
+              "Dezenas de telas acumuladas foram rejeitadas de uma só vez na revisão tardia, gerando um volume insustentável de retrabalho.",
           },
         ],
-        feedbackNarrative: "A equipe produziu em excesso sem validação, gerando acúmulo de trabalho em andamento e retrabalho massivo posterior.",
+        feedbackNarrative:
+          "A equipe produziu em excesso sem validação, gerando acúmulo de trabalho em andamento e retrabalho massivo posterior.",
         pmbokConcept: "Uso planejado vs. real de recursos",
         learnings: [
           "Aumentar estoque de trabalho em progresso sem vazão no gargalo mascara atrasos e eleva o desperdício por retrabalho.",
@@ -520,7 +565,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: -10,
           conhecimentoOrganizacional: -10,
         },
-        feedbackNarrative: "O fluxo destravou no curto prazo, mas alunos inundaram a ouvidoria com reclamações de botões quebrados e formulários inacessíveis.",
+        feedbackNarrative:
+          "O fluxo destravou no curto prazo, mas alunos inundaram a ouvidoria com reclamações de botões quebrados e formulários inacessíveis.",
         pmbokConcept: "Retrabalho e desperdício como indicadores de eficiência",
         learnings: [
           "Eliminar etapas de validação sem critérios de substituição degrada os requisitos mínimos de qualidade acordados do produto.",
@@ -528,7 +574,9 @@ export const tailoringEvents: GameEvent[] = [
         ],
         goodBad: "bad",
         risksEvaded: ["Tempo de espera na esteira de aprovação"],
-        otherConsequences: ["Sobrecarga no suporte a usuários e dano à credibilidade do novo sistema"],
+        otherConsequences: [
+          "Sobrecarga no suporte a usuários e dano à credibilidade do novo sistema",
+        ],
       },
     ],
   },
@@ -539,10 +587,12 @@ export const tailoringEvents: GameEvent[] = [
     difficulty: EventDifficulty.HARD,
     probabilityWeight: 2,
     tags: ["automacao_recursos", "eficiencia", "sustentabilidade", "horas_extras"],
-    learningObjective: "Investir na automação de processos e recursos virtuais para eliminar rotinas noturnas manuais que desgastam a equipe.",
+    learningObjective:
+      "Investir na automação de processos e recursos virtuais para eliminar rotinas noturnas manuais que desgastam a equipe.",
     communicationType: "email",
     senderRole: "Operações e Infraestrutura",
-    description: "Assunto: Janela de Publicação. As atualizações do sistema são feitas manualmente de madrugada por dois desenvolvedores seniores, exigindo 6 horas acordados em terminais de comando. O processo tem gerado cansaço, falhas de sincronização e atrasos matinais.",
+    description:
+      "Assunto: Janela de Publicação. As atualizações do sistema são feitas manualmente de madrugada por dois desenvolvedores seniores, exigindo 6 horas acordados em terminais de comando. O processo tem gerado cansaço, falhas de sincronização e atrasos matinais.",
     domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "monitorar",
@@ -560,7 +610,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: 15,
           conhecimentoOrganizacional: 10,
         },
-        feedbackNarrative: "A automação das rotinas de liberação permitiu atualizações frequentes sem intervenção noturna, devolvendo previsibilidade e descanso à equipe.",
+        feedbackNarrative:
+          "A automação das rotinas de liberação permitiu atualizações frequentes sem intervenção noturna, devolvendo previsibilidade e descanso à equipe.",
         pmbokConcept: "Gestão eficiente de recursos físicos e virtuais",
         learnings: [
           "Automatizar recursos virtuais e processos de verificação contínua reduz o risco de erro humano e elimina desperdícios de esforço especializado.",
@@ -568,7 +619,9 @@ export const tailoringEvents: GameEvent[] = [
         ],
         goodBad: "good",
         risksEvaded: ["Erros manuais em produção e exaustão física dos engenheiros seniores"],
-        otherConsequences: ["Capacidade de efetuar liberações frequentes do sistema com segurança e rapidez"],
+        otherConsequences: [
+          "Capacidade de efetuar liberações frequentes do sistema com segurança e rapidez",
+        ],
       },
       {
         key: "b",
@@ -586,10 +639,12 @@ export const tailoringEvents: GameEvent[] = [
               capacidadeEntrega: -10,
               qualidadeProduto: -10,
             },
-            narrative: "Desenvolvedores inexperientes cometeram erros durante a execução manual noturna, derrubando o portal de serviços acadêmicos.",
+            narrative:
+              "Desenvolvedores inexperientes cometeram erros durante a execução manual noturna, derrubando o portal de serviços acadêmicos.",
           },
         ],
-        feedbackNarrative: "O rodízio distribuiu o cansaço, mas profissionais sem treinamento cometeram equívocos graves na atualização dos bancos.",
+        feedbackNarrative:
+          "O rodízio distribuiu o cansaço, mas profissionais sem treinamento cometeram equívocos graves na atualização dos bancos.",
         pmbokConcept: "Utilização e inatividade de recursos",
         learnings: [
           "Espalhar processos manuais propensos a falhas entre recursos não treinados apenas multiplica a superfície de risco operacional.",
@@ -608,7 +663,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: -10,
           conhecimentoOrganizacional: -5,
         },
-        feedbackNarrative: "As folgas desfalcaram a equipe durante o expediente comercial, gerando ociosidade nos demais membros que dependiam de suporte sênior.",
+        feedbackNarrative:
+          "As folgas desfalcaram a equipe durante o expediente comercial, gerando ociosidade nos demais membros que dependiam de suporte sênior.",
         pmbokConcept: "Bem-estar e prevenção de burnout",
         learnings: [
           "Compensações paliativas para rotinas artesanais não resolvem a causa estrutural e geram ausências que travam o fluxo de trabalho.",
@@ -627,10 +683,12 @@ export const tailoringEvents: GameEvent[] = [
     difficulty: EventDifficulty.MEDIUM,
     probabilityWeight: 2,
     tags: ["equipe_virtual", "remoto", "colaboracao", "tailoring"],
-    learningObjective: "Adotar práticas e ferramentas de equipe virtual para garantir integração, confiança e senso de pertencimento.",
+    learningObjective:
+      "Adotar práticas e ferramentas de equipe virtual para garantir integração, confiança e senso de pertencimento.",
     communicationType: "slack",
     senderRole: "Recursos Humanos / Gestão de Pessoas",
-    description: "Membros da equipe trabalhando em cidades diferentes relatam isolamento e desconexão com as decisões de produto. As entregas estão desalinhadas e a falta de contato diário tem gerado silos e desconfiança mútua sobre a carga de trabalho de cada um.",
+    description:
+      "Membros da equipe trabalhando em cidades diferentes relatam isolamento e desconexão com as decisões de produto. As entregas estão desalinhadas e a falta de contato diário tem gerado silos e desconfiança mútua sobre a carga de trabalho de cada um.",
     domainTag: "Recursos › Liderar a Equipe",
     resourceType: "humano",
     resourceProcess: "liderar",
@@ -647,15 +705,20 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: 15,
           conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "A equipe restabeleceu laços de confiança e o compartilhamento espontâneo de soluções reduziu as inconsistências nas entregas.",
+        feedbackNarrative:
+          "A equipe restabeleceu laços de confiança e o compartilhamento espontâneo de soluções reduziu as inconsistências nas entregas.",
         pmbokConcept: "Equipes virtuais",
         learnings: [
           "O PMBOK 8 destaca que equipes virtuais demandam acordos explícitos de colaboração, rituais de alinhamento e ferramentas que aproximem os membros.",
           "Promove o entendimento compartilhado e fortalece os laços de confiança de equipes de alto desempenho (R2).",
         ],
         goodBad: "good",
-        risksEvaded: ["Silos individuais, desengajamento e perda de identidade coletiva do projeto"],
-        otherConsequences: ["Fortalecimento do sentimento de pertencimento e comunicação transparente"],
+        risksEvaded: [
+          "Silos individuais, desengajamento e perda de identidade coletiva do projeto",
+        ],
+        otherConsequences: [
+          "Fortalecimento do sentimento de pertencimento e comunicação transparente",
+        ],
       },
       {
         key: "b",
@@ -673,10 +736,12 @@ export const tailoringEvents: GameEvent[] = [
               capacidadeEntrega: -10,
               saudeEquipe: -15,
             },
-            narrative: "A vigilância gerou revolta e dois bolsistas de desenvolvimento pediram desligamento imediato do projeto.",
+            narrative:
+              "A vigilância gerou revolta e dois bolsistas de desenvolvimento pediram desligamento imediato do projeto.",
           },
         ],
-        feedbackNarrative: "A fiscalização invasiva destruiu a segurança psicológica. Os colaboradores passaram a simular atividade sem agregar valor.",
+        feedbackNarrative:
+          "A fiscalização invasiva destruiu a segurança psicológica. Os colaboradores passaram a simular atividade sem agregar valor.",
         pmbokConcept: "Ambiente seguro e transparência sobre vieses",
         learnings: [
           "Práticas de vigilância eletrônica minam a autonomia e destroem a confiança mútua indispensável ao trabalho colaborativo.",
@@ -695,7 +760,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: -15,
           conhecimentoOrganizacional: 5,
         },
-        feedbackNarrative: "O retorno forçado sem estrutura causou problemas de transporte, equipamentos improvisados e descontentamento com a gestão.",
+        feedbackNarrative:
+          "O retorno forçado sem estrutura causou problemas de transporte, equipamentos improvisados e descontentamento com a gestão.",
         pmbokConcept: "Colocação",
         learnings: [
           "A colocação presencial só agrega valor quando há infraestrutura adequada e consentimento; quando imposta de forma precária, gera atrito e despesas.",
@@ -703,7 +769,9 @@ export const tailoringEvents: GameEvent[] = [
         ],
         goodBad: "bad",
         risksEvaded: ["Gestão de equipes distribuídas remotamente"],
-        otherConsequences: ["Custo imprevisto com transporte, mesas improvisadas e conflitos sindicais"],
+        otherConsequences: [
+          "Custo imprevisto com transporte, mesas improvisadas e conflitos sindicais",
+        ],
       },
     ],
   },
@@ -714,10 +782,12 @@ export const tailoringEvents: GameEvent[] = [
     difficulty: EventDifficulty.HARD,
     probabilityWeight: 2,
     tags: ["planejamento", "estimativas", "fluxo", "paralisia"],
-    learningObjective: "Balancear o esforço de estimativas utilizando abordagens adaptativas para evitar paralisia por análise.",
+    learningObjective:
+      "Balancear o esforço de estimativas utilizando abordagens adaptativas para evitar paralisia por análise.",
     communicationType: "ticket",
     senderRole: "Comitê de Planejamento",
-    description: "Ticket #4401 - A gestão central quer que a equipe dedique três semanas inteiras estimando matematicamente todas as 120 tarefas futuras da modernização do SGA antes de iniciar o desenvolvimento, atrasando o lançamento do primeiro piloto.",
+    description:
+      "Ticket #4401 - A gestão central quer que a equipe dedique três semanas inteiras estimando matematicamente todas as 120 tarefas futuras da modernização do SGA antes de iniciar o desenvolvimento, atrasando o lançamento do primeiro piloto.",
     domainTag: "Recursos › Estimar os Recursos",
     resourceType: "humano",
     resourceProcess: "estimar",
@@ -734,14 +804,17 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: 15,
           conhecimentoOrganizacional: 10,
         },
-        feedbackNarrative: "Evitamos semanas de paralisia analítica. A equipe estimou com precisão o que executará agora e preservou a flexibilidade futura.",
+        feedbackNarrative:
+          "Evitamos semanas de paralisia analítica. A equipe estimou com precisão o que executará agora e preservou a flexibilidade futura.",
         pmbokConcept: "Abordagem de recursos adaptada ao projeto (tailoring)",
         learnings: [
           "O planejamento em ondas sucessivas equilibra clareza de curto prazo e flexibilidade estratégica, evitando desperdício de esforço analítico.",
           "Mantém a equipe produtiva (R5) gerando entregas incrementais sem interrupção de fluxo.",
         ],
         goodBad: "good",
-        risksEvaded: ["Paralisia por análise e perda de tempo com estimativas que mudariam com o aprendizado"],
+        risksEvaded: [
+          "Paralisia por análise e perda de tempo com estimativas que mudariam com o aprendizado",
+        ],
         otherConsequences: ["Fluxo constante de validação com os usuários do sistema"],
       },
       {
@@ -760,10 +833,12 @@ export const tailoringEvents: GameEvent[] = [
               capacidadeEntrega: -10,
               qualidadeProduto: -5,
             },
-            narrative: "Requisitos de matrículas mudaram na semana seguinte e tornaram obsoletas quase todas as planilhas calculadas nas três semanas de paralisia.",
+            narrative:
+              "Requisitos de matrículas mudaram na semana seguinte e tornaram obsoletas quase todas as planilhas calculadas nas três semanas de paralisia.",
           },
         ],
-        feedbackNarrative: "Gastamos tempo precioso calculando números teóricos que perderam validade com as mudanças regulatórias do Conselho Universitário.",
+        feedbackNarrative:
+          "Gastamos tempo precioso calculando números teóricos que perderam validade com as mudanças regulatórias do Conselho Universitário.",
         pmbokConcept: "Estimativa bottom-up de recursos",
         learnings: [
           "Estimar detalhadamente horizontes distantes em projetos com alta volatilidade gera desperdício de esforço intelectual e atraso no cronograma.",
@@ -782,7 +857,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: -15,
           conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "A gestão aprovou os dados fictícios, mas o cronograma estourou na segunda semana, desmoralizando a credibilidade do time.",
+        feedbackNarrative:
+          "A gestão aprovou os dados fictícios, mas o cronograma estourou na segunda semana, desmoralizando a credibilidade do time.",
         pmbokConcept: "Integridade e transparência do gerente de projetos",
         learnings: [
           "Apresentar estimativas fictícias para evitar atritos viola o código de ética profissional e compromete as bases contratuais do projeto.",
@@ -801,10 +877,12 @@ export const tailoringEvents: GameEvent[] = [
     difficulty: EventDifficulty.HARD,
     probabilityWeight: 2,
     tags: ["auditoria", "governanca", "conformidade", "setor_publico"],
-    learningObjective: "Alinhar conformidade e prestação de contas com métodos ágeis respeitando a governança do setor público.",
+    learningObjective:
+      "Alinhar conformidade e prestação de contas com métodos ágeis respeitando a governança do setor público.",
     communicationType: "email",
     senderRole: "Tribunal de Contas / Auditoria Geral",
-    description: "Assunto: Notificação de Conformidade. A auditoria pública questiona a ausência de termos de abertura detalhados para cada funcionalidade. O time teme que o retorno a processos cartorários engesse as entregas quinzenais da modernização.",
+    description:
+      "Assunto: Notificação de Conformidade. A auditoria pública questiona a ausência de termos de abertura detalhados para cada funcionalidade. O time teme que o retorno a processos cartorários engesse as entregas quinzenais da modernização.",
     domainTag: "Recursos › Planejar o Gerenciamento dos Recursos",
     resourceType: "humano",
     resourceProcess: "planejar",
@@ -822,7 +900,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: 10,
           conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "A auditoria aprovou a rastreabilidade das entregas por ciclo de trabalho e o time preservou o dinamismo do fluxo de desenvolvimento.",
+        feedbackNarrative:
+          "A auditoria aprovou a rastreabilidade das entregas por ciclo de trabalho e o time preservou o dinamismo do fluxo de desenvolvimento.",
         pmbokConcept: "Plano de gerenciamento dos recursos",
         learnings: [
           "O PMBOK 8 enfatiza integrar requisitos de governança pública nos artefatos ágeis existentes, assegurando rastreabilidade sem burocracia inútil.",
@@ -848,10 +927,12 @@ export const tailoringEvents: GameEvent[] = [
               capacidadeEntrega: -10,
               saudeEquipe: -10,
             },
-            narrative: "A lentidão na tramitação de pareceres físicos fez o semestre letivo iniciar sem o novo sistema de matrículas estar pronto.",
+            narrative:
+              "A lentidão na tramitação de pareceres físicos fez o semestre letivo iniciar sem o novo sistema de matrículas estar pronto.",
           },
         ],
-        feedbackNarrative: "A burocracia documental foi blindada, mas o sistema atrasou mais de seis meses, frustrando os estudantes da universidade.",
+        feedbackNarrative:
+          "A burocracia documental foi blindada, mas o sistema atrasou mais de seis meses, frustrando os estudantes da universidade.",
         pmbokConcept: "Abordagem de recursos adaptada ao projeto (tailoring)",
         learnings: [
           "Retroceder a modelos puramente cartorários em produtos digitais atrasa entregas críticas e desperdiça capacidade pública instalada.",
@@ -870,7 +951,8 @@ export const tailoringEvents: GameEvent[] = [
           saudeEquipe: -15,
           conhecimentoOrganizacional: -20,
         },
-        feedbackNarrative: "O órgão de controle aplicou medida cautelar suspendendo o pagamento de bolsas técnicas e abrindo sindicância contra a liderança.",
+        feedbackNarrative:
+          "O órgão de controle aplicou medida cautelar suspendendo o pagamento de bolsas técnicas e abrindo sindicância contra a liderança.",
         pmbokConcept: "Integridade e transparência do gerente de projetos",
         learnings: [
           "Ignorar as estruturas de governança e controle público acarreta penalidades legais e inviabiliza a continuidade dos recursos do projeto.",

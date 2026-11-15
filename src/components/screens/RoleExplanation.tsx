@@ -1,10 +1,10 @@
-import { CheckCircle, XCircle, ArrowRight } from 'lucide-react';
-import { SoftCard } from '@/components/ui/SoftCard';
-import { SoftButton } from '@/components/ui/SoftButton';
-import { Avatar3D } from '@/components/ui/Avatar3D';
-import { useGameStore } from '@/store/gameStore';
-import { ROLE_LABELS } from '@/types';
-import { ROLES_DETAILS } from '@/data/roles';
+import { CheckCircle, XCircle, ArrowRight } from "lucide-react";
+import { SoftCard } from "@/components/ui/SoftCard";
+import { SoftButton } from "@/components/ui/SoftButton";
+import { Avatar3D } from "@/components/ui/Avatar3D";
+import { useGameStore } from "@/store/gameStore";
+import { ROLE_LABELS } from "@/types";
+import { ROLES_DETAILS } from "@/data/roles";
 
 export function RoleExplanation() {
   const players = useGameStore((s) => s.players);
@@ -20,7 +20,8 @@ export function RoleExplanation() {
           Papéis dos Jogadores na Partida
         </h1>
         <p className="mt-3 text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          Cada participante assume uma perspectiva essencial do Domínio de Recursos. Conheça as responsabilidades, alçadas e a lente decisória de cada papel no comitê gestor.
+          Cada participante assume uma perspectiva essencial do Domínio de Recursos. Conheça as
+          responsabilidades, alçadas e a lente decisória de cada papel no comitê gestor.
         </p>
       </div>
 
@@ -36,7 +37,12 @@ export function RoleExplanation() {
             >
               {/* Cabeçalho do Jogador */}
               <div className="flex items-center gap-4 pb-5 border-b border-slate-100">
-                <Avatar3D initials={p.name.slice(0, 2)} role={p.role} imageUrl={p.avatarImage} size="md" />
+                <Avatar3D
+                  initials={p.name.slice(0, 2)}
+                  role={p.role}
+                  imageUrl={p.avatarImage}
+                  size="md"
+                />
                 <div className="min-w-0">
                   <h3 className="text-xl font-bold text-foreground truncate">{p.name}</h3>
                   <p className="text-xs font-bold text-primary uppercase tracking-wider mt-0.5">
@@ -51,9 +57,7 @@ export function RoleExplanation() {
               </div>
 
               {/* Descrição / Resumo */}
-              <p className="text-sm text-slate-600 leading-relaxed mb-5">
-                {detail.summary}
-              </p>
+              <p className="text-sm text-slate-600 leading-relaxed mb-5">{detail.summary}</p>
 
               {/* Responsabilidades Principais */}
               <div className="space-y-2 text-sm text-slate-700 flex-1">

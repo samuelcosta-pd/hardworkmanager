@@ -14,10 +14,12 @@ export const systemsThinkingEvents: GameEvent[] = [
     difficulty: EventDifficulty.HARD,
     probabilityWeight: 2,
     tags: ["recursos_virtuais", "banco_dados", "gargalo", "capacidade"],
-    learningObjective: "Identificar gargalos em recursos virtuais mediante a Teoria das Restrições e aplicar otimização estrutural em vez de atalhos frágeis.",
+    learningObjective:
+      "Identificar gargalos em recursos virtuais mediante a Teoria das Restrições e aplicar otimização estrutural em vez de atalhos frágeis.",
     communicationType: "ticket",
     senderRole: "Líder Técnico",
-    description: "Ticket #1088 - Faltam dez dias para o início das matrículas da instituição. O algoritmo de alocação de turmas satura a capacidade de processamento do repositório de dados, ameaçando paralisar as instâncias operacionais da instituição.",
+    description:
+      "Ticket #1088 - Faltam dez dias para o início das matrículas da instituição. O algoritmo de alocação de turmas satura a capacidade de processamento do repositório de dados, ameaçando paralisar as instâncias operacionais da instituição.",
     domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "monitorar",
@@ -33,21 +35,18 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: 15,
           saudeEquipe: 5,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "A intervenção focada no gargalo central reduziu o consumo de CPU em 60%, estabilizando o banco para o pico de acessos.",
+        feedbackNarrative:
+          "A intervenção focada no gargalo central reduziu o consumo de CPU em 60%, estabilizando o banco para o pico de acessos.",
         pmbokConcept: "Teoria das restrições e gargalos",
         learnings: [
           "O PMBOK 8 preconiza a Teoria das Restrições para atuar no elo mais fraco dos recursos físicos e virtuais do sistema.",
-          "Essa decisão assegura a disponibilidade sustentável dos recursos computacionais acadêmicos sem mascarar ineficiências na modelagem."
+          "Essa decisão assegura a disponibilidade sustentável dos recursos computacionais acadêmicos sem mascarar ineficiências na modelagem.",
         ],
         goodBad: "good",
-        risksEvaded: [
-          "Colapso catastrófico das instâncias de banco no primeiro dia de matrículas"
-        ],
-        otherConsequences: [
-          "Padronização de diretrizes para consultas de alta performance na STI"
-        ]
+        risksEvaded: ["Colapso catastrófico das instâncias de banco no primeiro dia de matrículas"],
+        otherConsequences: ["Padronização de diretrizes para consultas de alta performance na STI"],
       },
       {
         key: "b",
@@ -56,31 +55,29 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 10,
           qualidadeProduto: -15,
           saudeEquipe: -10,
-          conhecimentoOrganizacional: -5
+          conhecimentoOrganizacional: -5,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               qualidadeProduto: -15,
-              capacidadeEntrega: -15
+              capacidadeEntrega: -15,
             },
-            narrative: "A falta de integridade corrompeu o histórico de pré-requisitos, exigindo cancelamento manual de centenas de matrículas."
-          }
+            narrative:
+              "A falta de integridade corrompeu o histórico de pré-requisitos, exigindo cancelamento manual de centenas de matrículas.",
+          },
         ],
-        feedbackNarrative: "A gravação ficou rápida por dois dias, mas registros inconsistentes corromperam a base e geraram retrabalho massivo.",
+        feedbackNarrative:
+          "A gravação ficou rápida por dois dias, mas registros inconsistentes corromperam a base e geraram retrabalho massivo.",
         pmbokConcept: "Retrabalho e desperdício como indicadores de eficiência",
         learnings: [
           "O PMBOK 8 adverte que atalhos em recursos virtuais geram desperdício exponencial na forma de retrabalho de correção.",
-          "Suprimir mecanismos de proteção dos dados fere a confiabilidade do produto e compromete a sustentabilidade da operação."
+          "Suprimir mecanismos de proteção dos dados fere a confiabilidade do produto e compromete a sustentabilidade da operação.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Atraso imediato no cronograma de homologação"
-        ],
-        otherConsequences: [
-          "Inconsistência de matrículas de estudantes e passivo de auditoria"
-        ]
+        risksEvaded: ["Atraso imediato no cronograma de homologação"],
+        otherConsequences: ["Inconsistência de matrículas de estudantes e passivo de auditoria"],
       },
       {
         key: "c",
@@ -89,23 +86,20 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: -5,
           saudeEquipe: 0,
-          conhecimentoOrganizacional: -15
+          conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "O custo de hospedagem estourou o orçamento mensal da pró-reitoria e as consultas continuaram lentas por bloqueio de locks.",
+        feedbackNarrative:
+          "O custo de hospedagem estourou o orçamento mensal da pró-reitoria e as consultas continuaram lentas por bloqueio de locks.",
         pmbokConcept: "Análise de custo-benefício e de tendências",
         learnings: [
           "O PMBOK 8 recomenda a análise de custo-benefício para evitar o superdimensionamento dispendioso de recursos virtuais.",
-          "Aumentar hardware para compensar código defeituoso drena recursos financeiros sem solucionar a causa raiz do problema."
+          "Aumentar hardware para compensar código defeituoso drena recursos financeiros sem solucionar a causa raiz do problema.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Esforço imediato de otimização técnica preventiva das rotinas de consulta"
-        ],
-        otherConsequences: [
-          "Glosa orçamentária pela administração superior da universidade"
-        ]
-      }
-    ]
+        risksEvaded: ["Esforço imediato de otimização técnica preventiva das rotinas de consulta"],
+        otherConsequences: ["Glosa orçamentária pela administração superior da universidade"],
+      },
+    ],
   },
   {
     id: "systems_2_aquisicoes_nuvem",
@@ -114,10 +108,12 @@ export const systemsThinkingEvents: GameEvent[] = [
     difficulty: EventDifficulty.MEDIUM,
     probabilityWeight: 2,
     tags: ["nuvem", "custo_beneficio", "recursos_virtuais", "aquisicao"],
-    learningObjective: "Monitorar o desvio entre consumo planejado e real de recursos computacionais e aplicar contratação elástica sob demanda.",
+    learningObjective:
+      "Monitorar o desvio entre consumo planejado e real de recursos computacionais e aplicar contratação elástica sob demanda.",
     communicationType: "email",
     senderRole: "Superintendência de TI",
-    description: "Assunto: Fatura da Nuvem Governamental. O consumo de recursos computacionais virtuais durante os testes de carga ultrapassou a previsão inicial em 80%, consumindo a dotação de infraestrutura do trimestre.",
+    description:
+      "Assunto: Fatura da Nuvem Governamental. O consumo de recursos computacionais virtuais durante os testes de carga ultrapassou a previsão inicial em 80%, consumindo a dotação de infraestrutura do trimestre.",
     domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "monitorar",
@@ -132,21 +128,20 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 0,
           qualidadeProduto: 10,
           saudeEquipe: 5,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "O escalonamento automatizado reduziu a ociosidade dos ambientes computacionais em 45%, reequilibrando as despesas contratuais da universidade.",
+        feedbackNarrative:
+          "O escalonamento automatizado reduziu a ociosidade dos ambientes computacionais em 45%, reequilibrando as despesas contratuais da universidade.",
         pmbokConcept: "Uso planejado vs. real de recursos",
         learnings: [
           "O PMBOK 8 orienta o acompanhamento contínuo da variação entre uso planejado e real de recursos virtuais para evitar desperdícios.",
-          "A automação da infraestrutura elástica atende às metas de sustentabilidade financeira sem prejudicar os ambientes de teste."
+          "A automação da infraestrutura elástica atende às metas de sustentabilidade financeira sem prejudicar os ambientes de teste.",
         ],
         goodBad: "good",
-        risksEvaded: [
-          "Esgotamento prematuro da verba orçamentária de computação da instituição"
-        ],
+        risksEvaded: ["Esgotamento prematuro da verba orçamentária de computação da instituição"],
         otherConsequences: [
-          "Criação de cultura de gestão financeira de recursos virtuais na equipe pública"
-        ]
+          "Criação de cultura de gestão financeira de recursos virtuais na equipe pública",
+        ],
       },
       {
         key: "b",
@@ -155,31 +150,29 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: -15,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: -10
+          conhecimentoOrganizacional: -10,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               qualidadeProduto: -15,
-              capacidadeEntrega: -10
+              capacidadeEntrega: -10,
             },
-            narrative: "Testes automatizados concorrentes no ambiente de produção sobrescreveram notas oficiais do semestre anterior."
-          }
+            narrative:
+              "Testes automatizados concorrentes no ambiente de produção sobrescreveram notas oficiais do semestre anterior.",
+          },
         ],
-        feedbackNarrative: "A economia na fatura foi ilusória; a mistura de testes em produção causou incidentes gravíssimos e pânico na universidade.",
+        feedbackNarrative:
+          "A economia na fatura foi ilusória; a mistura de testes em produção causou incidentes gravíssimos e pânico na universidade.",
         pmbokConcept: "Aquisição de recursos físicos ou virtuais",
         learnings: [
           "O PMBOK 8 salienta que a supressão de recursos virtuais essenciais como ambientes de homologação compromete a integridade do produto.",
-          "Essa ação viola preceitos básicos de isolamento de infraestrutura e expõe os dados corporativos a risco inaceitável."
+          "Essa ação viola preceitos básicos de isolamento de infraestrutura e expõe os dados corporativos a risco inaceitável.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Necessidade de renegociação orçamentária com a pró-reitoria"
-        ],
-        otherConsequences: [
-          "Vulnerabilidade operacional severa e risco de sanções jurídicas"
-        ]
+        risksEvaded: ["Necessidade de renegociação orçamentária com a pró-reitoria"],
+        otherConsequences: ["Vulnerabilidade operacional severa e risco de sanções jurídicas"],
       },
       {
         key: "c",
@@ -188,33 +181,31 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 10,
           qualidadeProduto: 5,
           saudeEquipe: -5,
-          conhecimentoOrganizacional: -15
+          conhecimentoOrganizacional: -15,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               capacidadeEntrega: -15,
-              saudeEquipe: -10
+              saudeEquipe: -10,
             },
-            narrative: "A universidade teve as instâncias bloqueadas por inadimplência contratual, parando todo o desenvolvimento."
-          }
+            narrative:
+              "A universidade teve as instâncias bloqueadas por inadimplência contratual, parando todo o desenvolvimento.",
+          },
         ],
-        feedbackNarrative: "O provedor emitiu notificação de bloqueio judicial por estouro de dotação, paralisando os testes por uma semana.",
+        feedbackNarrative:
+          "O provedor emitiu notificação de bloqueio judicial por estouro de dotação, paralisando os testes por uma semana.",
         pmbokConcept: "Utilização e inatividade de recursos",
         learnings: [
           "O PMBOK 8 destaca o controle de inatividade como fator crucial para a gestão eficiente e sustentável de recursos de TI.",
-          "A negligência com o consumo de infraestrutura compromete a continuidade do projeto perante os órgãos de controle."
+          "A negligência com o consumo de infraestrutura compromete a continuidade do projeto perante os órgãos de controle.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Trabalho de configuração e monitoramento de scripts de desligamento"
-        ],
-        otherConsequences: [
-          "Interrupção de serviços e processos administrativos contra a gestão"
-        ]
-      }
-    ]
+        risksEvaded: ["Trabalho de configuração e monitoramento de scripts de desligamento"],
+        otherConsequences: ["Interrupção de serviços e processos administrativos contra a gestão"],
+      },
+    ],
   },
   {
     id: "systems_3_conhecimento_legado",
@@ -223,10 +214,12 @@ export const systemsThinkingEvents: GameEvent[] = [
     difficulty: EventDifficulty.HARD,
     probabilityWeight: 2,
     tags: ["legado", "documentacao", "ear", "migracao"],
-    learningObjective: "Mapear dependências tecnológicas usando a Estrutura Analítica dos Recursos (EAR) para viabilizar migração segura de dados.",
+    learningObjective:
+      "Mapear dependências tecnológicas usando a Estrutura Analítica dos Recursos (EAR) para viabilizar migração segura de dados.",
     communicationType: "slack",
     senderRole: "Líder Técnico",
-    description: "Canal #dados: 'Ninguém sabe como funciona a rotina legada de emissão de diplomas de 2004 em COBOL/C; o único analista que conhecia as regras se aposentou sem deixar documentação.'",
+    description:
+      "Canal #dados: 'Ninguém sabe como funciona a rotina legada de emissão de diplomas de 2004 em COBOL/C; o único analista que conhecia as regras se aposentou sem deixar documentação.'",
     domainTag: "Recursos › Estimar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "estimar",
@@ -241,21 +234,18 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: -5,
           qualidadeProduto: 15,
           saudeEquipe: 5,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "O parecer estruturado com a EAR documentou as rotinas obscuras e permitiu recriar as validações no novo SIGAA.",
+        feedbackNarrative:
+          "O parecer estruturado com a EAR documentou as rotinas obscuras e permitiu recriar as validações no novo SIGAA.",
         pmbokConcept: "Estrutura analítica dos recursos (EAR)",
         learnings: [
           "O PMBOK 8 recomenda a EAR para catalogar de forma hierárquica recursos humanos e acervos de conhecimento indispensáveis.",
-          "Essa medida garante a continuidade institucional do patrimônio de dados sem paralisar a esteira de desenvolvimento."
+          "Essa medida garante a continuidade institucional do patrimônio de dados sem paralisar a esteira de desenvolvimento.",
         ],
         goodBad: "good",
-        risksEvaded: [
-          "Bloqueio legal da emissão de diplomas de formandos da graduação"
-        ],
-        otherConsequences: [
-          "Elaboração de repositório documentado de regras de negócio legadas"
-        ]
+        risksEvaded: ["Bloqueio legal da emissão de diplomas de formandos da graduação"],
+        otherConsequences: ["Elaboração de repositório documentado de regras de negócio legadas"],
       },
       {
         key: "b",
@@ -264,31 +254,31 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 10,
           qualidadeProduto: -15,
           saudeEquipe: -10,
-          conhecimentoOrganizacional: -10
+          conhecimentoOrganizacional: -10,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               qualidadeProduto: -15,
-              capacidadeEntrega: -10
+              capacidadeEntrega: -10,
             },
-            narrative: "Diplomas emitidos com a nova rotina foram rejeitados pelo MEC por ausência de selos digitais criptográficos previstos em lei."
-          }
+            narrative:
+              "Diplomas emitidos com a nova rotina foram rejeitados pelo MEC por ausência de selos digitais criptográficos previstos em lei.",
+          },
         ],
-        feedbackNarrative: "A entrega foi rápida, mas dezenas de exceções legais foram esquecidas, gerando anulação de certidões acadêmicas.",
+        feedbackNarrative:
+          "A entrega foi rápida, mas dezenas de exceções legais foram esquecidas, gerando anulação de certidões acadêmicas.",
         pmbokConcept: "Opinião especializada na estimativa",
         learnings: [
           "O PMBOK 8 adverte que prescindir de opinião especializada qualificada em domínios críticos conduz a estimativas e códigos falhos.",
-          "Trabalhar com suposições desinformadas gera passivos regulatórios severos para a instituição de ensino superior."
+          "Trabalhar com suposições desinformadas gera passivos regulatórios severos para a instituição de ensino superior.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Despesa pontual com consultoria de transição de conhecimento"
-        ],
+        risksEvaded: ["Despesa pontual com consultoria de transição de conhecimento"],
         otherConsequences: [
-          "Paralisação de colações de grau e danos institucionais à universidade"
-        ]
+          "Paralisação de colações de grau e danos institucionais à universidade",
+        ],
       },
       {
         key: "c",
@@ -297,23 +287,22 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: -10,
           saudeEquipe: -5,
-          conhecimentoOrganizacional: -15
+          conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "A máquina antiga sofreu queima física de disco por obsolescência, corrompendo backups e travando a reitoria.",
+        feedbackNarrative:
+          "A máquina antiga sofreu queima física de disco por obsolescência, corrompendo backups e travando a reitoria.",
         pmbokConcept: "Sustentabilidade na gestão de recursos",
         learnings: [
           "O PMBOK 8 orienta a aposentadoria planejada e sustentável de recursos em fim de ciclo de vida para mitigar riscos catastróficos.",
-          "Manter ativos obsoletos sem plano de transição converte dívida técnica em vulnerabilidade de continuidade do negócio."
+          "Manter ativos obsoletos sem plano de transição converte dívida técnica em vulnerabilidade de continuidade do negócio.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Esforço técnico de análise do legado nesta fase do projeto"
-        ],
+        risksEvaded: ["Esforço técnico de análise do legado nesta fase do projeto"],
         otherConsequences: [
-          "Risco iminente de perda irreversível de registros históricos discentes"
-        ]
-      }
-    ]
+          "Risco iminente de perda irreversível de registros históricos discentes",
+        ],
+      },
+    ],
   },
   {
     id: "systems_4_integracao_banco_dados",
@@ -322,10 +311,12 @@ export const systemsThinkingEvents: GameEvent[] = [
     difficulty: EventDifficulty.MEDIUM,
     probabilityWeight: 2,
     tags: ["integracao", "testes", "qualidade", "gargalos"],
-    learningObjective: "Garantir a integridade do fluxo de entrega através de testes em ambientes integrados reais, evitando o adiamento crônico de validações.",
+    learningObjective:
+      "Garantir a integridade do fluxo de entrega através de testes em ambientes integrados reais, evitando o adiamento crônico de validações.",
     communicationType: "slack",
     senderRole: "Líder Técnico",
-    description: "Canal #arquitetura: 'Para manter a meta de histórias entregues no ciclo de trabalho, os membros da equipe usaram dados simulados isolados e não testaram a integração com o barramento real da STI.'",
+    description:
+      "Canal #arquitetura: 'Para manter a meta de histórias entregues no ciclo de trabalho, os membros da equipe usaram dados simulados isolados e não testaram a integração com o barramento real da STI.'",
     domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "monitorar",
@@ -340,21 +331,18 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: -5,
           qualidadeProduto: 15,
           saudeEquipe: 5,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "A integração revelou vinte conflitos de esquema imediatamente, permitindo corrigi-los antes que virassem bloqueio geral.",
+        feedbackNarrative:
+          "A integração revelou vinte conflitos de esquema imediatamente, permitindo corrigi-los antes que virassem bloqueio geral.",
         pmbokConcept: "Mapeamento do fluxo de valor",
         learnings: [
           "O PMBOK 8 preconiza o mapeamento do fluxo de valor para identificar onde desperdícios e estoques invisíveis de defeitos se acumulam.",
-          "Validar integrações com recursos reais elimina ilusões de velocidade e assegura software genuinamente pronto."
+          "Validar integrações com recursos reais elimina ilusões de velocidade e assegura software genuinamente pronto.",
         ],
         goodBad: "good",
-        risksEvaded: [
-          "Descobrir centenas de erros de integração na véspera do lançamento público"
-        ],
-        otherConsequences: [
-          "Ambiente de integração contínua robusto para todas as equipes da STI"
-        ]
+        risksEvaded: ["Descobrir centenas de erros de integração na véspera do lançamento público"],
+        otherConsequences: ["Ambiente de integração contínua robusto para todas as equipes da STI"],
       },
       {
         key: "b",
@@ -363,31 +351,29 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 10,
           qualidadeProduto: -15,
           saudeEquipe: -10,
-          conhecimentoOrganizacional: -10
+          conhecimentoOrganizacional: -10,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               qualidadeProduto: -15,
-              capacidadeEntrega: -15
+              capacidadeEntrega: -15,
             },
-            narrative: "A integração tardia colapsou os serviços; o lançamento precisou ser adiado em dois meses."
-          }
+            narrative:
+              "A integração tardia colapsou os serviços; o lançamento precisou ser adiado em dois meses.",
+          },
         ],
-        feedbackNarrative: "As métricas de produtividade do ciclo pareceram ótimas, mas o sistema travou completamente ao ser integrado aos dados reais.",
+        feedbackNarrative:
+          "As métricas de produtividade do ciclo pareceram ótimas, mas o sistema travou completamente ao ser integrado aos dados reais.",
         pmbokConcept: "Retrabalho e desperdício como indicadores de eficiência",
         learnings: [
           "O PMBOK 8 adverte que acumular débitos de integração transfere o custo da validação para o momento de maior vulnerabilidade.",
-          "Essa prática camufla o atraso real e viola o compromisso de entregas verificáveis e funcionais."
+          "Essa prática camufla o atraso real e viola o compromisso de entregas verificáveis e funcionais.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Queda aparente nos gráficos de desempenho da iteração corrente"
-        ],
-        otherConsequences: [
-          "Atraso no cronograma oficial e desgaste com o conselho universitário"
-        ]
+        risksEvaded: ["Queda aparente nos gráficos de desempenho da iteração corrente"],
+        otherConsequences: ["Atraso no cronograma oficial e desgaste com o conselho universitário"],
       },
       {
         key: "c",
@@ -396,23 +382,22 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: -15,
           saudeEquipe: -5,
-          conhecimentoOrganizacional: -15
+          conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "O acoplamento rígido derrubou o isolamento de segurança e expôs dados sensíveis de folha e notas a acessos indevidos.",
+        feedbackNarrative:
+          "O acoplamento rígido derrubou o isolamento de segurança e expôs dados sensíveis de folha e notas a acessos indevidos.",
         pmbokConcept: "Teoria das restrições e gargalos",
         learnings: [
           "O PMBOK 8 ensina que romper padrões arquiteturais para aliviar prazos gera gargalos e vulnerabilidades sistêmicas crônicas.",
-          "O desrespeito à arquitetura de recursos virtuais destrói a modularidade e inviabiliza a manutenção futura."
+          "O desrespeito à arquitetura de recursos virtuais destrói a modularidade e inviabiliza a manutenção futura.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Configuração de contratos de interface com o barramento"
-        ],
+        risksEvaded: ["Configuração de contratos de interface com o barramento"],
         otherConsequences: [
-          "Quebra de conformidade com padrões de governança digital do governo federal"
-        ]
-      }
-    ]
+          "Quebra de conformidade com padrões de governança digital do governo federal",
+        ],
+      },
+    ],
   },
   {
     id: "systems_5_licenca_banco_proprietario",
@@ -421,10 +406,12 @@ export const systemsThinkingEvents: GameEvent[] = [
     difficulty: EventDifficulty.MEDIUM,
     probabilityWeight: 2,
     tags: ["licenciamento", "custos", "open_source", "sustentabilidade"],
-    learningObjective: "Avaliar o impacto de longo prazo na sustentabilidade de recursos entre plataformas proprietárias e tecnologias abertas.",
+    learningObjective:
+      "Avaliar o impacto de longo prazo na sustentabilidade de recursos entre plataformas proprietárias e tecnologias abertas.",
     communicationType: "email",
     senderRole: "Superintendência de TI",
-    description: "Assunto: Renovação de Licenças Proprietárias. A renovação anual do ativo de software comercial consumirá 70% do orçamento total; a equipe propõe migração para recurso de tecnologia aberta.",
+    description:
+      "Assunto: Renovação de Licenças Proprietárias. A renovação anual do ativo de software comercial consumirá 70% do orçamento total; a equipe propõe migração para recurso de tecnologia aberta.",
     domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "monitorar",
@@ -439,21 +426,20 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: -5,
           qualidadeProduto: 15,
           saudeEquipe: 5,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "A migração libertou a universidade de amarras contratuais e capacitou os desenvolvedores em tecnologias modernas abertas.",
+        feedbackNarrative:
+          "A migração libertou a universidade de amarras contratuais e capacitou os desenvolvedores em tecnologias modernas abertas.",
         pmbokConcept: "Análise de custo-benefício e de tendências",
         learnings: [
           "O PMBOK 8 recomenda a análise de custo-benefício e de tendências para sustentar decisões de ciclo de vida de ativos computacionais.",
-          "A adoção de padrões abertos assegura sustentabilidade financeira de longo prazo e independência tecnológica do serviço público."
+          "A adoção de padrões abertos assegura sustentabilidade financeira de longo prazo e independência tecnológica do serviço público.",
         ],
         goodBad: "good",
         risksEvaded: [
-          "Dependência crônica de fornecedor (vendor lock-in) e sequestro orçamentário"
+          "Dependência crônica de fornecedor (vendor lock-in) e sequestro orçamentário",
         ],
-        otherConsequences: [
-          "Autonomia tecnológica e reinvestimento de verbas em bolsas discentes"
-        ]
+        otherConsequences: ["Autonomia tecnológica e reinvestimento de verbas em bolsas discentes"],
       },
       {
         key: "b",
@@ -462,31 +448,31 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 10,
           qualidadeProduto: -5,
           saudeEquipe: -10,
-          conhecimentoOrganizacional: -10
+          conhecimentoOrganizacional: -10,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               capacidadeEntrega: -15,
-              saudeEquipe: -10
+              saudeEquipe: -10,
             },
-            narrative: "A reitoria precisou contingenciar bolsas de desenvolvimento para cobrir a fatura da licença de software."
-          }
+            narrative:
+              "A reitoria precisou contingenciar bolsas de desenvolvimento para cobrir a fatura da licença de software.",
+          },
         ],
-        feedbackNarrative: "O conforto imediato sacrificou as bolsas de estágio e renovação de computadores físicos dos laboratórios da universidade.",
+        feedbackNarrative:
+          "O conforto imediato sacrificou as bolsas de estágio e renovação de computadores físicos dos laboratórios da universidade.",
         pmbokConcept: "Sustentabilidade na gestão de recursos",
         learnings: [
           "O PMBOK 8 posiciona a sustentabilidade como pilar transversal na gestão responsável de recursos escassos em projetos públicos.",
-          "Manter custos fixos desproporcionais restringe a capacidade da organização de atender demandas prioritárias da comunidade acadêmica."
+          "Manter custos fixos desproporcionais restringe a capacidade da organização de atender demandas prioritárias da comunidade acadêmica.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Trabalho técnico de conversão de dados e rotinas de banco"
-        ],
+        risksEvaded: ["Trabalho técnico de conversão de dados e rotinas de banco"],
         otherConsequences: [
-          "Déficit orçamentário na pró-reitoria e cortes em programas de assistência estudantil"
-        ]
+          "Déficit orçamentário na pró-reitoria e cortes em programas de assistência estudantil",
+        ],
       },
       {
         key: "c",
@@ -495,23 +481,22 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: -15,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: -15
+          conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "A irregularidade foi flagrada pelo Tribunal de Contas, acarretando multas pesadas e responsabilização dos gestores.",
+        feedbackNarrative:
+          "A irregularidade foi flagrada pelo Tribunal de Contas, acarretando multas pesadas e responsabilização dos gestores.",
         pmbokConcept: "Integridade e transparência do gerente de projetos",
         learnings: [
           "O PMBOK 8 estabelece a estrita integridade legal e transparência em todas as ações de aquisição e uso de recursos corporativos.",
-          "Infringir normas legais acarreta severas consequências institucionais, civis e criminais para a liderança do projeto."
+          "Infringir normas legais acarreta severas consequências institucionais, civis e criminais para a liderança do projeto.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Desembolso financeiro inicial para aquisição de licenças legais"
-        ],
+        risksEvaded: ["Desembolso financeiro inicial para aquisição de licenças legais"],
         otherConsequences: [
-          "Processo de improbidade administrativa e paralisação forçada dos sistemas"
-        ]
-      }
-    ]
+          "Processo de improbidade administrativa e paralisação forçada dos sistemas",
+        ],
+      },
+    ],
   },
   {
     id: "systems_6_ambiente_staging_testes",
@@ -520,10 +505,12 @@ export const systemsThinkingEvents: GameEvent[] = [
     difficulty: EventDifficulty.MEDIUM,
     probabilityWeight: 2,
     tags: ["staging", "calendario_recursos", "ambientes", "testes"],
-    learningObjective: "Gerenciar a concorrência por recursos virtuais compartilhados por meio de calendários de recursos e agendamento planejado.",
+    learningObjective:
+      "Gerenciar a concorrência por recursos virtuais compartilhados por meio de calendários de recursos e agendamento planejado.",
     communicationType: "slack",
     senderRole: "Líder de Design e Telas",
-    description: "Canal #testes: 'A equipe de experiência do usuário necessita do ambiente de homologação para testes de acessibilidade, mas a equipe de processamento central executou testes de estresse que derrubaram o ambiente computacional compartilhado.'",
+    description:
+      "Canal #testes: 'A equipe de experiência do usuário necessita do ambiente de homologação para testes de acessibilidade, mas a equipe de processamento central executou testes de estresse que derrubaram o ambiente computacional compartilhado.'",
     domainTag: "Recursos › Estimar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "estimar",
@@ -538,21 +525,22 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 0,
           qualidadeProduto: 15,
           saudeEquipe: 10,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "A coordenação por calendário eliminou a sobreposição destrutiva e assegurou dados confiáveis para as duas disciplinas.",
+        feedbackNarrative:
+          "A coordenação por calendário eliminou a sobreposição destrutiva e assegurou dados confiáveis para as duas disciplinas.",
         pmbokConcept: "Calendários de recursos",
         learnings: [
           "O PMBOK 8 prescreve calendários de recursos para organizar o uso compartilhado de ativos físicos e virtuais sem disputas desordenadas.",
-          "O planejamento temporal protege a integridade dos testes de usabilidade e preserva a estabilidade das medições de carga."
+          "O planejamento temporal protege a integridade dos testes de usabilidade e preserva a estabilidade das medições de carga.",
         ],
         goodBad: "good",
         risksEvaded: [
-          "Cancelamento de sessões com discentes cegos e retrabalho de testes de carga"
+          "Cancelamento de sessões com discentes cegos e retrabalho de testes de carga",
         ],
         otherConsequences: [
-          "Previsibilidade operacional para todos os times de desenvolvimento da STI"
-        ]
+          "Previsibilidade operacional para todos os times de desenvolvimento da STI",
+        ],
       },
       {
         key: "b",
@@ -561,31 +549,29 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 10,
           qualidadeProduto: -15,
           saudeEquipe: -10,
-          conhecimentoOrganizacional: -5
+          conhecimentoOrganizacional: -5,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               qualidadeProduto: -15,
-              capacidadeEntrega: -10
+              capacidadeEntrega: -10,
             },
-            narrative: "Telas confusas e inacessíveis causaram avalanche de reclamações e rejeição pública pelos centros acadêmicos."
-          }
+            narrative:
+              "Telas confusas e inacessíveis causaram avalanche de reclamações e rejeição pública pelos centros acadêmicos.",
+          },
         ],
-        feedbackNarrative: "O processamento atingiu ótima velocidade, mas a interface lançada mostrou-se incompreensível para alunos e professores.",
+        feedbackNarrative:
+          "O processamento atingiu ótima velocidade, mas a interface lançada mostrou-se incompreensível para alunos e professores.",
         pmbokConcept: "Escassez e excedente de recursos",
         learnings: [
           "O PMBOK 8 adverte que privilegiar uma disciplina em detrimento de outra gera desequilíbrio e compromete o valor total do produto.",
-          "Suprimir validações com usuários gera produtos computacionalmente rápidos, mas funcionalmente ineficazes para a comunidade."
+          "Suprimir validações com usuários gera produtos computacionalmente rápidos, mas funcionalmente ineficazes para a comunidade.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Negociação de horários e ajustes na agenda de testes de estresse"
-        ],
-        otherConsequences: [
-          "Rejeição da nova interface por alunos e docentes da universidade"
-        ]
+        risksEvaded: ["Negociação de horários e ajustes na agenda de testes de estresse"],
+        otherConsequences: ["Rejeição da nova interface por alunos e docentes da universidade"],
       },
       {
         key: "c",
@@ -594,23 +580,20 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: -15,
           qualidadeProduto: -10,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: -5
+          conhecimentoOrganizacional: -5,
         },
-        feedbackNarrative: "A disputa não regulada corrompeu os dados de homologação e instaurou discórdia aberta entre as lideranças de desenvolvimento.",
+        feedbackNarrative:
+          "A disputa não regulada corrompeu os dados de homologação e instaurou discórdia aberta entre as lideranças de desenvolvimento.",
         pmbokConcept: "Ambiente seguro e transparência sobre vieses",
         learnings: [
           "O PMBOK 8 frisa que a omissão na alocação de recursos compartilhados gera conflitos destrutivos e corrupção de artefatos.",
-          "A governança ativa da liderança é indispensável para criar cooperação ordenada e manter o ambiente seguro de trabalho."
+          "A governança ativa da liderança é indispensável para criar cooperação ordenada e manter o ambiente seguro de trabalho.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Esforço inicial de alinhamento e gestão do cronograma de infraestrutura"
-        ],
-        otherConsequences: [
-          "Deterioração das relações entre designers e engenheiros de software"
-        ]
-      }
-    ]
+        risksEvaded: ["Esforço inicial de alinhamento e gestão do cronograma de infraestrutura"],
+        otherConsequences: ["Deterioração das relações entre designers e engenheiros de software"],
+      },
+    ],
   },
   {
     id: "systems_7_backup_politica_retencao",
@@ -619,10 +602,12 @@ export const systemsThinkingEvents: GameEvent[] = [
     difficulty: EventDifficulty.HARD,
     probabilityWeight: 2,
     tags: ["backup", "riscos", "infraestrutura", "seguranca"],
-    learningObjective: "Harmonizar a alocação de recursos de armazenamento com o plano de gerenciamento dos riscos e continuidade de negócios.",
+    learningObjective:
+      "Harmonizar a alocação de recursos de armazenamento com o plano de gerenciamento dos riscos e continuidade de negócios.",
     communicationType: "ticket",
     senderRole: "Líder Técnico",
-    description: "Ticket #1102 - O espaço de armazenamento em nuvem está no limite; a equipe desativou os cópias diárias de segurança do repositório para economizar capacidade e evitar aquisição emergencial de ativos físicos de armazenamento.",
+    description:
+      "Ticket #1102 - O espaço de armazenamento em nuvem está no limite; a equipe desativou os cópias diárias de segurança do repositório para economizar capacidade e evitar aquisição emergencial de ativos físicos de armazenamento.",
     domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "monitorar",
@@ -638,21 +623,22 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: -5,
           qualidadeProduto: 15,
           saudeEquipe: 5,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "O uso de armazenamento econômico de longo prazo garantiu pontos de restauração sem onerar o orçamento da instituição.",
+        feedbackNarrative:
+          "O uso de armazenamento econômico de longo prazo garantiu pontos de restauração sem onerar o orçamento da instituição.",
         pmbokConcept: "Coordenação entre Recursos, Cronograma, Finanças e Risco",
         learnings: [
           "O PMBOK 8 destaca a coordenação estreita entre recursos, finanças e gerenciamento de riscos para salvaguardar os ativos críticos.",
-          "Garantir redundância através de mídias adequadas preserva a integridade institucional sem inflacionar custos operacionais."
+          "Garantir redundância através de mídias adequadas preserva a integridade institucional sem inflacionar custos operacionais.",
         ],
         goodBad: "good",
         risksEvaded: [
-          "Perda irrecuperável de notas e histórico escolar discente por falha de storage"
+          "Perda irrecuperável de notas e histórico escolar discente por falha de storage",
         ],
         otherConsequences: [
-          "Alinhamento dos processos da STI com a política de segurança da informação"
-        ]
+          "Alinhamento dos processos da STI com a política de segurança da informação",
+        ],
       },
       {
         key: "b",
@@ -661,31 +647,31 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 10,
           qualidadeProduto: -15,
           saudeEquipe: -10,
-          conhecimentoOrganizacional: -10
+          conhecimentoOrganizacional: -10,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               qualidadeProduto: -15,
-              capacidadeEntrega: -15
+              capacidadeEntrega: -15,
             },
-            narrative: "Uma falha de hardware na nuvem corrompeu tabelas e a equipe levou quatro dias para reconstruir dados manualmente."
-          }
+            narrative:
+              "Uma falha de hardware na nuvem corrompeu tabelas e a equipe levou quatro dias para reconstruir dados manualmente.",
+          },
         ],
-        feedbackNarrative: "A economia foi negligente; uma falha de disco subsequente exigiu reconstituição penosa e manual de semanas de trabalho.",
+        feedbackNarrative:
+          "A economia foi negligente; uma falha de disco subsequente exigiu reconstituição penosa e manual de semanas de trabalho.",
         pmbokConcept: "Impacto da indisponibilidade de recursos nos demais planos",
         learnings: [
           "O PMBOK 8 adverte que ignorar salvaguardas de recursos acarreta paralisia catastrófica em caso de contingência real.",
-          "Essa omissão compromete o plano de continuidade operacional e gera custos desmedidos de reparação emergencial."
+          "Essa omissão compromete o plano de continuidade operacional e gera custos desmedidos de reparação emergencial.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Contratação imediata de volume adicional de armazenamento de dados"
-        ],
+        risksEvaded: ["Contratação imediata de volume adicional de armazenamento de dados"],
         otherConsequences: [
-          "Vulnerabilidade institucional extrema a incidentes e ataques virtuais"
-        ]
+          "Vulnerabilidade institucional extrema a incidentes e ataques virtuais",
+        ],
       },
       {
         key: "c",
@@ -694,23 +680,20 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: -10,
           saudeEquipe: -5,
-          conhecimentoOrganizacional: -15
+          conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "A destruição precipitada de dados históricos eliminou o acervo de testes de regressão, gerando insegurança técnica.",
+        feedbackNarrative:
+          "A destruição precipitada de dados históricos eliminou o acervo de testes de regressão, gerando insegurança técnica.",
         pmbokConcept: "Liberação de recursos conforme o plano",
         learnings: [
           "O PMBOK 8 preconiza que a liberação ou descarte de ativos deve obedecer a planejamento criterioso e retenção de memória.",
-          "Destruir ativos de conhecimento sem validação empobrece a base técnica e reduz a eficácia de manutenções futuras."
+          "Destruir ativos de conhecimento sem validação empobrece a base técnica e reduz a eficácia de manutenções futuras.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Configuração de rotinas de arquivamento em camadas de baixo custo"
-        ],
-        otherConsequences: [
-          "Perda definitiva de cenários históricos de teste de regressão"
-        ]
-      }
-    ]
+        risksEvaded: ["Configuração de rotinas de arquivamento em camadas de baixo custo"],
+        otherConsequences: ["Perda definitiva de cenários históricos de teste de regressão"],
+      },
+    ],
   },
   {
     id: "systems_8_terceirizacao_vs_interno",
@@ -719,10 +702,12 @@ export const systemsThinkingEvents: GameEvent[] = [
     difficulty: EventDifficulty.HARD,
     probabilityWeight: 2,
     tags: ["aquisicao", "multicriterio", "terceirizacao", "estrategia"],
-    learningObjective: "Aplicar análise de decisão multicritério para deliberar entre desenvolvimento interno ou contratação externa de pacotes técnicos.",
+    learningObjective:
+      "Aplicar análise de decisão multicritério para deliberar entre desenvolvimento interno ou contratação externa de pacotes técnicos.",
     communicationType: "email",
     senderRole: "Gerente de Projetos",
-    description: "Assunto: Módulo de Reconhecimento Facial para Acesso a Restaurantes Universitários. A reitoria propõe contratar fábrica de software externa por valor milionário em vez de capacitar o time próprio.",
+    description:
+      "Assunto: Módulo de Reconhecimento Facial para Acesso a Restaurantes Universitários. A reitoria propõe contratar fábrica de software externa por valor milionário em vez de capacitar o time próprio.",
     domainTag: "Recursos › Adquirir os Recursos",
     resourceType: "humano",
     resourceProcess: "adquirir",
@@ -737,21 +722,22 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: -5,
           qualidadeProduto: 15,
           saudeEquipe: 10,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "A análise formal demonstrou que desenvolver internamente com bibliotecas abertas custava 80% menos e retinha o domínio na universidade.",
+        feedbackNarrative:
+          "A análise formal demonstrou que desenvolver internamente com bibliotecas abertas custava 80% menos e retinha o domínio na universidade.",
         pmbokConcept: "Análise de decisão multicritério",
         learnings: [
           "O PMBOK 8 recomenda a análise de decisão multicritério para selecionar fontes de recursos ponderando fatores técnicos e estratégicos.",
-          "A ponderação objetiva assegura o melhor uso do erário e estimula o fortalecimento das capacidades tecnológicas da organização."
+          "A ponderação objetiva assegura o melhor uso do erário e estimula o fortalecimento das capacidades tecnológicas da organização.",
         ],
         goodBad: "good",
         risksEvaded: [
-          "Contratação de solução externa incompatível e de altíssimo custo de manutenção"
+          "Contratação de solução externa incompatível e de altíssimo custo de manutenção",
         ],
         otherConsequences: [
-          "Domínio institucional de tecnologias biométricas por funcionários públicos efetivos"
-        ]
+          "Domínio institucional de tecnologias biométricas por funcionários públicos efetivos",
+        ],
       },
       {
         key: "b",
@@ -760,31 +746,31 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 10,
           qualidadeProduto: -10,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: -15
+          conhecimentoOrganizacional: -15,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               qualidadeProduto: -15,
-              capacidadeEntrega: -15
+              capacidadeEntrega: -15,
             },
-            narrative: "A empresa entregou código ofuscado e proprietário que não dialogava com a base de dados discente da instituição."
-          }
+            narrative:
+              "A empresa entregou código ofuscado e proprietário que não dialogava com a base de dados discente da instituição.",
+          },
         ],
-        feedbackNarrative: "A terceirização custou caro e entregou solução fechada que a equipe interna não consegue adaptar aos novos campi.",
+        feedbackNarrative:
+          "A terceirização custou caro e entregou solução fechada que a equipe interna não consegue adaptar aos novos campi.",
         pmbokConcept: "Recursos internos e externos",
         learnings: [
           "O PMBOK 8 adverte contra a terceirização precipitada que aliena o conhecimento central e cria dependência operacional crônica.",
-          "Essa decisão contraria o desenvolvimento sustentável das competências da instituição e expõe dados sensíveis a terceiros."
+          "Essa decisão contraria o desenvolvimento sustentável das competências da instituição e expõe dados sensíveis a terceiros.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Esforço inicial de capacitação da equipe em visão computacional"
-        ],
+        risksEvaded: ["Esforço inicial de capacitação da equipe em visão computacional"],
         otherConsequences: [
-          "Drenagem orçamentária prolongada e perda de domínio sobre o código-fonte"
-        ]
+          "Drenagem orçamentária prolongada e perda de domínio sobre o código-fonte",
+        ],
       },
       {
         key: "c",
@@ -793,23 +779,22 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: -15,
           saudeEquipe: -5,
-          conhecimentoOrganizacional: -10
+          conhecimentoOrganizacional: -10,
         },
-        feedbackNarrative: "A recusa sumária gerou crise com a Pró-Reitoria de Assuntos Estudantis e manteve fraudes crônicas nas filas do RU.",
+        feedbackNarrative:
+          "A recusa sumária gerou crise com a Pró-Reitoria de Assuntos Estudantis e manteve fraudes crônicas nas filas do RU.",
         pmbokConcept: "Negociação e influência para obter recursos",
         learnings: [
           "O PMBOK 8 orienta o gerente a negociar e propor saídas colaborativas com os stakeholders em vez de impor vetos unilaterais.",
-          "Ignorar as necessidades essenciais das partes interessadas enfraquece o valor público entregue pelo projeto."
+          "Ignorar as necessidades essenciais das partes interessadas enfraquece o valor público entregue pelo projeto.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Trabalho de elaboração de estudos técnicos e termos de referência"
-        ],
+        risksEvaded: ["Trabalho de elaboração de estudos técnicos e termos de referência"],
         otherConsequences: [
-          "Desgaste político severo e persistência de ineficiência operacional nos campi"
-        ]
-      }
-    ]
+          "Desgaste político severo e persistência de ineficiência operacional nos campi",
+        ],
+      },
+    ],
   },
   {
     id: "systems_9_licencas_subutilizadas",
@@ -818,10 +803,12 @@ export const systemsThinkingEvents: GameEvent[] = [
     difficulty: EventDifficulty.EASY,
     probabilityWeight: 2,
     tags: ["licencas", "inatividade", "custos", "liberacao"],
-    learningObjective: "Auditar a taxa de utilização de recursos virtuais e licenças para liberar ativos ociosos e reverter sobras para áreas deficitárias.",
+    learningObjective:
+      "Auditar a taxa de utilização de recursos virtuais e licenças para liberar ativos ociosos e reverter sobras para áreas deficitárias.",
     communicationType: "slack",
     senderRole: "Líder de Design e Telas",
-    description: "Canal #design: 'Descobrimos que a universidade paga 40 licenças de uma suíte cara de modelagem 3D contratada no passado; apenas duas estão em uso ativo pelos designers neste ano.'",
+    description:
+      "Canal #design: 'Descobrimos que a universidade paga 40 licenças de uma suíte cara de modelagem 3D contratada no passado; apenas duas estão em uso ativo pelos designers neste ano.'",
     domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "monitorar",
@@ -836,21 +823,20 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: 15,
           saudeEquipe: 15,
-          conhecimentoOrganizacional: 10
+          conhecimentoOrganizacional: 10,
         },
-        feedbackNarrative: "O cancelamento das ferramentas ociosas liberou verba para comprar equipamentos modernos que melhoraram a saúde do time.",
+        feedbackNarrative:
+          "O cancelamento das ferramentas ociosas liberou verba para comprar equipamentos modernos que melhoraram a saúde do time.",
         pmbokConcept: "Liberação de recursos conforme o plano",
         learnings: [
           "O PMBOK 8 recomenda a liberação tempestiva de recursos ociosos para evitar desperdícios e realocar valor onde há necessidade real.",
-          "O remanejamento responsável de investimentos virtuais para infraestrutura física melhora o ambiente e o rendimento da equipe."
+          "O remanejamento responsável de investimentos virtuais para infraestrutura física melhora o ambiente e o rendimento da equipe.",
         ],
         goodBad: "good",
-        risksEvaded: [
-          "Glosa de despesas ineficientes em auditoria interna da universidade"
-        ],
+        risksEvaded: ["Glosa de despesas ineficientes em auditoria interna da universidade"],
         otherConsequences: [
-          "Aquisição de periféricos ergonômicos e elevação do conforto do laboratório"
-        ]
+          "Aquisição de periféricos ergonômicos e elevação do conforto do laboratório",
+        ],
       },
       {
         key: "b",
@@ -859,31 +845,29 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 5,
           qualidadeProduto: -10,
           saudeEquipe: -10,
-          conhecimentoOrganizacional: -10
+          conhecimentoOrganizacional: -10,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               capacidadeEntrega: -10,
-              qualidadeProduto: -10
+              qualidadeProduto: -10,
             },
-            narrative: "Auditoria do Tribunal de Contas apontou dano ao erário por pagamento continuado de licenças sem uso comprovado."
-          }
+            narrative:
+              "Auditoria do Tribunal de Contas apontou dano ao erário por pagamento continuado de licenças sem uso comprovado.",
+          },
         ],
-        feedbackNarrative: "A inércia gerencial desperdiçou verba pública preciosa que fez falta direta para a compra de computadores de trabalho.",
+        feedbackNarrative:
+          "A inércia gerencial desperdiçou verba pública preciosa que fez falta direta para a compra de computadores de trabalho.",
         pmbokConcept: "Utilização e inatividade de recursos",
         learnings: [
           "O PMBOK 8 aponta a tolerância com inatividade crônica de recursos como falha grave de governança e monitoramento.",
-          "Desperdiçar recursos contratuais por comodismo administrativo viola o dever de sustentabilidade na gestão pública."
+          "Desperdiçar recursos contratuais por comodismo administrativo viola o dever de sustentabilidade na gestão pública.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Processo burocrático de repactuação de contrato com fornecedor de TI"
-        ],
-        otherConsequences: [
-          "Apontamento de auditoria e contingenciamento de compras prioritárias"
-        ]
+        risksEvaded: ["Processo burocrático de repactuação de contrato com fornecedor de TI"],
+        otherConsequences: ["Apontamento de auditoria e contingenciamento de compras prioritárias"],
       },
       {
         key: "c",
@@ -892,23 +876,20 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: -15,
           qualidadeProduto: -5,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: 5
+          conhecimentoOrganizacional: 5,
         },
-        feedbackNarrative: "Obrigar o uso de software inadequado gerou atrito, perda de tempo de codificação e insatisfação nos desenvolvedores.",
+        feedbackNarrative:
+          "Obrigar o uso de software inadequado gerou atrito, perda de tempo de codificação e insatisfação nos desenvolvedores.",
         pmbokConcept: "Mapeamento do fluxo de valor",
         learnings: [
           "O PMBOK 8 adverte que impor etapas desnecessárias no fluxo de trabalho introduz atrito e desperdício cognitivo.",
-          "A adequação da ferramenta ao papel é indispensável para preservar o foco e a eficiência operacional dos colaboradores."
+          "A adequação da ferramenta ao papel é indispensável para preservar o foco e a eficiência operacional dos colaboradores.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Justificativa formal do baixo índice de adesão da ferramenta adquirida"
-        ],
-        otherConsequences: [
-          "Queda de produtividade e desmotivação técnica entre os programadores"
-        ]
-      }
-    ]
+        risksEvaded: ["Justificativa formal do baixo índice de adesão da ferramenta adquirida"],
+        otherConsequences: ["Queda de produtividade e desmotivação técnica entre os programadores"],
+      },
+    ],
   },
   {
     id: "systems_10_staging_indisponivel",
@@ -917,10 +898,12 @@ export const systemsThinkingEvents: GameEvent[] = [
     difficulty: EventDifficulty.HARD,
     probabilityWeight: 2,
     tags: ["staging", "contingencia", "recursos_virtuais", "governanca"],
-    learningObjective: "Acionar recursos alternativos com riscos reconhecidos quando falhas de infraestrutura virtual impedirem a esteira contínua.",
+    learningObjective:
+      "Acionar recursos alternativos com riscos reconhecidos quando falhas de infraestrutura virtual impedirem a esteira contínua.",
     communicationType: "slack",
     senderRole: "Líder Técnico",
-    description: "Canal #infra: 'A máquina física que hospeda o ambiente de testes de integração queimou a fonte no datacenter da universidade; a reposição da peça levará cinco dias úteis.'",
+    description:
+      "Canal #infra: 'A máquina física que hospeda o ambiente de testes de integração queimou a fonte no datacenter da universidade; a reposição da peça levará cinco dias úteis.'",
     domainTag: "Recursos › Monitorar e Controlar os Recursos",
     resourceType: "fisico_virtual",
     resourceProcess: "monitorar",
@@ -935,21 +918,18 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 0,
           qualidadeProduto: 15,
           saudeEquipe: 10,
-          conhecimentoOrganizacional: 15
+          conhecimentoOrganizacional: 15,
         },
-        feedbackNarrative: "A resposta rápida através de infraestrutura como código restabeleceu os testes em poucas horas sem paralisar o ciclo de entregas.",
+        feedbackNarrative:
+          "A resposta rápida através de infraestrutura como código restabeleceu os testes em poucas horas sem paralisar o ciclo de entregas.",
         pmbokConcept: "Recursos alternativos com riscos reconhecidos",
         learnings: [
           "O PMBOK 8 recomenda a ativação planejada de recursos alternativos com riscos reconhecidos em situações de indisponibilidade.",
-          "A adoção de infraestrutura virtual redundante protege a continuidade do projeto e minimiza tempos de inatividade."
+          "A adoção de infraestrutura virtual redundante protege a continuidade do projeto e minimiza tempos de inatividade.",
         ],
         goodBad: "good",
-        risksEvaded: [
-          "Paralisia de cinco dias da equipe inteira de engenharia e atraso da versão"
-        ],
-        otherConsequences: [
-          "Modernização dos scripts de automação de ambientes em contêineres"
-        ]
+        risksEvaded: ["Paralisia de cinco dias da equipe inteira de engenharia e atraso da versão"],
+        otherConsequences: ["Modernização dos scripts de automação de ambientes em contêineres"],
       },
       {
         key: "b",
@@ -958,31 +938,31 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: -15,
           qualidadeProduto: -5,
           saudeEquipe: -10,
-          conhecimentoOrganizacional: -10
+          conhecimentoOrganizacional: -10,
         },
         delayedImpacts: [
           {
             triggerAfterEvents: 1,
             impacts: {
               capacidadeEntrega: -15,
-              saudeEquipe: -10
+              saudeEquipe: -10,
             },
-            narrative: "A paralisação forçada acumulou tarefas e gerou regime exaustivo de horas extras na semana seguinte."
-          }
+            narrative:
+              "A paralisação forçada acumulou tarefas e gerou regime exaustivo de horas extras na semana seguinte.",
+          },
         ],
-        feedbackNarrative: "A inércia diante da quebra de hardware consumiu uma semana útil de trabalho e comprimiu perigosamente o calendário final.",
+        feedbackNarrative:
+          "A inércia diante da quebra de hardware consumiu uma semana útil de trabalho e comprimiu perigosamente o calendário final.",
         pmbokConcept: "Impacto da indisponibilidade de recursos nos demais planos",
         learnings: [
           "O PMBOK 8 alerta que a inação perante indisponibilidade de recursos virtuais reverbera de forma destrutiva nos demais planos.",
-          "A liderança proativa deve dispor de alternativas de contingência para assegurar a produtividade contínua dos recursos humanos."
+          "A liderança proativa deve dispor de alternativas de contingência para assegurar a produtividade contínua dos recursos humanos.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Custo de consumo temporário de nuvem governamental"
-        ],
+        risksEvaded: ["Custo de consumo temporário de nuvem governamental"],
         otherConsequences: [
-          "Atraso crítico na entrega e descontentamento entre os desenvolvedores"
-        ]
+          "Atraso crítico na entrega e descontentamento entre os desenvolvedores",
+        ],
       },
       {
         key: "c",
@@ -991,22 +971,21 @@ export const systemsThinkingEvents: GameEvent[] = [
           capacidadeEntrega: 10,
           qualidadeProduto: -15,
           saudeEquipe: -15,
-          conhecimentoOrganizacional: -15
+          conhecimentoOrganizacional: -15,
         },
-        feedbackNarrative: "Um erro não testado subiu para a produção e travou o sistema de emissão de notas em plena época de fechamento semestral.",
+        feedbackNarrative:
+          "Um erro não testado subiu para a produção e travou o sistema de emissão de notas em plena época de fechamento semestral.",
         pmbokConcept: "Ambiente seguro e transparência sobre vieses",
         learnings: [
           "O PMBOK 8 salienta que violar salvaguardas de isolamento técnico sob pressão expõe a instituição a colapso de serviços vitais.",
-          "Apressar entregas sem validação em ambiente controlado destrói a segurança operacional e a reputação do projeto."
+          "Apressar entregas sem validação em ambiente controlado destrói a segurança operacional e a reputação do projeto.",
         ],
         goodBad: "bad",
-        risksEvaded: [
-          "Sensação momentânea de interrupção do ritmo de codificação"
-        ],
+        risksEvaded: ["Sensação momentânea de interrupção do ritmo de codificação"],
         otherConsequences: [
-          "Indisponibilidade pública do sistema universitário e indignação geral da comunidade"
-        ]
-      }
-    ]
-  }
+          "Indisponibilidade pública do sistema universitário e indignação geral da comunidade",
+        ],
+      },
+    ],
+  },
 ];

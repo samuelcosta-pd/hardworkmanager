@@ -1,18 +1,23 @@
 # Documentação Técnica e Funcional: Hard Work Manager
-*Simulador Educacional de Gerenciamento de Projetos com base no PMBOK 8 e no Domínio de Desempenho de Recursos*
+
+_Simulador Educacional de Gerenciamento de Projetos com base no PMBOK 8 e no Domínio de Desempenho de Recursos_
 
 ---
 
 ## 1. Visão Geral do Projeto
 
 ### Propósito do Sistema
-O **Hard Work Manager** é um jogo sério (*serious game*) desenvolvido como um simulador web colaborativo em turnos locais (*hotseat*). O seu propósito principal é capacitar estudantes e profissionais no gerenciamento de projetos de software, simulando os dilemas, tensões e *trade-offs* táticos durante a modernização do Sistema de Gestão Acadêmica de uma instituição pública de ensino superior no contexto de uma universidade pública federal.
+
+O **Hard Work Manager** é um jogo sério (_serious game_) desenvolvido como um simulador web colaborativo em turnos locais (_hotseat_). O seu propósito principal é capacitar estudantes e profissionais no gerenciamento de projetos de software, simulando os dilemas, tensões e _trade-offs_ táticos durante a modernização do Sistema de Gestão Acadêmica de uma instituição pública de ensino superior no contexto de uma universidade pública federal.
 
 ### Problema que Resolve
-O ensino de gerenciamento de projetos costuma ser focado em teorias abstratas e memorização de processos descontextualizados. Alunos frequentemente têm dificuldade em compreender na prática os impactos sistêmicos de decisões críticas sobre a saúde global do projeto e a dinâmica de equipes multidisciplinares. O sistema resolve essa deficiência pedagógica ao materializar em tempo real as relações de causa e efeito entre decisões de alocação de pessoas, infraestrutura técnica (nuvem, servidores e licenças), bem-estar e clima seguro, fluxo de trabalho (*Lean/Swarming*) e capacidade de entrega contínua.
+
+O ensino de gerenciamento de projetos costuma ser focado em teorias abstratas e memorização de processos descontextualizados. Alunos frequentemente têm dificuldade em compreender na prática os impactos sistêmicos de decisões críticas sobre a saúde global do projeto e a dinâmica de equipes multidisciplinares. O sistema resolve essa deficiência pedagógica ao materializar em tempo real as relações de causa e efeito entre decisões de alocação de pessoas, infraestrutura técnica (nuvem, servidores e licenças), bem-estar e clima seguro, fluxo de trabalho (_Lean/Swarming_) e capacidade de entrega contínua.
 
 ### Relação com o PMBOK 8 e o Domínio de Recursos
-O simulador fundamenta-se estritamente na **8ª Edição do PMBOK** (especificamente na Seção 2.6 - *Domínio de Desempenho de Recursos*). O jogo aborda tanto **Recursos Humanos** (motivação, inteligência emocional, Tuckman, liderança servidora, prevenção de burnout e desengajamento silencioso) quanto **Recursos Físicos e Virtuais** (servidores, ambientes em nuvem, storages, bancos de dados e licenças de software), articulando os 5 processos canônicos do domínio:
+
+O simulador fundamenta-se estritamente na **8ª Edição do PMBOK** (especificamente na Seção 2.6 - _Domínio de Desempenho de Recursos_). O jogo aborda tanto **Recursos Humanos** (motivação, inteligência emocional, Tuckman, liderança servidora, prevenção de burnout e desengajamento silencioso) quanto **Recursos Físicos e Virtuais** (servidores, ambientes em nuvem, storages, bancos de dados e licenças de software), articulando os 5 processos canônicos do domínio:
+
 1. **Planejar o Gerenciamento dos Recursos**: RAM, SWOT, Team Charter, gestão verde de RH e visão baseada em recursos;
 2. **Estimar os Recursos**: EAR (Estrutura Analítica dos Recursos), estimativa bottom-up, paramétrica, análoga e calendários de recursos;
 3. **Adquirir Recursos**: negociação em ambiente matricial, pré-designação, recursos alternativos com riscos reconhecidos e análise de decisão multicritério;
@@ -20,14 +25,15 @@ O simulador fundamenta-se estritamente na **8ª Edição do PMBOK** (especificam
 5. **Monitorar e Controlar Recursos**: uso planejado vs. real, Teoria das Restrições (TOC), retrabalho como indicador de ineficiência, mapeamento do fluxo de valor e liberação planejada de ativos.
 
 ### Público-Alvo e Objetivos de Aprendizagem
-* **Público-Alvo**: Estudantes de graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação e profissionais em capacitação de gestão ágil e tradicional.
-* **Objetivos de Aprendizagem**:
-  1. Compreender a dinâmica de *trade-offs* inevitáveis em projetos de software (sacrifícios conscientes de curto prazo versus sustentabilidade de longo prazo).
-  2. Vivenciar o impacto cumulativo da dívida técnica e dos impactos diferidos (*Delayed Impacts*) que retornam em sprints futuras.
+
+- **Público-Alvo**: Estudantes de graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação e profissionais em capacitação de gestão ágil e tradicional.
+- **Objetivos de Aprendizagem**:
+  1. Compreender a dinâmica de _trade-offs_ inevitáveis em projetos de software (sacrifícios conscientes de curto prazo versus sustentabilidade de longo prazo).
+  2. Vivenciar o impacto cumulativo da dívida técnica e dos impactos diferidos (_Delayed Impacts_) que retornam em sprints futuras.
   3. Praticar o gerenciamento de expectativas e a negociação assertiva frente a demandas políticas de stakeholders externos (ex.: Reitoria e Diretorias).
   4. Exercitar a comunicação estruturada sob pressão de tempo por meio de debates com regras claras de priorização de voz.
-  5. Assimilar o papel do Gerente de Projetos como facilitador e árbitro em cenários de divergência e empate (*Voto de Minerva*).
-  6. Aplicar conceitos avançados de fluxo de valor: *Swarming*, identificação de gargalos de QA, uso de radiadores de informação e mitigação da Lei de Brooks.
+  5. Assimilar o papel do Gerente de Projetos como facilitador e árbitro em cenários de divergência e empate (_Voto de Minerva_).
+  6. Aplicar conceitos avançados de fluxo de valor: _Swarming_, identificação de gargalos de QA, uso de radiadores de informação e mitigação da Lei de Brooks.
 
 ---
 
@@ -35,19 +41,19 @@ O simulador fundamenta-se estritamente na **8ª Edição do PMBOK** (especificam
 
 O sistema foi arquitetado com uma stack moderna de alta performance, garantindo tipagem estática ponta a ponta, reatividade modular e persistência de dados no cliente:
 
-| Tecnologia | Onde é utilizada | Função no Projeto | Motivo da Escolha |
-| :--- | :--- | :--- | :--- |
-| **TypeScript (v5.8+)** | Em todo o código-fonte (`.ts`, `.tsx`) | Tipagem estática, contratos de dados, interfaces e enums. | Elimina erros em tempo de execução e garante integridade nos modelos de eventos e métricas. |
-| **React 19** | Componentes e telas (`src/components/*`, `src/routes/*`) | Renderização declarativa da interface e gerenciamento reativo do ciclo de vida. | Ecossistema maduro, compatibilidade com hooks modernos e renderização otimizada. |
-| **TanStack Start** | Infraestrutura e Server Entry (`src/start.ts`, `src/server.ts`) | Plataforma full-stack baseada em SSR/Client com suporte a Server Functions tipadas. | Arquitetura unificada de alta velocidade e integração nativa com o roteamento. |
-| **TanStack Router** | Roteamento da aplicação (`src/router.tsx`, `src/routes/*`) | Gerenciamento de rotas e metadados SEO com tipagem estática automática. | Roteamento declarativo 100% tipado (`routeTree.gen.ts`) e otimizado. |
-| **Zustand (v5.0+)** | Estado global (`src/store/gameStore.ts`) | Gerenciamento do estado centralizado da partida, ações, fases e histórico. | Biblioteca leve, desacoplada de boilerplate, com suporte nativo ao middleware `persist`. |
-| **Zustand Persist** | Armazenamento local (`gameStore.ts`) | Sincronização automática do estado do jogo no `localStorage` do navegador. | Previne perda de progresso da partida em caso de recarregamento acidental da página (`F5`). |
-| **Tailwind CSS (v4.2+)** | Estilização global e componentes (`src/styles.css`) | Framework CSS utilitário com variáveis CSS nativas e temas customizados. | Produtividade acelerada, micro-animações fluidas e suporte a design tokens consistentes. |
-| **Radix UI / Shadcn UI** | Componentes base (`src/components/ui/*`) | Primitivas de interface acessíveis (Dialogs, Tooltips, Accordions, Progress, etc.). | Componentes desacoplados, totalmente acessíveis (WAI-ARIA) e altamente customizáveis. |
-| **Lucide React** | Toda a interface gráfica | Biblioteca de ícones vetoriais dinâmicos e responsivos. | Pacote com grande variedade semântica e suporte a tree-shaking. |
-| **Zod** | Validação de schemas (`src/lib/api/*`) | Validação estrita de tipos e contratos de dados. | Garantia de segurança de tipos em APIs e dados externos. |
-| **Vite (v7.3+) / Nitro** | Build tool, bundler e runtime | Servidor de desenvolvimento HMR ultra-rápido e empacotamento de produção. | Compilação instantânea com ES Modules e bundling otimizado. |
+| Tecnologia               | Onde é utilizada                                                | Função no Projeto                                                                   | Motivo da Escolha                                                                           |
+| :----------------------- | :-------------------------------------------------------------- | :---------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
+| **TypeScript (v5.8+)**   | Em todo o código-fonte (`.ts`, `.tsx`)                          | Tipagem estática, contratos de dados, interfaces e enums.                           | Elimina erros em tempo de execução e garante integridade nos modelos de eventos e métricas. |
+| **React 19**             | Componentes e telas (`src/components/*`, `src/routes/*`)        | Renderização declarativa da interface e gerenciamento reativo do ciclo de vida.     | Ecossistema maduro, compatibilidade com hooks modernos e renderização otimizada.            |
+| **TanStack Start**       | Infraestrutura e Server Entry (`src/start.ts`, `src/server.ts`) | Plataforma full-stack baseada em SSR/Client com suporte a Server Functions tipadas. | Arquitetura unificada de alta velocidade e integração nativa com o roteamento.              |
+| **TanStack Router**      | Roteamento da aplicação (`src/router.tsx`, `src/routes/*`)      | Gerenciamento de rotas e metadados SEO com tipagem estática automática.             | Roteamento declarativo 100% tipado (`routeTree.gen.ts`) e otimizado.                        |
+| **Zustand (v5.0+)**      | Estado global (`src/store/gameStore.ts`)                        | Gerenciamento do estado centralizado da partida, ações, fases e histórico.          | Biblioteca leve, desacoplada de boilerplate, com suporte nativo ao middleware `persist`.    |
+| **Zustand Persist**      | Armazenamento local (`gameStore.ts`)                            | Sincronização automática do estado do jogo no `localStorage` do navegador.          | Previne perda de progresso da partida em caso de recarregamento acidental da página (`F5`). |
+| **Tailwind CSS (v4.2+)** | Estilização global e componentes (`src/styles.css`)             | Framework CSS utilitário com variáveis CSS nativas e temas customizados.            | Produtividade acelerada, micro-animações fluidas e suporte a design tokens consistentes.    |
+| **Radix UI / Shadcn UI** | Componentes base (`src/components/ui/*`)                        | Primitivas de interface acessíveis (Dialogs, Tooltips, Accordions, Progress, etc.). | Componentes desacoplados, totalmente acessíveis (WAI-ARIA) e altamente customizáveis.       |
+| **Lucide React**         | Toda a interface gráfica                                        | Biblioteca de ícones vetoriais dinâmicos e responsivos.                             | Pacote com grande variedade semântica e suporte a tree-shaking.                             |
+| **Zod**                  | Validação de schemas (`src/lib/api/*`)                          | Validação estrita de tipos e contratos de dados.                                    | Garantia de segurança de tipos em APIs e dados externos.                                    |
+| **Vite (v7.3+) / Nitro** | Build tool, bundler e runtime                                   | Servidor de desenvolvimento HMR ultra-rápido e empacotamento de produção.           | Compilação instantânea com ES Modules e bundling otimizado.                                 |
 
 ---
 
@@ -133,6 +139,7 @@ hardworkmanager/
 ```
 
 ### Relação de Dependência entre os Módulos
+
 1. **Módulo de Contratos e Tipos (`src/types/index.ts`)**: Módulo fundamental. Define enums (`EventCategory`, `EventDifficulty`, `GameDifficulty`), interfaces (`GameEvent`, `Alternative`, `Metrics`, `DelayedImpact`, `Player`, `Decision`, `DebateSpeaker`) e tipos de fases (`GamePhase`).
 2. **Módulo de Lógica Matemática Pura (`src/lib/gameLogic.ts`)**: Isola a física das regras: cálculo de penalidade cruzada de conhecimento organizacional, apuração de votos, avaliação de condições booleanas de impactos diferidos e algoritmo ponderado de sorteio de eventos por sprint e dificuldade.
 3. **Módulo de Dados (`src/data/*`)**: Estrutura e exporta os avatares disponíveis e a biblioteca com 36 dilemas categorizados com ricas anotações pedagógicas do PMBOK 7.
@@ -143,7 +150,7 @@ hardworkmanager/
 
 ## 4. Arquitetura do Sistema
 
-O sistema emprega uma arquitetura baseada no **Phase-Based State Machine Pattern** acoplada ao padrão de **Fluxo Unidirecional de Dados** (*Flux Architecture*) viabilizado pelo Zustand com middleware de persistência.
+O sistema emprega uma arquitetura baseada no **Phase-Based State Machine Pattern** acoplada ao padrão de **Fluxo Unidirecional de Dados** (_Flux Architecture_) viabilizado pelo Zustand com middleware de persistência.
 
 ### Diagrama Arquitetural Completo
 
@@ -203,9 +210,10 @@ graph TD
 ```
 
 ### Ciclo de Vida da Informação
-1. **Entrada do Usuário**: O jogador interage com a interface (ex.: seleciona seu avatar, registra voto no *handoff* ou avança de etapa).
+
+1. **Entrada do Usuário**: O jogador interage com a interface (ex.: seleciona seu avatar, registra voto no _handoff_ ou avança de etapa).
 2. **Invocação da Ação**: O componente React chama a ação da store (ex.: `castVote('b')`, `resolveDecision()`, `nextEvent()`).
-3. **Processamento Determinístico**: A store utiliza funções puras de `gameLogic.ts` para computar os novos valores de métricas, avaliar se há penalidades dobradas por falta de conhecimento organizacional, verificar impactos diferidos ativados e verificar limites de *Game Over*.
+3. **Processamento Determinístico**: A store utiliza funções puras de `gameLogic.ts` para computar os novos valores de métricas, avaliar se há penalidades dobradas por falta de conhecimento organizacional, verificar impactos diferidos ativados e verificar limites de _Game Over_.
 4. **Persistência Automática**: O middleware serializa o snapshot do estado no `localStorage`.
 5. **Re-renderização e Comutação**: Os seletores do Zustand notificam os componentes e a rota raiz `index.tsx` altera a tela exibida com transições suaves em CSS.
 
@@ -213,7 +221,7 @@ graph TD
 
 ## 5. Fluxo de Execução e Game Loop
 
-O fluxo de execução do sistema é estruturado em sprints iterativas de 3 eventos, culminando em uma fase de consolidação pedagógica (*Debriefing*):
+O fluxo de execução do sistema é estruturado em sprints iterativas de 3 eventos, culminando em uma fase de consolidação pedagógica (_Debriefing_):
 
 ```mermaid
 sequenceDiagram
@@ -237,7 +245,7 @@ sequenceDiagram
     Equipe->>UI: Lê briefing institucional e clica em "Começar"
     UI->>Store: beginEvent()
     Store-->>UI: phase = 'event_display'
-    
+
     rect rgb(240, 245, 255)
         Note over Equipe,Logic: Game Loop do Dilema
         UI->>Equipe: Exibe e-mail/slack/ticket do evento
@@ -245,7 +253,7 @@ sequenceDiagram
         Note over Equipe,UI: Cada membro vota no modo Handoff
         UI->>Store: finalizeRound1()
         Store-->>UI: phase = 'vote_reveal'
-        
+
         alt Votação Unânime
             UI->>Store: resolveDecision()
         else Votação Divergente
@@ -254,12 +262,12 @@ sequenceDiagram
             UI->>Store: beginRound2() -> Votação Secreta Rodada 2
             UI->>Store: finalizeRound2() -> resolveDecision()
         end
-        
+
         Store->>Logic: Aplica impactos + Checa impactos diferidos + Testa Game Over
         Store-->>UI: phase = 'feedback_narrative'
         UI->>Equipe: Mostra consequências narrativas, deltas e conceito PMBOK 7
     end
-    
+
     Equipe->>UI: Clica em avançar (nextEvent)
     alt Métrica Crítica (< 40) ou Fim da Partida
         Store-->>UI: phase = 'debriefing'
@@ -279,76 +287,85 @@ sequenceDiagram
 O sistema implementa 7 mecânicas integradas para simular o ambiente corporativo e a colaboração sob a ótica do PMBOK 7:
 
 ### 1. Mecânica de Hotseat (Passe o Dispositivo)
-* **Arquivo**: `src/components/screens/VotingRound.tsx`.
-* **Funcionamento**: Permite que múltiplos jogadores participem da tomada de decisão em um único dispositivo físico (notebook, tablet ou smartphone). O fluxo é protegido por um estado de bloqueio (`handoff: true`). Quando um jogador conclui seu voto, a tela é imediatamente ofuscada exibindo o nome e papel do próximo votante. O próximo participante assume o dispositivo e clica em "Estou sozinho com a tela" para liberar suas opções de voto, assegurando o sigilo individual do voto da primeira e da segunda rodadas.
+
+- **Arquivo**: `src/components/screens/VotingRound.tsx`.
+- **Funcionamento**: Permite que múltiplos jogadores participem da tomada de decisão em um único dispositivo físico (notebook, tablet ou smartphone). O fluxo é protegido por um estado de bloqueio (`handoff: true`). Quando um jogador conclui seu voto, a tela é imediatamente ofuscada exibindo o nome e papel do próximo votante. O próximo participante assume o dispositivo e clica em "Estou sozinho com a tela" para liberar suas opções de voto, assegurando o sigilo individual do voto da primeira e da segunda rodadas.
 
 ### 2. Mecânica de Debate Estruturado com Timer
-* **Arquivos**: `src/components/screens/DebateStructured.tsx` e função `buildOrder`.
-* **Funcionamento**: Ativada automaticamente caso a primeira rodada de votação não atinja consenso unânime. O algoritmo analisa a distribuição de votos e estrutura a ordem de fala:
+
+- **Arquivos**: `src/components/screens/DebateStructured.tsx` e função `buildOrder`.
+- **Funcionamento**: Ativada automaticamente caso a primeira rodada de votação não atinja consenso unânime. O algoritmo analisa a distribuição de votos e estrutura a ordem de fala:
   1. **Vozes Minoritárias Não-GP** (30s cada): Falam primeiro para expor seus argumentos técnicos, riscos ou visão de usuário que a maioria desconsiderou.
   2. **Vozes Majoritárias Não-GP** (30s cada): Apresentam contra-argumentos e justificativas de viabilidade.
   3. **Gerente de Projetos (GP)** (20s): Fala por último para mediar o debate, ponderar o equilíbrio dos recursos e sintetizar a discussão antes da votação decisiva.
-* Um cronômetro reativo com suporte a pausa e avanço regula o tempo visualmente, garantindo equidade de fala.
+- Um cronômetro reativo com suporte a pausa e avanço regula o tempo visualmente, garantindo equidade de fala.
 
 ### 3. Mecânica de Apuração e Voto de Minerva
-* **Arquivos**: `src/lib/gameLogic.ts` (função `tallyVotes`) e `src/store/gameStore.ts` (`resolveDecision`).
-* **Funcionamento**: Os votos da rodada 2 são apurados. Caso haja empate entre alternativas, o sistema busca o voto individual do jogador com papel de Gerente de Projetos (`pm`), atribuindo a ele o **Voto de Minerva**. Se o GP não tiver votado naquelas opções, a primeira opção mais votada é selecionada como critério de desempate determinístico.
+
+- **Arquivos**: `src/lib/gameLogic.ts` (função `tallyVotes`) e `src/store/gameStore.ts` (`resolveDecision`).
+- **Funcionamento**: Os votos da rodada 2 são apurados. Caso haja empate entre alternativas, o sistema busca o voto individual do jogador com papel de Gerente de Projetos (`pm`), atribuindo a ele o **Voto de Minerva**. Se o GP não tiver votado naquelas opções, a primeira opção mais votada é selecionada como critério de desempate determinístico.
 
 ### 4. Gestão de 4 Métricas de Desempenho e Penalidade Cruzada
-* **Arquivos**: `src/lib/gameLogic.ts` (`applyImpacts`, `clamp`, `isGameOver`) e `src/types/index.ts`.
-* **Métricas Modeladas**:
+
+- **Arquivos**: `src/lib/gameLogic.ts` (`applyImpacts`, `clamp`, `isGameOver`) e `src/types/index.ts`.
+- **Métricas Modeladas**:
   1. **Capacidade de Entrega (Velocity / Eficiência Operacional)**: Inicia em 100. Representa o ritmo de entrega e a vazão da equipe.
   2. **Qualidade do Produto**: Inicia em 100. Mede a estabilidade arquitetural, aderência técnica e ausência de bugs.
   3. **Saúde da Equipe**: Inicia em 100. Mede a moral, engajamento e clima organizacional dos desenvolvedores.
   4. **Conhecimento Organizacional**: Inicia em 50. Mede a documentação, compartilhamento de conhecimento e mitigação de silos técnicos.
-* **Mecânica de Penalidade Cruzada**: Se o *Conhecimento Organizacional* cair abaixo de 20 pontos e uma nova decisão acarretar redução na *Capacidade de Entrega*, **a perda de capacidade é dobrada** (`capacidadeImpact *= 2`). Isso simula a realidade em que equipes sem documentação ou com silos de conhecimento demoram o dobro do tempo para diagnosticar e corrigir falhas no código legado.
-* **Condição de Fim de Jogo**: Se qualquer uma das 3 métricas principais (Capacidade, Qualidade ou Saúde) cair abaixo de 40 pontos, o projeto entra em colapso e transiciona para a fase de *Debriefing* de encerramento por falha.
+- **Mecânica de Penalidade Cruzada**: Se o _Conhecimento Organizacional_ cair abaixo de 20 pontos e uma nova decisão acarretar redução na _Capacidade de Entrega_, **a perda de capacidade é dobrada** (`capacidadeImpact *= 2`). Isso simula a realidade em que equipes sem documentação ou com silos de conhecimento demoram o dobro do tempo para diagnosticar e corrigir falhas no código legado.
+- **Condição de Fim de Jogo**: Se qualquer uma das 3 métricas principais (Capacidade, Qualidade ou Saúde) cair abaixo de 40 pontos, o projeto entra em colapso e transiciona para a fase de _Debriefing_ de encerramento por falha.
 
 ### 5. Mecânica de Impactos Diferidos (Delayed Impacts)
-* **Arquivos**: `src/types/index.ts` (`DelayedImpact`), `src/store/gameStore.ts`, `src/lib/gameLogic.ts` (`evaluateCondition`).
-* **Funcionamento**: Certas alternativas de decisão geram consequências atrasadas que não impactam o projeto de imediato, mas criam "dívidas" que explodem após $N$ rodadas (`triggerAfterEvents`). A store gerencia a fila de `pendingDelayedImpacts`, decrementando os contadores a cada turno. Quando o contador zera, o sistema avalia condições booleanas opcionais (ex.: `qualidadeProduto < 50`) e aplica penalidades narrativas e numéricas retroativas, exibidas no "Radar de Impactos Diferidos" da Sprint Review e no painel de consequências.
+
+- **Arquivos**: `src/types/index.ts` (`DelayedImpact`), `src/store/gameStore.ts`, `src/lib/gameLogic.ts` (`evaluateCondition`).
+- **Funcionamento**: Certas alternativas de decisão geram consequências atrasadas que não impactam o projeto de imediato, mas criam "dívidas" que explodem após $N$ rodadas (`triggerAfterEvents`). A store gerencia a fila de `pendingDelayedImpacts`, decrementando os contadores a cada turno. Quando o contador zera, o sistema avalia condições booleanas opcionais (ex.: `qualidadeProduto < 50`) e aplica penalidades narrativas e numéricas retroativas, exibidas no "Radar de Impactos Diferidos" da Sprint Review e no painel de consequências.
 
 ### 6. Mecânica de Geração de Partida Equilibrada e Embaralhamento de Alternativas
-* **Arquivos**: `src/lib/gameLogic.ts` (`generateMatchDeck`, `shuffleEventAlternatives`) e `src/store/gameStore.ts`.
-* **Funcionamento**: A cada nova partida, o simulador sorteia os dilemas da partida e **embaralha pseudoaleatoriamente a ordem das alternativas (a, b, c)** de cada dilema. Isso elimina o vício de previsibilidade posicional (onde a opção correta ficava historicamente concentrada na letra 'a') sem alterar a chave canônica original preservada na rastreabilidade dos dados.
-* **Modelo de Equilíbrio das Alternativas**:
+
+- **Arquivos**: `src/lib/gameLogic.ts` (`generateMatchDeck`, `shuffleEventAlternatives`) e `src/store/gameStore.ts`.
+- **Funcionamento**: A cada nova partida, o simulador sorteia os dilemas da partida e **embaralha pseudoaleatoriamente a ordem das alternativas (a, b, c)** de cada dilema. Isso elimina o vício de previsibilidade posicional (onde a opção correta ficava historicamente concentrada na letra 'a') sem alterar a chave canônica original preservada na rastreabilidade dos dados.
+- **Modelo de Equilíbrio das Alternativas**:
   - **Alternativa Recomendada (`good`)**: Apresenta trade-offs reais. Exige pequenos investimentos iniciais ou custos de adaptação, mas gera ganhos consolidados em saúde, qualidade e conhecimento institucional (soma líquida moderada de +10 a +25).
   - **Alternativa Frágil Tentadora (`bad tentadora`)**: Oferece ganhos imediatos ilusórios de velocidade (+5 a +10), cobrando a conta através de **impactos diferidos (`delayedImpacts`)** acumulados nas rodadas seguintes (-10 a -15).
   - **Alternativa Fraca (`bad franca`)**: Queda imediata moderada (-10 a -15), sem ultrapassar -15 em qualquer métrica isolada, evitando mortes súbitas não pedagógicas.
   - **Validação Monte Carlo**: O catálogo é calibrado com simulação de 10.000 partidas (`simular-partidas.ts`), garantindo 0.00% de Game Over para decisões consistentes, ~37% para escolhas aleatórias e 99.9% para decisões negligentes recorrentes (com colapso ocorrendo a partir do 4º dilema).
 
 ### 7. Injeção Dinâmica de NPCs e Avatares
-* **Arquivos**: `src/store/gameStore.ts` (função `injectNPC`), `src/data/avatars.ts`.
-* **Funcionamento**: Personagens remetentes de eventos internos (como desenvolvedores pleno, líderes técnicos adjuntos e designers) são sorteados dinamicamente dentre os avatares do catálogo que **não foram escolhidos pelos jogadores humanos**, garantindo variedade visual e imersão em cada partida.
+
+- **Arquivos**: `src/store/gameStore.ts` (função `injectNPC`), `src/data/avatars.ts`.
+- **Funcionamento**: Personagens remetentes de eventos internos (como desenvolvedores pleno, líderes técnicos adjuntos e designers) são sorteados dinamicamente dentre os avatares do catálogo que **não foram escolhidos pelos jogadores humanos**, garantindo variedade visual e imersão em cada partida.
 
 ### 8. Mecânica de Limitação de Tempo Oficial e Regra de Abstenção
-* **Arquivos**: `src/hooks/useCountdown.ts`, `src/components/ui/CountdownTimer.tsx`, `src/components/screens/EventDisplay.tsx` e `src/components/screens/VotingRound.tsx`.
-* **Regra Rígida de Negócio (`timerSettings`)**: O tempo não é customizável pelo usuário, atuando como regra estrita do sistema para assegurar a comparabilidade das sessões de jogo e a pressão controlada na tomada de decisões:
+
+- **Arquivos**: `src/hooks/useCountdown.ts`, `src/components/ui/CountdownTimer.tsx`, `src/components/screens/EventDisplay.tsx` e `src/components/screens/VotingRound.tsx`.
+- **Regra Rígida de Negócio (`timerSettings`)**: O tempo não é customizável pelo usuário, atuando como regra estrita do sistema para assegurar a comparabilidade das sessões de jogo e a pressão controlada na tomada de decisões:
   - **Leitura e Discussão Coletiva**: **2 minutos (120 segundos)** cronometrados durante o `EventDisplay`.
   - **Voto Individual em Hotseat**: **45 segundos** por participante durante o `VotingRound`.
-* **Auto-Avanço na Leitura**: Ao esgotar os 2 minutos em `EventDisplay`, um alerta visual informa que o tempo de discussão encerrou e o jogo avança automaticamente para a votação após 5 segundos.
-* **Regra de Abstenção Individual**: No `VotingRound`, o cronômetro inicia estritamente após o jogador confirmar que assumiu o dispositivo. Caso os 45 segundos expirem sem seleção, o sistema registra automaticamente uma **Abstenção (`abstain`)**. O participante também dispõe de botão explícito para abstenção voluntária. Votos em abstenção não pontuam em nenhuma alternativa na apuração.
+- **Auto-Avanço na Leitura**: Ao esgotar os 2 minutos em `EventDisplay`, um alerta visual informa que o tempo de discussão encerrou e o jogo avança automaticamente para a votação após 5 segundos.
+- **Regra de Abstenção Individual**: No `VotingRound`, o cronômetro inicia estritamente após o jogador confirmar que assumiu o dispositivo. Caso os 45 segundos expirem sem seleção, o sistema registra automaticamente uma **Abstenção (`abstain`)**. O participante também dispõe de botão explícito para abstenção voluntária. Votos em abstenção não pontuam em nenhuma alternativa na apuração.
 
 ---
 
 ## 7. Mapeamento para o PMBOK 7
 
-O jogo transpõe os princípios e práticas do PMBOK 7ª Edição e da gestão ágil/enxuta (*Lean*) diretamente para o comportamento das decisões do simulador:
+O jogo transpõe os princípios e práticas do PMBOK 7ª Edição e da gestão ágil/enxuta (_Lean_) diretamente para o comportamento das decisões do simulador:
 
-| Princípio PMBOK 7 / Fundamentação | Manifestação Pedagógica no Jogo | Módulo e Dilemas no Código (10 por Princípio) |
-| :--- | :--- | :--- |
-| **1. Faça a adaptação de acordo com o contexto (Tailoring)**<br>*(Seção 2.5.1 - Processos do projeto)* | Combate ao Desperdício Burocrático: Otimização e automação de processos, eliminação de formulários inúteis e relatórios duplicados (*Muda*). | `src/data/events/tailoringEvents.ts`<br>(10 dilemas: relatórios PDF vs dashboards, timesheets do PMO, CCB ágil, reuniões excessivas, BDD vs DOCX, homologação ágil de UX, pipeline CI/CD, sincronização de cadastros, estimativas de fluxo, auditoria digital). |
-| **2. Demonstre comportamentos de liderança**<br>*(Seção 2.5.3 - Foco da equipe do projeto)* | Liderança Servidora (Blindagem): Proteção dos desenvolvedores contra ruídos externos, contenção de horas extras predatórias, mediação de conflitos e segurança psicológica. | `src/data/events/leadershipEvents.ts`<br>(10 dilemas: escudo de suporte, combate ao burnout, sucessão de sênior, conflito Dev vs UX, blindagem contra assédio, Blameless Post-Mortem, reconhecimento público, quebra de silos, capacitação contínua, proteção de bolsistas). |
-| **3. Reconheça, avalie e reaja às interações do sistema (Pensamento Sistêmico)**<br>*(Seção 2.5.2 - Balanceamento de restrições)* | Gestão de Concessões (*Trade-offs*): Efeito dominó de decisões, equilíbrio de restrições concorrentes (prazo, custo, qualidade, moral e conhecimento) e penalidades cruzadas. | `src/data/events/systemsThinkingEvents.ts`<br>(10 dilemas: gambiarra de matrículas, nuvem vs local, decodificação de legado, locks de banco de dados, Oracle vs PostgreSQL, ambiente de Staging, retenção de backups, terceirização com DoD, monólito modular, 2FA gradual). |
-| **4. Aceite a mudança para alcançar o futuro estado previsto**<br>*(Seção 2.5.7 - Trabalho novo e mudanças)* | Combate à Distorção de Escopo (*Scope Creep*): Governança de mudanças, gestão de expectativas de stakeholders de alto escalão e adaptação a novas leis e feedbacks de uso. | `src/data/events/changeManagementEvents.ts`<br>(10 dilemas: chatbot com IA do Reitor, resistência de professores, portaria do MEC de diploma digital, adequação à LGPD, demandas da PROGRAD, demo transparente ao Conselho, mudança de API do Gov.br, feedback de piloto, integração de RU, novo manual de marca). |
-| **5. Inclua qualidade nos processos e nas entregas**<br>*(Seção 2.5.1 - Processos do projeto)* | Proteção Contra a Dívida Técnica: Resistência à pressa desordenada, *Swarming* com QA, Definition of Done estrita, acessibilidade digital (WCAG) e testes de estresse. | `src/data/events/qualityEvents.ts`<br>(10 dilemas: dívida técnica acumulada, Swarming de QA, hotfix de concorrência, SonarQube e Quality Gates, requisitos ambíguos de IRA, testes de regressão de histórico, integridade de DoD, acessibilidade WCAG 2.1, testes de carga k6, patch de SQL Injection). |
+| Princípio PMBOK 7 / Fundamentação                                                                                                 | Manifestação Pedagógica no Jogo                                                                                                                                               | Módulo e Dilemas no Código (10 por Princípio)                                                                                                                                                                                                                                                                      |
+| :-------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Faça a adaptação de acordo com o contexto (Tailoring)**<br>_(Seção 2.5.1 - Processos do projeto)_                            | Combate ao Desperdício Burocrático: Otimização e automação de processos, eliminação de formulários inúteis e relatórios duplicados (_Muda_).                                  | `src/data/events/tailoringEvents.ts`<br>(10 dilemas: relatórios PDF vs dashboards, timesheets do PMO, CCB ágil, reuniões excessivas, BDD vs DOCX, homologação ágil de UX, pipeline CI/CD, sincronização de cadastros, estimativas de fluxo, auditoria digital).                                                    |
+| **2. Demonstre comportamentos de liderança**<br>_(Seção 2.5.3 - Foco da equipe do projeto)_                                       | Liderança Servidora (Blindagem): Proteção dos desenvolvedores contra ruídos externos, contenção de horas extras predatórias, mediação de conflitos e segurança psicológica.   | `src/data/events/leadershipEvents.ts`<br>(10 dilemas: escudo de suporte, combate ao burnout, sucessão de sênior, conflito Dev vs UX, blindagem contra assédio, Blameless Post-Mortem, reconhecimento público, quebra de silos, capacitação contínua, proteção de bolsistas).                                       |
+| **3. Reconheça, avalie e reaja às interações do sistema (Pensamento Sistêmico)**<br>_(Seção 2.5.2 - Balanceamento de restrições)_ | Gestão de Concessões (_Trade-offs_): Efeito dominó de decisões, equilíbrio de restrições concorrentes (prazo, custo, qualidade, moral e conhecimento) e penalidades cruzadas. | `src/data/events/systemsThinkingEvents.ts`<br>(10 dilemas: gambiarra de matrículas, nuvem vs local, decodificação de legado, locks de banco de dados, Oracle vs PostgreSQL, ambiente de Staging, retenção de backups, terceirização com DoD, monólito modular, 2FA gradual).                                       |
+| **4. Aceite a mudança para alcançar o futuro estado previsto**<br>_(Seção 2.5.7 - Trabalho novo e mudanças)_                      | Combate à Distorção de Escopo (_Scope Creep_): Governança de mudanças, gestão de expectativas de stakeholders de alto escalão e adaptação a novas leis e feedbacks de uso.    | `src/data/events/changeManagementEvents.ts`<br>(10 dilemas: chatbot com IA do Reitor, resistência de professores, portaria do MEC de diploma digital, adequação à LGPD, demandas da PROGRAD, demo transparente ao Conselho, mudança de API do Gov.br, feedback de piloto, integração de RU, novo manual de marca). |
+| **5. Inclua qualidade nos processos e nas entregas**<br>_(Seção 2.5.1 - Processos do projeto)_                                    | Proteção Contra a Dívida Técnica: Resistência à pressa desordenada, _Swarming_ com QA, Definition of Done estrita, acessibilidade digital (WCAG) e testes de estresse.        | `src/data/events/qualityEvents.ts`<br>(10 dilemas: dívida técnica acumulada, Swarming de QA, hotfix de concorrência, SonarQube e Quality Gates, requisitos ambíguos de IRA, testes de regressão de histórico, integridade de DoD, acessibilidade WCAG 2.1, testes de carga k6, patch de SQL Injection).            |
 
 ---
 
 ## 8. Sistema de Personagens e Avatares
 
 ### A Mentora Pedagógica
-* **Helena (Consultora Ágil)**: Atua como mediadora educacional e narradora em momentos-chave da jornada:
+
+- **Helena (Consultora Ágil)**: Atua como mediadora educacional e narradora em momentos-chave da jornada:
   - No **Onboarding**, recepciona os participantes e explica o propósito do PMBOK 7.
   - No **Briefing**, apresenta o escopo institucional da modernização do SGA.
   - Na tela de **Consequências**, fornece análises estruturadas sobre o acerto ou equívoco da decisão tomada.
@@ -356,29 +373,31 @@ O jogo transpõe os princípios e práticas do PMBOK 7ª Edição e da gestão �
   - No **Debriefing Final**, conduz a retrospectiva de encerramento com métricas e aplicação profissional.
 
 ### Papéis do Jogador (Fundamentação PMBOK 8)
+
 Os papéis definidos no tipo `PlayerRole` e centralizados em `src/data/roles.ts` estabelecem as fronteiras de autoridade, os processos exercidos e as lentes decisórias de cada participante:
 
-| Dimensão | Gerente de Projetos (GP) | Líder Técnico (Tech Lead) | Líder de Design e Telas (UX Lead) |
-| :--- | :--- | :--- | :--- |
-| **Responde por** | Formação, clima e operação da equipe; governança e sucesso global do projeto. | Viabilidade computacional, integridade técnica e gestão de recursos físicos e virtuais. | Experiência discente/docente, usabilidade, acessibilidade digital e conformidade com o MEC. |
-| **Processos PMBOK 8 mais exercidos** | **Planejar**, **Adquirir** (negociação matricial com chefias e reitoria) e **Liderar a Equipe**. | **Estimar** (esforço bottom-up) e **Monitorar e Controlar** (servidores, nuvem, bancos, licenças e gargalos TOC). | **Estimar** (esforço de telas/pesquisa) e **Liderar** (testes com usuários e facilitação). |
-| **Fronteira de Autoridade** | Negocia alocação de pessoas, mantém ambiente seguro e exerce o Voto de Minerva em empates. | Autoridade sobre arquitetura, padrões técnicos, linguagens e qualidade da esteira CI/CD. | Autoridade sobre requisitos de interface, design tokens e acessibilidade (WCAG). |
-| **O que NÃO decide** | Não impõe escolhas arquiteturais nem define ferramentas técnicas de programação. | Não contrata/remaneja pessoas sem o GP nem negocia orçamentos com a Reitoria. | Não define priorização de infraestrutura de banco de dados nem barramentos internos. |
-| **Pergunta-Chave** | *"Temos as pessoas e recursos certos, no tempo certo, com a equipe motivada e segura?"* | *"Os recursos físicos e virtuais estão sendo usados com eficiência, sem desperdício nem retrabalho?"* | *"Esta solução é compreensível, inclusiva e realmente serve a quem estuda e leciona na universidade?"* |
+| Dimensão                             | Gerente de Projetos (GP)                                                                         | Líder Técnico (Tech Lead)                                                                                         | Líder de Design e Telas (UX Lead)                                                                      |
+| :----------------------------------- | :----------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------- |
+| **Responde por**                     | Formação, clima e operação da equipe; governança e sucesso global do projeto.                    | Viabilidade computacional, integridade técnica e gestão de recursos físicos e virtuais.                           | Experiência discente/docente, usabilidade, acessibilidade digital e conformidade com o MEC.            |
+| **Processos PMBOK 8 mais exercidos** | **Planejar**, **Adquirir** (negociação matricial com chefias e reitoria) e **Liderar a Equipe**. | **Estimar** (esforço bottom-up) e **Monitorar e Controlar** (servidores, nuvem, bancos, licenças e gargalos TOC). | **Estimar** (esforço de telas/pesquisa) e **Liderar** (testes com usuários e facilitação).             |
+| **Fronteira de Autoridade**          | Negocia alocação de pessoas, mantém ambiente seguro e exerce o Voto de Minerva em empates.       | Autoridade sobre arquitetura, padrões técnicos, linguagens e qualidade da esteira CI/CD.                          | Autoridade sobre requisitos de interface, design tokens e acessibilidade (WCAG).                       |
+| **O que NÃO decide**                 | Não impõe escolhas arquiteturais nem define ferramentas técnicas de programação.                 | Não contrata/remaneja pessoas sem o GP nem negocia orçamentos com a Reitoria.                                     | Não define priorização de infraestrutura de banco de dados nem barramentos internos.                   |
+| **Pergunta-Chave**                   | _"Temos as pessoas e recursos certos, no tempo certo, com a equipe motivada e segura?"_          | _"Os recursos físicos e virtuais estão sendo usados com eficiência, sem desperdício nem retrabalho?"_             | _"Esta solução é compreensível, inclusiva e realmente serve a quem estuda e leciona na universidade?"_ |
 
 ### Catálogo de Avatares da Equipe
+
 O sistema conta com 8 avatares selecionáveis (`src/data/avatars.ts`), com imagens ilustrativas em `public/Personagens/`:
 
-| Avatar | Nome | Imagem | Especialidade / Descrição | Papéis Recomendados |
-| :--- | :--- | :--- | :--- | :--- |
-| `geraldo` | Geraldo | `/Personagens/Geraldo.png` | Segurança da informação e auditoria estrutural. | PM, Tech Lead |
-| `kendrick` | Kendrick | `/Personagens/Kendrick.png` | Processos operacionais e integração contínua (DevOps). | Tech Lead |
-| `kenedy` | Kenedy | `/Personagens/Kenedy.png` | Backend e gerenciamento de banco de dados. | Tech Lead |
-| `leonara` | Leonara | `/Personagens/Leonara.png` | Jornada do usuário e acessibilidade de interface. | UX Lead |
-| `livia` | Lívia | `/Personagens/Lívia.png` | Visão estratégica, stakeholders e prazos. | PM |
-| `paulyne` | Paulyne | `/Personagens/Paulyne.png` | Métricas de qualidade e testes automatizados. | UX Lead, Tech Lead |
-| `rainara` | Rainara | `/Personagens/Rainara.png` | Comunicação e negociação de expectativas. | PM, UX Lead |
-| `roberto` | Roberto | `/Personagens/Roberto.png` | Arquitetura de software e sistemas legados. | Tech Lead |
+| Avatar     | Nome     | Imagem                      | Especialidade / Descrição                              | Papéis Recomendados |
+| :--------- | :------- | :-------------------------- | :----------------------------------------------------- | :------------------ |
+| `geraldo`  | Geraldo  | `/Personagens/Geraldo.png`  | Segurança da informação e auditoria estrutural.        | PM, Tech Lead       |
+| `kendrick` | Kendrick | `/Personagens/Kendrick.png` | Processos operacionais e integração contínua (DevOps). | Tech Lead           |
+| `kenedy`   | Kenedy   | `/Personagens/Kenedy.png`   | Backend e gerenciamento de banco de dados.             | Tech Lead           |
+| `leonara`  | Leonara  | `/Personagens/Leonara.png`  | Jornada do usuário e acessibilidade de interface.      | UX Lead             |
+| `livia`    | Lívia    | `/Personagens/Lívia.png`    | Visão estratégica, stakeholders e prazos.              | PM                  |
+| `paulyne`  | Paulyne  | `/Personagens/Paulyne.png`  | Métricas de qualidade e testes automatizados.          | UX Lead, Tech Lead  |
+| `rainara`  | Rainara  | `/Personagens/Rainara.png`  | Comunicação e negociação de expectativas.              | PM, UX Lead         |
+| `roberto`  | Roberto  | `/Personagens/Roberto.png`  | Arquitetura de software e sistemas legados.            | Tech Lead           |
 
 ---
 
@@ -401,9 +420,9 @@ O jogo utiliza uma metáfora visual de canais de comunicação corporativos (`sr
  └─────────────────────────┴─────────────────────────┴─────────────────────────┘
 ```
 
-* **Canal E-mail**: Simula pressões políticas de alto escalão, mudanças de prioridade da Reitoria e auditorias externas. Ensina os alunos a responder formalmente e analisar riscos contratuais e de escopo.
-* **Canal Slack**: Reproduz mensagens instantâneas do time, como avisos de sobrecarga de desenvolvedores, atritos entre design e programação ou dúvidas de implementação.
-* **Canal Ticket/Kanban**: Simula filas técnicas de incidentes em produção, débito técnico e demandas de infraestrutura.
+- **Canal E-mail**: Simula pressões políticas de alto escalão, mudanças de prioridade da Reitoria e auditorias externas. Ensina os alunos a responder formalmente e analisar riscos contratuais e de escopo.
+- **Canal Slack**: Reproduz mensagens instantâneas do time, como avisos de sobrecarga de desenvolvedores, atritos entre design e programação ou dúvidas de implementação.
+- **Canal Ticket/Kanban**: Simula filas técnicas de incidentes em produção, débito técnico e demandas de infraestrutura.
 
 ---
 
@@ -413,14 +432,14 @@ A aplicação conta com um acervo de **50 dilemas rigorosamente modelados**, org
 
 ### Módulos de Dilemas no Código
 
-| Módulo | Arquivo | Quantidade | Princípio PMBOK 7 Correspondente |
-| :--- | :--- | :---: | :--- |
-| **1. Tailoring de Processos** | `tailoringEvents.ts` | **10 dilemas** | *Faça a adaptação de acordo com o contexto (Tailoring)* — Combate ao desperdício burocrático e otimização de fluxo (*Lean*). |
-| **2. Liderança Servidora** | `leadershipEvents.ts` | **10 dilemas** | *Demonstre comportamentos de liderança* — Blindagem da equipe contra desvios, proteção da moral e combate ao burnout. |
-| **3. Pensamento Sistêmico** | `systemsThinkingEvents.ts` | **10 dilemas** | *Reconheça, avalie e reaja às interações do sistema* — Gestão de trade-offs, efeito dominó e restrições interconectadas. |
-| **4. Gestão de Mudanças** | `changeManagementEvents.ts` | **10 dilemas** | *Aceite a mudança para alcançar o futuro estado previsto* — Combate à distorção de escopo (*Scope Creep*) e governança formal. |
-| **5. Qualidade e Excelência** | `qualityEvents.ts` | **10 dilemas** | *Inclua qualidade nos processos e nas entregas* — Proteção contra a dívida técnica, testes de estresse e acessibilidade. |
-| **TOTAL GERAL NO JOGO** | `ALL_DYNAMIC_EVENTS` | **50 dilemas** | *Distribuídos uniformemente nos 5 princípios fundacionais.* |
+| Módulo                        | Arquivo                     |   Quantidade   | Princípio PMBOK 7 Correspondente                                                                                               |
+| :---------------------------- | :-------------------------- | :------------: | :----------------------------------------------------------------------------------------------------------------------------- |
+| **1. Tailoring de Processos** | `tailoringEvents.ts`        | **10 dilemas** | _Faça a adaptação de acordo com o contexto (Tailoring)_ — Combate ao desperdício burocrático e otimização de fluxo (_Lean_).   |
+| **2. Liderança Servidora**    | `leadershipEvents.ts`       | **10 dilemas** | _Demonstre comportamentos de liderança_ — Blindagem da equipe contra desvios, proteção da moral e combate ao burnout.          |
+| **3. Pensamento Sistêmico**   | `systemsThinkingEvents.ts`  | **10 dilemas** | _Reconheça, avalie e reaja às interações do sistema_ — Gestão de trade-offs, efeito dominó e restrições interconectadas.       |
+| **4. Gestão de Mudanças**     | `changeManagementEvents.ts` | **10 dilemas** | _Aceite a mudança para alcançar o futuro estado previsto_ — Combate à distorção de escopo (_Scope Creep_) e governança formal. |
+| **5. Qualidade e Excelência** | `qualityEvents.ts`          | **10 dilemas** | _Inclua qualidade nos processos e nas entregas_ — Proteção contra a dívida técnica, testes de estresse e acessibilidade.       |
+| **TOTAL GERAL NO JOGO**       | `ALL_DYNAMIC_EVENTS`        | **50 dilemas** | _Distribuídos uniformemente nos 5 princípios fundacionais._                                                                    |
 
 ---
 
@@ -430,24 +449,25 @@ As opções de cada dilema (`Alternative`) não são meras alternativas numéric
 
 ```typescript
 export interface Alternative {
-  key: AlternativeKey;           // 'a' | 'b' | 'c'
-  text: string;                  // Descrição da ação tática proposta
-  impacts: Partial<Metrics>;     // Variação direta de métricas
+  key: AlternativeKey; // 'a' | 'b' | 'c'
+  text: string; // Descrição da ação tática proposta
+  impacts: Partial<Metrics>; // Variação direta de métricas
   delayedImpacts?: DelayedImpact[]; // Impactos futuros condicionados
-  feedbackNarrative: string;     // Narrativa do desfecho imediato
-  pmbokConcept: string;          // Conceito teórico correspondente do PMBOK 7
-  learnings: string[];           // Lições práticas consolidadas
-  goodBad: string;               // Avaliação qualitativa da Mentora Helena
-  risksEvaded: string[];         // Riscos prevenidos ou mitigados
-  otherConsequences: string[];   // Análise de "E se outra opção fosse escolhida?"
+  feedbackNarrative: string; // Narrativa do desfecho imediato
+  pmbokConcept: string; // Conceito teórico correspondente do PMBOK 7
+  learnings: string[]; // Lições práticas consolidadas
+  goodBad: string; // Avaliação qualitativa da Mentora Helena
+  risksEvaded: string[]; // Riscos prevenidos ou mitigados
+  otherConsequences: string[]; // Análise de "E se outra opção fosse escolhida?"
 }
 ```
 
 Ao tomar uma decisão, a tela `ConsequenceFeedback.tsx` decompõe o aprendizado em 4 camadas:
+
 1. **Comentário de Helena**: Juízo de valor qualitativo sobre a maturidade da decisão.
 2. **Conceito PMBOK 7**: Ligação direta com o padrão do PMI.
 3. **Riscos Evitados / Criados**: Clareza sobre as contrapartidas assumidas.
-4. **Análise Contrafactual (*What If*)**: O que teria acontecido caso a equipe tivesse optado pelas outras alternativas.
+4. **Análise Contrafactual (_What If_)**: O que teria acontecido caso a equipe tivesse optado pelas outras alternativas.
 
 ---
 
@@ -611,23 +631,23 @@ stateDiagram-v2
     setup --> role_explanation : setupPlayers()
     role_explanation --> briefing : startGame()
     briefing --> event_display : beginEvent()
-    
+
     event_display --> voting_round_1 : Iniciar Votação Secreta
     voting_round_1 --> vote_reveal : Todos votaram (R1)
-    
+
     vote_reveal --> feedback_narrative : Votação Unânime (resolveDecision)
     vote_reveal --> debate_structured : Votação Divergente (startDebate)
-    
+
     debate_structured --> voting_round_2 : Encerrar Debate (beginRound2)
     voting_round_2 --> feedback_narrative : Todos votaram R2 (finalizeRound2)
-    
+
     feedback_narrative --> debriefing : Métrica < 40 ou Fim dos Eventos
     feedback_narrative --> sprint_review : Fim de Sprint (Múltiplo de 3 eventos)
     feedback_narrative --> dashboard : Avançar no mesmo ciclo
-    
+
     sprint_review --> dashboard : startNextSprint()
     dashboard --> event_display : beginEvent()
-    
+
     debriefing --> intro : quitGame() / reset()
     gameover --> intro : reset()
 ```
@@ -656,15 +676,15 @@ O design visual segue o padrão **Soft UI / Clean Enterprise**, priorizando legi
 
 ## 15. Sistema de Áudio
 
-* **Situação Atual no Código**: Não implementado. O sistema prioriza respostas visuais, transições animadas e avisos cromáticos. A inclusão de efeitos sonoros táteis e trilha ambiente suave está documentada no roadmap técnico.
+- **Situação Atual no Código**: Não implementado. O sistema prioriza respostas visuais, transições animadas e avisos cromáticos. A inclusão de efeitos sonoros táteis e trilha ambiente suave está documentada no roadmap técnico.
 
 ---
 
 ## 16. Sistema de Persistência
 
-* **Situação Atual no Código**: **Implementado e Ativo**.
-* **Mecanismo**: Utiliza o middleware `persist` do Zustand acoplado ao `localStorage` do navegador sob a chave `hardwork-manager-storage`.
-* **Benefícios**:
+- **Situação Atual no Código**: **Implementado e Ativo**.
+- **Mecanismo**: Utiliza o middleware `persist` do Zustand acoplado ao `localStorage` do navegador sob a chave `hardwork-manager-storage`.
+- **Benefícios**:
   - Resiliência completa a recarregamentos de página (`F5`), perda momentânea de conexão ou fechamento involuntário de abas em navegadores de dispositivos móveis.
   - Métodos `reset()` e `quitGame()` limpam explicitamente a chave do storage para permitir o reinício de uma nova partida limpa.
 
@@ -673,6 +693,7 @@ O design visual segue o padrão **Soft UI / Clean Enterprise**, priorizando legi
 ## 17. Sistema de Eventos e Reatividade
 
 O simulador adota um modelo reativo orientado a estados:
+
 1. **Triggers (Gatilhos)**: Disparados exclusivamente por eventos de ponteiros do usuário (`onClick`, `onChange`).
 2. **Engine de Estado**: Métodos da store realizam mutações imutáveis (`set({ ... })`).
 3. **Assinaturas Seletivas**: Componentes React utilizam seletores granulares do Zustand (`useGameStore((s) => s.propriedade)`), minimizando re-renderizações supérfluas e garantindo 60 FPS nas transições de telas.
@@ -681,9 +702,9 @@ O simulador adota um modelo reativo orientado a estados:
 
 ## 18. Inteligência Artificial
 
-* **Situação Atual no Código**:
+- **Situação Atual no Código**:
   - As transições de estado, cálculos matemáticos, penalidades e decisões são governadas por **lógica determinística pura**.
-  - Os dilemas envolvendo IA (como `ai_fever`) são recursos narrativos educacionais sobre gestão de expectativas e blindagem de escopo frente ao *hype* tecnológico.
+  - Os dilemas envolvendo IA (como `ai_fever`) são recursos narrativos educacionais sobre gestão de expectativas e blindagem de escopo frente ao _hype_ tecnológico.
   - A arquitetura está preparada para futura integração com LLMs para geração dinâmica de argumentos de stakeholders.
 
 ---
@@ -696,31 +717,31 @@ graph TD
     Onboard --> Setup[Cadastrar Nomes, Avatares e Dificuldade]
     Setup --> Roles[Aprender Mindsets dos Papéis]
     Roles --> Brief[Compreender Escopo do SGA]
-    
+
     Brief --> Dash[Acessar Dashboard da Sprint]
     Dash --> Dilemma[Ler Dilema via E-mail / Slack / Ticket]
-    
+
     Dilemma --> Vote1[Passar Dispositivo e Votar em Segredo - R1]
     Vote1 --> Reveal[Revelar Votos da Equipe]
-    
+
     Reveal --> CheckConsensus{Houve Unanimidade?}
-    
+
     CheckConsensus -->|Sim| Resolve[Aplicar Decisão e Deltas de Métricas]
     CheckConsensus -->|Não| Debate[Debate Estruturado com Timer de Fala]
-    
+
     Debate --> Vote2[Passar Dispositivo e Votar em Segredo - R2]
     Vote2 --> Resolve
-    
+
     Resolve --> Feedback[Analisar Consequências, PMBOK e Ecos]
-    
+
     Feedback --> CheckStatus{Métrica Crítica < 40 ou Fim de Jogo?}
-    
+
     CheckStatus -->|Sim| EndGame([Tela de Debriefing Final com Helena])
     CheckStatus -->|Não| CheckSprint{Completou 3 eventos da Sprint?}
-    
+
     CheckSprint -->|Sim| SprintReview[Tela de Sprint Review e Radar de Ameaças]
     CheckSprint -->|Não| Dash
-    
+
     SprintReview --> Dash
     EndGame --> Reset[Reiniciar Simulação]
     Reset --> Onboard
@@ -759,12 +780,12 @@ graph TD
     IndexSwitcher -->|Renderiza| ScreenComponents
     ScreenComponents -->|Dispara| StoreActionVote
     ScreenComponents -->|Dispara| StoreActionResolve
-    
+
     StoreActionResolve --> TallyAlgo
     StoreActionResolve --> ImpactAlgo
     StoreActionResolve --> EvalCond
     StoreActionResolve --> GameOverTest
-    
+
     GameOverTest -->|Atualiza| StorePhase
     ImpactAlgo -->|Atualiza| StoreMetrics
     StoreActionNext --> DrawAlgo
@@ -774,8 +795,8 @@ graph TD
 
 ## 21. Pontos Fortes do Projeto
 
-1. **Rigor Conceitual com o PMBOK 7**: A transposição prática de conceitos como *Swarming*, *Muda*, Teoria das Restrições, Radiadores de Informação e mitigação da Lei de Brooks confere valor pedagógico incomparável ao simulador.
-2. **Mecânica de Hotseat Polida**: A tela de bloqueio (*handoff*) com transições claras possibilita debates presenciais dinâmicos sem a necessidade de múltiplos computadores por grupo.
+1. **Rigor Conceitual com o PMBOK 7**: A transposição prática de conceitos como _Swarming_, _Muda_, Teoria das Restrições, Radiadores de Informação e mitigação da Lei de Brooks confere valor pedagógico incomparável ao simulador.
+2. **Mecânica de Hotseat Polida**: A tela de bloqueio (_handoff_) com transições claras possibilita debates presenciais dinâmicos sem a necessidade de múltiplos computadores por grupo.
 3. **Estrutura de Debriefing Rico**: Ao término da partida, o sistema não se limita a exibir "vitória ou derrota", mas gera um relatório detalhado de conceitos assimilados e reflexões customizadas.
 4. **Mecanismo de Penalidade Cruzada e Delayed Impacts**: Modela com fidelidade a complexidade de sistemas reais, onde a negligência com documentação ou testes cobra um preço severo em sprints futuras.
 5. **Persistência Confiável**: A integração com `localStorage` garante estabilidade operacional mesmo em redes instáveis ou salas de aula conectadas a dispositivos móveis.
@@ -785,16 +806,19 @@ graph TD
 ## 22. Problemas e Riscos do Código
 
 ### 1. Ausência de Testes Automatizados (Severidade: Alta)
-* **Problema**: O motor matemático e as funções puras (`gameLogic.ts`, `tallyVotes`, `drawNextEvent`, `evaluateCondition`) não possuem suíte de testes unitários automatizados (como Vitest ou Jest).
-* **Risco**: Regressões silenciosas em atualizações de regras ou adição de novos dilemas.
+
+- **Problema**: O motor matemático e as funções puras (`gameLogic.ts`, `tallyVotes`, `drawNextEvent`, `evaluateCondition`) não possuem suíte de testes unitários automatizados (como Vitest ou Jest).
+- **Risco**: Regressões silenciosas em atualizações de regras ou adição de novos dilemas.
 
 ### 2. Acoplamento de Eventos no Código-Fonte (Severidade: Média)
-* **Problema**: Os 36 dilemas estão declarados em arquivos TypeScript dentro do repositório (`src/data/events/*`).
-* **Risco**: Professores e instrutores não conseguem criar ou editar cenários sem clonar o código e efetuar alterações diretas no repositório.
+
+- **Problema**: Os 36 dilemas estão declarados em arquivos TypeScript dentro do repositório (`src/data/events/*`).
+- **Risco**: Professores e instrutores não conseguem criar ou editar cenários sem clonar o código e efetuar alterações diretas no repositório.
 
 ### 3. Falta de Internacionalização (i18n) (Severidade: Baixa)
-* **Problema**: Todos os textos narrativos, rótulos de botões e conceitos pedagógicos estão inseridos de forma literal (*hardcoded*) em português.
-* **Risco**: Limitação para uso em conferências ou turmas internacionais sem refatoração das strings.
+
+- **Problema**: Todos os textos narrativos, rótulos de botões e conceitos pedagógicos estão inseridos de forma literal (_hardcoded_) em português.
+- **Risco**: Limitação para uso em conferências ou turmas internacionais sem refatoração das strings.
 
 ---
 
@@ -810,41 +834,47 @@ graph TD
 
 A tabela abaixo sintetiza a cobertura pedagógica alcançada pelo simulador:
 
-| Área Educacional | Nível de Cobertura | Evidência no Jogo |
-| :--- | :---: | :--- |
-| **Compreensão de Trade-offs** | Excelente | Impossibilidade de maximizar todas as métricas simultaneamente; escolhas exigem sacrifícios táticos conscientes. |
-| **Engajamento de Stakeholders** | Excelente | Dilemas de e-mails com Reitoria e PMO ensinam limites de negociação e argumentação estruturada. |
-| **Comunicação em Equipe** | Excelente | Timer estruturado obriga a escuta ativa das vozes minoritárias antes do voto de minerva do GP. |
-| **Gestão de Dívida Técnica** | Excelente | Mecânica de impactos diferidos tangibiliza o custo futuro de atalhos de programação. |
-| **Fluxo de Trabalho Lean** | Excelente | Eventos específicos cobrem *Swarming*, gargalos de QA e eliminação de burocracias. |
+| Área Educacional                | Nível de Cobertura | Evidência no Jogo                                                                                                |
+| :------------------------------ | :----------------: | :--------------------------------------------------------------------------------------------------------------- |
+| **Compreensão de Trade-offs**   |     Excelente      | Impossibilidade de maximizar todas as métricas simultaneamente; escolhas exigem sacrifícios táticos conscientes. |
+| **Engajamento de Stakeholders** |     Excelente      | Dilemas de e-mails com Reitoria e PMO ensinam limites de negociação e argumentação estruturada.                  |
+| **Comunicação em Equipe**       |     Excelente      | Timer estruturado obriga a escuta ativa das vozes minoritárias antes do voto de minerva do GP.                   |
+| **Gestão de Dívida Técnica**    |     Excelente      | Mecânica de impactos diferidos tangibiliza o custo futuro de atalhos de programação.                             |
+| **Fluxo de Trabalho Lean**      |     Excelente      | Eventos específicos cobrem _Swarming_, gargalos de QA e eliminação de burocracias.                               |
 
 ---
 
 ## 25. Roadmap de Evolução
 
 ### Curto Prazo (1-2 meses)
-* **Suíte de Testes Automatizados**: Implementação de testes unitários com Vitest cobrindo 100% de `gameLogic.ts`.
-* **Exportação de Relatório PDF**: Geração de relatório de desempenho assinado pela Mentora Helena na tela de Debriefing para entrega acadêmica.
-* **Efeitos Sonoros**: Implementação de feedback de áudio tátil (cliques, tique-taque do cronômetro e alertas de perigo).
+
+- **Suíte de Testes Automatizados**: Implementação de testes unitários com Vitest cobrindo 100% de `gameLogic.ts`.
+- **Exportação de Relatório PDF**: Geração de relatório de desempenho assinado pela Mentora Helena na tela de Debriefing para entrega acadêmica.
+- **Efeitos Sonoros**: Implementação de feedback de áudio tátil (cliques, tique-taque do cronômetro e alertas de perigo).
 
 ### Médio Prazo (3-6 meses)
-* **Importador de Cenários Customizados (CMS / JSON)**: Interface para que professores carreguem arquivos JSON com conjuntos personalizados de eventos e métricas.
-* **Modo Multiplayer em Rede (WebSockets / Supabase)**: Substituição do modelo *hotseat* por salas virtuais onde cada aluno vota em seu próprio celular simultaneamente.
+
+- **Importador de Cenários Customizados (CMS / JSON)**: Interface para que professores carreguem arquivos JSON com conjuntos personalizados de eventos e métricas.
+- **Modo Multiplayer em Rede (WebSockets / Supabase)**: Substituição do modelo _hotseat_ por salas virtuais onde cada aluno vota em seu próprio celular simultaneamente.
 
 ### Longo Prazo (6-12 meses)
-* **Simulação de Stakeholders com IA Generativa**: Integração com APIs de LLMs para que a Reitoria ou o Líder Técnico respondam por chat dinâmico às argumentações redigidas pelos alunos.
+
+- **Simulação de Stakeholders com IA Generativa**: Integração com APIs de LLMs para que a Reitoria ou o Líder Técnico respondam por chat dinâmico às argumentações redigidas pelos alunos.
 
 ---
 
 ## 26. Resumo Executivo
 
 ### O que o sistema faz
+
 O **Hard Work Manager** é um simulador sério e colaborativo que coloca estudantes de Engenharia de Software no papel do comitê de liderança responsável pela modernização do Sistema de Gestão Acadêmica de uma universidade pública federal, capacitando-os no Domínio de Desempenho **Recursos** do PMBOK 8.
 
 ### Como funciona
-Em grupos de 3 a 4 participantes assumindo papéis de Gerente de Projetos, Líder Técnico e Líder de UX, a equipe gerencia dilemas operacionais e crises institucionais. O jogo utiliza rodadas de voto secreto em dispositivo compartilhado (*hotseat*), debates cronometrados com regras de equidade de fala e apuração com Voto de Minerva. As decisões impactam 4 métricas interdependentes, disparam impactos diferidos no tempo e culminam em um debriefing pedagógico conduzido pela Mentora Helena.
+
+Em grupos de 3 a 4 participantes assumindo papéis de Gerente de Projetos, Líder Técnico e Líder de UX, a equipe gerencia dilemas operacionais e crises institucionais. O jogo utiliza rodadas de voto secreto em dispositivo compartilhado (_hotseat_), debates cronometrados com regras de equidade de fala e apuração com Voto de Minerva. As decisões impactam 4 métricas interdependentes, disparam impactos diferidos no tempo e culminam em um debriefing pedagógico conduzido pela Mentora Helena.
 
 ### Estado atual do projeto
+
 O projeto está em **estágio totalmente funcional**, com interface de alta fidelidade visual, **50 dilemas modelados** (10 por princípio do PMBOK 7), persistência no `localStorage`, sistema de sprints e debriefing pedagógico completo.
 
 ---
@@ -853,36 +883,36 @@ O projeto está em **estágio totalmente funcional**, com interface de alta fide
 
 ### Arquivos Principais
 
-| Arquivo | Localização | Responsabilidade |
-| :--- | :--- | :--- |
-| `gameStore.ts` | `src/store/` | Estado central, mutações de fase, persistência e injeção de NPCs. |
-| `gameLogic.ts` | `src/lib/` | Funções puras de regras, apuração de votos, penalidade cruzada e sorteio de eventos. |
-| `dynamicEvents.ts` | `src/data/` | Agregador central dos 50 dilemas da simulação. |
-| `tailoringEvents.ts` | `src/data/events/` | 10 dilemas do Princípio 1: Adaptação de Processos (Tailoring). |
-| `leadershipEvents.ts` | `src/data/events/` | 10 dilemas do Princípio 2: Comportamentos de Liderança. |
-| `systemsThinkingEvents.ts` | `src/data/events/` | 10 dilemas do Princípio 3: Pensamento Sistêmico e Trade-offs. |
-| `changeManagementEvents.ts` | `src/data/events/` | 10 dilemas do Princípio 4: Gestão de Mudanças e Scope Creep. |
-| `qualityEvents.ts` | `src/data/events/` | 10 dilemas do Princípio 5: Qualidade e Proteção contra Dívida Técnica. |
-| `avatars.ts` | `src/data/` | Definição dos 8 avatares de equipe e da Mentora Helena. |
-| `index.tsx` | `src/routes/` | Roteador e comutador central de fases da interface. |
-| `__root.tsx` | `src/routes/` | Layout raiz, ExitButton e provedor de QueryClient. |
-| `CommViews.tsx` | `src/components/comms/` | Visualizadores de canais corporativos (E-mail, Slack, Ticket). |
-| `DebateStructured.tsx` | `src/components/screens/` | Cronômetro e gerenciamento da ordem de fala no debate. |
-| `ConsequenceFeedback.tsx` | `src/components/screens/` | Feedback visual, conceitos PMBOK 7 e aprendizados práticos. |
-| `SprintReview.tsx` | `src/components/screens/` | Revisão de sprint a cada 3 eventos e radar de impactos diferidos. |
-| `DebriefingFinal.tsx` | `src/components/screens/` | Fechamento pedagógico estruturado em 3 telas progressivas (1: Resumo & Reflexão, 2: Conceitos PMBOK 7, 3: Aplicação Profissional). |
+| Arquivo                     | Localização               | Responsabilidade                                                                                                                   |
+| :-------------------------- | :------------------------ | :--------------------------------------------------------------------------------------------------------------------------------- |
+| `gameStore.ts`              | `src/store/`              | Estado central, mutações de fase, persistência e injeção de NPCs.                                                                  |
+| `gameLogic.ts`              | `src/lib/`                | Funções puras de regras, apuração de votos, penalidade cruzada e sorteio de eventos.                                               |
+| `dynamicEvents.ts`          | `src/data/`               | Agregador central dos 50 dilemas da simulação.                                                                                     |
+| `tailoringEvents.ts`        | `src/data/events/`        | 10 dilemas do Princípio 1: Adaptação de Processos (Tailoring).                                                                     |
+| `leadershipEvents.ts`       | `src/data/events/`        | 10 dilemas do Princípio 2: Comportamentos de Liderança.                                                                            |
+| `systemsThinkingEvents.ts`  | `src/data/events/`        | 10 dilemas do Princípio 3: Pensamento Sistêmico e Trade-offs.                                                                      |
+| `changeManagementEvents.ts` | `src/data/events/`        | 10 dilemas do Princípio 4: Gestão de Mudanças e Scope Creep.                                                                       |
+| `qualityEvents.ts`          | `src/data/events/`        | 10 dilemas do Princípio 5: Qualidade e Proteção contra Dívida Técnica.                                                             |
+| `avatars.ts`                | `src/data/`               | Definição dos 8 avatares de equipe e da Mentora Helena.                                                                            |
+| `index.tsx`                 | `src/routes/`             | Roteador e comutador central de fases da interface.                                                                                |
+| `__root.tsx`                | `src/routes/`             | Layout raiz, ExitButton e provedor de QueryClient.                                                                                 |
+| `CommViews.tsx`             | `src/components/comms/`   | Visualizadores de canais corporativos (E-mail, Slack, Ticket).                                                                     |
+| `DebateStructured.tsx`      | `src/components/screens/` | Cronômetro e gerenciamento da ordem de fala no debate.                                                                             |
+| `ConsequenceFeedback.tsx`   | `src/components/screens/` | Feedback visual, conceitos PMBOK 7 e aprendizados práticos.                                                                        |
+| `SprintReview.tsx`          | `src/components/screens/` | Revisão de sprint a cada 3 eventos e radar de impactos diferidos.                                                                  |
+| `DebriefingFinal.tsx`       | `src/components/screens/` | Fechamento pedagógico estruturado em 3 telas progressivas (1: Resumo & Reflexão, 2: Conceitos PMBOK 7, 3: Aplicação Profissional). |
 
 ### Principais Interfaces e Tipos
 
-| Estrutura | Localização | Descrição |
-| :--- | :--- | :--- |
-| `GamePhase` | `src/types/index.ts` | Enum com os 16 estados da máquina de estados do jogo. |
-| `GameEvent` | `src/types/index.ts` | Estrutura completa de um dilema corporativo. |
-| `Alternative` | `src/types/index.ts` | Opção de decisão com impactos, aprendizados e conceitos PMBOK 7. |
+| Estrutura       | Localização          | Descrição                                                         |
+| :-------------- | :------------------- | :---------------------------------------------------------------- |
+| `GamePhase`     | `src/types/index.ts` | Enum com os 16 estados da máquina de estados do jogo.             |
+| `GameEvent`     | `src/types/index.ts` | Estrutura completa de um dilema corporativo.                      |
+| `Alternative`   | `src/types/index.ts` | Opção de decisão com impactos, aprendizados e conceitos PMBOK 7.  |
 | `DelayedImpact` | `src/types/index.ts` | Definição de impacto diferido com contador de eventos e condição. |
-| `Metrics` | `src/types/index.ts` | 4 indicadores de desempenho do projeto. |
-| `Player` | `src/types/index.ts` | Modelo do jogador com papel e avatar associado. |
-| `Decision` | `src/types/index.ts` | Registro histórico de decisão tomada na rodada. |
+| `Metrics`       | `src/types/index.ts` | 4 indicadores de desempenho do projeto.                           |
+| `Player`        | `src/types/index.ts` | Modelo do jogador com papel e avatar associado.                   |
+| `Decision`      | `src/types/index.ts` | Registro histórico de decisão tomada na rodada.                   |
 
 ---
 
@@ -893,31 +923,31 @@ O projeto está em **estágio totalmente funcional**, com interface de alta fide
 ```mermaid
 stateDiagram-v2
     [*] --> OnboardingIntro
-    
+
     state OnboardingIntro {
         [*] --> HelenaGreeting
         HelenaGreeting --> ExplanationStep1
         ExplanationStep1 --> ExplanationStep2
         ExplanationStep2 --> ExplanationStep3
     }
-    
+
     OnboardingIntro --> PlayerSetup : Concluir ou Pular
-    
+
     state PlayerSetup {
         [*] --> InserirNomes
         InserirNomes --> EscolherAvatares
         EscolherAvatares --> SelecionarDificuldade
         SelecionarDificuldade --> ValidarEquipe
     }
-    
+
     PlayerSetup --> RoleExplanation : setupPlayers()
     RoleExplanation --> ProjectBriefing : startGame()
     ProjectBriefing --> Dashboard : beginEvent()
-    
+
     state CicloDeSprint {
         Dashboard --> EventDisplay : beginEvent()
         EventDisplay --> VotingRound1 : Iniciar Votação
-        
+
         state VotingRound1 {
             [*] --> BloqueioHandoffR1
             BloqueioHandoffR1 --> RegistrarVotoR1
@@ -925,19 +955,19 @@ stateDiagram-v2
             ProximoJogadorR1 --> BloqueioHandoffR1 : Restam jogadores
             ProximoJogadorR1 --> FimVotacaoR1 : Todos votaram
         }
-        
+
         VotingRound1 --> VoteReveal : finalizeRound1()
-        
+
         state VoteReveal {
             [*] --> ChecarUnanimidade
             ChecarUnanimidade --> Unanime : Consenso 100%
             ChecarUnanimidade --> Divergente : Votos divergentes
         }
-        
+
         state FluxoDebate {
             Divergente --> DebateStructured : Iniciar Debate
             DebateStructured --> VotingRound2 : beginRound2()
-            
+
             state VotingRound2 {
                 [*] --> BloqueioHandoffR2
                 BloqueioHandoffR2 --> RegistrarVotoR2
@@ -946,21 +976,21 @@ stateDiagram-v2
                 ProximoJogadorR2 --> FimVotacaoR2 : Todos votaram
             }
         }
-        
+
         FimVotacaoR2 --> ConsequenceFeedback : resolveDecision() (Com Minerva se empate)
         Unanime --> ConsequenceFeedback : resolveDecision()
-        
+
         state ConsequenceFeedback {
             [*] --> AvaliarDeltas
             AvaliarDeltas --> ProcessarDelayedImpacts
             ProcessarDelayedImpacts --> ExibirFeedbackHelena
         }
     }
-    
+
     ConsequenceFeedback --> DebriefingFinal : isGameOver() == True ou Fim dos Eventos
     ConsequenceFeedback --> SprintReview : Eventos múltiplos de 3
     ConsequenceFeedback --> Dashboard : Evento intermediário
-    
+
     SprintReview --> Dashboard : startNextSprint()
     DebriefingFinal --> OnboardingIntro : quitGame() / reset()
 ```

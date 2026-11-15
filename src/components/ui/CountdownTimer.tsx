@@ -1,5 +1,5 @@
-import React from 'react';
-import { Timer, Pause, Play, AlertCircle } from 'lucide-react';
+import React from "react";
+import { Timer, Pause, Play, AlertCircle } from "lucide-react";
 
 interface CountdownTimerProps {
   formatted: string;
@@ -9,7 +9,7 @@ interface CountdownTimerProps {
   isRunning?: boolean;
   label?: string;
   onToggle?: () => void;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   showControls?: boolean;
 }
 
@@ -19,25 +19,21 @@ export function CountdownTimer({
   isUrgent,
   isExpired,
   isRunning = true,
-  label = 'Tempo Restante',
+  label = "Tempo Restante",
   onToggle,
-  size = 'md',
+  size = "md",
   showControls = false,
 }: CountdownTimerProps) {
-  const isSm = size === 'sm';
-  const isLg = size === 'lg';
+  const isSm = size === "sm";
+  const isLg = size === "lg";
 
   const containerBg = isExpired
-    ? 'bg-rose-100/80 border-rose-300 text-rose-900 ring-1 ring-rose-200'
+    ? "bg-rose-100/80 border-rose-300 text-rose-900 ring-1 ring-rose-200"
     : isUrgent
-      ? 'bg-amber-100/80 border-amber-300 text-amber-950 animate-pulse ring-1 ring-amber-200'
-      : 'bg-card border-slate-200/80 text-foreground';
+      ? "bg-amber-100/80 border-amber-300 text-amber-950 animate-pulse ring-1 ring-amber-200"
+      : "bg-card border-slate-200/80 text-foreground";
 
-  const barColor = isExpired
-    ? 'bg-rose-500'
-    : isUrgent
-      ? 'bg-amber-500'
-      : 'bg-primary';
+  const barColor = isExpired ? "bg-rose-500" : isUrgent ? "bg-amber-500" : "bg-primary";
 
   return (
     <div
@@ -45,11 +41,13 @@ export function CountdownTimer({
     >
       <div className="flex items-center gap-1.5 shrink-0">
         {isExpired ? (
-          <AlertCircle className={`text-rose-600 ${isSm ? 'h-3.5 w-3.5' : 'h-4 w-4'}`} />
+          <AlertCircle className={`text-rose-600 ${isSm ? "h-3.5 w-3.5" : "h-4 w-4"}`} />
         ) : (
-          <Timer className={`text-primary ${isSm ? 'h-3.5 w-3.5' : 'h-4 w-4'}`} />
+          <Timer className={`text-primary ${isSm ? "h-3.5 w-3.5" : "h-4 w-4"}`} />
         )}
-        <span className={`font-semibold tracking-wider uppercase text-muted-foreground ${isSm ? 'text-[10px]' : 'text-xs'}`}>
+        <span
+          className={`font-semibold tracking-wider uppercase text-muted-foreground ${isSm ? "text-[10px]" : "text-xs"}`}
+        >
           {label}
         </span>
       </div>
@@ -57,8 +55,8 @@ export function CountdownTimer({
       <div className="flex items-center gap-2">
         <span
           className={`font-mono font-extrabold tabular-nums tracking-tight ${
-            isSm ? 'text-sm' : isLg ? 'text-2xl' : 'text-base sm:text-lg'
-          } ${isExpired ? 'text-rose-700' : isUrgent ? 'text-amber-800' : 'text-foreground'}`}
+            isSm ? "text-sm" : isLg ? "text-2xl" : "text-base sm:text-lg"
+          } ${isExpired ? "text-rose-700" : isUrgent ? "text-amber-800" : "text-foreground"}`}
         >
           {formatted}
         </span>
@@ -77,7 +75,7 @@ export function CountdownTimer({
           type="button"
           onClick={onToggle}
           className="ml-1 rounded-lg p-1 text-muted-foreground hover:bg-slate-200/60 hover:text-foreground transition-colors"
-          title={isRunning ? 'Pausar cronômetro' : 'Retomar cronômetro'}
+          title={isRunning ? "Pausar cronômetro" : "Retomar cronômetro"}
         >
           {isRunning ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
         </button>

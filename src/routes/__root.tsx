@@ -87,15 +87,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Hard Work Manager: Modernização" },
-      { name: "description", content: "Simulador Colaborativo de Gerenciamento de Projetos - PMBOK 8 (Domínio Recursos)" },
+      {
+        name: "description",
+        content: "Simulador Colaborativo de Gerenciamento de Projetos - PMBOK 8 (Domínio Recursos)",
+      },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "Hard Work Manager" },
-      { property: "og:description", content: "Simulador Colaborativo de Gerenciamento de Projetos - PMBOK 8 (Domínio Recursos)" },
+      {
+        property: "og:description",
+        content: "Simulador Colaborativo de Gerenciamento de Projetos - PMBOK 8 (Domínio Recursos)",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "Hard Work Manager" },
-      { name: "twitter:description", content: "Simulador Colaborativo de Gerenciamento de Projetos - PMBOK 8 (Domínio Recursos)" },
+      {
+        name: "twitter:description",
+        content: "Simulador Colaborativo de Gerenciamento de Projetos - PMBOK 8 (Domínio Recursos)",
+      },
     ],
     links: [
       {

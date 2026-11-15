@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { Plus, Sparkles, Trash2, Users, X, Pencil, Clock } from 'lucide-react';
-import { SoftCard } from '@/components/ui/SoftCard';
-import { SoftButton } from '@/components/ui/SoftButton';
-import { useGameStore, TIMER_PRESETS } from '@/store/gameStore';
-import { ROLE_LABELS, type PlayerRole, type TimerPreset } from '@/types';
-import { AVAILABLE_AVATARES } from '@/data/avatars';
-import { ROLES_DETAILS } from '@/data/roles';
+import { useState } from "react";
+import { Plus, Sparkles, Trash2, Users, X, Pencil, Clock } from "lucide-react";
+import { SoftCard } from "@/components/ui/SoftCard";
+import { SoftButton } from "@/components/ui/SoftButton";
+import { useGameStore, TIMER_PRESETS } from "@/store/gameStore";
+import { ROLE_LABELS, type PlayerRole, type TimerPreset } from "@/types";
+import { AVAILABLE_AVATARES } from "@/data/avatars";
+import { ROLES_DETAILS } from "@/data/roles";
 
 interface Draft {
   name: string;
@@ -15,16 +15,16 @@ interface Draft {
   avatarImage?: string;
 }
 
-const DEFAULT_ROLES: PlayerRole[] = ['pm', 'techLead', 'uxLead'];
+const DEFAULT_ROLES: PlayerRole[] = ["pm", "techLead", "uxLead"];
 
 export function PlayerSetup() {
   const setupPlayers = useGameStore((s) => s.setupPlayers);
   const goTo = useGameStore((s) => s.goTo);
-  
+
   const [drafts, setDrafts] = useState<Draft[]>([
-    { name: '', role: 'pm' },
-    { name: '', role: 'techLead' },
-    { name: '', role: 'uxLead' },
+    { name: "", role: "pm" },
+    { name: "", role: "techLead" },
+    { name: "", role: "uxLead" },
   ]);
 
   const [avatarModalOpenFor, setAvatarModalOpenFor] = useState<number | null>(null);
@@ -34,7 +34,7 @@ export function PlayerSetup() {
 
   const addPlayer = () => {
     if (!canAdd) return;
-    setDrafts([...drafts, { name: '', role: 'uxLead' }]);
+    setDrafts([...drafts, { name: "", role: "uxLead" }]);
   };
 
   const removeLast = () => {
@@ -55,7 +55,9 @@ export function PlayerSetup() {
   const allValid = rolesValid && namesAndAvatarsValid;
 
   const getAvatarAssignedTo = (avatarId: string, currentDraftIndex: number) => {
-    const foundIndex = drafts.findIndex((d, idx) => d.avatarId === avatarId && idx !== currentDraftIndex);
+    const foundIndex = drafts.findIndex(
+      (d, idx) => d.avatarId === avatarId && idx !== currentDraftIndex,
+    );
     if (foundIndex !== -1 && drafts[foundIndex].name.trim()) {
       return drafts[foundIndex].name.trim();
     }
@@ -67,10 +69,9 @@ export function PlayerSetup() {
 
   const handleStart = () => {
     if (!allValid) return;
-    const final = drafts.map((d, i) => (i === 3 ? { ...d, role: 'uxLead' as PlayerRole } : d));
+    const final = drafts.map((d, i) => (i === 3 ? { ...d, role: "uxLead" as PlayerRole } : d));
     setupPlayers(final);
   };
-
 
   return (
     <div className="mx-auto flex min-h-screen max-w-3xl flex-col justify-center px-6 py-10">
@@ -95,10 +96,7 @@ export function PlayerSetup() {
           {drafts.map((d, i) => {
             const isFourth = i === 3;
             return (
-              <div
-                key={i}
-                className="rounded-2xl bg-muted p-4 space-y-2"
-              >
+              <div key={i} className="rounded-2xl bg-muted p-4 space-y-2">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-card text-sm font-bold text-primary shadow-[var(--shadow-soft)]">
                     {i + 1}
@@ -127,15 +125,15 @@ export function PlayerSetup() {
                       ))}
                     </select>
                   )}
-                  
+
                   {/* Unified Avatar Selector Button */}
                   <button
                     type="button"
                     onClick={() => setAvatarModalOpenFor(i)}
                     className={`flex items-center gap-2.5 rounded-2xl px-4 py-2.5 text-sm font-medium transition-all duration-200 shrink-0 ${
                       d.avatarImage
-                        ? 'bg-card text-foreground shadow-[var(--shadow-soft)] hover:-translate-y-0.5 border border-primary/30 hover:border-primary'
-                        : 'bg-card text-muted-foreground shadow-[var(--shadow-soft)] hover:-translate-y-0.5 hover:text-foreground border border-dashed border-slate-300 hover:border-primary/50'
+                        ? "bg-card text-foreground shadow-[var(--shadow-soft)] hover:-translate-y-0.5 border border-primary/30 hover:border-primary"
+                        : "bg-card text-muted-foreground shadow-[var(--shadow-soft)] hover:-translate-y-0.5 hover:text-foreground border border-dashed border-slate-300 hover:border-primary/50"
                     }`}
                   >
                     {d.avatarImage ? (
@@ -162,7 +160,8 @@ export function PlayerSetup() {
 
                 {/* Linha explicativa rápida do papel sob o PMBOK 8 */}
                 <div className="text-[11px] text-muted-foreground pl-1">
-                  {ROLES_DETAILS[isFourth ? 'uxLead' : d.role].badge} · {ROLES_DETAILS[isFourth ? 'uxLead' : d.role].mindset}
+                  {ROLES_DETAILS[isFourth ? "uxLead" : d.role].badge} ·{" "}
+                  {ROLES_DETAILS[isFourth ? "uxLead" : d.role].mindset}
                 </div>
               </div>
             );
@@ -185,16 +184,20 @@ export function PlayerSetup() {
           <div className="rounded-2xl bg-muted/70 p-4 border border-slate-200/70 flex items-start gap-3">
             <Clock className="h-5 w-5 text-primary shrink-0 mt-0.5" />
             <div className="text-xs text-slate-600 leading-relaxed">
-              <span className="font-bold text-foreground block mb-0.5">Regra Oficial de Tempo da Simulação</span>
-              Para exercitar a tomada de decisão sob pressão controlada e a comunicação assertiva, a simulação opera com <strong>2 minutos para discussão e leitura coletiva</strong> do dilema e <strong>45 segundos para cada voto individual</strong>.
+              <span className="font-bold text-foreground block mb-0.5">
+                Regra Oficial de Tempo da Simulação
+              </span>
+              Para exercitar a tomada de decisão sob pressão controlada e a comunicação assertiva, a
+              simulação opera com <strong>2 minutos para discussão e leitura coletiva</strong> do
+              dilema e <strong>45 segundos para cada voto individual</strong>.
             </div>
           </div>
         </div>
 
         {!rolesValid && (
           <p className="mt-6 rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm font-semibold text-amber-900">
-            Cada partida precisa de um Gerente de Projetos, um Líder Técnico e um Líder de Design e Telas.
-            Falta: {missingRoles.map((r) => ROLE_LABELS[r]).join(', ')}.
+            Cada partida precisa de um Gerente de Projetos, um Líder Técnico e um Líder de Design e
+            Telas. Falta: {missingRoles.map((r) => ROLE_LABELS[r]).join(", ")}.
           </p>
         )}
         {rolesValid && !namesAndAvatarsValid && (
@@ -203,7 +206,7 @@ export function PlayerSetup() {
           </p>
         )}
         <div className="mt-8 flex items-center justify-between">
-          <SoftButton variant="ghost" size="md" onClick={() => goTo('intro')}>
+          <SoftButton variant="ghost" size="md" onClick={() => goTo("intro")}>
             ← Voltar ao Guia
           </SoftButton>
 
@@ -218,67 +221,69 @@ export function PlayerSetup() {
           <div className="w-full max-w-3xl rounded-3xl bg-white p-6 shadow-2xl animate-in zoom-in-95">
             <div className="mb-6 flex items-center justify-between border-b pb-4">
               <div>
-                <h2 className="text-xl font-bold text-slate-800">
-                  Escolha o Avatar
-                </h2>
+                <h2 className="text-xl font-bold text-slate-800">Escolha o Avatar</h2>
                 <p className="text-sm text-slate-500 mt-1">
                   Jogador: {drafts[avatarModalOpenFor].name || `Jogador ${avatarModalOpenFor + 1}`}
                 </p>
               </div>
-              <button 
-                onClick={() => setAvatarModalOpenFor(null)} 
+              <button
+                onClick={() => setAvatarModalOpenFor(null)}
                 className="rounded-full p-2 hover:bg-slate-100 transition-colors"
               >
                 <X className="h-6 w-6 text-slate-500" />
               </button>
             </div>
-            
+
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-h-[60vh] overflow-y-auto p-1 custom-scrollbar">
-              {AVAILABLE_AVATARES.map(avatar => {
+              {AVAILABLE_AVATARES.map((avatar) => {
                 const assignedTo = getAvatarAssignedTo(avatar.id, avatarModalOpenFor);
                 const isSelectedByMe = drafts[avatarModalOpenFor].avatarId === avatar.id;
                 const isUnavailable = !!assignedTo;
-                
+
                 return (
                   <button
                     key={avatar.id}
                     onClick={() => {
                       if (!isUnavailable) {
-                        updateDraft(avatarModalOpenFor, { 
-                          avatarId: avatar.id, 
-                          avatarName: avatar.name, 
-                          avatarImage: avatar.imagePath 
+                        updateDraft(avatarModalOpenFor, {
+                          avatarId: avatar.id,
+                          avatarName: avatar.name,
+                          avatarImage: avatar.imagePath,
                         });
                         setAvatarModalOpenFor(null);
                       }
                     }}
                     disabled={isUnavailable}
                     className={`group relative flex flex-col items-center gap-3 rounded-2xl border-2 p-4 text-center transition-all duration-200 ${
-                      isSelectedByMe 
-                        ? 'border-primary bg-primary/5 ring-2 ring-primary/20 shadow-sm' 
+                      isSelectedByMe
+                        ? "border-primary bg-primary/5 ring-2 ring-primary/20 shadow-sm"
                         : isUnavailable
-                          ? 'border-slate-100 bg-slate-50/50 opacity-60 cursor-not-allowed'
-                          : 'border-slate-200 bg-white hover:border-primary/50 hover:shadow-md'
+                          ? "border-slate-100 bg-slate-50/50 opacity-60 cursor-not-allowed"
+                          : "border-slate-200 bg-white hover:border-primary/50 hover:shadow-md"
                     }`}
                   >
-                    <img 
-                      src={avatar.imagePath} 
+                    <img
+                      src={avatar.imagePath}
                       alt={avatar.name}
                       className={`h-20 w-20 rounded-full object-cover shadow-sm bg-slate-100 transition-transform duration-200 ${
-                        isUnavailable ? 'grayscale' : 'group-hover:scale-105'
+                        isUnavailable ? "grayscale" : "group-hover:scale-105"
                       }`}
                     />
                     <div>
-                      <p className={`font-bold ${isUnavailable ? 'text-slate-500' : 'text-slate-800'}`}>
+                      <p
+                        className={`font-bold ${isUnavailable ? "text-slate-500" : "text-slate-800"}`}
+                      >
                         {avatar.name}
                       </p>
                       {isUnavailable ? (
                         <p className="mt-1 text-xs font-medium text-red-500 bg-red-50 px-2 py-0.5 rounded-full inline-block">
-                          Selecionado por {assignedTo.split(' ')[0]}
+                          Selecionado por {assignedTo.split(" ")[0]}
                         </p>
                       ) : avatar.preferredRoles ? (
                         <p className="mt-1 text-xs text-muted-foreground">
-                          {avatar.preferredRoles.map(r => ROLE_LABELS[r].split(' ')[0]).join(', ')}
+                          {avatar.preferredRoles
+                            .map((r) => ROLE_LABELS[r].split(" ")[0])
+                            .join(", ")}
                         </p>
                       ) : null}
                     </div>
