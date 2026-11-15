@@ -97,18 +97,16 @@
   * {
     border-color: var(--color-border);
   }
-  /* Letra de projetor: base maior em telas grandes */
+  /*
+   * Escala pela altura da tela (computador e projetor): tudo em rem acompanha,
+   * para cada tela caber sem rolagem a partir de 1280×720. No celular a rolagem continua.
+   */
   html {
     font-size: 16px;
   }
-  @media (min-width: 1280px) {
+  @media (min-width: 1024px) {
     html {
-      font-size: 17px;
-    }
-  }
-  @media (min-width: 1600px) {
-    html {
-      font-size: 18px;
+      font-size: clamp(13px, calc(100vh / 52), 18px);
     }
   }
   html,

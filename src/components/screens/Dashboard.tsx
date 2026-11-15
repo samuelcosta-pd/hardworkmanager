@@ -3,7 +3,7 @@ import { SoftButton } from "@/components/ui/SoftButton";
 import { SoftCard } from "@/components/ui/SoftCard";
 import { Chip } from "@/components/game/Chip";
 import { DecisionDetails } from "@/components/game/DilemmaDrawer";
-import { Disclosure } from "@/components/game/Disclosure";
+import { DetailsPopover } from "@/components/game/Disclosure";
 import { GameScreen } from "@/components/game/GameScreen";
 import { decisionForTitle, findEvent } from "@/lib/history";
 import { ResponsibleBadge } from "@/components/game/ResponsibleBadge";
@@ -88,7 +88,7 @@ export function Dashboard() {
                 {pendingDelayedImpacts.map((p) => {
                   const src = decisionForTitle(decisions, p.sourceEventTitle);
                   return (
-                    <Disclosure
+                    <DetailsPopover
                       key={p.id}
                       summary={
                         <span className="text-base font-bold leading-snug">
@@ -114,7 +114,7 @@ export function Dashboard() {
                           chosenText={src.chosenText}
                         />
                       )}
-                    </Disclosure>
+                    </DetailsPopover>
                   );
                 })}
               </div>

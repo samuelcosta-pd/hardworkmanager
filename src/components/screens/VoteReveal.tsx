@@ -121,9 +121,6 @@ export function VoteReveal() {
                 <AltShape k={alt.key} size={22} />
                 {alt.key.toUpperCase()}
               </span>
-              <p className="m-0 max-w-72 text-center text-base font-bold leading-snug text-muted-foreground">
-                {alt.text}
-              </p>
             </div>
           );
         })}

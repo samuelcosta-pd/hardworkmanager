@@ -4,7 +4,8 @@ import { SoftButton } from "@/components/ui/SoftButton";
 import { AltBadge } from "@/components/game/AltShape";
 import { Chip } from "@/components/game/Chip";
 import { DecisionDetails } from "@/components/game/DilemmaDrawer";
-import { Disclosure } from "@/components/game/Disclosure";
+import { Carousel } from "@/components/game/Carousel";
+import { DetailsPopover } from "@/components/game/Disclosure";
 import { LEVEL_BG, LEVEL_LABEL, LEVEL_TEXT, METRIC_META, levelOf } from "@/components/game/GameHud";
 import { useGameStore } from "@/store/gameStore";
 import { ALL_DYNAMIC_EVENTS as GAME_EVENTS } from "@/data/dynamicEvents";
@@ -44,7 +45,7 @@ export function DebriefingFinal() {
   const goodCount = learnings.filter((l) => l.good).length;
 
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-8">
+    <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-5 px-4 py-6 sm:px-8">
       <nav className="flex flex-wrap items-center gap-2 pr-16" aria-label="Etapas do debriefing">
         {STEPS.map((label, i) => (
           <button
@@ -69,7 +70,7 @@ export function DebriefingFinal() {
         <img
           src={MENTOR.imagePath}
           alt="Helena"
-          className="h-20 w-20 shrink-0 rounded-full bg-[#dce3f5] object-cover ring-4 ring-primary"
+          className="h-16 w-16 shrink-0 rounded-full bg-[#dce3f5] object-cover ring-4 ring-primary"
         />
         <div className="flex flex-col gap-1">
           <span
@@ -89,47 +90,41 @@ export function DebriefingFinal() {
       </div>
 
       {step === 0 && (
-        <div className="flex flex-col gap-5 animate-float-in">
+        <div className="flex flex-col gap-4 animate-float-in">
           {gameOverReason && (
-            <p className="m-0 rounded-2xl bg-critical p-4 text-lg font-bold text-[#0e1633]">
+            <p className="m-0 rounded-2xl bg-critical p-3 text-lg font-bold text-[#0e1633]">
               {gameOverReason}
             </p>
           )}
-          <div className="grid grid-cols-3 gap-3">
-            <div className="rounded-2xl bg-muted p-4">
-              <div className="text-4xl font-black tabular-nums">{decisions.length}</div>
-              <div className="text-base font-bold text-muted-foreground">decisões</div>
-            </div>
-            <div className="rounded-2xl bg-muted p-4">
-              <div className="text-4xl font-black tabular-nums">
-                {decisions.filter((d) => d.wasUnanimous).length}
+          <div className="grid grid-cols-3 gap-3 lg:grid-cols-7">
+            {[
+              { n: decisions.length, label: "decisões" },
+              { n: decisions.filter((d) => d.wasUnanimous).length, label: "unânimes" },
+              { n: goodCount, label: "recomendadas" },
+            ].map((s) => (
+              <div key={s.label} className="rounded-2xl bg-muted p-3">
+                <div className="text-3xl font-black tabular-nums">{s.n}</div>
+                <div className="text-base font-bold text-muted-foreground">{s.label}</div>
               </div>
-              <div className="text-base font-bold text-muted-foreground">unânimes</div>
-            </div>
-            <div className="rounded-2xl bg-muted p-4">
-              <div className="text-4xl font-black tabular-nums">{goodCount}</div>
-              <div className="text-base font-bold text-muted-foreground">recomendadas</div>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+            ))}
             {METRIC_META.map((m) => {
               const v = metrics[m.key];
               const level = levelOf(m.key, v);
               return (
                 <div
                   key={m.key}
-                  className="flex flex-col gap-2 rounded-2xl border border-border bg-card p-4"
+                  className="flex flex-col gap-1.5 rounded-2xl border border-border bg-card p-3"
                 >
                   <span
                     className={cn(
-                      "flex items-center gap-2 text-base font-extrabold",
+                      "flex items-center gap-1.5 text-sm font-extrabold",
                       LEVEL_TEXT[level],
                     )}
                   >
                     {m.icon}
-                    <span className="text-muted-foreground">{m.long}</span>
+                    <span className="truncate text-muted-foreground">{m.label}</span>
                   </span>
-                  <span className="text-4xl font-black tabular-nums">{v}</span>
+                  <span className="text-3xl font-black tabular-nums">{v}</span>
                   <div className="h-2 overflow-hidden rounded-full bg-muted">
                     <div
                       className={cn("h-full rounded-full", LEVEL_BG[level])}
@@ -143,56 +138,65 @@ export function DebriefingFinal() {
               );
             })}
           </div>
-          <div className="flex flex-col gap-2 rounded-3xl border border-border bg-card p-5">
+          <div className="flex flex-col gap-2">
             <span className="text-xl font-black">Decisões da partida</span>
-            {learnings.map((l, i) => (
-              <Disclosure
-                key={i}
-                summary={
-                  <>
-                    <AltBadge k={l.key} size="sm" />
-                    <span className="flex-1 text-base font-bold">{l.title}</span>
-                    {l.good ? (
-                      <Chip tone="success">
-                        <Check className="h-4 w-4" strokeWidth={3} /> recomendada
-                      </Chip>
-                    ) : (
-                      <Chip tone="warning">
-                        <X className="h-4 w-4" strokeWidth={3} /> arriscada
-                      </Chip>
-                    )}
-                  </>
-                }
-              >
-                <DecisionDetails
-                  event={l.event}
-                  chosenKey={l.key}
-                  chosenText={l.decision.chosenText}
-                  narrative={l.decision.feedbackNarrative}
-                />
-              </Disclosure>
-            ))}
+            <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
+              {learnings.map((l, i) => (
+                <DetailsPopover
+                  key={i}
+                  summary={
+                    <>
+                      <AltBadge k={l.key} size="sm" />
+                      <span className="flex-1 truncate text-base font-bold">{l.title}</span>
+                      {l.good ? (
+                        <Chip tone="success">
+                          <Check className="h-4 w-4" strokeWidth={3} /> recomendada
+                        </Chip>
+                      ) : (
+                        <Chip tone="warning">
+                          <X className="h-4 w-4" strokeWidth={3} /> arriscada
+                        </Chip>
+                      )}
+                    </>
+                  }
+                >
+                  <DecisionDetails
+                    event={l.event}
+                    chosenKey={l.key}
+                    chosenText={l.decision.chosenText}
+                    narrative={l.decision.feedbackNarrative}
+                  />
+                </DetailsPopover>
+              ))}
+            </div>
           </div>
         </div>
       )}
 
       {step === 1 && (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 animate-float-in">
-          {learnings.length === 0 && (
+        <div className="flex min-h-0 flex-1 flex-col animate-float-in">
+          {learnings.length === 0 ? (
             <p className="text-lg text-muted-foreground">Nenhum conceito registrado.</p>
+          ) : (
+            <Carousel
+              perPage={3}
+              label="Conceitos do PMBOK 8 trabalhados"
+              items={learnings.map((l, i) => (
+                <div
+                  key={i}
+                  className="flex h-full flex-col gap-2 rounded-3xl border border-border bg-card p-5"
+                >
+                  <span className="text-base font-bold text-muted-foreground">{l.title}</span>
+                  <span className="flex items-start gap-2 text-xl font-black leading-snug text-primary">
+                    <BookOpen className="mt-1 h-5 w-5 shrink-0" /> {l.concept}
+                  </span>
+                  {l.lesson && (
+                    <p className="m-0 text-lg font-semibold leading-relaxed">{l.lesson}</p>
+                  )}
+                </div>
+              ))}
+            />
           )}
-          {learnings.map((l, i) => (
-            <div
-              key={i}
-              className="flex flex-col gap-2 rounded-3xl border border-border bg-card p-5"
-            >
-              <span className="text-base font-bold text-muted-foreground">{l.title}</span>
-              <span className="flex items-center gap-2 text-xl font-black text-primary">
-                <BookOpen className="h-5 w-5 shrink-0" /> {l.concept}
-              </span>
-              {l.lesson && <p className="m-0 text-lg font-semibold leading-relaxed">{l.lesson}</p>}
-            </div>
-          ))}
         </div>
       )}
 

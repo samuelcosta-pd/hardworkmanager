@@ -3,10 +3,12 @@ import { SoftButton } from "@/components/ui/SoftButton";
 import { Avatar3D } from "@/components/ui/Avatar3D";
 import { HelpButton } from "@/components/game/ResponsibleBadge";
 import { useGameStore } from "@/store/gameStore";
-import { ROLE_LABELS } from "@/types";
+import { ROLE_LABELS, type PlayerRole } from "@/types";
 import { ROLE_CARDS } from "@/data/roles";
 
 /** "Quem cuida do quê": um resumo de uma linha por papel, para diferenciar GP e Líder Técnico. */
+const ROLE_ORDER: PlayerRole[] = ["pm", "techLead", "uxLead"];
+
 export function RoleExplanation() {
   const players = useGameStore((s) => s.players);
   const startGame = useGameStore((s) => s.startGame);
@@ -21,30 +23,37 @@ export function RoleExplanation() {
         </p>
       </div>
 
-      <div className="mt-8 grid flex-1 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {players.map((p, i) => {
-          const card = ROLE_CARDS[p.role];
+      <div className="mt-6 grid flex-1 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {/* Um cartão por papel; o 4º jogador (colíder) entra no cartão de Design e Telas */}
+        {ROLE_ORDER.filter((r) => players.some((p) => p.role === r)).map((role, i) => {
+          const card = ROLE_CARDS[role];
+          const members = players.filter((p) => p.role === role);
           return (
             <article
-              key={p.id}
+              key={role}
               className="flex flex-col gap-4 rounded-3xl border border-border bg-card p-6 animate-float-in"
               style={{ animationDelay: `${i * 80}ms` }}
             >
               <div className="flex items-center gap-4">
-                <Avatar3D
-                  initials={p.name.slice(0, 2)}
-                  role={p.role}
-                  imageUrl={p.avatarImage}
-                  size="lg"
-                />
+                <div className="flex shrink-0 -space-x-3">
+                  {members.map((p) => (
+                    <div key={p.id} className="rounded-full ring-4 ring-card">
+                      <Avatar3D
+                        initials={p.name.slice(0, 2)}
+                        role={p.role}
+                        imageUrl={p.avatarImage}
+                        size="lg"
+                      />
+                    </div>
+                  ))}
+                </div>
                 <div className="flex min-w-0 flex-col">
-                  <span className="truncate text-2xl font-black">{p.name}</span>
+                  <span className="truncate text-2xl font-black">
+                    {members.map((p) => p.name).join(" e ")}
+                  </span>
                   <span className="text-base font-extrabold text-muted-foreground">
-                    {i === 3
-                      ? "Colíder de Design e Telas"
-                      : p.role === "pm"
-                        ? "Gerente de Projetos (GP)"
-                        : ROLE_LABELS[p.role]}
+                    {role === "pm" ? "Gerente de Projetos (GP)" : ROLE_LABELS[role]}
+                    {members.length > 1 ? " (colíderes)" : ""}
                   </span>
                 </div>
               </div>
@@ -67,7 +76,7 @@ export function RoleExplanation() {
                 <span className="text-sm font-bold text-muted-foreground">
                   O que fica fora desse papel
                 </span>
-                <HelpButton label={`O que não é responsabilidade de ${ROLE_LABELS[p.role]}`}>
+                <HelpButton label={`O que não é responsabilidade de ${ROLE_LABELS[role]}`}>
                   <ul className="m-0 flex list-none flex-col gap-2 p-0">
                     {card.notMine.map((n) => (
                       <li key={n} className="flex items-start gap-2">
