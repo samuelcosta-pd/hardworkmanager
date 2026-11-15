@@ -11,15 +11,36 @@ import { detectTechTerms } from "@/data/glossary";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export function EventDisplay() {
-  const { events, matchDeck, currentEventIndex, pendingDelayedImpacts, timerSettings, goTo } =
-    useGameStore();
+  const {
+    events,
+    matchDeck,
+    currentEventIndex,
+    pendingDelayedImpacts,
+    timerSettings,
+    readingDeadline,
+    goTo,
+  } = useGameStore();
   const event = events && events.length > 0 ? events[currentEventIndex] || events[0] : null;
 
-  const [autoAdvanceCountdown, setAutoAdvanceCountdown] = useState<number | null>(null);
+  const readingEnabled = timerSettings.enabled && timerSettings.readingSeconds > 0;
+
+  // Tempo restante calculado a partir do prazo salvo no store: voltar ao painel não reinicia
+  // nem pausa a leitura. Calculado só na montagem; depois o próprio cronômetro conta.
+  const [initialSeconds] = useState(() =>
+    readingDeadline == null
+      ? timerSettings.readingSeconds
+      : Math.max(0, Math.ceil((readingDeadline - Date.now()) / 1000)),
+  );
+
+  // Se o tempo já acabou enquanto a equipe estava no painel, segue direto para a transição.
+  const [autoAdvanceCountdown, setAutoAdvanceCountdown] = useState<number | null>(
+    readingEnabled && initialSeconds === 0 ? 5 : null,
+  );
 
   const countdown = useCountdown({
     durationSeconds: timerSettings.readingSeconds,
-    enabled: timerSettings.enabled && timerSettings.readingSeconds > 0,
+    initialSeconds,
+    enabled: readingEnabled,
     onExpire: () => {
       // Inicia contagem regressiva de 5 segundos para transição automática
       setAutoAdvanceCountdown(5);
@@ -92,10 +113,7 @@ export function EventDisplay() {
               progressPercent={countdown.progressPercent}
               isUrgent={countdown.isUrgent}
               isExpired={countdown.isExpired}
-              isRunning={countdown.isRunning}
               label="Discussão em Equipe"
-              onToggle={countdown.toggle}
-              showControls
               size="sm"
             />
           )}

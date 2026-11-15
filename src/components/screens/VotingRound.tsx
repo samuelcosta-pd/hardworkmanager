@@ -156,10 +156,7 @@ export function VotingRound({ round }: Props) {
               progressPercent={countdown.progressPercent}
               isUrgent={countdown.isUrgent}
               isExpired={countdown.isExpired}
-              isRunning={countdown.isRunning}
               label="Tempo de Voto"
-              onToggle={countdown.toggle}
-              showControls={false}
               size="sm"
             />
           )}

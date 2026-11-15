@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Pause, Play, SkipForward, Timer, MessageSquare, Check, ArrowRight } from "lucide-react";
+import { SkipForward, Timer, MessageSquare, Check, ArrowRight } from "lucide-react";
 import { SoftCard } from "@/components/ui/SoftCard";
 import { SoftButton } from "@/components/ui/SoftButton";
 import { Avatar3D } from "@/components/ui/Avatar3D";
@@ -58,15 +58,13 @@ export function DebateStructured() {
   const [idx, setIdx] = useState(0);
   const speaker = speakers[idx];
   const [secondsLeft, setSecondsLeft] = useState(speaker?.durationSeconds ?? 30);
-  const [running, setRunning] = useState(true);
 
   useEffect(() => {
     setSecondsLeft(speakers[idx]?.durationSeconds ?? 30);
-    setRunning(true);
   }, [idx, speakers]);
 
+  // O tempo de fala não pode ser pausado: a pressão do tempo faz parte da dinâmica.
   useEffect(() => {
-    if (!running) return;
     if (secondsLeft <= 0) return;
 
     const timer = setInterval(() => {
@@ -74,7 +72,7 @@ export function DebateStructured() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [running, secondsLeft]);
+  }, [secondsLeft]);
 
   const next = () => {
     if (idx < speakers.length - 1) setIdx(idx + 1);
@@ -145,11 +143,6 @@ export function DebateStructured() {
 
           {/* Controles de Tempo */}
           <div className="mt-6 flex flex-wrap justify-center gap-2">
-            <SoftButton variant="ghost" size="sm" onClick={() => setRunning((r) => !r)}>
-              {running ? <Pause className="h-4 w-4 mr-1.5" /> : <Play className="h-4 w-4 mr-1.5" />}
-              {running ? "Pausar" : "Retomar"}
-            </SoftButton>
-
             {!isLast ? (
               <SoftButton size="sm" onClick={next}>
                 <SkipForward className="h-4 w-4 mr-1.5" /> Próximo Colega

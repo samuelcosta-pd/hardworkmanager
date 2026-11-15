@@ -56,6 +56,8 @@ interface GameState {
   currentVoterIndex: number;
   gameOverReason?: string;
   timerSettings: TimerSettings;
+  /** Momento (epoch ms) em que acaba o tempo de leitura do dilema atual; null se ainda não começou. */
+  readingDeadline: number | null;
 
   // Propriedades de fluxo e impactos diferidos
   currentSprint: number;
@@ -99,6 +101,7 @@ const initialState = {
     votingSeconds: 45,
     enabled: true,
   },
+  readingDeadline: null as number | null,
   currentSprint: 1,
   playedEventsIds: [] as string[],
   pendingDelayedImpacts: [] as PendingDelayedImpact[],
@@ -170,13 +173,18 @@ export const useGameStore = create<GameState>()(
         }
       },
 
-      beginEvent: () =>
+      beginEvent: () => {
+        const { readingDeadline, timerSettings } = get();
         set({
           phase: "event_display",
           votes: [],
           currentVoterIndex: 0,
           delayedImpactsTriggeredThisRound: [],
-        }),
+          // O tempo de leitura começa na primeira abertura do dilema e continua correndo
+          // se a equipe voltar ao painel: sair e voltar não reinicia o cronômetro.
+          readingDeadline: readingDeadline ?? Date.now() + timerSettings.readingSeconds * 1000,
+        });
+      },
 
       castVote: (alt) => {
         const { votes, currentVoterIndex, players, phase } = get();
@@ -310,6 +318,7 @@ export const useGameStore = create<GameState>()(
           playedEventsIds: [...playedEventsIds, newEvent.id],
           votes: [],
           currentVoterIndex: 0,
+          readingDeadline: null,
           phase: "dashboard",
         });
       },

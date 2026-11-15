@@ -1,28 +1,24 @@
 import React from "react";
-import { Timer, Pause, Play, AlertCircle } from "lucide-react";
+import { Timer, AlertCircle } from "lucide-react";
 
 interface CountdownTimerProps {
   formatted: string;
   progressPercent: number;
   isUrgent: boolean;
   isExpired: boolean;
-  isRunning?: boolean;
   label?: string;
-  onToggle?: () => void;
   size?: "sm" | "md" | "lg";
-  showControls?: boolean;
 }
+
+// Sem controles de pausa: o tempo é parte da pressão do jogo e não pode ser interrompido.
 
 export function CountdownTimer({
   formatted,
   progressPercent,
   isUrgent,
   isExpired,
-  isRunning = true,
   label = "Tempo Restante",
-  onToggle,
   size = "md",
-  showControls = false,
 }: CountdownTimerProps) {
   const isSm = size === "sm";
   const isLg = size === "lg";
@@ -69,17 +65,6 @@ export function CountdownTimer({
           />
         </div>
       </div>
-
-      {showControls && onToggle && (
-        <button
-          type="button"
-          onClick={onToggle}
-          className="ml-1 rounded-lg p-1 text-muted-foreground hover:bg-slate-200/60 hover:text-foreground transition-colors"
-          title={isRunning ? "Pausar cronômetro" : "Retomar cronômetro"}
-        >
-          {isRunning ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
-        </button>
-      )}
     </div>
   );
 }

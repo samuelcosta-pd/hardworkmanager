@@ -2,20 +2,28 @@ import { useState, useEffect, useRef, useCallback } from "react";
 
 interface UseCountdownOptions {
   durationSeconds: number;
+  /** Segundos restantes ao montar (padrão: durationSeconds), para retomar um tempo já em curso. */
+  initialSeconds?: number;
   enabled?: boolean;
   onExpire?: () => void;
 }
 
-export function useCountdown({ durationSeconds, enabled = true, onExpire }: UseCountdownOptions) {
-  const [secondsLeft, setSecondsLeft] = useState(durationSeconds);
+export function useCountdown({
+  durationSeconds,
+  initialSeconds,
+  enabled = true,
+  onExpire,
+}: UseCountdownOptions) {
+  const startSeconds = initialSeconds ?? durationSeconds;
+  const [secondsLeft, setSecondsLeft] = useState(startSeconds);
   const [isRunning, setIsRunning] = useState(enabled);
   const hasExpiredRef = useRef(false);
 
   useEffect(() => {
-    setSecondsLeft(durationSeconds);
+    setSecondsLeft(startSeconds);
     setIsRunning(enabled);
     hasExpiredRef.current = false;
-  }, [durationSeconds, enabled]);
+  }, [startSeconds, enabled]);
 
   useEffect(() => {
     if (!isRunning || !enabled || secondsLeft <= 0) return;
@@ -37,9 +45,6 @@ export function useCountdown({ durationSeconds, enabled = true, onExpire }: UseC
     return () => clearInterval(timer);
   }, [isRunning, enabled, secondsLeft, onExpire]);
 
-  const pause = useCallback(() => setIsRunning(false), []);
-  const resume = useCallback(() => setIsRunning(true), []);
-  const toggle = useCallback(() => setIsRunning((r) => !r), []);
   const reset = useCallback(
     (newDuration?: number) => {
       setSecondsLeft(newDuration ?? durationSeconds);
@@ -64,9 +69,6 @@ export function useCountdown({ durationSeconds, enabled = true, onExpire }: UseC
     isRunning,
     isExpired,
     isUrgent,
-    pause,
-    resume,
-    toggle,
     reset,
   };
 }
