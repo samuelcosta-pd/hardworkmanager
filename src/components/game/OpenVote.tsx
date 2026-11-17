@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, Users } from "lucide-react";
 import { SoftButton } from "@/components/ui/SoftButton";
 import { Avatar3D } from "@/components/ui/Avatar3D";
 import { ALT_BG, AltShape } from "@/components/game/AltShape";
 import { DilemmaDrawer } from "@/components/game/DilemmaDrawer";
+import { Hint } from "@/components/game/Hint";
 import { GameScreen } from "@/components/game/GameScreen";
 import { TeamBar, type PlayerStatus } from "@/components/game/TeamBar";
 import { TimerRing } from "@/components/game/TimerRing";
@@ -24,20 +25,19 @@ export function OpenVote({ event }: { event: GameEvent }) {
   const countdown = useCountdown({
     durationSeconds: timerSettings.votingSeconds,
     enabled: timerOn,
-    // Tempo esgotado: quem não marcou se abstém (menos o GP, que precisa votar).
-    onExpire: () =>
-      setChoices((c) => {
-        const next = { ...c };
-        players.forEach((p) => {
-          if (!next[p.id] && p.role !== "pm") next[p.id] = "abstain";
-        });
-        return next;
-      }),
+    // Tempo esgotado: vale o que foi marcado (mesmo que seja um só voto) e o jogo segue sozinho.
+    onExpire: () => setTimeUp(true),
   });
+  const [timeUp, setTimeUp] = useState(false);
 
-  const pm = players.find((p) => p.role === "pm");
+  useEffect(() => {
+    if (!timeUp) return;
+    // Quem não marcou conta como abstenção; sem voto do GP, o desempate usa a 1ª votação.
+    const t = setTimeout(() => submitOpenVote(choices), 2500);
+    return () => clearTimeout(t);
+  }, [timeUp, choices, submitOpenVote]);
+
   const ready = players.every((p) => choices[p.id]);
-  const pmMissing = pm && !choices[pm.id];
 
   const status: Record<string, PlayerStatus> = {};
   players.forEach((p) => {
@@ -110,25 +110,35 @@ export function OpenVote({ event }: { event: GameEvent }) {
               </div>
               <div className="flex flex-wrap gap-2">
                 {event.alternatives.map((alt) => (
-                  <button
+                  <Hint
                     key={alt.key}
-                    type="button"
-                    aria-pressed={c === alt.key}
-                    aria-label={`${p.name} vota ${alt.key.toUpperCase()}`}
-                    onClick={() => setChoices({ ...choices, [p.id]: alt.key })}
-                    className={cn(
-                      ALT_BG[alt.key],
-                      "flex h-14 w-24 items-center justify-center gap-2 rounded-xl text-2xl font-black text-white transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary",
-                      c && c !== alt.key && "opacity-30",
-                      c === alt.key && "ring-4 ring-white",
-                    )}
+                    text={
+                      <>
+                        <b>{alt.key.toUpperCase()}:</b> {alt.text}
+                      </>
+                    }
                   >
-                    <AltShape k={alt.key} size={18} /> {alt.key.toUpperCase()}
-                  </button>
+                    <button
+                      type="button"
+                      disabled={timeUp}
+                      aria-pressed={c === alt.key}
+                      aria-label={`${p.name} vota ${alt.key.toUpperCase()}`}
+                      onClick={() => setChoices({ ...choices, [p.id]: alt.key })}
+                      className={cn(
+                        ALT_BG[alt.key],
+                        "flex h-14 w-24 items-center justify-center gap-2 rounded-xl text-2xl font-black text-white transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary",
+                        c && c !== alt.key && "opacity-30",
+                        c === alt.key && "ring-4 ring-white",
+                      )}
+                    >
+                      <AltShape k={alt.key} size={18} /> {alt.key.toUpperCase()}
+                    </button>
+                  </Hint>
                 ))}
                 {!isPm && (
                   <button
                     type="button"
+                    disabled={timeUp}
                     aria-pressed={c === "abstain"}
                     onClick={() => setChoices({ ...choices, [p.id]: "abstain" })}
                     className={cn(
@@ -146,14 +156,18 @@ export function OpenVote({ event }: { event: GameEvent }) {
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-4">
-        {countdown.isExpired && pmMissing && (
-          <span className="rounded-2xl border border-primary/40 bg-primary/10 px-4 py-2.5 text-base font-extrabold text-primary">
-            Tempo esgotado. O GP precisa marcar uma alternativa.
+        {timeUp ? (
+          <span
+            role="status"
+            className="rounded-2xl bg-primary px-5 py-2.5 text-lg font-black text-primary-foreground animate-pop-in"
+          >
+            Tempo esgotado. Aplicando a decisão com os votos marcados…
           </span>
+        ) : (
+          <SoftButton size="lg" disabled={!ready} onClick={() => submitOpenVote(choices)}>
+            Aplicar decisão <ArrowRight className="h-5 w-5" />
+          </SoftButton>
         )}
-        <SoftButton size="lg" disabled={!ready} onClick={() => submitOpenVote(choices)}>
-          Aplicar decisão <ArrowRight className="h-5 w-5" />
-        </SoftButton>
       </div>
     </GameScreen>
   );

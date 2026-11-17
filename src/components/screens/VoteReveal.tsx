@@ -4,6 +4,7 @@ import { Avatar3D } from "@/components/ui/Avatar3D";
 import { ALT_BG, AltShape } from "@/components/game/AltShape";
 import { DilemmaDrawer } from "@/components/game/DilemmaDrawer";
 import { GameScreen } from "@/components/game/GameScreen";
+import { Hint } from "@/components/game/Hint";
 import { TeamBar, type PlayerStatus } from "@/components/game/TeamBar";
 import { useGameStore } from "@/store/gameStore";
 import { tallyVotes } from "@/lib/gameLogic";
@@ -71,8 +72,8 @@ export function VoteReveal() {
             {tally.unanimous
               ? shortTitle(event.title)
               : tally.abstentions > 0
-                ? "Houve abstenção: no debate, quem se absteve fala primeiro."
-                : "No debate, a minoria fala primeiro e o GP por último."}
+                ? "Debate: quem se absteve fala primeiro e conta o que faltou. Depois, cada um tem 30 segundos para defender a sua escolha."
+                : "Debate: cada um tem 30 segundos para defender a sua escolha."}
           </span>
         </div>
         {tally.unanimous ? (
@@ -101,26 +102,50 @@ export function VoteReveal() {
             >
               <div className="flex min-h-14 flex-wrap justify-center gap-1.5">
                 {voters.map((p) => (
-                  <div key={p.id} className="rounded-full ring-2 ring-white" title={p.name}>
-                    <Avatar3D
-                      initials={p.name.slice(0, 2)}
-                      role={p.role}
-                      imageUrl={p.avatarImage}
-                      size="md"
-                    />
-                  </div>
+                  <Hint key={p.id} text={p.name}>
+                    <div
+                      className="rounded-full ring-2 ring-white"
+                      tabIndex={0}
+                      aria-label={p.name}
+                    >
+                      <Avatar3D
+                        initials={p.name.slice(0, 2)}
+                        role={p.role}
+                        imageUrl={p.avatarImage}
+                        size="md"
+                      />
+                    </div>
+                  </Hint>
                 ))}
               </div>
-              <div
-                className={`${ALT_BG[alt.key]} flex w-full max-w-64 items-start justify-center rounded-t-2xl rounded-b-md pt-3 text-4xl font-black text-white transition-all duration-700`}
-                style={{ height: n ? 48 + Math.round((220 * n) / max) : 16 }}
+              <Hint
+                text={
+                  <>
+                    <b>{alt.key.toUpperCase()}:</b> {alt.text}
+                  </>
+                }
               >
-                {n > 0 && n}
-              </div>
-              <span className="flex items-center gap-2 text-2xl font-black">
-                <AltShape k={alt.key} size={22} />
-                {alt.key.toUpperCase()}
-              </span>
+                <div
+                  tabIndex={0}
+                  aria-label={`Alternativa ${alt.key.toUpperCase()}: ${alt.text}`}
+                  className={`${ALT_BG[alt.key]} flex w-full max-w-64 cursor-help items-start justify-center rounded-t-2xl rounded-b-md pt-3 text-4xl font-black text-white transition-all duration-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary`}
+                  style={{ height: n ? 48 + Math.round((220 * n) / max) : 16 }}
+                >
+                  {n > 0 && n}
+                </div>
+              </Hint>
+              <Hint
+                text={
+                  <>
+                    <b>{alt.key.toUpperCase()}:</b> {alt.text}
+                  </>
+                }
+              >
+                <span className="flex cursor-help items-center gap-2 text-2xl font-black">
+                  <AltShape k={alt.key} size={22} />
+                  {alt.key.toUpperCase()}
+                </span>
+              </Hint>
             </div>
           );
         })}

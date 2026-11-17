@@ -103,14 +103,21 @@ export function PlayerSetup() {
                 type="button"
                 onClick={() => setAvatarModalOpenFor(i)}
                 aria-label={d.avatarId ? "Trocar avatar" : "Escolher avatar"}
-                className="rounded-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/60"
+                title={d.avatarId ? "Clique para trocar o avatar" : "Clique para escolher o avatar"}
+                className="relative rounded-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/60"
               >
                 {d.avatarImage ? (
-                  <img
-                    src={d.avatarImage}
-                    alt=""
-                    className="h-24 w-24 rounded-full bg-[#dce3f5] object-cover ring-4 ring-primary"
-                  />
+                  <>
+                    <img
+                      src={d.avatarImage}
+                      alt=""
+                      className="h-24 w-24 rounded-full bg-[#dce3f5] object-cover ring-4 ring-primary"
+                    />
+                    {/* Indica que o círculo é clicável para trocar o avatar */}
+                    <span className="absolute -bottom-1 -right-1 flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground ring-4 ring-card">
+                      <Pencil className="h-4 w-4" />
+                    </span>
+                  </>
                 ) : (
                   <span className="flex h-24 w-24 items-center justify-center rounded-full border-[3px] border-dashed border-border text-muted-foreground">
                     <Plus className="h-9 w-9" />
@@ -139,15 +146,6 @@ export function PlayerSetup() {
                   className="h-12 w-full rounded-xl border-2 border-border bg-background px-4 text-lg font-extrabold text-foreground placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none"
                 />
               </label>
-              <SoftButton
-                variant="ghost"
-                size="sm"
-                className="w-full"
-                onClick={() => setAvatarModalOpenFor(i)}
-              >
-                {d.avatarId ? <Pencil className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-                {d.avatarId ? "Trocar avatar" : "Escolher avatar"}
-              </SoftButton>
             </div>
           );
         })}

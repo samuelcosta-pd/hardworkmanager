@@ -12,6 +12,7 @@ export type GamePhase =
   | "decision_resolved"
   | "feedback_narrative"
   | "sprint_review"
+  | "game_end"
   | "debriefing"
   | "completed";
 

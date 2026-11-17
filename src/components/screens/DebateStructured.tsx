@@ -81,10 +81,17 @@ export function DebateStructured() {
   const isLast = idx === speakers.length - 1;
   const timeUp = secondsLeft <= 0;
 
-  // Tempo esgotado: a vez passa automaticamente (no último orador, só resta ir à votação final).
+  // Tempo esgotado: a vez passa automaticamente. No último orador (o GP), avisa e segue
+  // sozinho para a votação final depois de 3 s.
   useEffect(() => {
-    if (timeUp && !isLast) setIdx((i) => i + 1);
-  }, [timeUp, isLast]);
+    if (!timeUp) return;
+    if (!isLast) {
+      setIdx((i) => i + 1);
+      return;
+    }
+    const t = setTimeout(beginRound2, 3000);
+    return () => clearTimeout(t);
+  }, [timeUp, isLast, beginRound2]);
 
   if (!speaker) return null;
   const isPm = speaker.playerRole === "pm";
@@ -148,8 +155,11 @@ export function DebateStructured() {
             size={140}
           />
           {timeUp && isLast && (
-            <span className="text-lg font-extrabold text-primary">
-              Tempo esgotado. Sigam para a votação final.
+            <span
+              role="status"
+              className="rounded-2xl bg-primary px-5 py-2.5 text-lg font-black text-primary-foreground animate-pop-in"
+            >
+              Tempo esgotado. Indo para a votação final…
             </span>
           )}
         </section>

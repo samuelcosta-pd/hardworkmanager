@@ -1,13 +1,16 @@
 import {
   AlertTriangle,
   ArrowRight,
+  BookOpen,
+  Briefcase,
   Clock,
+  GraduationCap,
   Lightbulb,
   ShieldCheck,
   TrendingDown,
   TrendingUp,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { SoftButton } from "@/components/ui/SoftButton";
 import { SoftCard } from "@/components/ui/SoftCard";
 import { AltBadge } from "@/components/game/AltShape";
@@ -62,6 +65,8 @@ export function ConsequenceFeedback() {
     goTo,
   } = useGameStore();
 
+  // Depois da consequência, uma tela curta com o aprendizado deste dilema.
+  const [showLesson, setShowLesson] = useState(false);
   const decision = decisions[decisions.length - 1];
   const event = events[currentEventIndex] ?? events[0];
   const alt =
@@ -85,15 +90,74 @@ export function ConsequenceFeedback() {
   const isLast = currentEventIndex >= matchDeck.length - 1;
   const isCycleEnd = (currentEventIndex + 1) % 3 === 0;
   const cta = gameOverReason
-    ? "Ver desfecho do projeto"
-    : isLast || isCycleEnd
-      ? "Revisão do ciclo"
-      : "Próximo dilema";
+    ? "Fim de jogo"
+    : isLast
+      ? "Encerrar o jogo"
+      : isCycleEnd
+        ? "Revisão do ciclo"
+        : "Próximo dilema";
 
   // Variação real (inclui a penalidade cruzada e os limites 0–100); partidas antigas usam o valor nominal.
   const delta: Partial<Metrics> = decision.immediateDelta ?? alt.impacts;
   const changed = METRIC_META.filter((m) => (delta[m.key] ?? 0) !== 0);
   const good = alt.goodBad === "good";
+  const recommended = event.alternatives.find((a) => a.goodBad === "good");
+
+  if (showLesson) {
+    return (
+      <GameScreen
+        hudAction={
+          <DilemmaDrawer event={event} showAlternatives chosenKey={decision.chosenAlternative} />
+        }
+      >
+        <div className="flex flex-col gap-1 animate-float-in">
+          <span className="flex items-center gap-2 text-lg font-extrabold text-primary">
+            <GraduationCap className="h-6 w-6" /> Aprendizado do dilema
+          </span>
+          <h1 className="m-0 text-3xl font-black tracking-tight sm:text-4xl">
+            {shortTitle(decision.eventTitle)}
+          </h1>
+        </div>
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <section className="flex flex-col gap-3 rounded-3xl border border-border bg-card p-6 animate-float-in">
+            <span className="flex items-center gap-2 text-lg font-black text-muted-foreground">
+              <BookOpen className="h-6 w-6 text-primary" /> Conceito do PMBOK 8
+            </span>
+            <span className="text-2xl font-black leading-snug text-primary">
+              {alt.pmbokConcept}
+            </span>
+            {alt.learnings[0] && (
+              <p className="m-0 text-lg font-semibold leading-relaxed">{alt.learnings[0]}</p>
+            )}
+            {!good && recommended && (
+              <p className="m-0 mt-auto flex flex-wrap items-center gap-2 rounded-2xl bg-muted p-3 text-base font-bold">
+                A recomendada era a <AltBadge k={recommended.key} size="sm" />
+                {recommended.pmbokConcept}
+              </p>
+            )}
+          </section>
+          <section
+            className="flex flex-col gap-3 rounded-3xl border border-border bg-card p-6 animate-float-in"
+            style={{ animationDelay: "80ms" }}
+          >
+            <span className="flex items-center gap-2 text-lg font-black text-muted-foreground">
+              <Briefcase className="h-6 w-6 text-primary" /> Na vida profissional
+            </span>
+            <span className="text-2xl font-black leading-snug">Habilidade praticada</span>
+            <p className="m-0 text-lg font-semibold leading-relaxed">{event.learningObjective}</p>
+          </section>
+        </div>
+        <div className="mt-auto flex flex-wrap items-center justify-between gap-4">
+          <SoftButton variant="ghost" onClick={() => setShowLesson(false)}>
+            Voltar à consequência
+          </SoftButton>
+          <SoftButton size="lg" onClick={nextEvent}>
+            {cta} <ArrowRight className="h-5 w-5" />
+          </SoftButton>
+        </div>
+      </GameScreen>
+    );
+  }
 
   return (
     <GameScreen
@@ -109,23 +173,16 @@ export function ConsequenceFeedback() {
         <Chip>
           Escolha da equipe: <AltBadge k={decision.chosenAlternative} size="sm" />
         </Chip>
+        {/* O motivo completo aparece na tela de fim de jogo */}
+        {gameOverReason && (
+          <Chip tone="critical">
+            <AlertTriangle className="h-4 w-4" /> Limite crítico atingido
+          </Chip>
+        )}
         <span className="text-base font-bold text-muted-foreground">
           {shortTitle(decision.eventTitle)}
         </span>
       </div>
-
-      {gameOverReason && (
-        <div
-          className="flex items-start gap-3 rounded-3xl bg-critical p-4 text-[#0e1633] animate-pop-in"
-          role="alert"
-        >
-          <AlertTriangle className="mt-0.5 h-6 w-6 shrink-0" />
-          <div>
-            <p className="m-0 text-lg font-black">Limite crítico atingido</p>
-            <p className="m-0 text-base font-bold">{gameOverReason}</p>
-          </div>
-        </div>
-      )}
 
       {/* Duas consequências no mesmo turno ficam lado a lado (cabe sem rolagem em 1366×768) */}
       {delayedImpactsTriggeredThisRound.length > 0 && (
@@ -202,7 +259,7 @@ export function ConsequenceFeedback() {
         </div>
       )}
       {decision.penaltyApplied && (
-        <p className="m-0 rounded-2xl border border-critical/60 p-4 text-base font-bold">
+        <p className="m-0 rounded-2xl border border-critical/60 px-4 py-2 text-base font-bold">
           Penalidade cruzada: com o Conhecimento Organizacional abaixo de 20, a perda de Capacidade
           de Entrega desta decisão dobrou.
         </p>
@@ -272,8 +329,8 @@ export function ConsequenceFeedback() {
             )}
           </SheetContent>
         </Sheet>
-        <SoftButton size="lg" onClick={nextEvent}>
-          {cta} <ArrowRight className="h-5 w-5" />
+        <SoftButton size="lg" onClick={() => setShowLesson(true)}>
+          Ver o aprendizado <ArrowRight className="h-5 w-5" />
         </SoftButton>
       </div>
     </GameScreen>

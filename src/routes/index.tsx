@@ -12,6 +12,7 @@ import { VoteReveal } from "@/components/screens/VoteReveal";
 import { DebateStructured } from "@/components/screens/DebateStructured";
 import { ConsequenceFeedback } from "@/components/screens/ConsequenceFeedback";
 import { DebriefingFinal } from "@/components/screens/DebriefingFinal";
+import { GameEnd } from "@/components/screens/GameEnd";
 import { SprintReview } from "@/components/screens/SprintReview";
 
 export const Route = createFileRoute("/")({
@@ -77,6 +78,8 @@ function Game() {
       return <ConsequenceFeedback />;
     case "sprint_review":
       return <SprintReview />;
+    case "game_end":
+      return <GameEnd />;
     case "debriefing":
       return <DebriefingFinal />;
     default:

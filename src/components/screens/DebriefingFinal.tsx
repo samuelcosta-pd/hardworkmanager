@@ -39,7 +39,6 @@ export function DebriefingFinal() {
       key: d.chosenAlternative,
       good: alt?.goodBad === "good",
       concept: alt?.pmbokConcept ?? "",
-      lesson: alt?.learnings?.[0] ?? "",
     };
   });
   const goodCount = learnings.filter((l) => l.good).length;
@@ -190,8 +189,11 @@ export function DebriefingFinal() {
                   <span className="flex items-start gap-2 text-xl font-black leading-snug text-primary">
                     <BookOpen className="mt-1 h-5 w-5 shrink-0" /> {l.concept}
                   </span>
-                  {l.lesson && (
-                    <p className="m-0 text-lg font-semibold leading-relaxed">{l.lesson}</p>
+                  {/* O texto longo já foi visto no aprendizado de cada dilema; aqui fica só a habilidade */}
+                  {l.event?.learningObjective && (
+                    <p className="m-0 text-base font-semibold leading-relaxed text-muted-foreground">
+                      {l.event.learningObjective}
+                    </p>
                   )}
                 </div>
               ))}

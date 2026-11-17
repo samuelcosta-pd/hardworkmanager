@@ -293,16 +293,17 @@ export const useGameStore = create<GameState>()(
 
       nextEvent: () => {
         const { currentEventIndex, gameOverReason, matchDeck } = get();
+        // Fim de jogo (por limite crítico ou depois do último dilema): tela de encerramento
         if (gameOverReason) {
-          set({ phase: "debriefing" });
+          set({ phase: "game_end" });
           return;
         }
 
         const next = currentEventIndex + 1;
 
-        // Revisão de ciclo a cada 3 dilemas e ao fim do baralho
+        // Revisão de ciclo a cada 3 dilemas; depois do último, a tela de fim de jogo
         if (next >= matchDeck.length) {
-          set({ phase: "sprint_review" });
+          set({ phase: "game_end" });
         } else if (next % 3 === 0) {
           // Revisão de Sprint a cada 3 dilemas
           set({ phase: "sprint_review" });
