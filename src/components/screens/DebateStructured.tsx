@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, Check, MessageSquare, SkipForward } from "lucide-react";
+import { ArrowRight, Check, MessageSquare, SkipForward } from "lucide-react";
 import { SoftButton } from "@/components/ui/SoftButton";
 import { Avatar3D } from "@/components/ui/Avatar3D";
 import { AltRevealButton, DilemmaDrawer } from "@/components/game/DilemmaDrawer";
@@ -12,7 +12,8 @@ import { ROLE_LABELS, type AlternativeKey, type DebateSpeaker, type Player } fro
 
 /**
  * Ordem de fala: (1) quem se absteve, (2) quem votou na alternativa menos escolhida,
- * (3) quem votou na mais escolhida — 30 s cada — e, por último, o GP (20 s) para sintetizar.
+ * (3) quem votou na mais escolhida e, por último, o GP, que sintetiza. Todos têm 30 s.
+ * Quando o tempo acaba, a vez passa sozinha para o próximo: ninguém fala além do tempo.
  */
 function buildOrder(players: Player[], voteCountOf: (playerId: string) => number): DebateSpeaker[] {
   const pm = players.find((p) => p.role === "pm");
@@ -37,7 +38,7 @@ function buildOrder(players: Player[], voteCountOf: (playerId: string) => number
       playerName: pm.name,
       playerRole: pm.role,
       avatarImage: pm.avatarImage,
-      durationSeconds: 20,
+      durationSeconds: 30,
       order: (list.length + 1) as DebateSpeaker["order"],
     });
   }
@@ -77,8 +78,15 @@ export function DebateStructured() {
     return () => clearTimeout(t);
   }, [secondsLeft]);
 
-  if (!speaker) return null;
   const isLast = idx === speakers.length - 1;
+  const timeUp = secondsLeft <= 0;
+
+  // Tempo esgotado: a vez passa automaticamente (no último orador, só resta ir à votação final).
+  useEffect(() => {
+    if (timeUp && !isLast) setIdx((i) => i + 1);
+  }, [timeUp, isLast]);
+
+  if (!speaker) return null;
   const isPm = speaker.playerRole === "pm";
   const spVote = voteOf(speaker.playerId);
 
@@ -139,6 +147,11 @@ export function DebateStructured() {
             label="Tempo de fala"
             size={140}
           />
+          {timeUp && isLast && (
+            <span className="text-lg font-extrabold text-primary">
+              Tempo esgotado. Sigam para a votação final.
+            </span>
+          )}
         </section>
 
         <aside className="flex flex-col gap-3">
@@ -199,18 +212,9 @@ export function DebateStructured() {
             );
           })}
           <div className="mt-2 flex gap-3">
-            {idx > 0 && (
-              <SoftButton
-                variant="ghost"
-                onClick={() => setIdx(idx - 1)}
-                aria-label="Voltar ao orador anterior"
-              >
-                <ArrowLeft className="h-5 w-5" />
-              </SoftButton>
-            )}
             {!isLast ? (
               <SoftButton className="flex-1" onClick={() => setIdx(idx + 1)}>
-                Próximo <SkipForward className="h-5 w-5" />
+                Terminei de falar <SkipForward className="h-5 w-5" />
               </SoftButton>
             ) : (
               <SoftButton className="flex-1" onClick={beginRound2}>

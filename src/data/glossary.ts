@@ -7,6 +7,48 @@
  * descritos na Seção 2.6 do Guia (Domínio de Desempenho de Recursos).
  */
 export const TECH_GLOSSARY: Record<string, string> = {
+  // Siglas e termos do dia a dia de projetos de software (pedidos no teste de 17/11/2026)
+  gp: "Gerente de Projetos: responsável pelas pessoas, pelas negociações e por desempatar a votação final.",
+  "tech lead":
+    "Líder Técnico: responsável pela arquitetura, pelos ambientes e pelos recursos físicos e virtuais.",
+  ux: "Experiência do usuário (User Experience): como é usar o sistema, se é fácil, claro e acessível.",
+  sigaa:
+    "Sistema Integrado de Gestão de Atividades Acadêmicas: o sistema acadêmico usado pela universidade (matrícula, notas, histórico).",
+  ira: "Índice de Rendimento Acadêmico: média ponderada das notas do aluno, calculada pelo sistema acadêmico.",
+  pmo: "Escritório de Projetos (Project Management Office): setor que define padrões e acompanha os projetos da instituição.",
+  qa: "Garantia da qualidade (Quality Assurance): quem testa o sistema para encontrar defeitos antes de chegar ao usuário.",
+  sla: "Acordo de nível de serviço (Service Level Agreement): o compromisso de disponibilidade e tempo de resposta de um fornecedor.",
+  homologação:
+    "Etapa em que o sistema é testado e aprovado por quem vai usá-lo antes de ir para produção.",
+  staging:
+    "Ambiente de testes que imita o ambiente real (produção), usado para validar mudanças antes de publicá-las.",
+  nuvem: "Servidores e serviços alugados de um provedor pela internet, pagos conforme o uso.",
+  cluster:
+    "Conjunto de servidores que trabalham juntos como se fossem um só, para dar mais capacidade.",
+  snapshot: "Cópia instantânea do estado de um servidor ou banco de dados, usada como backup.",
+  snapshots: "Cópias instantâneas do estado de um servidor ou banco de dados, usadas como backup.",
+  api: "Interface que permite a um sistema trocar dados com outro sistema.",
+  apis: "Interfaces que permitem a um sistema trocar dados com outros sistemas.",
+  licença: "Direito pago de uso de um software, geralmente por usuário e por período.",
+  licenças: "Direitos pagos de uso de software, geralmente por usuário e por período.",
+  legado: "Sistema ou código antigo que continua em uso, difícil de manter e de modificar.",
+  "dívida técnica":
+    "Atalhos técnicos tomados para ganhar tempo agora e que custam retrabalho depois, como juros.",
+  "débito técnico":
+    "Atalhos técnicos tomados para ganhar tempo agora e que custam retrabalho depois, como juros.",
+  sprint:
+    "Ciclo curto e fixo de trabalho (por exemplo, duas semanas) ao fim do qual a equipe entrega algo.",
+  sprints:
+    "Ciclos curtos e fixos de trabalho (por exemplo, duas semanas) ao fim dos quais a equipe entrega algo.",
+  feedback: "Retorno sobre o trabalho de alguém: o que foi bem e o que pode melhorar.",
+  stakeholders:
+    "Partes interessadas: pessoas ou setores afetados pelo projeto ou que influenciam suas decisões.",
+  rotatividade: "Saída e substituição frequente de pessoas da equipe (turnover).",
+  onboarding: "Processo de receber e integrar uma pessoa nova na equipe até ela ficar produtiva.",
+  outsourcing: "Terceirização: contratar uma empresa externa para fazer parte do trabalho.",
+  "code freeze":
+    "Congelamento de código: período em que só se corrigem defeitos, sem novas funcionalidades.",
+
   // PMBOK 8 - Processos do Domínio de Recursos
   "planejar o gerenciamento dos recursos":
     "Processo do PMBOK 8 que define como os recursos (pessoas, equipamentos, licenças, ambientes) serão estimados, adquiridos, liderados e utilizados no projeto.",
@@ -195,7 +237,7 @@ const GLOSSARY_MATCHERS = Object.entries(TECH_GLOSSARY)
  */
 export function detectTechTerms(
   text: string,
-  max = 3,
+  max = 5,
 ): Array<{ term: string; definition: string }> {
   const found: Array<{ term: string; definition: string }> = [];
 

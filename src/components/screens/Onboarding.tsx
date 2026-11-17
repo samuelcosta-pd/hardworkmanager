@@ -139,7 +139,7 @@ export function Onboarding() {
               n={2}
               icon={<Lock className="h-7 w-7" />}
               title="Votem em segredo"
-              time="45 s cada"
+              time="1 min cada"
             />
             <StepCard
               n={3}

@@ -105,7 +105,10 @@ export function DilemmaDrawer({ event, showAlternatives, chosenKey, timer }: Dra
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const terms = detectTechTerms(event.description, 4);
+  const terms = detectTechTerms(
+    `${event.description} ${event.alternatives.map((a) => a.text).join(" ")}`,
+    6,
+  );
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>

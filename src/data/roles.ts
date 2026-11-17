@@ -124,7 +124,7 @@ export const ROLE_CARDS: Record<
   { headline: string; mission: string; decides: string[]; notMine: string[] }
 > = {
   pm: {
-    headline: "Cuida das pessoas",
+    headline: "Responsável pelas pessoas",
     mission: "Monta, protege e motiva a equipe. Negocia recursos com a Reitoria.",
     decides: [
       "Contratações, alocação e horas extras",
@@ -134,7 +134,7 @@ export const ROLE_CARDS: Record<
     notMine: ["Arquitetura técnica e banco de dados", "Detalhes visuais das telas"],
   },
   techLead: {
-    headline: "Cuida da tecnologia",
+    headline: "Responsável pela tecnologia",
     mission: "Responde por servidores, nuvem, licenças e ambientes de teste.",
     decides: [
       "Infraestrutura e capacidade técnica",
@@ -144,7 +144,7 @@ export const ROLE_CARDS: Record<
     notMine: ["Negociar bolsas e orçamento com a Reitoria", "Conflitos de pessoas e RH"],
   },
   uxLead: {
-    headline: "Cuida dos usuários",
+    headline: "Responsável pelos usuários",
     mission: "Garante que o sistema seja fácil de usar e acessível para alunos e professores.",
     decides: [
       "Usabilidade e testes com usuários",

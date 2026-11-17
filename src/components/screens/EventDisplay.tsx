@@ -70,7 +70,10 @@ export function EventDisplay() {
   }
 
   const { header, body } = parseMessage(event.description);
-  const terms = detectTechTerms(event.description, 4);
+  const terms = detectTechTerms(
+    `${event.description} ${event.alternatives.map((a) => a.text).join(" ")}`,
+    6,
+  );
   const imminent = pendingDelayedImpacts.find((p) => p.remainingEvents === 1);
 
   return (

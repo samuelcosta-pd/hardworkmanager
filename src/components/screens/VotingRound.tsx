@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ArrowRight, EyeOff, Lock, Undo2, UserX } from "lucide-react";
+import { ArrowRight, Check, EyeOff, Lock, RotateCcw, UserX } from "lucide-react";
+import { OpenVote } from "@/components/game/OpenVote";
 import { SoftButton } from "@/components/ui/SoftButton";
 import { SoftCard } from "@/components/ui/SoftCard";
 import { Avatar3D } from "@/components/ui/Avatar3D";
@@ -29,7 +30,6 @@ export function VotingRound({ round }: Props) {
     votes,
     timerSettings,
     castVote,
-    undoLastVote,
     finalizeRound1,
     finalizeRound2,
     goTo,
@@ -44,16 +44,27 @@ export function VotingRound({ round }: Props) {
   // Regra de desempate: na 2ª votação o GP não pode se abster.
   const mustVote = round === 2 && player?.role === "pm";
 
+  // Escolha marcada, ainda não confirmada. Não há como voltar ao voto de outra pessoa:
+  // a confirmação substitui o antigo "corrigir meu voto", que dava tempo extra de leitura.
+  const [pending, setPending] = useState<VoteChoice | null>(null);
+
   const handleVote = (choice: VoteChoice) => {
     if (choice === "abstain" && mustVote) return;
     castVote(choice);
+    setPending(null);
     setHandoff(true);
   };
 
   const countdown = useCountdown({
     durationSeconds: timerSettings.votingSeconds,
-    enabled: !handoff && !allVoted && timerSettings.enabled && timerSettings.votingSeconds > 0,
-    onExpire: () => handleVote("abstain"),
+    enabled:
+      round === 1 &&
+      !handoff &&
+      !allVoted &&
+      timerSettings.enabled &&
+      timerSettings.votingSeconds > 0,
+    // Tempo esgotado: vale a escolha marcada; sem escolha, abstenção.
+    onExpire: () => handleVote(pending ?? "abstain"),
   });
 
   const roundVotes = votes.filter((v) => v.round === round);
@@ -69,12 +80,6 @@ export function VotingRound({ round }: Props) {
         : "aguarda";
   });
   const footer = <TeamBar status={status} />;
-  const prevVoter = currentVoterIndex > 0 ? players[currentVoterIndex - 1] : undefined;
-  const undoButton = prevVoter ? (
-    <SoftButton variant="ghost" size="sm" onClick={undoLastVote}>
-      <Undo2 className="h-5 w-5" /> {prevVoter.name}, corrigir meu voto
-    </SoftButton>
-  ) : null;
   const timerOn = !handoff && !allVoted && timerSettings.enabled && timerSettings.votingSeconds > 0;
   const drawer = event ? (
     <DilemmaDrawer
@@ -90,6 +95,9 @@ export function VotingRound({ round }: Props) {
       }
     />
   ) : undefined;
+
+  // Votação final: aberta, numa só tela, sem passar o dispositivo.
+  if (round === 2 && event) return <OpenVote event={event} />;
 
   if (allVoted) {
     return (
@@ -109,7 +117,6 @@ export function VotingRound({ round }: Props) {
           >
             {round === 1 ? "Revelar votos" : "Aplicar decisão"} <ArrowRight className="h-5 w-5" />
           </SoftButton>
-          {undoButton && <div className="mt-4 flex justify-center">{undoButton}</div>}
         </SoftCard>
       </GameScreen>
     );
@@ -157,13 +164,12 @@ export function VotingRound({ round }: Props) {
           <SoftButton size="lg" className="w-full" onClick={() => setHandoff(false)}>
             Sou {player.name}, vou votar
           </SoftButton>
-          {undoButton}
         </div>
       </GameScreen>
     );
   }
 
-  const terms = detectTechTerms(event.alternatives.map((a) => a.text).join(" "), 4);
+  const terms = detectTechTerms(event.alternatives.map((a) => a.text).join(" "), 6);
 
   return (
     <GameScreen footer={footer} hudAction={drawer} className="max-w-7xl">
@@ -200,8 +206,9 @@ export function VotingRound({ round }: Props) {
           <button
             key={alt.key}
             type="button"
-            onClick={() => handleVote(alt.key)}
-            className={`${ALT_BG[alt.key]} flex min-h-40 flex-col gap-4 rounded-3xl p-6 text-left text-white shadow-[0_6px_0_rgba(0,0,0,0.3)] transition hover:-translate-y-1 hover:brightness-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary animate-float-in lg:min-h-72`}
+            onClick={() => setPending(alt.key)}
+            aria-pressed={pending === alt.key}
+            className={`${ALT_BG[alt.key]} ${pending && pending !== alt.key ? "opacity-40" : ""} ${pending === alt.key ? "ring-4 ring-white" : ""} flex min-h-40 flex-col gap-4 rounded-3xl p-6 text-left text-white shadow-[0_6px_0_rgba(0,0,0,0.3)] transition hover:-translate-y-1 hover:brightness-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary animate-float-in lg:min-h-72`}
             style={{ animationDelay: `${i * 60}ms` }}
           >
             <span className="flex items-center gap-3">
@@ -213,34 +220,46 @@ export function VotingRound({ round }: Props) {
         ))}
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-4">
-        {terms.length > 0 && (
-          <span className="flex items-center gap-2 text-base font-bold text-muted-foreground">
-            <HelpButton label="Termos técnicos das alternativas">
-              <div className="flex flex-col gap-3">
-                {terms.map(({ term, definition }) => (
-                  <div key={term}>
-                    <p className="m-0 font-extrabold capitalize">{term}</p>
-                    <p className="m-0 text-sm font-semibold">{definition}</p>
-                  </div>
-                ))}
-              </div>
-            </HelpButton>
-            Termos
-          </span>
-        )}
-        {mustVote ? (
-          <span className="rounded-2xl border border-primary/40 bg-primary/10 px-4 py-2.5 text-center text-base font-extrabold text-primary">
-            {countdown.isExpired
-              ? "Tempo esgotado. Como Gerente de Projetos, você precisa votar: em caso de empate, seu voto decide."
-              : "Como Gerente de Projetos, você não pode se abster nesta votação: em caso de empate, seu voto decide."}
-          </span>
-        ) : (
-          <SoftButton variant="ghost" size="sm" onClick={() => handleVote("abstain")}>
-            <UserX className="h-5 w-5" /> Não sei escolher · abster-me
+      {pending && pending !== "abstain" ? (
+        <div className="flex flex-wrap items-center justify-center gap-3 rounded-2xl border-2 border-primary bg-card px-4 py-1.5 animate-pop-in">
+          <span className="text-xl font-black">Confirmar voto na {pending.toUpperCase()}?</span>
+          <SoftButton onClick={() => handleVote(pending)}>
+            <Check className="h-5 w-5" /> Confirmar
           </SoftButton>
-        )}
-      </div>
+          <SoftButton variant="ghost" onClick={() => setPending(null)}>
+            <RotateCcw className="h-5 w-5" /> Trocar
+          </SoftButton>
+        </div>
+      ) : (
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          {terms.length > 0 && (
+            <span className="flex items-center gap-2 text-base font-bold text-muted-foreground">
+              <HelpButton label="Termos técnicos das alternativas">
+                <div className="flex flex-col gap-3">
+                  {terms.map(({ term, definition }) => (
+                    <div key={term}>
+                      <p className="m-0 font-extrabold capitalize">{term}</p>
+                      <p className="m-0 text-sm font-semibold">{definition}</p>
+                    </div>
+                  ))}
+                </div>
+              </HelpButton>
+              Termos
+            </span>
+          )}
+          {mustVote ? (
+            <span className="rounded-2xl border border-primary/40 bg-primary/10 px-4 py-2.5 text-center text-base font-extrabold text-primary">
+              {countdown.isExpired
+                ? "Tempo esgotado. Como Gerente de Projetos, você precisa votar: em caso de empate, seu voto decide."
+                : "Como Gerente de Projetos, você não pode se abster nesta votação: em caso de empate, seu voto decide."}
+            </span>
+          ) : (
+            <SoftButton variant="ghost" size="sm" onClick={() => handleVote("abstain")}>
+              <UserX className="h-5 w-5" /> Não sei escolher · abster-me
+            </SoftButton>
+          )}
+        </div>
+      )}
     </GameScreen>
   );
 }

@@ -69,12 +69,13 @@ export function PlayerSetup() {
         <div className="flex flex-col gap-1.5">
           <h1 className="m-0 text-4xl font-black tracking-tight sm:text-5xl">Montem a equipe</h1>
           <span className="text-lg font-bold text-muted-foreground">
-            Um papel para cada pessoa. O 4º jogador é opcional.
+            Um papel para cada pessoa. O 4º jogador é opcional. Um computador por equipe, sem dono:
+            ele passa de mão em mão na hora do voto.
           </span>
         </div>
         <div className="flex gap-2">
           <Chip>2 min de leitura</Chip>
-          <Chip>45 s por voto</Chip>
+          <Chip>1 min por voto</Chip>
         </div>
       </div>
 
@@ -101,7 +102,7 @@ export function PlayerSetup() {
               <button
                 type="button"
                 onClick={() => setAvatarModalOpenFor(i)}
-                aria-label={d.avatarId ? `Trocar avatar (${d.avatarName})` : "Escolher avatar"}
+                aria-label={d.avatarId ? "Trocar avatar" : "Escolher avatar"}
                 className="rounded-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/60"
               >
                 {d.avatarImage ? (
@@ -120,7 +121,13 @@ export function PlayerSetup() {
               <span className="flex min-h-[3.5rem] items-center text-xl font-black leading-tight">
                 {SLOT_TITLE(i, d.role)}
               </span>
-              <span className="text-base font-bold text-muted-foreground">{card.headline}</span>
+              {i === 3 ? (
+                <span className="rounded-full bg-primary/15 px-3 py-0.5 text-base font-extrabold text-primary">
+                  Vota e debate com peso igual
+                </span>
+              ) : (
+                <span className="text-base font-bold text-muted-foreground">{card.headline}</span>
+              )}
               <label className="flex w-full flex-col gap-1.5 text-left">
                 <span className="text-sm font-extrabold text-muted-foreground">Nome</span>
                 <input
@@ -234,7 +241,6 @@ export function PlayerSetup() {
                         owner && "grayscale",
                       )}
                     />
-                    <span className="text-base font-extrabold">{avatar.name}</span>
                     {owner && (
                       <span className="text-xs font-bold text-muted-foreground">
                         com {owner.split(" ")[0]}

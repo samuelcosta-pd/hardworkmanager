@@ -6,7 +6,7 @@ import { useGameStore } from "@/store/gameStore";
 import { ROLE_LABELS, type PlayerRole } from "@/types";
 import { ROLE_CARDS } from "@/data/roles";
 
-/** "Quem cuida do quê": um resumo de uma linha por papel, para diferenciar GP e Líder Técnico. */
+/** "Quem é responsável pelo quê": um resumo de uma linha por papel, para diferenciar GP e Líder Técnico. */
 const ROLE_ORDER: PlayerRole[] = ["pm", "techLead", "uxLead"];
 
 export function RoleExplanation() {
@@ -17,9 +17,12 @@ export function RoleExplanation() {
     <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-8 sm:px-8">
       <div className="flex flex-col gap-2 animate-float-in">
         <span className="text-lg font-extrabold text-primary">Antes de começar</span>
-        <h1 className="m-0 text-4xl font-black tracking-tight sm:text-5xl">Quem cuida do quê</h1>
+        <h1 className="m-0 text-4xl font-black tracking-tight sm:text-5xl">
+          Quem é responsável pelo quê
+        </h1>
         <p className="m-0 text-lg font-bold text-muted-foreground">
-          Todos votam com o mesmo peso. O responsável de cada dilema é o papel da área do problema.
+          Todos votam com o mesmo peso, inclusive os colíderes. O responsável de cada dilema é o
+          papel da área do problema.
         </p>
       </div>
 
@@ -57,7 +60,7 @@ export function RoleExplanation() {
                   </span>
                 </div>
               </div>
-              <div className="text-3xl font-black tracking-tight text-primary">{card.headline}</div>
+              <div className="text-xl font-black tracking-tight text-primary">{card.headline}</div>
               <p className="m-0 text-lg font-semibold text-muted-foreground">{card.mission}</p>
               <div className="flex flex-col gap-2.5">
                 <span className="text-sm font-black tracking-wide text-muted-foreground">

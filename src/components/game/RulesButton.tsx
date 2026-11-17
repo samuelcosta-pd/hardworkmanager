@@ -20,12 +20,12 @@ export function RulesButton() {
         <p className="m-0 mb-3 text-lg font-black">Como se joga</p>
         <ol className="m-0 flex list-decimal flex-col gap-1.5 pl-5 text-base font-semibold leading-snug">
           <li>Leiam o dilema juntos (2 min).</li>
-          <li>Cada um vota em segredo (45 s). Pode se abster.</li>
+          <li>Cada um vota em segredo (1 min) e confirma o voto. Pode se abster.</li>
           <li>
-            Se houver divergência: debate, com a minoria primeiro (30 s cada) e o Gerente de
-            Projetos (GP) por último (20 s).
+            Se houver divergência: debate, com a minoria primeiro e o Gerente de Projetos (GP) por
+            último, 30 s cada. Acabou o tempo, a vez passa.
           </li>
-          <li>Votação final. Empate: decide o GP, que não pode se abster nessa rodada.</li>
+          <li>Votação final aberta, numa só tela. Empate: decide o GP, que não pode se abster.</li>
         </ol>
         <p className="m-0 mb-1 mt-4 text-lg font-black">Métricas</p>
         <ul className="m-0 flex list-disc flex-col gap-1.5 pl-5 text-base font-semibold leading-snug">

@@ -27,10 +27,10 @@ export const TIMER_PRESETS: Record<
   TimerPreset,
   { readingSeconds: number; votingSeconds: number; enabled: boolean }
 > = {
-  short: { readingSeconds: 120, votingSeconds: 45, enabled: true },
-  standard: { readingSeconds: 120, votingSeconds: 45, enabled: true },
-  long: { readingSeconds: 120, votingSeconds: 45, enabled: true },
-  none: { readingSeconds: 120, votingSeconds: 45, enabled: true },
+  short: { readingSeconds: 120, votingSeconds: 60, enabled: true },
+  standard: { readingSeconds: 120, votingSeconds: 60, enabled: true },
+  long: { readingSeconds: 120, votingSeconds: 60, enabled: true },
+  none: { readingSeconds: 120, votingSeconds: 60, enabled: true },
 };
 
 interface PlayerDraft {
@@ -73,7 +73,7 @@ interface GameState {
   startGame: () => void;
   beginEvent: () => void;
   castVote: (alt: VoteChoice) => void;
-  undoLastVote: () => void;
+  submitOpenVote: (choices: Record<string, VoteChoice>) => void;
   finalizeRound1: () => void;
   startDebate: () => void;
   beginRound2: () => void;
@@ -99,7 +99,7 @@ const initialState = {
   timerSettings: {
     preset: "standard" as TimerPreset,
     readingSeconds: 120,
-    votingSeconds: 45,
+    votingSeconds: 60,
     enabled: true,
   },
   readingDeadline: null as number | null,
@@ -204,17 +204,15 @@ export const useGameStore = create<GameState>()(
         set({ votes: newVotes, currentVoterIndex: nextIdx });
       },
 
-      // Permite corrigir um toque errado: volta para o jogador anterior da mesma rodada.
-      undoLastVote: () => {
-        const { votes, currentVoterIndex, players, phase } = get();
-        if (currentVoterIndex <= 0) return;
-        const round = phase === "voting_round_2" ? 2 : 1;
-        const prev = players[currentVoterIndex - 1];
-        if (!prev) return;
-        set({
-          votes: votes.filter((v) => !(v.playerId === prev.id && v.round === round)),
-          currentVoterIndex: currentVoterIndex - 1,
-        });
+      // Votação final aberta: depois do debate as posições já são públicas, então a equipe
+      // registra todos os votos numa só tela, sem passar o dispositivo.
+      submitOpenVote: (choices) => {
+        const { votes, players } = get();
+        const round2 = players
+          .filter((p) => choices[p.id])
+          .map((p) => ({ playerId: p.id, alternative: choices[p.id], round: 2 as const }));
+        set({ votes: [...votes.filter((v) => v.round !== 2), ...round2] });
+        get().resolveDecision();
       },
 
       finalizeRound1: () => set({ phase: "vote_reveal" }),
@@ -363,7 +361,8 @@ export const useGameStore = create<GameState>()(
         ) {
           return current;
         }
-        return { ...current, ...(saved ?? {}) };
+        // Os tempos sempre vêm da versão atual do jogo, não do que ficou salvo no navegador.
+        return { ...current, ...(saved ?? {}), timerSettings: current.timerSettings };
       },
     },
   ),

@@ -206,7 +206,47 @@ export function generateMatchDeck(): GameEvent[] {
 
   // Cinco dilemas (um de cada módulo) em ordem aleatória + o sexto, de um módulo sorteado.
   const selectedDeck = [...shuffle(round1), ...shuffle(round2)].slice(0, MATCH_DILEMMA_COUNT);
-  return selectedDeck.map(shuffleEventAlternatives);
+  const slots = balancedGoodSlots(selectedDeck.length);
+  return selectedDeck.map((event, i) => placeAlternatives(event, slots[i]));
+}
+
+/**
+ * Posições (0 = A, 1 = B, 2 = C) da alternativa recomendada em cada dilema da partida.
+ * Sortear cada dilema de forma independente é uniforme no longo prazo, mas numa partida de
+ * 6 dilemas a recomendada cai na mesma letra 3 ou mais vezes em cerca de 1 a cada 3 partidas,
+ * e a turma passa a desconfiar da letra. Aqui cada letra aparece o mesmo número de vezes
+ * (2 vezes cada em 6 dilemas), em ordem sorteada e sem repetir a letra em dilemas seguidos.
+ */
+export function balancedGoodSlots(count: number, random: () => number = Math.random): number[] {
+  const base = Array.from({ length: count }, (_, i) => i % 3);
+  let order = shuffle(base, random);
+  for (let tries = 0; tries < 50; tries++) {
+    if (order.every((s, i) => i === 0 || s !== order[i - 1])) break;
+    order = shuffle(base, random);
+  }
+  return order;
+}
+
+/**
+ * Coloca a alternativa recomendada ('good') na posição `goodSlot` e sorteia as demais nas
+ * posições restantes, reatribuindo as chaves 'a', 'b', 'c'.
+ */
+export function placeAlternatives(
+  event: GameEvent,
+  goodSlot: number,
+  random: () => number = Math.random,
+): GameEvent {
+  const good = event.alternatives.filter((a) => a.goodBad === "good");
+  if (good.length !== 1 || event.alternatives.length !== 3) return shuffleEventAlternatives(event);
+
+  const others = shuffle(
+    event.alternatives.filter((a) => a !== good[0]),
+    random,
+  );
+  const ordered = [...others];
+  ordered.splice(goodSlot, 0, good[0]);
+  const keys: AlternativeKey[] = ["a", "b", "c"];
+  return { ...event, alternatives: ordered.map((alt, idx) => ({ ...alt, key: keys[idx] })) };
 }
 
 /**
