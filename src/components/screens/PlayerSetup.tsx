@@ -1,40 +1,44 @@
-import { useState } from "react";
-import { ArrowLeft, ArrowRight, Pencil, Plus, Trash2, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowLeft, ArrowRight, Dices, Pencil, Plus, Trash2, X } from "lucide-react";
 import { SoftButton } from "@/components/ui/SoftButton";
 import { Chip } from "@/components/game/Chip";
 import { useGameStore } from "@/store/gameStore";
 import { ROLE_LABELS, type PlayerRole } from "@/types";
 import { AVAILABLE_AVATARES } from "@/data/avatars";
 import { ROLE_CARDS } from "@/data/roles";
+import { shuffle } from "@/lib/gameLogic";
 import { cn } from "@/lib/utils";
 
 interface Draft {
   name: string;
-  role: PlayerRole;
   avatarId?: string;
   avatarName?: string;
   avatarImage?: string;
 }
 
+const ROLE_TITLE = (role: PlayerRole) =>
+  role === "pm" ? "Gerente de Projetos (GP)" : ROLE_LABELS[role];
+
 /**
- * Cada papel tem um lugar fixo (não há como escolher papel repetido):
- * 1 GP, 1 Líder Técnico, 1 Líder de Design e Telas e, opcionalmente, um colíder de Design e Telas.
+ * Sorteio dos papéis: sempre há um GP (ele desempata a votação); os demais jogadores recebem,
+ * também por sorteio, Líder Técnico e/ou Líder de Design e Telas, sem repetir.
  */
-const SLOT_TITLE = (i: number, role: PlayerRole) =>
-  i === 3
-    ? "Colíder de Design e Telas"
-    : role === "pm"
-      ? "Gerente de Projetos (GP)"
-      : ROLE_LABELS[role];
+function drawRoles(count: number): PlayerRole[] {
+  const others = shuffle<PlayerRole>(["techLead", "uxLead"]);
+  const roles = (["pm", ...others] as PlayerRole[]).slice(0, count);
+  return shuffle(roles);
+}
+
+const ROLE_CYCLE: PlayerRole[] = ["pm", "techLead", "uxLead"];
 
 export function PlayerSetup() {
   const setupPlayers = useGameStore((s) => s.setupPlayers);
   const goTo = useGameStore((s) => s.goTo);
-  const [drafts, setDrafts] = useState<Draft[]>([
-    { name: "", role: "pm" },
-    { name: "", role: "techLead" },
-    { name: "", role: "uxLead" },
-  ]);
+  // 2 jogadores obrigatórios e um 3º opcional; os papéis são sorteados depois do cadastro.
+  const [drafts, setDrafts] = useState<Draft[]>([{ name: "" }, { name: "" }]);
+  const [drawn, setDrawn] = useState<PlayerRole[] | null>(null);
+  const [revealed, setRevealed] = useState(false);
+  const [tick, setTick] = useState(0);
   const [avatarModalOpenFor, setAvatarModalOpenFor] = useState<number | null>(null);
 
   const updateDraft = (i: number, patch: Partial<Draft>) =>
@@ -50,7 +54,7 @@ export function PlayerSetup() {
           : !d.name.trim()
             ? "o nome"
             : "o avatar";
-      return `${what} ${i === 3 ? "do 4º jogador" : `do ${ROLE_LABELS[d.role]}`}`;
+      return `${what} do Jogador ${i + 1}`;
     });
   // Nomes repetidos confundem a votação e o debate ("Ana" e "Ana").
   const names = drafts.map((d) => d.name.trim().toLocaleLowerCase("pt-BR")).filter(Boolean);
@@ -63,14 +67,103 @@ export function PlayerSetup() {
     return drafts[i].name.trim() || `Jogador ${i + 1}`;
   };
 
+  // Animação do sorteio: os papéis "giram" por ~2,5 s e depois param no resultado.
+  useEffect(() => {
+    if (!drawn || revealed) return;
+    const spin = setInterval(() => setTick((t) => t + 1), 120);
+    const stop = setTimeout(() => setRevealed(true), 2600);
+    return () => {
+      clearInterval(spin);
+      clearTimeout(stop);
+    };
+  }, [drawn, revealed]);
+
+  const startDraw = () => {
+    if (!allValid) return;
+    setRevealed(false);
+    setDrawn(drawRoles(drafts.length));
+  };
+
+  if (drawn) {
+    return (
+      <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col items-center justify-center gap-8 px-4 py-8 text-center sm:px-8">
+        <div className="flex flex-col items-center gap-3 animate-pop-in">
+          <span className="flex h-20 w-20 items-center justify-center rounded-full bg-primary text-primary-foreground">
+            <Dices className={cn("h-10 w-10", !revealed && "animate-spin")} />
+          </span>
+          <h1 className="m-0 text-4xl font-black tracking-tight sm:text-5xl" role="status">
+            {revealed ? "Papéis sorteados!" : "Sorteando os papéis…"}
+          </h1>
+          <span className="text-lg font-bold text-muted-foreground">
+            {revealed
+              ? "Cada pessoa defende o ponto de vista do seu papel. Todos votam com o mesmo peso."
+              : "O jogo escolhe ao acaso quem será o GP e quem serão os líderes."}
+          </span>
+        </div>
+        <div
+          className={cn(
+            "grid w-full gap-4",
+            drafts.length === 3
+              ? "grid-cols-1 sm:grid-cols-3"
+              : "grid-cols-1 sm:grid-cols-2 sm:max-w-3xl",
+          )}
+        >
+          {drafts.map((d, i) => {
+            const role = revealed ? drawn[i] : ROLE_CYCLE[(tick + i) % ROLE_CYCLE.length];
+            return (
+              <div
+                key={i}
+                className={cn(
+                  "flex flex-col items-center gap-3 rounded-3xl border-2 bg-card p-6 transition",
+                  revealed ? "border-primary" : "border-border",
+                )}
+              >
+                <img
+                  src={d.avatarImage}
+                  alt=""
+                  className="h-24 w-24 rounded-full bg-[#dce3f5] object-cover ring-4 ring-primary"
+                />
+                <span className="text-2xl font-black">{d.name.trim()}</span>
+                <span
+                  className={cn(
+                    "min-h-[3.5rem] text-xl font-black leading-tight",
+                    revealed ? "text-primary animate-pop-in" : "text-muted-foreground",
+                  )}
+                >
+                  {ROLE_TITLE(role)}
+                </span>
+                {revealed && (
+                  <span className="text-base font-bold text-muted-foreground">
+                    {ROLE_CARDS[role].headline}
+                  </span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+        {revealed && (
+          <div className="flex flex-wrap items-center justify-center gap-4 animate-float-in">
+            {/* Sem "voltar": refazer o cadastro permitiria sortear de novo até cair no papel desejado */}
+            <SoftButton
+              size="lg"
+              onClick={() => setupPlayers(drafts.map((d, i) => ({ ...d, role: drawn[i] })))}
+            >
+              Ver os papéis <ArrowRight className="h-5 w-5" />
+            </SoftButton>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-8 sm:px-8">
       <div className="flex flex-wrap items-end justify-between gap-4 animate-float-in">
         <div className="flex flex-col gap-1.5">
           <h1 className="m-0 text-4xl font-black tracking-tight sm:text-5xl">Montem a equipe</h1>
           <span className="text-lg font-bold text-muted-foreground">
-            Um papel para cada pessoa. O 4º jogador é opcional. Um computador por equipe, sem dono:
-            ele passa de mão em mão na hora do voto.
+            2 ou 3 jogadores (o 3º é opcional). Os papéis são sorteados depois. Um computador por
+            equipe, sem dono: ele passa de mão em mão na hora do voto.
           </span>
         </div>
         <div className="flex gap-2">
@@ -79,20 +172,19 @@ export function PlayerSetup() {
         </div>
       </div>
 
-      <div className="mt-8 grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-8 grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {drafts.map((d, i) => {
-          const card = ROLE_CARDS[d.role];
           return (
             <div
               key={i}
               className="flex flex-col items-center gap-3 rounded-3xl border border-border bg-card p-5 text-center animate-float-in"
             >
               <div className="flex h-10 w-full items-center justify-end">
-                {i === 3 && (
+                {i === 2 && (
                   <button
                     type="button"
-                    onClick={() => setDrafts(drafts.slice(0, 3))}
-                    aria-label="Remover 4º jogador"
+                    onClick={() => setDrafts(drafts.slice(0, 2))}
+                    aria-label="Remover 3º jogador"
                     className="flex h-10 w-10 items-center justify-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"
                   >
                     <Trash2 className="h-5 w-5" />
@@ -124,17 +216,12 @@ export function PlayerSetup() {
                   </span>
                 )}
               </button>
-              {/* Altura fixa para o título (até 2 linhas): mantém nome e botões alinhados entre os cartões */}
-              <span className="flex min-h-[3.5rem] items-center text-xl font-black leading-tight">
-                {SLOT_TITLE(i, d.role)}
+              <span className="flex items-center text-xl font-black leading-tight">
+                Jogador {i + 1}
               </span>
-              {i === 3 ? (
-                <span className="rounded-full bg-primary/15 px-3 py-0.5 text-base font-extrabold text-primary">
-                  Vota e debate com peso igual
-                </span>
-              ) : (
-                <span className="text-base font-bold text-muted-foreground">{card.headline}</span>
-              )}
+              <span className="text-base font-bold text-muted-foreground">
+                {i === 2 ? "Opcional" : "Papel sorteado depois"}
+              </span>
               <label className="flex w-full flex-col gap-1.5 text-left">
                 <span className="text-sm font-extrabold text-muted-foreground">Nome</span>
                 <input
@@ -149,15 +236,15 @@ export function PlayerSetup() {
             </div>
           );
         })}
-        {drafts.length < 4 && (
+        {drafts.length < 3 && (
           <button
             type="button"
-            onClick={() => setDrafts([...drafts, { name: "", role: "uxLead" }])}
+            onClick={() => setDrafts([...drafts, { name: "" }])}
             className="flex min-h-48 flex-col items-center justify-center gap-2 rounded-3xl border-2 border-dashed border-border p-5 text-muted-foreground transition hover:border-primary hover:text-foreground"
           >
             <Plus className="h-9 w-9" />
-            <span className="text-lg font-extrabold">4º jogador</span>
-            <span className="text-sm font-bold">colíder de Design e Telas</span>
+            <span className="text-lg font-extrabold">3º jogador</span>
+            <span className="text-sm font-bold">opcional</span>
           </button>
         )}
       </div>
@@ -173,8 +260,8 @@ export function PlayerSetup() {
               : "Cada jogador precisa de um nome diferente"}
           </span>
         )}
-        <SoftButton size="lg" onClick={() => allValid && setupPlayers(drafts)} disabled={!allValid}>
-          Começar <ArrowRight className="h-5 w-5" />
+        <SoftButton size="lg" onClick={startDraw} disabled={!allValid}>
+          <Dices className="h-5 w-5" /> Sortear papéis
         </SoftButton>
       </div>
 
@@ -190,10 +277,7 @@ export function PlayerSetup() {
               <div>
                 <h2 className="m-0 text-2xl font-black">Escolha o avatar</h2>
                 <p className="m-0 mt-1 text-base font-bold text-muted-foreground">
-                  {drafts[avatarModalOpenFor].name ||
-                    (avatarModalOpenFor === 3
-                      ? "Colíder de Design e Telas"
-                      : ROLE_LABELS[drafts[avatarModalOpenFor].role])}
+                  {drafts[avatarModalOpenFor].name || `Jogador ${avatarModalOpenFor + 1}`}
                 </p>
               </div>
               <button

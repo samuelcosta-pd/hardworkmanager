@@ -21,13 +21,13 @@ export function RoleExplanation() {
           Quem é responsável pelo quê
         </h1>
         <p className="m-0 text-lg font-bold text-muted-foreground">
-          Todos votam com o mesmo peso, inclusive os colíderes. O responsável de cada dilema é o
-          papel da área do problema.
+          Todos votam com o mesmo peso. O responsável de cada dilema é o papel da área do problema;
+          se esse papel ficou sem jogador, a equipe decide junto.
         </p>
       </div>
 
       <div className="mt-6 grid flex-1 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {/* Um cartão por papel; o 4º jogador (colíder) entra no cartão de Design e Telas */}
+        {/* Um cartão por papel sorteado */}
         {ROLE_ORDER.filter((r) => players.some((p) => p.role === r)).map((role, i) => {
           const card = ROLE_CARDS[role];
           const members = players.filter((p) => p.role === role);
@@ -56,7 +56,6 @@ export function RoleExplanation() {
                   </span>
                   <span className="text-base font-extrabold text-muted-foreground">
                     {role === "pm" ? "Gerente de Projetos (GP)" : ROLE_LABELS[role]}
-                    {members.length > 1 ? " (colíderes)" : ""}
                   </span>
                 </div>
               </div>

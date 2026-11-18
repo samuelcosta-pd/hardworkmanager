@@ -55,6 +55,8 @@ export function ResponsibleBadge({ role, size = "md" }: { role: PlayerRole; size
           {owner ? `${owner.name} · ` : ""}
           {ROLE_LABELS[role]}
         </strong>
+        {/* Com 2 jogadores, um papel fica sem dono: o dilema é da equipe toda */}
+        {!owner && players.length > 0 && " (sem jogador: decidam juntos)"}
       </span>
       <HelpButton label="O que é o responsável?">{RESPONSIBLE_HELP}</HelpButton>
     </div>
