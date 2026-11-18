@@ -69,4 +69,20 @@ export const AVAILABLE_AVATARES: Avatar[] = [
       "Especialista em arquitetura estrutural e modernização de sistemas legados complexos.",
     preferredRoles: ["techLead"],
   },
+  {
+    id: "dandara",
+    name: "Dandara",
+    imagePath: "/Personagens/Dandara.png",
+    description:
+      "Desenvolvedora front-end criativa, focada em interfaces acessíveis e prototipação rápida.",
+    preferredRoles: ["uxLead", "techLead"],
+  },
+  {
+    id: "tais",
+    name: "Taís",
+    imagePath: "/Personagens/Taís.png",
+    description:
+      "Analista de negócios que traduz necessidades dos clientes em requisitos e prioridades claras.",
+    preferredRoles: ["pm"],
+  },
 ];
