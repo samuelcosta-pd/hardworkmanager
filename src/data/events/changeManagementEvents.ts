@@ -701,9 +701,9 @@ export const changeManagementEvents: GameEvent[] = [
     senderRole: "Líder de Design e Telas",
     description:
       "Canal #ux: 'O teste piloto com 200 alunos revelou que 75% não entenderam o fluxo de trancamento de matrícula no celular; o time de design quer redesenhar a tela inteira em três dias.'",
-    domainTag: "Recursos › Monitorar e Controlar os Recursos",
+    domainTag: "Recursos › Liderar a Equipe",
     resourceType: "humano",
-    resourceProcess: "monitorar",
+    resourceProcess: "liderar",
     senderName: "Carla Silveira",
     senderInitials: "CS",
     responsibleRole: "uxLead",
