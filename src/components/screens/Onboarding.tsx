@@ -111,7 +111,7 @@ export function Onboarding() {
             <Tile
               icon={<Users className="h-7 w-7" />}
               title="Vocês são o comitê"
-              text="Três ou quatro pessoas no mesmo dispositivo, cada uma com um papel."
+              text="Dois ou três membros no mesmo dispositivo, cada um com um papel."
             />
             <Tile
               icon={<LayoutGrid className="h-7 w-7" />}
